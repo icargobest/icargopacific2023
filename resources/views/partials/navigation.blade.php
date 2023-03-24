@@ -31,7 +31,7 @@
       >
         <i class="fas fa-bars"></i>
       </button>
-  
+
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
@@ -55,7 +55,7 @@
                 <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employee">Employee</a>
+                <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
@@ -64,7 +64,7 @@
         <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
-  
+
       <!-- Right elements -->
       <div class="d-flex align-items-center">
         <!-- Icon -->
@@ -74,7 +74,7 @@
         <a class="text-reset me-3" href="#">
           <i class="fas fa-list"></i>
         </a>
-  
+
         <!-- Notifications -->
         <div class="dropdown">
           <a

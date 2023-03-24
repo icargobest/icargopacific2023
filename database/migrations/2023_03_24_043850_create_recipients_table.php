@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('recipient_city');
             $table->string('recipient_state');
             $table->string('recipient_zip');
-            //$table->foreign('shipments_id')->references('id')->on('shipments');
-            //$table->foreign('drivers_id')->references('id')->on('drivers');
             $table->timestamps();
         });
     }
