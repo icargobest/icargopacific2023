@@ -10,7 +10,7 @@
     <ul>
         @foreach ($company as $comp)
         <li>
-            {{$comp->name}}
+            {{$comp->email}}
         </li>
         @endforeach
 

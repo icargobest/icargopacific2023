@@ -17,7 +17,8 @@ class DriverFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'driver_name' => fake()->name(),
+            'vehicle_type'=> 'motorcycle',
         ];
     }
 }

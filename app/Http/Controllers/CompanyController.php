@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
     public function index(){
-
-        $data = Company::all();
-
-        return view('company.index',['company' => $data] );
+        return view('');
     }
+
+    public function create(){
+        return view('company.create');
+    }
+
+    public function show(){
+        $data = ["data" => "data from database"];
+        return view('company')
+            ->with('data', $data);
+    }
+
 }
