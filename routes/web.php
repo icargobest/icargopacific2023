@@ -56,9 +56,8 @@ Route::get('/employees', function () {
 });
 
 //DRIVER PAGE
-Route::get('/driver', function () {
-    return view('driver/driver');
-});
+Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
+Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@checkUser']);
 
 Route::get('/company', [CompanyController::class, 'index']);
 
