@@ -33,12 +33,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Users Routes
-
 Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Users Routes
+
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])
+    Route::get('/home', [HomeController::class, 'index'])
     ->name('dashboard');
 });
 
@@ -146,6 +148,3 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
