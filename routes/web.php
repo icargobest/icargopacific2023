@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,13 +18,46 @@ use Illuminate\Support\Facades\Route;
 */
 
 // LOGIN PAGE
+// Route::get('/', function () {
+//     return view('login/index');
+// });
+
+// // REGISTER ACCOUNT PAGE
+// Route::get('/register', function () {
+//     return view('login/register');
+// });
+
+
+
 Route::get('/', function () {
-    return view('login/index');
+    return view('welcome');
 });
 
-// REGISTER ACCOUNT PAGE
-Route::get('/register', function () {
-    return view('login/register');
+// Users Routes
+
+Auth::routes();
+
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'index'])
+    ->name('dashboard');
+});
+
+// Manager Routes
+Route::middleware(['auth', 'user-access:company'])->group(function () {
+    Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
+    ->name('company.dashboard');
+});  
+
+// Super Admin Routes
+Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
+    Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
+    ->name('super.admin.dashboard');
+});
+
+// Driver Routes
+Route::middleware(['auth', 'user-access:driver'])->group(function () {
+    Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
+    ->name('driver.dashboard');
 });
 
 // FORGOT PASSWORD PAGE
@@ -62,7 +97,7 @@ Route::get('/driver', function () {
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-Auth::routes();
+// Auth::routes();
 
 //test
 Route::get('/employees', [EmployeeController::class, 'index'])->name('EmployeePanel');
@@ -81,16 +116,11 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
 
 
 
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
@@ -112,3 +142,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         });
 
     });*/
+
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
