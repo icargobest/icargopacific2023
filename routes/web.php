@@ -37,14 +37,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Users Routes
-
+// User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
     ->name('dashboard');
 });
 
-// Manager Routes
+// Company Routes
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
     ->name('company.dashboard');
@@ -61,6 +60,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
     ->name('driver.dashboard');
 });
+
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
@@ -144,7 +144,4 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
         });
 
     });*/
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
