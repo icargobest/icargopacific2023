@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,11 +51,64 @@ Route::get('/freight', function () {
 });
 
 //EMPLOYEE PAGE
-Route::get('/employee', function () {
-    return view('employee/employee');
+Route::get('/employees', function () {
+    return view('employees/employees');
 });
 
 //DRIVER PAGE
 Route::get('/driver', function () {
     return view('driver/driver');
 });
+
+Route::get('/company', [CompanyController::class, 'index']);
+
+Auth::routes();
+
+//test
+Route::get('/employees', [EmployeeController::class, 'index'])->name('EmployeePanel');
+
+
+Route::post('/add_employee', [EmployeeController::class, 'addEmployee'])->name('addEmployee');
+
+Route::get('/delete_employee/{id}', [EmployeeController::class, 'archiveEmployee'])->name
+    ('archiveEmployee');
+
+Route::get('/update_employee/{id}', [EmployeeController::class, 'updateEmployee'])->name
+    ('updateEmployee');
+
+Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEmployee'])->name
+    ('saveUpdatedEmployee');
+
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*Route::group(['middleware' => ['auth']], function() {
+        /**
+         * Logout Routes
+         */
+        /*Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+
+        /**
+         * User Routes
+         */
+        /*Route::group(['prefix' => 'users'], function() {
+            Route::get('/', 'UsersController@index')->name('users.index');
+            Route::get('/create', 'UsersController@create')->name('users.create');
+            Route::post('/create', 'UsersController@store')->name('users.store');
+            Route::get('/{user}/show', 'UsersController@show')->name('users.show');
+            Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
+            Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
+            Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
+        });
+
+    });*/
