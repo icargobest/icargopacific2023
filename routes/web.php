@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // LOGIN PAGE
 Route::get('/', function () {
-    return view('login/index');
+    return view('random');
 });
 
 // REGISTER ACCOUNT PAGE
