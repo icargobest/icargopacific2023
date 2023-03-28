@@ -35,7 +35,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/createCompanyAccount', [App\Http\Controllers\HomeController::class, 'createCompanyAccount']);
 
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
@@ -61,6 +64,9 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     ->name('driver.dashboard');
 });
 
+Route::get('/registerCompany', function () {
+    return view('/registerCompany');
+});
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {

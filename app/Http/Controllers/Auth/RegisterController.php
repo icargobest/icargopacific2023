@@ -32,7 +32,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        return redirect('/login');
+        return redirect('login')->with('success','Registered successfully');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,20 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function createCompanyAccount(Request $request)
+    {
+        $data = new user;
+
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->password=bcrypt($request->password);
+        $data->type='2';
+
+        $data->save();
+        
+        return view('/registerCompany')->with('success', "Registered successfully");
+        // return redirect()->back()->with('success', "Registered successfully");
     }
     public function companyDashboard()
     {

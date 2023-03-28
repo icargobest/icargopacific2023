@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
 
     protected $redirectTo = RouteServiceProvider::HOME;
@@ -27,29 +27,35 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+    
+        $user = User::where('email', $input['email'])->first();
      
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        if($user && auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if (auth()->user()->type == 'super-admin') {
+            if ($user->type == 'super-admin') {
                 return redirect()->route('super.admin.dashboard');
             }
-
-            else if (auth()->user()->type == 'company') {
+    
+            else if ($user->type == 'company') {
                 return redirect()->route('company.dashboard');
             }
-
-            else if (auth()->user()->type == 'driver') {
+    
+            else if ($user->type == 'driver') {
                 return redirect()->route('driver.dashboard');
             }
-
+    
             else{
                 return redirect()->route('dashboard');
             }
-        }else{
-            return redirect()->route('/login')
-                ->with('error','Email-Address And Password Are Wrong.');
+        }
+        else if ($user) {
+            return redirect()->route('login')->with('error','Incorrect password');
+        }
+        else{
+            return redirect()->route('login')->with('error','User does not exist');
         }
     }
+    
 
     /**
      * Log the user out of the application.

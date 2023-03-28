@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register as a company') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ url('/createCompanyAccount') }}">
                         @csrf
                         @include('flash-message')
                         <div class="row mb-3">
@@ -67,17 +67,15 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
-                        </div>   
+                        </div>
                     </form>
-                    <a href="{{ url('/registerCompany') }}">
+                    <a href="{{ route('register') }}">
                         <button type="button" class="btn btn-primary">
-                            {{ __('Register as a company') }}
-                        </button>
+                            {{ __('Register as a user') }}
+                        </button>   
                     </a>
                     <p>Already have an account?
-                        <span> 
-                            <a href="{{ route('login') }}">Login Here</a> 
-                        </span>
+                        <span> <a href="{{ route('login') }}">Login Here</a> </span>
                     </p>
                 </div>
             </div>
