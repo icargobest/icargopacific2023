@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +18,53 @@ use Illuminate\Support\Facades\Route;
 */
 
 // LOGIN PAGE
+// Route::get('/', function () {
+//     return view('login/index');
+// });
+
+// // REGISTER ACCOUNT PAGE
+// Route::get('/register', function () {
+//     return view('login/register');
+// });
+
+
+
 Route::get('/', function () {
-    return view('login/index');
+    return view('welcome');
 });
 
-// REGISTER ACCOUNT PAGE
-Route::get('/register', function () {
-    return view('login/register');
+Auth::routes();
+
+// company account registration
+Route::get('/registerCompany', function () {
+    return view('/registerCompany');
 });
+Route::post('/store', [CompanyController::class, 'store']);
+
+// User/Customer Routes
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])
+    ->name('dashboard');
+});
+
+// Company Routes
+Route::middleware(['auth', 'user-access:company'])->group(function () {
+    Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
+    ->name('company.dashboard');
+});  
+
+// Super Admin Routes
+Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
+    Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
+    ->name('super.admin.dashboard');
+});
+
+// Driver Routes
+Route::middleware(['auth', 'user-access:driver'])->group(function () {
+    Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
+    ->name('driver.dashboard');
+});
+
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
@@ -61,7 +102,7 @@ Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@check
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-Auth::routes();
+// Auth::routes();
 
 //test
 Route::get('/employees', [EmployeeController::class, 'index'])->name('EmployeePanel');
@@ -80,16 +121,11 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
 
 
 
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
@@ -111,3 +147,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         });
 
     });*/
+
