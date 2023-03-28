@@ -14,12 +14,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
+    
 
 
 
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+    <!-- CSS for bootstrap modifying -->
+    <link rel="stylesheet" href="/css/waybill-list.css" />
     
     <title>Document</title>
 </head>

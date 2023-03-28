@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // LOGIN PAGE
 Route::get('/', function () {
-    return view('random');
+    return view('login/index');
 });
 
 // REGISTER ACCOUNT PAGE
@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
 
 // WAYBILL PAGE
 Route::get('/waybill', function () {
-    return view('waybill/waybill');
+    return view('waybill/waybill-list');
 });
 
 //VIEW WAYBILL INFORMATION PAGE
@@ -112,3 +112,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         });
 
     });*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
