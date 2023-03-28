@@ -21,6 +21,6 @@ class MultiAuthUser
         }
 
         return redirect()->back()
-                    ->with('warning', 'You do not have permission to access for this page. Please logout first.');
+                    ->with('warning', 'You do not have permission to access the page. Please logout first.');
     }
 }

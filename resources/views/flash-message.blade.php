@@ -12,7 +12,9 @@
 
 @if ($message = Session::get('success'))
 <div class="py-3 mt-3 mb-4 alert alert-success alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+    <use xlink:href="#check-circle-fill"/>
+  </svg>
   <strong>{{ $message }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
@@ -20,7 +22,9 @@
     
 @if ($message = Session::get('error'))
 <div class="py-3 mt-3 mb-4 alert alert-danger alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+    <use xlink:href="#check-circle-fill"/>
+  </svg>
   <strong>{{ $message }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
@@ -28,7 +32,9 @@
      
 @if ($message = Session::get('warning'))
 <div class="container w-75 alert alert-warning alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
+    <use xlink:href="#exclamation-triangle-fill"/>
+  </svg>
   <strong>{{ $message }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
@@ -36,14 +42,19 @@
      
 @if ($message = Session::get('info'))
 <div class="py-3 mt-3 mb-4 alert alert-info alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+    <use xlink:href="#info-fill"/>
+  </svg>
   <strong>{{ $message }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
     
 @if ($errors->any())
-<div class="py-3 mt-3 mb-4 alert alert-danger alert-dismissible fade show" role="alert">
+<div class="py-3 mt-3 mb-4 alert alert-warning alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
+    <use xlink:href="#exclamation-triangle-fill"/>
+  </svg>
   <strong>Validation errors occured. Please confirm the fields and submit again.</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
