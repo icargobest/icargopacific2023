@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register as a company') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/store">
+                    <form method="POST" action="{{ route('store') }}">
                         @csrf
                         @include('flash-message')
                         <div class="row mb-3">
