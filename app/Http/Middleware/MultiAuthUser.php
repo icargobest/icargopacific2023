@@ -19,9 +19,8 @@ class MultiAuthUser
         if(auth()->user()->type == $userType){
             return $next($request);
         }
-          
-        // return response()->json(['You do not have permission to access for this page. Please logout first']);
-        /* return response()->view('errors.check-permission'); */
-        return redirect()->back()->with('error', 'You do not have permission to access for this page. Please logout first.');
+
+        return redirect()->back()
+                    ->with('warning', 'You do not have permission to access for this page. Please logout first.');
     }
 }
