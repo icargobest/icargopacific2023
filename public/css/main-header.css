@@ -23,6 +23,7 @@ width: 100vw;
 padding-left: 50px;
 background: #EAEBEE;
 margin-top: 65px;
+z-index: 10;
 }
 
 .random-div
