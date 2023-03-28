@@ -15,25 +15,25 @@ class CreateUsersSeeder extends Seeder
                'name'=>'User',
                'email'=>'user@gmail.com',
                'type'=>0,
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('password'),
             ],
             [
                'name'=>'Super Admin',
                'email'=>'super-admin@gmail.com',
                'type'=>1,
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('password'),
             ],
             [
                'name'=>'Company',
                'email'=>'company@gmail.com',
                'type'=> 2,
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('password'),
             ],
             [
                'name'=>'Driver',
                'email'=>'driver@gmail.com',
                'type'=> 3,
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('password'),
             ],
         ];
     

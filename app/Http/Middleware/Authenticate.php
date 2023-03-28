@@ -19,7 +19,7 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         if (!Auth::check()) {
-            session()->flash('error', 'Please login to access this page.');
+            session()->flash('error', 'Please login first to access this page.');
             return redirect()->route('login');
         }
     

@@ -22,8 +22,8 @@
     
 @if ($message = Session::get('error'))
 <div class="py-3 mt-3 mb-4 alert alert-danger alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
-    <use xlink:href="#check-circle-fill"/>
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+    <use xlink:href="#exclamation-triangle-fill"/>
   </svg>
   <strong>{{ $message }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
