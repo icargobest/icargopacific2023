@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        @include('flash-message')
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
@@ -13,7 +14,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    You are login as user role.
+                     You are login as a driver role.
                 </div>
             </div>
         </div>

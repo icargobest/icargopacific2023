@@ -2,11 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +16,53 @@ use Illuminate\Http\Request;
 */
 
 // LOGIN PAGE
+// Route::get('/', function () {
+//     return view('login/index');
+// });
+
+// // REGISTER ACCOUNT PAGE
+// Route::get('/register', function () {
+//     return view('login/register');
+// });
+
+
+
 Route::get('/', function () {
-    return view('login/index');
+    return view('welcome');
 });
 
-// REGISTER ACCOUNT PAGE
-Route::get('/register', function () {
-    return view('login/register');
+Auth::routes(['verify' => true]);
+
+// company account registration
+Route::get('/registerCompany', function () {
+    return view('/registerCompany');
 });
+Route::post('/store', [CompanyController::class, 'store']);
+
+// User/Customer Routes
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])
+    ->name('dashboard')->middleware('verified');
+});
+
+// Company Routes
+Route::middleware(['auth', 'user-access:company'])->group(function () {
+    Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
+    ->name('company.dashboard')->middleware('verified');
+});
+
+// Super Admin Routes
+Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
+    Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
+    ->name('super.admin.dashboard')->middleware('verified');
+});
+
+// Driver Routes
+Route::middleware(['auth', 'user-access:driver'])->group(function () {
+    Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
+    ->name('driver.dashboard')->middleware('verified');
+});
+
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
@@ -45,23 +80,12 @@ Route::get('/freight', function () {
 });
 
 //DRIVER PAGE
-Route::get('/driver', function () {
-    return view('driver/driver');
-});
+Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
+Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@checkUser']);
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-//Employee Panel
-Route::controller(EmployeeController::class)->group(function(){
-    Route::get('/employees','index')->name('EmployeePanel');
-    Route::post('/add_employee', 'addEmployee')->name('addEmployee');
-    Route::get('/update_employee/{id}','updateEmployee')->name('updateEmployee');
-    Route::post('/save_updated_employee','saveUpdatedEmployee')->name('saveUpdatedEmployee');
-    Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
-    Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
-    Route::get('/employees/archive/{id}', 'archive')->name('archiveEmployee');
-    Route::get('/employees/unarchive/{id}', 'unarchive')->name('unarchiveEmployee');
-});
+Auth::routes();
 
 //Waybill Panel
 Route::controller(ShipmentController::class)->group(function(){
@@ -126,11 +150,22 @@ Route::get('/generate-code', function () {
 });
 
 
+// Plan Controller / Monthly Subscription Routes
+Route::middleware("auth")->group(function() {
+    Route::get('plans',[PlanController::class,'index']);
+    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+});
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
