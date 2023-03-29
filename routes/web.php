@@ -2,7 +2,15 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PlanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +93,18 @@ Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@check
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-Auth::routes();
+//Employee Panel
+Route::controller(EmployeeController::class)->group(function(){
+    Route::get('/employees','index')->name('EmployeePanel');
+    Route::post('/add_employee', 'addEmployee')->name('addEmployee');
+    Route::get('/update_employee/{id}','updateEmployee')->name('updateEmployee');
+    Route::post('/save_updated_employee','saveUpdatedEmployee')->name('saveUpdatedEmployee');
+    Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
+    Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
+    Route::get('/employees/archive/{id}', 'archive')->name('archiveEmployee');
+    Route::get('/employees/unarchive/{id}', 'unarchive')->name('unarchiveEmployee');
+});
+// Auth::routes();
 
 //Waybill Panel
 Route::controller(ShipmentController::class)->group(function(){
@@ -161,11 +180,7 @@ Route::middleware("auth")->group(function() {
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**

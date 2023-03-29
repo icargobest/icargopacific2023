@@ -17,10 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-<<<<<<< HEAD
-=======
-    
->>>>>>> develop
+
 </head>
 <body>
     <div id="app">
