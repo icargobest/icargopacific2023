@@ -60,6 +60,9 @@
               <li class="nav-item">
                 <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link @if(isset($qrcode)){{$qrcode}}@endif" href="/qrcode">QR Code</a>
+              </li>
         </ul>
         <!-- Left links -->
       </div>

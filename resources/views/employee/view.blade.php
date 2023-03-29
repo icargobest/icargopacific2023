@@ -3,6 +3,7 @@
 <div class="modal-body">
     <form method="POST" action="{{route('saveUpdatedEmployee')}}">
       @csrf
+      <fieldset disabled>
       <!-- 2 column grid layout with text inputs for the first and last names -->
       <div class="row mb-4">
         <div class="col">
@@ -59,13 +60,11 @@
         <textarea class="form-control" id="form6Example7" rows="4"></textarea>
         <label class="form-label" for="form6Example7">Additional information</label>
       </div>-->
+    </fieldset>
 
       <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
-            Save
-          </button>
-          <a href="{{route('EmployeePanel')}}" class="btn btn-danger btn-block">
-            Cancel
+          <a href="{{route('EmployeePanel')}}" class="btn btn-success btn-block">
+            Back
           </a>
         </div>
     </form>

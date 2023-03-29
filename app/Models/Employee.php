@@ -27,4 +27,11 @@ class Employee extends Model
         $emp = $this->find($id);
         $emp->update($data);
     }
+
+    public function archive()
+    {
+        $this->archived = true;
+        $this->save();
+    }
+
 }

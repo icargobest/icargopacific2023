@@ -13,6 +13,12 @@ class EmployeeController extends Controller
         return view('employee.index', ['employees' => $data]);
     }
 
+    function viewArchive(){
+        $data = Employee::all();
+
+        return view('employee.view_archive', ['employees' => $data]);
+    }
+
     function __construct()
     {
         $this->employee = new Employee;
@@ -30,11 +36,6 @@ class EmployeeController extends Controller
         return back();
     }
 
-    public function archiveEmployee($id){
-        $this->employee->deleteEmployee($id);
-        return back();
-    }
-
     function updateEmployee($id){
         $emp=$this->employee->getEmployeeId($id);
         return view('employee.edit',compact('emp'));
@@ -45,9 +46,33 @@ class EmployeeController extends Controller
             'name' => $request->updateFullName,
             'email' => $request->updateEmail,
             'password' => $request->updatePassword,
-            'role' => $request->updateRole
+            'role' => $request->updateRole,
         ];
         $this->employee->updateEmployee($data,$request->id);
         return redirect()->route('EmployeePanel');
     }
+
+    function viewEmployee($id){
+        $emp=$this->employee->getEmployeeId($id);
+        return view('employee.view',compact('emp'));
+    }
+
+    public function archive($id)
+    {
+        $employee = Employee::findOrFail($id);
+        $employee->archived = 1;
+        $employee->save();
+
+        return redirect()->route('EmployeePanel')->with('success', 'Employee data archived successfully.');
+    }
+
+    public function unarchive($id)
+    {
+        $employee = Employee::findOrFail($id);
+        $employee->archived = 0;
+        $employee->save();
+
+        return redirect()->route('viewArchive')->with('success', 'Employee date restore successfully.');
+    }
+
 }

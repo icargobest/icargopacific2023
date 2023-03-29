@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,24 +39,9 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 
-// WAYBILL PAGE
-Route::get('/waybill', function () {
-    return view('waybill/waybill');
-});
-
-//VIEW WAYBILL INFORMATION PAGE
-Route::get('/waybill/viewinformation', function () {
-    return view('waybill/waybillInformation');
-});
-
 //FREIGHT PAGE
 Route::get('/freight', function () {
     return view('freight/freight');
-});
-
-//EMPLOYEE PAGE
-Route::get('/employees', function () {
-    return view('employees/employees');
 });
 
 //DRIVER PAGE
@@ -62,23 +51,79 @@ Route::get('/driver', function () {
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-Auth::routes();
+//Employee Panel
+Route::controller(EmployeeController::class)->group(function(){
+    Route::get('/employees','index')->name('EmployeePanel');
+    Route::post('/add_employee', 'addEmployee')->name('addEmployee');
+    Route::get('/update_employee/{id}','updateEmployee')->name('updateEmployee');
+    Route::post('/save_updated_employee','saveUpdatedEmployee')->name('saveUpdatedEmployee');
+    Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
+    Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
+    Route::get('/employees/archive/{id}', 'archive')->name('archiveEmployee');
+    Route::get('/employees/unarchive/{id}', 'unarchive')->name('unarchiveEmployee');
+});
 
-//test
-Route::get('/employees', [EmployeeController::class, 'index'])->name('EmployeePanel');
+//Waybill Panel
+Route::controller(ShipmentController::class)->group(function(){
+    Route::get('/waybill','index')->name('waybillPanel');
+    Route::post('add_waybill','addShipment')->name('addShipment');
+    Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
+    Route::get('/invoice/{id}','viewInvoice')->name('generate');
+    Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+});
 
 
-Route::post('/add_employee', [EmployeeController::class, 'addEmployee'])->name('addEmployee');
+//QR Code && Barcode Generation
+Route::get('/generate-code', function (Request $request) {
+    $code = $request->get('tracking_number');
 
-Route::get('/delete_employee/{id}', [EmployeeController::class, 'archiveEmployee'])->name
-    ('archiveEmployee');
+    // Generate QR code with logo
+    $qrCode = QrCode::format('svg')->size(500)->generate($code);
 
-Route::get('/update_employee/{id}', [EmployeeController::class, 'updateEmployee'])->name
-    ('updateEmployee');
+    // Add logo to QR code
+    $logoPath = public_path('img/icargo.png');
+    $logo = file_get_contents($logoPath);
+    $svg = new \SimpleXMLElement($qrCode);
+    $image = $svg->addChild('image');
+    $image->addAttribute('href', 'data:image/png;base64,' . base64_encode($logo));
+    $image->addAttribute('x', '58');
+    $image->addAttribute('y', '58');
+    $image->addAttribute('width', '50');
+    $image->addAttribute('height', '50');
+    $image->addAttribute('opacity', '0.6');
+    $qrCodeWithLogo = $svg->asXML();
 
-Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEmployee'])->name
-    ('saveUpdatedEmployee');
+    // Generate barcode
+    $barcode = DNS1D::getBarcodeSVG($code, 'C39');
 
+    // Generate file name
+    $fileName = 'code_' . time() . '.zip';
+
+    // Create zip archive
+    $zip = new \ZipArchive();
+    $zip->open(storage_path('app/public/' . $fileName), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+    $zip->addFromString('qr_code.svg', $qrCode);
+    $zip->addFromString('barcode.svg', $barcode);
+    $zip->close();
+
+    // Generate file path
+    $filePath = storage_path('app/public/' . $fileName);
+
+    // Return a response to download the zip archive
+    $response = response()->download($filePath)->deleteFileAfterSend(true);
+
+    // Display the barcode and QR code
+    $barcodeHtml = '<div> '. $barcode .'</div>';
+    $qrCodeHtml = '<div>'. $qrCodeWithLogo .'</div>';
+    $codeHtml = '<div style="margin: 5% 30% 5%">' . $barcodeHtml . '</div>' . '<div style="margin: 5% 30% 5%">' . $qrCodeHtml . '</div>' ;
+
+    return view('generate-code')->with('codeHtml', $codeHtml)->with('response', $response);
+});
+
+// Route to display the form and generated code
+Route::get('/generate-code', function () {
+    return view('generate-code');
+});
 
 
 
@@ -86,11 +131,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
@@ -112,3 +152,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         });
 
     });*/
+
