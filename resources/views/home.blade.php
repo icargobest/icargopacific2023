@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    You are login as user role.
                 </div>
             </div>
         </div>
