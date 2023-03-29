@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use App\Models\User;
->>>>>>> develop
 
 class HomeController extends Controller
 {
@@ -29,8 +26,6 @@ class HomeController extends Controller
     {
         return view('home');
     }
-<<<<<<< HEAD
-=======
     public function createCompanyAccount(Request $request)
     {
         $data = new user;
@@ -59,5 +54,4 @@ class HomeController extends Controller
     {
         return view('/driver/dashboard');
     }
->>>>>>> develop
 }
