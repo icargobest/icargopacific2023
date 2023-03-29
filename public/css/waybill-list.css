@@ -5,6 +5,8 @@
 
 }
 
-/* .btn-wrapper{
-    z-index: 0;
-} */
+.price-div{
+    display: inline-block;
+    background-color: aqua;
+    margin-left: 10px;
+}

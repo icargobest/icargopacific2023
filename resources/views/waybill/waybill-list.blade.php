@@ -91,8 +91,8 @@
                             <td>17x30x41 | 97 kg</td>
                             <td>300</td>
                             <td>Processing</td>
-                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">Tracking</button>
-                            <button type="button" class="btn btn-primary btn-block mb-1">View</button>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#tracking-modal">Tracking</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#view-modal">View</button>
                             <button type="button" class="btn btn-secondary btn-block">Print</button> </td>
                         </tr>
                         <tr>
@@ -104,8 +104,8 @@
                             <td>17x30x41 | 97 kg</td>
                             <td>300</td>
                             <td>Pending</td>
-                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">Tracking</button>
-                            <button type="button" class="btn btn-primary btn-block mb-1">View</button>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#tracking-modal">Tracking</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#view-modal">View</button>
                             <button type="button" class="btn btn-secondary btn-block">Print</button> </td>
                         </tr>
                         <tr>
@@ -117,8 +117,8 @@
                             <td>17x30x41 | 97 kg</td>
                             <td>300</td>
                             <td>Pending</td>
-                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">Tracking</button>
-                            <button type="button" class="btn btn-primary btn-block mb-1">View</button>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#tracking-modal">Tracking</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#view-modal">View</button>
                             <button type="button" class="btn btn-secondary btn-block">Print</button> </td>
                         </tr>
                         <tr>
@@ -130,8 +130,8 @@
                             <td>17x30x41 | 97 kg</td>
                             <td>300</td>
                             <td>Processing</td>
-                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">Tracking</button>
-                            <button type="button" class="btn btn-primary btn-block mb-1">View</button>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#tracking-modal">Tracking</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1" data-bs-toggle="modal" data-bs-target="#view-modal">View</button>
                             <button type="button" class="btn btn-secondary btn-block">Print</button> </td>
                         </tr>
 
@@ -139,6 +139,120 @@
                     </table>
                 </section>
                 <!-- table end -->
+
+                <!-- tracking modal -->
+                <div class="modal fade" id="tracking-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- title -->
+                            <h5 class="modal-title" id="exampleModalToggleLabel">TRACKING</h5>
+                            <!-- close button -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- modal content -->
+                        <div class="modal-body">
+                            This means that the modal for TRACKING is working even if bobo ako.
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6"> 
+                                    <div class="child1 ">wews</div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                    <div class="child2 h-100">wew</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- button sa baba -->
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- view modal -->
+                <div class=" modal fade" id="view-modal" aria-hidden="true" aria-labelledby="waybill-detail-modal" tabindex="-1">
+                    <div class="modal modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- title -->
+                            <h5 class="modal-title" id="waybill-detail-modal">WAYBILL DETAILS</h5>
+                            <!-- close button -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- modal content -->
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- picture in waybill -->
+                                        <div class="col-lg-5 col-md-5 col-sm-5"> 
+                                            <div class="child1 text-center">  
+                                                <img src="/img/box.jpg"
+                                                alt="login form" class="img-fluid w-100 h-100" style="border-radius: 0 1rem 1rem 0;" />   
+                                            </div>
+                                        </div>
+                                        <!-- table of details in waybill -->
+                                        <div class="col-lg-7 col-md-7 col-sm-7">
+                                            <div class="child2 h-90">
+                                                <table class="table table-sm table-no-bottom-space">
+                                                    <!-- <thead>
+                                                        <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">First</th>
+                                                        <th scope="col">Last</th>
+                                                        <th scope="col">Handle</th>
+                                                        </tr>
+                                                    </thead> -->
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>ID:</th>
+                                                            <td class="fw-bold">26</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Pickup:</th>
+                                                            <td class="fw-bold">John Doe Binan City</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Drop off:</th>
+                                                            <td class="fw-bold">Muntinlupa</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Parcel Size & Weight:</th>
+                                                            <td class="fw-bold">17x30x41 | 97 kg</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Parcel Item</th>
+                                                            <td class="fw-bold">Tools</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Parcel Charges:</th>
+                                                            <td class="fw-bold">Php 68</td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="price-div rounded" >
+                                                <tr>
+                                                    <th>Parcel Charges:</th>
+                                                    <td class="fw-bold">Php 68</td>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                        
+                            <!-- button  -->
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 

@@ -1,132 +1,147 @@
-@include('partials.navigation', ['freight' => 'fw-bold'])
+@include('partials.admin-nav') 
+
+
 
     <!--Forwarding List-->
-    <div class="container p-3">
-      <div class="card">
-      <div class="card-body overflow-x-scroll">
-        <div class="d-grid gap-2 d-md-flex row p-3">
-          <h4>Forwarding List</h4>  
+    <div class="container py-5 h-90 ">
+        <div class="border border-2" style="overflow-x: auto; max-width: 100%;">
+            <div class="waybill-head bg-primary">
+                <h3 class="fw-bold ms-5">Advance Freight Forwarding List</h3>
+            </div>
+
+                <!-- dropdown group starts here -->
+                <section class="btn-wrapper ms-5 mt-5 mb-3">
+                    <h5 class="fw-normal mb-2">FILTERS:</h5>
+                    <div class=" btn-group mb-2">
+                        <button id="btn-group" class="btn btn-primary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            PARCEL ITEM
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group mb-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            PARCEL SIZE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group mb-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            PARCEL WIDTH
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group mb-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            AMOUNT
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group mb-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            STATUS
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+
+                    </div>
+                </section>
+                <!-- dropdown group ends here -->
+                
+                <!-- table starts here -->
+                <section class="mb-5 px-4 h-90">
+                    <table class="table table-striped table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>PHOTO</th>
+                            <th>PICKUP</th>
+                            <th>DROPOFF</th>
+                            <th>PARCEL ITEM</th>
+                            <th>PARCEL SIZE & WIDTH</th>
+                            <th>TOTAL AMOUNT</th>
+                            <th>STATUS</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Photo</td>
+                            <td>John Doe <br>Binan City</td>
+                            <td>Muntinlupa</td>
+                            <td>Tools</td>
+                            <td>17x30x41 | 97 kg</td>
+                            <td>300</td>
+                            <td>Processing</td>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">TRACKING</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1">VIEW</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1">FORWARD</button>
+                            <button type="button" class="btn btn-secondary btn-block">PRINT</button> </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Photo</td>
+                            <td>John Doe <br>Binan City</td>
+                            <td>Muntinlupa</td>
+                            <td>Tools</td>
+                            <td>17x30x41 | 97 kg</td>
+                            <td>300</td>
+                            <td>Pending</td>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">TRACKING</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1">VIEW</button>
+                            <button type="button" class="btn btn-secondary btn-block">PRINT</button> </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Photo</td>
+                            <td>John Doe <br>Binan City</td>
+                            <td>Muntinlupa</td>
+                            <td>Tools</td>
+                            <td>17x30x41 | 97 kg</td>
+                            <td>300</td>
+                            <td>Pending</td>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">TRACKING</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1">VIEW</button>
+                            <button type="button" class="btn btn-secondary btn-block">PRINT</button> </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Photo</td>
+                            <td>John Doe <br>Binan City</td>
+                            <td>Muntinlupa</td>
+                            <td>Tools</td>
+                            <td>17x30x41 | 97 kg</td>
+                            <td>300</td>
+                            <td>Processing</td>
+                            <td class="align-middle"> <button type="button" class="btn btn-primary btn-block mb-1">TRACKING</button>
+                            <button type="button" class="btn btn-primary btn-block mb-1">VIEW</button>
+                            <button type="button" class="btn btn-secondary btn-block">PRINT</button> </td>
+                        </tr>
+
+                    </tbody>
+                    </table>
+                </section>
+                <!-- table end -->
         </div>
-
-        <!-- Forwading list table -->
-        <table class="table align-middle mb-0 bg-white table-striped">
-        <thead class="bg-light">
-          <tr>
-            <th>ID</th>
-            <th>Photo</th>
-            <th>Pickup</th>
-            <th>Drop-off</th>
-            <th>Parcel Item</th> 
-            <th>Parcel Size & Weight</th>
-            <th>Total Amount</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-              </div>
-            </td>
-            <td><p class="fw-normal mb-1">Zephania Park Davao City Philippine</p></td>
-            <td><p class="fw-normal mb-1">Sample Drop-off</p></td>
-            <td><p class="fw-normal mb-1">Sample Parcel Item</p></td>
-            <td><p class="fw-normal mb-1">Sample Size & Weight</p></td>
-            <td><p class="fw-normal mb-1">Sample Total Amount</p></td>
-            <td><span class="badge badge-primary rounded-pill d-inline">Processing</span></td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Print</button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="/waybill/viewinformation">View</a></button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Forward</button>
-            </td>
-          </tr>
-            <td>2</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-              </div>
-            </td>
-            <td><p class="fw-normal mb-1">Sample Pickup</p></td>
-            <td><p class="fw-normal mb-1">Sample Drop-off</p></td>
-            <td><p class="fw-normal mb-1">Sample Parcel Item</p></td>
-            <td><p class="fw-normal mb-1">Sample Size & Weight</p></td>
-            <td><p class="fw-normal mb-1">Sample Total Amount</p></td>
-            <td><span class="badge badge-primary rounded-pill d-inline">Processing</span></td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Print</button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="/waybill/viewinformation">View</a></button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Forward</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/3.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-              </div>
-            </td>
-            <td><p class="fw-normal mb-1">Sample Pickup</p></td>
-            <td><p class="fw-normal mb-1">Sample Drop-off</p></td>
-            <td><p class="fw-normal mb-1">Sample Parcel Item</p></td>
-            <td><p class="fw-normal mb-1">Sample Size & Weight</p></td>
-            <td><p class="fw-normal mb-1">Sample Total Amount</p></td>
-            <td><span class="badge badge-danger rounded-pill d-inline">Pending</span></td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Print</button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="/waybill/viewinformation">View</a></button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Forward</button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/4.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-              </div>
-            </td>
-            <td><p class="fw-normal mb-1">Sample Pickup</p></td>
-            <td><p class="fw-normal mb-1">Sample Drop-off</p></td>
-            <td><p class="fw-normal mb-1">Sample Parcel Item</p></td>
-            <td><p class="fw-normal mb-1">Sample Size & Weight</p></td>
-            <td><p class="fw-normal mb-1">Sample Total Amount</p></td>
-            <td><span class="badge badge-danger rounded-pill d-inline">Pending</span></td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Print</button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="/waybill/viewinformation">View</a></button>            
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Forward</button>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/5.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-              </div>
-            </td>
-            <td><p class="fw-normal mb-1">Sample Pickup</p></td>
-            <td><p class="fw-normal mb-1">Sample Drop-off</p></td>
-            <td><p class="fw-normal mb-1">Sample Parcel Item</p></td>
-            <td><p class="fw-normal mb-1">Sample Size & Weight</p></td>
-            <td><p class="fw-normal mb-1">Sample Total Amount</p></td>
-            <td><span class="badge badge-primary rounded-pill d-inline">Processing</span></td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Print</button>
-              <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="/waybill/viewinformation">View</a></button>            
-              <button type="button" class="btn btn-link btn-sm btn-rounded">Forward</button>
-            </td>
-          </tr>
-        </tbody>
-        </table>
-      </div>
     </div>
-    </div>
-    <!-- End of Waybill List -->
-
-    <!-- MDB -->
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-</body>
-</html>
-{{-- @include('partials.footer') --}}
+@include('partials.footer') 
