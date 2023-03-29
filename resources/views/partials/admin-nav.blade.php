@@ -15,8 +15,8 @@
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
     
-
-
+    {{-- dashboard css --}}
+    <link rel="stylesheet" type="text/css" href="{{url('css/admindashboard.css')}}">
 
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
