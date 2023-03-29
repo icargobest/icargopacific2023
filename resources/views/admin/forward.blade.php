@@ -1,9 +1,13 @@
-
 <!-- Navbar -->
-@include('header', ['dashboard' => 'fw-bold'])
+@include('partials/admin-nav')
 <!-- Navbar -->
 
-<div class="container p-4">
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
+<script src="{{ asset('js/bootstrap.js')}}"></script>
+<script src="{{ asset('js/mdb.min.js')}}"></script>
+
+<div class="container-fluid pt-4 pb-4">
     <!-- Transfer Search Bar -->
     <div class="card rounded-0">
         <div class="shadow text-white p-3" style="background-color: #214D94;">
@@ -29,7 +33,7 @@
         <div class="card-body">
             <div class="row">
                 <!-- Forms -->
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <div class="input-group pb-3">
                         <input type="date" class="form-control" style="background-color: #EAEBEE"/>
                     </div>
@@ -65,21 +69,21 @@
                         </select>
                     </div>
                     <div class="input-group pb-3">
-                        <div class="form-outline" style="background-color: #EAEBEE">
-                            <input type="number" class="form-control" />
+                        <div class="form-outline">
+                            <input type="number" class="form-control" style="background-color: #EAEBEE"/>
                             <label class="form-label">Freight Charges</label>
                         </div>
                     </div>
                     <div class="input-group pb-3">
-                        <div class="form-outline" style="background-color: #EAEBEE">
-                            <input type="number" class="form-control" />
+                        <div class="form-outline">
+                            <input type="number" class="form-control" style="background-color: #EAEBEE"/>
                             <label class="form-label">Total Amount</label>
                         </div>
                     </div>
                 </div>
                 <!--  Forms End -->
                 <!-- Form -->
-                <div class="col-sm-7">   
+                <div class="col-sm-6">   
                     <div class="border border-secondary p-3 rounded">
                         <table class="table table-responsive table-sm table-striped m-0">
                             <tbody>
@@ -120,7 +124,4 @@
 <!-- Container -->
 </div>
 
-
-<!-- Footer -->
-@include ('footer')
-<!--End Footer -->
+<script src="/js/bootstrap.bundle.js"></script>
