@@ -60,9 +60,6 @@
               <li class="nav-item">
                 <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link @if(isset($qrcode)){{$qrcode}}@endif" href="/qrcode">QR Code</a>
-              </li>
         </ul>
         <!-- Left links -->
       </div>
@@ -169,7 +166,7 @@
                   <a href="#" class="dropdown-item">Lock Account</a>
             </li>
             <li>
-                <a href="/index.html" class="dropdown-item">Logout</a>
+                <a href="./" class="dropdown-item">Logout</a>
             </li>
           </ul>
         </div>

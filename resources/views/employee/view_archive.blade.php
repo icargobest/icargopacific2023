@@ -22,15 +22,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($employees as $emp)
-                        @if ($emp->archived == true)
+                    @foreach ($employees as $employee)
+                        @if ($employee->archived == true)
                             <tr>
-                                <td>{{$emp->id}}</td>
-                                <td>{{$emp->name}}</td>
-                                <td>{{$emp->email}}</td>
-                                <td>{{$emp->role}}</td>
-                                <td><a href="{{route('unarchiveEmployee', $emp->id)}}" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to restore this employee?')">Restore</a>
-                                </td>
+                                <td>{{$employee->id}}</td>
+                                <td>{{$employee->name}}</td>
+                                <td>{{$employee->email}}</td>
+                                <td>{{$employee->role}}</td>
+                                <td>@include('employee.restore')</td>
                                 <td>
                                 </td>
                             </tr>

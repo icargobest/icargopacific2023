@@ -97,12 +97,12 @@ Route::get('/company', [CompanyController::class, 'index']);
 Route::controller(EmployeeController::class)->group(function(){
     Route::get('/employees','index')->name('EmployeePanel');
     Route::post('/add_employee', 'addEmployee')->name('addEmployee');
-    Route::get('/update_employee/{id}','updateEmployee')->name('updateEmployee');
-    Route::post('/save_updated_employee','saveUpdatedEmployee')->name('saveUpdatedEmployee');
     Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
     Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
-    Route::get('/employees/archive/{id}', 'archive')->name('archiveEmployee');
-    Route::get('/employees/unarchive/{id}', 'unarchive')->name('unarchiveEmployee');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::put('/employees/archive/{id}', 'archive')->name('archive');
+    Route::put('/employees/unarchive/{id}', 'unarchive')->name('unarchive');
 });
 // Auth::routes();
 

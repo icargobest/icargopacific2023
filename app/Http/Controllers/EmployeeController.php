@@ -19,8 +19,7 @@ class EmployeeController extends Controller
         return view('employee.view_archive', ['employees' => $data]);
     }
 
-    function __construct()
-    {
+    function __construct(){
         $this->employee = new Employee;
     }
 
@@ -33,23 +32,23 @@ class EmployeeController extends Controller
         ];
 
         $this->employee->addEmployee($data);
-        return back();
+        return back()->with('success', 'Employee data created successfully!');
     }
 
-    function updateEmployee($id){
-        $emp=$this->employee->getEmployeeId($id);
-        return view('employee.edit',compact('emp'));
+    function edit($id){
+        $data = Employee::find($id);
+        return view('employee.edit', ['employee' => $data]);
+
     }
 
-    function saveUpdatedEmployee(Request $request){
-        $data = [
-            'name' => $request->updateFullName,
-            'email' => $request->updateEmail,
-            'password' => $request->updatePassword,
-            'role' => $request->updateRole,
-        ];
-        $this->employee->updateEmployee($data,$request->id);
-        return redirect()->route('EmployeePanel');
+    function update(Request $request, $id){
+        $data = Employee::find($id);
+        $data->name = $request->input('updateFullName');
+        $data->email = $request->input('updateEmail');
+        $data->password = $request->input('updatePassword');
+        $data->role = $request->input('updateRole');
+        $data->save();
+        return back()->with('success', 'Employee #'.$id.' data updated successfully!');
     }
 
     function viewEmployee($id){
@@ -63,7 +62,7 @@ class EmployeeController extends Controller
         $employee->archived = 1;
         $employee->save();
 
-        return redirect()->route('EmployeePanel')->with('success', 'Employee data archived successfully.');
+        return redirect()->back()->with('success', 'Employee #'.$id.' data archived successfully.');
     }
 
     public function unarchive($id)
@@ -72,7 +71,7 @@ class EmployeeController extends Controller
         $employee->archived = 0;
         $employee->save();
 
-        return redirect()->route('viewArchive')->with('success', 'Employee date restore successfully.');
+        return redirect()->back()->with('success', 'Employee #'.$id.' data restored successfully.');
     }
 
 }
