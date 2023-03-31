@@ -10,3 +10,32 @@
     background-color: aqua;
     margin-left: 10px;
 }
+
+#bid-button{
+    height: 50px;
+    padding-top: 0;
+}
+
+#tracking-status{
+    color: white !important;
+}
+
+/* #headers{
+    
+} */
+
+#trackingsD{
+    border-radius: 0;
+    border-color: gray !important;
+    border-width: 2px !important;
+    border-style: solid !important;
+}
+
+#tracking-commits-and-location{
+    color: white !important;
+    background-color: #0C2F68 !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid black;
+
+}
