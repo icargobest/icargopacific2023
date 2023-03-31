@@ -737,7 +737,6 @@
             "time": "2023-01-14T14:17:03+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "endroid/qr-code",
             "version": "4.8.1",
             "source": {
@@ -774,7 +773,6 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "4.x-dev"
-=======
             "name": "fideloper/proxy",
             "version": "4.4.2",
             "source": {
@@ -803,16 +801,12 @@
                     "providers": [
                         "Fideloper\\Proxy\\TrustedProxyServiceProvider"
                     ]
->>>>>>> develop
                 }
             },
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "Endroid\\QrCode\\": "src/"
-=======
+                    "Endroid\\QrCode\\": "src/",
                     "Fideloper\\Proxy\\": "src/"
->>>>>>> develop
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -821,7 +815,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
                     "name": "Jeroen van den Enden",
                     "email": "info@endroid.nl"
                 }
@@ -846,7 +839,6 @@
                 }
             ],
             "time": "2023-02-23T08:56:09+00:00"
-=======
                     "name": "Chris Fidao",
                     "email": "fideloper@gmail.com"
                 }
@@ -942,7 +934,6 @@
             ],
             "abandoned": true,
             "time": "2022-02-23T14:25:13+00:00"
->>>>>>> develop
         },
         {
             "name": "fruitcake/php-cors",
@@ -2504,7 +2495,6 @@
             "time": "2023-03-03T20:12:38+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "masterminds/html5",
             "version": "2.7.6",
             "source": {
@@ -2526,7 +2516,6 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7"
-=======
             "name": "moneyphp/money",
             "version": "v4.1.0",
             "source": {
@@ -2571,25 +2560,18 @@
                 "florianv/exchanger": "Exchange rates library for PHP",
                 "florianv/swap": "Exchange rates library for PHP",
                 "psr/cache-implementation": "Used for Currency caching"
->>>>>>> develop
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
                     "dev-master": "2.7-dev"
-=======
                     "dev-master": "3.x-dev"
->>>>>>> develop
                 }
             },
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "Masterminds\\": "src"
-=======
+                    "Masterminds\\": "src",
                     "Money\\": "src/"
->>>>>>> develop
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2598,7 +2580,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
                     "name": "Matt Butcher",
                     "email": "technosophos@gmail.com"
                 },
@@ -2701,7 +2682,6 @@
                 }
             ],
             "time": "2023-01-31T09:47:59+00:00"
-=======
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net"
@@ -2727,7 +2707,6 @@
                 "source": "https://github.com/moneyphp/money/tree/v4.1.0"
             },
             "time": "2022-12-19T20:35:32+00:00"
->>>>>>> develop
         },
         {
             "name": "monolog/monolog",
@@ -3225,7 +3204,6 @@
             "time": "2023-02-08T01:06:31+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "phenx/php-font-lib",
             "version": "0.5.4",
             "source": {
@@ -3244,7 +3222,6 @@
             },
             "require-dev": {
                 "symfony/phpunit-bridge": "^3 || ^4 || ^5"
-=======
             "name": "paragonie/constant_time_encoding",
             "version": "v2.6.3",
             "source": {
@@ -3264,21 +3241,16 @@
             "require-dev": {
                 "phpunit/phpunit": "^6|^7|^8|^9",
                 "vimeo/psalm": "^1|^2|^3|^4"
->>>>>>> develop
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "FontLib\\": "src/FontLib"
-=======
+                    "FontLib\\": "src/FontLib",
                     "ParagonIE\\ConstantTime\\": "src/"
->>>>>>> develop
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-<<<<<<< HEAD
                 "LGPL-3.0"
             ],
             "authors": [
@@ -3340,7 +3312,6 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.0"
             },
             "time": "2022-09-06T12:16:56+00:00"
-=======
                 "MIT"
             ],
             "authors": [
@@ -3378,7 +3349,6 @@
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
             "time": "2022-06-14T06:56:20+00:00"
->>>>>>> develop
         },
         {
             "name": "phpoption/phpoption",
