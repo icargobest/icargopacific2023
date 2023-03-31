@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // LOGIN PAGE
 Route::get('/', function () {
-    return view('login/index');
+    return view('employee/employees');
 });
 
 // REGISTER ACCOUNT PAGE
@@ -62,7 +62,6 @@ Route::get('/driver', function () {
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-Auth::routes();
 
 //test
 Route::get('/employees', [EmployeeController::class, 'index'])->name('EmployeePanel');
@@ -84,11 +83,10 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -113,6 +111,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
     });*/
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

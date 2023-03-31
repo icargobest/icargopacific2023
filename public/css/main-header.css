@@ -12,6 +12,10 @@ background: #EAEBEE;
 
 }
 
+
+body:-webkit-scrollbar {
+    display: none;
+}
 .main-container
 {
 display: flex;
@@ -21,9 +25,8 @@ display: flex;
 {
 width: 100vw;
 padding-left: 50px;
-background: #EAEBEE;
+/* background: #EAEBEE; */
 margin-top: 65px;
-z-index: 10;
 }
 
 .random-div
@@ -65,6 +68,7 @@ height: 100vh;
 background: #1d4586;
 overflow: hidden;
 transition:all 500ms ease-in-out;
+z-index: 10;
 }
 
 .sidebar:hover
@@ -143,7 +147,7 @@ border-bottom-right-radius: 0;
 {
 margin: 8px 0px;
 height: 20px;
-color:#888;
+color: #fff;;
 display: flex;
 align-items: center;
 padding: 0px 12px;
@@ -206,6 +210,79 @@ justify-content: space-between;
 
 
 
+/* New added
+ */
+.header-container
+{
+display: flex;
+justify-content: space-between;
+}
+
+
+
+.user-container
+{
+display: flex;
+height: 100%;
+align-items: center;
+justify-content: flex-end;
+margin-right: 10px;
+padding-bottom: 5px;;
+}
+
+.header-dropdown
+{   
+inset: 10px 0px auto auto !important;
+background-color: #fff !important;
+}
+
+
+.spanUser
+{
+display: none;
+color: #214D94;
+font-weight: bolder;
+margin: 0px 5px;
+}
+.spanUser2
+{
+display: block;
+padding: 10px;
+color: #353535;
+font-weight: bolder;
+}
+
+.userButton
+{
+    width: 100px;
+    border-radius:20px !important;
+    background: #F9CD1A;
+    color: #fff;
+    border: none;
+    margin: 0px;
+}
+
+.dividerBlack, .dividerBlack1
+{
+    border-bottom: 1px solid #353535;
+    margin-top: 10px;
+    margin: auto;
+    width: 85%;
+}
+
+
+
+.header-dropdown i
+{
+
+margin-right: 10px;
+color: #F9C800;
+}
+
+
+
+
+
 @media screen and (min-width: 664px) {
 .sidebar
 {
@@ -218,6 +295,25 @@ width: 250px;
     margin-top: 30px;
     width: 100%;
 }
+
+
+
+.spanUser
+{
+display: block;
+}
+.spanUser2
+{
+display: none;
+}
+
+.dividerBlack1
+{
+display: none;
+}
+
+
+
 .content-container
 {
 padding-left: 250px;

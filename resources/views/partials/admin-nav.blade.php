@@ -21,14 +21,12 @@
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-    <!-- CSS for bootstrap modifying -->
     <link rel="stylesheet" href="/css/waybill-list.css" />
     
     <title>Document</title>
 </head>
 
 <style>
-
 
 </style>
 
@@ -130,14 +128,42 @@
 
 
     <div class="content-container">
-        <div class="header-container">
+        <div class="header-container ">
             <div class="logo">
                 <span>
                     <img src="img/Frame 1.png" alt="">
                 </span>
             </div>
+
+            <div class="user-container">
+                <span class="spanUser">
+                    Jhony Simpson James
+                </span>
+                
+                <div class="button-container dropdown ">
+                    <button class="userButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  style="">
+                            <span>Admin</span>
+                    </button>
+                    <ul class="header-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <li class="d-flex align-items-center" style="height:30px; background-color:#D9D9D9; padding-left:10px; font-weight:bolder">Settings</li>
+                        <li>
+                            <span class="spanUser2">
+                                Jhony Simpson James
+                            </span>
+                        </li>
+                        <li><div class="dividerBlack1"></div></li>
+                        
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-gear"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
+                        <li><div class="dividerBlack"></div></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-lock"></i>Lock Accounts</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
         </div> 
         
       
-
-
