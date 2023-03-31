@@ -1,0 +1,79 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.vertical-center {
+    min-height: 100%;  
+    min-height: 100vh; 
+  
+    display: flex;
+    align-items: center;
+}
+
+.blue{
+    color: #214D94;
+}
+.letter-spacing{
+    letter-spacing: 1px;
+}
+.login-button{
+    width: 100%;
+    background-color: #F7CF0F;
+    border: none;
+    color: #214D94;
+    font-weight: bold;
+}
+
+.login-button:hover{
+    background-color: #ffd500;
+    color: #214D94;
+    letter-spacing: 1px;
+}
+
+.login-image-container{
+    object-fit: cover;
+    padding: 0px;
+}
+
+.login-image{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.login-container{
+    background-color: white;
+}
+
+.login-header{
+    font-weight: bold;
+    font-size: 25px;
+    color: #214D94;
+}
+
+.register-button{
+    background-color: #F7CF0F; 
+    border:none; color: #214D94; 
+    width: 100%; 
+    font-weight:500;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.register-ascompany-button{
+    background-color: transparent; 
+    border:#214D94 solid 2px; 
+    color: #214D94; 
+    width: 100%; 
+    font-weight:500;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.register-ascompany-button:hover{
+    background-color: #214D94 ; 
+    border:#214D94 solid 2px; 
+    color: white;
+
+}

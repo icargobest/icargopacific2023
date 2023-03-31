@@ -9,17 +9,17 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-
+    
         <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
             <img class="login-image" src="/img/login_image.png" alt="login_image">
         </div>
-
+    
         <div class="col-lg-4 login-container p-5">
             
-                <div class="pb-2 login-header">{{ __('Register') }}</div>
+                <div class="pb-2 login-header">{{ __('Register as a company') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
-
-                    <form method="POST" action="{{ route('register') }}">
+                
+                    <form method="POST" action="/store">
                         @csrf
                         @include('flash-message')
                         <div class="row mb-3">
@@ -32,9 +32,9 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
 
                                 @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -49,9 +49,9 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail Address">
 
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-lock-fill text-secondary"></i>
                                 </span>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"  placeholder="Re-Type Password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-Type Password">
                             </div>
                         </div>
 
@@ -90,26 +90,22 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
-                        </div>   
+                        </div>
                     </form>
-                    <a href="{{ url('/registerCompany') }}">
+                    <a href="{{ route('register') }}">
                         <button type="button" class="mb-5 register-ascompany-button letter-spacing">
-                            {{ __('Register as a company') }}
-                        </button>
+                            {{ __('Register as a user') }}
+                        </button>   
                     </a>
 
                     <div class="text-center mt-5 pt-5">
                         <p>Already have an account?
-                            <span> 
-                                <a href="{{ route('login') }}">Login Here</a> 
-                            </span>
+                            <span> <a href="{{ route('login') }}">Login Here</a> </span>
                         </p>
                     </div>
                 
             
         </div>
-
-        
     </div>
 </div>
 @endsection
