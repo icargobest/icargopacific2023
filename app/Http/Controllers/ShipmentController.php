@@ -39,7 +39,7 @@ class ShipmentController extends Controller
             'length' => $request->length,
             'width' => $request->width,
             'height' => $request->height,
-            'total_price' => fake()->numberBetween($min = 1000, $max = 9000),
+            'total_price' => $request->amount,
             'status' => 'pending',
         ];
 

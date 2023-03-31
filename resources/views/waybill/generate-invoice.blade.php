@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
     <title>Invoice #{{$ship->id}}</title>
 
     <style>
@@ -77,7 +74,6 @@
             color: #fff;
         }
     </style>
-</head>
 <body>
 
     <table class="order-details">
@@ -183,6 +179,5 @@
     <p class="text-center">
         Thank your for shopping with iCargo Pacific
     </p>
-
 </body>
 </html>

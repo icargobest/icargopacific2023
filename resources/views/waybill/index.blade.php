@@ -24,12 +24,12 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         <h1>SENDER INFO</h1>
                         @csrf
-                      <!-- 2 column grid layout with text inputs for the first and last names -->
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form6Example1" name="senderName" class="form-control" />
-                        <label class="form-label" for="form6Example1">Full Name</label>
-                      </div>
-
+                      <fieldset disabled>
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form6Example1" name="senderName" value="{{Auth::user()->name}}"class="form-control" />
+                            <label class="form-label" for="form6Example1">Full Name</label>
+                        </div>
+                      </fieldset>
                       <!-- Address input -->
                       <div class="form-outline mb-4">
                         <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
@@ -52,12 +52,12 @@
                         </div>
                       </div>
 
-                      <!--Email input-->
-                      <div class="form-outline mb-4">
-                        <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
-                        <label class="form-label" for="form6Example5">Email Address</label>
-                      </div>
-
+                      <fieldset disabled>
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form6Example5" name="senderEmail" value="{{Auth::user()->email}}" class="form-control" />
+                            <label class="form-label" for="form6Example5">Email Address</label>
+                        </div>
+                      </fieldset>
 
                       <!-- City Zip input -->
                       <div class="row mb-4">
@@ -229,6 +229,14 @@
                           </div>
                         </div>
 
+                        <!--Bid input-->
+                        <div class="form-outline mb-4">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example3" name="amount" class="form-control" />
+                                <label class="form-label" for="form6Example3">Minimum Bid</label>
+                            </div>
+                        </div>
+
                         <!--Image input-->
                         <div class="form-outline mb-4">
                           <input type="file" id="form6Example5" class="form-control" />
@@ -253,11 +261,14 @@
           </div>
         </div>
 
-        <!-- waybill list table -->
-        <table class="table align-middle mb-0 bg-white table-striped">
+        <div class="mt-2">
+            @include('partials.messages')
+        </div>
+
+        <table class="table table-striped">
             <thead class="bg-light">
             <tr>
-                <th>ID</th>
+                <th>Tracking Number</th>
                 <th>Photo</th>
                 <th>Pickup</th>
                 <th>Drop-off</th>
@@ -265,29 +276,30 @@
                 <th>Parcel Size & Weight</th>
                 <th>Total Amount</th>
                 <th>Status</th>
-                <th></th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
                 @foreach ($shipments as $ship)
-                    <tr>
-                        <td>{{$ship->id}}</td>
-                        <td></td>
-                        <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
-                        <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
-                        <td></td>
-                        <td>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg </td>
-                        <td>{{$ship->total_price}}</td>
-                        <td>{{$ship->status}}</td>
-                        @if($ship->status == 'pending')
-                            <td><a href="{{route('viewShipment', $ship->id)}}" class="btn btn-dark btn-sm"> View</a></td>
-                        @elseif($ship->status == 'processing')
-                            <td><a href="" class="btn btn-dark btn-sm">Tracking</a></td>
-                        @endif
-                        <td><a href="{{route('generate',$ship->id)}}" class="btn btn-dark btn-sm">Invoice</a></td>
-                        <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>
-                    </tr>
+                    @if(Auth::user()->name == $ship->sender_name)
+                        <tr>
+                            <td>{{$ship->tracking_number}}</td>
+                            <td></td>
+                            <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
+                            <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
+                            <td></td>
+                            <td>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg </td>
+                            <td>{{$ship->total_price}}</td>
+                            <td>{{$ship->status}}</td>
+                            @if($ship->status == 'pending')
+                                <td><a href="{{route('viewShipment', $ship->id)}}" class="btn btn-dark btn-sm"> View</a></td>
+                            @elseif($ship->status == 'processing')
+                                <td><a href="" class="btn btn-dark btn-sm">Tracking</a></td>
+                                <td><a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">Generate</a></td>
+                                <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>
+                            @endif
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

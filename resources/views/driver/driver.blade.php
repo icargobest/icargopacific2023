@@ -18,27 +18,6 @@
                     <button type="button" class="btn btn-primary">Search</button>
 
                   </div>
-<<<<<<< HEAD
-                </div>
-                -->
-
-                <div style="display:none">
-                  <label>QR Scanner</label>
-                </div>
-                <div class="p-3">
-                  <a class="btn btn-primary mt-3">Start</a>
-                  <a class="btn btn-danger mt-3">Reset</a>
-                </div>
-                <div class="scanvideo">
-                  <video id="video" width="230" height="230" style="border: 1px solid gray"></video>
-                </div>
-                <div class="scanresult">
-                  <label>Result:</label>
-                  <span id="result"></span>
-                </div>
-              </section>
-            </main>
-=======
 
                   <!--
                   <div class="input-group mb-3">
@@ -48,7 +27,7 @@
                     </div>
                   </div>
                   -->
-                  
+
                   <div style="display:none">
                     <label>QR Scanner</label>
                   </div>
@@ -67,13 +46,12 @@
                 </section>
               </main>
             </div>
->>>>>>> develop
           </div>
         </div>
       </div>
     </div>
-<<<<<<< HEAD
   </div>
+
 <form method="POST" action="{{ url('/generate-code') }}">
     @csrf
     <div>
@@ -96,8 +74,7 @@
     <script src="/js/bootstrap.bundle.js"></script>
 </body>
 </html>
-=======
-  
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
   <script type="text/javascript">
@@ -196,5 +173,4 @@ span a{
   color:red
 }
 </style>
->>>>>>> develop
 {{-- @include('partials.footer') --}}

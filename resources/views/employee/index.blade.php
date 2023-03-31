@@ -10,7 +10,6 @@
             @include('employee.create')
         </div>
 
-
         <div class="mt-2">
             @include('partials.messages')
         </div>
