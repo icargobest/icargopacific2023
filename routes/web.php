@@ -107,8 +107,8 @@ Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@check
 Route::resource('drivers', DriverController::class);
 Route::get('/drivers/delete/{id}', [DriverController::class, 'destroy'])->name('drivers.delete');
 Route::get('ArchivedUser',[DriverController::class, 'viewArchive'])->name('drivers.viewArchive');
-Route::get('/drivers/archive/{id}',[DriverController::class, 'archive'])->name('drivers.archive');
-Route::get('/drivers/unarchive/{id}',[DriverController::class, 'unarchive'])->name('drivers.unarchive');
+Route::put('/drivers/archive/{id}',[DriverController::class, 'archive'])->name('drivers.archive');
+Route::put('/drivers/unarchive/{id}',[DriverController::class, 'unarchive'])->name('drivers.unarchive');
 
 
 Route::get('/company', [CompanyController::class, 'index']);

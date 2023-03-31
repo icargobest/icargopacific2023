@@ -1,26 +1,15 @@
-@include('partials.navigation', ['drivers' => 'fw-bold'])
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Driver</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>Edit Driver</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('drivers.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
-            </div>
+<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{$driver->id}}">
+    Edit
+ </button>
+<div class="modal fade" id="editModal{{$driver->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Driver Information</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
         @if(session('status'))
         <div class="alert alert-success mb-1 mt-1">
             {{ session('status') }}
@@ -60,10 +49,12 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </form>
+        </div>
+      </div>
     </div>
-</body>
-
-</html>
+  </div>
+</div>

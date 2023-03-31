@@ -1,35 +1,37 @@
-@include('partials.navigation', ['drivers' => 'fw-bold'])
-
-
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col col-md-6"><b>Driver Information</b></div>
-                <div class="col col-md-6">
-                    <a href="{{ route('drivers.index') }}" class="btn btn-primary btn-sm float-end">View All</a>
-                </div>
-            </div>
+<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$driver->id}}">
+    Show
+ </button>
+    
+  <div class="modal fade" id="showModal{{$driver->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Driver Information</h5>
+          </button>
         </div>
-        <div class="card-body">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-label-form"><b>Driver Name</b></label>
+        <div class="modal-body">
+            <div class="row mb-4">
+                <label class="col-sm-10 col-label-form"><b>Driver Name</b></label>
                 <div class="col-sm-10">
                     {{$driver->driver_name}}
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-label-form"><b>Vehicle Type</b></label>
+            <div class="row mb4">
+                <label class="col-sm-10 col-label-form"><b>Vehicle Type</b></label>
                 <div class="col-sm-10">
                     {{$driver->vehicle_type}}
                 </div>
             </div>
             <div class="row mb-4">
-                <label class="col-sm-2 col-label-form"><b>Plate No.</b></label>
+                <label class="col-sm-10 col-label-form"><b>Plate No.</b></label>
                 <div class="col-sm-10">
                     {{$driver->plate_no}}
                 </div>
             </div>
-          </a>
         </div>
-    </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>

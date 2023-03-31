@@ -63,7 +63,7 @@ class DriverController extends Controller
             'plate_no' => 'required',
         ]);
         
-        $drivers->fill($request->post())->save();
+        $driver->fill($request->post())->save();
         return redirect()->route('drivers.index')->with('success','Driver Has Been updated successfully');
     }
 

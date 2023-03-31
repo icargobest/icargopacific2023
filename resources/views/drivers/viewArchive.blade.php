@@ -26,8 +26,7 @@
                                 <td>{{ $driver->driver_name }}</td>
                                 <td>{{ $driver->vehicle_type }}</td>
                                 <td>{{ $driver->plate_no }}</td>
-                                <td><a href="{{route('drivers.unarchive', $driver->id)}}" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to restore this driver?')">Restore</a>
-                                </td>
+                                <td>@include('drivers.restore')</td>
                                 <td>
                                 </td>
                             </tr>

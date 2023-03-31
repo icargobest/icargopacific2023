@@ -1,63 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Add Driver</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left mb-2">
-                    <h2>Add Driver</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('drivers.index') }}"> Back</a>
-                </div>
-            </div>
+<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+    Add Driver
+</button>
+<div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Driver</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-        @if(session('status'))
-        <div class="alert alert-success mb-1 mt-1">
-            {{ session('status') }}
-        </div>
-        @endif
-        <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Driver Name:</strong>
-                        <input type="text" name="driver_name" class="form-control" placeholder="Driver Name">
-                        @error('driver_name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
+            <!-- Driver Name -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" id="form6Example1" name="driver_name" class="form-control" />
+                  <label class="form-label" for="form6Example1">Driver Name</label>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Vehicle Type:</strong>
-                        <input type="text" name="vehicle_type" class="form-control" placeholder="Vehicle Type">
-                        @error('vehicle_type')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Plate No.</strong>
-                        <input type="text" name="plate_no" class="form-control" placeholder="Plate No">
-                        @error('plate_no')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
+              </div>
             </div>
-        </form>
-    </div>
-</body>
 
-</html>
+            <!-- Vehicle Type -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form6Example5" name="vehicle_type" class="form-control" />
+              <label class="form-label" for="form6Example5">Vehicle Type</label>
+            </div>
+
+            <!-- Plate No. -->
+             <div class="form-outline mb-4">
+              <input type="text" id="form6Example4" name="plate_no" class="form-control" />
+              <label class="form-label" for="form6Example4">Plate No.</label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Save
+                </button>
+                <button type="reset" class="btn btn-danger btn-block mb-4">
+                  Reset
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
