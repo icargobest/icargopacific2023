@@ -1,0 +1,208 @@
+.createWaybill-container{
+    width: 100%;
+    padding-top: 50px;
+    /* border: 2px solid red; */
+}
+.form-holder{
+    height: 600px;
+    /* border: 2px solid red; */
+    position: relative;
+}
+/* .summary-holder{
+    height: 600px;
+} */
+.form-wrapper{
+    height: 100%;
+    background-color: #fff;
+}
+.form-wrapper span{
+    font-size: 12px;
+}
+.summary-wrapper{
+    height: 100%;
+    background-color: #fff;
+}
+.form-header{
+    height: 55px;
+    padding-left: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    color: #fff;
+    background-color: #214D94;
+}
+.form-header span{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+.summary-header{
+    height: 55px;
+    padding-left: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    color: #fff;
+    background-color: #214D94;
+}
+.summary-header span{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+
+.waybillRow{
+    display: flex;
+    justify-content: space-around;
+    
+    /* border: 2px solid violet; */
+}
+
+/* INPUTS */
+.createWaybill-container input{
+    border-radius: 5px !important;
+}
+
+.createWaybill-container .numberInput{
+    display: flex;
+    justify-content: space-between;
+}
+.createWaybill-container .mobileNo-input{
+    width: 55%;
+}
+.createWaybill-container .telephone-input{
+    width: 40%;
+}
+.createWaybill-container .address-Input{
+    justify-content: space-between;
+
+}
+.createWaybill-container .city-Input{
+    width: 65%;
+}
+.createWaybill-container .postal-Input{
+    width: 30%;
+}
+
+
+
+/* BUTTONS */
+
+.button-holder{
+    padding-top: 30px;
+    padding-right: 20px;
+    /* border: 2px solid red; */
+    width: 100%;
+
+    display: flex;
+    justify-content: end;
+    align-items:flex-end;
+}
+.button-holder button{
+    padding: 6px;
+    width: 100px;
+    color: #fff;
+    background-color: #214D94;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+.button-holder button:hover{
+    border: 1.5px solid #214D94;
+}
+
+.button-holder a{
+    padding: 6px;
+    width: 100px;
+    color: #fff;
+    background-color: #214D94;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+.button-holder a:hover{
+    border: 1.5px solid #214D94;
+}
+
+.rcvrbutton-holder{
+    padding: 30px 20px 0 20px;
+    /* border: 2px solid red; */
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-end;
+}
+.rcvrbutton-holder button{
+    padding: 6px;
+    width: 100px;
+    color: #fff;
+    background-color: #214D94;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+.rcvrbutton-holder button:hover{
+    border: 1.5px solid #214D94;
+}
+
+/* SUMMARY HOLDER */
+.info-holder{
+    padding-left: 15px;
+    padding-top: 15px;
+    /* border: 2px solid red; */
+    margin-top: -50px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.info-holder h5{
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: #214D94;
+}
+ul span{
+    font-size: 12px;
+    color: #214D94;
+    text-transform: uppercase;
+}
+.senderInfo ul, .receiverInfo ul{
+    list-style: none;
+    padding-left: 0;
+}
+.senderInfo li, .receiverInfo li{
+    font-size: 12px;
+    padding: 5px 0;
+}
+
+/* MODALS */
+
+.modal header{
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal header button{
+    color: #fff;
+}
+
+.modal-backdrop {
+    display: none !important;
+}
+.receiver-modal{
+    margin-top: -25px;
+}
+.shipmentDetail-modal{
+    margin-top: -25px;
+}
+.receiver-modal::-webkit-scrollbar{
+    display: none;
+}
+.shipmentDetail-modal::-webkit-scrollbar{
+    display: none;
+}

@@ -23,7 +23,6 @@ width: 100vw;
 padding-left: 50px;
 background: #EAEBEE;
 margin-top: 65px;
-z-index: 10;
 }
 
 .random-div
@@ -51,6 +50,7 @@ position: fixed;
 background: #fff;
 display: flex;
 align-items: center;
+z-index: 10;
 }
 
 .sidebar
@@ -64,6 +64,7 @@ height: 100vh;
 background: #1d4586;
 overflow: hidden;
 transition:all 500ms ease-in-out;
+z-index: 10;
 }
 
 .sidebar:hover
@@ -142,7 +143,7 @@ border-bottom-right-radius: 0;
 {
 margin: 8px 0px;
 height: 20px;
-color:#888;
+color:#fff;
 display: flex;
 align-items: center;
 padding: 0px 12px;

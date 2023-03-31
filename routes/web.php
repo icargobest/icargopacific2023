@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 // LOGIN PAGE
 Route::get('/', function () {
     return view('login/index');
+});
+
+Route::get('/', function () {
+    return view('create_waybill/createWaybill');
 });
 
 // REGISTER ACCOUNT PAGE

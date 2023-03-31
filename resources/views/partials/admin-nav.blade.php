@@ -19,6 +19,7 @@
 
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
     
     <title>Document</title>
