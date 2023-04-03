@@ -8,6 +8,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
 
@@ -90,6 +91,14 @@ Route::get('/freight', function () {
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
 Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@checkUser']);
+
+//DRIVER PANEL
+Route::resource('drivers', DriverController::class);
+Route::get('/drivers/delete/{id}', [DriverController::class, 'destroy'])->name('drivers.delete');
+Route::get('ArchivedUser',[DriverController::class, 'viewArchive'])->name('drivers.viewArchive');
+Route::put('/drivers/archive/{id}',[DriverController::class, 'archive'])->name('drivers.archive');
+Route::put('/drivers/unarchive/{id}',[DriverController::class, 'unarchive'])->name('drivers.unarchive');
+
 
 Route::get('/company', [CompanyController::class, 'index']);
 
