@@ -165,58 +165,113 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </header>
             
-                            <div class="input-group input-group flex-column mb-3 px-3">
-                                <span>Name</span>
-                                <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-            
-                            <div class="input-group input-group flex-column mb-3  px-3">
-                                <span>Street Address</span>
-                                <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-            
-                            <div class="numberInput input-group mb-3  flex-row px-3">
-            
-                                <div class="mobileNo-input input-group input-group flex-column">
-                                    <span>Mobile Number</span>
-                                    <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="shipment-wrapper container px-4">
+
+                                <div class="serviceDropdown row mb-4">
+                                    <span>Service</span>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select Option
+                                        </button>
+                                        <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton2">
+                                        <li class="dropdown-item">Option1</li>
+                                        <li class="dropdown-item">Option2</li>
+                                        <li class="dropdown-item">Option3</li>
+                                        <li class="dropdown-item">Option4</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="telephone-input input-group input-group flex-column">
-                                    <span>Telephone</span>
-                                    <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <div class="typeDropdown row mb-5">
+                                    <span>Type</span>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select Option
+                                        </button>
+                                        <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton2">
+                                        <li class="dropdown-item">Option1</li>
+                                        <li class="dropdown-item">Option2</li>
+                                        <li class="dropdown-item">Option3</li>
+                                        <li class="dropdown-item">Option4</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                
-                            </div>
-            
-                            <div class="input-group input-group flex-column mb-3  px-3">
-                                <span>Email Address</span>
-                                <input type="email" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-            
-                            <div class="address-Input input-group input-group mb-3 flex-row px-3">
-            
-                                <div class="city-Input input-group flex-column">
-                                    <span>City</span>
-                                    <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <div class="parcelDetails row mb-4">
+                                    <div class="col">
+                                        <span>Weight(kg)</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Length(cm)</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Width(cm)</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Height(cm)</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Category</span>
+                                    </div>
+
                                 </div>
-                                <div class="postal-Input input-group flex-column">
-                                    <span>Postal Code</span>
-                                    <input type="text" class="form-control w-100 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <div class="parcelInputs row mb-4">
+                                    <div class="col">
+                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            ------
+                                            </button>
+                                            <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton2">
+                                            <li class="dropdown-item">Option1</li>
+                                            <li class="dropdown-item">Option2</li>
+                                            <li class="dropdown-item">Option3</li>
+                                            <li class="dropdown-item">Option4</li>
+                                            </ul>
+                                        </div>  
+                                    </div>
+                                      
                                 </div>
-                                
-                            </div>
+
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <span>Image</span>
+                                            <input class="form-control form-control fileUpload" id="formFileSm" type="file">
+                                          </div>
+                                    </div>
+                                    <div class="col">
+                                        <span>Mode of Payment</span>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Select Option
+                                            </button>
+                                            <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton2">
+                                            <li class="dropdown-item">Cash on Delivery(COD)</li>
+                                            <li class="dropdown-item">Gcash</li>
+                                            <li class="dropdown-item">Paymaya</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- BUTTONS --}}
             
-                            <div class="input-group input-group flex-column mb-3  px-3">
-                                <span>Country</span>
-                                <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-            
-                            {{-- BUTTONS --}}
-            
-                            <div class="rcvrbutton-holder">
-                                <button class="btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">PREVIOUS</button>
-                                
-                                <button type="button" class="btn" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#shipmentDetailModal">SUBMIT</button>
+                                <div class="rcvrbutton-holder">
+                                    <button class="btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">PREVIOUS</button>
+                                    
+                                    <button type="button" class="btn" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#shipmentDetailModal">SUBMIT</button>
+                                </div>
+
                             </div>
             
             

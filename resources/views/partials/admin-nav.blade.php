@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-    
-
 
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -15,7 +13,7 @@
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
 
-
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
