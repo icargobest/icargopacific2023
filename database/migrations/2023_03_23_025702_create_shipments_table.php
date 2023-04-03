@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            //$table->unsignedBigInteger('company_id');
+            //$table->foreign('company_id')->references('id')->on('companies');
+            //$table->unsignedBigInteger('employee_id');
+            //$table->foreign('employee_id')->references('id')->on('employees');
             $table->string('tracking_number')->unique();
             $table->string('sender_name');
             $table->string('sender_address');
@@ -34,9 +34,10 @@ return new class extends Migration
             $table->decimal('width', 8, 2);
             $table->decimal('height', 8, 2);
             $table->decimal('weight', 8, 2);
-            $table->string('vehicle_type');
-            $table->string('cargo_type');
+            //$table->string('vehicle_type');
+            //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2);
+            $table->string('status');
             $table->timestamps();
         });
     }
