@@ -2,11 +2,12 @@
 
 
     <!--Waybill List-->
-    <div class="container p-3">
+    <div class="container">
       <div class="card">
       <div class="card-body overflow-x-scroll">
+        <h4>Waybill List</h4>
+        @if(Auth::user()->type =='user')
         <div class="d-grid gap-2 d-md-flex row p-3">
-          <h4>Waybill List</h4>
           <div class="tex-wrap">
             <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
               Create Waybill
@@ -24,12 +25,11 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         <h1>SENDER INFO</h1>
                         @csrf
-                      <fieldset disabled>
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
                         <div class="form-outline mb-4">
-                            <input type="text" id="form6Example1" name="senderName" value="{{Auth::user()->name}}"class="form-control" />
+                            <input type="text" id="form6Example1" name="senderName" class="form-control" />
                             <label class="form-label" for="form6Example1">Full Name</label>
                         </div>
-                      </fieldset>
                       <!-- Address input -->
                       <div class="form-outline mb-4">
                         <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
@@ -52,12 +52,10 @@
                         </div>
                       </div>
 
-                      <fieldset disabled>
                         <div class="form-outline mb-4">
-                            <input type="email" id="form6Example5" name="senderEmail" value="{{Auth::user()->email}}" class="form-control" />
+                            <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
                             <label class="form-label" for="form6Example5">Email Address</label>
                         </div>
-                      </fieldset>
 
                       <!-- City Zip input -->
                       <div class="row mb-4">
@@ -183,15 +181,26 @@
                     <div class="modal-body">
                           <h1>PARCEL INFO</h1>
                         <!-- ! Dropdown Service menu-->
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form6Example1" name="sevice" class="form-control" />
-                          <label class="form-label" for="form6Example1">Service</label>
-                        </div>
-
-                        <!-- !Dropdown Type menu-->
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form6Example5" name="type" class="form-control" />
-                          <label class="form-label" for="form6Example5">Type</label>
+                        <div class="row mb-4">
+                            <div class="form-group col-md-3">
+                                <div class="form-outline">
+                                    <label for="exampleFormControlSelect1">Service</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="">
+                                        <option value="Express">Standard</option>
+                                        <option value="Express">Express</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- !Dropdown Type menu-->
+                            <div class="form-group col-md-3">
+                                <div class="form-outline">
+                                    <label for="exampleFormControlSelect1">Type</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="">
+                                        <option value="Document">Document</option>
+                                        <option value="Other">Other/s</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Parcel details input -->
@@ -222,10 +231,12 @@
                           </div>
                           <!--Dropdown category menu-->
                           <div class="col">
-                              <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="category" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Category</label>
-                              </div>
+                            <div class="form-outline">
+                                <label for="exampleFormControlSelect1">Category</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="">
+                                    <option value="Other">Other/s</option>
+                                </select>
+                            </div>
                           </div>
                         </div>
 
@@ -260,6 +271,7 @@
             </div>
           </div>
         </div>
+        @endif
 
         <div class="mt-2">
             @include('partials.messages')
@@ -281,7 +293,7 @@
             </thead>
             <tbody>
                 @foreach ($shipments as $ship)
-                    @if(Auth::user()->name == $ship->sender_name)
+                    @if(Auth::user()->id == $ship->user_id)
                         <tr>
                             <td>{{$ship->tracking_number}}</td>
                             <td></td>
@@ -292,9 +304,27 @@
                             <td>{{$ship->total_price}}</td>
                             <td>{{$ship->status}}</td>
                             @if($ship->status == 'pending')
-                                <td><a href="{{route('viewShipment', $ship->id)}}" class="btn btn-dark btn-sm"> View</a></td>
+                                <td>@include('waybill.view')</td>
                             @elseif($ship->status == 'processing')
-                                <td><a href="" class="btn btn-dark btn-sm">Tracking</a></td>
+                                <td>@include('waybill.tracking')</td>
+                                <td><a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">Generate</a></td>
+                                <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>
+                            @endif
+                        </tr>
+                    @elseif(Auth::user()->type == 'company')
+                        <tr>
+                            <td>{{$ship->tracking_number}}</td>
+                            <td></td>
+                            <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
+                            <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
+                            <td></td>
+                            <td>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg </td>
+                            <td>{{$ship->total_price}}</td>
+                            <td>{{$ship->status}}</td>
+                            @if($ship->status == 'pending')
+                                <td>@include('waybill.view')</td>
+                            @elseif($ship->status == 'processing')
+                                <td>@include('waybill.tracking')</td>
                                 <td><a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">Generate</a></td>
                                 <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>
                             @endif
@@ -308,90 +338,12 @@
     </div>
     <!-- End of Waybill List -->
 
-    <!--View Modal-->
-    <div class="modal top fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Waybill Details</h5>
-              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <fieldset disabled>
-                <input type="text" name="id" value="{{$ship->id}}">
-                <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="form6Example1" name="senderName" class="form-control" value="{{$ship->sender_name}}"/>
-                  <label class="form-label" for="form6Example1">Pick Up</label>
-                </div>
+    <!-- MDB -->
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!--Bootstrap JS-->
+    <script src="/js/bootstrap.bundle.js"></script>
+    <!--Popper-->
 
-                <!-- Address input -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
-                  <label class="form-label" for="form6Example5">Street Address</label>
-                </div>
-
-                <!-- Contact input -->
-                <div class="row mb-4">
-                  <div class="col">
-                      <div class="form-outline">
-                          <input type="text" id="form6Example3" name="senderMobile" class="form-control" />
-                          <label class="form-label" for="form6Example3">Mobile Number</label>
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="form-outline">
-                          <input type="text" id="form6Example3" name="senderTelephone" class="form-control" />
-                          <label class="form-label" for="form6Example3">Telephone</label>
-                      </div>
-                  </div>
-                </div>
-
-                <!--Email input-->
-                <div class="form-outline mb-4">
-                  <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
-                  <label class="form-label" for="form6Example5">Email Address</label>
-                </div>
-
-
-                <!-- City Zip input -->
-                <div class="row mb-4">
-                  <div class="col">
-                      <div class="form-outline">
-                          <input type="text" id="form6Example3" name="senderCity" class="form-control" />
-                          <label class="form-label" for="form6Example3">Municipality/City</label>
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="form-outline">
-                          <input type="text" id="form6Example3" name="senderZip" class="form-control" />
-                          <label class="form-label" for="form6Example3">Postal Code</label>
-                      </div>
-                  </div>
-                </div>
-
-                <!--State input-->
-                <div class="form-outline mb-4">
-                  <input type="text" id="form6Example3" name="senderState" class="form-control" />
-                  <label class="form-label" for="form6Example3">State</label>
-                </div>
-            </fieldset>
-            </div>
-            <div class="modal-footer">
-              <a class="btn btn-primary btn-block" data-mdb-toggle="modal" data-mdb-target="#exampleModal1" data-bs-dismiss="modal">
-                Next
-              </a>
-              <a class="btn btn-secondary btn-block mb-4" data-mdb-dismiss="modal">
-                  Back
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- MDB -->
-
-      <script type="text/javascript" src="/js/mdb.min.js"></script>
-
-{{-- @include('partials.footer') --}}
+      {{-- @include('partials.footer') --}}

@@ -25,6 +25,7 @@ class ShipmentController extends Controller
     function addShipment(Request $request){
         $data = [
             'tracking_number' => fake()->isbn13(),
+            'user_id' => $request->user_id,
             'sender_name' => $request->senderName,
             'sender_address' => $request->senderAddress,
             'sender_city' => $request->senderCity,
@@ -39,7 +40,7 @@ class ShipmentController extends Controller
             'length' => $request->length,
             'width' => $request->width,
             'height' => $request->height,
-            'total_price' => $request->amount,
+            'total_price' => fake()->numberBetween($min = 100, $max = 500),
             'status' => 'pending',
         ];
 

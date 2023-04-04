@@ -6,7 +6,24 @@
         @include('flash-message')
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                        <a class="nav-link" href="/company/dashboard">Home</a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Dispatcher</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
+                      </li>
+              </ul></div>
 
                 <div class="card-body">
                     @if (session('status'))
