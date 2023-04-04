@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>iCargo2023</title>
 
         <!-- Fonts -->
 
@@ -22,7 +22,10 @@
         </style>
     </head>
     <body class="antialiased">
+<<<<<<< HEAD
         <h1>test</h1>
+=======
+>>>>>>> develop
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

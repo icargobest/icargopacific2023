@@ -1,0 +1,58 @@
+@include('partials.navigation', ['drivers' => 'fw-bold'])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Driver List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+</head>
+<body>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <div class="pull-left">
+                    <h2>Driver List</h2>
+                </div>
+                <div class="pull-right mb-2">
+                    <a class="btn btn-success" href="{{ route('drivers.create') }}"> Add Driver</a>
+                </div>
+            </div>
+        </div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID #</th>
+                    <th>Driver Name</th>
+                    <th>Vehicle Type</th>
+                    <th>Plate No.</th>
+                    <th width="280px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($drivers as $driver)
+                    <tr>
+                        <td>{{ $driver->id }}</td>
+                        <td>{{ $driver->driver_name }}</td>
+                        <td>{{ $driver->vehicle_type }}</td>
+                        <td>{{ $driver->plate_no }}</td>
+                        <td>
+                            <form action="{{ route('drivers.destroy',$driver->id) }}" method="Post">
+                                <a class="btn btn-primary" href="{{ route('drivers.edit',$driver->id) }}">Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+            </tbody>
+        </table>
+        {!! $drivers->links() !!}
+    </div>
+</body>
+</html>
