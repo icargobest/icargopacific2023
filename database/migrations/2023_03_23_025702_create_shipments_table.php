@@ -20,6 +20,7 @@ return new class extends Migration
             //$table->unsignedBigInteger('employee_id');
             //$table->foreign('employee_id')->references('id')->on('employees');
             $table->string('tracking_number')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->string('sender_name');
             $table->string('sender_address');
             $table->string('sender_city');
