@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Shipment extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function addShipment($data){
+        return $this->create($data);
+    }
+
+    function getShipmentId($id){
+        return $this->find($id);
+    }
 }

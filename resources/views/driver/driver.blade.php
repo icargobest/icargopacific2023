@@ -27,7 +27,7 @@
                     </div>
                   </div>
                   -->
-                  
+
                   <div style="display:none">
                     <label>QR Scanner</label>
                   </div>
@@ -50,7 +50,31 @@
         </div>
       </div>
     </div>
-  
+  </div>
+
+<form method="POST" action="{{ url('/generate-code') }}">
+    @csrf
+    <div>
+        <label for="data">Enter data:</label>
+        <input type="text" name="data" id="data" required>
+    </div>
+    <div>
+        <button type="submit">Generate code</button>
+    </div>
+</form>
+
+
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!--Bootstrap-->
+    <script src="/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
   <script type="text/javascript">

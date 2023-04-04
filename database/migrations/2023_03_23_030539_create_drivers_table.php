@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('driver_name');
             $table->string('vehicle_type');
-            $table->string('plate_number');
+            $table->string('plate_no');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
