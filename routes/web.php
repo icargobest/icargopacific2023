@@ -124,8 +124,8 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
 
 
 // Plan Controller / Monthly Subscription Routes
-Route::middleware("auth")->group(function() {
-    Route::get('plans',[PlanController::class,'index']);
+Route::middleware("auth")->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
