@@ -5,6 +5,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PlanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // company account registration
 Route::get('/registerCompany', function () {
@@ -44,25 +46,25 @@ Route::post('/store', [CompanyController::class, 'store']);
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
-    ->name('dashboard');
+    ->name('dashboard')->middleware('verified');
 });
 
 // Company Routes
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
-    ->name('company.dashboard');
+    ->name('company.dashboard')->middleware('verified');
 });  
 
 // Super Admin Routes
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
-    ->name('super.admin.dashboard');
+    ->name('super.admin.dashboard')->middleware('verified');
 });
 
 // Driver Routes
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
-    ->name('driver.dashboard');
+    ->name('driver.dashboard')->middleware('verified');
 });
 
 
@@ -120,6 +122,13 @@ Route::post('/save_updated_employee', [EmployeeController::class, 'saveUpdatedEm
     ('saveUpdatedEmployee');
 
 
+
+// Plan Controller / Monthly Subscription Routes
+Route::middleware("auth")->group(function() {
+    Route::get('plans',[PlanController::class,'index']);
+    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+});
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
