@@ -1,0 +1,24 @@
+svg{
+    width:  1.5rem;
+    height: 1.5rem;
+}
+
+
+.rounded-lg {
+    border-radius: 1rem !important;
+}
+
+.text-smalll {
+    font-size: 0.9rem !important;
+}
+
+.custom-seperator{
+    width: 5rem;
+    height: 6px;
+    border-radius: 1rem;
+}
+
+.text-uppercase{
+    letter-spacing: 0.2rem;
+}
+
