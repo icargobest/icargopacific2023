@@ -45,6 +45,7 @@
         </a>
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li><input type="text" value="{{Auth::user()->name}}"disabled></li>
             @if(Auth::user()->type == 'user')
               <li class="nav-item">
                 <a class="nav-link" href="/home">Home</a>

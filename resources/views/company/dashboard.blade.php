@@ -15,6 +15,9 @@
                         <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
+                      </li>
+                      <li class="nav-item">
                           <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
                       </li>
                       <li class="nav-item">

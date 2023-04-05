@@ -3,7 +3,7 @@
 </button>
 
 
-<div class="modal top fade modal-l" id="showModal{{$ship->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top fade modal-lg" id="showModal{{$ship->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -62,17 +62,49 @@
               </div>
             </fieldset>
               @if(Auth::user()->type == 'company')
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="form-outline">
-                            <input type="text" id="form6Example1" placeholder="BID AMOUNT" class="form-control" />
-                            <label class="form-label" for="form6Example1">BID AMOUNT</label>
+                <form method="POST" action="{{route('addBid')}}">
+                @csrf
+                    <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
+                    <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
+                    <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="number" id="form6Example1" name="bid_amount" placeholder="BID AMOUNT" class="form-control" />
+                                <label class="form-label" for="form6Example1">BID AMOUNT</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success btn-sm">Bid</button>
                         </div>
                     </div>
-                    <div class="col">
-                        <button class="btn btn-success btn-sm">Bid</button>
-                    </div>
-                </div>
+                </form>
+              @elseif(Auth::user()->type == 'user')
+                <table class="table table-striped">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Company</th>
+                            <th>Bid Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @foreach($bids as $bid)
+                        @if($ship->id == $bid->shipment_id)
+                            <form>
+                            @csrf
+                                <tbody>
+                                    <tr>
+                                        <td>{{$bid->company_name}}</td>
+                                        <td>{{$bid->bid_amount}}</td>
+                                        <td>{{$bid->status}}</td>
+                                        <td><button class="btn btn-success btn-sm">Accept</button></td>
+                                    </tr>
+                                </tbody>
+                            </form>
+                        @endif
+                    @endforeach
+                </table>
               @endif
         </div>
       </div>

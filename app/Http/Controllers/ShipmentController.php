@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shipment;
+use App\Models\Bid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -14,12 +15,14 @@ class ShipmentController extends Controller
 {
     public function index(){
         $data = Shipment::all();
+        $data1 = Bid::all();
 
-        return view('waybill.index', ['shipments' => $data]);
+        return view('waybill.index', ['shipments' => $data, 'bids' => $data1]);
     }
 
     function __construct(){
         $this->shipment = new Shipment;
+        $this->bid = new Bid;
     }
 
     function addShipment(Request $request){
@@ -45,6 +48,18 @@ class ShipmentController extends Controller
         ];
 
         $this->shipment->addShipment($data);
+        return back();
+    }
+
+    function addBid(Request $request){
+        $data = [
+            'company_id' => $request->company_id,
+            'company_name' => $request->company_name,
+            'shipment_id' => $request->shipment_id,
+            'bid_amount' => $request->bid_amount,
+            'status' => 'Pending',
+        ];
+        $this->bid->addBid($data);
         return back();
     }
 

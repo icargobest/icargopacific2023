@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bid', function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->string('company_name');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('bid_amount');
             $table->string('status');
