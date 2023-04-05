@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['driver_name', 'vehicle_type', 'plate_no'];
+
+    public function store($data){
+        return $this->create($data);
+    }
 }
