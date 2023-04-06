@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$driver->id}}">
+<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$user->id}}">
     Show
  </button>
     
-  <div class="modal fade" id="showModal{{$driver->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="showModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,24 +10,30 @@
           </button>
         </div>
         <div class="modal-body">
-            <div class="row mb-4">
+            <div class="mb-4">
                 <label class="col-sm-10 col-label-form"><b>Driver Name</b></label>
                 <div class="col-sm-10">
-                    {{$driver->driver_name}}
+                  {{ $user->name }}
                 </div>
             </div>
-            <div class="row mb4">
+            <div class="mb-4">
+                <label class="col-sm-10 col-label-form"><b>Email</b></label>
+                <div class="col-sm-10">
+                  {{ $user->email }}
+                </div>
+            </div>
+            <div class="mb-4">
                 <label class="col-sm-10 col-label-form"><b>Vehicle Type</b></label>
                 <div class="col-sm-10">
-                    {{$driver->vehicle_type}}
+                  {{ $user->driverDetail->vehicle_type }}
                 </div>
             </div>
-            <div class="row mb-4">
-                <label class="col-sm-10 col-label-form"><b>Plate No.</b></label>
-                <div class="col-sm-10">
-                    {{$driver->plate_no}}
-                </div>
-            </div>
+            <div class="mb-4">
+              <label class="col-sm-10 col-label-form"><b>Plate No.</b></label>
+              <div class="col-sm-10">
+                {{ $user->driverDetail->plate_no }}
+              </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>

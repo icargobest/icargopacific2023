@@ -52,6 +52,6 @@ class HomeController extends Controller
 
     public function driverDashboard()
     {
-        return view('/driver/dashboard');
+        return view('driver.driver');
     }
 }
