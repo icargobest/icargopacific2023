@@ -77,3 +77,15 @@
     color: white;
 
 }
+
+.resetpass-button{
+    background-color: #214D94; 
+    border:none; color: #214D94; 
+    width: 100%; 
+    font-weight:500;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
