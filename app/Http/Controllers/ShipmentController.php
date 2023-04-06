@@ -44,7 +44,7 @@ class ShipmentController extends Controller
             'width' => $request->width,
             'height' => $request->height,
             'total_price' => fake()->numberBetween($min = 100, $max = 500),
-            'status' => 'pending',
+            'status' => 'Pending',
         ];
 
         $this->shipment->addShipment($data);
@@ -61,6 +61,25 @@ class ShipmentController extends Controller
         ];
         $this->bid->addBid($data);
         return back();
+    }
+
+    function acceptBid(Request $request, $id){
+        $bid = Bid::findOrFail($id);
+        $shipment = Shipment::findOrFail($request->input('shipment_id'));
+
+        $bid->status = 'Accepted';
+        $bid->save();
+
+        $shipment->bid_amount = $bid->bid_amount;
+        $shipment->company_bade = $bid->company_name;
+        $shipment->status = 'Processing';
+        $shipment->save();
+
+        Bid::where('shipment_id', $shipment->id)
+        ->where('id', '!=', $bid->id)
+        ->update(['status' => 'Rejected']);
+
+        return redirect()->back();
     }
 
     function viewShipment($id){

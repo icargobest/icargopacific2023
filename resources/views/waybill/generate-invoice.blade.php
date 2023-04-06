@@ -85,6 +85,7 @@
                 <th width="50%" colspan="5" class="text-end company-data">
                     <span>Invoice Id: {{$ship->id}}</span> <br>
                     <span>Date: {{date(' d / m / Y')}}</span> <br>
+                    <span>Company: {{$ship->company_bade}}</span> <br>
                     <span>Zip code : (postal code)</span> <br>
                     <span>Address: (address of company)</span> <br>
                 </th>

@@ -15,7 +15,7 @@
                         <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Waybill</a>
+                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
                         </li>
                     @elseif(Auth::user()->type = 2)
                         <li class="nav-item">
@@ -25,7 +25,7 @@
                         <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Waybill</a>
+                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
                         </li>
                     @endif
               </ul></div>

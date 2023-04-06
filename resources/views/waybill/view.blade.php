@@ -91,14 +91,20 @@
                     </thead>
                     @foreach($bids as $bid)
                         @if($ship->id == $bid->shipment_id)
-                            <form>
+                            <form action="{{route('acceptBid', $bid->id)}}" method="POST">
                             @csrf
+                            @method('PUT')
+                                <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                 <tbody>
                                     <tr>
                                         <td>{{$bid->company_name}}</td>
                                         <td>{{$bid->bid_amount}}</td>
                                         <td>{{$bid->status}}</td>
-                                        <td><button class="btn btn-success btn-sm">Accept</button></td>
+                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted'))
+                                            <td><button tpye="submit" class="btn btn-success btn-sm" disabled>Accept</button></td>
+                                        @else
+                                            <td><button tpye="submit" class="btn btn-success btn-sm">Accept</button></td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </form>

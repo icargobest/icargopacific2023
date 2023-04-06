@@ -5,12 +5,12 @@
     <div class="container">
       <div class="card">
       <div class="card-body overflow-x-scroll">
-        <h4>Waybill List</h4>
+        <h4>Order List</h4>
         @if(Auth::user()->type =='user')
         <div class="d-grid gap-2 d-md-flex row p-3">
           <div class="tex-wrap">
             <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-              Create Waybill
+              Create Order
             </button>
 
             <!--Sender Modal -->
@@ -293,7 +293,7 @@
             </thead>
             <tbody>
                 @foreach ($shipments as $ship)
-                    @if(Auth::user()->id == $ship->user_id)
+                    @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
                             <td>{{$ship->tracking_number}}</td>
                             <td></td>
@@ -303,27 +303,9 @@
                             <td>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg </td>
                             <td>{{$ship->total_price}}</td>
                             <td>{{$ship->status}}</td>
-                            @if($ship->status == 'pending')
+                            @if($ship->status == 'Pending')
                                 <td>@include('waybill.view')</td>
-                            @elseif($ship->status == 'processing')
-                                <td>@include('waybill.tracking')</td>
-                                <td><a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">Generate</a></td>
-                                <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>
-                            @endif
-                        </tr>
-                    @elseif(Auth::user()->type == 'company')
-                        <tr>
-                            <td>{{$ship->tracking_number}}</td>
-                            <td></td>
-                            <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
-                            <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
-                            <td></td>
-                            <td>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg </td>
-                            <td>{{$ship->total_price}}</td>
-                            <td>{{$ship->status}}</td>
-                            @if($ship->status == 'pending')
-                                <td>@include('waybill.view')</td>
-                            @elseif($ship->status == 'processing')
+                            @elseif($ship->status == 'Processing')
                                 <td>@include('waybill.tracking')</td>
                                 <td><a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">Generate</a></td>
                                 <td><a href="{{route('print',$ship->id)}}" class="btn btn-dark btn-sm">Print</a></td>

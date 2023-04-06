@@ -54,7 +54,7 @@
                 <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Waybill</a>
+                <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
               </li>
               @elseif(Auth::user()->type == 'company')
                 <li class="nav-item">
@@ -65,7 +65,7 @@
                 </li>
                 <li class="nav-item">
                 <li class="nav-item">
-                    <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Waybill</a>
+                    <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
                 </li>
                     <a class="nav-link" href="">Dispatcher</a>
                 </li>

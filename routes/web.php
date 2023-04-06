@@ -115,6 +115,7 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
+    Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
 });
 
 
