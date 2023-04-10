@@ -15,12 +15,42 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="driver_name" class="form-control" />
+                  <input type="text" id="form6Example1" name="name" class="form-control" />
                   <label class="form-label" for="form6Example1">Driver Name</label>
                 </div>
               </div>
             </div>
 
+            <!-- Driver Email -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" id="form6Example1" name="email" class="form-control" />
+                  <label class="form-label" for="form6Example1">Email</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Driver password -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="password" id="form6Example1" name="password" class="form-control" />
+                  <label class="form-label" for="form6Example1">Password</label>
+                </div>
+              </div>
+            </div>
+
+             <!-- Driver confirm password -->
+             <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="password" id="form6Example1" name="password_confirmation" class="form-control" />
+                  <label class="form-label" for="form6Example1">Confirm Password</label>
+                </div>
+              </div>
+            </div>
+            <h4>Driver Details</h4>
             <!-- Vehicle Type -->
             <div class="form-outline mb-4">
               <input type="text" id="form6Example5" name="vehicle_type" class="form-control" />

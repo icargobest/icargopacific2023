@@ -1,7 +1,8 @@
 <?php
   
 namespace App\Models;
-  
+
+use App\Models\Driver;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +21,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'type'
     ];
+
+    public function driverDetail(){
+        return $this->hasOne(Driver::class, 'user_id', 'id');
+    }
   
     protected $hidden = [
         'password',

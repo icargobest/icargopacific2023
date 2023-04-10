@@ -4,7 +4,7 @@
         <h1>Driver List</h1>
         <div class="lead">
             <a href="{{route('drivers.viewArchive')}}" class="btn btn-primary"">
-              Archive Driver
+              Archived Driver
             </a>
             @include('drivers.create')
             
@@ -16,29 +16,30 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" width="1%">#</th>
+                <th scope="col" width="1%">ID</th>
                 <th scope="col" width="25%">Driver Name</th>
                 <th scope="col">Vehicle Type</th>
-                <th scope="col">Plate No.</th>
-                <th scope="col" width="1%" colspan="5"></th>
+                <th scope="col">Plate number</th>
+                <th scope="col" width="1%" colspan="5">Action</th>
             </tr>
             </thead>
             <tbody>
-                @foreach ($drivers as $driver)
-                  @if ($driver->archived == false)
-                    <tr>
-                        <td>{{ $driver->id }}</td>
-                        <td>{{ $driver->driver_name }}</td>
-                        <td>{{ $driver->vehicle_type }}</td>
-                        <td>{{ $driver->plate_no }}</td>
-                        <td>@include('drivers.show')</td>
-                        <td>@include('drivers.edit')</td>
-                        <td>@include('drivers.archive')</td>
-                    @endif
-                @endforeach
+                @foreach ($users as $user)
+                @if ($user->driverDetail->archived == false)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->driverDetail->vehicle_type }}</td>
+                    <td>{{ $user->driverDetail->plate_no }}</td>
+                    <td>@include('drivers.show')</td>
+                    <td>@include('drivers.edit')</td>
+                    <td>@include('drivers.archive')</td>
+                </tr>
+                @endif
+            @endforeach
             </tbody>
         </table>
-        {!! $drivers->links() !!}
+        {!! $users->links() !!}
         <div class="d-flex">
         </div>
 
