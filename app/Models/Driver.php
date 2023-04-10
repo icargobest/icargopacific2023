@@ -9,9 +9,10 @@ class Driver extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['driver_name', 'vehicle_type', 'plate_no'];
+    protected $fillable = ['user_id', 'vehicle_type', 'plate_no'];
 
     public function store($data){
         return $this->create($data);
     }
+
 }

@@ -3,23 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\Drivers;
 
 class DriverController extends Controller
 {
     
-    public function index(Driver $drivers)
+    public function index(User $users)
     {
-        $drivers = Driver::orderBy('id','asc')->paginate(100);
-        return view('drivers.index', compact('drivers'));
+        $type = '3';
+        $users = User::where('type','=', $type)->paginate(100);
+        return view('drivers.index', compact('users'));
     }
 
-    function viewArchive(Driver $drivers){
+    function viewArchive(User $users){
 
-        $drivers = Driver::orderBy('id','asc')->paginate(100);
-        return view('drivers.viewArchive', compact('drivers'));
+        $type = '3';
+        $users = User::where('type','=', $type)->paginate(100);
+        return view('drivers.viewArchive', compact('users'));
     }
 
 
@@ -35,35 +39,51 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
-        $data = [
-            'driver_name' => $request->driver_name,
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'name.required' => 'Name field is required.',
+            'password.required' => 'Password field is required.',
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+            'email.required' => 'Email field is required.',
+            'email.unique' => 'Email address must be unique within the organization',
+            'email.email' => 'Email field must be email address.'
+        ]);
+
+        $validated['type'] = '3'; // set the type to '3' driver
+        $validated['password'] = Hash::make($validated['password']);
+        $user = User::create($validated);
+
+        $user->driverDetail()->create([
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
-        ];
-        
-        $this->driver->store($data);
+        ]);
         return redirect()->route('drivers.index')->with('success','Driver has been created successfully.');
     }
 
-    public function show(Driver $driver)
+    public function show(User $users)
     {
-        return view('drivers.show', compact('driver'));
+        return view('drivers.show', compact('users'));
     }
 
-    public function edit(Driver $driver)
+    public function edit(User $users)
     {
-        return view('drivers.edit',compact('driver'));
+        return view('drivers.edit',compact('users'));
     }
 
-    public function update(Request $request, Driver $driver)
+    public function update($id, Request $request)
     {
-        $request->validate([
-            'driver_name' => 'required',
-            'vehicle_type' => 'required',
-            'plate_no' => 'required',
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->update();
+
+        $user->driverDetail()->update([
+            'vehicle_type' => $request->vehicle_type,
+            'plate_no' => $request->plate_no,
         ]);
-        
-        $driver->fill($request->post())->save();
         return redirect()->route('drivers.index')->with('success','Driver Has Been updated successfully');
     }
 
@@ -74,19 +94,19 @@ class DriverController extends Controller
 
     public function archive($id)
     {
-        $id = Driver::findOrFail($id);
-        $id->archived = 1;
-        $id->save();
-
+        $id = User::findOrFail($id);
+        $id->driverDetail()->update([
+            'archived' => true,
+        ]);
         return redirect()->route('drivers.index')->with('success', 'Driver data archived successfully.');
     }
 
     public function unarchive($id)
     {
-        $id = Driver::findOrFail($id);
-        $id->archived = 0;
-        $id->save();
-
+        $id = User::findOrFail($id);
+        $id->driverDetail()->update([
+            'archived' => false,
+        ]);
         return redirect()->route('drivers.viewArchive')->with('success', 'Driver data restore successfully.');
     }
 
