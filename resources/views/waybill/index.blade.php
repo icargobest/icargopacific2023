@@ -278,9 +278,9 @@
         </div>
 
         <table class="table table-striped">
-            <thead class="bg-light">
+            <thead>
             <tr>
-                <th>Tracking Number</th>
+                <th scope="col" width="10%">Tracking Number</th>
                 <th>Photo</th>
                 <th>Pickup</th>
                 <th>Drop-off</th>
@@ -295,7 +295,7 @@
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
-                            <td><a href="data:image/svg;base64,{!! base64_encode(QrCode::format('svg')->size(400)->generate($ship->tracking_number))!!}" download="{{$ship->tracking_number}}"><img src="data:image/svg;base64,{!! base64_encode(QrCode::format('svg')->size(400)->generate($ship->tracking_number))!!}"></a>{{$ship->tracking_number}}</td>
+                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.svg"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
                             <td></td>
                             <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
                             <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
