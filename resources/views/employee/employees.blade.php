@@ -8,7 +8,7 @@
 
 
 
-<div class="container py-5">
+<nav class="container py-5">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
 
         <div class="employee-header-container">
@@ -226,7 +226,7 @@
       </div>
     </div>
   </div>
-</div>
+</nav>
 
 
 

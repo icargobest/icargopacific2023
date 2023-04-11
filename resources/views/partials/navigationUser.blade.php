@@ -10,11 +10,18 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
         <!-- MDB -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="/css/mdb.min.css" />
         <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-{{--         <link rel="stylesheet" href="/css/waybill-list.css" /> --}}
+        <link rel="stylesheet" href="/css/waybill-list.css" />
 </head>
+<style>
+    .links .link i
+    {
+    padding-top: 0px!important;
+    }
+</style>
 
 <body>
 
@@ -37,41 +44,14 @@
                 <div class="link1">
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-gauge"></i>
-                            <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Dashboard</span></a>
+                            <i class="bi bi-cart-plus-fill" style="margin-bottom: 5px"></i>
+                            <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Order</span></a>
                         </div>
                     </div>
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-plus"></i>
-                            <span>Create Waybill List</span>
-                        </div>
-                    </div>
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-table"></i>
-                            <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill"><span>Waybill</span></a>
-                        </div>
-                    </div>
-                    
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-user"></i>
-                            <span>Add. Freight Forwarding</span>
-                        </div>
-                    </div>
-        
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-user"></i>
-                            <span>Transfer to Forwarding</span>
-                        </div>
-                    </div>
-        
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-user"></i>
-                            <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees"><span>Employee</span></a>
+                            <i class="bi bi-cart-check-fill" style="margin-bottom: 5px"></i>
+                            <span>Order History </span>
                         </div>
                     </div>
                 </div>

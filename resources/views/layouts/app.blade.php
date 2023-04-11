@@ -14,70 +14,86 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+    <link rel="stylesheet" href="/css/waybill-list.css" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
+<style scoped>
+li
+{
+  list-style: none;
+  margin: 0px 10px
+}
+</style>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    iCargo
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+    <div class="header-container">
+        <div class="logo">
+            <span>
+                <img src="img/Frame 1.png" alt="">
+            </span>
+        </div>
+
+
+        
+        <div class="user-container">
+            
+            @guest
+            @if (Route::has('login'))
+                <li class=" ">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+            @endif
+
+            @if (Route::has('register'))
+                <li class="">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+
+            @else
+           <a><span class="spanUser">
+            {{ Auth::user()->name }}
+            </span>
+           </a>
+            
+            <div class="button-container dropdown ">
+                <button class="userButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  style="">
+                        <span>Admin</span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                <ul class="header-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                    <li class="d-flex align-items-center" style="height:30px; background-color:#D9D9D9; padding-left:10px; font-weight:bolder">Settings</li>
+                    <li>
+                        <a><span class="spanUser2">
+                        {{ Auth::user()->name }}
+                        </span>
+                        </a>
+                    </li>
+                    <li><div class="dividerBlack1"></div></li>
+                    
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-gear"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
+                    <li><div class="dividerBlack"></div></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Lock Accounts</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                            </form>
+                </ul>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
+            @endguest
+        </div>
+    </div> 
+            <main class="py-4">
+             @yield('content')
         </main>
-    </div>
 </body>
 </html>

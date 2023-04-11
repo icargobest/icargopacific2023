@@ -83,23 +83,14 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 
-<<<<<<< HEAD
-// WAYBILL PAGE
-Route::get('/waybill', function () {
-    return view('waybill/waybill-list');
-});
-
-//VIEW WAYBILL INFORMATION PAGE
-Route::get('/waybill/viewinformation', function () {
-    return view('waybill/waybillInformation');
-});
-
-=======
->>>>>>> develop
 //FREIGHT PAGE
 Route::get('/freight', function () {
     return view('freight/freight');
 });
+
+
+
+
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);

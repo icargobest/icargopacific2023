@@ -27,10 +27,6 @@ width: 100vw;
 padding-left: 50px;
 /* background: #EAEBEE; */
 margin-top: 65px;
-<<<<<<< HEAD
-=======
-
->>>>>>> DECENA-BRANCH
 }
 
 .random-div
@@ -199,13 +195,14 @@ cursor: pointer;
 .logo img
 {
 width: 220px;
+
 }
 
 
 
 .links-wrapper
 {
-height: 75vh;
+height:80vh;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
@@ -291,6 +288,7 @@ color: #F9C800;
 .sidebar
 {
 width: 250px;
+/* display: none; */
 }
 
 .sidebar .divider2
@@ -298,6 +296,11 @@ width: 250px;
     border-bottom: 1px solid #d6d6d6;
     margin-top: 30px;
     width: 100%;
+}
+
+.logo img
+{
+margin-left: 5px;
 }
 
 

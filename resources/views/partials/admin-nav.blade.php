@@ -138,7 +138,7 @@
             <div class="user-container">
                 <span class="spanUser">
                     Jhony Simpson James
-                </span>
+            </span>
                 
                 <div class="button-container dropdown ">
                     <button class="userButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  style="">
