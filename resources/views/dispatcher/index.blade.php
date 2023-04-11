@@ -1,12 +1,12 @@
-@include('partials.navigation', ['drivers' => 'fw-bold'])
+@include('partials.navigation', ['dispatcher' => 'fw-bold'])
     <!--Employee List-->
     <div class="bg-light p-4 rounded">
-        <h1>Driver List</h1>
+        <h1>Dispatcher List</h1>
         <div class="lead">
-            <a href="{{ route('drivers.viewArchive') }}" class="btn btn-primary">
-              Archived Driver
+            <a href="{{route('dispatcher.viewArchive')}}" class="btn btn-primary">
+                Archived Dispatcher
             </a>
-            @include('drivers.create')
+            @include('dispatcher.create')
             
             <!-- Modal -->
         <div class="mt-2">
@@ -16,24 +16,20 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" width="1%">ID</th>
-                <th scope="col" width="25%">Driver Name</th>
-                <th scope="col">Vehicle Type</th>
-                <th scope="col">Plate number</th>
+                <th scope="col" width="5%">ID</th>
+                <th scope="col" width="25%">Dispatcher Name</th>
                 <th scope="col" width="1%" colspan="5">Action</th>
             </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                @if ($user->driverDetail->archived == false)
+                @if ($user->dispatcherDetail->archived == false)
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->driverDetail->vehicle_type }}</td>
-                    <td>{{ $user->driverDetail->plate_no }}</td>
-                    <td>@include('drivers.show')</td>
-                    <td>@include('drivers.edit')</td>
-                    <td>@include('drivers.archive')</td>
+                    <td>@include('dispatcher.show')</td>
+                    <td>@include('dispatcher.edit')</td>
+                    <td>@include('dispatcher.archive')</td>
                 </tr>
                 @endif
             @endforeach
