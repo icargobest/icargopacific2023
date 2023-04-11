@@ -80,7 +80,7 @@
         <thead>
             <tr>
                 <th width="50%" colspan="1">
-                    <img src="public_path('img/icargo.png')" alt="Logo Here">
+                    <img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->tracking_number))!!}">
                 </th>
                 <th width="50%" colspan="5" class="text-end company-data">
                     <span>Invoice Id: {{$ship->id}}</span> <br>
