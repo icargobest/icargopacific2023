@@ -45,6 +45,8 @@
         </a>
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li><input type="text" value="{{Auth::user()->name}}"disabled></li>
+            @if(Auth::user()->type == 'user')
               <li class="nav-item">
                 <a class="nav-link" href="/home">Home</a>
               </li>
@@ -52,11 +54,20 @@
                 <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Waybill</a>
+                <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
               </li>
-              @if(session('status') == 2)
+              @elseif(Auth::user()->type == 'company')
+                <li class="nav-item">
+                    <a class="nav-link" href="/company/dashboard">Home</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
+                </li>
+                <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
+                </li>
+                    <a class="nav-link" href="">Dispatcher</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
