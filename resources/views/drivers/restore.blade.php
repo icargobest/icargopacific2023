@@ -1,7 +1,7 @@
-<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#restoreModal{{$driver->id}}">
+<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#restoreModal{{$user->id}}">
     Restore
  </button>
- <div class="modal top fade" id="restoreModal{{$driver->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+ <div class="modal top fade" id="restoreModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -9,7 +9,7 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('drivers.unarchive', $driver->id)}}">
+          <form method="POST" action="{{route('drivers.unarchive', $user->id)}}">
             @csrf
             @method ('PUT')
             <h4>Are you sure you want to restore this driver?</h4>

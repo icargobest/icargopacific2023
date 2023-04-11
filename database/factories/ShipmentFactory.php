@@ -19,6 +19,7 @@ class ShipmentFactory extends Factory
         return [
             'tracking_number' => fake()->isbn13(),
             'sender_name' => fake()->name(),
+            'user_id' => fake()->numberBetween($min = 5, $max = 10),
             'sender_address' => fake()->streetAddress(),
             'sender_city' => fake()->city(),
             'sender_state' => fake()->state(),

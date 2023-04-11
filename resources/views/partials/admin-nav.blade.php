@@ -12,8 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
+<<<<<<< HEAD
 
     <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+=======
+    <!-- tempwaybill -->
+    <link rel="stylesheet" href="/css/waybilltemp.css" />
+
+>>>>>>> develop
 
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>

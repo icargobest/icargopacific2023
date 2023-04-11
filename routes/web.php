@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
@@ -105,11 +106,12 @@ Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@check
 
 //DRIVER PANEL
 Route::resource('drivers', DriverController::class);
-Route::get('/drivers/delete/{id}', [DriverController::class, 'destroy'])->name('drivers.delete');
-Route::get('ArchivedUser',[DriverController::class, 'viewArchive'])->name('drivers.viewArchive');
-Route::put('/drivers/archive/{id}',[DriverController::class, 'archive'])->name('drivers.archive');
-Route::put('/drivers/unarchive/{id}',[DriverController::class, 'unarchive'])->name('drivers.unarchive');
-
+Route::controller(DriverController::class)->group(function(){
+    Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
+    Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+    Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
+    Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
+});
 
 Route::get('/company', [CompanyController::class, 'index']);
 
@@ -133,7 +135,10 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+    Route::post('add_bid', 'addBid')->name('addBid');
+    Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
 });
+
 
 
 //QR Code && Barcode Generation

@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Driver extends Model
+class Bid extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'vehicle_type', 'plate_no'];
+    protected $guarded = [];
 
-    public function store($data){
+    public function addBid($data){
         return $this->create($data);
     }
-
 }
