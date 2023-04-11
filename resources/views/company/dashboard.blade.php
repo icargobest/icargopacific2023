@@ -10,7 +10,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                         <a class="nav-link" href="/company/dashboard">Home</a>
-                        </li>git push origin BRANCH MO
+                        </li>
                         <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
