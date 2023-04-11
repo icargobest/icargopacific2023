@@ -1,4 +1,4 @@
-@include('partials.navigation', ['driver' => 'fw-bold'])
+@include('layouts.app', ['driver' => 'fw-bold'])
 
   <div class="container center p-3">
       <div class="row">
