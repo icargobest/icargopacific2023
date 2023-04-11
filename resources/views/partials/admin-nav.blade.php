@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+<<<<<<< HEAD
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
@@ -14,6 +15,24 @@
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
     <!-- CSS for bootstrap modifying -->
     <link rel="stylesheet" href="/css/waybill-list.css" />
+=======
+    
+
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
+    <!-- tempwaybill -->
+    <link rel="stylesheet" href="/css/waybilltemp.css" />
+
+
+
+    <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+>>>>>>> develop
     
     <title>Document</title>
 </head>
@@ -23,18 +42,34 @@
 
 </style>
 
+<<<<<<< HEAD
 <body  style="background: #EAEBEE;">
+=======
+<body>
+>>>>>>> develop
 <div class="main-container">
 
 
     <div class="sidebar">
         <div class="wrapper">
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> develop
             <div class="search-bar-container">
                 <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <input class="input"id="search-input" placeholder="Tracking ID">
             </div>
+<<<<<<< HEAD
             <div class="divider">
             </div>
+=======
+
+            <div class="divider">
+            </div>
+            
+>>>>>>> develop
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
@@ -55,6 +90,10 @@
                             <span>Waybill List</span>
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> develop
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-user"></i>
@@ -122,6 +161,14 @@
                     <img src="img/Frame 1.png" alt="">
                 </span>
             </div>
+<<<<<<< HEAD
         </div>
     <!-- </div>
 </div> -->
+=======
+        </div> 
+        
+      
+
+
+>>>>>>> develop

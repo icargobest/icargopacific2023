@@ -9,6 +9,10 @@ font-family: 'Poppins', sans-serif;
 body
 {
 background: #EAEBEE;
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 }
 
 .main-container
@@ -20,8 +24,14 @@ display: flex;
 {
 width: 100vw;
 padding-left: 50px;
+<<<<<<< HEAD
 margin-top: 65px;
 z-index: 10;
+=======
+background: #EAEBEE;
+margin-top: 65px;
+
+>>>>>>> develop
 }
 
 .random-div

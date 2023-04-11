@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
