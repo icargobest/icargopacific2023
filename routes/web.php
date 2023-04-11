@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
@@ -123,7 +124,10 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+    Route::post('add_bid', 'addBid')->name('addBid');
+    Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
 });
+
 
 
 //QR Code && Barcode Generation
