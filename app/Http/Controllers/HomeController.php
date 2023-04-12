@@ -41,4 +41,9 @@ class HomeController extends Controller
     {
         return view('driver.driver');
     }
+
+    public function dispatcherDashboard()
+    {
+        return view('dispatcher.dashboard');
+    }
 }
