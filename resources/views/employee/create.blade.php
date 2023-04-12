@@ -1,10 +1,9 @@
-
-<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Add Employee
+<button type="button" class="btn btn-primary primary btn-block shadow-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+  Add
 </button>
 
 <div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-    <div class="modal-dialog ">
+  <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
@@ -42,17 +41,16 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn primary btn-primary btn-block">
                   Save
                 </button>
                 <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
                   Back
                 </a>
-              </div>
+            </div>
           </form>
         </div>
 
       </div>
-    </div>
   </div>
 </div>

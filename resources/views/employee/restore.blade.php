@@ -1,5 +1,5 @@
 <!-- Archive Modal -->
-<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#restoreModal{{$employee->id}}">
+<button type="button" class="btn btn-danger btn-sm" data-mdb-toggle="modal" data-mdb-target="#restoreModal{{$employee->id}}">
     Restore
  </button>
 
@@ -16,7 +16,7 @@
             @method ('PUT')
             <h4>Are you sure you want to restore this employee?</h4>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn primary btn-primary btn-block">
                   Restore
                 </button>
                 <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">

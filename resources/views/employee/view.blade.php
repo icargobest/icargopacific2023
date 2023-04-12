@@ -1,6 +1,6 @@
 
 <button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$employee->id}}">
-    Show
+    View
  </button>
 
  <div class="modal top fade" id="showModal{{$employee->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
@@ -37,8 +37,8 @@
                </div>
             </fieldset>
                  <div class="modal-footer">
-                    <a class="btn btn-dark btn-block" data-mdb-dismiss="modal">
-                        Back
+                    <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
+                        Cancel
                     </a>
                  </div>
          </div>

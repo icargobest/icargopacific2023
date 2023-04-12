@@ -38,10 +38,10 @@
                 <input type="text" id="form6Example4" name="updateRole" value="{{$employee->role}}" class="form-control" />
               </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
+                    <button type="submit" class="btn primary btn-primary btn-block" data-mdb-dismiss="modal">
                         Save
                       </button>
-                    <a href="{{route('EmployeePanel')}}" class="btn btn-success btn-block">
+                    <a href="{{route('EmployeePanel')}}" class="btn btn-secondary btn-block">
                         Cancel
                     </a>
                 </div>
