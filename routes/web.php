@@ -13,7 +13,7 @@ use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DispatcherController;
-
+use App\Http\Controllers\StationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,16 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
     ->name('company.dashboard')->middleware('verified');
+    Route::controller(StationController::class)->group(function(){
+        Route::get('/company/stations','index')->name('stations.view');
+        Route::post('/add-station', 'addStation')->name('add.station');
+        Route::get('/view_station/{station_id}','viewStation')->name('view.station');
+        Route::get('/view_employee_archive','viewArchive')->name('view.Archive');
+        Route::get('/edit/{station_id}', 'edit')->name('edit');
+        Route::put('/update/{station_id}', 'update')->name('update');
+        Route::put('/stations/archive/{station_id}', 'archive')->name('archive');
+        Route::put('/stations/unarchive/{station_id}', 'unarchive')->name('unarchive');
+    });
 });
 
 // Super Admin Routes

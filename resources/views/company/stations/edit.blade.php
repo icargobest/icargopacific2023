@@ -15,46 +15,27 @@
               @csrf
               @method('PUT')
               <!-- 2 column grid layout with text inputs for the first and last names -->
-              {{-- <div class="row mb-4">
+              <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
                     <input type="text" id="form6Example1" name="updateFullName" value="{{$employee->name}}" class="form-control" />
                   </div>
                 </div>
-              </div> --}}
+              </div>
 
-               <!-- Station ID Input -->
-               <div class="row mb-4">
-                <div class="col">
-                  <div class="form-outline">
-                    <input type="text" id="stationID" name="stationID" value="{{$employee->name}}" class="form-control" />
-                    <label class="form-label" for="stationID">Station ID</label>
-                  </div>
-                </div>
-              </div>
-  
-              <!-- Station Name input -->
+              <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="stationName" name="stationName" value="{{$employee->name}}" class="form-control" />
-                <label class="form-label" for="stationName">Station Name</label>
+                <input type="email" id="form6Example5" name="updateEmail" value="{{$employee->email}}" class="form-control" />
               </div>
-  
-              <!-- Sttation Address input -->
+
+              <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="stationAddress" name="stationAddress" value="{{$employee->name}}" class="form-control" />
-                <label class="form-label" for="stationAddress">Password</label>
+                <input type="password" id="form6Example5" name="updatePassword" value="{{$employee->password}}" class="form-control" />
               </div>
-  
-              <!-- Station Contact No. -->
+
+              <!-- Position -->
                <div class="form-outline mb-4">
-                <input type="text" id="stationContactNo" name="stationContactNo" value="{{$employee->name}}" class="form-control" />
-                <label class="form-label" for="stationContactNo">Contact No.</label>
-              </div>
-  
-              <!-- Station Contact No. -->
-               <div class="form-outline mb-4">
-                <input type="text" id="stationEmail name="stationEmail" value="{{$employee->name}}" class="form-control" />
-                <label class="form-label" for="stationContactNo">Email</label>
+                <input type="text" id="form6Example4" name="updateRole" value="{{$employee->role}}" class="form-control" />
               </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">

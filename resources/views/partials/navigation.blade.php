@@ -75,6 +75,9 @@
                 <li class="nav-item">
                   <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link @if(isset($station)){{$station}}@endif" href="/driver">Stations</a>
+                </li>
               @endif
         </ul>
         <!-- Left links -->
