@@ -43,6 +43,9 @@ class LoginController extends Controller
             else if ($user->type == 'driver') {
                 return redirect()->route('driver.dashboard');
             }
+            else if ($user->type == 'dispatcher') {
+                return redirect()->route('dispatcher.dashboard');
+            }
     
             else{
                 return redirect()->route('dashboard');
