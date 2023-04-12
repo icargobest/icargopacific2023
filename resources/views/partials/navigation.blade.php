@@ -33,53 +33,7 @@
       </button>
 
       <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
-          <img
-            src="/img/icargo-logo-1.jpg"
-            height="30"
-            alt="MDB Logo"
-            loading="lazy"
-          />
-        </a>
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li><input type="text" value="{{Auth::user()->name}}"disabled></li>
-            @if(Auth::user()->type == 'user')
-              <li class="nav-item">
-                <a class="nav-link" href="/home">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
-              </li>
-              @elseif(Auth::user()->type == 'company')
-                <li class="nav-item">
-                    <a class="nav-link" href="/company/dashboard">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
-                </li>
-                <li class="nav-item">
-                <li class="nav-item">
-                    <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
-                </li>
-                    <a class="nav-link" href="">Dispatcher</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
-                </li>
-              @endif
-        </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
+      
 
       <!-- Right elements -->
       <div class="d-flex align-items-center">
