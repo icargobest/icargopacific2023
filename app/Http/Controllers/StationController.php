@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Station;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StationController extends Controller
 {
@@ -14,26 +15,22 @@ class StationController extends Controller
     {
         $this->station = new Station;
     }
-    
+
     public function index(){
-        $stations = $this->station->getStation();
+        $user_id = Auth::id();
+        $stations = $this->station->where('user_id', $user_id)->get();
         return view('company.stations.index', compact('stations'));
     }
 
     public function store(Request $request){
         $data = [
+            'user_id' => Auth::id(),
             'station_number' => $request->station_number,
             'station_name' => $request->station_name,
             'station_address' => $request->station_address,
             'station_contact_no' => $request->station_contact_no,
             'station_email' => $request->station_email,
         ];
-    
-        $validatedData = $request->validate([
-            'station_email' => 'required|email|unique:stations,station_email',
-        ], [
-            'station_email.unique' => 'The email address is already in use.',
-        ]);
     
         try {
             $this->station->addStation($data);
@@ -67,7 +64,8 @@ class StationController extends Controller
     }
 
     public function viewArchive(){
-        $stations = $this->station->getStation();
+        $user_id = Auth::id();
+        $stations = $this->station->where('user_id', $user_id)->get();
         return view('company.stations.view_archive', compact('stations'));
     }
 
@@ -90,5 +88,4 @@ class StationController extends Controller
 
         return back()->with('success', 'Station #'.$id.' data restored successfully.');
     }
-    
 }

@@ -9,7 +9,15 @@ class Station extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id', 
+        'station_number',
+        'station_name',
+        'station_address',
+        'station_contact_no',
+        'station_email',
+        'archived',
+    ];
 
     public function addStation($data){
         return $this->create($data);
