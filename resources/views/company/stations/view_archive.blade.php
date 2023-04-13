@@ -1,10 +1,9 @@
-@include('partials.navigation', ['employee' => 'fw-bold'])
-    <!--Employee List-->
+@include('partials.navigation', ['stations' => 'fw-bold'])
+    <!--Archived Stations -->
     <div class="bg-light p-4 rounded">
-        <h1>Archive</h1>
+        <h1>Stations Archive</h1>
         <div class="lead">
-            Manage your users here.
-            <a href="{{route('EmployeePanel')}}" class="btn btn-primary">
+            <a href="{{route('stations.view')}}" class="btn btn-primary">
                 Back
             </a>
             <div class="mt-2">
@@ -13,29 +12,31 @@
 
             <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th scope="col" width="1%">#</th>
-                    <th scope="col" width="15%">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col" width="1%" colspan="3"></th>
-                </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach ($employees as $employee)
-                        @if ($employee->archived == true)
-                            <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->email}}</td>
-                                <td>{{$employee->role}}</td>
-                                <td>@include('employee.restore')</td>
-                                <td>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach --}}
-
+                    <tr>
+                        <th scope="col" width="1%">ID</th>
+                        <th scope="col" width="1%">Station Number</th>
+                        <th scope="col" width="15%">Station Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Contact No.</th>
+                        <th scope="col">Email</th>
+                        <th scope="col" width="1%" colspan="3"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($stations as $station)
+                            @if ($station->archived == 1)
+                                <tr>
+                                    <th scope="col" width="1%">{{$station->id}}</th>
+                                    <td>{{$station->station_number}}</td>
+                                    <td>{{$station->station_name}}</td>
+                                    <td>{{$station->station_address}}</td>
+                                    <td>{{$station->station_contact_no}}</td>
+                                    <td>{{$station->station_email}}</td>
+                                    <td>@include('company.stations.view')</td>
+                                    <td>@include('company.stations.restore')</td>
+                                </tr>
+                            @endif
+                        @endforeach
                 </tbody>
             </table>
 

@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stations', function (Blueprint $table) {
-            $table->string('station_id');
+            $table->id();
+            $table->string('station_number');
             $table->string('station_name');
             $table->string('station_address');
             $table->string('station_contact_no');
             $table->string('station_email')->unique();
-            $table->boolean('is_archive')->default(false);
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

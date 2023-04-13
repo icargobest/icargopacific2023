@@ -1,29 +1,26 @@
 @include('partials.navigation', ['stations' => 'fw-bold'])
-    <!--Employee List-->
+    <!--Stations -->
     <div class="bg-light p-4 rounded">
         <h1>Stations</h1>
         <div class="lead">
-            <a href="{{route('viewArchive')}}" class="btn btn-success">
+            <a href="{{route('view.stations.archived')}}" class="btn btn-success">
                 Archive
             </a>
             @include('company/stations.create')
         </div>
 
         <div class="mt-2">
-            @include('partials.messages')
-            @if(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
+            @include('flash-message')
         </div>
 
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" width="1%">#</th>
-                <th scope="col" width="1%">Station ID</th>
+                <th scope="col" width="1%">ID</th>
+                <th scope="col" width="1%">Station Number</th>
                 <th scope="col" width="15%">Station Name</th>
                 <th scope="col">Address</th>
-                <th scope="col">Contact</th>
+                <th scope="col">Contact No.</th>
                 <th scope="col">Email</th>
                 <th scope="col" width="1%" colspan="3"></th>
             </tr>
@@ -32,8 +29,8 @@
                 @foreach ($stations as $station)
                     @if ($station->archived == 0)
                         <tr>
-                            <th scope="col" width="1%">#</th>
-                            <td>{{$station->station_id}}</td>
+                            <th scope="col" width="1%">{{$station->id}}</th>
+                            <td>{{$station->station_number}}</td>
                             <td>{{$station->station_name}}</td>
                             <td>{{$station->station_address}}</td>
                             <td>{{$station->station_contact_no}}</td>
@@ -41,7 +38,7 @@
                             {{-- <td>{{$station->created_at}}</td>
                             <td>{{$station->updated_at}}</td> --}}
                             <td>@include('company.stations.view')</td>
-                            {{-- <td>@include('company.stations.edit')</td> --}}
+                            <td>@include('company.stations.edit')</td>
                             <td>@include('company.stations.archive')</td>
                         </tr>
                     @endif

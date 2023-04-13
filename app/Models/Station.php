@@ -19,4 +19,9 @@ class Station extends Model
         return $this->all();
     }
 
+    public function updateStation($data, $id){
+        $station = $this->find($id);
+        $station->update($data);
+    }
+
 }

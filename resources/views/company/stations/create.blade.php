@@ -12,8 +12,8 @@
         </div>
         <div class="modal-body">
           @if(session('error'))
-    <div class="alert alert-danger">{{ session('error') }}</div>
-@endif
+              <div class="alert alert-danger">{{ session('error') }}</div>
+          @endif
           <form method="POST" action="{{route('add.station')}}">
             @csrf
 
@@ -21,8 +21,8 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="stationID" name="station_id" class="form-control" />
-                  <label class="form-label" for="stationID">Station ID</label>
+                  <input type="text" id="stationID" name="station_number" class="form-control" />
+                  <label class="form-label" for="stationID">Station Number</label>
                 </div>
               </div>
             </div>

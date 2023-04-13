@@ -1,9 +1,9 @@
 
-<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$station->station_id}}">
+<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$station->id}}">
     Show
  </button>
 
- <div class="modal top fade" id="showModal{{$station->station_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+ <div class="modal top fade" id="showModal{{$station->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
      <div class="modal-dialog ">
        <div class="modal-content">
          <div class="modal-header">
@@ -18,8 +18,8 @@
              <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="stationID" name="station_id" value={{$station->station_id}} class="form-control" />
-                  <label class="form-label" for="stationID">Station ID</label>
+                  <input type="text" id="stationID" name="station_id" value={{$station->station_number}} class="form-control" />
+                  <label class="form-label" for="stationID">Station Number</label>
                 </div>
               </div>
             </div>
