@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Forward;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class CompanyController extends Controller
 {
     public function index(){
-        return view('');
+        return view('company.dashboard');
     }
 
     public function create(){
@@ -48,5 +49,4 @@ class CompanyController extends Controller
         return view('company')
             ->with('data', $data);
     }
-
 }

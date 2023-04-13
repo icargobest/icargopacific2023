@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -51,27 +52,26 @@ Route::post('/store', [CompanyController::class, 'store']);
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
-    ->name('dashboard')->middleware('verified');
+    ->name('dashboard');
 });
 
 // Company Routes
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
-    ->name('company.dashboard')->middleware('verified');
+    ->name('company.dashboard');
 });
 
 // Super Admin Routes
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
-    ->name('super.admin.dashboard')->middleware('verified');
+    ->name('super.admin.dashboard');
 });
 
 // Driver Routes
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
-    ->name('driver.dashboard')->middleware('verified');
+    ->name('driver.dashboard');
 });
-
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
