@@ -1,6 +1,7 @@
 @include('partials.admin-nav')
 
 
+
     <div class="container py-5 h-90 ">
         <div class="border border-2" style="overflow-x: auto; max-width: 100%;">
             <div class="waybill-head bg-primary">
@@ -366,6 +367,8 @@
         </div>
         
     </div>
+
+
 
 
 @include('partials.footer') 
