@@ -1,4 +1,231 @@
-@include('partials.navigation', ['waybill' => 'fw-bold'])
+<head>
+  <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+  <title>Orders</title>
+</head>
+
+{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+@include('partials.admin-nav')
+
+{{-- ORDER CONTAINER RECONCEPTUALIZE --}}
+<div class="order-container container">
+
+  <h4>MY ITEMS</h4>
+  <div class="button-holder row justify-content-end px-2 mb-3">
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+      Post Order
+    </button>
+  </div>
+
+  <div class="cards-holder">
+
+{{-- CARD CREATED AFTER FILLING UP --}}
+<a class="cardItem" href="#">
+    <div class="item-card container px-4">
+      <div class="card-body">
+        <div class="row">
+  
+          <div class="details-wrapper col-lg-10 col-sm-12">
+            <div class="recepients-wrapper row">
+  
+              <div class="senderInfo col-lg-6">
+                <h6>SENDER</h6>
+  
+                <ul>
+                    <li>Name | <span>Edan Franco</span></li>
+                    <li>Address | <span>Kristen Griffit</span></li>
+                    <li>Number | <span>0999-999-9999</span></li>
+                </ul>                  
+              </div>
+              <div class="receiverInfo col-lg-6">
+                <h6>RECEIVER</h6>
+  
+                <ul>
+                    <li>Name | <span>Fletcher Peck</span></li>
+                    <li>Address | <span>Maxwell Wood</span></li>
+                    <li>Number | <span>0999-999-9999</span></li>
+                </ul>
+              </div>
+  
+            </div>
+            <div class="parcelInfo-wrapper">
+  
+              <div class="itemInfo">
+                <h6>ITEM INFORMATION</h6>
+  
+                <div class="parcelDetails row">
+  
+                  <div class="listLayout col-lg-6 col-sm-12">
+                    <ul>
+                          <li>ID | <span>#68</span></li>
+                          <li>Size & Weight | <span>17x30x41 | 97 kg</span></li>
+                    </ul>
+                  </div>
+                  <div class="listLayout col-lg-6 col-sm-12">
+                    <ul>     
+                          <li>Category | <span>Appliances</span></li>
+                          <li>Mode of Pament | <span>COD</span></li>
+                    </ul>
+                  </div>
+  
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+          <div class="image-wrapper col">
+            <div class="image-holder">
+              <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+</a>
+{{-- END OF CARD --}}
+
+
+{{-- CARD CREATED AFTER FILLING UP --}}
+<a class="cardItem" href="#">
+  <div class="item-card container px-4">
+    <div class="card-body">
+      <div class="row">
+
+        <div class="details-wrapper col-lg-10 col-sm-12">
+          <div class="recepients-wrapper row">
+
+            <div class="senderInfo col-lg-6">
+              <h6>SENDER</h6>
+
+              <ul>
+                  <li>Name | <span>Edan Franco</span></li>
+                  <li>Address | <span>Kristen Griffit</span></li>
+                  <li>Number | <span>0999-999-9999</span></li>
+              </ul>                  
+            </div>
+            <div class="receiverInfo col-lg-6">
+              <h6>RECEIVER</h6>
+
+              <ul>
+                  <li>Name | <span>Fletcher Peck</span></li>
+                  <li>Address | <span>Maxwell Wood</span></li>
+                  <li>Number | <span>0999-999-9999</span></li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="parcelInfo-wrapper">
+
+            <div class="itemInfo">
+              <h6>ITEM INFORMATION</h6>
+
+              <div class="parcelDetails row">
+
+                <div class="listLayout col-lg-6 col-sm-12">
+                  <ul>
+                        <li>ID | <span>#68</span></li>
+                        <li>Size & Weight | <span>17x30x41 | 97 kg</span></li>
+                  </ul>
+                </div>
+                <div class="listLayout col-lg-6 col-sm-12">
+                  <ul>     
+                        <li>Category | <span>Appliances</span></li>
+                        <li>Mode of Pament | <span>COD</span></li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="image-wrapper col">
+          <div class="image-holder">
+            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</a>
+{{-- END OF CARD --}}
+
+
+{{-- CARD CREATED AFTER FILLING UP --}}
+<a class="cardItem" href="#">
+  <div class="item-card container px-4">
+    <div class="card-body">
+      <div class="row">
+
+        <div class="details-wrapper col-lg-10 col-sm-12">
+          <div class="recepients-wrapper row">
+
+            <div class="senderInfo col-lg-6">
+              <h6>SENDER</h6>
+
+              <ul>
+                  <li>Name | <span>Edan Franco</span></li>
+                  <li>Address | <span>Kristen Griffit</span></li>
+                  <li>Number | <span>0999-999-9999</span></li>
+              </ul>                  
+            </div>
+            <div class="receiverInfo col-lg-6">
+              <h6>RECEIVER</h6>
+
+              <ul>
+                  <li>Name | <span>Fletcher Peck</span></li>
+                  <li>Address | <span>Maxwell Wood</span></li>
+                  <li>Number | <span>0999-999-9999</span></li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="parcelInfo-wrapper">
+
+            <div class="itemInfo">
+              <h6>ITEM INFORMATION</h6>
+
+              <div class="parcelDetails row">
+
+                <div class="listLayout col-lg-6 col-sm-12">
+                  <ul>
+                        <li>ID | <span>#68</span></li>
+                        <li>Size & Weight | <span>17x30x41 | 97 kg</span></li>
+                  </ul>
+                </div>
+                <div class="listLayout col-lg-6 col-sm-12">
+                  <ul>     
+                        <li>Category | <span>Appliances</span></li>
+                        <li>Mode of Pament | <span>COD</span></li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="image-wrapper col">
+          <div class="image-holder">
+            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</a>
+{{-- END OF CARD --}}
+
+  </div>
+
+
+</div>
+{{-- END OF ORDER CONTAINER --}}
 
 
     <!--Waybill List-->
@@ -15,75 +242,117 @@
 
             <!--Sender Modal -->
             <div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-              <div class="modal-dialog modal-xl">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Waybill</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">SENDER INFORMATION</h5>
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <form method="POST" action="{{route('addShipment')}}">
-                        <h1>SENDER INFO</h1>
+                        {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
-                        <div class="form-outline mb-4">
+
+                        {{-- NAME INPUT --}}
+                        <div class="nameInput mb-3">
+                          <span>Full Name</span>
+                          <div class="form-outline">
                             <input type="text" id="form6Example1" name="senderName" class="form-control" />
-                            <label class="form-label" for="form6Example1">Full Name</label>
+                            {{-- <label class="form-label" for="form6Example1">Full Name</label> --}}
+                          </div>
                         </div>
+                        
                       <!-- Address input -->
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
-                        <label class="form-label" for="form6Example5">Street Address</label>
+                      <div class="addressInput mb-3">
+                        <span>Street Address</span>
+                        <div class="form-outline">
+                          <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
+                          {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
+                        </div>  
                       </div>
-
+                      
                       <!-- Contact input -->
-                      <div class="row mb-4">
+                      <div class="row mb-3">
                         <div class="col">
+
+                          {{-- MOBILE INPUT --}}
+                          <div class="mobileInput">
+                            <span>Mobile Number</span>
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderMobile" class="form-control" />
-                                <label class="form-label" for="form6Example3">Mobile Number</label>
+                              <input type="text" id="form6Example3" name="senderMobile" class="form-control" />
+                              {{-- <label class="form-label" for="form6Example3">Mobile Number</label> --}}
                             </div>
+                          </div>
+                            
                         </div>
+
                         <div class="col">
+
+                          {{-- TELEPHONE INPUT --}}
+                          <div class="telephoneInput">
+                            <span>Telephone</span>
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderTelephone" class="form-control" />
-                                <label class="form-label" for="form6Example3">Telephone</label>
+                              <input type="text" id="form6Example3" name="senderTelephone" class="form-control" />
+                              {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                             </div>
+                          </div>
+                            
                         </div>
                       </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
-                            <label class="form-label" for="form6Example5">Email Address</label>
-                        </div>
+                      {{-- EMAIL INPUT --}}
+                      <div class="emailInput mb-3">
+                        <span>Email Address</span>
+                        <div class="form-outline">
+                          <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
+                          {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
+                        </div> 
+                      </div>
+                       
 
                       <!-- City Zip input -->
-                      <div class="row mb-4">
+                      <div class="row mb-3">
+
                         <div class="col">
+                          {{-- MUNICIPALITY --}}
+                          <div class="municipalityInput">
+                            <span>Municipality/ City</span>
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderCity" class="form-control" />
-                                <label class="form-label" for="form6Example3">Municipality/City</label>
+                              <input type="text" id="form6Example3" name="senderCity" class="form-control" />
+                              {{-- <label class="form-label" for="form6Example3">Municipality/City</label> --}}
                             </div>
+                          </div>
+                            
                         </div>
+
                         <div class="col">
-                            <div class="form-outline">
+                            {{-- POSTAL --}}
+                            <div class="postalInput">
+                              <span>Postal Code</span>
+                              <div class="form-outline">
                                 <input type="text" id="form6Example3" name="senderZip" class="form-control" />
-                                <label class="form-label" for="form6Example3">Postal Code</label>
+                                {{-- <label class="form-label" for="form6Example3">Postal Code</label> --}}
+                              </div>
                             </div>
+                            
                         </div>
                       </div>
 
                       <!--State input-->
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form6Example3" name="senderState" class="form-control" />
-                        <label class="form-label" for="form6Example3">State</label>
+                      <div class="stateInput">
+                        <span>State</span>
+                        <div class="form-outline">
+                          <input type="text" id="form6Example3" name="senderState" class="form-control" />
+                          {{-- <label class="form-label" for="form6Example3">State</label> --}}
+                        </div>
                       </div>
+                      
                   </div>
-                  <div class="modal-footer">
-                    <a class="btn btn-secondary btn-block mb-4" data-mdb-dismiss="modal">
+                  <div class="modal-buttons modal-footer">
+                    <a class="btn btn-secondary btn" data-mdb-dismiss="modal">
                         Back
                     </a>
-                    <a class="btn btn-primary btn-block" data-mdb-toggle="modal" data-mdb-target="#exampleModal1" data-bs-dismiss="modal">
+                    <a class="btn btn-primary btn" data-mdb-toggle="modal" data-mdb-target="#exampleModal1" data-bs-dismiss="modal">
                       Next
                     </a>
                   </div>
@@ -93,76 +362,118 @@
 
             <!--Receiver Modal-->
             <div class="modal top fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-                <div class="modal-dialog modal-xl">
+                <div class="modal-dialog  modal-dialog-centered modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Create Waybill</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">RECEIVER INFORMATION</h5>
                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                          <h1>RECEIVER INFO</h1>
+                          {{-- <h1>RECEIVER INFO</h1> --}}
                         <!-- 2 column grid layout with text inputs for the first and last names -->
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form6Example1" name="receiverName" class="form-control" />
-                          <label class="form-label" for="form6Example1">Full Name</label>
+
+                        {{-- NAME INPUT --}}
+                        <div class="nameInput mb-3">
+                          <span>Full Name</span>
+                          <div class="form-outline">
+                            <input type="text" id="form6Example1" name="receiverName" class="form-control" />
+                            {{-- <label class="form-label" for="form6Example1">Full Name</label> --}}
+                          </div>
                         </div>
 
                         <!-- Address input -->
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form6Example5" name="receiverAddress" class="form-control" />
-                          <label class="form-label" for="form6Example5">Street Address</label>
+                        <div class="addressInput mb-3">
+                          <span>Address</span>
+                          <div class="form-outline">
+                            <input type="text" id="form6Example5" name="receiverAddress" class="form-control" />
+                            {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
+                          </div>  
                         </div>
-
+                        
                         <!-- Contact input -->
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                           <div class="col">
+
+                            {{-- MOBILE INPUT --}}
+                            <div class="mobileInput">
+                              <span>Mobile Number</span>
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverMobile" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Mobile Number</label>
+                                <input type="text" id="form6Example3" name="receiverMobile" class="form-control" />
+                                {{-- <label class="form-label" for="form6Example3">Mobile Number</label> --}}
                               </div>
+                            </div>
+                              
                           </div>
+
                           <div class="col">
+
+                            {{-- TELEPHONE --}}
+                            <div class="telephoneInput">
+                              <span>Telephone</span>
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverTelephone" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Telephone</label>
+                                <input type="text" id="form6Example3" name="receiverTelephone" class="form-control" />
+                                {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                               </div>
+                            </div>
+                              
                           </div>
                         </div>
 
                         <!--Email input-->
-                        <div class="form-outline mb-4">
-                          <input type="email" id="form6Example5" name="receiverEmail" class="form-control" />
-                          <label class="form-label" for="form6Example5">Email Address</label>
+                        <div class="emailInput mb-3">
+                          <span>Email Address</span>
+                          <div class="form-outline mb-4">
+                            <input type="email" id="form6Example5" name="receiverEmail" class="form-control" />
+                            {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
+                          </div>
                         </div>
+                        
 
                         <!-- City Zip input -->
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                           <div class="col">
+
+                            {{-- MUNICIPALITY --}}
+                            <div class="municipalityInput">
+                              <span>Municipality/ City</span>
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverCity" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Municipality/City</label>
+                                <input type="text" id="form6Example3" name="receiverCity" class="form-control" />
+                                {{-- <label class="form-label" for="form6Example3">Municipality/City</label> --}}
                               </div>
+                            </div>
+                              
                           </div>
+
                           <div class="col">
+
+                            {{-- POSTAL CODE --}}
+                            <div class="postalInput">
+                              <span>Postal Code</span>
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverZip" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Postal Code</label>
+                                <input type="text" id="form6Example3" name="receiverZip" class="form-control" />
+                                {{-- <label class="form-label" for="form6Example3">Postal Code</label> --}}
                               </div>
+                            </div>  
+                              
                           </div>
                         </div>
 
                         <!--State input-->
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form6Example3" name="receiverState" class="form-control" />
-                          <label class="form-label" for="form6Example3">State</label>
+                        <div class="stateInput">
+                          <span>State</span>
+                          <div class="form-outline">
+                            <input type="text" id="form6Example3" name="receiverState" class="form-control" />
+                            {{-- <label class="form-label" for="form6Example3">State</label> --}}
+                          </div>
                         </div>
+                        
 
                     </div>
-                    <div class="modal-footer">
-                      <a class="btn btn-secondary btn-block" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <div class="modal-buttons modal-footer">
+                      <a class="btn btn-secondary btn" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                         Previous
                       </a>
-                      <a class="btn btn-primary btn-block" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
+                      <a class="btn btn-primary btn" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
                         Next
                       </a>
                     </div>
@@ -172,98 +483,132 @@
 
             <!--Parcel Modal-->
             <div class="modal top fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-                <div class="modal-dialog modal-xl">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Create Waybill</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">PARCEL DETAILS</h5>
                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                          <h1>PARCEL INFO</h1>
+                        
                         <!-- ! Dropdown Service menu-->
-                        <div class="row mb-4">
-                            <div class="form-group col-md-3">
+                        <div class="row mb-5">
+
+                            <div class="form-group col-6">
+                              <div class="serviceInput">
+                                <span>Service</span>
                                 <div class="form-outline">
-                                    <label for="exampleFormControlSelect1">Service</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="">
-                                        <option value="Express">Standard</option>
-                                        <option value="Express">Express</option>
-                                    </select>
-                                </div>
+                                  {{-- <label for="exampleFormControlSelect1">Service</label> --}}
+                                  <select class="form-control" id="exampleFormControlSelect1" name="">
+                                      <option value="Express">Standard</option>
+                                      <option value="Express">Express</option>
+                                  </select>
+                              </div>
+                              </div>
                             </div>
+
                             <!-- !Dropdown Type menu-->
-                            <div class="form-group col-md-3">
-                                <div class="form-outline">
-                                    <label for="exampleFormControlSelect1">Type</label>
+                            <div class="form-group col-6">
+                                <div class="typeInput">
+                                  <span>Type</span>
+                                  <div class="form-outline">
+                                    {{-- <label for="exampleFormControlSelect1">Type</label> --}}
                                     <select class="form-control" id="exampleFormControlSelect1" name="">
                                         <option value="Document">Document</option>
                                         <option value="Other">Other/s</option>
                                     </select>
                                 </div>
+                                </div>
                             </div>
-                        </div>
+                          </div>
 
                         <!-- Parcel details input -->
-                        <div class="row mb-4">
+                        <div class="row mb-5">
                           <div class="col">
-                              <div class="form-outline">
+                              <div class="weightInput">
+                                <span>Weight</span>
+                                <div class="form-outline">
                                   <input type="text" id="form6Example3" name="weight" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Weight</label>
+                                  {{-- <label class="form-label" for="form6Example3">Weight</label> --}}
+                                </div>
                               </div>
                           </div>
                           <div class="col">
-                              <div class="form-outline">
+                              <div class="lengthInput">
+                                <span>Length</span>
+                                <div class="form-outline">
                                   <input type="text" id="form6Example3" name="length" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Length</label>
+                                  {{-- <label class="form-label" for="form6Example3">Length</label> --}}
+                                </div>
                               </div>
                           </div>
                           <div class="col">
-                              <div class="form-outline">
+                              <div class="widthInput">
+                                <span>Width</span>
+                                <div class="form-outline">
                                   <input type="text" id="form6Example3" name="width" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Width</label>
+                                  {{-- <label class="form-label" for="form6Example3">Width</label> --}}
+                                </div>
                               </div>
                           </div>
                           <div class="col">
-                              <div class="form-outline">
+                              <div class="heightInput">
+                                <span>Height</span>
+                                <div class="form-outline">
                                   <input type="text" id="form6Example3" name="height" class="form-control" />
-                                  <label class="form-label" for="form6Example3">Height</label>
+                                  {{-- <label class="form-label" for="form6Example3">Height</label> --}}
+                                </div>
                               </div>
                           </div>
+                          
                           <!--Dropdown category menu-->
                           <div class="col">
-                            <div class="form-outline">
-                                <label for="exampleFormControlSelect1">Category</label>
+                            <div class="categoryInput">
+                              <span>Category</span>
+                              <div class="form-outline">
+                                {{-- <label for="exampleFormControlSelect1">Category</label> --}}
                                 <select class="form-control" id="exampleFormControlSelect1" name="">
                                     <option value="Other">Other/s</option>
                                 </select>
+                              </div>
                             </div>
                           </div>
+
                         </div>
 
                         <!--Bid input-->
-                        <div class="form-outline mb-4">
-                            <div class="form-outline">
+                        <div class="form-outline mb-5">
+                            <div class="bidInput">
+                              <span>Minimum Bid</span>
+                              <div class="form-outline">
                                 <input type="text" id="form6Example3" name="amount" class="form-control" />
-                                <label class="form-label" for="form6Example3">Minimum Bid</label>
+                                {{-- <label class="form-label" for="form6Example3">Minimum Bid</label> --}}
+                              </div>
                             </div>
                         </div>
 
                         <!--Image input-->
-                        <div class="form-outline mb-4">
-                          <input type="file" id="form6Example5" class="form-control" />
+                        <div class="imageInput w-50">
+                          <span>Image</span>
+                          <div class="form-outline mb-4">
+                            <input type="file" id="form6Example5" class="form-control" />
+                          </div>
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary btn-block" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                    <div class="modal-buttons modal-footer">
+                        <a class="btn btn-secondary btn" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
                           Previous
                         </a>
-                      <a class="btn btn-danger btn-block mb-4" data-mdb-dismiss="modal">
-                        Reset
-                      </a>
-                      <button type="submit" class="btn btn-success btn-block mb-4">
-                        Submit
-                      </button>
+                        <div class="button-group">
+                          <a class="btn btn-danger btn" data-mdb-dismiss="modal">
+                            Reset
+                          </a>
+                          <button type="submit" class="btn btn-success btn">
+                            Submit
+                          </button>
+                        </div>
+                      
                     </div>
                     </form>
                   </div>

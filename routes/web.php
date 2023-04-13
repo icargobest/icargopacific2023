@@ -62,20 +62,10 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     ->name('company.dashboard')->middleware('verified');
 });
 
-<<<<<<< HEAD
-Route::get('/', function () {
-    return view('create_waybill/createWaybill');
-});
-
-// REGISTER ACCOUNT PAGE
-Route::get('/register', function () {
-    return view('login/register');
-=======
 // Super Admin Routes
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
     ->name('super.admin.dashboard')->middleware('verified');
->>>>>>> develop
 });
 
 // Driver Routes
@@ -99,6 +89,12 @@ Route::get('/dashboard', function () {
 Route::get('/freight', function () {
     return view('freight/freight');
 });
+
+// CREATE WAYBILL PAGE
+Route::get('/createWaybill', function () {
+    return view('create_waybill/createWaybill');
+});
+
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
