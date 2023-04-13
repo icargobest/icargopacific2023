@@ -60,15 +60,23 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
     ->name('company.dashboard')->middleware('verified');
-    Route::controller(StationController::class)->group(function(){
-        Route::get('/company/stations','index')->name('stations.view');
-        Route::post('/add-station', 'store')->name('add.station');
-        Route::get('/view_station/{id}','show')->name('show.station');
-        Route::get('/company/stations_archive','viewArchive')->name('view.stations.archived');
-        Route::get('/edit/{id}', 'edit')->name('edit.station');
-        Route::put('/company//update/{id}', 'update')->name('update.station');
-        Route::put('/company/stations/archive/{id}', 'archive')->name('archive.station');
-        Route::put('/company/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
+    Route::group(['prefix' => 'company/stations'], function () {
+        Route::get('/', [StationController::class, 'index'])
+            ->name('stations.view');
+        Route::post('/add-station', [StationController::class, 'store'])
+            ->name('add.station');
+        Route::get('/view_station/{id}', [StationController::class, 'show'])
+            ->name('show.station');
+        Route::get('/stations_archive', [StationController::class, 'viewArchive'])
+            ->name('view.stations.archived');
+        Route::get('/edit/{id}', [StationController::class, 'edit'])
+            ->name('edit.station');
+        Route::put('/update/{id}', [StationController::class, 'update'])
+            ->name('update.station');
+        Route::put('/archive/{id}', [StationController::class, 'archive'])
+            ->name('archive.station');
+        Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
+            ->name('unarchive.station');
     });
 });
 

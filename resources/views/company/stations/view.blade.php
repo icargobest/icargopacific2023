@@ -18,44 +18,44 @@
              <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="stationID" name="station_id" value={{$station->station_number}} class="form-control" />
+                  <input type="text" id="stationID" name="station_id" value="{{$station->station_number}}" class="form-control" />
                   <label class="form-label" for="stationID">Station Number</label>
                 </div>
               </div>
             </div>
             <!-- Station Name input -->
             <div class="form-outline mb-4">
-              <input type="text" id="stationName" name="station_name" value={{$station->station_name}} class="form-control" />
+              <input type="text" id="stationName" name="station_name" value="{{$station->station_name}}" class="form-control" />
               <label class="form-label" for="stationName">Station Name</label>
             </div>
 
             <!-- Sttation Address input -->
             <div class="form-outline mb-4">
-              <input type="text" id="stationAddress" name="station_address" value={{$station->station_address}} class="form-control" />
+              <input type="text" id="stationAddress" name="station_address" value="{{$station->station_address}}" class="form-control" />
               <label class="form-label" for="stationAddress">Address</label>
             </div>
 
             <!-- Station Contact No. -->
              <div class="form-outline mb-4">
-              <input type="text" id="stationContactNo" name="station_contact_no" value={{$station->station_contact_no}} class="form-control" />
+              <input type="text" id="stationContactNo" name="station_contact_no" value="{{$station->station_contact_no}}" class="form-control" />
               <label class="form-label" for="stationContactNo">Contact No.</label>
             </div>
 
             <!-- Station Email. -->
              <div class="form-outline mb-4">
-              <input type="text" id="stationEmail" name="station_email" value={{$station->station_email}} class="form-control" />
+              <input type="text" id="stationEmail" name="station_email" value="{{$station->station_email}}" class="form-control" />
               <label class="form-label" for="stationEmail">Email</label>
             </div>
 
             <!-- Station Email. -->
              <div class="form-outline mb-4">
-              <input type="text" id="stationEmail" name="station_email" value={{$station->created_at}} class="form-control" />
+              <input type="text" id="stationEmail" name="station_email" value="{{$station->created_at}}" class="form-control" />
               <label class="form-label" for="stationEmail">Created At</label>
             </div>
 
             <!-- Station Email. -->
              <div class="form-outline mb-4">
-              <input type="text" id="stationEmail" name="station_email" value={{$station->updated_at}} class="form-control" />
+              <input type="text" id="stationEmail" name="station_email" value="{{$station->updated_at}}" class="form-control" />
               <label class="form-label" for="stationEmail">Updated At</label>
             </div>
              
