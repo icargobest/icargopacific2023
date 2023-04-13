@@ -39,10 +39,13 @@ class CompanyController extends Controller
          $validated['password'] = Hash::make($validated['password']);
      
          $user = User::create($validated);
- 
-         return redirect()->route('login')
-                         ->with('success', 'Registered successfully. Please login to continue.');
+     
+          auth()->login($user); // log in the user programmatically
+     
+         return redirect()->route('company.dashboard') // redirect to the company dashboard page
+                         ->with('success', 'Registered successfully. You are now logged in.');
      }
+     
 
     public function show(){
         $data = ["data" => "data from database"];
