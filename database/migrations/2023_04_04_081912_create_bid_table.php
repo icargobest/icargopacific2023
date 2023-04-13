@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->string('vehicle_type');
-            $table->string('plate_no');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('archived')->default(false);
+            $table->unsignedBigInteger('company_id');
+            $table->string('company_name');
+            $table->unsignedBigInteger('shipment_id');
+            $table->unsignedBigInteger('bid_amount');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('bid');
     }
 };

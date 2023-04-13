@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\DispatcherController;
 
 
 /*
@@ -72,6 +74,13 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     ->name('driver.dashboard');
 });
 
+// Dispatcher Routes
+Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
+    Route::get('/dispatcher/dashboard', [HomeController::class, 'dispatcherDashboard'])
+    ->name('dispatcher.dashboard')->middleware('verified');
+});
+
+
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
     return view('login/forgot-password');
@@ -93,10 +102,21 @@ Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@check
 
 //DRIVER PANEL
 Route::resource('drivers', DriverController::class);
-Route::get('/drivers/delete/{id}', [DriverController::class, 'destroy'])->name('drivers.delete');
-Route::get('ArchivedUser',[DriverController::class, 'viewArchive'])->name('drivers.viewArchive');
-Route::put('/drivers/archive/{id}',[DriverController::class, 'archive'])->name('drivers.archive');
-Route::put('/drivers/unarchive/{id}',[DriverController::class, 'unarchive'])->name('drivers.unarchive');
+Route::controller(DriverController::class)->group(function(){
+    Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
+    Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+    Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
+    Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
+});
+
+//DISPATCHER PANEL
+Route::resource('dispatcher', DispatcherController::class);
+Route::controller(DispatcherController::class)->group(function(){
+    Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
+    Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
+    Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
+    Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
+});
 
 
 Route::get('/company', [CompanyController::class, 'index']);
@@ -121,7 +141,10 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+    Route::post('add_bid', 'addBid')->name('addBid');
+    Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
 });
+
 
 
 //QR Code && Barcode Generation

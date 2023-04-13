@@ -2,39 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Driver;
+
 use App\Models\User;
+use App\Models\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use App\Drivers;
 
-class DriverController extends Controller
+class DispatcherController extends Controller
 {
     
     public function index(User $users)
     {
-        $type = '3';
+        $type = '4';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.index', compact('users'));
+        return view('dispatcher.index', compact('users'));
     }
 
     function viewArchive(User $users){
 
-        $type = '3';
+        $type = '4';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.viewArchive', compact('users'));
+        return view('dispatcher.viewArchive', compact('users'));
     }
 
 
     public function create()
     {
-        return view('drivers.create');
-    }
-
-    function __construct()
-    {
-        $this->driver = new Driver;
+        return view('dispatcher.create');
     }
 
     public function store(Request $request)
@@ -52,26 +47,25 @@ class DriverController extends Controller
             'email.unique' => 'Email address must be unique within the organization',
             'email.email' => 'Email field must be email address.'
         ]);
-
-        $validated['type'] = '3'; // set the type to '3' driver
+        
+        $validated['type'] = '4'; // set the type to '3' driver
         $validated['password'] = Hash::make($validated['password']);
         $user = User::create($validated);
 
-        $user->driverDetail()->create([
-            'vehicle_type' => $request->vehicle_type,
-            'plate_no' => $request->plate_no,
+        $user->dispatcherDetail()->create([
+            'vehicle_type' => false,
         ]);
-        return redirect()->route('drivers.index')->with('success','Driver has been created successfully.');
+        return redirect()->route('dispatcher.index')->with('success','Dispatcher has been created successfully.');
     }
 
     public function show(User $users)
     {
-        return view('drivers.show', compact('users'));
+        return view('dispatcher.show', compact('users'));
     }
 
     public function edit(User $users)
     {
-        return view('drivers.edit',compact('users'));
+        return view('dispatcher.edit',compact('users'));
     }
 
     public function update($id, Request $request)
@@ -79,35 +73,30 @@ class DriverController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->update();
-
-        $user->driverDetail()->update([
-            'vehicle_type' => $request->vehicle_type,
-            'plate_no' => $request->plate_no,
-        ]);
-        return redirect()->route('drivers.index')->with('success','Driver Has Been updated successfully');
+        return redirect()->route('dispatcher.index')->with('success','Dispatcher Has Been updated successfully');
     }
 
     public function destroy($id){
         Driver::destroy($id);
-        return redirect()->route('drivers.index')->with('success','Driver has been deleted successfully');
+        return redirect()->route('dispatcher.index')->with('success','Dispatcher has been deleted successfully');
     }
 
     public function archive($id)
     {
         $id = User::findOrFail($id);
-        $id->driverDetail()->update([
+        $id->dispatcherDetail()->update([
             'archived' => true,
         ]);
-        return redirect()->route('drivers.index')->with('success', 'Driver data archived successfully.');
+        return redirect()->route('dispatcher.index')->with('success', 'Dispatcher data archived successfully.');
     }
 
     public function unarchive($id)
     {
         $id = User::findOrFail($id);
-        $id->driverDetail()->update([
+        $id->dispatcherDetail()->update([
             'archived' => false,
         ]);
-        return redirect()->route('drivers.viewArchive')->with('success', 'Driver data restore successfully.');
+        return redirect()->route('dispatcher.viewArchive')->with('success', 'Dispatcher data restore successfully.');
     }
 
 }

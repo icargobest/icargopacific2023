@@ -1,27 +1,27 @@
 <button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Add Driver
+    Add Dispatcher
 </button>
 <div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Driver</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Dispatcher</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <!-- Driver Name -->
+            <!-- Dispatcher Name -->
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
                   <input type="text" id="form6Example1" name="name" class="form-control" />
-                  <label class="form-label" for="form6Example1">Driver Name</label>
+                  <label class="form-label" for="form6Example1">Dispatcher Name</label>
                 </div>
               </div>
             </div>
 
-            <!-- Driver Email -->
+            <!-- Dispatcher Email -->
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
@@ -31,7 +31,7 @@
               </div>
             </div>
 
-            <!-- Driver password -->
+            <!-- Dispatcher password -->
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
@@ -41,7 +41,7 @@
               </div>
             </div>
 
-             <!-- Driver confirm password -->
+             <!-- Dispatcher confirm password -->
              <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
@@ -49,18 +49,6 @@
                   <label class="form-label" for="form6Example1">Confirm Password</label>
                 </div>
               </div>
-            </div>
-            <h4>Driver Details</h4>
-            <!-- Vehicle Type -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example5" name="vehicle_type" class="form-control" />
-              <label class="form-label" for="form6Example5">Vehicle Type</label>
-            </div>
-
-            <!-- Plate No. -->
-             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="plate_no" class="form-control" />
-              <label class="form-label" for="form6Example4">Plate No.</label>
             </div>
 
             <div class="modal-footer">

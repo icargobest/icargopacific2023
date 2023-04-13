@@ -23,15 +23,9 @@
                 </div>
             </div>
             <div class="mb-4">
-                <label class="col-sm-10 col-label-form"><b>Vehicle Type</b></label>
-                <div class="col-sm-10">
-                  {{ $user->driverDetail->vehicle_type }}
-                </div>
-            </div>
-            <div class="mb-4">
-              <label class="col-sm-10 col-label-form"><b>Plate No.</b></label>
+              <label class="col-sm-10 col-label-form"><b>Type</b></label>
               <div class="col-sm-10">
-                {{ $user->driverDetail->plate_no }}
+                {{ $user->type }}
               </div>
           </div>
         </div>

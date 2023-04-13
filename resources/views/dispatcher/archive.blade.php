@@ -9,7 +9,7 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('drivers.archive', $user->id)}}">
+          <form method="POST" action="{{route('dispatcher.archive', $user->id)}}">
             @csrf
             @method ('PUT')
             <h4>Are you sure you want to archive this driver?</h4>

@@ -15,7 +15,7 @@
             {{ session('status') }}
         </div>
         @endif
-        <form action="{{ route('drivers.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('dispatcher.update',$user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -25,26 +25,6 @@
                         <input type="text" name="name" value="{{ $user->name }}" class="form-control"
                             placeholder="Driver name">
                         @error('name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Vehicle Type:</strong>
-                        <input type="text" name="vehicle_type" value="{{ $user->driverDetail->vehicle_type }}" class="form-control"
-                            placeholder="Vehicle Type">
-                        @error('plate_no')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Plate Number:</strong>
-                        <input type="text" name="plate_no" value="{{ $user->driverDetail->plate_no }}" class="form-control"
-                            placeholder="Plate No">
-                        @error('plate_no')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
