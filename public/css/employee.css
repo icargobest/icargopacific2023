@@ -1,4 +1,23 @@
+.modal-backdrop:disabled 
+{
+
+}
+
+.fade:disabled
+{
+
+}
+.show:disabled
+{
+
+}
+
 /* Header Container */
+a:link
+{
+text-decoration: none;
+
+}
 
 .employee-header-container
 {
@@ -74,6 +93,9 @@ border: 1px solid black;
 border-radius: 0px !important;
 }
 
+
+
+
 .employee button:hover
 {
 color: #000000;
@@ -96,7 +118,7 @@ margin:auto;
 margin-bottom: 40px;
 }
 
-.addemployee button
+.m-button1
 {
 width:90%;
 max-width:280px; 
@@ -105,6 +127,24 @@ display: block;
 background-color: #214D94 !important;
 }
 
+.m-button2
+{
+width:90%;
+max-width:280px; 
+margin: auto;
+display: block;
+color:#fff;
+background-color: #14a44d !important;
+}
+.m-button2:hover
+{
+color: #fff !important;
+}
+
+.bc1
+{
+background-color: red !important;
+}
 
 
 /* Table Container */
@@ -125,6 +165,8 @@ th
 {
 background-color: #214D94 !important;
 border: none;
+color: #FFF;
+text-align: center;
 }
 
 
@@ -152,13 +194,18 @@ border: none;
 max-width: 90% !important;
 }
 
-
-
-
-
-
-
-
+.modified-select
+{
+max-width: 80px;
+margin: 0px 5px;
+justify-content:center!important;
+align-items: center;
+display: flex;
+background-color: #fff !important;
+color: #000000;
+border: 1px solid black;
+border-radius: 0px !important;
+}
 
 
 
@@ -222,14 +269,86 @@ margin-bottom: 8px !important;
 }
 
 
+.bold-hover {
+    font-weight: normal;
+    transition: all 0.3s ease;
+  }
+  
+  .bold-hover:hover {
+    font-weight: bold;
+  }
 
 
 
+.border-black
+{
+border-radius: 0px !important; 
+border:1px solid black;
+padding-left:20px;
+font-size:12px ;
+}
+
+.capitalized
+{
+text-transform:capitalize;
+}
+
+.b-shadow
+{
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
 
 
+.b-shadow:hover
+{
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.10);
+
+}
+
+.s-margin
+{
+margin:0px 10px 5px 5px;
+}
+
+.fs-medium
+{
+font-size: 12px;
+}
 
 
+.label-container label
+{
+color:#214D94 !important;
+font-size: 12px !important;
+display:block;
+}
+.label-container
+{
+display: flex;
+justify-content: flex-start;
+padding-left: 10px;
+}
 
+
+.col-yellow
+{
+color: #ffc107 !important;
+}
+
+.col-black
+{
+color: #000 !important;
+}
+
+.col-green
+{
+color: #14a44d !important;
+}
+
+.col-red
+{
+color:#dc3545 !important;
+}
 
 @media screen and (min-width: 668px) 
 {
@@ -239,9 +358,9 @@ margin-bottom: 8px !important;
 {
 margin-left: 1rem;
 }
-.addemployee button
+.m-button1, .m-button2
 {
-    width: 200px;
+    width: 125px !important;
     margin: none;
     display: inline;
 }
@@ -352,6 +471,17 @@ margin-right: 10px;
 .employee button
 {
 
+margin-bottom: 5px;
+display: flex;
+min-width: 150px;
+max-width: 150px;
+
+justify-content:center;
+align-items: center;
+}
+
+.modified-select
+{
 margin-bottom: 5px;
 display: flex;
 min-width: 150px;

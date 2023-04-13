@@ -7,16 +7,16 @@
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Archive Data</h5>
+          <h5 class="modal-title col-red" id="exampleModalLabel">ARCHIVE EMPLOYEE</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form method="POST" action="{{route('archive', $employee->id)}}">
             @csrf
             @method ('PUT')
-            <h4>Are you sure you want to archive this employee?</h4>
+            <h4>Are you sure you want to <span class="col-red" style="font-weight:bold">archived</span> this employee?</h4>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn btn-danger btn-block">
                   Archive
                 </button>
                 <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">

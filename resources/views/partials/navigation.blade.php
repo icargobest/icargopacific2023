@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
+
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="/css/bootstrap.css">
         <!-- Font Awesome -->
@@ -13,7 +15,10 @@
         <link rel="stylesheet" href="/css/mdb.min.css" />
         <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+        <link rel="stylesheet" href="/css/waybill-list.css" />
+
 {{--         <link rel="stylesheet" href="/css/waybill-list.css" /> --}}
+
 </head>
 
 <body>

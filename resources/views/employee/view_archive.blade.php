@@ -1,4 +1,7 @@
-@include('partials.navigation', ['employee' => 'fw-bold'])
+@include('partials.admin-nav')
+
+@include('layouts.app')
+
     <!--Employee List-->
     <div class="bg-light p-4 rounded">
         <h1>Archive</h1>

@@ -326,6 +326,7 @@
 
 
 <script src="{{ asset('js/admin.employees.js') }}"></script>
+<script src="/js/bootstrap.bundle.js"></script>
 
 
 @include('partials.footer') 

@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
     <link rel="stylesheet" href="/css/waybill-list.css" />
 
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
 </head>
 <style scoped>
 li
@@ -92,7 +92,7 @@ li
             @endguest
         </div>
     </div> 
-            <main class="py-4">
+        <main class="py-4">
              @yield('content')
         </main>
 </body>
