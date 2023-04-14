@@ -80,7 +80,7 @@ class DispatcherController extends Controller
     }
 
     public function destroy($id){
-        Driver::destroy($id);
+        Dispatcher::destroy($id);
         return redirect()->route('dispatcher.index')->with('success','Dispatcher has been deleted successfully');
     }
 

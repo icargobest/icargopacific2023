@@ -14,6 +14,7 @@ class DriverController extends Controller
     private $type;
     private $validate;
     private $update_user;
+    private $driver;
     
     public function index(User $users)
     {
