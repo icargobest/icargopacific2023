@@ -128,55 +128,6 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
 });
 
-
-
-//QR Code && Barcode Generation
-Route::get('/generate-code', function (Request $request) {
-    $code = $request->get('tracking_number');
-
-    // Generate QR code with logo
-    $qrCode = QrCode::format('svg')->size(500)->generate($code);
-
-    // Add logo to QR code
-    $logoPath = public_path('img/icargo.png');
-    $logo = file_get_contents($logoPath);
-    $svg = new \SimpleXMLElement($qrCode);
-    $image = $svg->addChild('image');
-    $image->addAttribute('href', 'data:image/png;base64,' . base64_encode($logo));
-    $image->addAttribute('x', '58');
-    $image->addAttribute('y', '58');
-    $image->addAttribute('width', '50');
-    $image->addAttribute('height', '50');
-    $image->addAttribute('opacity', '0.6');
-    $qrCodeWithLogo = $svg->asXML();
-
-    // Generate barcode
-    $barcode = DNS1D::getBarcodeSVG($code, 'C39');
-
-    // Generate file name
-    $fileName = 'code_' . time() . '.zip';
-
-    // Create zip archive
-    $zip = new \ZipArchive();
-    $zip->open(storage_path('app/public/' . $fileName), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-    $zip->addFromString('qr_code.svg', $qrCode);
-    $zip->addFromString('barcode.svg', $barcode);
-    $zip->close();
-
-    // Generate file path
-    $filePath = storage_path('app/public/' . $fileName);
-
-    // Return a response to download the zip archive
-    $response = response()->download($filePath)->deleteFileAfterSend(true);
-
-    // Display the barcode and QR code
-    $barcodeHtml = '<div> '. $barcode .'</div>';
-    $qrCodeHtml = '<div>'. $qrCodeWithLogo .'</div>';
-    $codeHtml = '<div style="margin: 5% 30% 5%">' . $barcodeHtml . '</div>' . '<div style="margin: 5% 30% 5%">' . $qrCodeHtml . '</div>' ;
-
-    return view('generate-code')->with('codeHtml', $codeHtml)->with('response', $response);
-});
-
 // Route to display the form and generated code
 Route::get('/generate-code', function () {
     return view('generate-code');

@@ -3,11 +3,11 @@
     <div class="bg-light p-4 rounded">
         <h1>Driver List</h1>
         <div class="lead">
-            <a href="{{route('drivers.viewArchive')}}" class="btn btn-primary"">
+            <a href="{{route('drivers.viewArchive')}}" class="btn btn-primary">
               Archived Driver
             </a>
             @include('drivers.create')
-            
+
             <!-- Modal -->
         <div class="mt-2">
             @include('partials.messages')

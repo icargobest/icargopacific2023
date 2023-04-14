@@ -11,7 +11,7 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{route('update', $employee->id)}}">
+            <form method="POST" action="{{route('update', $employee->id)}}" enctype="multipart/form-data">
               @csrf
               @method('PUT')
               <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -33,10 +33,6 @@
                 <input type="password" id="form6Example5" name="updatePassword" value="{{$employee->password}}" class="form-control" />
               </div>
 
-              <!-- Position -->
-               <div class="form-outline mb-4">
-                <input type="text" id="form6Example4" name="updateRole" value="{{$employee->role}}" class="form-control" />
-              </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
                         Save
