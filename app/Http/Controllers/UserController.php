@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Search;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function search(Request $request)
     {
-        $id = $request->input('id');
-        $user = User::find($id);
+        $tracking_number = $request->input('tracking_number');
+        $shipment = Search::where('tracking_number', $tracking_number)->first();
 
-        if ($user) {
+        if ($shipment) {
             return response()->json([
-                'message' => 'Tracking ID found!',
-                'data' => $user,
+                'message' => 'Tracking number found!',
+                'data' => $shipment,
             ]);
         } else {
             return response()->json([
-                'message' => 'Tracking ID not found.',
+                'message' => 'Tracking number not found.',
             ]);
         }
     }
