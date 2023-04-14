@@ -7,7 +7,7 @@
     <form action="/search" method="POST">
         @csrf
         <label for="id">Enter Tracking ID:</label>
-        <input type="text" id="id" name="id">
+        <input type="text" id="id" name="tracking_number">
         <button type="submit">Search</button>
     </form>
     <div id="message"></div>
@@ -23,7 +23,7 @@
                 success: function(response) {
                     $('#message').text(response.message);
                     if (response.data) {
-                        $('#message').append('<br>ID: ' + response.data.id);
+                        $('#message').append('<br>ID: ' + response.data.tracking_number);
                     }
                 },
                 error: function(response) {
