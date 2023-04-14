@@ -13,19 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('stations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            //$table->unsignedBigInteger('company_id');
-            //$table->foreign('company_id')->references('id')->on('companies');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->unsignedBigInteger('user_id')->nullable()->default(null);
+            $table->string('station_number');
+            $table->string('station_name');
+            $table->string('station_address');
+            $table->string('station_contact_no');
+            $table->string('station_email')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('stations');
     }
 };

@@ -59,6 +59,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal">
+                                        {{ __('Lock Account') }}
+                                    </a>
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,6 +75,26 @@
                                     </form>
                                 </div>
                             </li>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Are you sure?</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                                        <a href="{{ route('users.status.update', ['user_id' => auth()->user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
+                                            Confirm
+                                        </a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
                         @endguest
                     </ul>
                 </div>
@@ -80,5 +105,11 @@
             @yield('content')
         </main>
     </div>
-</body>
-</html>
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!--Bootstrap-->
+    <script src="/js/bootstrap.bundle.js"></script>
+    </body>
+    </html>
+    <script src="/js/bootstrap.bundle.js"></script>

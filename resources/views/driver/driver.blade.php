@@ -52,20 +52,6 @@
     </div>
   </div>
 
-<form method="POST" action="{{ url('/generate-code') }}">
-    @csrf
-    <div>
-        <label for="data">Enter data:</label>
-        <input type="text" name="data" id="data" required>
-    </div>
-    <div>
-        <button type="submit">Generate code</button>
-    </div>
-</form>
-
-
-
-
     <!-- MDB -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
     <!-- Custom scripts -->

@@ -6,8 +6,8 @@
             <a href="{{ route('drivers.viewArchive') }}" class="btn btn-primary">
               Archived Driver
             </a>
-            @include('drivers.create')
-            
+            @include('company/drivers.create')
+
             <!-- Modal -->
         <div class="mt-2">
             @include('partials.messages')
@@ -31,9 +31,20 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->driverDetail->vehicle_type }}</td>
                     <td>{{ $user->driverDetail->plate_no }}</td>
-                    <td>@include('drivers.show')</td>
-                    <td>@include('drivers.edit')</td>
-                    <td>@include('drivers.archive')</td>
+                    <td>@include('company/drivers.show')</td>
+                    <td>@include('company/drivers.edit')</td>
+                    <td>@include('company/drivers.archive')</td>
+                    <td>
+                        @if($user->status == 1)
+                        <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm">
+                            Lock
+                        </a>
+                        @else
+                         <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm">
+                            unlock
+                         </a>
+                        @endif
+                    </td>
                 </tr>
                 @endif
             @endforeach

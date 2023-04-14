@@ -11,25 +11,28 @@ use Illuminate\Support\Facades\Hash;
 
 class DispatcherController extends Controller
 {
-    
+    private $type;
+    private $validate;
+    private $update_user;
+
     public function index(User $users)
     {
         $type = '4';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('dispatcher.index', compact('users'));
+        return view('company/dispatcher.index', compact('users'));
     }
 
     function viewArchive(User $users){
 
         $type = '4';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('dispatcher.viewArchive', compact('users'));
+        return view('company/dispatcher.viewArchive', compact('users'));
     }
 
 
     public function create()
     {
-        return view('dispatcher.create');
+        return view('company/dispatcher.create');
     }
 
     public function store(Request $request)
@@ -77,7 +80,7 @@ class DispatcherController extends Controller
     }
 
     public function destroy($id){
-        Driver::destroy($id);
+        Dispatcher::destroy($id);
         return redirect()->route('dispatcher.index')->with('success','Dispatcher has been deleted successfully');
     }
 
@@ -97,6 +100,14 @@ class DispatcherController extends Controller
             'archived' => false,
         ]);
         return redirect()->route('dispatcher.viewArchive')->with('success', 'Dispatcher data restore successfully.');
+    }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            return redirect()->route('dispatcher.index')->with('success','Dispatcher Has Been updated successfully');
     }
 
 }
