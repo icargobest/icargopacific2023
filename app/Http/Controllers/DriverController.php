@@ -11,25 +11,28 @@ use App\Drivers;
 
 class DriverController extends Controller
 {
+    private $type;
+    private $validate;
+    private $update_user;
     
     public function index(User $users)
     {
         $type = '3';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.index', compact('users'));
+        return view('company/drivers.index', compact('users'));
     }
 
     function viewArchive(User $users){
 
         $type = '3';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.viewArchive', compact('users'));
+        return view('company/drivers.viewArchive', compact('users'));
     }
 
 
     public function create()
     {
-        return view('drivers.create');
+        return view('company/drivers.create');
     }
 
     function __construct()
@@ -108,6 +111,14 @@ class DriverController extends Controller
             'archived' => false,
         ]);
         return redirect()->route('drivers.viewArchive')->with('success', 'Driver data restore successfully.');
+    }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            return redirect()->route('drivers.index')->with('success','Driver Has Been updated successfully');
     }
 
 }

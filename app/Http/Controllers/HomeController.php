@@ -44,6 +44,6 @@ class HomeController extends Controller
 
     public function dispatcherDashboard()
     {
-        return view('dispatcher.dashboard');
+        return view('/company/dispatcher.dashboard');
     }
 }
