@@ -7,7 +7,7 @@
               Archived Driver
             </a>
             @include('company/drivers.create')
-            
+
             <!-- Modal -->
         <div class="mt-2">
             @include('partials.messages')

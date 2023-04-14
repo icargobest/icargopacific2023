@@ -1,5 +1,5 @@
 <?php
-  
+
 namespace App\Models;
 
 use App\Models\Driver;
@@ -11,11 +11,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Cashier\Billable;
-  
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, Billable;
-      
+
     protected $fillable = [
         'name',
         'email',
@@ -31,20 +31,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function dispatcherDetail(){
         return $this->hasOne(Dispatcher::class, 'user_id', 'id')->withDefault();
     }
-  
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
-  
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-     
+
     protected function type(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["user", "super-admin", "company", "driver", "dispatcher"][$value],
+            get: fn ($value) =>  ["user", "super-admin", "company", "driver", "dispatcher", "staff"][$value],
         );
     }
 }
