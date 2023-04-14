@@ -13,6 +13,9 @@ use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DispatcherController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\UserController;
+
 
 
 /*
@@ -86,10 +89,20 @@ Route::get('/forgot-password', function () {
     return view('login/forgot-password');
 });
 
+
+// FIND TRACKING ID
+
+Route::get('/find', function () {
+    return view('search');
+});
+
+Route::post('/search', [UserController::class, 'search']);
+
 // DASHBOARD PAGE
 Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
+Route::get('/income', [IncomeController::class, 'index']);
 
 //FREIGHT PAGE
 Route::get('/freight', function () {
