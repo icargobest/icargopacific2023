@@ -31,6 +31,9 @@
                       </li>
                         <a class="nav-link" href="/drivers">Driver List</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dispatcher">Dispatcher List</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">

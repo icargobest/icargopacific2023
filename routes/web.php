@@ -12,7 +12,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
-
+use App\Http\Controllers\DispatcherController;
+use App\Http\Controllers\StationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,10 +56,28 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     ->name('dashboard')->middleware('verified');
 });
 
-// Company Routes
+// Company Manager Routes
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
     ->name('company.dashboard')->middleware('verified');
+    Route::group(['prefix' => 'company/stations'], function () {
+        Route::get('/', [StationController::class, 'index'])
+            ->name('stations.view');
+        Route::post('/add-station', [StationController::class, 'store'])
+            ->name('add.station');
+        Route::get('/view_station/{id}', [StationController::class, 'show'])
+            ->name('show.station');
+        Route::get('/stations_archive', [StationController::class, 'viewArchive'])
+            ->name('view.stations.archived');
+        Route::get('/edit/{id}', [StationController::class, 'edit'])
+            ->name('edit.station');
+        Route::put('/update/{id}', [StationController::class, 'update'])
+            ->name('update.station');
+        Route::put('/archive/{id}', [StationController::class, 'archive'])
+            ->name('archive.station');
+        Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
+            ->name('unarchive.station');
+    });
 });
 
 // Super Admin Routes
@@ -71,6 +90,12 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
     ->name('driver.dashboard')->middleware('verified');
+});
+
+// Dispatcher Routes
+Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
+    Route::get('/dispatcher/dashboard', [HomeController::class, 'dispatcherDashboard'])
+    ->name('dispatcher.dashboard')->middleware('verified');
 });
 
 
@@ -110,6 +135,16 @@ Route::controller(DriverController::class)->group(function(){
     Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
     Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
 });
+
+//DISPATCHER PANEL
+Route::resource('dispatcher', DispatcherController::class);
+Route::controller(DispatcherController::class)->group(function(){
+    Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
+    Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
+    Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
+    Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
+});
+
 
 Route::get('/company', [CompanyController::class, 'index']);
 
