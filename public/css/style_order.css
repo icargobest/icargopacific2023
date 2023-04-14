@@ -16,7 +16,7 @@
     padding: 5px 0;
     margin-bottom: 15px;
 
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 1.5px;
 
     border-bottom: 1px solid rgb(0, 0, 0, 0.5);
@@ -141,7 +141,10 @@
     color: #353535;
     font-size: 13px;
   }
-
+  .modal-body .required{
+    color: red;
+  }
+ 
   .serviceInput select, 
   .typeInput select, 
   .categoryInput select,
