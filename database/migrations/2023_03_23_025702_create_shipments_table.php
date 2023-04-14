@@ -35,8 +35,8 @@ return new class extends Migration
             $table->decimal('width', 8, 2);
             $table->decimal('height', 8, 2);
             $table->decimal('weight', 8, 2);
-            $table->unsignedBigInteger('bid_amount');
-            $table->string('company_bade');
+            $table->unsignedBigInteger('bid_amount')->nullable()->default;
+            $table->string('company_bade')->nullable()->default;
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2);

@@ -13,7 +13,7 @@
         <div class="col-lg-4 login-container p-5">
                 <div class="pb-2 login-header">{{ __('LOGIN') }}</div>
                 <div class="pb-3 blue">Sign-in to your Account</div>
-               
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         @include('flash-message')
@@ -25,7 +25,7 @@
                                     <i class="bi bi-envelope-fill text-secondary"></i>
                                 </span>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mail Address">
-                            
+
                                 @error('email')
                                     <div class="col-12 text-center">
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                     <i class="bi bi-lock-fill text-secondary"></i>
                                 </span>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                              
+
                                 @error('password')
                                     <div class="col-12 text-center">
                                         <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </form>
-                
+
                     <div class="text-center mt-5 pt-5">
                         <small class="">Don't have an Account? <span class="blue"><a href="/register">Sign up</a></span></small>
                     </div>

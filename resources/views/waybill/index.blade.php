@@ -295,8 +295,8 @@
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
-                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.svg"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
-                            <td></td>
+                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.png"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
+                            <td><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($ship->user_id.'-'.$ship->tracking_number.'-'.$ship->id, 'C128',1,50) }}" alt="barcode"/></td>
                             <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
                             <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
                             <td></td>
@@ -327,5 +327,6 @@
     <!--Bootstrap JS-->
     <script src="/js/bootstrap.bundle.js"></script>
     <!--Popper-->
+
 
       {{-- @include('partials.footer') --}}
