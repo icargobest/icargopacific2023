@@ -24,7 +24,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                        <td>@include('dispatcher.restore')</td>
+                        <td>@include('company/dispatcher.restore')</td>
                     </tr>
                     @endif
                 @endforeach

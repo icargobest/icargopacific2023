@@ -20,15 +20,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'type'
+        'type',
+        'status'
     ];
 
     public function driverDetail(){
-        return $this->hasOne(Driver::class, 'user_id', 'id');
+        return $this->hasOne(Driver::class, 'user_id', 'id')->withDefault();
     }
 
     public function dispatcherDetail(){
-        return $this->hasOne(Dispatcher::class, 'user_id', 'id');
+        return $this->hasOne(Dispatcher::class, 'user_id', 'id')->withDefault();
     }
   
     protected $hidden = [

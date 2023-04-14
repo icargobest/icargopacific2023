@@ -50,17 +50,31 @@
                 </div>
               </div>
             </div>
+
             <h4>Driver Details</h4>
+
             <!-- Vehicle Type -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example5" name="vehicle_type" class="form-control" />
-              <label class="form-label" for="form6Example5">Vehicle Type</label>
+            <div class="row mb-4">
+              <div class="col">
+              <label for="vehicle_type">Vehicle Type</label>
+                <select type="text" id="form6Example5" name="vehicle_type" required>
+                  <option value="" hidden>Select Vehicle Type</option>
+                  <option value="Motorcycle">Motorcycle</option>
+                  <option value="Van">Van</option>
+                  <option value="Pick-Up">Pick-Up</option>
+                  <option value="Truck">Truck</option>
+                </select>
+              </div>
             </div>
 
             <!-- Plate No. -->
-             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="plate_no" class="form-control" />
-              <label class="form-label" for="form6Example4">Plate No.</label>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" id="form6Example1" name="plate_no" class="form-control" />
+                  <label class="form-label" for="form6Example1">Plate No.</label>
+                </div>
+              </div>
             </div>
 
             <div class="modal-footer">
