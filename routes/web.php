@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\UsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,14 @@ Route::get('/registerCompany', function () {
 });
 Route::post('/store', [CompanyController::class, 'store']);
 
+// Authenticated Lock Account Routes
+Route::middleware('auth')->group(function(){
+    // To Update Users
+    Route::get('/users/status/{user_id}/{status_code}', [UsersController::class, 'updateStatus'])->name('users.status.update');
+    Route::get('/dispatcher/dashboard/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+    Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
+});
+
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
@@ -77,6 +87,24 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
             ->name('archive.station');
         Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
             ->name('unarchive.station');
+    });
+
+    //DRIVER PANEL
+    Route::resource('company/drivers', DriverController::class);
+    Route::controller(DriverController::class)->group(function() {
+        Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
+        Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+        Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
+        Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
+    });
+
+    //DISPATCHER PANEL
+    Route::resource('company/dispatcher', DispatcherController::class);
+    Route::controller(DispatcherController::class)->group(function(){
+        Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
+        Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
+        Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
+        Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
     });
 });
 
@@ -127,23 +155,9 @@ Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\Dispatche
 Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
-//DRIVER PANEL
-Route::resource('drivers', DriverController::class);
-Route::controller(DriverController::class)->group(function(){
-    Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
-    Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
-    Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
-    Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
-});
 
-//DISPATCHER PANEL
-Route::resource('dispatcher', DispatcherController::class);
-Route::controller(DispatcherController::class)->group(function(){
-    Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
-    Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
-    Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
-    Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
-});
+
+
 
 
 Route::get('/company', [CompanyController::class, 'index']);
