@@ -6,7 +6,7 @@
           <div class="card">
           <div class="text-center">
             <div class="card-header text-center p-3">
-              <h2>Driver Tracking</h2>
+              <h2>Dispatcher</h2>
             </div>
             <div class="card-body">
               <main class="wrapper">
@@ -43,16 +43,16 @@
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
-                  <!-- Pickup Modal -->
-                  <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
+                  <!-- Received Modal -->
+                  <div class="modal fade" id="receivedmodal" tabindex="-1" aria-labelledby="receivedModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="pickupModalLabel">Shipment Picked Up</h5>
+                          <h5 class="modal-title" id="receivedModalLabel">Shipment Received</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>Shipment has been picked up.</p>
+                          <p>Shipment has been received.</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
@@ -61,50 +61,50 @@
                     </div>
                   </div>
 
-                  <!-- Waiting for Dispatch Modal -->
-                  <div class="modal fade" id="alreadyPickedModal" tabindex="-1" aria-labelledby="alreadyPickedModalLabel" aria-hidden="true">
+                  <!-- Out for Delivery Modal -->
+                  <div class="modal fade" id="outfordeliveryModal" tabindex="-1" aria-labelledby="outfordeliveryModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="alreadyPickedModalLabel">Shipment Received by Dispatcher</h5>
+                          <h5 class="modal-title" id="outfordeliveryModalLabel">Shipment Permission</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>Waiting for dispatcher to dispatch the shipment.</p>
+                          <p>Shipment Out for delivery.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
                         </div>
                       </div>
                     </div> 
-                  </div> 
-                  <!-- Success Delivery Modal -->
+                  </div>   
+                  <!-- Successful Delivery Modal -->
                   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="successModalLabel">Shipment Success!</h5>
+                          <h5 class="modal-title" id="successModalLabel">Shipment Success</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>Shipment Delivered Succesfully.</p>
+                          <p>Shipment has been Delivered.</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
                         </div>
                       </div>
                     </div>
-                  </div>    
-                  <!-- Delivered Modal -->
-                  <div class="modal fade" id="deliveredModal" tabindex="-1" aria-labelledby="deliveredModalLabel" aria-hidden="true">
+                  </div> 
+                  <!-- Not yet picked up Modal -->
+                  <div class="modal fade" id="notpickupModal" tabindex="-1" aria-labelledby="notpickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="deliveredModalLabel">Shipment Success</h5>
+                          <h5 class="modal-title" id="notpickupModalLabel">Shipment Status</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>Shipment Delivered.</p>
+                          <p>Shipment has not been Picked Up yet.</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
@@ -120,6 +120,20 @@
       </div>
     </div>
   </div>
+
+<form method="POST" action="{{ url('/generate-code') }}">
+    @csrf
+    <div>
+        <label for="data">Enter data:</label>
+        <input type="text" name="data" id="data" required>
+    </div>
+    <div>
+        <button type="submit">Generate code</button>
+    </div>
+</form>
+
+
+
 
     <!-- MDB -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
@@ -138,76 +152,77 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
+    var pickedup = 0;
     function onScanSuccess(data) {
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
-      data: {"_token": "{{ csrf_token() }}", data: data},
-      success: function (data) {
-        // after success to get Data from controller if Shipment is available in the database
-        // iframe for waybill info
-        if (data.result == 1) {
-          var iframeContainer = document.getElementById('my-iframe-container');
-          // check if there is already an iframe in the container
-          if (iframeContainer.childElementCount > 0) {
-            iframeContainer.removeChild(iframeContainer.childNodes[0]);
-          }
-          var iframe = document.createElement('iframe');
-          iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframeContainer.appendChild(iframe);
-          html5QrcodeScanner.clear();
-
-          // add event listener to button when iframe is loaded
-          iframe.onload = function() {
-            var button = iframe.contentDocument.getElementById("my-button");
-            button.addEventListener("click", function() {
-              if (data.status === "") {
-                data.status = 'pickup';
-                var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
-                modal.show();
-
-                // Update the database with the new pickup value
-                $.ajax({
-                    type: "POST",
-                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
-              } else if (data.status === 'delivery') {
-                data.status = 'delivered';
-                var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
-                deliveredModal.show();
-
-                // Update the database with the new delivered value
-                $.ajax({
-                  type: "POST",
-                  url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
-                  data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                  success: function (response) {
-                    console.log(response);
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: "{{action('App\Http\Controllers\DispatcherQrScannerController@checkUser')}}",
+            data: {"_token": "{{ csrf_token() }}", data: data},
+            success: function (data) {
+                // after success to get Data from controller if Shipment is available in the database
+                // iframe for waybill info
+                if (data.result == 1) {
+                  var iframeContainer = document.getElementById('my-iframe-container');
+                  // check if there is already an iframe in the container
+                  if (iframeContainer.childElementCount > 0) {
+                    iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
-                });
-              } else if (data.status === 'delivered') {
-                var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                deliveredModal.show();
-              } else {
-                var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
-                modal.show();
-              }
-            });
-          };
-        } else {
-          return confirm('There is no shipment with this qr code');
-        }
-      }
-    });
-  }
+                  var iframe = document.createElement('iframe');
+                  iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+                  iframe.style.width = '100%';
+                  iframe.style.height = '500px';
+                  iframeContainer.appendChild(iframe);
+                  html5QrcodeScanner.clear();
 
+                    // add event listener to button when iframe is loaded
+                    iframe.onload = function() {
+                    var button = iframe.contentDocument.getElementById("my-button");
+                    button.addEventListener("click", function() {
+                      if (data.status === 'pickup') {
+                        data.status = 'received';
+                        var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
+                        modal.show();
+
+                        // Update the database with the new received value
+                        $.ajax({
+                          type: "POST",
+                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
+                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                          success: function (response) {
+                            console.log(response);
+                          }
+                        });
+                      } else if (data.status === 'received') {
+                        data.status = 'delivery';
+                        var deliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
+                        deliveryModal.show();
+
+                        // Update the database with the new out for delivery value
+                        $.ajax({
+                          type: "POST",
+                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
+                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                          success: function (response) {
+                            console.log(response);
+                          }
+                        });
+                      } else if (data.status === 'delivered') {
+                        var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                        deliveredModal.show();
+                      } else {
+                        var modal = new bootstrap.Modal(document.getElementById('notpickupModal'), {});
+                        modal.show();
+                      }
+                    });
+                  };
+
+                } else {
+                    return confirm('There is no shipment with this qr code');
+                }
+            }
+        })
+      }
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
         "reader", {fps: 10, qrbox: 250});

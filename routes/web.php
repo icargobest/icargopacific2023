@@ -156,8 +156,16 @@ Route::get('/freight', function () {
 });
 
 //DRIVER PAGE
-Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
-Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@checkUser']);
+Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
+
+//DISPATCHER PAGE
+Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 
 
