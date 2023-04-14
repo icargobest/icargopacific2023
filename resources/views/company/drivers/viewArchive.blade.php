@@ -27,7 +27,8 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->driverDetail->vehicle_type }}</td>
                         <td>{{ $user->driverDetail->plate_no }}</td>
-                        <td>@include('drivers.restore')</td>
+                        <td>@include('company/drivers.show')</td>
+                        <td>@include('company/drivers.restore')</td>
                     </tr>
                     @endif
                 @endforeach

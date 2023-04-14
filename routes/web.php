@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +54,14 @@ Route::get('/registerCompany', function () {
 });
 Route::post('/store', [CompanyController::class, 'store']);
 
+// Authenticated Lock Account Routes
+Route::middleware('auth')->group(function(){
+    // To Update Users
+    Route::get('/users/status/{user_id}/{status_code}', [UsersController::class, 'updateStatus'])->name('users.status.update');
+    Route::get('/dispatcher/dashboard/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+    Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
+});
+
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
@@ -78,6 +90,24 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
             ->name('unarchive.station');
     });
+
+    //DRIVER PANEL
+    Route::resource('company/drivers', DriverController::class);
+    Route::controller(DriverController::class)->group(function() {
+        Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
+        Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+        Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
+        Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
+    });
+
+    //DISPATCHER PANEL
+    Route::resource('company/dispatcher', DispatcherController::class);
+    Route::controller(DispatcherController::class)->group(function(){
+        Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
+        Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
+        Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
+        Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
+    });
 });
 
 // Super Admin Routes
@@ -99,15 +129,26 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 });
 
 
+
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
     return view('login/forgot-password');
 });
 
+
+// FIND TRACKING ID
+
+Route::get('/find', function () {
+    return view('search');
+});
+
+Route::post('/search', [UserController::class, 'search']);
+
 // DASHBOARD PAGE
 Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
+Route::get('/income', [IncomeController::class, 'index']);
 
 //FREIGHT PAGE
 Route::get('/freight', function () {
@@ -115,26 +156,20 @@ Route::get('/freight', function () {
 });
 
 //DRIVER PAGE
-Route::get('driver', ['uses' => 'App\Http\Controllers\QrScannerController@index']);
-Route::post('driver', ['uses' => 'App\Http\Controllers\QrScannerController@checkUser']);
+Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
 
-//DRIVER PANEL
-Route::resource('drivers', DriverController::class);
-Route::controller(DriverController::class)->group(function(){
-    Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
-    Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
-    Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
-    Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
-});
+//DISPATCHER PAGE
+Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
-//DISPATCHER PANEL
-Route::resource('dispatcher', DispatcherController::class);
-Route::controller(DispatcherController::class)->group(function(){
-    Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
-    Route::get('archived-dispatcher', 'viewArchive')->name('dispatcher.viewArchive');
-    Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
-    Route::put('/dispatcher/unarchive/{id}','unarchive')->name('dispatcher.unarchive');
-});
+
+
+
 
 
 Route::get('/company', [CompanyController::class, 'index']);
@@ -161,55 +196,6 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
-});
-
-
-
-//QR Code && Barcode Generation
-Route::get('/generate-code', function (Request $request) {
-    $code = $request->get('tracking_number');
-
-    // Generate QR code with logo
-    $qrCode = QrCode::format('svg')->size(500)->generate($code);
-
-    // Add logo to QR code
-    $logoPath = public_path('img/icargo.png');
-    $logo = file_get_contents($logoPath);
-    $svg = new \SimpleXMLElement($qrCode);
-    $image = $svg->addChild('image');
-    $image->addAttribute('href', 'data:image/png;base64,' . base64_encode($logo));
-    $image->addAttribute('x', '58');
-    $image->addAttribute('y', '58');
-    $image->addAttribute('width', '50');
-    $image->addAttribute('height', '50');
-    $image->addAttribute('opacity', '0.6');
-    $qrCodeWithLogo = $svg->asXML();
-
-    // Generate barcode
-    $barcode = DNS1D::getBarcodeSVG($code, 'C39');
-
-    // Generate file name
-    $fileName = 'code_' . time() . '.zip';
-
-    // Create zip archive
-    $zip = new \ZipArchive();
-    $zip->open(storage_path('app/public/' . $fileName), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-    $zip->addFromString('qr_code.svg', $qrCode);
-    $zip->addFromString('barcode.svg', $barcode);
-    $zip->close();
-
-    // Generate file path
-    $filePath = storage_path('app/public/' . $fileName);
-
-    // Return a response to download the zip archive
-    $response = response()->download($filePath)->deleteFileAfterSend(true);
-
-    // Display the barcode and QR code
-    $barcodeHtml = '<div> '. $barcode .'</div>';
-    $qrCodeHtml = '<div>'. $qrCodeWithLogo .'</div>';
-    $codeHtml = '<div style="margin: 5% 30% 5%">' . $barcodeHtml . '</div>' . '<div style="margin: 5% 30% 5%">' . $qrCodeHtml . '</div>' ;
-
-    return view('generate-code')->with('codeHtml', $codeHtml)->with('response', $response);
 });
 
 // Route to display the form and generated code

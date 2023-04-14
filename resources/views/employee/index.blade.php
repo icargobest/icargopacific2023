@@ -1,9 +1,8 @@
 @include('partials.navigation', ['employee' => 'fw-bold'])
     <!--Employee List-->
     <div class="bg-light p-4 rounded">
-        <h1>Users</h1>
+        <h1>Staff</h1>
         <div class="lead">
-            Manage your users here.
             <a href="{{route('viewArchive')}}" class="btn btn-success">
                 Archive
             </a>
@@ -17,11 +16,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" width="1%">#</th>
-                <th scope="col" width="15%">Name</th>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="25%">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col" width="1%" colspan="3"></th>
+                <th scope="col" width="1%" colspan="5">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +29,6 @@
                             <td>{{$employee->id}}</td>
                             <td>{{$employee->name}}</td>
                             <td>{{$employee->email}}</td>
-                            <td>{{$employee->role}}</td>
                             <td>@include('employee.view')</td>
                             <td>@include('employee.edit')</td>
                             <td>@include('employee.archive')</td>

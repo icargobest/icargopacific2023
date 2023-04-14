@@ -76,6 +76,24 @@
                 <li class="nav-item">
                   <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
                 </li>
+              @elseif(Auth::user()->type == 'staff')
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
+                </li>
+                <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
+                </li>
+                    <a class="nav-link" href="">Dispatcher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
                 <li class="nav-item">
                   <a class="nav-link @if(isset($station)){{$station}}@endif" href="/driver">Stations</a>
                 </li>
