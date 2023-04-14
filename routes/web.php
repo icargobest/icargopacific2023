@@ -35,7 +35,12 @@ use App\Http\Controllers\PlanController;
 //     return view('login/register');
 // });
 
-
+Route::get('/forward', function () {
+    return view('admin/forward');
+});
+Route::get('/mobile', function () {
+    return view('admin/mobile-accept-bid');
+});
 
 Route::get('/', function () {
     return view('welcome');

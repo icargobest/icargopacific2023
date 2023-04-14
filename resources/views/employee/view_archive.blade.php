@@ -1,9 +1,13 @@
 @include('partials.navigation', ['employee' => 'fw-bold'])
 
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
         .primary {
             background-color: #214D94;
             color: white;
+        }
+        body{
+            font-family: 'Poppins';
         }
     </style>
 

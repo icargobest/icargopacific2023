@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-  </div>
-</div> 
- <!-- Footer -->
-=======
     
     
     
@@ -10,7 +5,6 @@
     </div>
 
   <!-- Footer -->
->>>>>>> develop
   <!-- MDB -->
   <script type="text/javascript" src="/js/mdb.min.js"></script>
   <!-- Custom scripts -->
