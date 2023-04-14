@@ -16,6 +16,15 @@
         <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
         <link rel="stylesheet" href="/css/waybill-list.css" />
+
+
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+
+    <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+    
+    <title>Document</title>
 </head>
 
 <body>

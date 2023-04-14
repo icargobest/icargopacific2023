@@ -25,6 +25,7 @@ use App\Http\Controllers\PlanController;
 |
 */
 
+
 // LOGIN PAGE
 // Route::get('/', function () {
 //     return view('login/index');
