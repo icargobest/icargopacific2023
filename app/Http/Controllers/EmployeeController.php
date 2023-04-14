@@ -59,8 +59,8 @@ class EmployeeController extends Controller
     }
 
     function update(Request $request, $id){
-        $user = User::find($id);
-        $employee = Employee::where('user_id', $user->id)->first();
+        $employee = Employee::find($id);
+        $user = User::where('id', $employee->user_id)->first();
 
         $name = $request->input('updateFullName');
         $email = $request->input('updateEmail');
@@ -71,12 +71,12 @@ class EmployeeController extends Controller
         }
 
         $user->name = $name;
-        $user->email = $email;
+        $user->email == $email;
         $user->password = $password;
         $user->save();
 
         $employee->name = $name;
-        $employee->email = $email;
+        $employee->email == $email;
         $employee->password = $password;
         $employee->save();
 

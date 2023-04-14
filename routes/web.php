@@ -74,6 +74,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
 });
 
 
+
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
     return view('login/forgot-password');
