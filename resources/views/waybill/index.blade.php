@@ -1,6 +1,5 @@
-@include('partials.navigation', ['waybill' => 'fw-bold'])
-
-
+@include('layouts.app')
+@include('partials.navigationUser')
     <!--Waybill List-->
     <div class="container">
       <div class="card">
@@ -319,13 +318,4 @@
     </div>
     </div>
     <!-- End of Waybill List -->
-
-    <!-- MDB -->
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-    <!--Bootstrap JS-->
-    <script src="/js/bootstrap.bundle.js"></script>
-    <!--Popper-->
-
-      {{-- @include('partials.footer') --}}
+    @include('partials.footer')

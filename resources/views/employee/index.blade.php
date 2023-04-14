@@ -1,25 +1,5 @@
-@include('partials.admin-nav')
-
-@include('layouts.app')
-
-
-<style>
-.table-container
-{
-overflow: auto;
-}
-
-td button
-{
-min-width: 80px !important;
-}
-
-</style>
-
-<head>
-    <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
-    <link rel="stylesheet" href="/css/waybill-list.css" />
-</head>
+@extends('layouts.app')
+@include('partials.navigationCompany')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -27,10 +7,19 @@ min-width: 80px !important;
             <h3 class="">EMPLOYEE LIST</h3>
         </div>
 
+        <div class="addemployee" style="" >
+            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
+            <a href="{{route('viewArchive')}}">
+                <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
+                    Archived
+                 </button>
+            </a>
+        </div>
+
         <section class="search-filter-container">
 
             <div class="top-container1" style="max-width: 800px;">
-                <h5 class="fw-normal mb-2 d-inline"> SEARCH:</h5>
+                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
                 <div class="input-group rounded">
                     <input type="search" class="form-control rounded" placeholder="Search Employee" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
@@ -68,15 +57,6 @@ min-width: 80px !important;
 
         </section>
 
-        <div class="addemployee" >
-            <button type="button" class="btn btn-primary mb-1 m-button1 fs-medium" style="" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
-            <a href="{{route('viewArchive')}}">
-                <button type="button" class="btn mb-1 m-button2 fs-medium">
-                Archived
-                </button>
-            </a>
-        </div>
-
         <div class="mt-2">
             @include('partials.messages')
         </div>
@@ -86,11 +66,11 @@ min-width: 80px !important;
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col" width="1%">#</th>
-                    <th scope="col" width="15%">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Position</th>
-                    <th scope="col" width="1%" colspan="3"></th>
+                    <th scope="col"style="text-align:center;">#</th>
+                    <th scope="col"style="text-align:center;">Name</th>
+                    <th scope="col"style="text-align:center;">Email</th>
+                    <th scope="col"style="text-align:center;">Position</th>
+                    <th scope="col"style="text-align:center; width:300px"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,9 +81,10 @@ min-width: 80px !important;
                                 <td class="capitalized">{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
                                 <td class="capitalized">{{$employee->role}}</td>
-                                <td>@include('employee.view')</td>
-                                <td>@include('employee.edit')</td>
-                                <td>@include('employee.archive')</td>
+                                <td class="td-buttons d-flex" style="overflow:auto;">@include('employee.view')
+                                    @include('employee.edit')
+                                    @include('employee.archive')
+                                </td>
                             </tr>
                         @endif
                     @endforeach

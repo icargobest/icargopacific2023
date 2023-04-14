@@ -1,5 +1,5 @@
-@include('partials.navigation', ['freight' => 'fw-bold'])
-
+@include('layouts.app')
+@include('partials.navigationCompany')
     <!--Forwarding List-->
     <div class="container p-3">
       <div class="card">
@@ -123,10 +123,4 @@
       </div>
     </div>
     </div>
-    <!-- End of Waybill List -->
 
-    <!-- MDB -->
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-</body>
-</html>
-{{-- @include('partials.footer') --}}

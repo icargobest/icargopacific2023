@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-
-
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="/css/bootstrap.css">
         <!-- Font Awesome -->
@@ -16,14 +14,13 @@
         <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
         <link rel="stylesheet" href="/css/waybill-list.css" />
-
-{{--         <link rel="stylesheet" href="/css/waybill-list.css" /> --}}
-
 </head>
 
 <body>
 
-  <div class="main-container">
+    @include('layouts.app')
+
+  <div class="main-container ">
 
 
     <div class="sidebar">
@@ -41,7 +38,7 @@
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
-                        <div class="link">
+                        <div class="link" >
                             <i class="fa fa-gauge"></i>
                             <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Dashboard</span></a>
                         </div>
@@ -74,10 +71,13 @@
                     </div>
         
                     <div class="links">
+                        
+                        <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                         <div class="link">
                             <i class="fa fa-user"></i>
-                            <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees"><span>Employee</span></a>
+                            <span>Employee</span>
                         </div>
+                        </a>
                     </div>
                 </div>
     
@@ -117,3 +117,5 @@
 
         </div>
     </div>
+    
+    <div class="content-container">

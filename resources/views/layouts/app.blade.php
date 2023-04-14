@@ -22,7 +22,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<style scoped>
+<style>
 li
 {
   list-style: none;
@@ -34,7 +34,7 @@ li
     <div class="header-container">
         <div class="logo">
             <span>
-                <img src="img/Frame 1.png" alt="">
+                <img src="/img/Frame 1.png" alt="">
             </span>
         </div>
 
