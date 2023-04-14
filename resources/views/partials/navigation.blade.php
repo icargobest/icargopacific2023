@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
+    <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -93,6 +94,8 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
+                <li class="nav-item">
+                  <a class="nav-link @if(isset($station)){{$station}}@endif" href="/driver">Stations</a>
                 </li>
               @endif
         </ul>

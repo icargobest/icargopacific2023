@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Driver;
+use App\Models\Dispatcher;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +27,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Driver::class, 'user_id', 'id');
     }
 
+    public function dispatcherDetail(){
+        return $this->hasOne(Dispatcher::class, 'user_id', 'id');
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -38,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function type(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["user", "super-admin", "company", "driver", "staff"][$value],
+            get: fn ($value) =>  ["user", "super-admin", "company", "driver", "dispatcher", "staff"][$value],
         );
     }
 }
