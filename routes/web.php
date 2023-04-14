@@ -122,10 +122,10 @@ Route::post('driver/update-delivery', ['uses' => 'App\Http\Controllers\DriverQrS
 Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
 
 //DISPATCHER PAGE
-Route::get('dispatcher', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
-Route::post('dispatcher/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
-Route::post('dispatcher/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
-Route::post('dispatcher/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
+Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 //DRIVER PANEL
 Route::resource('drivers', DriverController::class);
