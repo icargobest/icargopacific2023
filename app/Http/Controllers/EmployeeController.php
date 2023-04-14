@@ -32,7 +32,7 @@ class EmployeeController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->type = 4;
+        $user->type = 5;
         $saved = $user->save();
 
         $staff = new Employee;
