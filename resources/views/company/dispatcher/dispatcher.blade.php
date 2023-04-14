@@ -179,8 +179,8 @@
                     iframe.onload = function() {
                     var button = iframe.contentDocument.getElementById("my-button");
                     button.addEventListener("click", function() {
-                      if (data.pickup === 1 && data.received === 0) {
-                        data.received = 1;
+                      if (data.status === 'pickup') {
+                        data.status = 'received';
                         var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
                         modal.show();
 
@@ -188,13 +188,13 @@
                         $.ajax({
                           type: "POST",
                           url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, received: data.received},
+                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
                           success: function (response) {
                             console.log(response);
                           }
                         });
-                      } else if (data.pickup === 1 && data.received === 1 && data.delivery === 0) {
-                        data.delivery = 1;
+                      } else if (data.status === 'received') {
+                        data.status = 'delivery';
                         var deliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
                         deliveryModal.show();
 
@@ -202,13 +202,12 @@
                         $.ajax({
                           type: "POST",
                           url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, delivery: data.delivery},
+                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
                           success: function (response) {
                             console.log(response);
                           }
                         });
-                      } else if (data.pickup === 1 && data.received === 1 && data.delivery === 1 && data.delivery === 1 && data.delivered === 1) {
-                        data.delivered = 1;
+                      } else if (data.status === 'delivered') {
                         var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                         deliveredModal.show();
                       } else {

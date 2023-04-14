@@ -138,78 +138,76 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
-    var pickedup = 0;
     function onScanSuccess(data) {
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
-            data: {"_token": "{{ csrf_token() }}", data: data},
-            success: function (data) {
-                // after success to get Data from controller if Shipment is available in the database
-                // iframe for waybill info
-                if (data.result == 1) {
-                  var iframeContainer = document.getElementById('my-iframe-container');
-                  // check if there is already an iframe in the container
-                  if (iframeContainer.childElementCount > 0) {
-                    iframeContainer.removeChild(iframeContainer.childNodes[0]);
+    $.ajax({
+      type: "POST",
+      cache: false,
+      url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
+      data: {"_token": "{{ csrf_token() }}", data: data},
+      success: function (data) {
+        // after success to get Data from controller if Shipment is available in the database
+        // iframe for waybill info
+        if (data.result == 1) {
+          var iframeContainer = document.getElementById('my-iframe-container');
+          // check if there is already an iframe in the container
+          if (iframeContainer.childElementCount > 0) {
+            iframeContainer.removeChild(iframeContainer.childNodes[0]);
+          }
+          var iframe = document.createElement('iframe');
+          iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+          iframe.style.width = '100%';
+          iframe.style.height = '500px';
+          iframeContainer.appendChild(iframe);
+          html5QrcodeScanner.clear();
+
+          // add event listener to button when iframe is loaded
+          iframe.onload = function() {
+            var button = iframe.contentDocument.getElementById("my-button");
+            button.addEventListener("click", function() {
+              if (data.status === "") {
+                data.status = 'pickup';
+                var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
+                modal.show();
+
+                // Update the database with the new pickup value
+                $.ajax({
+                    type: "POST",
+                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
+                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+              } else if (data.status === 'delivery') {
+                data.status = 'delivered';
+                var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
+                deliveredModal.show();
+
+                // Update the database with the new delivered value
+                $.ajax({
+                  type: "POST",
+                  url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
+                  data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                  success: function (response) {
+                    console.log(response);
                   }
-                  var iframe = document.createElement('iframe');
-                  iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
-                  iframe.style.width = '100%';
-                  iframe.style.height = '500px';
-                  iframeContainer.appendChild(iframe);
-                  html5QrcodeScanner.clear();
-
-                    // add event listener to button when iframe is loaded
-                    iframe.onload = function() {
-                    var button = iframe.contentDocument.getElementById("my-button");
-                    button.addEventListener("click", function() {
-                      if (data.pickup === 0) {
-                        data.pickup = 1;
-                        var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
-                        modal.show();
-
-                        // Update the database with the new pickup value
-                        $.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.pickup},
-                          success: function (response) {
-                            console.log(response);
-                          }
-                        });
-                      } else if (data.pickup === 1 && data.received === 1 && data.delivery === 1 && data.delivered === 0) {
-                        data.delivered = 1;
-                        var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
-                        deliveredModal.show();
-
-                        // Update the database with the new delivered value
-                        $.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, delivered: data.delivered},
-                          success: function (response) {
-                            console.log(response);
-                          }
-                        });
-                      } else if (data.pickup === 1 && data.received === 1 && data.delivery === 1 && data.delivered === 1) {
-                        data.delivered = 1;
-                        var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                        deliveredModal.show();
-                      } else {
-                        var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
-                        modal.show();
-                      }
-                    });
-                  };
-
-                } else {
-                    return confirm('There is no shipment with this qr code');
-                }
-            }
-        })
+                });
+              } else if (data.status === 'delivered') {
+                var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                deliveredModal.show();
+              } else {
+                var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
+                modal.show();
+              }
+            });
+          };
+        } else {
+          return confirm('There is no shipment with this qr code');
+        }
       }
+    });
+  }
+
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
         "reader", {fps: 10, qrbox: 250});

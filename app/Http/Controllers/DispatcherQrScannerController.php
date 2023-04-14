@@ -16,35 +16,31 @@ class DispatcherQrScannerController extends Controller
     public function checkUser(Request $request)
     {
         $result = 0;
-        $received = 0;
-        $pickup = 0;
-        $delivery = 0;
-        $delivered = 0;
+        $status = null;
         $name = null;
+        $id = null;
 
         if ($request->data) {
             $user = User::where('name', $request->data)->first();
             if ($user) {
                 Auth::login($user);
                 $result = 1;
-                $received = $user->received;
-                $pickup = $user->pickup;
-                $delivery = $user->delivery;
-                $delivered = $user->delivered;
                 $name = $user->name;
+                $status = $user->status;
+                $id = $user->id;
             } else {
                 $result = 0;
             }
         }
 
-        return response()->json(['result' => $result, 'received' => $received, 'delivery' => $delivery, 'delivered' => $delivered, 'pickup' => $pickup, 'name' => $name]);
+        return response()->json(['result' => $result, 'status' => $status, 'name' => $name, 'id' => $id]);
     }
 
 	public function updateReceived(Request $request)
     {
         $user = Auth::user();
         if ($user) {
-            $user->received = $request->received;
+            $user->status = 'received';
             $user->save();
         }
         return response()->json(['success' => true]);
@@ -54,7 +50,7 @@ class DispatcherQrScannerController extends Controller
 	{
 		$user = Auth::user();
         if ($user) {
-            $user->delivery = $request->delivery;
+            $user->status = 'delivery';
             $user->save();
         }
         return response()->json(['success' => true]);
