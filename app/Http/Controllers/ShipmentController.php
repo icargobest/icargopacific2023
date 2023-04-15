@@ -28,6 +28,8 @@ class ShipmentController extends Controller
 
     function addShipment(Request $request){
         $data = [
+            'station_id' => $request->stationID,
+            'station_name' => $request->stationName,
             'tracking_number' => fake()->isbn13(),
             'user_id' => $request->user_id,
             'sender_name' => $request->senderName,

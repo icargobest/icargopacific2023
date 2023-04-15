@@ -27,6 +27,14 @@
                         @csrf
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
                         <div class="form-outline mb-4">
+                            <input type="text" id="form6Example1" name="stationID" class="form-control" />
+                            <label class="form-label" for="form6Example1">Station ID</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form6Example1" name="stationName" class="form-control" />
+                            <label class="form-label" for="form6Example1">Station Name</label>
+                        </div>
+                        <div class="form-outline mb-4">
                             <input type="text" id="form6Example1" name="senderName" class="form-control" />
                             <label class="form-label" for="form6Example1">Full Name</label>
                         </div>

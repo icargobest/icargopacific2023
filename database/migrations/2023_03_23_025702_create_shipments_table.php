@@ -19,6 +19,8 @@ return new class extends Migration
             //$table->foreign('company_id')->references('id')->on('companies');
             //$table->unsignedBigInteger('employee_id');
             //$table->foreign('employee_id')->references('id')->on('employees');
+            $table->string('station_id');
+            $table->string('station');
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('sender_name');
