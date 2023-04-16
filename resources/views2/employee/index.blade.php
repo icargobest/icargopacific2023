@@ -114,7 +114,7 @@
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" />
+                  <input type="text" id="form6Example1" name="FullName" class="form-control" />
                   <label class="form-label" for="form6Example1">FULL NAME</label>
               </div>
             </div>
@@ -133,8 +133,8 @@
               
             <!-- Position -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
-              <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
+              <input type="text" id="form6Example4" name="role" class="form-control" />
+              <label class="form-label" for="form6Example4">POSITION</label>
             </div>
                     
           
