@@ -49,7 +49,7 @@
       
                             <a class="nav-link" href="/company/dashboard">
                             <div class="link" >
-                                <i class="fa fa-tachometer" style="margin-bottom: 10px; padding-top:8px;"></i>
+                                <i class="fa fa-tachometer link-i-1" ></i>
                                 <span>Dashboard</span>
                             </div>
                             </a>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="links">
                             <div class="link">
-                                <i class="fa fa-list" style="margin-bottom: 10px; padding-top:8px;"></i>
+                                <i class="fa fa-list link-i-1"></i>
                                 <span>Order List </span>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
       
                           <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">
                           <div class="link" >
-                              <i class="fa fa-truck" style="margin-bottom: 10px; padding-top:8px;"></i>
+                              <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
                           </div>
                           </a>
@@ -74,7 +74,7 @@
                       </div>
                       <div class="links">
                           <div class="link">
-                              <i class="fa fa-history" style="margin-bottom: 10px; padding-top:8px;"></i>
+                              <i class="fa fa-history link-i-1"></i>
                               <span>Order History </span>
                           </div>
                       </div>
@@ -83,7 +83,7 @@
       
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
                         <div class="link" >
-                            <i class="fa fa-forward" style="margin-bottom: 10px; padding-top:8px;"></i>
+                            <i class="fa fa-forward link-i-1"></i>
                             <span>Adv. Freight Forwarding</span>
                         </div>
                         </a>
@@ -92,7 +92,7 @@
                     <div class="links">
                       <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                         <div class="link">
-                            <i class="fa fa-user" style="margin-bottom: 10px; padding-top:8px;"></i>
+                            <i class="fa fa-user link-i-1"></i>
                             <span>Staff </span>
                         </div>
                       </a>
@@ -102,7 +102,7 @@
       
                       <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                           <div class="link" >
-                              <i class="fa fa-id-card" style="margin-bottom: 10px; padding-top:8px;"></i>
+                              <i class="fa fa-id-card link-i-1"></i>
                               <span>Dispatcher</span>
                           </div>
                       </a>
@@ -111,7 +111,7 @@
                   <div class="links">
                       <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">
                           <div class="link">
-                              <i class="fa fa-id-card-o" style="margin-bottom: 10px; padding-top:8px;"></i>
+                              <i class="fa fa-id-card-o link-i-1"></i>
                               <span>Driver</span>
                           </div>
                       </a>
@@ -119,14 +119,14 @@
       
                   <div class="links">
                     <div class="link">
-                        <i class="fa fa-history" style="margin-bottom: 10px; padding-top:8px;"></i>
+                        <i class="fa fa-history link-i-1"></i>
                         <span>Order History</span>
                     </div>
                   </div>
       
                   <div class="links">
                     <div class="link">
-                        <i class="fa fa-envelope-o" style="margin-bottom: 10px; padding-top:8px;"></i>
+                        <i class="fa fa-envelope-o link-i-1"></i>
                         <span>Subscription</span>
                     </div>
                   </div>
@@ -138,21 +138,21 @@
                     <div class="link2">
                         <div class="links">
                             <div class="link">
-                                <i class="fa fa-bell"></i>
+                                <i class="fa fa-bell link-i-2"></i>
                                 <span>Notifications</span>
                             </div>
                         </div>
                         
                         <div class="links">
                             <div class="link">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-envelope link-i-2"></i>
                                 <span>Messages</span>
                             </div>
                         </div>
             
                         <div class="links">
                             <div class="link">
-                                <i class="fa fa-plus"></i>
+                                <i class="fa fa-plus link-i-2"></i>
                                 <span>List Items</span>
                             </div>
                         </div>

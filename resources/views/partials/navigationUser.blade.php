@@ -11,6 +11,7 @@
             <!--Bootstrap CSS-->
             <link rel="stylesheet" href="/css/bootstrap.css">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
@@ -26,10 +27,6 @@
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-</head>
-
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
 <div class="main-container">
@@ -53,7 +50,7 @@
 
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
                         <div class="link" >
-                            <i class="bi bi-cart-plus-fill"></i>
+                            <i class="bi bi-cart-plus-fill link-i-3"></i>
                             <span>Order</span>
                         </div>
                         </a>
@@ -61,7 +58,7 @@
                     </div>
                     <div class="links">
                         <div class="link">
-                            <i class="bi bi-cart-check-fill"></i>
+                            <i class="bi bi-cart-check-fill link-i-3"></i>
                             <span>Order History </span>
                         </div>
                     </div>
@@ -73,21 +70,21 @@
                 <div class="link2">
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-bell link-i-4"></i>
                             <span>Notifications</span>
                         </div>
                     </div>
                     
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-envelope"></i>
+                            <i class="fa fa-envelope link-i-4"></i>
                             <span>Messages</span>
                         </div>
                     </div>
         
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-plus link-i-4"></i>
                             <span>List Items</span>
                         </div>
                     </div>

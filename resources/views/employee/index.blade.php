@@ -97,7 +97,7 @@
 
 
 <!-- Modal -->
-<div class="modal top   fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -114,7 +114,7 @@
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="FullName" class="form-control" />
+                  <input type="text" id="form6Example1" name="name" class="form-control" />
                   <label class="form-label" for="form6Example1">FULL NAME</label>
               </div>
             </div>
@@ -133,16 +133,16 @@
               
             <!-- Position -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="role" class="form-control" />
-              <label class="form-label" for="form6Example4">POSITION</label>
+              <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
+              <label class="form-label" for="form6Example4">Confirm Password</label>
             </div>
                     
           
-            <!-- Message input -->
-{{--             <div class="form-outline mb-4">
-              <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-              <label class="form-label" for="form6Example7">Additional information</label>
-            </div> --}}
+                            <!-- Message input -->
+                {{--             <div class="form-outline mb-4">
+                            <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                            <label class="form-label" for="form6Example7">Additional information</label>
+                            </div> --}}
 
 
             <div class="button-modal-container">
@@ -151,6 +151,9 @@
                     <button type="reset" class="btn btn-outline-primary" data-mdb-dismiss="modal">
                         Reset
                     </button>
+                    <a href="{{ route('users.status.update', ['user_id' => auth()->user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
+                        Confirm
+                    </a>
                 </div>
     
                 <div class="rightmodal-button-container">

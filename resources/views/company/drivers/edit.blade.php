@@ -1,4 +1,3 @@
-
 <button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{ $user->id }}">
     Edit
  </button>
@@ -32,9 +31,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Vehicle Type:</strong>
-                        <input type="text" name="vehicle_type" value="{{ $user->driverDetail->vehicle_type }}" class="form-control"
-                            placeholder="Vehicle Type">
-                        @error('plate_no')
+                            <select type="text" name="vehicle_type">
+                                <option value="{{ $user->driverDetail->vehicle_type }}" hidden>{{ $user->driverDetail->vehicle_type }}</option>
+                                <option value="Motorcycle">Motorcycle</option>
+                                <option value="Van">Van</option>
+                                <option value="Truck">Truck</option>
+                              </select>
+                        @error('vehicle_type')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
@@ -50,7 +53,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
+                        Save
+                      </button>
+                    <a href="{{route('drivers.index')}}" class="btn btn-success btn-block">
+                        Cancel
+                    </a>
             </div>
         </form>
         </div>

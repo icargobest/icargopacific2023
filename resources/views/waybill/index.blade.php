@@ -234,7 +234,7 @@
       <div class="card">
       <div class="card-body overflow-x-scroll">
         <h4>Order List</h4>
-        @if(Auth::user()->type =='user')
+       {{--  @if(Auth::user()->type =='user') --}}
         <div class="d-grid gap-2 d-md-flex row p-3">
           <div class="tex-wrap">
             <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
@@ -253,7 +253,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
+                        <input type="hidden" name="user_id" value="{{-- {{Auth::user()->id}} --}}" class="form-control" />
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
@@ -617,7 +617,7 @@
             </div>
           </div>
         </div>
-        @endif
+{{--         @endif --}}
 
         <div class="mt-2">
             @include('partials.messages')
@@ -637,12 +637,12 @@
                 <th>Action</th>
             </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
-                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.svg"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
-                            <td></td>
+                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.png"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
+                            <td><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($ship->user_id.'-'.$ship->tracking_number.'-'.$ship->id, 'C128',1,50) }}" alt="barcode"/></td>
                             <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
                             <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
                             <td></td>
@@ -660,7 +660,7 @@
                     @endif
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
       </div>
     </div>
     </div>

@@ -6,30 +6,35 @@ use App\Models\Driver;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Drivers;
 
 class DriverController extends Controller
 {
+    private $type;
+    private $validate;
+    private $update_user;
+    private $driver;
     
     public function index(User $users)
     {
         $type = '3';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.index', compact('users'));
+        return view('company/drivers.index', compact('users'));
     }
 
     function viewArchive(User $users){
 
         $type = '3';
         $users = User::where('type','=', $type)->paginate(100);
-        return view('drivers.viewArchive', compact('users'));
+        return view('company/drivers.viewArchive', compact('users'));
     }
 
 
     public function create()
     {
-        return view('drivers.create');
+        return view('company/drivers.create');
     }
 
     function __construct()
@@ -56,7 +61,7 @@ class DriverController extends Controller
         $validated['type'] = '3'; // set the type to '3' driver
         $validated['password'] = Hash::make($validated['password']);
         $user = User::create($validated);
-
+        
         $user->driverDetail()->create([
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
@@ -84,7 +89,8 @@ class DriverController extends Controller
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
         ]);
-        return redirect()->route('drivers.index')->with('success','Driver Has Been updated successfully');
+        return back()->with('success', 'Driver #'.$id.' data updated successfully!');
+        
     }
 
     public function destroy($id){
@@ -98,7 +104,7 @@ class DriverController extends Controller
         $id->driverDetail()->update([
             'archived' => true,
         ]);
-        return redirect()->route('drivers.index')->with('success', 'Driver data archived successfully.');
+        return back()->with('success', 'Driver #'.$id->id.' Archived successfully!');
     }
 
     public function unarchive($id)
@@ -107,7 +113,16 @@ class DriverController extends Controller
         $id->driverDetail()->update([
             'archived' => false,
         ]);
-        return redirect()->route('drivers.viewArchive')->with('success', 'Driver data restore successfully.');
+        return back()->with('success', 'Driver #'.$id->id.' Restore successfully!');
+    }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Driver #'.$user_id->id.' Update status successfully!');
     }
 
 }
