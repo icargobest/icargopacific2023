@@ -53,7 +53,7 @@
 
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
                         <div class="link" >
-                            <i class="bi bi-cart-plus-fill" style="margin-bottom: 5px;" ></i>
+                            <i class="bi bi-cart-plus-fill"></i>
                             <span>Order</span>
                         </div>
                         </a>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="links">
                         <div class="link">
-                            <i class="bi bi-cart-check-fill" style="margin-bottom: 5px"></i>
+                            <i class="bi bi-cart-check-fill"></i>
                             <span>Order History </span>
                         </div>
                     </div>
