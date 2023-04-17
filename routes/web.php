@@ -44,7 +44,7 @@ Route::get('/forward', function () {
     return view('admin/forward');
 });
 Route::get('/mobile', function () {
-    return view('admin/mobile-accept-bid');
+    return view('waybill/accept-bid');
 });
 
 Route::get('/', function () {

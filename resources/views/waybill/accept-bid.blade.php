@@ -78,9 +78,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <h5 class="fw-normal">PARCEL INFORMATION</h5>
                             <div class="col-sm-6 pt-2">
                                 <table style="width:100%">
+                                <tr>
+                                    <th>
+                                    <h5 class="fw-normal">PARCEL INFORMATION</h5>
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th>ID:</th>
                                     <td>68</td>
