@@ -21,7 +21,7 @@
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Employee</a>
+                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Staff</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Dispatcher</a>
@@ -29,7 +29,10 @@
                       <li class="nav-item">
                         <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
                       </li>
-                        <a class="nav-link" href="/drivers">Driver List</a>
+                        <a class="nav-link" href="/company/drivers">Driver List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/company/dispatcher">Dispatcher List</a>
                         </li>
                     </ul>
                 </div>

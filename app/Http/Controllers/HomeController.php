@@ -26,20 +26,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function createCompanyAccount(Request $request)
-    {
-        $data = new user;
 
-        $data->name=$request->name;
-        $data->email=$request->email;
-        $data->password=bcrypt($request->password);
-        $data->type='2';
-
-        $data->save();
-        
-        return view('/registerCompany')->with('success', "Registered successfully");
-        // return redirect()->back()->with('success', "Registered successfully");
-    }
     public function companyDashboard()
     {
         return view('/company/dashboard');
@@ -53,5 +40,10 @@ class HomeController extends Controller
     public function driverDashboard()
     {
         return view('driver.driver');
+    }
+
+    public function dispatcherDashboard()
+    {
+        return view('/company/dispatcher.dashboard');
     }
 }

@@ -25,16 +25,6 @@
                <div class="form-outline mb-4">
                  <input type="email" id="form6Example5" name="updateEmail" value="{{$employee->email}}" class="form-control" />
                </div>
-
-               <!-- Password input -->
-               <div class="form-outline mb-4">
-                 <input type="password" id="form6Example5" name="updatePassword" value="{{$employee->password}}" class="form-control" />
-               </div>
-
-               <!-- Position -->
-                <div class="form-outline mb-4">
-                 <input type="text" id="form6Example4" name="updateRole" value="{{$employee->role}}" class="form-control" />
-               </div>
             </fieldset>
                  <div class="modal-footer">
                     <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
