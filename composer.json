@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0.0",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
         "laravel/cashier": "^14.9",
         "laravel/fortify": "^1.16",
         "laravel/framework": "^9.19",
@@ -22,7 +23,9 @@
         "livewire/livewire": "^2.12",
         "milon/barcode": "^10.0",
         "picqer/php-barcode-generator": "^2.2",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "imagick/imagick": "^3.4.4"
+
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -74,6 +77,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

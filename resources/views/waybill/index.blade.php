@@ -25,14 +25,14 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         <h1>SENDER INFO</h1>
                         @csrf
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" required/>
                         <div class="form-outline mb-4">
                             <input type="text" id="form6Example1" name="senderName" class="form-control" />
                             <label class="form-label" for="form6Example1">Full Name</label>
                         </div>
                       <!-- Address input -->
                       <div class="form-outline mb-4">
-                        <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
+                        <input type="text" id="form6Example5" name="senderAddress" class="form-control" required/>
                         <label class="form-label" for="form6Example5">Street Address</label>
                       </div>
 
@@ -40,7 +40,7 @@
                       <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderMobile" class="form-control" />
+                                <input type="text" id="form6Example3" name="senderMobile" class="form-control" required/>
                                 <label class="form-label" for="form6Example3">Mobile Number</label>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                       </div>
 
                         <div class="form-outline mb-4">
-                            <input type="email" id="form6Example5" name="senderEmail" class="form-control" />
+                            <input type="email" id="form6Example5" name="senderEmail" class="form-control" required/>
                             <label class="form-label" for="form6Example5">Email Address</label>
                         </div>
 
@@ -61,13 +61,13 @@
                       <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderCity" class="form-control" />
+                                <input type="text" id="form6Example3" name="senderCity" class="form-control" required/>
                                 <label class="form-label" for="form6Example3">Municipality/City</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="form6Example3" name="senderZip" class="form-control" />
+                                <input type="text" id="form6Example3" name="senderZip" class="form-control" required/>
                                 <label class="form-label" for="form6Example3">Postal Code</label>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
 
                       <!--State input-->
                       <div class="form-outline mb-4">
-                        <input type="text" id="form6Example3" name="senderState" class="form-control" />
+                        <input type="text" id="form6Example3" name="senderState" class="form-control" required/>
                         <label class="form-label" for="form6Example3">State</label>
                       </div>
                   </div>
@@ -103,13 +103,13 @@
                           <h1>RECEIVER INFO</h1>
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="form-outline mb-4">
-                          <input type="text" id="form6Example1" name="receiverName" class="form-control" />
+                          <input type="text" id="form6Example1" name="receiverName" class="form-control" required/>
                           <label class="form-label" for="form6Example1">Full Name</label>
                         </div>
 
                         <!-- Address input -->
                         <div class="form-outline mb-4">
-                          <input type="text" id="form6Example5" name="receiverAddress" class="form-control" />
+                          <input type="text" id="form6Example5" name="receiverAddress" class="form-control" required/>
                           <label class="form-label" for="form6Example5">Street Address</label>
                         </div>
 
@@ -117,7 +117,7 @@
                         <div class="row mb-4">
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverMobile" class="form-control" />
+                                  <input type="text" id="form6Example3" name="receiverMobile" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Mobile Number</label>
                               </div>
                           </div>
@@ -131,7 +131,7 @@
 
                         <!--Email input-->
                         <div class="form-outline mb-4">
-                          <input type="email" id="form6Example5" name="receiverEmail" class="form-control" />
+                          <input type="email" id="form6Example5" name="receiverEmail" class="form-control" required/>
                           <label class="form-label" for="form6Example5">Email Address</label>
                         </div>
 
@@ -139,13 +139,13 @@
                         <div class="row mb-4">
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverCity" class="form-control" />
+                                  <input type="text" id="form6Example3" name="receiverCity" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Municipality/City</label>
                               </div>
                           </div>
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="receiverZip" class="form-control" />
+                                  <input type="text" id="form6Example3" name="receiverZip" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Postal Code</label>
                               </div>
                           </div>
@@ -153,7 +153,7 @@
 
                         <!--State input-->
                         <div class="form-outline mb-4">
-                          <input type="text" id="form6Example3" name="receiverState" class="form-control" />
+                          <input type="text" id="form6Example3" name="receiverState" class="form-control" required/>
                           <label class="form-label" for="form6Example3">State</label>
                         </div>
 
@@ -207,25 +207,25 @@
                         <div class="row mb-4">
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="weight" class="form-control" />
+                                  <input type="text" id="form6Example3" name="weight" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Weight</label>
                               </div>
                           </div>
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="length" class="form-control" />
+                                  <input type="text" id="form6Example3" name="length" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Length</label>
                               </div>
                           </div>
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="width" class="form-control" />
+                                  <input type="text" id="form6Example3" name="width" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Width</label>
                               </div>
                           </div>
                           <div class="col">
                               <div class="form-outline">
-                                  <input type="text" id="form6Example3" name="height" class="form-control" />
+                                  <input type="text" id="form6Example3" name="height" class="form-control" required/>
                                   <label class="form-label" for="form6Example3">Height</label>
                               </div>
                           </div>
@@ -280,7 +280,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" width="10%">Tracking Number</th>
                 <th>Photo</th>
                 <th>Pickup</th>
                 <th>Drop-off</th>
@@ -295,8 +294,7 @@
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
-                            <td><a href="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(400)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}" download="{{$ship->user_id}}-{{$ship->tracking_number}}-{{$ship->id}}.png"><img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id))!!}"></a>{{$ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id}}</td>
-                            <td><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($ship->user_id.'-'.$ship->tracking_number.'-'.$ship->id, 'C128',1,50) }}" alt="barcode"/></td>
+                            <td></td>
                             <td>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}</td>
                             <td>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</td>
                             <td></td>
