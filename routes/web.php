@@ -44,7 +44,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return view('waybill/index');
+    return view('welcome');
 });
 
 Auth::routes(['verify' => true]);
