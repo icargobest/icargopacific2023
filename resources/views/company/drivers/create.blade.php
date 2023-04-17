@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#createModal" data-backdrop="static" data-keyboard="false">
+<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#createModal">
     Add Driver
 </button>
 <div class="modal top fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
@@ -48,7 +48,6 @@
               <div class="col">
                 <div class="form-outline">
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

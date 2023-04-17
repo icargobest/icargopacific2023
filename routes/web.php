@@ -95,6 +95,11 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     //DRIVER PANEL
     Route::resource('company/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function() {
+    });
+
+    //DRIVER PANEL
+    Route::resource('company/drivers', DriverController::class);
+    Route::controller(DriverController::class)->group(function(){
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
         Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
         Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
@@ -171,6 +176,8 @@ Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerCo
 Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
 Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
+
+
 
 
 
