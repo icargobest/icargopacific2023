@@ -30,6 +30,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
+
 // LOGIN PAGE
 // Route::get('/', function () {
 //     return view('login/index');
@@ -154,6 +155,10 @@ Route::get('/income', [IncomeController::class, 'index']);
 Route::get('/freight', function () {
     return view('freight/freight');
 });
+
+
+
+
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);

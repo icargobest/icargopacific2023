@@ -44,9 +44,9 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
 
-            // 'allow_self_signed' => true,
-            // 'verify_peer' => false,
-            // 'verify_peer_name' => false,
+             'allow_self_signed' => true,
+             'verify_peer' => false,
+             'verify_peer_name' => false,
         ],
 
         'ses' => [

@@ -9,33 +9,71 @@
 
     <title>iCargo</title>
 
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
+            <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
+            <!--Bootstrap CSS-->
+            <link rel="stylesheet" href="/css/bootstrap.css">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+            <!-- MDB -->
+            <link rel="stylesheet" href="/css/mdb.min.css" />
+            <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+            
+            {{-- CSS --}}
+            <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="/css/waybill-list.css" />
 
+        <!-- Scripts -->
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+<style>
+li
+{
+  list-style: none;
+  margin: 0px 10px
+}
+</style>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    iCargo
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+    <div class="header-container">
+        <div class="logo">
+            <span>
+                <img src="/img/Frame 1.png" alt="">
+            </span>
+        </div>
+
+
+        
+        <div class="user-container">
+            
+            @guest
+            @if (Route::has('login'))
+                <li class=" ">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+            @endif
+
+            @if (Route::has('register'))
+                <li class="">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+
+            @else
+           <a><span class="spanUser">
+            {{ Auth::user()->name }}
+            </span>
+           </a>
+            
+            <div class="button-container dropdown ">
+                <button class="userButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  style="">
+                        <span>Admin</span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -98,19 +136,53 @@
                             </div>
                         @endguest
                     </ul>
+                <ul class="header-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                    <li class="d-flex align-items-center" style="height:30px; background-color:#D9D9D9; padding-left:10px; font-weight:bolder">Settings</li>
+                    <li>
+                        <a><span class="spanUser2">
+                        {{ Auth::user()->name }}
+                        </span>
+                        </a>
+                    </li>
+                    <li><div class="dividerBlack1"></div></li>
+                    
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-gear"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
+                    <li><div class="dividerBlack"></div></li>
+                    
+                    <li><a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                            </form>
+                </ul>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                        <a href="{{ route('users.status.update', ['user_id' => auth()->user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
+                            Confirm
+                        </a>
+                    </div>
+                  </div>
                 </div>
             </div>
-        </nav>
-
+            @endguest
+        </div>
+    </div> 
         <main class="py-4">
-            @yield('content')
+             @yield('content')
         </main>
-    </div>
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-    <!--Bootstrap-->
-    <script src="/js/bootstrap.bundle.js"></script>
-    </body>
-    </html>
-    <script src="/js/bootstrap.bundle.js"></script>
+
+@include('partials.footer')	

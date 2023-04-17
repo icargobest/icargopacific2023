@@ -1,0 +1,521 @@
+/* Header Container */
+a:link
+{
+text-decoration: none;
+}
+
+
+.employee-header-container
+{
+height: 53px;
+background-color: #214D94;
+display: flex;
+align-items: center;
+color: #fff;
+}
+
+
+.employee-header-container h3
+{
+margin: 0px;
+margin-left: 1.5rem;
+}
+
+
+
+/* Search and Filter Container */
+
+.search-filter-container h5
+{
+color: #000000;
+font-weight: bolder;
+text-transform: capitalize;
+}
+
+
+.top-container1, .top-container2
+{
+margin-left: 1rem;
+margin-top: 2rem;
+
+}
+
+
+.top-container1 input
+{
+width: 100%;
+max-width: 250px;
+}
+
+
+.top-container2
+{
+margin-bottom: 20px;
+}
+
+.dropdown-container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.employee span
+{
+color: #000000;
+}
+
+
+.employee button
+{
+min-width: 80px;
+max-width: 80px;
+margin: 0px 5px;
+justify-content:center!important;
+align-items: center;
+display: flex;
+background-color: #fff !important;
+color: #000000;
+border: 1px solid black;
+border-radius: 0px !important;
+}
+
+
+
+
+.employee button:hover
+{
+color: #000000;
+font-weight: bolder;
+}
+
+
+.header-dropdown
+{
+/* border: 2px solid red !important; */
+max-width: 171px !important;
+min-width: 171px !important;
+}
+.dropdown-item:hover
+{
+color: #000000;
+font-weight: bolder;
+}
+
+
+/* Add Employee Container */
+
+.addemployee
+{
+display: flex;
+align-items: flex-end;
+flex-direction: column;
+margin-top: 10px; 
+gap: 10px;
+padding-right: 10px;
+}
+
+.m-button1
+{
+width:30%;
+min-width:150px;
+max-width:280px; 
+display: block;
+background-color: #214D94 !important;
+font-size: 12px !important;
+}
+
+.m-button2
+{
+width:30%;
+min-width:150px;
+max-width:280px; 
+display: block;
+color:#fff;
+background-color: #14a44d !important;
+font-size: 12px !important;
+}
+.m-button2:hover
+{
+color: #fff !important;
+}
+
+.bc1
+{
+background-color: red !important;
+}
+
+
+/* Table Container */
+
+.table-container
+{
+padding: 0px 10px;
+}
+
+.table-container
+{
+overflow: auto;
+}
+
+td button
+{
+min-width: 80px !important;
+}
+.header-tr
+{
+border: none;
+}
+
+td,th
+{
+text-align: center;
+
+}
+
+
+th
+{
+background-color: #214D94 !important;
+border: none;
+color: #FFF;
+text-align: center;
+}
+
+
+
+
+/* Table Container Button */
+
+
+
+.created-button
+{
+
+    color: #0d6efd;
+    background-color: transparent;
+    border-color: #3b71ca !important;
+    border: 1px solid #3b71ca !important;
+    font-weight: bold;
+    width: 90% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.created-button:focus
+{
+max-width: 90% !important;
+}
+
+.modified-select
+{
+max-width: 80px;
+margin: 0px 5px;
+justify-content:center!important;
+align-items: center;
+display: flex;
+background-color: #fff !important;
+color: #000000;
+border: 1px solid black;
+border-radius: 0px !important;
+}
+
+
+
+
+
+/* Modals */
+
+
+.modal-divider
+{
+border-bottom: 1px solid #bdbdbd;
+margin: auto;
+width: 93%;
+}
+textarea
+{
+resize: none;
+}
+
+.modal-header h5
+{
+text-transform: uppercase;
+color: #214D94;
+font-weight: bolder;
+}
+
+.button-modal-container
+{
+    display: grid;
+}
+
+.leftmodal-button-container button, .rightmodal-button-container button
+{
+margin-bottom: 8px !important;
+}
+
+.leftmodal-button-container button,
+.rightmodal-button-container button
+
+{
+    height: 40px;
+    width: 100%;
+}
+
+
+.leftmodal-button-container
+{
+    display: grid;
+}
+
+
+
+
+.rightmodal-button-container
+{
+    display: grid;
+
+}
+
+.btn-close
+{
+/* border: 2px solid red !important; */
+min-width: 25px !important;
+width:25px !important;
+padding: 0px !important;
+margin: 0px !important;
+}
+
+
+
+
+
+.bold-hover {
+    font-weight: normal;
+    transition: all 0.3s ease;
+  }
+  
+  .bold-hover:hover {
+    font-weight: bold;
+  }
+
+
+
+.border-black
+{
+border-radius: 0px !important; 
+border:1px solid black;
+padding-left:20px;
+font-size:12px ;
+}
+
+.capitalized
+{
+text-transform:capitalize;
+}
+
+.b-shadow
+{
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+
+.b-shadow:hover
+{
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.10);
+
+}
+
+.s-margin
+{
+margin:0px 10px 5px 5px;
+}
+
+.fs-medium
+{
+font-size: 12px;
+}
+
+
+.label-container label
+{
+color:#214D94 !important;
+font-size: 12px !important;
+display:block;
+}
+.label-container
+{
+display: flex;
+justify-content: flex-start;
+padding-left: 10px;
+}
+
+.td-buttons button
+{
+margin:0px 5px !important;
+}
+
+
+.col-yellow
+{
+color: #ffc107 !important;
+}
+
+.col-black
+{
+color: #000 !important;
+}
+
+.col-green
+{
+color: #14a44d !important;
+}
+
+.col-red
+{
+color:#dc3545 !important;
+}
+
+@media screen and (min-width: 668px) 
+{
+
+/* Add Employee Container */
+.addemployee
+{
+margin-left: 1rem;
+}
+.m-button1, .m-button2
+{
+    width: 125px !important;
+    margin: none;
+    display: inline;
+}
+
+
+
+/* Modal */
+
+.button-modal-container
+{
+display: flex;
+}
+
+
+.leftmodal-button-container button, .rightmodal-button-container button
+{
+max-width: 120px;
+margin-bottom: 0px !important;
+}
+.leftmodal-button-container
+{
+width: 20%;
+}
+.rightmodal-button-container 
+{
+display: flex;
+width: 80%;
+justify-content: flex-end;
+}
+
+.rightmodal-button-container button
+{
+margin: 0px 5px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1020px) 
+{
+
+/* Search and Filter Container   */
+
+
+.search-filter-container
+{
+display: flex;
+flex-direction: row;
+}
+
+.top-container1
+{
+width: 40%;
+max-width: 300px;
+}
+.top-container1 input
+{
+min-width: 100px !important;   
+max-width: 250px;
+}
+
+.top-container1, .top-container2
+{
+margin-top: 3rem;
+
+}
+
+.top-container2, .addemployee
+{
+margin-left: 3rem;
+}
+
+.top-container2
+{
+    width: 100%;
+}
+
+.input-group,.dropdown-container
+{
+margin-top: 15px;
+}
+
+
+
+/* Dropdown Buttons*/
+
+
+.employee
+{
+flex-direction: row;
+}
+
+
+.employee button
+{
+margin-right: 10px;
+}
+
+.employee button
+{
+
+margin-bottom: 5px;
+display: flex;
+min-width: 150px;
+max-width: 150px;
+
+justify-content:center;
+align-items: center;
+}
+
+.modified-select
+{
+margin-bottom: 5px;
+display: flex;
+min-width: 150px;
+max-width: 150px;
+
+justify-content:center;
+align-items: center;
+}
+
+
+}
