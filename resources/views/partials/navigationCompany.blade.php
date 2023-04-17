@@ -109,7 +109,7 @@
                       
                   </div>
                   <div class="links">
-                      <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">
+                      <a class="nav-link" href="/company/drivers">
                           <div class="link">
                               <i class="fa fa-id-card-o link-i-1"></i>
                               <span>Driver</span>

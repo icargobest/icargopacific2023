@@ -69,7 +69,7 @@
                     <th scope="col"style="text-align:center;">#</th>
                     <th scope="col"style="text-align:center;">Name</th>
                     <th scope="col"style="text-align:center;">Email</th>
-                    <th scope="col"style="text-align:center;">Position</th>
+                    {{-- <th scope="col"style="text-align:center;">Position</th> --}}
                     <th scope="col"style="text-align:center; width:300px"></th>
                 </tr>
                 </thead>
@@ -80,7 +80,7 @@
                                 <td >{{$employee->id}}</td>
                                 <td class="capitalized">{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
-                                <td class="capitalized">{{$employee->role}}</td>
+                                {{-- <td class="capitalized">{{$employee->role}}</td> --}}
                                 <td class="td-buttons d-flex" style="overflow:auto;">@include('employee.view')
                                     @include('employee.edit')
                                     @include('employee.archive')
@@ -125,13 +125,13 @@
               <label class="form-label" for="form6Example5">EMAIL</label>
             </div>
           
-            <!-- Job -->
+            <!-- Password -->
             <div class="form-outline mb-4">
               <input type="text" id="form6Example3" name="password" class="form-control" />
               <label class="form-label" for="form6Example3">PASSWORD</label>
             </div>    
               
-            <!-- Position -->
+            <!-- Confirm Password -->
             <div class="form-outline mb-4">
               <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
               <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
