@@ -2,13 +2,13 @@
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
-    .primary {
-    background-color: #214D94;
-    color: white;
-    }
-    body{
-    font-family: 'Poppins';
-    }
+        .primary {
+        background-color: #214D94;
+        color: white;
+        }
+        body{
+        font-family: 'Poppins';
+        }
         .info, td{
             color: #214D94;
         }
@@ -26,8 +26,9 @@
             <card class="card bg-white btn-wrapper p-4 shadow-lg">
                 <!-- Mobile Sender and Receiver -->
                 <div class="row">
-                    <div class="col-sm-10">
-                        <div class="row overflow-auto">
+                    <!-- Product Information -->
+                    <div class="col-xl-10">
+                        <div class="row">
                             <div class="col-sm-6 pt-2">
                                 <h5 class="fw-normal">SENDER</h5>
                                 <table style="width:100%">
@@ -63,12 +64,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row overflow-auto">
-                            <div class="col-xs-10">
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <hr class="opacity-75">
                             </div>
                         </div>
-                        <div class="row overflow-auto">
+                        <div class="row">
                             <h5 class="fw-normal">PARCEL INFORMATION</h5>
                             <div class="col-sm-6 pt-2">
                                 <table style="width:100%">
@@ -95,17 +96,18 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row overflow-auto">
-                            <div class="col-xs-12 d-xl-none">
+                        <div class="row">
+                            <div class="col-lg-12 d-xl-none">
                                 <hr class="opacity-75">
                             </div>
                         </div>
                     </div>
+                    <!-- Product Image -->
                     <div class="col-xl-2">
                         <div>
-                            <img src="img/television.png" class="card shadow-0" alt="television">
+                            <img src="img/television.png" class="card shadow-0" alt="television"  style="min-width:140px;">
                             <div class="pt-2">
-                            <button type="button" class="btn btn-primary primary btn-block btn-lg shadow-0 ">
+                            <button type="button" class="btn btn-primary primary btn-block btn-lg shadow-0" style="min-width:140px; max-width:509px;">
                             Track Item</button>
                             </div>
                         </div>    
