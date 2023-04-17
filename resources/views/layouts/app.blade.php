@@ -91,35 +91,38 @@ li
                     <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
                     <li><div class="dividerBlack"></div></li>
                     
-                    <li><a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
+                    <li><a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                             </form>
                 </ul>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h4>Are you sure?</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
-                        <a href="{{ route('users.status.update', ['user_id' => auth()->user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
-                            Confirm
-                        </a>
-                    </div>
-                  </div>
-                </div>
-            </div>
             @endguest
         </div>
     </div> 
+                @if (Auth::check())
+                <!-- Modal -->
+                <div class="modal fade" id="confirmModal{{ Auth::user()->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Lock Account</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Are you sure you want to lock your account?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                            <a href="{{ route('users.status.update', ['user_id' => Auth::user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
+                                Confirm
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                @endif
         <main class="py-4">
              @yield('content')
         </main>

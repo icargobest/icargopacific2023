@@ -94,11 +94,6 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
     //DRIVER PANEL
     Route::resource('company/drivers', DriverController::class);
-    Route::controller(DriverController::class)->group(function() {
-    });
-
-    //DRIVER PANEL
-    Route::resource('company/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function(){
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
         Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
