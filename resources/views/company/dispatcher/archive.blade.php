@@ -12,7 +12,7 @@
           <form method="POST" action="{{route('dispatcher.archive', $user->id)}}">
             @csrf
             @method ('PUT')
-            <h4>Are you sure you want to archive this driver?</h4>
+            <h4>Are you sure you want to archive <strong>{{$user->name}}</strong>?</h4>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger">Archive</button>

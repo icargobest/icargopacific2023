@@ -76,7 +76,7 @@ class DispatcherController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->update();
-        return redirect()->route('dispatcher.index')->with('success','Dispatcher Has Been updated successfully');
+        return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
     }
 
     public function destroy($id){
@@ -90,7 +90,7 @@ class DispatcherController extends Controller
         $id->dispatcherDetail()->update([
             'archived' => true,
         ]);
-        return redirect()->route('dispatcher.index')->with('success', 'Dispatcher data archived successfully.');
+        return back()->with('success', 'Dispatcher #'.$id->id.' Archived successfully!');
     }
 
     public function unarchive($id)
@@ -99,7 +99,7 @@ class DispatcherController extends Controller
         $id->dispatcherDetail()->update([
             'archived' => false,
         ]);
-        return redirect()->route('dispatcher.viewArchive')->with('success', 'Dispatcher data restore successfully.');
+        return back()->with('success', 'Dispatcher #'.$id->id.' Restore successfully!');
     }
 
     public function updateStatus($user_id, $status_code)
@@ -107,7 +107,8 @@ class DispatcherController extends Controller
             $update_user = User::whereId($user_id)->update([
                 'status' => $status_code
             ]);
-            return redirect()->route('dispatcher.index')->with('success','Dispatcher Has Been updated successfully');
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Dispatcher #'.$user_id->id.' Update status successfully!');
     }
 
 }

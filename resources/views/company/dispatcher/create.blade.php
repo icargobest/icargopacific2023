@@ -15,7 +15,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" />
+                  <input type="text" id="form6Example1" name="name" class="form-control" required />
                   <label class="form-label" for="form6Example1">Dispatcher Name</label>
                 </div>
               </div>
@@ -25,7 +25,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="email" class="form-control" />
+                  <input type="text" id="form6Example1" name="email" class="form-control" required/>
                   <label class="form-label" for="form6Example1">Email</label>
                 </div>
               </div>
@@ -35,7 +35,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="password" id="form6Example1" name="password" class="form-control" />
+                  <input type="password" id="form6Example1" name="password" class="form-control" required/>
                   <label class="form-label" for="form6Example1">Password</label>
                 </div>
               </div>
@@ -45,7 +45,7 @@
              <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="password" id="form6Example1" name="password_confirmation" class="form-control" />
+                  <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
                   <label class="form-label" for="form6Example1">Confirm Password</label>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                   Save
                 </button>
                 <button type="reset" class="btn btn-danger btn-block mb-4">
-                  Reset
+                  Clear
                 </button>
               </div>
           </form>
