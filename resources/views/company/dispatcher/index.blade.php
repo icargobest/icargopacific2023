@@ -10,7 +10,7 @@
             
             <!-- Modal -->
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
         <table class="table table-striped">

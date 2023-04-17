@@ -7,10 +7,10 @@
               Archived Driver
             </a>
             @include('company/drivers.create')
-
+            
             <!-- Modal -->
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
         <table class="table table-striped">
@@ -55,6 +55,7 @@
         </div>
 
     </div>
+
     <!-- MDB -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
     <!-- Custom scripts -->
