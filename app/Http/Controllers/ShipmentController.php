@@ -117,6 +117,6 @@ class ShipmentController extends Controller
         ]);
     }
 
-        
+
 
 }
