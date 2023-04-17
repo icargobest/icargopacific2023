@@ -40,6 +40,7 @@ return new class extends Migration
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2);
+            $table->string('order_status')->nullable()->default;
             $table->string('status');
             $table->timestamps();
         });
