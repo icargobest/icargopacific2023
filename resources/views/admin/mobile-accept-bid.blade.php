@@ -25,13 +25,17 @@
             <hr class="opacity-75">
             <card class="card bg-white btn-wrapper p-4 shadow-lg">
                 <!-- Mobile Sender and Receiver -->
-                <div class="row">
+                <div class="row overflow-auto">
                     <!-- Product Information -->
                     <div class="col-xl-10">
                         <div class="row">
                             <div class="col-sm-6 pt-2">
-                                <h5 class="fw-normal">SENDER</h5>
                                 <table style="width:100%">
+                                <tr>
+                                    <th>
+                                    <h5 class="fw-normal">SENDER</h5>
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th>Name:</th>
                                     <td>irYs Hope</td>
@@ -47,8 +51,12 @@
                                 </table>
                             </div>
                             <div class="col-sm-6 pt-2">
-                                <h5 class="fw-normal">RECEIVER</h5>
                                 <table style="width:100%">
+                                <tr>
+                                    <th>
+                                    <h5 class="fw-normal">RECEIVER</h5>
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th>Name:</th>
                                     <td>Moom</td>
