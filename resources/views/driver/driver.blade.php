@@ -1,4 +1,5 @@
-@include('partials.navigation', ['driver' => 'fw-bold'])
+@extends('layouts.app')
+@include('partials.navigationCompany')
 
   <div class="container center p-3">
       <div class="row">
@@ -250,7 +251,7 @@
     background: black;
     width:300px;
   }
-  button {
+  .container button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
