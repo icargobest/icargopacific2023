@@ -24,37 +24,37 @@
     <div class="item-card container px-4">
       <div class="card-body">
         <div class="row">
-  
+
           <div class="details-wrapper col-lg-10 col-sm-12">
             <div class="recepients-wrapper row">
-  
+
               <div class="senderInfo col-lg-6">
                 <h6>SENDER</h6>
-  
+
                 <ul>
                     <li>Name | <span>Edan Franco</span></li>
                     <li>Address | <span>Kristen Griffit</span></li>
                     <li>Number | <span>0999-999-9999</span></li>
-                </ul>                  
+                </ul>
               </div>
               <div class="receiverInfo col-lg-6">
                 <h6>RECEIVER</h6>
-  
+
                 <ul>
                     <li>Name | <span>Fletcher Peck</span></li>
                     <li>Address | <span>Maxwell Wood</span></li>
                     <li>Number | <span>0999-999-9999</span></li>
                 </ul>
               </div>
-  
+
             </div>
             <div class="parcelInfo-wrapper">
-  
+
               <div class="itemInfo">
                 <h6>ITEM INFORMATION</h6>
-  
+
                 <div class="parcelDetails row">
-  
+
                   <div class="listLayout col-lg-6 col-sm-12">
                     <ul>
                           <li>ID | <span>#68</span></li>
@@ -62,24 +62,24 @@
                     </ul>
                   </div>
                   <div class="listLayout col-lg-6 col-sm-12">
-                    <ul>     
+                    <ul>
                           <li>Category | <span>Appliances</span></li>
                           <li>Mode of Pament | <span>COD</span></li>
                     </ul>
                   </div>
-  
+
                 </div>
               </div>
-  
+
             </div>
           </div>
-  
+
           <div class="image-wrapper col">
             <div class="image-holder">
               <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
             </div>
           </div>
-  
+
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
                   <li>Name | <span>Edan Franco</span></li>
                   <li>Address | <span>Kristen Griffit</span></li>
                   <li>Number | <span>0999-999-9999</span></li>
-              </ul>                  
+              </ul>
             </div>
             <div class="receiverInfo col-lg-6">
               <h6>RECEIVER</h6>
@@ -130,7 +130,7 @@
                   </ul>
                 </div>
                 <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>     
+                  <ul>
                         <li>Category | <span>Appliances</span></li>
                         <li>Mode of Pament | <span>COD</span></li>
                   </ul>
@@ -171,7 +171,7 @@
                   <li>Name | <span>Edan Franco</span></li>
                   <li>Address | <span>Kristen Griffit</span></li>
                   <li>Number | <span>0999-999-9999</span></li>
-              </ul>                  
+              </ul>
             </div>
             <div class="receiverInfo col-lg-6">
               <h6>RECEIVER</h6>
@@ -198,7 +198,7 @@
                   </ul>
                 </div>
                 <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>     
+                  <ul>
                         <li>Category | <span>Appliances</span></li>
                         <li>Mode of Pament | <span>COD</span></li>
                   </ul>
@@ -253,7 +253,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-                        <input type="hidden" name="user_id" value="{{-- {{Auth::user()->id}} --}}" class="form-control" />
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
@@ -264,16 +264,16 @@
                           </div>
 
                         </div>
-                        
+
                       <div class="addressInput mb-3">
                         <span>Street Address <span class="required">*</span></span>
                         <div class="form-outline">
                           <input type="text" id="form6Example5" name="senderAddress" class="form-control" required />
                           {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
-                        </div>  
+                        </div>
 
                       </div>
-                      
+
                       <!-- Contact input -->
                       <div class="row mb-3">
                         <div class="col">
@@ -286,7 +286,7 @@
 
                             </div>
                           </div>
-                            
+
                         </div>
 
                         <div class="col">
@@ -299,7 +299,7 @@
                               {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                             </div>
                           </div>
-                            
+
                         </div>
                       </div>
                       {{-- EMAIL INPUT --}}
@@ -308,9 +308,9 @@
                         <div class="form-outline">
                           <input type="email" id="form6Example5" name="senderEmail" class="form-control" required />
                           {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
-                        </div> 
+                        </div>
                       </div>
-                      
+
 
                       <!-- City Zip input -->
                       <div class="row mb-3">
@@ -325,7 +325,7 @@
 
                             </div>
                           </div>
-                            
+
                         </div>
 
                         <div class="col">
@@ -338,7 +338,7 @@
                               </div>
 
                             </div>
-                            
+
                         </div>
                       </div>
 
@@ -350,7 +350,7 @@
                           {{-- <label class="form-label" for="form6Example3">State</label> --}}
 
                       </div>
-                      
+
                   </div>
                   <div class="modal-buttons modal-footer">
                     <a class="btn btn-secondary btn" data-mdb-dismiss="modal">
@@ -375,7 +375,7 @@
                     <div class="modal-body">
                           {{-- <h1>RECEIVER INFO</h1> --}}
                         <!-- 2 column grid layout with text inputs for the first and last names -->
-                        
+
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
                           <span>Full Name <span class="required">*</span></span>
@@ -391,10 +391,10 @@
                           <div class="form-outline">
                             <input type="text" id="form6Example5" name="receiverAddress" class="form-control" />
                             {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
-                          </div>  
+                          </div>
 
                         </div>
-                        
+
                         <!-- Contact input -->
                         <div class="row mb-3">
                           <div class="col">
@@ -403,13 +403,13 @@
                             <div class="mobileInput">
                               <span>Mobile Number <span class="required">*</span></span>
                               <div class="form-outline">
-                              
+
                                 <input type="text" id="form6Example3" name="receiverMobile" class="form-control" />
                                 {{-- <label class="form-label" for="form6Example3">Mobile Number</label> --}}
 
                               </div>
                             </div>
-                              
+
                           </div>
 
                           <div class="col">
@@ -422,7 +422,7 @@
                                 {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                               </div>
                             </div>
-                              
+
                           </div>
                         </div>
 
@@ -434,7 +434,7 @@
                             {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
                           </div>
                         </div>
-                        
+
 
                         <!-- City Zip input -->
                         <div class="row mb-3">
@@ -448,7 +448,7 @@
                                 {{-- <label class="form-label" for="form6Example3">Municipality/City</label> --}}
                               </div>
                             </div>
-                              
+
                           </div>
 
                           <div class="col">
@@ -460,8 +460,8 @@
                                 <input type="text" id="form6Example3" name="receiverZip" class="form-control" />
                                 {{-- <label class="form-label" for="form6Example3">Postal Code</label> --}}
                               </div>
-                            </div>  
-                              
+                            </div>
+
                           </div>
                         </div>
 
@@ -473,7 +473,7 @@
                             {{-- <label class="form-label" for="form6Example3">State</label> --}}
                           </div>
                         </div>
-                        
+
 
                     </div>
                     <div class="modal-buttons modal-footer">
@@ -497,7 +497,7 @@
                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
+
                         <!-- ! Dropdown Service menu-->
                         <div class="row mb-5">
 
@@ -567,7 +567,7 @@
                                 </div>
                               </div>
                           </div>
-                          
+
                           <!--Dropdown category menu-->
                           <div class="col">
                             <div class="categoryInput">
@@ -615,7 +615,7 @@
                             Submit
                           </button>
                         </div>
-                      
+
                     </div>
                     </form>
                   </div>
@@ -642,7 +642,7 @@
                 <th>Action</th>
             </tr>
             </thead>
-            {{-- <tbody>
+            <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
@@ -664,7 +664,7 @@
                     @endif
                 @endforeach
             </tbody>
-        </table> --}}
+        </table>
       </div>
     </div>
     </div>
