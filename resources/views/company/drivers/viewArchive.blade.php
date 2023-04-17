@@ -5,7 +5,7 @@
         <div class="lead">
             <a href="{{route('drivers.index')}}" class="btn btn-primary">Back</a>
             <div class="mt-2">
-                @include('partials.messages')
+                @include('flash-message')
             </div>
 
             <table class="table table-striped">
