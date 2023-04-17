@@ -4,19 +4,34 @@
   <div class="container center p-3">
       <div class="row">
         <div class="col-sm-12 col-12">
-          <div class="card">
-          <div class="text-center">
-            <div class="card-header text-center p-3">
-              <h2>Driver Tracking</h2>
+            <div>
+              <h2 class="fw-bold">DRIVER TRACKING</h2>
             </div>
-            <div class="card-body">
+            <div class="container p-5 shadow" style=" background-color:white;">
+            <div class="text-center">
+              
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
-                  <div>
+                  {{-- <div>
                     <p>Enter tracking ID to search for parcel:</p>
 
                     <input type="text" placeholder="Enter tracking ID">
                     <button type="button" class="btn btn-primary">Search</button>
+
+                  </div> --}}
+                  <div class="mb-4">
+                    <p class="h5" style="font-weight: 550">Enter tracking ID to search for parcel:</p>
+                    <div class="col-12 d-flex justify-content-center" style="">
+                      <div class="col-12 col-md-3 mb-3">
+                        <input type="text" placeholder="Enter tracking ID" style="width: 100%; padding:5px;">
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center" style="">
+                      <div class="col-12 col-md-3">
+                        <button type="button" class="btn btn-primary" style="width: 100%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
+                      </div>
+                    </div>
+                    
 
                   </div>
 
@@ -32,11 +47,18 @@
                   <div style="display:none">
                     <label>QR Scanner</label>
                   </div>
-                  <div class="p-3">
-                    <!--<a class="btn btn-primary mt-3">Start</a> -->
-                    <a class="btn btn-danger mt-3" id="resetButton">Reset</a>
+                  <div class="col-12 d-flex justify-content-center mb-4" style="">
+                    <div class="col-12 col-md-3">
+                      <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
+                    </div>
                   </div>
-                  <div class="container" style="text-align:center;">
+
+                  {{-- <div class="p-3 col-4 border">
+                    <!--<a class="btn btn-primary mt-3">Start</a> -->
+                    <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px">Reset</a>
+                  </div> --}}
+
+                  <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
                   <div class="scanresult">
@@ -44,6 +66,8 @@
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
+
+                  
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -116,8 +140,9 @@
                 </section>
               </main>
             </div>
-          </div>
-        </div>
+            </div>
+          
+        
       </div>
     </div>
   </div>

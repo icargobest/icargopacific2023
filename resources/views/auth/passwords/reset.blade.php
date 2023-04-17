@@ -1,12 +1,6 @@
 @extends('layouts.app')
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/curr-login.css">
-    <link href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
-</head>
 @section('content')
+<div style="margin-top: 68px">
 <div class="container">
     <div class="row justify-content-center">
 
@@ -68,7 +62,7 @@
 
                         <div class="row mb-0 mt-5">
                             <div class="col-lg-12">
-                                <button type="submit" class="mb-1 resetpass-button letter-spacing">
+                                <button type="submit" class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94;">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
@@ -78,5 +72,6 @@
         
         </div>
     </div>
+</div>
 </div>
 @endsection
