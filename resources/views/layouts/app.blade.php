@@ -34,6 +34,8 @@
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
+            <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

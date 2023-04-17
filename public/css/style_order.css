@@ -25,6 +25,12 @@
     font-size: 18px;
     letter-spacing: 1px;
 }
+.button-holder{
+    width: 100%;
+    display: flex ;
+    align-items: center ;
+    justify-content: flex-end;
+}
 
 .button-holder button{
     width: 150px;
