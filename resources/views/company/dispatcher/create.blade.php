@@ -15,7 +15,13 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" required />
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                   <label class="form-label" for="form6Example1">Dispatcher Name</label>
                 </div>
               </div>
@@ -25,7 +31,13 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="email" class="form-control" required/>
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                   <label class="form-label" for="form6Example1">Email</label>
                 </div>
               </div>
@@ -35,7 +47,13 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="password" id="form6Example1" name="password" class="form-control" required/>
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                   <label class="form-label" for="form6Example1">Password</label>
                 </div>
               </div>
