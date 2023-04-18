@@ -194,10 +194,11 @@ Route::controller(EmployeeController::class)->group(function(){
 });
 // Auth::routes();
 
-//Waybill Panel
+//Order Panel
 Route::controller(ShipmentController::class)->group(function(){
-    Route::get('/waybill','index')->name('waybillPanel');
-    Route::post('add_waybill','addShipment')->name('addShipment');
+    Route::get('/company/order','index')->name('companyOrderPanel');
+    Route::get('/order','userIndex')->name('userOrderPanel');
+    Route::post('/add_order','addShipment')->name('addShipment');
     Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');

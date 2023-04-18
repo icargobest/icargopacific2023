@@ -70,7 +70,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="number" id="form6Example1" name="bid_amount" placeholder="BID AMOUNT" class="form-control" />
+                                <input type="number" id="form6Example1" name="bid_amount" placeholder="{{$ship->bid_amount}}" class="form-control" />
                                 <label class="form-label" for="form6Example1">BID AMOUNT</label>
                             </div>
                         </div>

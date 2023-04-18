@@ -4,21 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipment;
 use App\Models\Bid;
+use App\Models\Sender;
+use App\Models\Recipient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
 
-
-
 class ShipmentController extends Controller
 {
-    public function index(){
-        $data = Shipment::all();
-        $data1 = Bid::all();
+    private $shipments;
+    private $bid;
 
-        return view('waybill.index', ['shipments' => $data, 'bids' => $data1]);
+    public function index(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('company.order.index', ['shipments' => $shipment, 'bids' => $bid]);
+    }
+
+    public function userIndex(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('order.index', ['shipments' => $shipment, 'bids' => $bid]);
     }
 
     function __construct(){
@@ -27,30 +37,64 @@ class ShipmentController extends Controller
     }
 
     function addShipment(Request $request){
-        $data = [
-            'tracking_number' => fake()->isbn13(),
-            'user_id' => $request->user_id,
+
+        // Insert sender data
+        $senderData = [
             'sender_name' => $request->senderName,
+            'sender_mobile' => $request->senderMobile,
+            'sender_tel' => $request->senderTelephone,
+            'sender_email' => $request->senderEmail,
             'sender_address' => $request->senderAddress,
             'sender_city' => $request->senderCity,
             'sender_state' => $request->senderState,
             'sender_zip' => $request->senderZip,
+        ];
+        $senderModel = new Sender();
+        $sender = $senderModel->create($senderData);
+
+        // Insert recipient data
+        $recipientData = [
             'recipient_name' => $request->receiverName,
+            'recipient_mobile' => $request->receiverMobile,
+            'recipient_tel' => $request->receiverTelephone,
+            'recipient_email' => $request->receiverEmail,
             'recipient_address' => $request->receiverAddress,
             'recipient_city' => $request->receiverCity,
             'recipient_state' => $request->receiverState,
             'recipient_zip' => $request->receiverZip,
+        ];
+        $recipientModel = new Recipient();
+        $recipient = $recipientModel->create($recipientData);
+
+        // Insert shipment data
+        $shipmentData = [
+            'tracking_number' => fake()->isbn13(),
+            'user_id' => $request->user_id,
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
             'weight' => $request->weight,
             'length' => $request->length,
             'width' => $request->width,
             'height' => $request->height,
-            'total_price' => fake()->numberBetween($min = 100, $max = 500),
+            'service_type' => $request->service_type,
+            'order_type' => $request->order_type,
+            'category' => $request->category,
+            'min_bid_amount' => $request->amount,
             'status' => 'Pending',
         ];
+        $shipmentModel = new Shipment();
+        $shipment = $shipmentModel->create($shipmentData);
 
-        $this->shipment->addShipment($data);
+        // Update sender and recipient models
+        $sender->shipment_id = $shipment->id;
+        $recipient->shipment_id = $shipment->id;
+        $sender->save();
+        $recipient->save();
+
         return back();
     }
+
+
 
     function addBid(Request $request){
         $data = [
@@ -72,7 +116,7 @@ class ShipmentController extends Controller
         $bid->save();
 
         $shipment->bid_amount = $bid->bid_amount;
-        $shipment->company_bade = $bid->company_name;
+        $shipment->company_bid = $bid->company_name;
         $shipment->status = 'Processing';
         $shipment->save();
 
@@ -84,14 +128,16 @@ class ShipmentController extends Controller
     }
 
     function viewShipment($id){
-        $ships=$this->shipment->getShipmentId($id);
-        return view('waybill.view',compact('ships'));
+        $bid = Bid::all();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('order.view',compact('ship'), ['bids' => $bid]);
     }
 
     public function viewInvoice($id)
     {
         $ship = Shipment::findOrFail($id);
-        return view('waybill.generate-invoice', compact('ship'));
+        return view('order.generate-invoice', compact('ship'));
     }
 
     function generateInvoice($id)
@@ -100,7 +146,7 @@ class ShipmentController extends Controller
 
         $data = ['ship' => $ship];
 
-        $pdf = Pdf::loadView('waybill.generate-invoice', $data);
+        $pdf = Pdf::loadView('order.generate-invoice', $data);
         $todayDate = Carbon::now()->format('d-m-Y');
         return $pdf->download('invoice'.$ship->id.'-'.$todayDate.'.pdf');
     }
