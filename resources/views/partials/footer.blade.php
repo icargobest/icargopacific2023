@@ -10,6 +10,6 @@
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
   <!--Bootstrap-->
-  <script src="/js/bootstrap.bundle.js"></script>
+{{--   <script src="/js/bootstrap.bundle.js"></script> --}}
 </body>
 </html>

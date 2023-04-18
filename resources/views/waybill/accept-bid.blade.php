@@ -1,5 +1,13 @@
-    @include('partials/admin-nav')
+    @include('layouts.app')
+    @include('partials.navigationUser')
 
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
+    <!-- Google Poppins Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
         .primary {
@@ -13,14 +21,22 @@
             color: #214D94;
         }
 
-        img {
+        .img-size {
             max-width: 100%;
             height: auto;
+        }
+        th {
+            background-color: white !important;
+            color: black;
+            font-weight: normal;
+        }
+        td {
+            text-align: left;
         }
     </style>
 
     <div class="container-fluid py-3">
-        <div class="p-4" style="background-color: #EAEBEE;">
+        <div class="p-4">
             <h3 class="text-dark mb-0">TELEVISION</h3>
             <hr class="opacity-75">
             <card class="card bg-white btn-wrapper p-4 shadow-lg">
@@ -32,9 +48,7 @@
                             <div class="col-sm-6 pt-2">
                                 <table style="width:100%">
                                 <tr>
-                                    <th>
-                                    <h5 class="fw-normal">SENDER</h5>
-                                    </th>
+                                    <th><h5 class="fw-normal opacity-75">SENDER</h5></th> <!-- This code is here because of nagiging vertical yung sender -->
                                 </tr>
                                 <tr>
                                     <th>Name:</th>
@@ -53,9 +67,7 @@
                             <div class="col-sm-6 pt-2">
                                 <table style="width:100%">
                                 <tr>
-                                    <th>
-                                    <h5 class="fw-normal">RECEIVER</h5>
-                                    </th>
+                                    <th><h5 class="fw-normal opacity-75">RECEIVER</h5></th> <!-- This code is here because of nagiging vertical yung sender -->
                                 </tr>
                                 <tr>
                                     <th>Name:</th>
@@ -78,13 +90,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            <h5 class="fw-normal">PARCEL INFORMATION</h5></th>
                             <div class="col-sm-6 pt-2">
                                 <table style="width:100%">
-                                <tr>
-                                    <th>
-                                    <h5 class="fw-normal">PARCEL INFORMATION</h5>
-                                    </th>
-                                </tr>
                                 <tr>
                                     <th>ID:</th>
                                     <td>68</td>
@@ -117,7 +125,7 @@
                     <!-- Product Image -->
                     <div class="col-xl-2">
                         <div>
-                            <img src="img/television.png" class="card shadow-0" alt="television"  style="min-width:140px;">
+                            <img src="img/television.png" class="card shadow-0 img-size" alt="television"  style="min-width:140px;">
                             <div class="pt-2">
                             <button type="button" class="btn btn-primary primary btn-block btn-lg shadow-0" style="min-width:140px; max-width:509px;">
                             Track Item</button>

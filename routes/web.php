@@ -30,6 +30,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
+
 // LOGIN PAGE
 // Route::get('/', function () {
 //     return view('login/index');
@@ -40,11 +41,17 @@ use App\Http\Controllers\UserController;
 //     return view('login/register');
 // });
 
+//TRANSFER FORWARDING PAGE
 Route::get('/forward', function () {
     return view('admin/forward');
 });
-Route::get('/mobile', function () {
+//WAYBILL - ACCEPT BID PAGE
+Route::get('/accept-bid', function () {
     return view('waybill/accept-bid');
+});
+//COMPANY - ORDER LIST PAGE
+Route::get('/order-list', function () {
+    return view('company/order-list');
 });
 
 Route::get('/', function () {
@@ -159,6 +166,10 @@ Route::get('/income', [IncomeController::class, 'index']);
 Route::get('/freight', function () {
     return view('freight/freight');
 });
+
+
+
+
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);

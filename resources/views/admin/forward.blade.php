@@ -1,11 +1,20 @@
 <!-- Navbar -->
-@include('partials/admin-nav')
+@include('layouts.app')
+@include('partials.navigationCompany')
 <!-- Navbar -->
 
 <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
 <script src="{{ asset('js/bootstrap.js')}}"></script>
 <script src="{{ asset('js/mdb.min.js')}}"></script>
+
+<style>
+    th {
+        background-color: white !important;
+        color: black;
+        font-weight: normal;
+    }
+</style>
 
 <div class="container-fluid pt-4 pb-4">
     <!-- Transfer Search Bar -->
@@ -33,7 +42,7 @@
         <div class="card-body">
             <div class="row">
                 <!-- Forms -->
-                <div class="col-sm-6">
+                <div class="col-lg-6">
                     <div class="input-group pb-3">
                         <input type="date" class="form-control" style="background-color: #EAEBEE"/>
                     </div>
@@ -83,7 +92,7 @@
                 </div>
                 <!--  Forms End -->
                 <!-- Form -->
-                <div class="col-sm-6">   
+                <div class="col-lg-6 overflow-auto">   
                     <div class="border border-secondary p-3 rounded">
                         <table class="table table-responsive table-sm table-striped m-0">
                             <tbody>
