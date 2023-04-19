@@ -33,7 +33,7 @@ class ShipmentController extends Controller
         $sender = Sender::all();
         $recipient = Recipient::all();
 
-        return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender' => $sender, 'recipient' => $recipient]);
+        return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     function postOrder(){
@@ -46,6 +46,10 @@ class ShipmentController extends Controller
     }
 
     function addOrder(Request $request){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+        $sender = Sender::all();
+        $recipient = Recipient::all();
 
         // Insert sender data
         $senderData = [
@@ -100,9 +104,8 @@ class ShipmentController extends Controller
         $sender->save();
         $recipient->save();
 
-        return view('order.index');
+        return redirect()->route('userOrderPanel')->with('success', 'Order added successfully.');
     }
-
 
 
     function addBid(Request $request){

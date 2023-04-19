@@ -181,8 +181,8 @@ Route::controller(EmployeeController::class)->group(function(){
 // Auth::routes();
 
 Route::get('/order-form', function () {
-    return view('order.waybill-form');
-})->name('postOrder');
+    return view('order/waybill-form');
+});
 
 //Order Panel
 Route::controller(ShipmentController::class)->group(function(){
