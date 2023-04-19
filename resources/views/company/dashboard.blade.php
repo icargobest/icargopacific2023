@@ -17,7 +17,7 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-            
+
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
@@ -49,7 +49,7 @@
                         <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
+                        <a class="nav-link" href="{{route('companyOrderPanel')}}">Order</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Staff</a>

@@ -17,7 +17,7 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-            
+
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
@@ -33,44 +33,46 @@
 
         <div class="sidebar">
             <div class="wrapper">
-      
-      
+
+
                 <div class="search-bar-container">
                     <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input class="input"id="search-input" placeholder="Tracking ID">
                 </div>
-      
+
                 <div class="divider">
                 </div>
-                
+
                 <div class="links-wrapper">
                     <div class="link1">
                         <div class="links">
-      
+
                             <a class="nav-link" href="/company/dashboard">
                             <div class="link" >
                                 <i class="fa fa-tachometer link-i-1" ></i>
                                 <span>Dashboard</span>
                             </div>
                             </a>
-                            
+
                         </div>
                         <div class="links">
+                            <a class="nav-link" href="{{route('companyOrderPanel')}}">
                             <div class="link">
                                 <i class="fa fa-list link-i-1"></i>
                                 <span>Order List </span>
                             </div>
+                            </a>
                         </div>
-      
+
                         <div class="links">
-      
+
                           <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
                           </div>
                           </a>
-                          
+
                       </div>
                       <div class="links">
                           <div class="link">
@@ -78,16 +80,14 @@
                               <span>Order History </span>
                           </div>
                       </div>
-      
+
                       <div class="links">
-      
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
+
                         <div class="link" >
                             <i class="fa fa-forward link-i-1"></i>
                             <span>Adv. Freight Forwarding</span>
                         </div>
-                        </a>
-                        
+
                     </div>
                     <div class="links">
                       <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
@@ -97,16 +97,16 @@
                         </div>
                       </a>
                     </div>
-      
+
                     <div class="links">
-      
+
                       <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                           <div class="link" >
                               <i class="fa fa-id-card link-i-1"></i>
                               <span>Dispatcher</span>
                           </div>
                       </a>
-                      
+
                   </div>
                   <div class="links">
                       <a class="nav-link" href="/company/drivers">
@@ -116,14 +116,14 @@
                           </div>
                       </a>
                   </div>
-      
+
                   <div class="links">
                     <div class="link">
                         <i class="fa fa-history link-i-1"></i>
                         <span>Order History</span>
                     </div>
                   </div>
-      
+
                   <div class="links">
                     <div class="link">
                         <i class="fa fa-envelope-o link-i-1"></i>
@@ -131,10 +131,10 @@
                     </div>
                   </div>
                     </div>
-        
+
         <!--             <div class="divider2">
                     </div> -->
-        
+
                     <div class="link2">
                         <div class="links">
                             <div class="link">
@@ -142,21 +142,21 @@
                                 <span>Notifications</span>
                             </div>
                         </div>
-                        
+
                         <div class="links">
                             <div class="link">
                                 <i class="fa fa-envelope link-i-2"></i>
                                 <span>Messages</span>
                             </div>
                         </div>
-            
+
                         <div class="links">
                             <div class="link">
                                 <i class="fa fa-plus link-i-2"></i>
                                 <span>List Items</span>
                             </div>
                         </div>
-            
+
                         <div class="links">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                               <div class="link">
@@ -170,10 +170,9 @@
                       </div>
                     </div>
                 </div>
-      
+
             </div>
         </div>
-      
-      
+
+
         <div class="content-container">
-            
