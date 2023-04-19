@@ -55,6 +55,7 @@ Route::get('/registerCompany', function () {
 });
 Route::post('/store', [CompanyController::class, 'store']);
 
+
 // Authenticated Lock Account Routes
 Route::middleware('auth')->group(function(){
     // To Update Users
@@ -262,12 +263,6 @@ Route::middleware("auth")->group(function() {
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**

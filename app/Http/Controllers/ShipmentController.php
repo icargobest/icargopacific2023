@@ -15,8 +15,9 @@ use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
 class ShipmentController extends Controller
 {
-    private $shipments;
+    private $shipment;
     private $bid;
+    
 
     public function index(){
         $shipment = Shipment::all();

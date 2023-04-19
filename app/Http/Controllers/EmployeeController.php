@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
+    private $employee;
+    
     public function index(){
         $data = Employee::all();
 
