@@ -80,10 +80,10 @@
         <thead>
             <tr>
                 <th width="25%" colspan="1">
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($ship->user_id.'-'.$ship->tracking_number.'-'.$ship->id, 'C128',2,50) }}" alt="barcode"/>
+                    {!! DNS2D::getBarcodeHTML("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE') !!}
                 </th>
                 <th>
-                    <img src="data:image/png;base64,{!! base64_encode(QrCode::format('png')->size(100)->generate($ship->tracking_number))!!}">
+                    {!! DNS1D::getBarcodeHTML("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',2,50) !!}
                 </th width="50%" colspan="5">
                 <th width="25%" colspan="3" class="text-end company-data">
                     <span>Invoice Id: {{$ship->id}}</span> <br>

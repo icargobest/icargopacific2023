@@ -122,7 +122,7 @@ class DriverController extends Controller
                 'status' => $status_code
             ]);
             $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Driver #'.$user_id->id.' Update status successfully!');
+            return back()->with('success', 'Driver #'.$user_id->id.' Status updated successfully!');
     }
 
 }
