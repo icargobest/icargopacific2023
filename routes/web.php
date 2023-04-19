@@ -55,12 +55,18 @@ Route::get('/registerCompany', function () {
 });
 Route::post('/store', [CompanyController::class, 'store']);
 
-// Authenticated Lock Account Routes
+// Authenticated Account Routes
 Route::middleware('auth')->group(function(){
-    // To Update Users
+    // Lock Account
     Route::get('/users/status/{user_id}/{status_code}', [UsersController::class, 'updateStatus'])->name('users.status.update');
-    Route::get('/dispatcher/dashboard/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+
+    // Lock Account Panel
     Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
+    Route::get('/dispatcher/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+
+    // Chnage Password
+    Route::get('settings/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+    Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 });
 
 // User/Customer Routes

@@ -10,30 +10,54 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="mb-4">
-                <label class="col-sm-10 col-label-form"><b>Driver Name</b></label>
-                <div class="col-sm-10">
-                  {{ $user->name }}
-                </div>
-            </div>
-            <div class="mb-4">
-                <label class="col-sm-10 col-label-form"><b>Email</b></label>
-                <div class="col-sm-10">
-                  {{ $user->email }}
-                </div>
-            </div>
-            <div class="mb-4">
-                <label class="col-sm-10 col-label-form"><b>Vehicle Type</b></label>
-                <div class="col-sm-10">
-                  {{ $user->driverDetail->vehicle_type }}
-                </div>
-            </div>
-            <div class="mb-4">
-              <label class="col-sm-10 col-label-form"><b>Plate No.</b></label>
-              <div class="col-sm-10">
-                {{ $user->driverDetail->plate_no }}
-              </div>
+          <fieldset disabled>
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+
+          <!-- Driver ID -->
+          <div class="row mb-4">
+           <div class="col">
+             <div class="form-outline">
+               <input type="text" id="id" name="id" value="{{ $user->id }}" class="form-control" />
+               <label class="form-label" for="id">Driver ID</label>
+             </div>
+           </div>
+         </div>
+
+         <!-- Driver Name -->
+          <div class="form-outline mb-4">
+            <input type="text" id="name" name="name" value="{{ $user->name }}" class="form-control" />
+            <label class="form-label" for="name">Driver Name</label>
           </div>
+
+         <!-- Driver Email -->
+         <div class="form-outline mb-4">
+           <input type="text" id="email" name="email" value="{{ $user->email }}" class="form-control" />
+           <label class="form-label" for="email">Email</label>
+         </div>
+
+         <!-- Driver vehicle type -->
+          <div class="form-outline mb-4">
+           <input type="text" id="vehicle_type" name="vehicle_type" value="{{ $user->driverDetail->vehicle_type }}" class="form-control" />
+           <label class="form-label" for="vehicle_type">Vehicle Type</label>
+         </div>
+
+         <!-- Driver plate no. -->
+          <div class="form-outline mb-4">
+           <input type="text" id="plate_no" name="plate_no" value="{{ $user->driverDetail->plate_no }}" class="form-control" />
+           <label class="form-label" for="plate_no">Plate Number</label>
+         </div>
+
+         <!-- Created at -->
+          <div class="form-outline mb-4">
+           <input type="text" id="stationEmail" name="station_email" value="{{$user->created_at}}" class="form-control" />
+           <label class="form-label" for="stationEmail">Created At</label>
+         </div>
+
+         <!-- Updated at -->
+          <div class="form-outline mb-4">
+           <input type="text" id="stationEmail" name="station_email" value="{{$user->updated_at}}" class="form-control" />
+           <label class="form-label" for="stationEmail">Updated At</label>
+         </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
