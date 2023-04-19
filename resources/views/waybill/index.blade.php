@@ -255,7 +255,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-                        <input type="hidden" name="user_id" value="{{-- {{Auth::user()->id}} --}}" class="form-control" />
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />"
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
@@ -644,7 +644,7 @@
                 <th>Action</th>
             </tr>
             </thead>
-            {{-- <tbody>
+            <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
@@ -666,7 +666,7 @@
                     @endif
                 @endforeach
             </tbody>
-        </table> --}}
+        </table>
       </div>
     </div>
     </div>
