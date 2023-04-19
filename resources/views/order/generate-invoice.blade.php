@@ -101,7 +101,7 @@
         <thead>
             <tr>
                 <th width="25%" colspan="1">
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',1,50) }}" alt="barcode">
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->tracking_number", 'C128',2,50) }}" alt="barcode">
                 </th>
                 <th width="25%" colspan="5" class="text-end company-data">
 
@@ -198,7 +198,7 @@
 
 
     <br>
-    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE',10, 10) }}" alt="QR Code">
+    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->tracking_number", 'QRCODE',10, 10) }}" alt="QR Code">
     <p class="text-center">
         <img src="/img/icargo-logo-1.jpg" style="max-height:150px;">
     </p>

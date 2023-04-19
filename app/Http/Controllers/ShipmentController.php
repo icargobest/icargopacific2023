@@ -21,8 +21,6 @@ class ShipmentController extends Controller
     public function index(){
         $shipment = Shipment::all();
         $bid = Bid::all();
-        $sender = $shipment->sender();
-        $recipient = $shipment->recipient();
 
         return view('company.order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
@@ -30,8 +28,6 @@ class ShipmentController extends Controller
     public function userIndex(){
         $shipment = Shipment::all();
         $bid = Bid::all();
-        $sender = Sender::all();
-        $recipient = Recipient::all();
 
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
@@ -107,7 +103,6 @@ class ShipmentController extends Controller
         return redirect()->route('userOrderPanel')->with('success', 'Order added successfully.');
     }
 
-
     function addBid(Request $request){
         $data = [
             'company_id' => $request->company_id,
@@ -146,11 +141,25 @@ class ShipmentController extends Controller
         return view('order.view',compact('ship'), ['bids' => $bid]);
     }
 
+    function viewOrder_Company($id){
+        $bid = Bid::all();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('company.order.view',compact('ship'), ['bids' => $bid]);
+    }
+
     function trackOrder($id){
         $bid = Bid::all();
 
         $ship=$this->shipment->getShipmentId($id);
         return view('order.track',compact('ship'), ['bids' => $bid]);
+    }
+
+    function trackOrder_Company($id){
+        $bid = Bid::all();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('company.order.track',compact('ship'), ['bids' => $bid]);
     }
 
     public function viewInvoice($id)

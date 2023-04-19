@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -56,6 +57,7 @@ return new class extends Migration
             $table->string('order_type');
             $table->string('category');
             $table->unsignedBigInteger('min_bid_amount');
+            $table->string('mode_of_payment')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
             $table->string('company_bid')->nullable()->default;
             //$table->string('vehicle_type');
@@ -74,6 +76,7 @@ return new class extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
         Schema::dropIfExists('shipments');

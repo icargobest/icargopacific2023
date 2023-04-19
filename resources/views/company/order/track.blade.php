@@ -5,13 +5,13 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationUser')
+  @extends('partials.navigationCompany')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
 
 
-  <h4>TRACKING ORDER</h4>
+  <h4>TRACKING ORDER #{{$ship->id}}</h4>
 
   <div class="cards-holder">
     {{-- CARD CREATED AFTER FILLING UP --}}

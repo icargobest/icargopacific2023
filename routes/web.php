@@ -190,7 +190,9 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/order','userIndex')->name('userOrderPanel');
     Route::post('/add_order','addOrder')->name('addOrder');
     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
+    Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
     Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
+    Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');

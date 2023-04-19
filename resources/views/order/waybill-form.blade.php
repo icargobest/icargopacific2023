@@ -258,7 +258,7 @@
 
             <div class="row mb-5">
 
-                <div class="form-group col-6">
+                <div class="form-group col-4">
                   <div class="serviceInput">
                     <span>Service <span class="required">*</span></span>
                     <div class="form-outline">
@@ -267,12 +267,12 @@
                           <option value="Standard">Standard</option>
                           <option value="Express">Express</option>
                       </select>
-                  </div>
+                    </div>
                   </div>
                 </div>
 
                 <!-- !Dropdown Type menu-->
-                <div class="form-group col-6">
+                <div class="form-group col-4">
                     <div class="typeInput">
                       <span>Type<span class="required">*</span></span>
                       <div class="form-outline">
@@ -281,7 +281,21 @@
                             <option value="Document">Document</option>
                             <option value="Other">Other/s</option>
                         </select>
+                        </div>
                     </div>
+                </div>
+
+                <!-- !Dropdown Type menu-->
+                <div class="form-group col-4">
+                    <div class="mopInput">
+                      <span>Mode of Payment<span class="required">*</span></span>
+                      <div class="form-outline">
+                        <select class="form-control" id="exampleFormControlSelect1" name="mode_of_payment" required>
+                            <option value="COD">Cash On Delivery(COD)</option>
+                            <option value="Gcash Payment">Gcash Payment</option>
+                            <option value="Credit/Debit Card">Credit/Debit Card</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
               </div>

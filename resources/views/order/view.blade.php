@@ -27,7 +27,7 @@
 
                         <ul>
                             <li>Name | <span>{{$ship->sender_name}}</span></li>
-                            <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}<</span></li>
+                            <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
                         </ul>
                     </div>
@@ -53,12 +53,14 @@
                             <ul>
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
+                                <li>Company | <span>{{$ship->company_bid}}</span></li>
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">
                             <ul>
                                 <li>Category | <span>{{$ship->category}}</span></li>
                                 <li>Mode of Pament | <span>COD</span></li>
+                                <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
                             </ul>
                         </div>
 
@@ -74,7 +76,7 @@
                     </div>
 
                 @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder',$ship->id)}}" target="_blank" class="btn btn-primary btn">
+                    <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn">
                         Track Order
                     </a>
                 @endif
