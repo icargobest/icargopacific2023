@@ -1,0 +1,171 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.borderRed{
+    border: 1px solid red !important;
+}
+
+.order-container{
+    padding: 10px;
+    /* border: 2px solid red; */
+}
+.order-container h4{
+    padding: 5px 0;
+    margin-bottom: 15px;
+
+    font-weight: 500;
+    letter-spacing: 1.5px;
+
+    border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+}
+.order-container h6{
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.button-holder{
+    width: 100%;
+    display: flex ;
+    align-items: center ;
+    justify-content: flex-end;
+}
+
+.button-holder button{
+    width: 150px;
+
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    background-color: #214D94;
+}
+
+.cards-holder{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+.cardItem{
+    color: #353535;
+}
+.cardItem:hover{
+    color: #353535;
+}
+
+/* CARD DETAILS */
+
+.order-container .item-card{
+    /* height: 260px; */
+    padding: 15px;
+
+    background-color: #fff;
+    border: 1px solid rgb(35, 35, 35, 0.5);
+    box-shadow: 1.5px 1.5px 1px 2px rgba(135, 135, 135, 0.5);
+    border-radius: 8px;
+}
+
+.order-container .recepients-wrapper{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+}
+.order-container li{
+    list-style: none;
+}
+.itemInfo ul{
+    width: 100%;
+}
+.parcelInfo-wrapper{
+    padding-top: 10px;
+}
+.parcelDetails{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+.recepients-wrapper ul span, .parcelDetails ul span{
+    font-size: 15px;
+    color: #214D94;
+}
+
+ /* CARD IMAGE */
+.image-wrapper{
+    display: grid;
+    place-items: center;
+}
+.order-container .image-holder{
+    height: 165px;
+    width: 165px;
+    /* border: 1px solid blue; */
+    border-radius: 7px;
+    object-fit: cover;
+    overflow: hidden;
+}
+.order-container .image-holder img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+   
+}
+
+/* MODALS */
+.modal-header{
+    background-color: #214D94 ;
+    color: #fff;
+}
+.modal-content .modal-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-buttons a, .modal-buttons button{
+    width: 120px;
+    padding: 7px 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    /* border: 1px solid red; */
+}
+.modal-buttons .button-group{
+    display: flex;
+    gap: 10px;
+}
+
+/* FORMS */
+  .modal-body span{
+    color: #353535;
+    font-size: 13px;
+  }
+  .modal-body .required{
+    color: red;
+  }
+ 
+  .serviceInput select, 
+  .typeInput select, 
+  .categoryInput select,
+  .weightInput input,
+  .lengthInput input,
+  .widthInput input,
+  .heightInput input,
+  .bidInput input,
+  .imageInput input{
+    border: 1px solid rgb(53, 53, 53,0.5) !important;
+  }
+  
+.imageInput input{
+    padding: 8px;
+    color: #214D94;
+    background-color: rgb(249, 205, 26,0.9) !important;
+    font-size: 13px;
+}

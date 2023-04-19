@@ -1,21 +1,29 @@
 @extends('layouts.app')
-
 @section('content')
+<div class="vertical-center" style="margin-top: -68px">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
+        <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
+            <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
+        </div>
+
+        <div class="col-lg-4 login-container p-5">
+            
+                <div class="pb-2 login-header">{{ __('Register') }}</div>
+                <div class="pb-3 blue">Create your Account</div>
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        @include('flash-message')
+                        {{-- @include('flash-message') --}}
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            {{-- <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -26,10 +34,13 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope-fill text-secondary"></i>
+                                </span>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail Address">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -40,10 +51,13 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill text-secondary"></i>
+                                </span>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -54,34 +68,43 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            {{-- <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill text-secondary"></i>
+                                </span>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"  placeholder="Re-Type Password">
                             </div>
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-12">
+                                <button type="submit" class="mb-1 register-button letter-spacing">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>   
                     </form>
                     <a href="{{ url('/registerCompany') }}">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="mb-5 register-ascompany-button letter-spacing">
                             {{ __('Register as a company') }}
                         </button>
                     </a>
-                    <p>Already have an account?
-                        <span> 
-                            <a href="{{ route('login') }}">Login Here</a> 
-                        </span>
-                    </p>
-                </div>
-            </div>
+
+                    <div class="text-center mt-3 pt-3">
+                        <p>Already have an account?
+                            <span> 
+                                <a href="{{ route('login') }}">Login Here</a> 
+                            </span>
+                        </p>
+                    </div>
+                
+            
         </div>
+
+        
     </div>
+</div>
 </div>
 @endsection

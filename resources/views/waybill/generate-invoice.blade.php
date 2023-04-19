@@ -79,12 +79,16 @@
     <table class="order-details">
         <thead>
             <tr>
-                <th width="50%" colspan="1">
-                    <img src="public_path('img/icargo.png')" alt="Logo Here">
+                <th width="25%" colspan="1">
+                    {!! DNS2D::getBarcodeHTML("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE') !!}
                 </th>
-                <th width="50%" colspan="5" class="text-end company-data">
+                <th>
+                    {!! DNS1D::getBarcodeHTML("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',2,50) !!}
+                </th width="50%" colspan="5">
+                <th width="25%" colspan="3" class="text-end company-data">
                     <span>Invoice Id: {{$ship->id}}</span> <br>
                     <span>Date: {{date(' d / m / Y')}}</span> <br>
+                    <span>Company: {{$ship->company_bade}}</span> <br>
                     <span>Zip code : (postal code)</span> <br>
                     <span>Address: (address of company)</span> <br>
                 </th>

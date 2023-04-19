@@ -20,6 +20,7 @@ return new class extends Migration
             //$table->unsignedBigInteger('employee_id');
             //$table->foreign('employee_id')->references('id')->on('employees');
             $table->string('tracking_number')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->string('sender_name');
             $table->string('sender_address');
             $table->string('sender_city');
@@ -34,9 +35,12 @@ return new class extends Migration
             $table->decimal('width', 8, 2);
             $table->decimal('height', 8, 2);
             $table->decimal('weight', 8, 2);
+            $table->unsignedBigInteger('bid_amount')->nullable()->default;
+            $table->string('company_bade')->nullable()->default;
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2);
+            $table->string('order_status')->nullable()->default;
             $table->string('status');
             $table->timestamps();
         });

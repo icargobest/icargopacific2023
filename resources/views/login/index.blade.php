@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
+    <!-- CSS for bootstrap modifying -->
+    <link rel="stylesheet" href="/css/login.css" />
+    <!-- fafa-user -->
+    <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <section class="vh-100" style="background-color: #eee;">
@@ -43,14 +47,14 @@
       
                         <div class="form-outline mb-4">
                           <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                          <label class="form-label" for="form2Example17">Email address</label>
+                          <label class="form-label ps-4" for="form2Example17">E-mail address</label>
                         </div>
       
                         <div class="form-outline mb-4">
                           <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                          <label class="form-label" for="form2Example27">Password</label>
+                          <label class="form-label ps-4" for="form2Example27">Password</label>
                         </div>
-      
+
                         <div class="pt-1 mb-4">
                           <a href="/dashboard">
                           <button class="btn btn-primary btn-lg btn-block" type="button">Login</button>
@@ -65,6 +69,15 @@
                       </form>
       
                     </div>
+                    
+                  </div>
+                  <div class="col-lg-6 col-lg-7 d-none d-md-block" >
+                    <!--Image from web
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;">
+                    -->
+                    <img src="/img/login-bg-pic.jpg"
+                      alt="login form" class="img-fluid w-100" style="border-radius: 0 1rem 1rem 0;" />
                   </div>
                 </div>
               </div>
