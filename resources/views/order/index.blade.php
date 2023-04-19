@@ -12,9 +12,9 @@
 
   <h4>MY ITEMS</h4>
   <div class="button-holder row justify-content-end px-2 mb-3">
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-      Post Order
-    </button>
+    {{--<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">--}}
+    <a href="{{route('postOrder')}}" ><button class="btn btn-primary">Post Order</button></a>
+    {{--</button>--}}
   </div>
 
     <div class="cards-holder">
@@ -22,7 +22,7 @@
         @foreach ($shipments as $ship)
             @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
             {{-- CARD CREATED AFTER FILLING UP --}}
-            <a class="cardItem" href="{{route('viewShipment',$ship->id)}}">
+            <a class="cardItem" href="{{route('viewOrder',$ship->id)}}">
                 <div class="item-card container px-4">
                 <div class="card-body">
                     <div class="row">
@@ -34,18 +34,18 @@
                             <h6>SENDER</h6>
 
                             <ul>
-                                <li>Name | <span>{{$ship->sender_name}}</span></li>
-                                <li>Address | <span>{{$ship->sender_address}} , {{$ship->sender_city}} , {{$ship->sender_state}} , {{$ship->sender_zip}}<</span></li>
-                                <li>Number | <span>{{$ship->sender_mobile}}</span></li>
+                                <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
+                                <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
+                                <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
                             </ul>
                         </div>
                         <div class="receiverInfo col-lg-6">
                             <h6>RECEIVER</h6>
 
                             <ul>
-                                <li>Name | <span>{{$ship->recipient_name}}</span></li>
-                                <li>Address | <span>{{$ship->recipient_address}} , {{$ship->recipient_city}} , {{$ship->recipient_state}} , {{$ship->recipient_zip}}</span></li>
-                                <li>Number | <span>{{$ship->recipient_mobile}}</span></li>
+                                <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
+                                <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
+                                <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
                             </ul>
                         </div>
 
@@ -60,7 +60,7 @@
                             <div class="listLayout col-lg-6 col-sm-12">
                                 <ul>
                                     <li>ID | <span>{{$ship->id}}</span></li>
-                                    <li>Size & Weight | <span>{{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg</span></li>
+                                    <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 </ul>
                             </div>
                             <div class="listLayout col-lg-6 col-sm-12">
@@ -102,7 +102,7 @@
                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="{{route('addShipment')}}">
+                      <form method="POST" action="{{route('addOrder')}}">
                           {{-- <h1>SENDER INFO</h1> --}}
                           @csrf
                           <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />

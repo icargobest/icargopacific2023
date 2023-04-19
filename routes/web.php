@@ -129,16 +129,12 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     ->name('dispatcher.dashboard')->middleware('verified');
 });
 
-
-
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
     return view('login/forgot-password');
 });
 
-
 // FIND TRACKING ID
-
 Route::get('/find', function () {
     return view('search');
 });
@@ -156,10 +152,6 @@ Route::get('/freight', function () {
     return view('freight/freight');
 });
 
-
-
-
-
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
 Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
@@ -171,12 +163,6 @@ Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerCo
 Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
 Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-
-
-
-
-
-
 
 
 Route::get('/company', [CompanyController::class, 'index']);
@@ -194,12 +180,17 @@ Route::controller(EmployeeController::class)->group(function(){
 });
 // Auth::routes();
 
+Route::get('/order-form', function () {
+    return view('order.waybill-form');
+})->name('postOrder');
+
 //Order Panel
 Route::controller(ShipmentController::class)->group(function(){
     Route::get('/company/order','index')->name('companyOrderPanel');
     Route::get('/order','userIndex')->name('userOrderPanel');
-    Route::post('/add_order','addShipment')->name('addShipment');
-    Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
+    Route::post('/add_order','addOrder')->name('addOrder');
+    Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
+    Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
@@ -207,7 +198,7 @@ Route::controller(ShipmentController::class)->group(function(){
 });
 
 Route::get('/waybillForm', function () {
-    return view('waybill/waybill-form');
+    Route::get('company/order/waybill-form')->name('waybillForm');
 });
 
 //QR Code && Barcode Generation

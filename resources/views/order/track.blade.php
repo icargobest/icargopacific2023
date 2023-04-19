@@ -11,9 +11,9 @@
 <div class="order-container container">
 
 
-  <h4>MY ITEMS</h4>
-  <div class="cards-holder">
+  <h4>TRACKING ORDER</h4>
 
+  <div class="cards-holder">
     {{-- CARD CREATED AFTER FILLING UP --}}
             <div class="item-card container px-4">
             <div class="card-body">
@@ -73,48 +73,14 @@
                     <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
                     </div>
 
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder',$ship->id)}}" target="_blank" class="btn btn-primary btn">
-                        Track Order
+                    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
+                        Invoice
                     </a>
-                @endif
+                    <a href="#" class="btn btn-dark btn-sm">
+                        Print Waybill
+                    </a>
                 </div>
-
-
-
                 </div>
-
-                <table class="table table-striped">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Company</th>
-                            <th>Bid Amount</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    @foreach($bids as $bid)
-                        @if($ship->id == $bid->shipment_id)
-                            <form action="{{route('acceptBid', $bid->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                                <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
-                                <tbody>
-                                    <tr>
-                                        <td>{{$bid->company_name}}</td>
-                                        <td>{{$bid->bid_amount}}</td>
-                                        <td>{{$bid->status}}</td>
-                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted'))
-                                            <td><button tpye="submit" class="btn btn-success btn-sm" disabled>Accept</button></td>
-                                        @else
-                                            <td><button tpye="submit" class="btn btn-success btn-sm">Accept</button></td>
-                                        @endif
-                                    </tr>
-                                </tbody>
-                            </form>
-                        @endif
-                    @endforeach
-                </table>
             </div>
             </div>
         {{-- END OF CARD --}}

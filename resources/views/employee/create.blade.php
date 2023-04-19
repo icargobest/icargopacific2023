@@ -11,7 +11,7 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('addEmployee')}}" enctype="multipart/form-data">
+          <form method="GET" action="{{route('addEmployee')}}" enctype="multipart/form-data">
             @csrf
             <!-- Name Input -->
             <div class="row mb-4">

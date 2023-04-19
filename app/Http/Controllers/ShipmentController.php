@@ -8,6 +8,7 @@ use App\Models\Sender;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\View;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
@@ -20,15 +21,23 @@ class ShipmentController extends Controller
     public function index(){
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $sender = $shipment->sender();
+        $recipient = $shipment->recipient();
 
-        return view('company.order.index', ['shipments' => $shipment, 'bids' => $bid]);
+        return view('company.order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function userIndex(){
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $sender = Sender::all();
+        $recipient = Recipient::all();
 
-        return view('order.index', ['shipments' => $shipment, 'bids' => $bid]);
+        return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender' => $sender, 'recipient' => $recipient]);
+    }
+
+    function postOrder(){
+        return view('order.waybill-form');
     }
 
     function __construct(){
@@ -36,7 +45,7 @@ class ShipmentController extends Controller
         $this->bid = new Bid;
     }
 
-    function addShipment(Request $request){
+    function addOrder(Request $request){
 
         // Insert sender data
         $senderData = [
@@ -91,7 +100,7 @@ class ShipmentController extends Controller
         $sender->save();
         $recipient->save();
 
-        return back();
+        return view('order.index');
     }
 
 
@@ -127,11 +136,18 @@ class ShipmentController extends Controller
         return redirect()->back();
     }
 
-    function viewShipment($id){
+    function viewOrder($id){
         $bid = Bid::all();
 
         $ship=$this->shipment->getShipmentId($id);
         return view('order.view',compact('ship'), ['bids' => $bid]);
+    }
+
+    function trackOrder($id){
+        $bid = Bid::all();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('order.track',compact('ship'), ['bids' => $bid]);
     }
 
     public function viewInvoice($id)
@@ -139,30 +155,4 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
     }
-
-    function generateInvoice($id)
-    {
-        $ship = Shipment::findOrFail($id);
-
-        $data = ['ship' => $ship];
-
-        $pdf = Pdf::loadView('order.generate-invoice', $data);
-        $todayDate = Carbon::now()->format('d-m-Y');
-        return $pdf->download('invoice'.$ship->id.'-'.$todayDate.'.pdf');
-    }
-
-
-    public function generateBarcode($id) {
-        $ship = Shipment::find($id);
-        $data = $ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id;
-        $barcode = DNS1D::getBarcodePNG($data, 'C128');
-
-        return view('barcode', [
-            'barcode' => $barcode,
-            'ship' => $ship
-        ]);
-    }
-
-
-
 }
