@@ -69,7 +69,19 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
         });
+        Schema::create('order_histories', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->string('status');
+            $table->timestamps();
+
+            // Define foreign key constraint for the order_id column
+            $table->foreign('order_id')
+                  ->references('id')->on('shipments')
+                  ->onDelete('cascade');
+        });
     }
+
 
     /**
      * Reverse the migrations.
@@ -79,6 +91,7 @@ return new class extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::dropIfExists('oder_histories');
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
         Schema::dropIfExists('shipments');
