@@ -55,13 +55,12 @@ class StaffController extends Controller
         $staff->company_id= Auth::id();// Set the user_id foreign key to the id of the newly created User
         $staff->name = $request->name;
         $staff->contact_no = $request->contact_no;
-        $staff->archived = false;
         $saved1 = $staff->save();
 
         if($saved && $saved1){
-            return back()->with('success', 'Employee data created successfully!');
+            return back()->with('success', 'Staff data created successfully!');
         }else{
-            return back()->with('error', 'Failed to create employee data!');
+            return back()->with('error', 'Failed to create staff data!');
         }
     }
 
