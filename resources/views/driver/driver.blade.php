@@ -19,18 +19,35 @@
                     <button type="button" class="btn btn-primary">Search</button>
 
                   </div> --}}
-                  <div class="mb-4">
-                    <p class="h5" style="font-weight: 550">Enter tracking ID to search for parcel:</p>
-                    <div class="col-12 d-flex justify-content-center" style="">
-                      <div class="col-12 col-md-3 mb-3">
-                        <input type="text" placeholder="Enter tracking ID" style="width: 100%; padding:5px;">
-                      </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center" style="">
-                      <div class="col-12 col-md-3">
-                        <button type="button" class="btn btn-primary" style="width: 100%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
-                      </div>
-                    </div>
+                  <form action="/search" method="POST">
+                    @csrf
+                    <label for="id">Enter Tracking ID:</label>
+                    <input type="text" id="id" name="tracking_number">
+                    <button type="submit" class="btn btn-primary" style="width: 25%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
+                </form>
+                <div id="message"></div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $('form').submit(function(e) {
+                        e.preventDefault();
+                        var formData = $(this).serialize();
+                        $.ajax({
+                            url: $(this).attr('action'),
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                $('#message').text(response.message);
+                                if (response.data) {
+                                    $('#message').append('<br>ID: ' + response.data.tracking_number);
+                                }
+                            },
+                            error: function(response) {
+                                $('#message').text('An error occurred while searching for user.');
+                            }
+                        })
+                    })
+                </script>
+                </form>
                     
 
                   </div>

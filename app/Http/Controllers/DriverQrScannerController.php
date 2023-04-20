@@ -38,8 +38,7 @@ class DriverQrScannerController extends Controller
 
 
 	public function updatePickup(Request $request)
-    {
-        $user = Auth::user();
+    {        $user = Auth::user();
         if ($user) {
             $user->status = 'pickup';
             $user->save();
