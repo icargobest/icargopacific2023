@@ -36,7 +36,7 @@
                 <div class="label-container">
                     <label>VEHICLE TYPE:</label>
                   </div>
-                <select type="text" id="form6Example5" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+                <select type="text" id="form6Example5" name="vehicle_type" style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
                   <option value="{{ $user->driverDetail->vehicle_type }}" hidden>{{ $user->driverDetail->vehicle_type }}</option>
                   <option value="Motorcycle">Motorcycle</option>
                   <option value="Van">Van</option>
