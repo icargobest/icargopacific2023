@@ -5,7 +5,7 @@ text-decoration: none;
 }
 
 
-.employee-header-container
+.staff-header-container
 {
 height: 53px;
 background-color: #214D94;
@@ -15,7 +15,7 @@ color: #fff;
 }
 
 
-.employee-header-container h3
+.staff-header-container h3
 {
 margin: 0px;
 margin-left: 1.5rem;
@@ -59,13 +59,13 @@ margin-bottom: 20px;
     flex-direction: row;
 }
 
-.employee span
+.staff span
 {
 color: #000000;
 }
 
 
-.employee button
+.staff button
 {
 min-width: 80px;
 max-width: 80px;
@@ -82,7 +82,7 @@ border-radius: 0px !important;
 
 
 
-.employee button:hover
+.staff button:hover
 {
 color: #000000;
 font-weight: bolder;
@@ -104,7 +104,7 @@ font-weight: bolder;
 
 /* Add Employee Container */
 
-.addemployee
+.add-staff
 {
 display: flex;
 align-items: flex-end;
@@ -380,7 +380,7 @@ color:#dc3545 !important;
 {
 
 /* Add Employee Container */
-.addemployee
+.add-staff
 {
 margin-left: 1rem;
 }
@@ -390,7 +390,6 @@ margin-left: 1rem;
     margin: none;
     display: inline;
 }
-
 
 
 /* Modal */
@@ -463,7 +462,7 @@ margin-top: 3rem;
 
 }
 
-.top-container2, .addemployee
+.top-container2, .add-staff
 {
 margin-left: 3rem;
 }
@@ -483,18 +482,18 @@ margin-top: 15px;
 /* Dropdown Buttons*/
 
 
-.employee
+.staff
 {
 flex-direction: row;
 }
 
 
-.employee button
+.staff button
 {
 margin-right: 10px;
 }
 
-.employee button
+.staff button
 {
 
 margin-bottom: 5px;
