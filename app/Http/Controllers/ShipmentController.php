@@ -18,6 +18,7 @@ class ShipmentController extends Controller
 {
     private $shipment;
     private $bid;
+    
 
     public function index(){
         $shipment = Shipment::all();
