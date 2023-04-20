@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Orders</title>
-  </head>
+</head>
 
 
 <form  method="POST" action="{{route('shipment.transfer')}}">
