@@ -31,6 +31,8 @@
 
         <div class="senderForm p-4">
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
+            <input type="hidden" name="station_id" value="0" class="form-control" />
+            <input type="hidden" name="station_name" value="none" class="form-control" />
 
             {{-- NAME INPUT --}}
             <div class="nameInput mb-4">
