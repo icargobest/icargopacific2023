@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipment;
 use App\Models\Bid;
+use App\Models\OrderHistory;
 use App\Models\Sender;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
@@ -104,6 +105,13 @@ class ShipmentController extends Controller
         return redirect()->route('userOrderPanel')->with('success', 'Order added successfully.');
     }
 
+    public function show(OrderHistory $order)
+    {
+        $order->load('order_histories');
+
+        return view('orders.show', compact('order'));
+    }
+
     function addBid(Request $request){
         $data = [
             'company_id' => $request->company_id,
@@ -153,14 +161,14 @@ class ShipmentController extends Controller
         $bid = Bid::all();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('order.track',compact('ship'), ['bids' => $bid]);
+        return view('order.track',compact('ship'), ['bids' => $bid, 'order']);
     }
 
     function trackOrder_Company($id){
         $bid = Bid::all();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid]);
+        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order']);
     }
 
     public function viewInvoice($id)
