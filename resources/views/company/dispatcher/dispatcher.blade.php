@@ -1,4 +1,5 @@
 @include('partials.navigation', ['driver' => 'fw-bold'])
+@extends('layouts.status')
 
   <div class="container center p-3">
       <div class="row">
@@ -31,15 +32,57 @@
                   <div style="display:none">
                     <label>QR Scanner</label>
                   </div>
-                  <div class="p-3">
-                    <!--<a class="btn btn-primary mt-3">Start</a> -->
-                    <a class="btn btn-danger mt-3" id="resetButton">Reset</a>
+                  <div class="col-12 d-flex justify-content-center mb-4" style="">
+                    <div class="col-12 col-md-3">
+                      <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
+                    </div>
                   </div>
+
+                  {{-- <div class="p-3 col-4 border">
+                    <!--<a class="btn btn-primary mt-3">Start</a> -->
+                    <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px">Reset</a>
+                  </div> --}}
+
                   <div class="container" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
                   <div class="scanresult">
                     <label>Result:</label>
+                    <div class="track--wrapper">
+                      <div class="track__item" id="picked-up">
+                          <div class="track__thumb">
+                              <i class="las la-briefcase"></i>
+                          </div>
+                          <div class="track__content">
+                              <h5 class="track__title">@lang('Picked Up')</h5>
+                          </div>
+                      </div>
+                      <div class="track__item" id="assort">
+                          <div class="track__thumb">
+                              <i class="lar la-building"></i>
+                          </div>
+                          <div class="track__content">
+                              <h5 class="track__title">@lang('Logistics')</h5>
+                          </div>
+                      </div>
+                      <div class="track__item" id="delivered">
+                          <div class="track__thumb">
+                              <i class="las la-truck-pickup"></i>
+                          </div>
+                          <div class="track__content">
+                              <h5 class="track__title">@lang('Delivery')</h5>
+                          </div>
+                      </div>
+                      <div class="track__item" id="completed">
+                          <div class="track__thumb">
+                              <i class="las la-check-circle"></i>
+                          </div>
+                          <div class="track__content">
+                              <h5 class="track__title">@lang('Completed')</h5>
+                          </div>
+                      </div>
+                    </div>
+
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
@@ -169,7 +212,7 @@
                     iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
                   var iframe = document.createElement('iframe');
-                  iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+                  iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
                   iframe.style.width = '100%';
                   iframe.style.height = '500px';
                   iframeContainer.appendChild(iframe);
@@ -178,6 +221,24 @@
                     // add event listener to button when iframe is loaded
                     iframe.onload = function() {
                     var button = iframe.contentDocument.getElementById("my-button");
+                    var pickedUp = document.getElementById('picked-up');
+                    var assort = document.getElementById('assort');
+                    var delivered = document.getElementById('delivered');
+                    var completed = document.getElementById('completed');
+
+                    if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                        pickedUp.classList.add('done');
+                    }
+                    if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                        assort.classList.add('done');
+                    }
+                    if (data.status === "delivery" || data.status === "delivered") {
+                        delivered.classList.add('done');
+                    }
+                    if (data.status === "delivered") {
+                        completed.classList.add('done');
+                    }
+
                     button.addEventListener("click", function() {
                       if (data.status === 'pickup') {
                         data.status = 'received';
