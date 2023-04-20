@@ -255,28 +255,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-<<<<<<< HEAD
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form6Example1" name="stationID" class="form-control" />
-                            <label class="form-label" for="form6Example1">Station ID</label>
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form6Example1" name="stationName" class="form-control" />
-                            <label class="form-label" for="form6Example1">Station Name</label>
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form6Example1" name="senderName" class="form-control" />
-                            <label class="form-label" for="form6Example1">Full Name</label>
-                        </div>
-                      <!-- Address input -->
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form6Example5" name="senderAddress" class="form-control" />
-                        <label class="form-label" for="form6Example5">Street Address</label>
-                      </div>
-=======
                         <input type="hidden" name="user_id" value="{{-- {{Auth::user()->id}} --}}" class="form-control" />
->>>>>>> develop
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
