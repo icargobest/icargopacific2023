@@ -79,15 +79,6 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
     ->name('company.dashboard')->middleware('verified');
-
-    Route::group(['prefix' => 'company'], function () {
-        Route::get('/freight',[CompanyController::class, 'viewFreight'])
-            ->name('company.freight');
-        Route::get('/edit/{id}',[CompanyController::class, 'transferShipment']);
-        Route::post('/edit',[CompanyController::class, 'transfer'])
-            ->name('company.transfer');
-    });
-
     Route::group(['prefix' => 'company/stations'], function () {
         Route::get('/', [StationController::class, 'index'])
             ->name('stations.view');
@@ -212,6 +203,11 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+
+    Route::group(['prefix' => 'company'], function () {
+        Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
+        Route::post('/transfer','transfer')->name('shipment.transfer');
+    });
 });
 
 Route::get('/waybillForm', function () {
