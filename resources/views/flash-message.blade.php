@@ -31,7 +31,7 @@
 @endif
      
 @if ($message = Session::get('warning'))
-<div class="container w-75 alert alert-warning alert-dismissible fade show" role="alert">
+<div class="container alert alert-warning alert-dismissible fade show" role="alert">
   <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
     <use xlink:href="#exclamation-triangle-fill"/>
   </svg>

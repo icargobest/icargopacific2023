@@ -16,6 +16,7 @@ use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 
 
@@ -98,11 +99,21 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
             ->name('unarchive.station');
     });
 
+    //Staff Panel
+    Route::resource('company/staff', StaffController::class);
+    Route::controller(StaffController::class)->group(function(){
+        Route::get('/staff','index')->name('staff.view');
+        Route::get('/archived_staff','viewArchive')->name('staff.viewArchive');
+        Route::put('/staff/archive/{id}', 'archive')->name('staff.archive');
+        Route::put('/staff/unarchive/{id}', 'unarchive')->name('staff.unarchive');
+    });
+
+
     //DRIVER PANEL
     Route::resource('company/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function(){
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
-        Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+        Route::get('archived-drivers', 'viewArchive')->name('drivers.viewArchive');
         Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
         Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
     });
@@ -173,18 +184,7 @@ Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\Disp
 
 Route::get('/company', [CompanyController::class, 'index']);
 
-//Employee Panel
-Route::controller(EmployeeController::class)->group(function(){
-    Route::get('/employees','index')->name('EmployeePanel');
-    Route::post('/add_employee', 'addEmployee')->name('addEmployee');
-    Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
-    Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::put('/employees/archive/{id}', 'archive')->name('archive');
-    Route::put('/employees/unarchive/{id}', 'unarchive')->name('unarchive');
-});
-// Auth::routes();
+
 
 Route::get('/order-form', function () {
     return view('order/waybill-form');
@@ -268,12 +268,6 @@ Route::middleware("auth")->group(function() {
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**

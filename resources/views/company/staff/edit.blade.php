@@ -1,17 +1,17 @@
 
-<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{$employee->id}}">
+<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{$staff->id}}">
    EDIT
 </button>
 
-<div class="modal top fade" id="editModal{{$employee->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top fade" id="editModal{{$staff->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title col-green" id="exampleModalLabel">EDIT EMPLOYEE</h5>
+          <h5 class="modal-title col-green" id="exampleModalLabel">EDIT STAFF</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{route('update', $employee->id)}}">
+            <form method="POST" action="{{route('staff.update', $staff->id)}}">
               @csrf
               @method('PUT')
               <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -21,7 +21,7 @@
                     <label>FULL NAME</label>
                   </div>
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" name="updateFullName" value="{{$employee->name}}" class="form-control" />
+                    <input type="text" id="form6Example1" name="updateFullName" value="{{$staff->name}}" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -32,24 +32,24 @@
               </div>
               <div class="form-outline mb-2">
 
-                <input type="email" id="form6Example5" name="updateEmail" value="{{$employee->email}}" class="form-control" />
+                <input type="email" id="form6Example5" name="updateEmail" value="{{$staff->user->email}}" class="form-control" />
               </div>
 
-              <!-- Password input -->
+              <!-- Contact input -->
+              <div class="label-container">
+                <label>Contact No_</label>
+              </div>
+              <div class="form-outline mb-2">
+                <input type="text" id="form6Example5" name="updateContactNo" value="{{$staff->contact_no}}" class="form-control" />
+              </div>
+
               <div class="label-container">
                 <label>PASSWORD</label>
               </div>
               <div class="form-outline mb-2">
-                <input type="password" id="form6Example5" name="updatePassword" value="{{$employee->password}}" class="form-control" />
+                <input type="password" id="form6Example5" name="updatePassword" value="{{$staff->user->password}}" class="form-control" />
               </div>
 
-              <!-- Position -->
-              <div class="label-container">
-                <label>POSITION</label>
-              </div>
-               <div class="form-outline mb-2">
-                <input type="text" id="form6Example4" name="updateRole" value="{{$employee->role}}" class="form-control" />
-              </div>
 
               <div class="button-modal-container">
 
@@ -65,21 +65,12 @@
                         Save
                     </button>
 
-                    <a href="{{route('EmployeePanel')}}"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    <a href="{{route('staff.view')}}"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">
                         CANCEL
                       </button>
                     </a>
                   </div>
               </div>
-
-{{--                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
-                        Save
-                      </button>
-                    <a href="{{route('EmployeePanel')}}" class="btn btn-success btn-block">
-                        Cancel
-                    </a> --}}
-
                 </div>
             </form>
           </div>
