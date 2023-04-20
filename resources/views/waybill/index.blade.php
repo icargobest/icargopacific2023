@@ -11,12 +11,10 @@
 <div class="order-container container">
 
   <h4>MY ITEMS</h4>
-  <div class="button-holder mb-3">
-    <a href="/waybillForm">
-      <button type="button" class="btn btn-primary">
-        Post Order
-      </button>
-    </a>
+  <div class="button-holder row justify-content-end px-2 mb-3">
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+      Post Order
+    </button>
   </div>
 
   <div class="cards-holder">
@@ -255,7 +253,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />"
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">

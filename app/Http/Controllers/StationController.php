@@ -36,7 +36,7 @@ class StationController extends Controller
             $this->station->addStation($data);
             return back()->with('success', 'Station data created successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Error creating station: '.$e->getMessage());
+            return back()->with('warning', 'Error creating station. Please confirm the fields and submit again');
         }
     }    
 
