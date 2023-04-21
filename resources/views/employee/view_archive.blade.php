@@ -66,11 +66,11 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col" style="text-align:center;" width="1%">#</th>
-                    <th scope="col" style="text-align:center;" width="15%">Name</th>
+                    <th scope="col" style="text-align:center;">#</th>
+                    <th scope="col" style="text-align:center;">Name</th>
                     <th scope="col" style="text-align:center;">Email</th>
-                    <th scope="col" style="text-align:center;">Role</th>
-                    <th scope="col" style="text-align:center; width:300px"></th>
+                    {{-- <th scope="col" style="text-align:center;">Role</th> --}}
+                    <th scope="col" style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,8 +80,8 @@
                                 <td>{{$employee->id}}</td>
                                 <td>{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
-                                <td>{{$employee->role}}</td>
-                                <td class="td-buttons"style="overflow:auto">@include('employee.restore')</td>
+                                {{-- <td>{{$employee->role}}</td> --}}
+                                <td class="td-buttons"style="overflow:auto">@include('employee.view')@include('employee.restore')</td>
                             </tr>
                         @endif
                     @endforeach

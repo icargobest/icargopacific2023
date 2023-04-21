@@ -214,6 +214,7 @@ padding: 0px 12px;
 transition:  all 300ms ease-in-out;
 }
 
+
 .links .link i
 {
 display: inline-block;
@@ -268,13 +269,39 @@ text-decoration: none;
     margin-top: 10px;
     width: 100%;
 }
-.links .link:hover
+
+
+
+.links a:hover span, .links a:active span
+{
+color: #1D4586;
+cursor: pointer;
+}
+
+.links a:hover .link, .links a:active .link
+{
+background:#EAEBEE
+}
+
+.links a:hover i, .links a:active i
+{ 
+color: #1D4586;
+}
+
+
+.links .link:hover, .links .link:active
 {
 background:#EAEBEE ;
 color: #1D4586;
 cursor: pointer;
 }
 
+
+.bottom-nav
+{
+position: fixed;
+bottom: 0;
+}
 
 /* Holds Content Container*/
 .main-container

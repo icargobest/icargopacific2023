@@ -91,7 +91,7 @@
                                         Lock
                                     </a>
                                     @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:80px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:85px !important;">
                                         unlock
                                     </a>
                                 @endif

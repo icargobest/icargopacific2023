@@ -4,7 +4,7 @@
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
         <div class="employee-header-container">
-            <h3 class="">EMPLOYEE LIST</h3>
+            <h3 class="">STAFF LIST</h3>
         </div>
 
         <div class="addemployee" style="" >
@@ -70,7 +70,7 @@
                     <th scope="col"style="text-align:center;">Name</th>
                     <th scope="col"style="text-align:center;">Email</th>
                     {{-- <th scope="col"style="text-align:center;">Position</th> --}}
-                    <th scope="col"style="text-align:center; width:300px"></th>
+                    <th scope="col"style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>
                 <tbody>

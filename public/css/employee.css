@@ -249,9 +249,15 @@ font-weight: bolder;
     display: grid;
 }
 
-.leftmodal-button-container button, .rightmodal-button-container button
+
+.leftmodal-button-container
 {
-margin-bottom: 8px !important;
+margin-bottom: 10px;
+}
+
+.rightmodal-button-container
+{
+gap: 10px;
 }
 
 .leftmodal-button-container button,
@@ -339,15 +345,16 @@ font-size: 12px;
 
 .label-container label
 {
-color:#214D94 !important;
-font-size: 12px !important;
+color:BLACK !important;
+font-size: 13.5px !important;
 display:block;
+font-weight: bolder;
 }
 .label-container
 {
 display: flex;
 justify-content: flex-start;
-padding-left: 10px;
+
 }
 
 .td-buttons button

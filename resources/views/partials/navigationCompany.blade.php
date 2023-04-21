@@ -99,8 +99,7 @@
                     </div>
       
                     <div class="links">
-      
-                      <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
+                      <a class="nav-link" href="/company/dispatcher">
                           <div class="link" >
                               <i class="fa fa-id-card link-i-1"></i>
                               <span>Dispatcher</span>
@@ -134,32 +133,10 @@
         
         <!--             <div class="divider2">
                     </div> -->
-        
-                    <div class="link2">
-                        <div class="links">
-                            <div class="link">
-                                <i class="fa fa-bell link-i-2"></i>
-                                <span>Notifications</span>
-                            </div>
-                        </div>
-                        
-                        <div class="links">
-                            <div class="link">
-                                <i class="fa fa-envelope link-i-2"></i>
-                                <span>Messages</span>
-                            </div>
-                        </div>
             
-                        <div class="links">
-                            <div class="link">
-                                <i class="fa fa-plus link-i-2"></i>
-                                <span>List Items</span>
-                            </div>
-                        </div>
-            
-                        <div class="links">
+                        <div class="links bottom-nav">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                              <div class="link">
+                              <div class="link ">
                                   <i class="fa fa-sign-out"></i>
                                       <span>Logout</span>
                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -176,4 +153,3 @@
       
       
         <div class="content-container">
-            
