@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateStaffRequest;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,47 +39,25 @@ class StaffController extends Controller
         return view('company.staff.create');
     }
 
-
-    public function store(Request $request)
+    public function store(CreateStaffRequest $request)
     {
-        // staff user account
-        $user = new User;
-
-        $validatedUser = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            'name.required' => 'Name field is required.',
-            'password.required' => 'Password field is required.',
-            'password.confirmed' => 'Password does not match.',
-            'password.min' => 'Password must be a minimum of 8 characters',
-            'email.required' => 'Email field is required.',
-            'email.unique' => 'Email address must be unique within the organization',
-            'email.email' => 'Email field must be email address.',
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => '5',
         ]);
-        
-        $validatedUser['type'] = '5'; // set the type to '3' driver
-        $validatedUser['password'] = Hash::make($validatedUser['password']);
-        $user = User::create($validatedUser);
-
-        // staff linked to users table
-        $staff = new Staff;
-        $validatedStaff = $request->validate([
-            'contact_no' => ['required', 'string', 'min:11', 'max:11'],
-        ], [
-            'contact_no.required' => 'Contact field is required.',
-            'contact_no.max' => 'Contact no must be a min and max of 11 characters'
-        ]);          
-        
-        $validatedStaff['user_id'] = $user->id;
-        $validatedStaff['company_id'] =  Auth::id();
-        $staff = Staff::create($validatedStaff);
-
+    
+        $staff = Staff::create([
+            'contact_no' => $request->contact_no,
+            'user_id' => $user->id,
+            'company_id' => Auth::id(),
+        ]);
+    
         return redirect()->route('staff.index')
                 ->with('success','Staff has been created successfully.');
-       
     }
+    
 
     public function show($id)
     {
@@ -95,22 +74,27 @@ class StaffController extends Controller
         return view('company.staff.edit', compact('staff', 'user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CreateStaffRequest $request, $id)
     {
+        $staffData = [
+            'contact_no' => $request->input('contact_no')
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ];
+        
         $staff = Staff::find($id);
+        $staff->update($staffData);
+
         $user = $staff->user;
-
-        $user->name = $request->input('updateFullName');
-        $user->email = $request->input('updateEmail');
-        $user->password = Hash::make($request->input('updatePassword'));
-        $user->save();
-
-        $staff->name = $request->input('updateFullName');
-        $staff->contact_no = $request->input('updateContactNo');
-        $staff->save();
+        $user->update($userData);
 
         return back()->with('success', 'Staff #'.$id.' data updated successfully!');
     }
+
 
     public function destroy($id)
     {

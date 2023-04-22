@@ -23,6 +23,11 @@
                   <div class="form-outline">
                     <input type="text" id="form6Example1" name="updateFullName" value="{{$staff->user->name}}" class="form-control" />
                   </div>
+                  @error('name')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror 
                 </div>
               </div>
 
@@ -33,6 +38,11 @@
               <div class="form-outline mb-2">
 
                 <input type="email" id="form6Example5" name="updateEmail" value="{{$staff->user->email}}" class="form-control" />
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
 
               <!-- Contact input -->
@@ -41,6 +51,11 @@
               </div>
               <div class="form-outline mb-2">
                 <input type="text" id="form6Example5" name="updateContactNo" value="{{$staff->contact_no}}" class="form-control" />
+                @error('contact_no')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
               </div>
 
               <div class="label-container">
@@ -48,6 +63,11 @@
               </div>
               <div class="form-outline mb-2">
                 <input type="password" id="form6Example5" name="updatePassword" value="{{$staff->user->password}}" class="form-control" />
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
               </div>
 
 
