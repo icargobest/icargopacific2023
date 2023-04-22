@@ -35,33 +35,49 @@ class StaffController extends Controller
 
     public function create()
     {
-        return view('company/staff.create');
+        return view('company.staff.create');
     }
 
 
     public function store(Request $request)
     {
+        // staff user account
         $user = new User;
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->type = 5;
-        $saved = $user->save();
+        $validatedUser = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'name.required' => 'Name field is required.',
+            'password.required' => 'Password field is required.',
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+            'email.required' => 'Email field is required.',
+            'email.unique' => 'Email address must be unique within the organization',
+            'email.email' => 'Email field must be email address.',
+        ]);
+        
+        $validatedUser['type'] = '5'; // set the type to '3' driver
+        $validatedUser['password'] = Hash::make($validatedUser['password']);
+        $user = User::create($validatedUser);
 
+        // staff linked to users table
         $staff = new Staff;
+        $validatedStaff = $request->validate([
+            'contact_no' => ['required', 'string', 'min:11', 'max:11'],
+        ], [
+            'contact_no.required' => 'Contact field is required.',
+            'contact_no.max' => 'Contact no must be a min and max of 11 characters'
+        ]);          
+        
+        $validatedStaff['user_id'] = $user->id;
+        $validatedStaff['company_id'] =  Auth::id();
+        $staff = Staff::create($validatedStaff);
 
-        $staff->user_id = $user->id;
-        $staff->company_id= Auth::id();// Set the user_id foreign key to the id of the newly created User
-        $staff->name = $request->name;
-        $staff->contact_no = $request->contact_no;
-        $saved1 = $staff->save();
-
-        if($saved && $saved1){
-            return back()->with('success', 'Staff data created successfully!');
-        }else{
-            return back()->with('error', 'Failed to create staff data!');
-        }
+        return redirect()->route('staff.index')
+                ->with('success','Staff has been created successfully.');
+       
     }
 
     public function show($id)

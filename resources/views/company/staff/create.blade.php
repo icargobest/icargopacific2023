@@ -20,32 +20,56 @@
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" />
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                   <label class="form-label" for="form6Example1">FULL NAME</label>
               </div>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="form6Example5"  name="email" class="form-control" />
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail Address">
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
               <label class="form-label" for="form6Example5">EMAIL</label>
             </div>
 
             <!-- Contact input -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example5"  name="contact_no" class="form-control" />
+              <input id="contact" type="text" class="form-control @error('password') is-invalid @enderror" name="contact_no" required placeholder="Contact no">
+
+              @error('contact_no')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
               <label class="form-label" for="form6Example5">Contact</label>
             </div>
           
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example3" name="password" class="form-control" />
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+
+              @error('password')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
               <label class="form-label" for="form6Example3">PASSWORD</label>
             </div>    
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
+              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Re-Type Password">
               <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
             </div>
                     
@@ -71,9 +95,11 @@
                         Save
                     </button>
 
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    <a href="{{route('staff.index')}}">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
                         Back
                     </button>
+                    </a>
                 </div>
           </form>
         </div>

@@ -21,7 +21,7 @@
                     <label>FULL NAME</label>
                   </div>
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" name="updateFullName" value="{{$staff->name}}" class="form-control" />
+                    <input type="text" id="form6Example1" name="updateFullName" value="{{$staff->user->name}}" class="form-control" />
                   </div>
                 </div>
               </div>

@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function companyDashboard()
     {
-        return view('/company/dashboard');
+        return view('company.dashboard');
     }
 
     public function superAdminDashboard()
@@ -46,6 +46,11 @@ class HomeController extends Controller
     public function dispatcherDashboard()
     {
         return view('/company/dispatcher.dashboard');
+    }
+
+    public function staffDashboard()
+    {
+        return view('staff_panel.dashboard');
     }
 
     public function changePassword()

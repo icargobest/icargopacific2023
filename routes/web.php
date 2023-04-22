@@ -99,7 +99,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
             ->name('unarchive.station');
     });
 
-    //Staff Panel
+    //Staff
     Route::resource('company/staff', StaffController::class);
     Route::controller(StaffController::class)->group(function(){
         Route::get('/staff','index')->name('staff.view');
@@ -109,7 +109,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     });
 
 
-    //DRIVER PANEL
+    //DRIVER
     Route::resource('company/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function(){
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
@@ -118,7 +118,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
     });
 
-    //DISPATCHER PANEL
+    //DISPATCHER
     Route::resource('company/dispatcher', DispatcherController::class);
     Route::controller(DispatcherController::class)->group(function(){
         Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
@@ -145,6 +145,15 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::get('/dispatcher/dashboard', [HomeController::class, 'dispatcherDashboard'])
     ->name('dispatcher.dashboard')->middleware('verified');
 });
+
+// Staff Routes
+Route::middleware(['auth', 'user-access:staff'])->group(function () {
+    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
+    ->name('staff.dashboard')->middleware('verified');
+});
+
+
+
 
 // FORGOT PASSWORD PAGE
 Route::get('/forgot-password', function () {
