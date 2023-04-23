@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateStaffRequest;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,34 +36,28 @@ class StaffController extends Controller
 
     public function create()
     {
-        return view('company/staff.create');
+        return view('company.staff.create');
     }
 
-
-    public function store(Request $request)
+    public function store(CreateStaffRequest $request)
     {
-        $user = new User;
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->type = 5;
-        $saved = $user->save();
-
-        $staff = new Staff;
-
-        $staff->user_id = $user->id;
-        $staff->company_id= Auth::id();// Set the user_id foreign key to the id of the newly created User
-        $staff->name = $request->name;
-        $staff->contact_no = $request->contact_no;
-        $saved1 = $staff->save();
-
-        if($saved && $saved1){
-            return back()->with('success', 'Staff data created successfully!');
-        }else{
-            return back()->with('error', 'Failed to create staff data!');
-        }
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => '5',
+        ]);
+    
+        $staff = Staff::create([
+            'contact_no' => $request->contact_no,
+            'user_id' => $user->id,
+            'company_id' => Auth::id(),
+        ]);
+    
+        return redirect()->route('staff.index')
+                ->with('success','Staff has been created successfully.');
     }
+    
 
     public function show($id)
     {
@@ -79,22 +74,27 @@ class StaffController extends Controller
         return view('company.staff.edit', compact('staff', 'user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CreateStaffRequest $request, $id)
     {
+        $staffData = [
+            'contact_no' => $request->input('contact_no')
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ];
+        
         $staff = Staff::find($id);
+        $staff->update($staffData);
+
         $user = $staff->user;
-
-        $user->name = $request->input('updateFullName');
-        $user->email = $request->input('updateEmail');
-        $user->password = Hash::make($request->input('updatePassword'));
-        $user->save();
-
-        $staff->name = $request->input('updateFullName');
-        $staff->contact_no = $request->input('updateContactNo');
-        $staff->save();
+        $user->update($userData);
 
         return back()->with('success', 'Staff #'.$id.' data updated successfully!');
     }
+
 
     public function destroy($id)
     {

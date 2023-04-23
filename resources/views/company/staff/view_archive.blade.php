@@ -77,7 +77,7 @@
                         @if ($staff->archived == true)
                             <tr>
                                 <td>{{$staff->id}}</td>
-                                <td>{{$staff->name}}</td>
+                                <td>{{$staff->user->name}}</td>
                                 <td>{{$staff->user->email}}</td>
                                 <td>{{$staff->contact_no}}</td>
                                 <td class="td-buttons"style="overflow:auto">

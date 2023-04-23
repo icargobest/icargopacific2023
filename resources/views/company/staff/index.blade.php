@@ -15,7 +15,9 @@
                 Archived
              </button>
         </a>
-
+        <div class="mt-2">
+            @include('flash-message')
+        </div>
         <section class="search-filter-container">
 
             <div class="top-container1" style="max-width: 800px;">
@@ -57,11 +59,6 @@
 
         </section>
 
-        <div class="mt-2">
-            @include('partials.messages')
-        </div>
-
-
         <div class="table-container">
             <table class="table table-striped">
                 <thead>
@@ -79,9 +76,9 @@
                         @if ($staff->archived == 0)
                             <tr>
                                 <td >{{$staff->id}}</td>
-                                <td class="capitalized">{{$staff->name}}</td>
-                                <td>{{$staff->user->email}}</td>
+                                <td class="capitalized">{{$staff->user->name}}</td>
                                 <td>{{$staff->contact_no}}</td>
+                                <td>{{$staff->user->email}}</td>
                                 {{-- <td class="capitalized">{{$staff->role}}</td> --}}
                                 <td class="td-buttons d-flex" style="overflow:auto;">
                                     @include('company.staff.show')
