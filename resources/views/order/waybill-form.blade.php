@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <form class="userInputs d-flex px-3"method="POST" action="{{route('addOrder')}}">
+    <form class="userInputs d-flex px-3" method="POST" action="{{route('addOrder')}}" enctype="multipart/form-data">
       {{-- SENDER FORM --}}
      @csrf
       <div class="senderForm-wrapper row p-0 shadow-sm">
@@ -32,7 +32,6 @@
         <div class="senderForm p-4">
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
             <input type="hidden" name="station_id" value="0" class="form-control" />
-            <input type="hidden" name="station_name" value="none" class="form-control" />
 
             {{-- NAME INPUT --}}
             <div class="nameInput mb-4">
@@ -359,7 +358,7 @@
             <!--Bid input-->
             <div class="form-outline mb-5">
                 <div class="bidInput">
-                  <span>Minimum Bid <span class="required">*</span></span>
+                  <span>Maximum Bid <span class="required">*</span></span>
                   <div class="form-outline">
                     <input type="text" id="form6Example3" name="amount" class="form-control" required/>
                     {{-- <label class="form-label" for="form6Example3">Minimum Bid</label> --}}
@@ -371,7 +370,7 @@
             <div class="imageInput w-50">
               <span>Image<span class="required">*</span></span>
               <div class="form-outline mb-4">
-                <input type="file" id="form6Example5" class="form-control" />
+                <input type="file" name="photo"  id="photo"/>
               </div>
             </div>
 

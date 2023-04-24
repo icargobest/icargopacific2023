@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipment;
 use App\Models\Bid;
+use App\Models\Station;
 use App\Models\OrderHistory;
 use App\Models\Sender;
 use App\Models\Recipient;
@@ -18,7 +19,7 @@ class ShipmentController extends Controller
 {
     private $shipment;
     private $bid;
-    
+
 
     public function index(){
         $shipment = Shipment::all();
@@ -32,6 +33,13 @@ class ShipmentController extends Controller
         $bid = Bid::all();
 
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function freight(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     function postOrder(){
@@ -78,9 +86,13 @@ class ShipmentController extends Controller
         $recipient = $recipientModel->create($recipientData);
 
         // Insert shipment data
+
+        $requestData = $request->all();
+        $fileName = time().$request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+
         $shipmentData = [
             'station_id' => $request->station_id,
-            'station_name' => $request->station_name,
             'tracking_number' => fake()->isbn13(),
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
@@ -93,10 +105,18 @@ class ShipmentController extends Controller
             'order_type' => $request->order_type,
             'category' => $request->category,
             'min_bid_amount' => $request->amount,
+            'photo' => '/storage/'.$path,
             'status' => 'Pending',
         ];
+
+
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
+
+
+
+
+
 
         // Update sender and recipient models
         $sender->shipment_id = $shipment->id;
@@ -183,14 +203,18 @@ class ShipmentController extends Controller
     public function transferShipment($id)
     {
         $data = Shipment::find($id);
-        return view('/company/order/transfer',['shipments'=>$data]);
+        $stats = Station::all();
+        return view('/company/order/transfer',[
+            'shipments'=>$data,
+            'stations' => $stats,
+        ]);
     }
 
     public function transfer(Request $request)
     {
         $data = Shipment::find($request->id);
         $data->station_id=$request->transferto_station_id;
-        $data->station_name=$request->transferto_station;
+        $data->status = 'Transferred';
         $data->save();
 
         return redirect('company/order');

@@ -26,7 +26,7 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
                             <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
@@ -80,7 +80,7 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                    <img src="{{asset($ship->photo)}}" alt="">
                     </div>
 
                 @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
@@ -143,7 +143,7 @@
 
 <script>
     // Get the minimum bid amount from the HTML using PHP
-    var minBidAmount = {{$ship->min_bid_amount}};
+    var maxBidAmount = {{$ship->min_bid_amount}};
 
     // Get a reference to the bid amount input field and the bid button
     var bidAmountInput = document.getElementById('form6Example3');
@@ -152,7 +152,7 @@
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount < minBidAmount) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount) {
             bidButton.disabled = true;
         } else {
             bidButton.disabled = false;
