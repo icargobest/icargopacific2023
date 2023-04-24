@@ -53,6 +53,10 @@ Route::get('/accept-bid', function () {
 Route::get('/order-list', function () {
     return view('company/order-list');
 });
+//COMPANY - ASSIGN DRIVER
+Route::get('/assign-driver', function () {
+    return view('company/dispatcher/assign-driver');
+});
 
 Route::get('/', function () {
     return view('welcome');

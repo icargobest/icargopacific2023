@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/mdb.min.css" />
     <!-- Google Poppins Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <style>
         .primary {
         background-color: #214D94;

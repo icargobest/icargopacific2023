@@ -10,11 +10,28 @@
     <!-- Google Poppins Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
-        th, td {
-            text-align: center;
-            }
+        body{
+            font-family: 'Poppins';
+        }
         .align-left {
             text-align: left;
+        }
+        .img-size {
+            max-width: 100%;
+            height: auto;
+            max-width: 250px;
+        }
+        th {
+            background-color: white !important;
+            color: black;
+            font-weight: normal;
+        }
+        td {
+            text-align: left;
+            font-weight: bold;
+        }
+        .form-style {
+            max-width: 170px;
         }
     </style>
     <div class="container-fluid px-5 py-2  h-90">
@@ -162,33 +179,104 @@
                 <!-- table end -->
 
                 <!-- tracking modal -->
-                <div class="modal fade" id="tracking-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal fade" id="tracking-modal" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <!-- title -->
-                            <h5 class="modal-title" id="exampleModalToggleLabel">TRACKING</h5>
-                            <!-- close button -->
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- modal content -->
-                        <div class="modal-body">
-                            Modal
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6"> 
-                                    <div class="child1 ">Information 1</div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                    <div class="child2 h-100">Information 2</div>
+                            <div class="modal-header">
+                                <!-- title -->
+                                <h4 class="modal-title mb-0" id="trackingModalToggleLabel">ORDER DETAILS</h4>
+                                <!-- close button -->
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <!-- modal content -->
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Product Image -->
+                                        <div class="col-xl-6">
+                                            <img src="img/television.png" class="card shadow-0 img-size my-2" alt="television">
+                                            <button class="btn btn-success opacity-75 img-size my-2 px-3 py-2" disabled>
+                                                <h6 class="mb-0 fw-bold text-capitalize">Current Bid: Php 165</h6>
+                                            </button>
+                                            <div class="row form-group align-items-end my-2">
+                                                <div class="col-md-6">
+                                                    <label class="control-label control-label-left fw-bold">BID</label>
+                                                    <input type="number" class="form-control typeahead form-style" placeholder="BID AMOUNT">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-warning mt-2">
+                                                        BID NOW
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Product Information -->
+                                        <div class="col-xl-6">
+                                            <div class="row">
+                                                    <table class="m-2"style="width:100%">
+                                                    <tr>
+                                                        <th><h5 class="fw-bold opacity-75">SENDER</h5></th> 
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Name:</th>
+                                                        <td>irYs Hope</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Address:</th>
+                                                        <td>California</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Contact Number:</th>
+                                                        <td>0999-999-9999</td>
+                                                    </tr>
+                                                    </table>
+                                                    <hr class="opacity-75">
+                                                    <table class="m-2"style="width:100%">
+                                                    <tr>
+                                                        <th><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Name:</th>
+                                                        <td>Moom</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Address:</th>
+                                                        <td>Australia</td>
+                                                        </tr>
+                                                    <tr>
+                                                        <th>Contact Number:</th>
+                                                        <td>0999-999-9999</td>
+                                                    </tr>
+                                                    </table>
+                                                    <hr class="opacity-75">
+                                                    <table class="m-2"style="width:100%">
+                                                    <tr>
+                                                        <th><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ID:</th>
+                                                        <td>26</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Size & Weight:</th>
+                                                        <td>17x30x41 | 97 kg</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Parcel Item:</th>
+                                                        <td>TOOLS</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Freight Charges:</th>
+                                                        <td>Php 68</td>
+                                                    </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <!-- button sa baba -->
-                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
-                        </div>
                         </div>
                     </div>
                 </div>
