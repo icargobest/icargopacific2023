@@ -248,12 +248,10 @@ margin-bottom: 8px;
 
 .links .link span
 {
-display: inline-block;
-font-size: 12px;
-margin-left: 20px;
-white-space: nowrap; 
-display: inline-block;
-text-decoration: none;
+    font-size: 12px;
+    margin-left: 20px;
+    white-space: nowrap; 
+    text-decoration: none;
 }
 
 .sidebar .divider
@@ -289,18 +287,34 @@ color: #1D4586;
 }
 
 
-.links .link:hover, .links .link:active
+.links .link:hover
 {
 background:#EAEBEE ;
 color: #1D4586;
 cursor: pointer;
 }
 
+.links .link i.arrow
+{
+transform: rotate(-180deg);
+min-height: 20px;
+padding: 0px !important;
+}
 
 .bottom-nav
 {
 position: fixed;
 bottom: 0;
+}
+
+.links a
+{
+color: #fff;
+}
+
+.none
+{
+display: none;
 }
 
 /* Holds Content Container*/
