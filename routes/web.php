@@ -174,9 +174,9 @@ Route::get('/dashboard', function () {
 Route::get('/income', [IncomeController::class, 'index']);
 
 //FREIGHT PAGE
-Route::get('/freight', function () {
+/*Route::get('/freight', function () {
     return view('freight/freight');
-});
+});*/
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
@@ -203,6 +203,7 @@ Route::get('/order-form', function () {
 Route::controller(ShipmentController::class)->group(function(){
     Route::get('/company/order','index')->name('companyOrderPanel');
     Route::get('/order','userIndex')->name('userOrderPanel');
+    Route::get('/freight','freight')->name('freightPanel');
     Route::post('/add_order','addOrder')->name('addOrder');
     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
     Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');

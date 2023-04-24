@@ -18,7 +18,7 @@ class ShipmentController extends Controller
 {
     private $shipment;
     private $bid;
-    
+
 
     public function index(){
         $shipment = Shipment::all();
@@ -32,6 +32,13 @@ class ShipmentController extends Controller
         $bid = Bid::all();
 
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function freight(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     function postOrder(){
