@@ -43,7 +43,6 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->string('station_id');
-            $table->string('station_name');
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -67,6 +66,7 @@ return new class extends Migration
             $table->decimal('total_price', 8, 2)->nullable()->default;
             $table->string('order_status')->nullable()->default;
             $table->string('status');
+            $table->string('photo', 300);
             $table->timestamps();
         });
         Schema::create('order_histories', function (Blueprint $table) {

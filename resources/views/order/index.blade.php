@@ -1,19 +1,20 @@
 <head>
   <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-  <title>Orders</title>
+  <title>Customer | Orders</title>
+  <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @include('layouts.app')
-@extends('partials.navigationUser')
+@include('partials.navigationUser')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
 
   <h4>MY ITEMS</h4>
-  <div class="button-holder row justify-content-end px-2 mb-3">
+  <div class="button-holder row  mx-1 mb-3">
     <a href="/order-form">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary btn-sm btn-block">
             Post Order
         </button>
     </a>
@@ -79,11 +80,11 @@
                             </div>
                         </div>
 
-                        <div class="image-wrapper col">
-                            <div class="image-holder">
-                            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                            </div>
+                    <div class="image-wrapper col">
+                        <div class="image-holder">
+                        <img src="{{asset($ship->photo)}}" alt="">
                         </div>
+                    </div>
 
                         </div>
                     </div>

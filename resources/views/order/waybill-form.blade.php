@@ -3,7 +3,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
 
-    <title>Waybill Form</title>
+    <title>Customer | Waybill Form</title>
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+
 </head>
 
 @include('layouts.app')
@@ -23,7 +25,7 @@
         </div>
     </div>
 
-    <form class="userInputs d-flex px-3"method="POST" action="{{route('addOrder')}}">
+    <form class="userInputs d-flex px-3" method="POST" action="{{route('addOrder')}}" enctype="multipart/form-data">
       {{-- SENDER FORM --}}
      @csrf
       <div class="senderForm-wrapper row p-0 shadow-sm">
@@ -32,24 +34,25 @@
         <div class="senderForm p-4">
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
             <input type="hidden" name="station_id" value="0" class="form-control" />
-            <input type="hidden" name="station_name" value="none" class="form-control" />
 
             {{-- NAME INPUT --}}
             <div class="nameInput mb-4">
-               <span>Full Name <span class="required">*</span></span>
+              <span>
+                <label class="form-label" for="form6Example1">Full Name</label><span class="required">*</span>
+              </span>
                <div class="form-outline">
                  <input type="text" id="form6Example1" name="senderName" class="form-control" required />
-                 {{-- <label class="form-label" for="form6Example1">Full Name</label> --}}
                </div>
              </div>
 
            <!-- Address input -->
            <div class="addressInput mb-4">
-             <span>Street Address <span class="required">*</span></span>
+             <span>
+              <label class="form-label" for="form6Example5">Street Address</label><span class="required">*</span>
+            </span>
              <div class="form-outline">
                <input type="text" id="form6Example5" name="senderAddress" class="form-control" required />
-               {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
-             </div>
+             </div>  
            </div>
 
            <!-- Contact input -->
@@ -58,10 +61,11 @@
 
                {{-- MOBILE INPUT --}}
                <div class="mobileInput">
-                 <span>Mobile Number <span class="required">*</span></span>
+                <span>
+                  <label class="form-label" for="form6Example3">Mobile Number</label><span class="required">*</span>
+                </span>
                  <div class="form-outline">
                    <input type="text" id="form6Example3" name="senderMobile" class="form-control" required />
-                   {{-- <label class="form-label" for="form6Example3">Mobile Number</label> --}}
                  </div>
                </div>
 
@@ -71,10 +75,11 @@
 
                {{-- TELEPHONE INPUT --}}
                <div class="telephoneInput">
-                 <span>Telephone</span>
+                <span>
+                  <label class="form-label" for="form6Example3">Telephone</label>
+                </span>
                  <div class="form-outline">
                    <input type="text" id="form6Example3" name="senderTelephone" class="form-control" />
-                   {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                  </div>
                </div>
 
@@ -82,11 +87,12 @@
            </div>
            {{-- EMAIL INPUT --}}
            <div class="emailInput mb-4">
-             <span>Email Address <span class="required">*</span></span>
+            <span>
+              <label class="form-label" for="form6Example5">Email Address</label> <span class="required">*</span>
+            </span>
              <div class="form-outline">
                <input type="email" id="form6Example5" name="senderEmail" class="form-control" required />
-               {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
-             </div>
+             </div> 
            </div>
 
 
@@ -96,10 +102,11 @@
              <div class="col">
                {{-- MUNICIPALITY --}}
                <div class="municipalityInput">
-                 <span>Municipality/ City <span class="required">*</span></span>
+                <span>
+                  <label class="form-label" for="form6Example3">Municipality/City</label> <span class="required">*</span>
+                </span>
                  <div class="form-outline">
                    <input type="text" id="form6Example3" name="senderCity" class="form-control" required />
-                   {{-- <label class="form-label" for="form6Example3">Municipality/City</label> --}}
                  </div>
                </div>
 
@@ -108,10 +115,11 @@
              <div class="col">
                  {{-- POSTAL --}}
                  <div class="postalInput">
-                   <span>Postal Code <span class="required">*</span></span>
+                  <span>
+                    <label class="form-label" for="form6Example3">Postal Code</label> <span class="required">*</span>
+                  </span>
                    <div class="form-outline">
                      <input type="text" id="form6Example3" name="senderZip" class="form-control" required />
-                     {{-- <label class="form-label" for="form6Example3">Postal Code</label> --}}
                    </div>
                  </div>
 
@@ -120,10 +128,11 @@
 
            <!--State input-->
            <div class="stateInput mb-4">
-             <span>State <span class="required">*</span></span>
+            <span>
+              <label class="form-label" for="form6Example3">State</label> <span class="required">*</span>
+            </span>
              <div class="form-outline">
                <input type="text" id="form6Example3" name="senderState" class="form-control" required />
-               {{-- <label class="form-label" for="form6Example3">State</label> --}}
              </div>
            </div>
 
@@ -371,7 +380,7 @@
             <div class="imageInput w-50">
               <span>Image<span class="required">*</span></span>
               <div class="form-outline mb-4">
-                <input type="file" id="form6Example5" class="form-control" />
+                <input type="file" name="photo"  id="photo"/>
               </div>
             </div>
 
