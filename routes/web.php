@@ -44,7 +44,7 @@ use App\Http\Controllers\UserController;
 
 //TRANSFER FORWARDING PAGE
 Route::get('/forward', function () {
-    return view('admin/forward');
+    return view('super-admin/forward');
 });
 //WAYBILL - ACCEPT BID PAGE
 Route::get('/accept-bid', function () {
