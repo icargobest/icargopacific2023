@@ -34,6 +34,7 @@
 
 .button-holder button{
     width: 150px;
+    height: 35px;
 
     font-size: 13px;
     font-weight: 500;
@@ -99,12 +100,13 @@
 
  /* CARD IMAGE */
 .image-wrapper{
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .order-container .image-holder{
-    height: 165px;
-    width: 165px;
+    height: fit-content;
+    width: fit-content;
     /* border: 1px solid blue; */
     border-radius: 7px;
     object-fit: cover;
@@ -169,3 +171,28 @@
     background-color: rgb(249, 205, 26,0.9) !important;
     font-size: 13px;
 }
+
+@media (max-width: 600px) {
+    
+.order-container h6{
+    font-size: 15px;
+}
+
+.order-container .image-holder{
+    height: 150px;
+    width: 150px;
+}
+.button-holder{
+    justify-content: center;
+    width: 100%;
+}
+
+.button-holder button{
+    width: 100% !important;
+    height: 45px;
+
+    font-size: 15px;
+}
+
+
+  }

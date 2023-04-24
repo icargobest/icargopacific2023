@@ -1,19 +1,20 @@
 <head>
   <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-  <title>Orders</title>
+  <title>Customer | Orders</title>
+  <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @include('layouts.app')
-@extends('partials.navigationUser')
+@include('partials.navigationUser')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
 
   <h4>MY ITEMS</h4>
-  <div class="button-holder row justify-content-end px-2 mb-3">
+  <div class="button-holder row  mx-1 mb-3">
     <a href="/order-form">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary btn-sm btn-block">
             Post Order
         </button>
     </a>
