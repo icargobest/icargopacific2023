@@ -67,32 +67,11 @@
 
     <!--             <div class="divider2">
                 </div> -->
-
-                <div class="link2">
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-bell link-i-4"></i>
-                            <span>Notifications</span>
-                        </div>
-                    </div>
-
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-envelope link-i-4"></i>
-                            <span>Messages</span>
-                        </div>
-                    </div>
-
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-plus link-i-4"></i>
-                            <span>List Items</span>
-                        </div>
-                    </div>
-
-                    <div class="links">
+    
+        
+                    <div class="links bottom-nav">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <div class="link">
+                            <div class="link ">
                                 <i class="fa fa-sign-out"></i>
                                     <span>Logout</span>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
