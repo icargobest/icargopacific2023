@@ -38,6 +38,7 @@
                             <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
                             <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
                             <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
+                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
                         </ul>
                     </div>
 
@@ -54,6 +55,7 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">
