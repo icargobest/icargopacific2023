@@ -358,7 +358,7 @@
             <!--Bid input-->
             <div class="form-outline mb-5">
                 <div class="bidInput">
-                  <span>Minimum Bid <span class="required">*</span></span>
+                  <span>Maximum Bid <span class="required">*</span></span>
                   <div class="form-outline">
                     <input type="text" id="form6Example3" name="amount" class="form-control" required/>
                     {{-- <label class="form-label" for="form6Example3">Minimum Bid</label> --}}

@@ -45,11 +45,11 @@ return new class extends Migration
             $table->string('station_id');
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('senders');
+            $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
             $table->unsignedBigInteger('recipient_id');
-            $table->foreign('recipient_id')->references('id')->on('recipients');
+            $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
             $table->decimal('weight', 8, 2);
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2);

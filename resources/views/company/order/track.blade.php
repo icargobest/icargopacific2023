@@ -26,9 +26,10 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}<</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
+                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
                         </ul>
                     </div>
                     <div class="receiverInfo col-lg-6">
@@ -38,6 +39,7 @@
                             <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
                             <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
                             <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
+                            <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                         </ul>
                     </div>
 
