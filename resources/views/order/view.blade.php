@@ -12,6 +12,21 @@
 
 
   <h4>MY ITEMS</h4>
+  @if ($ship->status != 'Cancelled')
+    <a href="">
+        <button type="button" class="btn btn-primary">
+            Edit
+        </button>
+    </a>
+    <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
+    @csrf
+    @method('PUT')
+        <button type="submit" class="btn btn-danger">
+            Cancel Order
+        </button>
+    </form>
+  @endif
+
   <div class="cards-holder">
 
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -26,9 +41,10 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
+                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
                         </ul>
                     </div>
                     <div class="receiverInfo col-lg-6">
@@ -38,7 +54,7 @@
                             <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
                             <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
                             <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
+                            <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                         </ul>
                     </div>
 
@@ -55,7 +71,6 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 <li>Company | <span>{{$ship->company_bid}}</span></li>
-                                <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">
@@ -83,9 +98,6 @@
                     </a>
                 @endif
                 </div>
-
-
-
                 </div>
 
                 <table class="table table-striped">

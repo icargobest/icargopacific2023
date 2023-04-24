@@ -152,6 +152,15 @@ class ShipmentController extends Controller
         return redirect()->back();
     }
 
+    function cancelOrder($id){
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->status = 'Cancelled';
+        $shipment->save();
+
+        return redirect()->back();
+    }
+
     function viewOrder($id){
         $bid = Bid::all();
 
@@ -184,6 +193,13 @@ class ShipmentController extends Controller
     {
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
+    }
+
+    function orderHistory(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('order.order-history', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
 
