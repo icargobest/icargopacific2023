@@ -12,20 +12,30 @@
 
 
   <h4>MY ITEMS</h4>
-  @if ($ship->status != 'Cancelled')
-    <a href="">
-        <button type="button" class="btn btn-primary">
-            Edit
-        </button>
-    </a>
-    <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
-    @csrf
-    @method('PUT')
-        <button type="submit" class="btn btn-danger">
-            Cancel Order
-        </button>
-    </form>
+  @if($ship->company_bid == null && $ship->bid_amount == null)
+    @if ($ship->status != 'Cancelled')
+        <a href="">
+            <button type="button" class="btn btn-primary">
+                Edit
+            </button>
+        </a>
+        <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
+        @csrf
+        @method('PUT')
+            <button type="submit" class="btn btn-danger">
+                Cancel Order
+            </button>
+        </form>
+    @endif
   @endif
+  <div>
+      @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+          <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn col-2">
+              Track Order
+          </a>
+      @endif
+  </div>
+
 
   <div class="cards-holder">
 
@@ -89,14 +99,9 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="{{asset($ship->photo)}}" alt="">
+                        <img src="{{asset($ship->photo)}}" alt="">
                     </div>
-
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
-                    <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn">
-                        Track Order
-                    </a>
-                @endif
+                </div>
                 </div>
                 </div>
 

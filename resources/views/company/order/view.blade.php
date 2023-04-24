@@ -12,6 +12,14 @@
 
 
   <h4>Order #{{$ship->id}}</h4>
+  <div>
+    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+        <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
+            Track Order
+        </a>
+    @endif
+  </div>
+
   <div class="cards-holder">
 
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -26,7 +34,7 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
                             <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
@@ -84,11 +92,7 @@
                     </div>
                 </div>
 
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
-                        Track Order
-                    </a>
-                @else
+                @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
                     <form method="POST" action="{{route('addBid')}}">
                         @csrf
                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />

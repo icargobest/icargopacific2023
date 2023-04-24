@@ -15,7 +15,7 @@
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing'))
+              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred'))
                 @if($ship->status != 'Cancelled' && $ship->status != 'Delivered')
                 {{-- CARD CREATED AFTER FILLING UP --}}
                 <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
@@ -74,7 +74,7 @@
 
                         <div class="image-wrapper col">
                             <div class="image-holder">
-                            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                            <img src="{{asset($ship->photo)}}" alt="">
                             </div>
                         </div>
 
