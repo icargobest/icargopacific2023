@@ -71,13 +71,25 @@
               </div>
 
 
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block" id="addModal2" data-mdb-dismiss="modal">
-                  Save changes
-                </button>
-                <a href="{{route('EmployeePanel')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
-                  Cancel
-                </a>
+              <div class="button-modal-container">
+
+                  <div class="leftmodal-button-container">
+                      <button type="reset" class="btn btn-outline-primary" data-mdb-dismiss="modal">
+                          Reset
+                      </button>
+                  </div>
+
+                  <div class="rightmodal-button-container">
+        
+                    <button type="submit" class="btn btn-primary" id="addModal2"data-mdb-dismiss="modal">
+                        Save
+                    </button>
+
+                    <a href="{{route('staff.view')}}"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        CANCEL
+                      </button>
+                    </a>
+                  </div>
               </div>
                 </div>
             </form>

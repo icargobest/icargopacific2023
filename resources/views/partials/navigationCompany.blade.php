@@ -14,10 +14,6 @@
 
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-            
-           {{--  BOX ICON --}}
-            <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-            
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
@@ -79,6 +75,13 @@
 
                       </div>
                       <div class="links">
+                          <div class="link">
+                              <i class="fa fa-history link-i-1"></i>
+                              <span>Order History </span>
+                          </div>
+                      </div>
+
+                      <div class="links">
 
                         <div class="link" >
                             <i class="fa fa-forward link-i-1"></i>
@@ -86,47 +89,32 @@
                         </div>
 
                     </div>
-                    <div  id="toggle-icon" class="links" >
-                        <div class="link"style="display: flex;justify-content: space-between;">
-                            <i class="fa fa-history link-i-1" ><span>Staff</span></i>
-                            <i id="toggle-icon" class="bx bxs-chevron-down"></i>
-                        </div>
-                    </div>
-
-                    <div id="toggle-div1" class="links" >
-                      <a class="nav-link" href="/company/staff">
+                    <div class="links">
+                      <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                         <div class="link">
                             <i class="fa fa-user link-i-1"></i>
-                            <span>Employees </span>
+                            <span>Staff </span>
                         </div>
                       </a>
                     </div>
-      
-                    <div id="toggle-div2" class="links">
-                      <a class="nav-link" href="/company/dispatcher">
+
+                    <div class="links">
+
+                      <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                           <div class="link" >
                               <i class="fa fa-id-card link-i-1"></i>
                               <span>Dispatcher</span>
                           </div>
-                      </a> 
+                      </a>
+
                   </div>
-                  <div id="toggle-div3" class="links">
+                  <div class="links">
                       <a class="nav-link" href="/company/drivers">
                           <div class="link">
                               <i class="fa fa-id-card-o link-i-1"></i>
                               <span>Driver</span>
                           </div>
                       </a>
-                  </div>
-
-
-                  <div class="links">
-                    <a class="nav-link" href="/company/stations">
-                        <div class="link">
-                            <i class="fa fa-charging-station link-i-1" ></i>
-                            <span>Station</span>
-                        </div>
-                    </a>
                   </div>
 
                   <div class="links">
@@ -136,14 +124,42 @@
                     </div>
                   </div>
 
-                </div>
+                  <div class="links">
+                    <div class="link">
+                        <i class="fa fa-envelope-o link-i-1"></i>
+                        <span>Subscription</span>
+                    </div>
+                  </div>
+                    </div>
 
         <!--             <div class="divider2">
                     </div> -->
-            
-                        <div class="links bottom-nav">
+
+                    <div class="link2">
+                        <div class="links">
+                            <div class="link">
+                                <i class="fa fa-bell link-i-2"></i>
+                                <span>Notifications</span>
+                            </div>
+                        </div>
+
+                        <div class="links">
+                            <div class="link">
+                                <i class="fa fa-envelope link-i-2"></i>
+                                <span>Messages</span>
+                            </div>
+                        </div>
+
+                        <div class="links">
+                            <div class="link">
+                                <i class="fa fa-plus link-i-2"></i>
+                                <span>List Items</span>
+                            </div>
+                        </div>
+
+                        <div class="links">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                              <div class="link ">
+                              <div class="link">
                                   <i class="fa fa-sign-out"></i>
                                       <span>Logout</span>
                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -157,5 +173,6 @@
 
             </div>
         </div>
+
 
         <div class="content-container">
