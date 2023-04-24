@@ -26,6 +26,40 @@
                 </div>
             </div>
 
+            <div class="top-container2">
+                <h5 class="fw-normal mb-2 d-inline"> FILTERS:</h5>
+                <div class="dropdown-container">
+
+                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
+                        <option value="1" hidden>Title</option>
+                        <option value="1">Head Developer</option>
+                        <option value="2">Head Designer</option>
+                        <option value="3">CEO</option>
+                    </select>
+
+                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
+                        <option value="1" hidden>Status</option>
+                        <option value="1">Active</option>
+                        <option value="2">Pending</option>
+                        <option value="3">Archived</option>
+                    </select>
+
+                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
+                        <option value="1" hidden>Position</option>
+                        <option value="1">Head Developer</option>
+                        <option value="2">Head Designer</option>
+                        <option value="3">CEO</option>
+                    </select>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="mt-2">
+            @include('partials.messages')
+        </div>
+
+        <div class="table-container">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -36,7 +70,6 @@
                     <th scope="col" style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>
-
                 <tbody>
                     @foreach ($staff as $staff)
                         @if ($staff->archived == true)
@@ -48,13 +81,10 @@
                                 <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/drivers.show')@include('company/drivers.restore')</td>
                             </tr>
                         @endif
-                    @endforeach    
+                    @endforeach
+
                 </tbody>
             </table>
-
-            <div class="d-flex">
-            </div>
-
         </div>
     </div>  
 </main>
