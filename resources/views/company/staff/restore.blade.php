@@ -14,9 +14,9 @@
           <form method="POST" action="{{route('staff.unarchive', $staff->id)}}">
             @csrf
             @method ('PUT')
-            <h4>Are you sure you want to restore staff #<strong>{{$staff->id}}</strong>?</h4>
+            <h4>Are you sure you want to <span style="color:#198754; font-weight:bolder">restore</span> this Employee?</h4>
             <div class="modal-footer">
-                <button type="submit" class="btn primary btn-primary btn-block">
+                <button type="submit" class="btn btn-success btn-block">
                   Restore
                 </button>
                 <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">

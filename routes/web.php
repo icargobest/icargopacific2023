@@ -218,7 +218,7 @@ Route::get('/order-form', function () {
 Route::controller(ShipmentController::class)->group(function(){
     Route::get('/company/order','index')->name('companyOrderPanel');
     Route::get('/order','userIndex')->name('userOrderPanel');
-    Route::get('/freight','freight')->name('freightPanel');
+    Route::get('/company/freight','freight')->name('freightPanel');
     Route::post('/add_order','addOrder')->name('addOrder');
     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
     Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');

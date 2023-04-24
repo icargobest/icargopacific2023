@@ -9,11 +9,10 @@
     <input type="hidden" name="id" value="{{$shipments['id']}}"><br><br>
     <label class="form-label" for="trackingNum">Tracking Number: {{$shipments['tracking_number']}}</label><br><br>
     <label class="form-label" for="stationfromID">Transfer from Station#: {{$shipments['station_id']}}</label><br><br>
-    <label class="form-label" for="stationNumber">Transfer To:</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="transferto_station_id" required>
-        @foreach($stations as $stats)
-        <option value="{{$stats->station_number}}">{{$stats->station_number}}</option>
-        @endforeach
-    </select>
+    <label class="form-label" for="stationfromName">Station Name: {{$shipments['station_name']}}</label><br><br>
+    <label class="form-label" for="transferto_station_id">Transfer To:</label>
+    <input type="text" name="transferto_station_id" placeholder="Enter Station ID" required><br><br>
+    <label class="form-label" for="transferto_station">Station Name:</label>
+    <input type="text" name="transferto_station" placeholder="Enter Station Name" required><br><br>
     <button type="submit">Transfer</button>
 </form>

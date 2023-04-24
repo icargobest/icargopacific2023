@@ -213,10 +213,16 @@ class ShipmentController extends Controller
     public function transfer(Request $request)
     {
         $data = Shipment::find($request->id);
+        $data = $request->validate([
+            'transferto_station_id' => 'required'
+        ], [
+            'transferto_station_id.required' => 'Transfer to Station ID is required'
+        ]);
+        
         $data->station_id=$request->transferto_station_id;
         $data->status = 'Transferred';
         $data->save();
 
-        return redirect('company/order');
+        return redirect('/company/freight');
     }
 }
