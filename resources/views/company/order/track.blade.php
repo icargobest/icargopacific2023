@@ -26,10 +26,9 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}<</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
                         </ul>
                     </div>
                     <div class="receiverInfo col-lg-6">
@@ -39,7 +38,6 @@
                             <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
                             <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
                             <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                         </ul>
                     </div>
 
@@ -74,7 +72,7 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="{{asset($ship->photo)}}" alt="">
+                    <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
                     </div>
 
                     <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
@@ -110,15 +108,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Order Status: Processing</h5>
                             <p class="card-text">Your order is currently being processed.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @elseif($ship->status == 'Transferred')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status</h5>
-                            <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
-                            <p class="card-text">Your order has already been transferred to another station.</p>
                             <p class="card-text">Date : {{$ship->updated_at}}</p>
                         </div>
                     </div>
