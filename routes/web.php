@@ -218,7 +218,7 @@ Route::controller(ShipmentController::class)->group(function(){
 
     Route::group(['prefix' => 'company'], function () {
         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-        Route::post('/transfer','transfer')->name('shipment.transfer');
+        Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
     });
 });
 

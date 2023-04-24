@@ -5,7 +5,7 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationUser')
+  @extends('partials.navigationCompany')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
