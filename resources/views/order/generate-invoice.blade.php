@@ -198,7 +198,7 @@
 
 
     <br>
-    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->tracking_number", 'QRCODE',10, 10) }}" alt="QR Code">
+    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE',10, 10) }}" alt="QR Code">
     <p class="text-center">
         <img src="/img/icargo-logo-1.jpg" style="max-height:150px;">
     </p>
