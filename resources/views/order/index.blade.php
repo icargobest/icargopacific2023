@@ -80,7 +80,7 @@
 
                     <div class="image-wrapper col">
                         <div class="image-holder">
-                        <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                        <img src="{{asset($ship->photo)}}" alt="">
                         </div>
                     </div>
 
