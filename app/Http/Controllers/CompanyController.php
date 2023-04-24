@@ -18,29 +18,6 @@ class CompanyController extends Controller
     public function create(){
         return view('company.create');
     }
-
-    public function viewFreight(){
-        $data = Shipments::all();
-        return view('company.freight',['shipments'=>$data]);
-    }
-
-    public function transferShipment($id)
-    {
-        $data = Shipments::find($id);
-        return view('/company/edit',['shipments'=>$data]);
-    }
-
-    public function transfer(Request $request)
-    {
-        $data = Shipments::find($request->id);
-        $data->station_id=$request->station_id;
-        $data->station=$request->station;
-        $data->save();
-
-        return redirect('company/freight');
-    }
-
-
      // company registration
      public function store(Request $request)
      {

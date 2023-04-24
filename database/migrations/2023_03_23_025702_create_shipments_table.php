@@ -43,14 +43,13 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->string('station_id');
-            $table->string('station_name');
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('senders');
+            $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
             $table->unsignedBigInteger('recipient_id');
-            $table->foreign('recipient_id')->references('id')->on('recipients');
+            $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
             $table->decimal('weight', 8, 2);
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2);
@@ -67,6 +66,7 @@ return new class extends Migration
             $table->decimal('total_price', 8, 2)->nullable()->default;
             $table->string('order_status')->nullable()->default;
             $table->string('status');
+            $table->string('photo', 300);
             $table->timestamps();
         });
         Schema::create('order_histories', function (Blueprint $table) {
