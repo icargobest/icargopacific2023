@@ -5,13 +5,19 @@
 
 <!-- Navbar -->
 @include('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationAdmin')
 <!-- Navbar -->
 
-<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-<link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
-<script src="{{ asset('js/bootstrap.js')}}"></script>
-<script src="{{ asset('js/mdb.min.js')}}"></script>
+<!--Bootstrap CSS-->
+<link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
+    <!-- Google Poppins Font -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
     th {
@@ -138,4 +144,3 @@
 <!-- Container -->
 </div>
 
-<script src="/js/bootstrap.bundle.js"></script>
