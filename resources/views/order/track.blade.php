@@ -74,7 +74,7 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                    <img src="{{asset($ship->photo)}}" alt="">
                     </div>
 
                     <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
@@ -88,6 +88,63 @@
             </div>
             </div>
         {{-- END OF CARD --}}
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Order Summary</h3>
+                @if($ship->status == 'Pending')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status: Pending</h5>
+                            <p class="card-text">Your order is currently pending.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @elseif($ship->status == 'Processing')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status: Processing</h5>
+                            <p class="card-text">Your order is currently being processed.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @elseif($ship->status == 'Transferred')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status</h5>
+                            <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
+                            <p class="card-text">Your order has already been transferred to another station.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @elseif($ship->status == 'Shipped')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status: Shipped</h5>
+                            <p class="card-text">Your order has been shipped.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @elseif($ship->status == 'In Transit')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status: In Transit</h5>
+                            <p class="card-text">Your order has been shipped.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @elseif($ship->status == 'Delivered')
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Status: Delivered</h5>
+                            <p class="card-text">Your order has been delivered.</p>
+                            <p class="card-text">Date : {{$ship->updated_at}}</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+        
     </div>
 </div>
 {{-- END OF ORDER CONTAINER --}}
