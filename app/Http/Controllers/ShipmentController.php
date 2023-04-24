@@ -86,6 +86,8 @@ class ShipmentController extends Controller
 
         // Insert shipment data
         $shipmentData = [
+            'station_id' => $request->station_id,
+            'station_name' => $request->station_name,
             'tracking_number' => fake()->isbn13(),
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
@@ -182,5 +184,22 @@ class ShipmentController extends Controller
     {
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
+    }
+
+
+    public function transferShipment($id)
+    {
+        $data = Shipment::find($id);
+        return view('/company/order/transfer',['shipments'=>$data]);
+    }
+
+    public function transfer(Request $request)
+    {
+        $data = Shipment::find($request->id);
+        $data->station_id=$request->transferto_station_id;
+        $data->station_name=$request->transferto_station;
+        $data->save();
+
+        return redirect('company/order');
     }
 }

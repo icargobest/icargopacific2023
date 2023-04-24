@@ -46,6 +46,9 @@ class LoginController extends Controller
             else if ($user->type == 'dispatcher') {
                 return redirect()->route('dispatcher.dashboard');
             }
+            else if ($user->type == 'staff') {
+                return redirect()->route('staff.dashboard');
+            }
     
             else{
                 return redirect()->route('dashboard');

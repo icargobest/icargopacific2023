@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>iCargo</title>
+    <title>Document</title>
 
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
             <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
@@ -31,3 +31,25 @@
 
 @extends('partials.navigationCompany')
 @extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        @include('flash-message')
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                   
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                     You are login as a staff role.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

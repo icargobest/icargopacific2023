@@ -79,10 +79,15 @@
 
                     <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
                         Invoice
-                    </a>
+                    </a><br>
+                    @if($ship->station_id == 0)
+                    <a href="{{route('viewTransfer', $ship->id)}}" class="btn btn-dark btn-sm">
+                        Transfer
+                    </a><br>
+                    @endif
                     <a href="#" class="btn btn-dark btn-sm">
                         Print Waybill
-                    </a>
+                    </a><br>
                 </div>
                 </div>
             </div>
