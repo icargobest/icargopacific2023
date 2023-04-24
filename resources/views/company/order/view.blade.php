@@ -56,7 +56,7 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
-                                    <li>Minimum Bid | <span>{{$ship->min_bid_amount}}</span></li>
+                                    <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
                                 @else
                                     <li>Company | <span>{{$ship->company_bid}}</span></li>
                                 @endif
@@ -80,8 +80,9 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="{{asset($ship->photo)}}" alt="">
+                        <img src="{{asset($ship->photo)}}" alt="">
                     </div>
+                </div>
 
                 @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
                     <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
@@ -93,7 +94,7 @@
                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                         <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
-                        <div class="form-outline mb-5">
+                        <div class="form-outline mb-5 col-2">
                             <div class="bidInput">
                               <span>Bid<span class="required"></span></span>
                               <div class="form-outline">
