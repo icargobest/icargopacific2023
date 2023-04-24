@@ -91,7 +91,7 @@ return new class extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('order_histories');
+        Schema::dropIfExists('oder_histories');
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
         Schema::dropIfExists('shipments');
