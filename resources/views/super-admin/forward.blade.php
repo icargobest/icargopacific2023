@@ -1,3 +1,8 @@
+<head>
+    <title>ADMIN | TRANSFER TO FORWARDING</title>
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+</head>
+
 <!-- Navbar -->
 @include('layouts.app')
 @include('partials.navigationCompany')

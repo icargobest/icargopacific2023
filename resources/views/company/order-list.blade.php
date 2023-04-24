@@ -1,6 +1,11 @@
+    <head>
+        <title>STAFF | ORDER LIST</title>
+        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+    </head>
+    
     @include('layouts.app')
     @include('partials.navigationCompany')
-    
+
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <!-- Font Awesome -->

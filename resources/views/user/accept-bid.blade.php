@@ -1,3 +1,8 @@
+    <head>
+        <title>USER | ACCEPT BID</title>
+        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+    </head>
+    
     @include('layouts.app')
     @include('partials.navigationUser')
 

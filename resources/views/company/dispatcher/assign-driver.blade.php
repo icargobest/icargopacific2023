@@ -1,3 +1,8 @@
+    <head>
+        <title>DISPATCHER | ASSIGN DRIVER</title>
+        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+    </head>
+    
     @include('layouts.app')
     @include('partials.navigationCompany')
     
