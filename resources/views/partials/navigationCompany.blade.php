@@ -21,7 +21,7 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-            
+
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
@@ -37,61 +37,54 @@
 
         <div class="sidebar">
             <div class="wrapper">
-      
-      
+
+
                 <div class="search-bar-container">
                     <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input class="input"id="search-input" placeholder="Tracking ID">
                 </div>
-      
+
                 <div class="divider">
                 </div>
-                
+
                 <div class="links-wrapper">
                     <div class="link1">
                         <div class="links">
-      
+
                             <a class="nav-link" href="/company/dashboard">
                             <div class="link" >
                                 <i class="fa fa-tachometer link-i-1" ></i>
                                 <span>Dashboard</span>
                             </div>
                             </a>
-                            
+
                         </div>
                         <div class="links">
+                            <a class="nav-link" href="{{route('companyOrderPanel')}}">
                             <div class="link">
                                 <i class="fa fa-list link-i-1"></i>
                                 <span>Order List </span>
                             </div>
+                            </a>
                         </div>
-      
+
                         <div class="links">
-      
+
                           <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
                           </div>
                           </a>
-                          
+
                       </div>
                       <div class="links">
-                          <div class="link">
-                              <i class="fa fa-history link-i-1"></i>
-                              <span>Order History </span>
-                          </div>
-                      </div>
-      
-                      <div class="links">
-      
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
+
                         <div class="link" >
                             <i class="fa fa-forward link-i-1"></i>
                             <span>Adv. Freight Forwarding</span>
                         </div>
-                        </a>
-                        
+
                     </div>
                     <div  id="toggle-icon" class="links" >
                         <div class="link"style="display: flex;justify-content: space-between;">
@@ -100,8 +93,8 @@
                         </div>
                     </div>
 
-                    <div id="toggle-div1" class="links none" >
-                      <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
+                    <div id="toggle-div1" class="links" >
+                      <a class="nav-link" href="/company/staff">
                         <div class="link">
                             <i class="fa fa-user link-i-1"></i>
                             <span>Employees </span>
@@ -109,7 +102,7 @@
                       </a>
                     </div>
       
-                    <div id="toggle-div2" class="links none">
+                    <div id="toggle-div2" class="links">
                       <a class="nav-link" href="/company/dispatcher">
                           <div class="link" >
                               <i class="fa fa-id-card link-i-1"></i>
@@ -117,7 +110,7 @@
                           </div>
                       </a> 
                   </div>
-                  <div id="toggle-div3" class="links none">
+                  <div id="toggle-div3" class="links">
                       <a class="nav-link" href="/company/drivers">
                           <div class="link">
                               <i class="fa fa-id-card-o link-i-1"></i>
@@ -125,22 +118,26 @@
                           </div>
                       </a>
                   </div>
-      
+
+
+                  <div class="links">
+                    <a class="nav-link" href="/company/stations">
+                        <div class="link">
+                            <i class="fa fa-charging-station link-i-1" ></i>
+                            <span>Station</span>
+                        </div>
+                    </a>
+                  </div>
+
                   <div class="links">
                     <div class="link">
                         <i class="fa fa-history link-i-1"></i>
                         <span>Order History</span>
                     </div>
                   </div>
-      
-                  <div class="links">
-                    <div class="link">
-                        <i class="fa fa-envelope-o link-i-1"></i>
-                        <span>Subscription</span>
-                    </div>
-                  </div>
-                    </div>
-        
+
+                </div>
+
         <!--             <div class="divider2">
                     </div> -->
             
@@ -157,7 +154,7 @@
                       </div>
                     </div>
                 </div>
-      
+
             </div>
         </div>
 

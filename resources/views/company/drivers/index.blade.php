@@ -58,7 +58,7 @@
         </section>
 
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
 
@@ -127,53 +127,65 @@
             @csrf
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
-            <div class="form-outline mb-4">
-                <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" required/>
-                  <label class="form-label" for="form6Example1">FULL NAME</label>
-
-                  @error('name')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
-                  
+            <!-- Driver Name -->
+            <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                  @error('name')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                    <label class="form-label" for="form6Example1">FULL NAME</label>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="form6Example5"  name="email" class="form-control"required />
-              <label class="form-label" for="form6Example5">EMAIL</label>
-              @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-          
-            <!-- Password -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example3" name="password" class="form-control"required />
-              <label class="form-label" for="form6Example3">PASSWORD</label>
-              @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-            </div>    
-              
-            <!-- Confirm Password -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="password_confirmation" class="form-control"required />
-              <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
-            </div>
+  
+              <!-- Driver Email -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
+                                  @error('email')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                    <label class="form-label" for="form6Example1">EMAIL</label>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Driver password -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                  @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                    <label class="form-label" for="form6Example1">PASSWORD</label>
+                  </div>
+                </div>
+              </div>
+  
+               <!-- Driver confirm password -->
+               <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
+                    <label class="form-label" for="form6Example1">CONFIRM PASSWORD</label>
+                  </div>
+                </div>
+              </div>
             
-
             <div class="row mb-4">
               <label class="form-label" for="vehicle_type"></label>
               <select type="text" id="form6Example5" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
-                <option value="" hidden>DRIVERS DETAIL</option>
+                <option value="" hidden>VEHICLE TYPE</option>
                 <option value="Motorcycle">Motorcycle</option>
                 <option value="Van">Van</option>
                 <option value="Truck">Truck</option>

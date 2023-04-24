@@ -18,7 +18,7 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-            
+
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
@@ -43,18 +43,18 @@
 
             <div class="divider">
             </div>
-            
+
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
 
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
+                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="{{route('userOrderPanel')}}">
                         <div class="link" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
                             <span>Order</span>
                         </div>
                         </a>
-                        
+
                     </div>
                     <div class="links">
                         <div class="link">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-    
+
     <!--             <div class="divider2">
                 </div> -->
     
@@ -88,4 +88,3 @@
 
 
     <div class="content-container">
-        

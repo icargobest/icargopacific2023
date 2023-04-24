@@ -336,6 +336,11 @@ margin-top: 67px;
 
 
 
+/* navFont */
+.navFont
+{
+font-size: 12px !important;
+}
 
 @media screen and (min-width: 664px) {
 

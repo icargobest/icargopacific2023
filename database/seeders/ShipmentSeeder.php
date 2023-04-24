@@ -18,6 +18,8 @@ class ShipmentSeeder extends Seeder
     $faker = Faker::create();
     foreach (range(1,5) as $index) {
         DB::table('shipments')->insert([
+            'station_id' => $faker->numberBetween(1,10),
+            'station' => $faker->randomElement(['Test1','Test2', 'Test3']),
             'tracking_number' => $faker->numberBetween(500,1000),
             'user_id' => $faker->numberBetween(1,10),
             'sender_name' => $faker->name,

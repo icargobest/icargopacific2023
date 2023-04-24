@@ -16,12 +16,21 @@
              <div class="row mb-2">
                <div class="col"> 
                 <div class="label-container">
-                  <label>Driver Name</label>
+                  <label for="id">Driver ID</label>
                 </div>
                  <div class="form-outline">
-                   <input type="text" id="form6Example1" name="updateFullName" value="{{ $user->name }}" class="form-control" />
+                   <input type="text" id="id" name="id" value="{{ $user->id }}" class="form-control" />
                  </div>
+
                </div>
+             </div>
+
+
+             <div class="label-container">
+              <label for="name">Driver Name</label>
+            </div>
+             <div class="form-outline">
+               <input type="text" id="name" name="name" value="{{ $user->name }}" class="form-control" />
              </div>
 
              <!-- Email input -->
@@ -29,7 +38,7 @@
               <label>EMAIL</label>
             </div>
              <div class="form-outline mb-2">
-               <input type="email" id="form6Example5" name="updateEmail" value="{{$user->email}}" class="form-control" />
+               <input type="email" id="email" name="email" value="{{$user->email}}" class="form-control" />
              </div>
 
              <!-- Password input -->
@@ -37,7 +46,7 @@
               <label>Vehicle Type</label>
             </div>
              <div class="form-outline mb-2">
-               <input type="text" id="form6Example5" name="vehicle_type" value="{{$user->driverDetail->vehicle_type}}" class="form-control" />
+               <input type="text" id="vehicle_type" name="vehicle_type" value="{{$user->driverDetail->vehicle_type}}" class="form-control" />
              </div>
 
              <!-- Position -->
@@ -45,8 +54,24 @@
               <label>Plate No.</label>
             </div>
               <div class="form-outline mb-2">
-               <input type="text" id="form6Example4" name="updateRole" value="{{$user->driverDetail->plate_no}}" class="form-control" />
+               <input type="text" id="station_email" name="station_email" value="{{$user->driverDetail->plate_no}}" class="form-control" />
              </div>
+
+             <div class="label-container">
+              <label>Created At</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="text" id="station_email" name="station_email" value="{{$user->created_at}}" class="form-control" />
+             </div>
+
+             <div class="label-container">
+              <label>Updated At</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="text" id="station_email" name="station_email" value="{{$user->updated_at}}" class="form-control" />
+             </div>
+
+
           </fieldset>
                <div class="modal-footer">
                   <a class="btn btn-dark btn-block" data-mdb-dismiss="modal">

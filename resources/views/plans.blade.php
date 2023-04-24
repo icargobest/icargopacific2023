@@ -1,21 +1,20 @@
 @extends('layouts.app')
-
+   
 @section('content')
 <div class="container">
 <section>
-    <div class="container py-5">
-
-    <header class="text=center mb-5 text-black">
-        <div class="row">
-            <div class="col-lg-12 mx-auto">
-                <h1>Monthly Subscription</h1>
-                <h3>Pricing</h3>
-            </div>
+  <div class="container py-5">
+     
+  <header class="text-center mb-5 text-black">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <h1>Monthly Subscription Plan</h1>
+          <h3>Pricing</h3>
         </div>
-    </div>
-</header>
-
-<div class="row text-center align-items-end">
+      </div>
+    </header>
+ 
+    <div class="row text-center align-items-end">
         <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="bg-white p-5 rounded-lg shadow">
             <h1 class="h6 text-uppercase font-weight-bold mb-4">FREE</h1>
@@ -46,7 +45,7 @@
             <a href="#" class="btn btn-primary btn-block shadow rounded-pill">Buy Now</a>
             </div>
         </div>
-
+ 
         @foreach($plans as $plan)
         <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="bg-white p-5 rounded-lg shadow">
@@ -57,16 +56,14 @@
  
             <ul class="list-unstyled my-5 text-small text-left font-weight-normal">
                 <li class="mb-3">
-                <i class="fa fa-check mr-2 text-primary"></i> Lorem ipsum dolor sit amet</li>
+                <i class="fa fa-check mr-2 text-primary"></i>Cloud Tracking and monitoring</li>
                 <li class="mb-3">
-                <i class="fa fa-check mr-2 text-primary"></i> Sed ut perspiciatis</li>
+                <i class="fa fa-check mr-2 text-primary"></i>1000 pcs printing of waybill a month</li>
                 <li class="mb-3">
-                <i class="fa fa-check mr-2 text-primary"></i> At vero eos et accusamus</li>
+                <i class="fa fa-check mr-2 text-primary"></i>Advanced Freight Forwarding</li>
                 <li class="mb-3">
-                <i class="fa fa-check mr-2 text-primary"></i> Nam libero tempore</li>
+                <i class="fa fa-check mr-2 text-primary"></i>Logistic software Management</li>
                 <li class="mb-3">
-                <i class="fa fa-check mr-2 text-primary"></i> Sed ut perspiciatis</li>
-                <li class="mb-3 text-muted">
                 <i class="fa fa-times mr-2"></i>
                 <del>Sed ut perspiciatis</del>
                 </li>
@@ -75,6 +72,9 @@
             </div>
         </div>
         @endforeach
+    </div>
+  </div>
 </section>
+ 
 </div>
 @endsection

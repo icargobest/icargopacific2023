@@ -58,7 +58,7 @@
         </section>
 
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
 
@@ -105,7 +105,7 @@
 
 
 <!-- Modal -->
-<div class="modal top   fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal top   fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -116,32 +116,51 @@
       <div class="modal-divider"></div>
 
         <div class="modal-body">
-          <form method="POST" action="{{route('dispatcher.store')}}">
+            <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" />
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    
                   <label class="form-label" for="form6Example1">DISPATCHER NAME</label>
               </div>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="form6Example5"  name="email" class="form-control" />
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
+
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               <label class="form-label" for="form6Example5">EMAIL</label>
             </div>
           
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example3" name="password" class="form-control" />
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
               <label class="form-label" for="form6Example3">PASSWORD</label>
             </div>    
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
+                <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
               <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
             </div>
                     
