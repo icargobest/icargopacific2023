@@ -217,6 +217,6 @@ class ShipmentController extends Controller
         $data->status = 'Transferred';
         $data->save();
 
-        return redirect('company/order');
+        return redirect('/company/freight');
     }
 }
