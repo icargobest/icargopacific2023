@@ -92,7 +92,7 @@
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
 
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
+                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
                     <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn">
                         Track Order
                     </a>
@@ -120,7 +120,7 @@
                                         <td>{{$bid->company_name}}</td>
                                         <td>{{$bid->bid_amount}}</td>
                                         <td>{{$bid->status}}</td>
-                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted'))
+                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
                                             <td><button tpye="submit" class="btn btn-success btn-sm" disabled>Accept</button></td>
                                         @else
                                             <td><button tpye="submit" class="btn btn-success btn-sm">Accept</button></td>

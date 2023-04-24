@@ -82,6 +82,7 @@
                     <div class="image-holder">
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
+                </div>
 
                 @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
                     <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
@@ -93,7 +94,7 @@
                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                         <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
-                        <div class="form-outline mb-5">
+                        <div class="form-outline mb-5 col-2">
                             <div class="bidInput">
                               <span>Bid<span class="required"></span></span>
                               <div class="form-outline">

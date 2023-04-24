@@ -109,14 +109,8 @@ class ShipmentController extends Controller
             'status' => 'Pending',
         ];
 
-
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
-
-
-
-
-
 
         // Update sender and recipient models
         $sender->shipment_id = $shipment->id;
@@ -234,7 +228,7 @@ class ShipmentController extends Controller
         ], [
             'transferto_station_id.required' => 'Transfer to Station ID is required'
         ]);
-        
+
         $data->station_id=$request->transferto_station_id;
         $data->status = 'Transferred';
         $data->save();

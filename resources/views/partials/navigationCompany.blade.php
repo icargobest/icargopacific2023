@@ -14,10 +14,10 @@
 
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-            
+
            {{--  BOX ICON --}}
             <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-            
+
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
@@ -70,7 +70,7 @@
 
                         <div class="links">
 
-                          <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">
+                          <a class="nav-link" href="{{route('freightPanel')}}">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
@@ -101,14 +101,14 @@
                         </div>
                       </a>
                     </div>
-      
+
                     <div id="toggle-div2" class="links">
                       <a class="nav-link" href="/company/dispatcher">
                           <div class="link" >
                               <i class="fa fa-id-card link-i-1"></i>
                               <span>Dispatcher</span>
                           </div>
-                      </a> 
+                      </a>
                   </div>
                   <div id="toggle-div3" class="links">
                       <a class="nav-link" href="/company/drivers">
@@ -140,7 +140,7 @@
 
         <!--             <div class="divider2">
                     </div> -->
-            
+
                         <div class="links bottom-nav">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                               <div class="link ">
