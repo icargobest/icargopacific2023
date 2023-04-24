@@ -59,8 +59,8 @@
 
             </fieldset>
                  <div class="modal-footer">
-                    <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
-                        Cancel
+                    <a class="btn btn-dark btn-block" data-mdb-dismiss="modal">
+                        Back
                     </a>
                  </div>
          </div>
