@@ -48,7 +48,7 @@ Route::get('/forward', function () {
 });
 //WAYBILL - ACCEPT BID PAGE
 Route::get('/accept-bid', function () {
-    return view('waybill/accept-bid');
+    return view('user/accept-bid');
 });
 //COMPANY - ORDER LIST PAGE
 Route::get('/order-list', function () {
