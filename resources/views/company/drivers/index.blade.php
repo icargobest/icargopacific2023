@@ -91,7 +91,7 @@
                                         Lock
                                     </a>
                                     @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:80px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:85px !important;">
                                         unlock
                                     </a>
                                 @endif
@@ -182,7 +182,6 @@
                 </div>
               </div>
             
-            <h4>Driver Details</h4>
             <div class="row mb-4">
               <label class="form-label" for="vehicle_type"></label>
               <select type="text" id="form6Example5" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>

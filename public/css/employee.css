@@ -5,7 +5,7 @@ text-decoration: none;
 }
 
 
-.staff-header-container
+.employee-header-container
 {
 height: 53px;
 background-color: #214D94;
@@ -15,7 +15,7 @@ color: #fff;
 }
 
 
-.staff-header-container h3
+.employee-header-container h3
 {
 margin: 0px;
 margin-left: 1.5rem;
@@ -59,13 +59,13 @@ margin-bottom: 20px;
     flex-direction: row;
 }
 
-.staff span
+.employee span
 {
 color: #000000;
 }
 
 
-.staff button
+.employee button
 {
 min-width: 80px;
 max-width: 80px;
@@ -82,7 +82,7 @@ border-radius: 0px !important;
 
 
 
-.staff button:hover
+.employee button:hover
 {
 color: #000000;
 font-weight: bolder;
@@ -104,7 +104,7 @@ font-weight: bolder;
 
 /* Add Employee Container */
 
-.add-staff
+.addemployee
 {
 display: flex;
 align-items: flex-end;
@@ -387,7 +387,7 @@ color:#dc3545 !important;
 {
 
 /* Add Employee Container */
-.add-staff
+.addemployee
 {
 margin-left: 1rem;
 }
@@ -397,6 +397,7 @@ margin-left: 1rem;
     margin: none;
     display: inline;
 }
+
 
 
 /* Modal */
@@ -469,7 +470,7 @@ margin-top: 3rem;
 
 }
 
-.top-container2, .add-staff
+.top-container2, .addemployee
 {
 margin-left: 3rem;
 }
@@ -489,18 +490,18 @@ margin-top: 15px;
 /* Dropdown Buttons*/
 
 
-.staff
+.employee
 {
 flex-direction: row;
 }
 
 
-.staff button
+.employee button
 {
 margin-right: 10px;
 }
 
-.staff button
+.employee button
 {
 
 margin-bottom: 5px;

@@ -9,7 +9,7 @@
 
         <div class="addemployee" style="" >
             <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
-            <a href="{{route('staff.viewArchive')}}">
+            <a href="{{route('viewArchive')}}">
                 <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
                     Archived
                  </button>
@@ -21,7 +21,7 @@
             <div class="top-container1" style="max-width: 800px;">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
                 <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Search Staff" aria-label="Search" aria-describedby="search-addon" />
+                    <input type="search" class="form-control rounded" placeholder="Search Employee" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                       <i class="fas fa-search"></i>
                     </span>
@@ -58,7 +58,7 @@
         </section>
 
         <div class="mt-2">
-            @include('flash-message')
+            @include('partials.messages')
         </div>
 
 
@@ -69,22 +69,21 @@
                     <th scope="col"style="text-align:center;">#</th>
                     <th scope="col"style="text-align:center;">Name</th>
                     <th scope="col"style="text-align:center;">Email</th>
-                    <th scope="col"style="text-align:center;">Contact No</th>
+                    {{-- <th scope="col"style="text-align:center;">Position</th> --}}
                     <th scope="col"style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($staff as $staff)
-                        @if ($staff->archived == 0)
+                    @foreach ($employees as $employee)
+                        @if ($employee->archived == 0)
                             <tr>
-                                <td >{{$staff->id}}</td>
-                                <td class="capitalized">{{$staff->user->name}}</td>
-                                <td>{{$staff->contact_no}}</td>
-                                <td>{{$staff->email}}</td>
-                                <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
-                                    @include('company.staff.show')
-                                    @include('company.staff.edit')
-                                    @include('company.staff.archive')
+                                <td >{{$employee->id}}</td>
+                                <td class="capitalized">{{$employee->name}}</td>
+                                <td>{{$employee->email}}</td>
+                                {{-- <td class="capitalized">{{$employee->role}}</td> --}}
+                                <td class="td-buttons d-flex" style="overflow:auto;">@include('employee.view')
+                                    @include('employee.edit')
+                                    @include('employee.archive')
                                 </td>
                             </tr>
                         @endif
@@ -102,64 +101,49 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     
       <div class="modal-divider"></div>
 
         <div class="modal-body">
-          <form method="POST" action="{{route('staff.store')}}">
+          <form method="POST" action="{{route('addEmployee')}}">
             @csrf
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="">
+                  <input type="text" id="form6Example1" name="name" class="form-control" />
                   <label class="form-label" for="form6Example1">FULL NAME</label>
-                  @error('name')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror 
               </div>
             </div>
 
-
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder=""/>
-              @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-              @enderror
+              <input type="email" id="form6Example5"  name="email" class="form-control" />
               <label class="form-label" for="form6Example5">EMAIL</label>
             </div>
-
-            <!-- Contact input -->
-            <div class="form-outline mb-4">
-                <div class="form-outline">
-                    <input id="contact" type="text" class="form-control @error('password') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" required placeholder="">
-                    <label class="form-label" for="form6Example5">Contact</label>
-                    @error('contact_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+          
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input type="password" id="form6Example3" name="password" class="form-control" />
+              <input type="text" id="form6Example3" name="password" class="form-control" />
               <label class="form-label" for="form6Example3">PASSWORD</label>
-            </div>   
+            </div>    
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-              <input type="password" id="form6Example4" name="password_confirmation" class="form-control" />
+              <input type="text" id="form6Example4" name="password_confirmation" class="form-control" />
               <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
             </div>
+                    
+          
+            <!-- Message input -->
+{{--             <div class="form-outline mb-4">
+              <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+              <label class="form-label" for="form6Example7">Additional information</label>
+            </div> --}}
+
 
             <div class="button-modal-container">
 
