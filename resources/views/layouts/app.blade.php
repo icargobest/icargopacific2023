@@ -98,13 +98,13 @@ li
                     
 {{--                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-user"></i>Profile</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
-                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
+                    <li><a class="dropdown-item navFont" href="/subscriptions/plans"><i class="fa fa-credit-card"></i>Payments</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
                     <li><div class="dividerBlack"></div></li> --}}
                     
-                    <li><a class="dropdown-item navFont" href="{{ route('change-password') }}"><i class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
-                    <li><a class="dropdown-item navFont" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
-                    <li><a class="dropdown-item navFont" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
+                    <li><a class="dropdown-item" href="{{ route('change-password') }}"><i class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
+                    <li><a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                             </form>
