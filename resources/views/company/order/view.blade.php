@@ -64,7 +64,7 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
-                                    <li>Minimum Bid | <span>{{$ship->min_bid_amount}}</span></li>
+                                    <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
                                 @else
                                     <li>Company | <span>{{$ship->company_bid}}</span></li>
                                 @endif
@@ -148,16 +148,14 @@
 
 <script>
     // Get the minimum bid amount from the HTML using PHP
-    var minBidAmount = {{$ship->min_bid_amount}};
-
+    var maxBidAmount = {{$ship->min_bid_amount}};
     // Get a reference to the bid amount input field and the bid button
     var bidAmountInput = document.getElementById('form6Example3');
     var bidButton = document.getElementById('bidButton');
-
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount > minBidAmount) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount) {
             bidButton.disabled = true;
         } else {
             bidButton.disabled = false;

@@ -80,14 +80,18 @@
                             <ul>
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                @endif
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">
                             <ul>
                                 <li>Category | <span>{{$ship->category}}</span></li>
                                 <li>Mode of Pament | <span>COD</span></li>
-                                <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
+                                @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
+                                @endif
                             </ul>
                         </div>
 

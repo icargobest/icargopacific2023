@@ -15,75 +15,73 @@
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred'))
-                @if($ship->status != 'Cancelled' && $ship->status != 'Delivered')
-                {{-- CARD CREATED AFTER FILLING UP --}}
-                <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
-                    <div class="item-card container px-4">
-                    <div class="card-body">
-                        <div class="row">
+              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred')))
+              {{-- CARD CREATED AFTER FILLING UP --}}
+              <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
+                  <div class="item-card container px-4">
+                  <div class="card-body">
+                      <div class="row">
 
-                        <div class="details-wrapper col-lg-10 col-sm-12">
-                            <div class="recepients-wrapper row">
+                      <div class="details-wrapper col-lg-10 col-sm-12">
+                          <div class="recepients-wrapper row">
 
-                            <div class="senderInfo col-lg-6">
-                                <h6>SENDER</h6>
+                          <div class="senderInfo col-lg-6">
+                              <h6>SENDER</h6>
 
-                                <ul>
-                                    <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
-                                    <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
-                                    <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
-                                </ul>
-                            </div>
-                            <div class="receiverInfo col-lg-6">
-                                <h6>RECEIVER</h6>
+                              <ul>
+                                  <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
+                                  <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
+                                  <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
+                              </ul>
+                          </div>
+                          <div class="receiverInfo col-lg-6">
+                              <h6>RECEIVER</h6>
 
-                                <ul>
-                                    <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
-                                    <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
-                                    <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                                </ul>
-                            </div>
+                              <ul>
+                                  <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
+                                  <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
+                                  <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
+                              </ul>
+                          </div>
 
-                            </div>
-                            <div class="parcelInfo-wrapper">
+                          </div>
+                          <div class="parcelInfo-wrapper">
 
-                            <div class="itemInfo">
-                                <h6>ITEM INFORMATION</h6>
+                          <div class="itemInfo">
+                              <h6>ITEM INFORMATION</h6>
 
-                                <div class="parcelDetails row">
+                              <div class="parcelDetails row">
 
-                                <div class="listLayout col-lg-6 col-sm-12">
-                                    <ul>
-                                        <li>ID | <span>{{$ship->id}}</span></li>
-                                        <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                    </ul>
-                                </div>
-                                <div class="listLayout col-lg-6 col-sm-12">
-                                    <ul>
-                                        <li>Category | <span>{{$ship->category}}</span></li>
-                                        <li>Mode of Pament | <span>COD</span></li>
-                                    </ul>
-                                </div>
+                              <div class="listLayout col-lg-6 col-sm-12">
+                                  <ul>
+                                      <li>ID | <span>{{$ship->id}}</span></li>
+                                      <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
+                                  </ul>
+                              </div>
+                              <div class="listLayout col-lg-6 col-sm-12">
+                                  <ul>
+                                      <li>Category | <span>{{$ship->category}}</span></li>
+                                      <li>Mode of Pament | <span>COD</span></li>
+                                  </ul>
+                              </div>
 
-                                </div>
-                            </div>
+                              </div>
+                          </div>
 
-                            </div>
-                        </div>
+                          </div>
+                      </div>
 
-                        <div class="image-wrapper col">
-                            <div class="image-holder">
-                            <img src="{{asset($ship->photo)}}" alt="">
-                            </div>
-                        </div>
+                      <div class="image-wrapper col">
+                          <div class="image-holder">
+                          <img src="{{asset($ship->photo)}}" alt="">
+                          </div>
+                      </div>
 
-                        </div>
-                    </div>
-                    </div>
-                </a>
-                {{-- END OF CARD --}}
-                @endif
+                      </div>
+                  </div>
+                  </div>
+              </a>
+              {{-- END OF CARD --}}
               @endif
           @endforeach
           </div>

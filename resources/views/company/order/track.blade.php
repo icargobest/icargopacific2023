@@ -152,6 +152,4 @@
             </div>
         </div>
 
-    </div>
-</div>
 {{-- END OF ORDER CONTAINER --}}

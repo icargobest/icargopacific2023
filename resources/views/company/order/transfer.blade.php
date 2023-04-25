@@ -9,8 +9,7 @@
 @endforeach
 @endif
 
-
-<form method="POST" action="{{route('shipment.transfer',$shipments['id'])}}">
+<form method="POST" action="{{route('shipment.transfer')}}">
     @csrf
     @method('PUT')
     <input type="hidden" name="id" value="{{$shipments['id']}}"><br><br>

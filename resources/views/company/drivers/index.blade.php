@@ -1,3 +1,4 @@
+<title>Driver</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
@@ -28,32 +29,6 @@
                 </div>
             </div>
 
-            <div class="top-container2">
-                <h5 class="fw-normal mb-2 d-inline"> FILTERS:</h5>
-                <div class="dropdown-container">
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Title</option>
-                        <option value="1">Head Developer</option>
-                        <option value="2">Head Designer</option>
-                        <option value="3">CEO</option>
-                    </select>
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Status</option>
-                        <option value="1">Active</option>
-                        <option value="2">Pending</option>
-                        <option value="3">Archived</option>
-                    </select>
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Position</option>
-                        <option value="1">Head Developer</option>
-                        <option value="2">Head Designer</option>
-                        <option value="3">CEO</option>
-                    </select>
-                </div>
-            </div>
 
         </section>
 
@@ -87,11 +62,11 @@
                                     @include('company/drivers.archive')                                
                                     
                                     @if($user->status == 1)
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger" style="width:80px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;">
                                         Lock
                                     </a>
                                     @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:85px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:85px !important;">
                                         unlock
                                     </a>
                                 @endif
