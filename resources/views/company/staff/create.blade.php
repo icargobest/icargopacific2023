@@ -41,7 +41,7 @@
             <!-- Contact input -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                    <input id="contact" type="text" class="form-control @error('password') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" required placeholder="">
+                    <input id="contact" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" required placeholder="">
                     <label class="form-label" for="form6Example5">Contact</label>
                     @error('contact_no')
                         <span class="invalid-feedback" role="alert">
@@ -52,13 +52,19 @@
             </div>
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input type="password" id="form6Example3" name="password" class="form-control" />
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required(true) autocomplete="new-password" placeholder="Password">
+
+              @error('password')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
               <label class="form-label" for="form6Example3">PASSWORD</label>
             </div>   
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-              <input type="password" id="form6Example4" name="password_confirmation" class="form-control" />
+              <input type="password" id="form6Example4" name="password_confirmation" @required(true) class="form-control" />
               <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
             </div>
 

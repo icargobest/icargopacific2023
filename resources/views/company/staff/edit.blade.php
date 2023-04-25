@@ -21,9 +21,9 @@
                     <label>FULL NAME</label>
                   </div>
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" name="updateFullName" value="{{$staff->user->name}}" class="form-control" />
+                    <input type="text" id="form6Example1" name="updateFullName" @error('updateFullName') is-invalid @enderror" value="{{$staff->user->name}}" class="form-control" @required(true) />
                   </div>
-                  @error('name')
+                  @error('updateFullName')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
@@ -37,8 +37,8 @@
               </div>
               <div class="form-outline mb-2">
 
-                <input type="email" id="form6Example5" name="updateEmail" value="{{$staff->user->email}}" class="form-control" />
-                @error('email')
+                <input type="email" id="form6Example5" name="updateEmail" @error('updateEmail') is-invalid @enderror" value="{{$staff->user->email}}" class="form-control" @required(true)/>
+                @error('updateEmail')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -50,8 +50,8 @@
                 <label>Contact No_</label>
               </div>
               <div class="form-outline mb-2">
-                <input type="text" id="form6Example5" name="updateContactNo" value="{{$staff->contact_no}}" class="form-control" />
-                @error('contact_no')
+                <input type="text" id="form6Example5" name="updateContactNo" @error('updateContactNo') is-invalid @enderror value="{{$staff->contact_no}}" class="form-control" @required(true)/>
+                @error('updateContactNo')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -62,8 +62,8 @@
                 <label>PASSWORD</label>
               </div>
               <div class="form-outline mb-2">
-                <input type="password" id="form6Example5" name="updatePassword" value="{{$staff->user->password}}" class="form-control" />
-                @error('password')
+                <input type="password" id="form6Example5" name="updatePassword" @error('updatePassword') is-invalid @enderror value="{{$staff->user->password}}" class="form-control" @required(true)/>
+                @error('updatePassword')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -75,7 +75,7 @@
                 <button type="submit" class="btn btn-primary btn-block" id="addModal2" data-mdb-dismiss="modal">
                   Save changes
                 </button>
-                <a href="{{route('EmployeePanel')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
+                <a href="{{route('staff.index')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
                   Cancel
                 </a>
               </div>

@@ -16,8 +16,12 @@ use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeStaffController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DispatcherDashboardController;
+use App\Http\Controllers\DriverDashboardController;
+
 
 
 /*
@@ -78,7 +82,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 // Company Manager Routes
 Route::middleware(['auth', 'user-access:company'])->group(function () {
-    Route::get('/company/dashboard', [HomeController::class, 'companyDashboard'])
+    Route::get('/company/dashboard', [IncomeController::class, 'index'])
     ->name('company.dashboard')->middleware('verified');
     Route::group(['prefix' => 'company/stations'], function () {
         Route::get('/', [StationController::class, 'index'])
@@ -172,6 +176,9 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 Route::get('/income', [IncomeController::class, 'index']);
+Route::get('/incomestaff', [IncomeStaffController::class, 'index']);
+Route::get('/dispatcherdashboard', [DispatcherDashboardController::class, 'index']);
+Route::get('/driverdashboard', [DriverDashboardController::class, 'index']);
 
 //FREIGHT PAGE
 /*Route::get('/freight', function () {
