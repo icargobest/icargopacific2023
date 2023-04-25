@@ -46,6 +46,6 @@ class IncomeController extends Controller
         $dailyData = DailyIncome::select('day', 'income')->orderBy('day')->get();
         
 
-        return view('income', compact('incomes', 'totalMonthly', 'totalYearly', 'dashboard', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
+        return view('company.dashboard', compact('incomes', 'totalMonthly', 'totalYearly', 'dashboard', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 }
