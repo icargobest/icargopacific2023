@@ -1,19 +1,12 @@
 @extends('layouts.app')
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/curr-login.css">
-    <link href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
-</head>
 @section('content')
-{{-- <div class="vertical-center"> --}}
+<div class="vertical-center" style="margin-top: -68px">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-4 login-container p-5">
                 <div class="pb-2 login-header">{{ __('LOGIN') }}</div>
                 <div class="pb-3 blue">Sign-in to your Account</div>
-               
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         @include('flash-message')
@@ -25,7 +18,7 @@
                                     <i class="bi bi-envelope-fill text-secondary"></i>
                                 </span>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mail Address">
-                            
+
                                 @error('email')
                                     <div class="col-12 text-center">
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +37,7 @@
                                     <i class="bi bi-lock-fill text-secondary"></i>
                                 </span>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                              
+
                                 @error('password')
                                     <div class="col-12 text-center">
                                         <span class="invalid-feedback" role="alert">
@@ -84,16 +77,16 @@
                             </div>
                         </div>
                     </form>
-                
+
                     <div class="text-center mt-5 pt-5">
                         <small class="">Don't have an Account? <span class="blue"><a href="/register">Sign up</a></span></small>
                     </div>
         </div>
 
         <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
-            <img class="login-image" src="/img/login_image.png" alt="login_image">
+            <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
         </div>
     </div>
 </div>
-{{-- </div> --}}
+</div>
 @endsection

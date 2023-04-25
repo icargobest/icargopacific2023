@@ -1,23 +1,9 @@
-.modal-backdrop:disabled 
-{
-
-}
-
-.fade:disabled
-{
-
-}
-.show:disabled
-{
-
-}
-
 /* Header Container */
 a:link
 {
 text-decoration: none;
-
 }
+
 
 .employee-header-container
 {
@@ -103,6 +89,12 @@ font-weight: bolder;
 }
 
 
+.header-dropdown
+{
+/* border: 2px solid red !important; */
+max-width: 171px !important;
+min-width: 171px !important;
+}
 .dropdown-item:hover
 {
 color: #000000;
@@ -114,27 +106,33 @@ font-weight: bolder;
 
 .addemployee
 {
-margin:auto;
-margin-bottom: 40px;
+display: flex;
+align-items: flex-end;
+flex-direction: column;
+margin-top: 10px; 
+gap: 10px;
+padding-right: 10px;
 }
 
 .m-button1
 {
-width:90%;
+width:30%;
+min-width:150px;
 max-width:280px; 
-margin: auto;
 display: block;
 background-color: #214D94 !important;
+font-size: 12px !important;
 }
 
 .m-button2
 {
-width:90%;
+width:30%;
+min-width:150px;
 max-width:280px; 
-margin: auto;
 display: block;
 color:#fff;
 background-color: #14a44d !important;
+font-size: 12px !important;
 }
 .m-button2:hover
 {
@@ -149,6 +147,20 @@ background-color: red !important;
 
 /* Table Container */
 
+.table-container
+{
+padding: 0px 10px;
+}
+
+.table-container
+{
+overflow: auto;
+}
+
+td button
+{
+min-width: 80px !important;
+}
 .header-tr
 {
 border: none;
@@ -237,10 +249,6 @@ font-weight: bolder;
     display: grid;
 }
 
-
-
-
-
 .leftmodal-button-container button, .rightmodal-button-container button
 {
 margin-bottom: 8px !important;
@@ -262,11 +270,24 @@ margin-bottom: 8px !important;
 
 
 
+
 .rightmodal-button-container
 {
     display: grid;
 
 }
+
+.btn-close
+{
+/* border: 2px solid red !important; */
+min-width: 25px !important;
+width:25px !important;
+padding: 0px !important;
+margin: 0px !important;
+}
+
+
+
 
 
 .bold-hover {
@@ -327,6 +348,11 @@ display:block;
 display: flex;
 justify-content: flex-start;
 padding-left: 10px;
+}
+
+.td-buttons button
+{
+margin:0px 5px !important;
 }
 
 
@@ -437,7 +463,7 @@ margin-top: 3rem;
 
 }
 
-.top-container1, .top-container2, .addemployee
+.top-container2, .addemployee
 {
 margin-left: 3rem;
 }

@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
+
     
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+        <!-- MDB -->
+        <link rel="stylesheet" href="/css/mdb.min.css" />
+        <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+        <link rel="stylesheet" href="/css/waybill-list.css" />
 
 
-    <!--Bootstrap CSS-->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <!-- MDB -->
-    <link rel="stylesheet" href="/css/mdb.min.css" />
-    
-
-
-
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-    <link rel="stylesheet" href="/css/waybill-list.css" />
     
     <title>Document</title>
 </head>
 
-<style>
-
-</style>
-
 <body>
-<div class="main-container">
+
+  <div class="main-container">
 
 
     <div class="sidebar">
@@ -49,9 +47,9 @@
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
-                        <div class="link">
+                        <div class="link" >
                             <i class="fa fa-gauge"></i>
-                            <span>Dashboard</span>
+                            <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Dashboard</span></a>
                         </div>
                     </div>
                     <div class="links">
@@ -63,7 +61,7 @@
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-table"></i>
-                            <span>Waybill List</span>
+                            <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill"><span>Waybill</span></a>
                         </div>
                     </div>
                     
@@ -82,10 +80,13 @@
                     </div>
         
                     <div class="links">
+                        
+                        <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
                         <div class="link">
                             <i class="fa fa-user"></i>
                             <span>Employee</span>
                         </div>
+                        </a>
                     </div>
                 </div>
     
@@ -125,45 +126,5 @@
 
         </div>
     </div>
-
-
+    
     <div class="content-container">
-        <div class="header-container ">
-            <div class="logo">
-                <span>
-                    <img src="img/Frame 1.png" alt="">
-                </span>
-            </div>
-
-            <div class="user-container">
-                <span class="spanUser">
-                    Jhony Simpson James
-            </span>
-                
-                <div class="button-container dropdown ">
-                    <button class="userButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  style="">
-                            <span>Admin</span>
-                    </button>
-                    <ul class="header-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                        <li class="d-flex align-items-center" style="height:30px; background-color:#D9D9D9; padding-left:10px; font-weight:bolder">Settings</li>
-                        <li>
-                            <span class="spanUser2">
-                                Jhony Simpson James
-                            </span>
-                        </li>
-                        <li><div class="dividerBlack1"></div></li>
-                        
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-gear"></i>Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
-                        <li><div class="dividerBlack"></div></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-lock"></i>Lock Accounts</a></li>
-
-                    </ul>
-                </div>
-            </div>
-
-        </div> 
-        
-      

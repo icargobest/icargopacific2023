@@ -1,4 +1,4 @@
-@include('partials.admin-nav')
+@include('partials.navigationAdmin')
 
 <head>
     <link rel="stylesheet" href="{{ asset('css/employee.css') }}">

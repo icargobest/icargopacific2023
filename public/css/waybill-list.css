@@ -11,18 +11,10 @@
     margin-left: 10px;
 }
 
-#bid-button{
-    height: 50px;
-    padding-top: 0;
-}
-
 #tracking-status{
     color: white !important;
 }
 
-/* #headers{
-    
-} */
 
 #trackingsD{
     border-radius: 0;
@@ -38,4 +30,44 @@
     border-top-right-radius: 10px;
     border: 1px solid black;
 
+}
+
+.dropdownContainer{
+    display: flex;
+    flex-direction: column; 
+}
+.first-filter{
+    display: flex;
+}
+
+.second-filter{
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 664px) 
+{
+.dropdownContainer{
+    display: flex;
+    flex-direction: row; 
+}
+
+.first-filter{
+    display: flex; 
+}
+
+.second-filter{
+    display: flex;   
+}
+
+}
+
+#tracking-table th{
+    background-color: transparent !important;
+    color: black !important;
+}
+
+#view-table th{
+    background-color: transparent !important;
+    color: black !important;
 }

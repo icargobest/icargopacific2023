@@ -1,17 +1,11 @@
 @extends('layouts.app')
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/curr-login.css">
-    <link href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
-</head>
 @section('content')
+<div class="vertical-center" style="margin-top: -68px">
 <div class="container">
     <div class="row justify-content-center">
     
         <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
-            <img class="login-image" src="/img/login_image.png" alt="login_image">
+            <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
         </div>
     
         <div class="col-lg-4 login-container p-5">
@@ -21,7 +15,7 @@
                 
                     <form method="POST" action="/store">
                         @csrf
-                        @include('flash-message')
+                        {{-- @include('flash-message') --}}
                         <div class="row mb-3">
                             {{-- <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label> --}}
 
@@ -98,7 +92,7 @@
                         </button>   
                     </a>
 
-                    <div class="text-center mt-5 pt-5">
+                    <div class="text-center mt-3 pt-3">
                         <p>Already have an account?
                             <span> <a href="{{ route('login') }}">Login Here</a> </span>
                         </p>
@@ -107,5 +101,6 @@
             
         </div>
     </div>
+</div>
 </div>
 @endsection

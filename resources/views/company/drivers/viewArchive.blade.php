@@ -5,7 +5,7 @@
         <div class="lead">
             <a href="{{route('drivers.index')}}" class="btn btn-primary">Back</a>
             <div class="mt-2">
-                @include('partials.messages')
+                @include('flash-message')
             </div>
 
             <table class="table table-striped">
@@ -27,7 +27,8 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->driverDetail->vehicle_type }}</td>
                         <td>{{ $user->driverDetail->plate_no }}</td>
-                        <td>@include('drivers.restore')</td>
+                        <td>@include('company/drivers.show')</td>
+                        <td>@include('company/drivers.restore')</td>
                     </tr>
                     @endif
                 @endforeach

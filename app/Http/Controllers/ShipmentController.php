@@ -7,6 +7,7 @@ use App\Models\Bid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
 
 
@@ -103,5 +104,19 @@ class ShipmentController extends Controller
         $todayDate = Carbon::now()->format('d-m-Y');
         return $pdf->download('invoice'.$ship->id.'-'.$todayDate.'.pdf');
     }
+
+
+    public function generateBarcode($id) {
+        $ship = Shipment::find($id);
+        $data = $ship->user_id . '-' . $ship->tracking_number . '-' . $ship->id;
+        $barcode = DNS1D::getBarcodePNG($data, 'C128');
+
+        return view('barcode', [
+            'barcode' => $barcode,
+            'ship' => $ship
+        ]);
+    }
+
+        
 
 }

@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-        <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="/css/bootstrap.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-        <!-- MDB -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="/css/mdb.min.css" />
-        <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-        <link rel="stylesheet" href="/css/waybill-list.css" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+            <link rel="dns-prefetch" href="//fonts.gstatic.com">
+            <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
+            <!--Bootstrap CSS-->
+            <link rel="stylesheet" href="/css/bootstrap.css">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+            <!-- MDB -->
+            <link rel="stylesheet" href="/css/mdb.min.css" />
+            <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
+            
+            {{-- CSS --}}
+            <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="/css/waybill-list.css" />
+
+        <!-- Scripts -->
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    </head>
 </head>
-<style>
-    .links .link i
-    {
-    padding-top: 0px!important;
-    }
-</style>
 
-<body>
-
-  <div class="main-container">
+<div class="main-container">
 
 
     <div class="sidebar">
@@ -43,14 +47,18 @@
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
-                        <div class="link">
-                            <i class="bi bi-cart-plus-fill" style="margin-bottom: 5px"></i>
-                            <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Order</span></a>
+
+                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">
+                        <div class="link" >
+                            <i class="bi bi-cart-plus-fill link-i-3"></i>
+                            <span>Order</span>
                         </div>
+                        </a>
+                        
                     </div>
                     <div class="links">
                         <div class="link">
-                            <i class="bi bi-cart-check-fill" style="margin-bottom: 5px"></i>
+                            <i class="bi bi-cart-check-fill link-i-3"></i>
                             <span>Order History </span>
                         </div>
                     </div>
@@ -62,33 +70,43 @@
                 <div class="link2">
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-bell link-i-4"></i>
                             <span>Notifications</span>
                         </div>
                     </div>
                     
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-envelope"></i>
+                            <i class="fa fa-envelope link-i-4"></i>
                             <span>Messages</span>
                         </div>
                     </div>
         
                     <div class="links">
                         <div class="link">
-                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-plus link-i-4"></i>
                             <span>List Items</span>
                         </div>
                     </div>
         
                     <div class="links">
-                        <div class="link">
-                            <i class="fa fa-sign-out"></i>
-                            <span>Logout</span>
-                        </div>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <div class="link">
+                                <i class="fa fa-sign-out"></i>
+                                    <span>Logout</span>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+
+
+    <div class="content-container">
+        
