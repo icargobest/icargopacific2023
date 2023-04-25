@@ -11,6 +11,13 @@ class PlanSeeder extends Seeder
     {
         $plans = [
             [
+                'name' => 'Free', 
+                'slug' => 'free', 
+                'stripe_plan' => 'price_1N0alwA6dkExbPGEMHNixzLj', 
+                'price' => 0, 
+                'description' => 'No monthly subscription'
+            ],
+            [
                 'name' => 'Standard', 
                 'slug' => 'standard', 
                 'stripe_plan' => 'price_1MqtHUA6dkExbPGE2h50wTK6', 

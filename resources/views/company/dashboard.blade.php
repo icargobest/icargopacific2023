@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-item">
                       <li class="nav-item">
-                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
+                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/company/freight">Freight</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>

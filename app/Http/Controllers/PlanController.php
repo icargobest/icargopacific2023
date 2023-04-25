@@ -12,12 +12,12 @@ class PlanController extends Controller
     public function index(){
         $plans = Plan::get();
 
-        return view("plans", compact("plans"));
+        return view("/subscriptions/plans", compact("plans"));
     }
     public function show(Plan $plan, Request $request)
     {
         $intent = auth()->user()->createSetupIntent();
-        return view("subscription", compact("plan", "intent"));
+        return view("/subscriptions/subscription", compact("plan", "intent"));
     }
     public function subscription(Request $request)
     {
