@@ -21,6 +21,9 @@ margin: 0px;
 margin-left: 1.5rem;
 }
 
+.form-control.is-invalid.active, .form-control.is-invalid{
+    margin-bottom: 0;
+}
 
 
 /* Search and Filter Container */
