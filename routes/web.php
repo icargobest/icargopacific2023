@@ -49,7 +49,7 @@ use App\Http\Controllers\DriverDashboardController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('partials.navigationDriver');
 });
 
 Auth::routes(['verify' => true]);
@@ -290,6 +290,26 @@ Route::middleware("auth")->group(function () {
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
+
+Route::get('/driverlist', function () {
+    return view('driver_panel.parcelList');
+});
+
+
+
+Route::get('/driver/history', function () {
+    return view('driver_panel.deliverHistory');
+});
+
+
+
+// Route::get('/dispatchdriver', function () {
+//     return view('dispatcher.dispatchDriver');
+// });
+
+// Route::get('/dispatchhistory', function () {
+//     return view('dispatcher.dispatchHistory');
+// });
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
