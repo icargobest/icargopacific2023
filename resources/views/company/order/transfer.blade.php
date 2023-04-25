@@ -6,11 +6,12 @@
 @if($errors->any())
 @foreach($errors->all() as $err)
     <strong>{{$err}}</strong>
-@endforeach 
+@endforeach
 @endif
 
 <form method="POST" action="{{route('shipment.transfer')}}">
     @csrf
+    @method('PUT')
     <input type="hidden" name="id" value="{{$shipments['id']}}"><br><br>
     <label class="form-label" for="trackingNum">Tracking Number: {{$shipments['tracking_number']}}</label><br><br>
     <label class="form-label" for="stationfromID">Transfer from Station#: {{$shipments['station_id']}}</label><br><br>

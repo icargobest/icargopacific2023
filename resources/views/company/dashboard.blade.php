@@ -32,7 +32,7 @@
 @extends('partials.navigationCompany')
 @extends('layouts.app')
 
-@section('content')
+{{--@section('content')
 <div class="container">
     <div class="row justify-content-center">
         @include('flash-message')
@@ -80,5 +80,5 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}
 

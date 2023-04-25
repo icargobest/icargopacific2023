@@ -53,8 +53,7 @@
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
-
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="{{route('userOrderPanel')}}">
+                        <a class="nav-link" href="{{route('userOrderPanel')}}">
                         <div class="link" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
                             <span>Order</span>
@@ -63,10 +62,12 @@
 
                     </div>
                     <div class="links">
+                        <a class="nav-link" href="{{route('orderHistory')}}">
                         <div class="link">
                             <i class="bi bi-cart-check-fill link-i-3"></i>
                             <span>Order History </span>
                         </div>
+                        </a>
                     </div>
                 </div>
 

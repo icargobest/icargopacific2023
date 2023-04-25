@@ -11,7 +11,22 @@
 <div class="order-container container">
 
 
-  <h4>TRACKING ORDER #{{$ship->id}}</h4>
+  <h4>TRACKING ORDER</h4>
+
+
+  <div class="text-center">
+    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
+        Invoice
+    </a>
+    <a href="#" class="btn btn-dark btn-sm col-1">
+        Print Waybill
+    </a>
+    @if($ship->station_id == 0)
+        <a href="{{route('viewTransfer', $ship->id)}}" class="btn btn-dark btn-sm col-1">
+            Transfer
+        </a>
+    @endif
+  </div>
 
   <div class="cards-holder">
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -76,19 +91,6 @@
                     <div class="image-holder">
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
-
-                    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
-                        Invoice
-                    </a><br>
-                    @if($ship->station_id == 0)
-                    <a href="{{route('viewTransfer', $ship->id)}}" class="btn btn-dark btn-sm">
-                        Transfer
-                    </a><br>
-                    @endif
-                    <a href="#" class="btn btn-dark btn-sm">
-                        Print Waybill
-                    </a><br>
-                </div>
                 </div>
             </div>
             </div>

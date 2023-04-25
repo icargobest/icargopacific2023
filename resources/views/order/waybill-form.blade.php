@@ -49,7 +49,7 @@
             </span>
              <div class="form-outline">
                <input type="text" id="addressSender" name="senderAddress" class="form-control" required />
-             </div>  
+             </div>
            </div>
 
            <!-- Contact input -->
@@ -89,7 +89,7 @@
             </span>
              <div class="form-outline">
                <input type="email" id="emailSender" name="senderEmail" class="form-control" required />
-             </div> 
+             </div>
            </div>
 
 
@@ -383,7 +383,7 @@
             <div class="form-outline mb-5">
                 <div class="bidInput">
                   <span>
-                    <label class="form-label" for="bidParcel">Minimum Bid</label><span class="required">*</span>
+                    <label class="form-label" for="bidParcel">Maximum Bid</label><span class="required">*</span>
                   </span>
                   <div class="form-outline">
                     <input type="text" id="bidParcel" name="amount" class="form-control" required/>
