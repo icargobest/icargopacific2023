@@ -19,23 +19,6 @@
                 </div>
             </div>
 
-            <div class="top-container2" style=" margin-top: 15px">
-                <h5 class="fw-normal mb-2 d-inline"> FILTERS:</h5>
-                <div class="dropdown-container">
-                    <select class="form-select bold-hover border-black capitalized s-margin modified-select" aria-label="Default select example" style="width:150px; min-width: 150px">
-                        <option value="" hidden>STATUS</option>
-                        <option value="2">Delivered</option>
-                        <option value="3">Canceled</option>
-                    </select>
-
-                    <select class="form-select bold-hover border-black capitalized s-margin modified-select" aria-label="Default select example" style="width:150px; min-width: 150px">
-                      <option value="" hidden>PARCEL ITEM</option>
-                      <option value="1">TOOL</option>
-                      <option value="2">FURNITURE</option>
-                      <option value="3">APPLIANCES</option>
-                  </select>
-                </div>
-            </div>
 
         </section>
 

@@ -292,20 +292,20 @@ Route::middleware("auth")->group(function () {
 });
 
 Route::get('/driverlist', function () {
-    return view('driver.parcelList');
+    return view('driver_panel.parcelList');
 });
 
 Route::get('/driverhistory', function () {
-    return view('driver.deliverHistory');
+    return view('driver_panel.deliverHistory');
 });
 
-Route::get('/dispatchdriver', function () {
-    return view('dispatcher.dispatchDriver');
-});
+// Route::get('/dispatchdriver', function () {
+//     return view('dispatcher.dispatchDriver');
+// });
 
-Route::get('/dispatchhistory', function () {
-    return view('dispatcher.dispatchHistory');
-});
+// Route::get('/dispatchhistory', function () {
+//     return view('dispatcher.dispatchHistory');
+// });
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**
