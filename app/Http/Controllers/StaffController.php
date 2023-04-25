@@ -128,4 +128,13 @@ class StaffController extends Controller
         return redirect()->back()->with('success', 'Staff #'.$id.' data restored successfully.');
     }
 
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Staff  status updated successfully!');
+    }
+
 }
