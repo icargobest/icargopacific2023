@@ -1,20 +1,21 @@
 @extends('layouts.app')
-   
+
 @section('content')
 <div class="container">
 <section>
-  <div class="container py-5">
-     
-  <header class="text-center mb-5 text-black">
-      <div class="row">
-        <div class="col-lg-12 mx-auto">
-          <h1>Monthly Subscription Plan</h1>
-          <h3>Pricing</h3>
+    <div class="container py-5">
+
+    <header class="text=center mb-5 text-black">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h1>Monthly Subscription</h1>
+                <h3>Pricing</h3>
+            </div>
         </div>
-      </div>
-    </header>
- 
-    <div class="row text-center align-items-end">
+    </div>
+</header>
+
+<div class="row text-center align-items-end">
         <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="bg-white p-5 rounded-lg shadow">
             <h1 class="h6 text-uppercase font-weight-bold mb-4">FREE</h1>
@@ -45,7 +46,6 @@
             <a href="#" class="btn btn-primary btn-block shadow rounded-pill">Buy Now</a>
             </div>
         </div>
- 
         @foreach($plans as $plan)
         <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="bg-white p-5 rounded-lg shadow">
