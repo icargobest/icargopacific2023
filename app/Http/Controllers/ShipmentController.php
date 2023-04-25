@@ -220,19 +220,13 @@ class ShipmentController extends Controller
         ]);
     }
 
-    public function transfer($id, Request $request)
+    public function transfer(Request $request)
     {
-        $data = Shipment::findOrFail($id);
-        $data = $request->validate([
-            'transferto_station_id' => 'required'
-        ], [
-            'transferto_station_id.required' => 'Transfer to Station ID is required'
-        ]);
-
-        $data->station_id = $request->transferto_station_id;
+        $data = Shipment::find($request->id);
+        $data->station_id=$request->transferto_station_id;
         $data->status = 'Transferred';
         $data->save();
 
-        return redirect('/company/freight');
+        return redirect('company/freight');
     }
 }
