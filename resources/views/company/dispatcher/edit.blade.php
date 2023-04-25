@@ -3,11 +3,11 @@
   EDIT
 </button>
 
-<div class="modal top fade" id="editModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top fade" id="editModal{{$user->id}}" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
    <div class="modal-dialog ">
      <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title col-green" id="exampleModalLabel">Edit Information</h5>
+       <div class="modal-header mbc2">
+         <h5 class="modal-title">Edit Information</h5>
          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">
@@ -19,16 +19,14 @@
            <form action="{{ route('dispatcher.update',$user->id) }}" method="POST" enctype="multipart/form-data">
              @csrf
              @method('PUT')
-             <div class="row mb-2">
+             <div class="row mb-4">
                <div class="col">
-                 <div class="label-container">
-                   <label>Dispatcher Name:</label>
-                 </div>
                  <div class="form-outline">
                    <input type="text" id="form6Example1" name="name" value="{{ $user->name }}" class="form-control" placeholder="Driver name"/>
                       @error('name')
                       <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                       @enderror
+                  <label class="form-label" for="name">DISPATCHER NAME</label>
                   </div>
                </div>
              </div>

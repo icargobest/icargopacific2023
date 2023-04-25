@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
             <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
             <!--Bootstrap CSS-->
@@ -27,8 +25,11 @@
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
-        <!-- Scripts -->
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+            
+            <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+            <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+            <!-- Scripts -->
+            @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 
@@ -63,19 +64,23 @@
                             <a class="nav-link" href="{{route('companyOrderPanel')}}">
                             <div class="link">
                                 <i class="fa fa-list link-i-1"></i>
-                                <span>Order List </span>
+                                <span>Order  </span>
                             </div>
                             </a>
                         </div>
 
                         <div class="links">
+                            <div class="link">
+                                <i class="fa fa-history link-i-1"></i>
+                                <span>Order History</span>
+                            </div>
+                          </div>
 
-                          <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">
+                        <div class="links">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
                           </div>
-                          </a>
 
                       </div>
                       <div class="links">
@@ -88,7 +93,7 @@
                     </div>
                     <div  id="toggle-icon" class="links" >
                         <div class="link"style="display: flex;justify-content: space-between;">
-                            <i class="fa fa-history link-i-1" ><span>Staff</span></i>
+                            <i class="fa fa-history link-i-1" ><span>Employees</span></i>
                             <i id="toggle-icon" class="bx bxs-chevron-down"></i>
                         </div>
                     </div>
@@ -97,7 +102,7 @@
                       <a class="nav-link" href="/company/staff">
                         <div class="link">
                             <i class="fa fa-user link-i-1"></i>
-                            <span>Employees </span>
+                            <span>Staff </span>
                         </div>
                       </a>
                     </div>
@@ -129,12 +134,7 @@
                     </a>
                   </div>
 
-                  <div class="links">
-                    <div class="link">
-                        <i class="fa fa-history link-i-1"></i>
-                        <span>Order History</span>
-                    </div>
-                  </div>
+
 
                 </div>
 

@@ -1,3 +1,6 @@
+<title>Station</title>
+
+
 @extends('layouts.app')
 @include('partials.navigationCompany')
 

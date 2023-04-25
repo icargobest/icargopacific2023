@@ -1,10 +1,12 @@
+<title>Stations Archived</title>
+
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
             <div class="employee-header-container">
-                <h3 class="">Archived Stations</h3>
+                <h3 class="">Station Archived</h3>
             </div>
         <div class="addemployee" style="height:75.6px;" >
             <a href="{{route('stations.view')}}">

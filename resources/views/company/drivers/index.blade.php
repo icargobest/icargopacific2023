@@ -1,3 +1,4 @@
+<title>Driver</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
@@ -87,11 +88,11 @@
                                     @include('company/drivers.archive')                                
                                     
                                     @if($user->status == 1)
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger" style="width:80px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;">
                                         Lock
                                     </a>
                                     @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:85px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:85px !important;">
                                         unlock
                                     </a>
                                 @endif

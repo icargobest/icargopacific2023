@@ -1,6 +1,6 @@
+<title>Dispatcher</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
-
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
         <div class="employee-header-container">
@@ -8,7 +8,7 @@
         </div>
 
         <div class="addemployee" style="" >
-            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Dispatcher</button>
+            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#addDispatcherModal">Add Dispatcher</button>
             <a href="{{route('dispatcher.viewArchive')}}">
                 <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
                     Archived

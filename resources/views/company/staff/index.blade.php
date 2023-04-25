@@ -1,3 +1,5 @@
+<title>Staff</title>
+
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
@@ -8,7 +10,7 @@
         </div>
 
         <div class="addemployee" style="" >
-            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Staff</button>
+            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#addStaffModal">Add Staff</button>
             <a href="{{route('staff.viewArchive')}}">
                 <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
                     Archived
@@ -79,8 +81,8 @@
                             <tr>
                                 <td >{{$staff->id}}</td>
                                 <td class="capitalized">{{$staff->user->name}}</td>
+                                <td>{{$staff->user->email}}</td>
                                 <td>{{$staff->contact_no}}</td>
-                                <td>{{$staff->email}}</td>
                                 <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
                                     @include('company.staff.show')
                                     @include('company.staff.edit')

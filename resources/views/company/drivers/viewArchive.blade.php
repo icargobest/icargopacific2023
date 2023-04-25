@@ -1,10 +1,11 @@
+<title>Dispatcher Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
             <div class="employee-header-container">
-                <h3 class="">Archived Drivers</h3>
+                <h3 class="">Drivers Archived</h3>
             </div>
         
 
