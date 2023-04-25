@@ -33,6 +33,7 @@
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
+            <link rel="stylesheet" href="/css/driver&dispatcher.css" />
 
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
 
