@@ -17,6 +17,7 @@
                 <li><i class="bi bi-1-circle-fill"></i><span>Sender Information</span></li>
                 <li><i class="bi bi-2-circle-fill"></i><span>Receiver Information</span></li>
                 <li><i class="bi bi-3-circle-fill"></i><span>Parcel Details</span></li>
+                <li class="mandatory"><span class="required">*</span> Fields are mandatory.</li>
             </ul>
         </div>
     </div>
@@ -391,7 +392,7 @@
             </div>
 
             <!--Image input-->
-            <div class="imageInput w-50">
+            <div class="imageInput w-50 mb-4">
               <span>Image<span class="required">*</span></span>
               <div class="form-outline mb-4">
                 <input type="file" name="photo"  id="photo"/>
