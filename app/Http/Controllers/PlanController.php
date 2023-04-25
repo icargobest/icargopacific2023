@@ -10,7 +10,7 @@ use App\Models\User;
 class PlanController extends Controller
 {
     public function index(){
-        $plans = Plan::get();
+        $plans=Plan::get();
 
         return view("plans", compact("plans"));
     }
