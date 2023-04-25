@@ -298,7 +298,6 @@ Route::middleware("auth")->group(function () {
          * Logout Routes
          */
         /*Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
-
         /**
          * User Routes
          */
@@ -311,6 +310,4 @@ Route::middleware("auth")->group(function () {
             Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
             Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         });
-
     });*/
-
