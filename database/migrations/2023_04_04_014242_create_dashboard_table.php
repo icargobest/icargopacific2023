@@ -14,7 +14,8 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('dashboard', function (Blueprint $table) {
+    
+    Schema::create('dispatchdashboard', function (Blueprint $table) {
         $table->id();
         $table->integer('accepted')->default(0);
         $table->integer('pickedup')->default(0);
@@ -26,7 +27,7 @@ return new class extends Migration
         $table->timestamps();
     });
 
-    DB::table('dashboard')->insert([
+    DB::table('dispatchdashboard')->insert([
         [
             'accepted' => rand(0, 200),
             'pickedup' => rand(0, 200),
@@ -47,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dashboard');
+        Schema::dropIfExists('dispatchdashboard');
     }
 };
