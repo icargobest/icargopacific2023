@@ -77,6 +77,7 @@
                           </div>
 
                         <div class="links">
+                        <a class="nav-link" href="/company/freight">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>

@@ -286,9 +286,11 @@ Route::get('/generate-code', function () {
 
 // Plan Controller / Monthly Subscription Routes
 Route::middleware("auth")->group(function () {
-    Route::get('plans', [PlanController::class, 'index']);
-    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+    Route::group(['prefix' => 'subscriptions'], function () {
+    Route::get('/plans', [PlanController::class, 'index']);
+    Route::get('/plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+    });
 });
 
 Route::get('/driverlist', function () {
