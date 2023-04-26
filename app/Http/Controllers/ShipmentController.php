@@ -8,6 +8,7 @@ use App\Models\Station;
 use App\Models\OrderHistory;
 use App\Models\Sender;
 use App\Models\Recipient;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
@@ -35,11 +36,26 @@ class ShipmentController extends Controller
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function staffIndex(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('staff_panel.order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
     public function freight(){
         $shipment = Shipment::all();
         $bid = Bid::all();
 
         return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function freightStaff(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+        $staff = Staff::all();
+
+        return view('staff_panel.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'staffs' => $staff]);
     }
 
     function postOrder(){
@@ -149,6 +165,7 @@ class ShipmentController extends Controller
 
         $shipment->bid_amount = $bid->bid_amount;
         $shipment->company_bid = $bid->company_name;
+        $shipment->company_id = $bid->company_id;
         $shipment->status = 'Processing';
         $shipment->save();
 
@@ -184,22 +201,30 @@ class ShipmentController extends Controller
 
     function trackOrder($id){
         $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     function trackOrder_Company($id){
         $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     public function viewInvoice($id)
     {
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
+    }
+
+    public function viewInvoiceCompany($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('company.order.generate-invoice', compact('ship'));
     }
 
     function orderHistory(){
