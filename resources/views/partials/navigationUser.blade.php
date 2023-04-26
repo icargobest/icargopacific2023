@@ -18,17 +18,19 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
+            {{-- USER CSS --}}
+            <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
+
+
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-</head>
-
 <div class="main-container">
 
 
@@ -47,20 +49,20 @@
             <div class="links-wrapper">
                 <div class="link1">
                     <div class="links">
-
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="{{route('userOrderPanel')}}">
+                        <a class="nav-link" href="{{route('userOrderPanel')}}">
                         <div class="link" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
                             <span>Order</span>
                         </div>
                         </a>
-
                     </div>
                     <div class="links">
+                        <a class="nav-link" href="{{route('orderHistory')}}">
                         <div class="link">
                             <i class="bi bi-cart-check-fill link-i-3"></i>
                             <span>Order History </span>
                         </div>
+                        </a>
                     </div>
                 </div>
 

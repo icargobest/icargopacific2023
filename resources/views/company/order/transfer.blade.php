@@ -11,7 +11,6 @@
             padding-bottom: 40px;
             padding-left: 10px;
         }
-
         #main-wrap{
             background-color: #F0EAD6 !important;
             max-height: 100%;
@@ -24,57 +23,46 @@
             border-bottom-left-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
-
         #transfer-header{
             background-color: #214D94;
             color: white;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
-
         #form-title{
             display: block;
         }
-
         #form-div{
             font-weight: 300;
         }
-
         #trans-btn{
             width: 50%;
             background-color: #214D94 !important;
         }
-
         #trans-btn :hover{
             background-color: white;
         }
-
         @media (min-width: 667px) {
-
             #main-wrap{
                 width: 40%;
                 margin: auto;
                 justify-content: center;
                 align-items: center;
             }
-
             /* #form-title{
                 display: flex;
                 flex-direction: column;
                 
             } */
-
             #form-div{
                 display: flex;
                 flex-direction: column;
                 
             }
-
             #trans-btn{
                 margin-bottom: 20px;
             }
         }
-
     </style>
 </head>
 

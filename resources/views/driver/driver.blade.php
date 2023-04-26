@@ -1,55 +1,22 @@
 @extends('layouts.app')
-@extends('layouts.status')
 @include('partials.navigationCompany')
-<link rel="stylesheet" href="./line-awesome.min.css">
+
   <div class="container center p-3">
       <div class="row">
         <div class="col-sm-12 col-12">
-            <div>
-              <h2 class="fw-bold">DRIVER TRACKING</h2>
+          <div class="card">
+          <div class="text-center">
+            <div class="card-header text-center p-3">
+              <h2>Driver Tracking</h2>
             </div>
-            <div class="container p-5 shadow" style=" background-color:white;">
-            <div class="text-center">
-              
+            <div class="card-body">
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
-                  {{-- <div>
+                  <div>
                     <p>Enter tracking ID to search for parcel:</p>
 
                     <input type="text" placeholder="Enter tracking ID">
                     <button type="button" class="btn btn-primary">Search</button>
-
-                  </div> --}}
-                  <form action="/search" method="POST">
-                    @csrf
-                    <label for="id">Enter Tracking ID:</label>
-                    <input type="text" id="id" name="tracking_number">
-                    <button type="submit" class="btn btn-primary" style="width: 25%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
-                </form>
-                <div id="message"></div>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
-                    $('form').submit(function(e) {
-                        e.preventDefault();
-                        var formData = $(this).serialize();
-                        $.ajax({
-                            url: $(this).attr('action'),
-                            type: 'POST',
-                            data: formData,
-                            success: function(response) {
-                                $('#message').text(response.message);
-                                if (response.data) {
-                                    $('#message').append('<br>ID: ' + response.data.tracking_number);
-                                }
-                            },
-                            error: function(response) {
-                                $('#message').text('An error occurred while searching for user.');
-                            }
-                        })
-                    })
-                </script>
-                </form>
-                    
 
                   </div>
 
@@ -69,52 +36,11 @@
                     <!--<a class="btn btn-primary mt-3">Start</a> -->
                     <a class="btn btn-danger mt-3" id="resetButton">Reset</a>
                   </div>
-
-                  {{-- <div class="p-3 col-4 border">
-                    <!--<a class="btn btn-primary mt-3">Start</a> -->
-                    <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px">Reset</a>
-                  </div> --}}
-
-                  <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
+                  <div class="container" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
                   <div class="scanresult">
                     <label>Result:</label>
-                    <div class="track--wrapper">
-                      <div class="track__item" id="picked-up">
-                          <div class="track__thumb">
-                              <i class="las la-briefcase"></i>
-                          </div>
-                          <div class="track__content">
-                              <h5 class="track__title">@lang('Picked Up')</h5>
-                          </div>
-                      </div>
-                      <div class="track__item" id="assort">
-                          <div class="track__thumb">
-                              <i class="lar la-building"></i>
-                          </div>
-                          <div class="track__content">
-                              <h5 class="track__title">@lang('Logistics')</h5>
-                          </div>
-                      </div>
-                      <div class="track__item" id="delivered">
-                          <div class="track__thumb">
-                              <i class="las la-truck-pickup"></i>
-                          </div>
-                          <div class="track__content">
-                              <h5 class="track__title">@lang('Delivery')</h5>
-                          </div>
-                      </div>
-                      <div class="track__item" id="completed">
-                          <div class="track__thumb">
-                              <i class="las la-check-circle"></i>
-                          </div>
-                          <div class="track__content">
-                              <h5 class="track__title">@lang('Completed')</h5>
-                          </div>
-                      </div>
-                    </div>
-
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
@@ -190,9 +116,8 @@
                 </section>
               </main>
             </div>
-            </div>
-          
-        
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -214,7 +139,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
-  function onScanSuccess(data) {
+    function onScanSuccess(data) {
     $.ajax({
       type: "POST",
       cache: false,
@@ -230,7 +155,7 @@
             iframeContainer.removeChild(iframeContainer.childNodes[0]);
           }
           var iframe = document.createElement('iframe');
-          iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+          iframe.srcdoc = '<html><head></head><body><h1>' + data.name + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
           iframe.style.width = '100%';
           iframe.style.height = '500px';
           iframeContainer.appendChild(iframe);
@@ -238,29 +163,9 @@
 
           // add event listener to button when iframe is loaded
           iframe.onload = function() {
-            // assume 'data' is the fetched data object
             var button = iframe.contentDocument.getElementById("my-button");
-            var pickedUp = document.getElementById('picked-up');
-            var assort = document.getElementById('assort');
-            var delivered = document.getElementById('delivered');
-            var completed = document.getElementById('completed');
-
-            if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                pickedUp.classList.add('done');
-            }
-            if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                assort.classList.add('done');
-            }
-            if (data.status === "delivery" || data.status === "delivered") {
-                delivered.classList.add('done');
-            }
-            if (data.status === "delivered") {
-                completed.classList.add('done');
-            }
-
-
             button.addEventListener("click", function() {
-              if (data.status === "Processing") {
+              if (data.status === "") {
                 data.status = 'pickup';
                 var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
                 modal.show();
@@ -303,7 +208,6 @@
       }
     });
   }
-
 
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
@@ -384,6 +288,5 @@ span a{
 #reader__dashboard_section_csr span{
   color:red
 }
-
 </style>
 {{-- @include('partials.footer') --}}

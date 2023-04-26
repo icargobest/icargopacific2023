@@ -1,14 +1,11 @@
 <!-- Modal -->
-<div class="modal top fade" id="addDriverModal" tabindex="-1" aria-labelledby="addDriverModal" aria-hidden="true">
+<div class="modal top fade" id="addDriverModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addDriverModal">Add Station</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    
-      <div class="modal-divider"></div>
-
         <div class="modal-body">
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>

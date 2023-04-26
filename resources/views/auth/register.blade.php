@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center" style="margin-top: -68px">
+<div class="vertical-center">
 <div class="container">
     <div class="row justify-content-center">
 
@@ -16,7 +16,11 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         {{-- @include('flash-message') --}}
+<<<<<<< Updated upstream
+                        <div class="row mb-4">
+=======
                         <div class="row mb-3">
+>>>>>>> Stashed changes
                             {{-- <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label> --}}
 
                             <div class="input-group">
@@ -33,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label> --}}
 
                             <div class="input-group">
@@ -50,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label> --}}
 
                             <div class="input-group">
@@ -67,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             {{-- <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label> --}}
 
                             <div class="input-group">

@@ -109,29 +109,8 @@ class ShipmentController extends Controller
             'status' => 'Pending',
         ];
 
-
-        $shipmentModel = new Shipment();
-        $shipment = $shipmentModel->create($shipmentData);
-
-
-
-
-
-
-        // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
-        $sender->save();
-        $recipient->save();
-
-        return redirect()->route('userOrderPanel')->with('success', 'Order added successfully.');
-    }
-
-    public function show(OrderHistory $order)
-    {
-        $order->load('order_histories');
-
-        return view('orders.show', compact('order'));
+        $this->shipment->addShipment($data);
+        return back();
     }
 
     function addBid(Request $request){
@@ -165,38 +144,15 @@ class ShipmentController extends Controller
         return redirect()->back();
     }
 
-    function viewOrder($id){
-        $bid = Bid::all();
-
-        $ship=$this->shipment->getShipmentId($id);
-        return view('order.view',compact('ship'), ['bids' => $bid]);
-    }
-
-    function viewOrder_Company($id){
-        $bid = Bid::all();
-
-        $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.view',compact('ship'), ['bids' => $bid]);
-    }
-
-    function trackOrder($id){
-        $bid = Bid::all();
-
-        $ship=$this->shipment->getShipmentId($id);
-        return view('order.track',compact('ship'), ['bids' => $bid, 'order']);
-    }
-
-    function trackOrder_Company($id){
-        $bid = Bid::all();
-
-        $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order']);
+    function viewShipment($id){
+        $ships=$this->shipment->getShipmentId($id);
+        return view('waybill.view',compact('ships'));
     }
 
     public function viewInvoice($id)
     {
         $ship = Shipment::findOrFail($id);
-        return view('order.generate-invoice', compact('ship'));
+        return view('waybill.generate-invoice', compact('ship'));
     }
 
 
@@ -210,19 +166,4 @@ class ShipmentController extends Controller
         ]);
     }
 
-    public function transfer(Request $request)
-    {
-        $data = Shipment::find($request->id);
-        $data = $request->validate([
-            'transferto_station_id' => 'required'
-        ], [
-            'transferto_station_id.required' => 'Transfer to Station ID is required'
-        ]);
-        
-        $data->station_id=$request->transferto_station_id;
-        $data->status = 'Transferred';
-        $data->save();
-
-        return redirect('/company/freight');
-    }
 }

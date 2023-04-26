@@ -79,6 +79,7 @@ display: block;
 padding: 10px;
 color: #353535;
 font-weight: bolder;
+text-transform: capitalize !important;
 }
 
 .userButton
