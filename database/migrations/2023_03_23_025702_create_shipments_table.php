@@ -80,7 +80,20 @@ return new class extends Migration
                   ->references('id')->on('shipments')
                   ->onDelete('cascade');
         });
+
+        Schema::create('order_tracking_logs', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->string('tracking_number');
+            $table->string('shipment_id');
+            $table->string('status');
+            $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('shipments')->onDelete('cascade');
+        });
     }
+
+
 
 
     /**
@@ -95,5 +108,6 @@ return new class extends Migration
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
         Schema::dropIfExists('shipments');
+        Schema::dropIfExists('order_tracking_logs');
     }
 };

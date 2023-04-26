@@ -59,13 +59,6 @@ class CreateUsersSeeder extends Seeder
                'email_verified_at'=> now(),
                'password'=> bcrypt('password'),
             ],
-            [
-               'name'=>'Driver',
-               'email'=>'driver@gmail.com',
-               'type'=> 3,
-               'email_verified_at'=> now(),
-               'password'=> bcrypt('password'),
-            ],
         ];
 
         foreach ($users as $key => $user) {

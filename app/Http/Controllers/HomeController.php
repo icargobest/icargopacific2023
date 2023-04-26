@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function driverDashboard()
     {
-        return view('driver.driver');
+        return view('driver_panel.driver');
     }
 
     public function dispatcherDashboard()
