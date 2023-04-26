@@ -1,7 +1,5 @@
 <head>
-  <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
   <title>Customer | Orders</title>
-  <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
