@@ -11,6 +11,6 @@ class DispatcherDashboardController extends Controller
     public function index()
     {
         $dashboard = DB::table('dashboard')->first();
-        return view('comapny\dispatcher\dashboard', compact('dashboard'));
+        return view('company\dispatcher\dashboard', compact('dashboard'));
     }
 }
