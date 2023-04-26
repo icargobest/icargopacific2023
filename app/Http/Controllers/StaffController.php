@@ -57,7 +57,7 @@ class StaffController extends Controller
             'contact_no' => ['required', 'min:11', 'max:11'],
         ], [
             'contact_no.required' => 'Contact field is required.',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 characters'
+            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
     
         $staff = Staff::create([

@@ -1,23 +1,20 @@
 <!-- Modal -->
-<div class="modal top   fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal top fade" id="addStaffModal" aria-labelledby="addStaffModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    
-      <div class="modal-divider"></div>
-
         <div class="modal-body">
-          <form method="POST" action="{{route('staff.store')}}">
+          <form method="POST" action="{{route('staff.store')}}" enctype="multipart/form-data" >
             @csrf
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
                   <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="">
-                  <label class="form-label" for="form6Example1">FULL NAME</label>
+                  <label class="form-label" for="name">Staff Name</label>
                   @error('name')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -35,7 +32,7 @@
                   <strong>{{ $message }}</strong>
               </span>
               @enderror
-              <label class="form-label" for="form6Example5">EMAIL</label>
+              <label class="form-label" for="email">Email</label>
             </div>
 
             <!-- Contact input -->
@@ -61,20 +58,24 @@
             </div>
             <!-- Password -->
             <div class="form-outline mb-4">
+<<<<<<< HEAD
               <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" @required(true) autocomplete="new-password" placeholder="Password">
 
+=======
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required(true) autocomplete="new-password" placeholder="Password">
+>>>>>>> develop
               @error('password')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
               @enderror
-              <label class="form-label" for="form6Example3">PASSWORD</label>
+              <label class="form-label" for="password">Password</label>
             </div>   
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-              <input type="password" id="form6Example4" name="password_confirmation" @required(true) class="form-control" />
-              <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
+              <input type="password" id="password_confirmation" name="password_confirmation" @required(true) class="form-control" />
+              <label class="form-label" for="password_confirmation">Confirm Password</label>
             </div>
 
             <div class="button-modal-container">

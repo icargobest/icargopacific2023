@@ -12,10 +12,10 @@
 
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-
+            
            {{--  BOX ICON --}}
             <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
+            
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
@@ -77,7 +77,6 @@
                           </div>
 
                         <div class="links">
-                        <a class="nav-link" href="/company/freight">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
@@ -92,39 +91,6 @@
                             </div>
 
                         </div>
-                        <div id="toggle-icon" class="links" >
-                            <div class="link"style="display: flex;justify-content: space-between;">
-                                <i class="fa fa-history link-i-1" ><span>Employees</span></i>
-                                <i id="toggle-icon" class="bx bxs-chevron-down"></i>
-                            </div>
-                        </div>
-
-                        <div id="toggle-div1" class="links" >
-                        <a class="nav-link" href="/company/staff">
-                            <div class="link">
-                                <i class="fa fa-user link-i-1"></i>
-                                <span>Staff </span>
-                            </div>
-                        </a>
-                        </div>
-
-                        <div id="toggle-div2" class="links">
-                        <a class="nav-link" href="/company/dispatcher">
-                            <div class="link" >
-                                <i class="fa fa-id-card link-i-1"></i>
-                                <span>Dispatcher</span>
-                            </div>
-                        </a>
-                        </div>
-                        <div id="toggle-div3" class="links">
-                            <a class="nav-link" href="/company/drivers">
-                                <div class="link">
-                                    <i class="fa fa-id-card-o link-i-1"></i>
-                                    <span>Driver</span>
-                                </div>
-                            </a>
-                        </div>
-
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link">
@@ -133,20 +99,11 @@
                                 </div>
                             </a>
                         </div>
-
-                        <div class="links">
-                            <a class="nav-link" href="/company/stations">
-                                <div class="link">
-                                    <i class="fa fa-credit-card link-i-1" ></i>
-                                    <span>Subscription</span>
-                                </div>
-                            </a>
-                        </div>
                     </div>
 
         <!--             <div class="divider2">
                     </div> -->
-
+            
                         <div class="links bottom-nav">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                               <div class="link ">
