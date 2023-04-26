@@ -5,7 +5,7 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationCompany')
+  @extends('partials.navigationStaff')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
@@ -14,7 +14,7 @@
   <h4>Order #{{$ship->id}}</h4>
   <div>
     @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
-        <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
+        <a href="{{route('trackOrder_Staff',$ship->id)}}" class="btn btn-primary btn">
             Track Order
         </a>
     @endif
@@ -91,12 +91,10 @@
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
                 </div>
-
                 @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
-                    <form method="POST" action="{{route('addBid')}}">
+                    <form method="POST" action="{{route('staff_addBid')}}">
                         @csrf
-                        <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
-                        <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
+                        <input type="hidden" name="staff_id" value="{{Auth::user()->id}}" />
                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
                         <div class="form-outline mb-5 col-2">
                             <div class="bidInput">

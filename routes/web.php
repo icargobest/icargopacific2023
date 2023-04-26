@@ -190,17 +190,10 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
        Route::controller(ShipmentController::class)->group(function(){
          Route::get('/staff/order','staffIndex')->name('staff.order');
          Route::get('/staff/freight','freightStaff')->name('freightStaff');
-    //     Route::post('/add_order','addOrder')->name('addOrder');
-    //     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
-    //     Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
-    //     Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
-    //     Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-    //     Route::get('/invoice/{id}','viewInvoice')->name('generate');
-    //     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
-    //     Route::post('add_bid', 'addBid')->name('addBid');
-    //     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
-    //     Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-    //     Route::get('/order/history', 'orderHistory')->name('orderHistory');
+         Route::get('/staff/view_shipment/{id}','viewOrder_Staff')->name('viewOrder_Staff');
+         Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
+         Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
+         Route::post('add_bid', 'staff_addBid')->name('staff_addBid');
 
     //     Route::group(['prefix' => 'company'], function () {
     //         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');

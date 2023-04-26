@@ -15,10 +15,9 @@
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
-                @if(Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending')
+              @if((Auth::user()->type == 'staff' && $ship->company_bid == null && $ship->status == 'Pending'))
                 {{-- CARD CREATED AFTER FILLING UP --}}
-                <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
+                <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
                     <div class="item-card container px-4">
                     <div class="card-body">
                         <div class="row">
@@ -83,7 +82,6 @@
                     </div>
                 </a>
                 {{-- END OF CARD --}}
-                @endif
               @endif
           @endforeach
           </div>
