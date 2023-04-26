@@ -184,16 +184,18 @@ class ShipmentController extends Controller
 
     function trackOrder($id){
         $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     function trackOrder_Company($id){
         $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     public function viewInvoice($id)
