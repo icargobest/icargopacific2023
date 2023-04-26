@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function superAdminDashboard()
     {
-        return view('/super-admin/dashboard');
+        return view('/icargo_super-admin_panel/dashboard');
     }
 
     public function driverDashboard()
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     public function dispatcherDashboard()
     {
-        return view('/company/dispatcher.dashboard');
+        return view('company/dispatcher.dispatcher');
     }
 
     public function staffDashboard()

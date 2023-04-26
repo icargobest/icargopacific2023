@@ -59,6 +59,15 @@
                                     @include('company.staff.show')
                                     @include('company.staff.edit')
                                     @include('company.staff.archive')
+                                    @if($staff->user->status == 1)
+                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 0]) }}" class="btn btn-danger" style="width:80px !important;">
+                                        Lock
+                                    </a>
+                                    @else
+                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:80px !important;">
+                                        unlock
+                                    </a>
+                                @endif
                                 </td>
                             </tr>
                         @endif

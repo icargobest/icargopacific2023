@@ -48,11 +48,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                        @if ($user->dispatcherDetail->archived == true)
+                    @foreach ($dispatchers as $user)
+                        @if ($user->archived == true)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/dispatcher.show')@include('company/dispatcher.restore')</td>
                             </tr>
