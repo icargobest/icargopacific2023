@@ -42,22 +42,6 @@ use App\Http\Controllers\UserController;
 //     return view('login/register');
 // });
 
-//TRANSFER FORWARDING PAGE
-Route::get('/forward', function () {
-    return view('super-admin/forward');
-});
-//WAYBILL - ACCEPT BID PAGE
-Route::get('/accept-bid', function () {
-    return view('user/accept-bid');
-});
-//COMPANY - ORDER LIST PAGE
-Route::get('/order-list', function () {
-    return view('company/order-list');
-});
-//COMPANY - ASSIGN DRIVER
-Route::get('/assign-driver', function () {
-    return view('company/dispatcher/assign-driver');
-});
 
 Route::get('/', function () {
     return view('welcome');

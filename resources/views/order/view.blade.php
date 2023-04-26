@@ -12,6 +12,31 @@
 
 
   <h4>MY ITEMS</h4>
+  @if($ship->company_bid == null && $ship->bid_amount == null)
+    @if ($ship->status != 'Cancelled')
+        <a href="">
+            <button type="button" class="btn btn-primary">
+                Edit
+            </button>
+        </a>
+        <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
+        @csrf
+        @method('PUT')
+            <button type="submit" class="btn btn-danger">
+                Cancel Order
+            </button>
+        </form>
+    @endif
+  @endif
+  <div>
+      @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+          <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn col-2">
+              Track Order
+          </a>
+      @endif
+  </div>
+
+
   <div class="cards-holder">
 
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -26,9 +51,10 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
+                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
                         </ul>
                     </div>
                     <div class="receiverInfo col-lg-6">
@@ -38,7 +64,7 @@
                             <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
                             <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
                             <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
+                            <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
                         </ul>
                     </div>
 
@@ -54,15 +80,18 @@
                             <ul>
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                <li>Company | <span>{{$ship->company_bid}}</span></li>
-                                <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
+                                @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                @endif
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">
                             <ul>
                                 <li>Category | <span>{{$ship->category}}</span></li>
                                 <li>Mode of Pament | <span>COD</span></li>
-                                <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
+                                @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
+                                @endif
                             </ul>
                         </div>
 
@@ -74,18 +103,10 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="{{asset($ship->photo)}}" alt="">
+                        <img src="{{asset($ship->photo)}}" alt="">
                     </div>
-
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder',$ship->id)}}" class="btn btn-primary btn">
-                        Track Order
-                    </a>
-                @endif
                 </div>
-
-
-
+                </div>
                 </div>
 
                 <table class="table table-striped">
@@ -108,7 +129,7 @@
                                         <td>{{$bid->company_name}}</td>
                                         <td>{{$bid->bid_amount}}</td>
                                         <td>{{$bid->status}}</td>
-                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted'))
+                                        @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
                                             <td><button tpye="submit" class="btn btn-success btn-sm" disabled>Accept</button></td>
                                         @else
                                             <td><button tpye="submit" class="btn btn-success btn-sm">Accept</button></td>
