@@ -180,7 +180,7 @@
             <!-- License input -->
             <div class="form-outline mb-4">
               <div class="form-outline">
-                  <input id="license_number" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" autocomplete="license_number" 
+                  <input id="license" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" autocomplete="license_number" 
                   minlength="11" 
                   maxlength="11"  
                   required 
@@ -207,7 +207,7 @@
             <!-- Plate input -->
             <div class="form-outline mb-4">
               <div class="form-outline">
-                  <input id="plate_no" type="text" class="form-control @error('plate_no') is-invalid @enderror" name="plate_no" value="{{ old('plate_no') }}" autocomplete="plate_no" 
+                  <input id="plate" type="text" class="form-control @error('plate_no') is-invalid @enderror" name="plate_no" value="{{ old('plate_no') }}" autocomplete="plate_no" 
                   minlength="6" 
                   maxlength="8"  
                   required 
