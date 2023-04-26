@@ -15,7 +15,7 @@
 
 
   <div class="text-center">
-    <a href="{{route('generateInvoice',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
+    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
         Invoice
     </a>
     <a href="#" class="btn btn-dark btn-sm col-1">

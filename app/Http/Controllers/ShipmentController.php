@@ -35,11 +35,25 @@ class ShipmentController extends Controller
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function staffIndex(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('staff_panel.order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
     public function freight(){
         $shipment = Shipment::all();
         $bid = Bid::all();
 
         return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function freightStaff(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('staff_panel.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     function postOrder(){
@@ -202,6 +216,12 @@ class ShipmentController extends Controller
     {
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
+    }
+
+    public function viewInvoiceCompany($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('company.order.generate-invoice', compact('ship'));
     }
 
     function orderHistory(){

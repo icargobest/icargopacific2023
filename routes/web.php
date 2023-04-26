@@ -80,6 +80,17 @@ Route::middleware('auth')->group(function(){
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
     ->name('dashboard');
+
+    //Order Routes
+    Route::controller(ShipmentController::class)->group(function(){
+        Route::get('/order','userIndex')->name('userOrderPanel');
+        Route::post('/add_order','addOrder')->name('addOrder');
+        Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
+        Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
+        Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+        Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
+        Route::get('/invoice/{id}','viewInvoice')->name('generate');
+    });
 });
 
 // Company Manager Panel
@@ -90,18 +101,11 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/company/order','index')->name('company.order');
-        Route::get('/order','userIndex')->name('userOrderPanel');
         Route::get('/company/freight','freight')->name('freightPanel');
-        Route::post('/add_order','addOrder')->name('addOrder');
-        Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
-        Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/invoice/{id}','viewInvoice')->name('generate');
-        Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
         Route::post('add_bid', 'addBid')->name('addBid');
-        Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
-        Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
         Route::get('/order/history', 'orderHistory')->name('orderHistory');
 
         Route::group(['prefix' => 'company'], function () {
@@ -183,28 +187,27 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
-      Route::controller(ShipmentController::class)->group(function(){
-        Route::get('/company/order','index')->name('company.order');
-        Route::get('/order','userIndex')->name('userOrderPanel');
-        Route::get('/company/freight','freight')->name('freightPanel');
-        Route::post('/add_order','addOrder')->name('addOrder');
-        Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
-        Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
-        Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
-        Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/invoice/{id}','viewInvoice')->name('generate');
-        Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
-        Route::post('add_bid', 'addBid')->name('addBid');
-        Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
-        Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/order/history', 'orderHistory')->name('orderHistory');
+       Route::controller(ShipmentController::class)->group(function(){
+         Route::get('/staff/order','index')->name('staff.order');
+         Route::get('/staff/freight','freightStaff')->name('freightStaff');
+    //     Route::post('/add_order','addOrder')->name('addOrder');
+    //     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
+    //     Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
+    //     Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
+    //     Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
+    //     Route::get('/invoice/{id}','viewInvoice')->name('generate');
+    //     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
+    //     Route::post('add_bid', 'addBid')->name('addBid');
+    //     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+    //     Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
+    //     Route::get('/order/history', 'orderHistory')->name('orderHistory');
 
-        Route::group(['prefix' => 'company'], function () {
-            Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-            Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
-        });
-    });
-    
+    //     Route::group(['prefix' => 'company'], function () {
+    //         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
+    //         Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
+    //     });
+     });
+
 });
 
 
