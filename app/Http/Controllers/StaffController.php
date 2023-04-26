@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class StaffController extends Controller
 {
@@ -41,6 +44,8 @@ class StaffController extends Controller
 
     public function store(CreateUserRequest $request)
     {
+        DB::beginTransaction();
+        try {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -60,12 +65,15 @@ class StaffController extends Controller
             'user_id' => $user->id,
             'company_id' => Auth::id(),
         ]);
-    
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
         return redirect()->route('staff.index')
                 ->with('success','Staff has been created successfully.');
     }
     
-
     public function show($id)
     {
         $staff = $this->staff->getStaff($id);
@@ -100,7 +108,7 @@ class StaffController extends Controller
         $user->update($userData);
 
         return redirect()->route('staff.index')
-                ->with('success','Staff has been updated successfully.');
+                ->with('success','Staff #'.$id.' has been updated successfully.');
     }
 
 

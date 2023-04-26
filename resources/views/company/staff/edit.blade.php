@@ -47,7 +47,7 @@
 
               <!-- Contact input -->
               <div class="label-container">
-                <label>Contact No_</label>
+                <label>Contact No</label>
               </div>
               <div class="form-outline mb-2">
                 <input type="text" id="form6Example5" name="updateContactNo" @error('updateContactNo') is-invalid @enderror value="{{$staff->contact_no}}" class="form-control" @required(true)/>

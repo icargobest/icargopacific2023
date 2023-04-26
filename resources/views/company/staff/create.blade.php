@@ -41,7 +41,16 @@
             <!-- Contact input -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
-                    <input id="contact" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" required placeholder="">
+                    <input id="contact" 
+                            type="text" 
+                            class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" 
+                            value="{{ old('contact_no') }}" 
+                            autocomplete="contact_no"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                            minlength="11" 
+                            maxlength="11"
+                            required 
+                            placeholder="">
                     <label class="form-label" for="form6Example5">Contact</label>
                     @error('contact_no')
                         <span class="invalid-feedback" role="alert">
@@ -52,7 +61,7 @@
             </div>
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required(true) autocomplete="new-password" placeholder="Password">
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" @required(true) autocomplete="new-password" placeholder="Password">
 
               @error('password')
                   <span class="invalid-feedback" role="alert">
