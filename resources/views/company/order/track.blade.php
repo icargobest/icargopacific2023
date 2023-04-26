@@ -151,3 +151,4 @@
         </div>
 
 {{-- END OF ORDER CONTAINER --}}
+@include('partials.footer')	

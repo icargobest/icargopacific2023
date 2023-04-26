@@ -265,10 +265,15 @@ margin-bottom: 8px;
 .sidebar .divider2
 {
     border-bottom: 1px solid #d6d6d6;
-    margin-top: 10px;
     width: 100%;
 }
 
+
+.links .link
+{
+width: 250px !important;
+
+}
 
 
 .links a:hover span, .links a:active span
@@ -294,6 +299,7 @@ background:#EAEBEE ;
 color: #1D4586;
 cursor: pointer;
 }
+
 
 .links .link i.arrow
 {
@@ -335,6 +341,10 @@ margin-top: 67px;
 }
 
 
+.ml-30px
+{
+margin-left: 30px;
+}
 
 
 /* navFont */
