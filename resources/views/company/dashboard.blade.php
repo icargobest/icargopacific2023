@@ -1,84 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+@extends('layouts.chart')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <link rel="dns-prefetch" href="//fonts.gstatic.com">
-            <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
-            <!--Bootstrap CSS-->
-            <link rel="stylesheet" href="/css/bootstrap.css">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-            <!-- Font Awesome -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-            <!-- MDB -->
-            <link rel="stylesheet" href="/css/mdb.min.css" />
-            <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-
-            {{-- CSS --}}
-            <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
-            <link rel="stylesheet" href="/css/waybill-list.css" />
-
-        <!-- Scripts -->
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    </head>
-</head>
-
-
-@extends('partials.navigationCompany')
-@extends('layouts.app')
+@section('title', 'Monthly Income')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        @include('flash-message')
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                        <a class="nav-link" href="/company/dashboard">Home</a>
-                        </li>
-                        <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                      <li class="nav-item">
-                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/company/freight">Freight</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Staff</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">Dispatcher</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link @if(isset($driver)){{$driver}}@endif" href="/driver">Driver</a>
-                      </li>
-                        <a class="nav-link" href="/company/drivers">Driver List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/company/dispatcher">Dispatcher List</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                     You are login as a company role.
-                </div>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Company Manager Dashboard</a>
+  </nav>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Monthly Income</div>
+            <div class="card-body">
+                <div id="monthly_chart_div"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Weekly Income</div>
+            <div class="card-body">
+                <div id="weekly_chart_div"></div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Yearly Income</div>
+            <div class="card-body">
+                <div id="yearly_chart_div"></div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Daily Income</div>
+            <div class="card-body">
+                <div id="daily_chart_div"></div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Shipping Status</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accepted</td>
+                            <td>{{ $dashboard->accepted }}</td>
+                        </tr>
+                        <tr>
+                            <td>Picked up</td>
+                            <td>{{ $dashboard->pickedup }}</td>
+                        </tr>
+                        <tr>
+                            <td>Received</td>
+                            <td>{{ $dashboard->received }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dispatched</td>
+                            <td>{{ $dashboard->dispatched }}</td>
+                        </tr>
+                        <tr>
+                            <td>Forwarded</td>
+                            <td>{{ $dashboard->forwarded }}</td>
+                        </tr>
+                        <tr>
+                            <td>Delivered</td>
+                            <td>{{ $dashboard->delivered }}</td>
+                        </tr>
+                        <tr>
+                            <td>Confirmed</td>
+                            <td>{{ $dashboard->confirmed }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-@endsection
 
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawMonthlyChart);
+
+    function drawMonthlyChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Income'],
+            @foreach ($incomes as $income)
+            ['{{ date('M', strtotime($income->date)) }}', {{ $income->amount }}],
+            @endforeach
+        ]);
+
+        var options = {
+            title: 'Monthly Income',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('monthly_chart_div'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawWeeklyChart);
+    
+    function drawWeeklyChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Week', 'Income'],
+            ['Week 1', {{ $week1 }}],
+            ['Week 2', {{ $week2 }}],
+            ['Week 3', {{ $week3 }}],
+            ['Week 4', {{ $week4 }}]
+        ]);
+    
+        var options = {
+            title: 'Weekly Income Chart',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+    
+        var chart = new google.visualization.LineChart(document.getElementById('weekly_chart_div'));
+    
+        chart.draw(data, options);
+    }
+</script>
+
+<<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Income'],
+            ['2023', {{ $chartData[1][1] }}],
+            ['2024', {{ $chartData[2][1] }}],
+            ['2025', {{ $chartData[3][1] }}],
+            ['2026', {{ $chartData[4][1] }}],
+            ['2027', {{ $chartData[5][1] }}],
+            ['2028', {{ $chartData[6][1] }}],
+            ['2029', {{ $chartData[7][1] }}],
+            ['2030', {{ $chartData[8][1] }}]
+        ]);
+
+        var options = {
+            title: 'Yearly Income',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('yearly_chart_div'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Day', 'Income'],
+            @foreach ($dailyData as $row)
+              
+                ['{{ date('D', strtotime($row->day)) }}', {{ $row->income }}],
+            @endforeach
+        ]);
+
+        var options = {
+            title: 'Daily Income',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('daily_chart_div'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+
+
+@endsection

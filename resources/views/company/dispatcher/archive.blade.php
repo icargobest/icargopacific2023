@@ -14,7 +14,7 @@
         <form method="POST" action="{{route('dispatcher.archive', $user->id)}}">
           @csrf
           @method ('PUT')
-          <h4>Are you sure you want to <span class="span-red">archived</span> this dispatcher{{-- ?{{$user->name}} --}}</h4>
+          <h4>Are you sure you want to <span class="span-red">archived</span> this dispatcher{{-- ?{{$user->user->name}} --}}</h4>
           <div class="modal-footer">
               <button type="submit" class="btn btn-danger btn-block">
                 Archive

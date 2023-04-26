@@ -65,11 +65,12 @@ Route::middleware('auth')->group(function(){
     // Lock Account
     Route::get('/users/status/{user_id}/{status_code}', [UsersController::class, 'updateStatus'])->name('users.status.update');
 
-    // Lock Account Panel
+    // Lock Account CRUD
     Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
     Route::get('/dispatcher/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+    Route::get('/staff/status/{user_id}/{status_code}', [StaffController::class, 'updateStatus'])->name('staff.status.update');
 
-    // Chnage Password
+    // Change Password
     Route::get('settings/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 });
@@ -140,13 +141,13 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 
 // Driver Routes
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
-    Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
+    Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
     ->name('driver.dashboard');
 });
 
 // Dispatcher Routes
 Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
-    Route::get('/dispatcher/dashboard', [HomeController::class, 'dispatcherDashboard'])
+    Route::get('/dispatcher/dashboard', [DispatcherDashboardController::class, 'index'])
     ->name('dispatcher.dashboard')->middleware('verified');
 });
 
@@ -176,9 +177,6 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 Route::get('/income', [IncomeController::class, 'index']);
-Route::get('/incomestaff', [IncomeStaffController::class, 'index']);
-Route::get('/dispatcherdashboard', [DispatcherDashboardController::class, 'index']);
-Route::get('/driverdashboard', [DriverDashboardController::class, 'index']);
 
 //FREIGHT PAGE
 /*Route::get('/freight', function () {
@@ -220,10 +218,12 @@ Route::controller(ShipmentController::class)->group(function(){
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+    Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
+    Route::get('/order/history', 'orderHistory')->name('orderHistory');
 
     Route::group(['prefix' => 'company'], function () {
         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-        Route::post('/transfer','transfer')->name('shipment.transfer');
+        Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
     });
 });
 

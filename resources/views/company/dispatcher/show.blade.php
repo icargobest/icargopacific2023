@@ -12,24 +12,43 @@
        </div>
        <div class="modal-body">
           <fieldset disabled>
-             <div class="row mb-4">
-               <div class="col"> 
-                 <div class="form-outline">
-                   <input type="text" id="forupdateFullNamem6Example1" name="updateFullName" value="{{ $user->name }}" class="form-control" />
-                   <label class="form-label" for="updateFullName">Dispatcher Name</label>
-                  </div>
-               </div>
+             <!-- Email input -->
+             <div class="label-container">
+              <label>NAME</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="email" id="form6Example5" name="updateEmail" value=" {{ $user->user->name }}" class="form-control" />
              </div>
 
              <!-- Email input -->
-             <div class="form-outline mb-4">
-               <input type="email" id="updateEmail" name="updateEmail" value=" {{ $user->email }}" class="form-control" />
-               <label class="form-label" for="updateEmail">Dispatcher Email</label>
+             <div class="label-container">
+              <label>EMAIL</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="email" id="form6Example5" name="updateEmail" value=" {{ $user->user->email }}" class="form-control" />
              </div>
 
-             <div class="form-outline mb-4">
-               <input type="text" id="vehicle_type" name="vehicle_type" value="{{ $user->type }}" class="form-control" style="text-transform:capitalize;"/>
-               <label class="form-label" for="vehicle_type">Type</label>
+             <!-- Email input -->
+             <div class="label-container">
+              <label>CONTACT NUMBER</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="email" id="form6Example5" name="updateEmail" value=" {{ $user->contact_no }}" class="form-control" />
+             </div>
+
+             <!-- Email input -->
+             <div class="label-container">
+              <label>CREATED AT</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="email" id="form6Example5" name="updateEmail" value=" {{ $user->created_at }}" class="form-control" />
+             </div>
+
+             <div class="label-container">
+              <label>UPDATED AT</label>
+            </div>
+             <div class="form-outline mb-2">
+               <input type="email" id="form6Example5" name="updateEmail" value=" {{ $user->updated_at }}" class="form-control" />
              </div>
 
 

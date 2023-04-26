@@ -12,6 +12,14 @@
 
 
   <h4>Order #{{$ship->id}}</h4>
+  <div>
+    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+        <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
+            Track Order
+        </a>
+    @endif
+  </div>
+
   <div class="cards-holder">
 
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -56,7 +64,7 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
-                                    <li>Minimum Bid | <span>{{$ship->min_bid_amount}}</span></li>
+                                    <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
                                 @else
                                     <li>Company | <span>{{$ship->company_bid}}</span></li>
                                 @endif
@@ -82,18 +90,15 @@
                     <div class="image-holder">
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
+                </div>
 
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
-                        Track Order
-                    </a>
-                @else
+                @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
                     <form method="POST" action="{{route('addBid')}}">
                         @csrf
                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                         <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
-                        <div class="form-outline mb-5">
+                        <div class="form-outline mb-5 col-2">
                             <div class="bidInput">
                               <span>Bid<span class="required"></span></span>
                               <div class="form-outline">

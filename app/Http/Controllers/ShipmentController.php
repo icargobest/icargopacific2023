@@ -109,14 +109,8 @@ class ShipmentController extends Controller
             'status' => 'Pending',
         ];
 
-
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
-
-
-
-
-
 
         // Update sender and recipient models
         $sender->shipment_id = $shipment->id;
@@ -165,6 +159,15 @@ class ShipmentController extends Controller
         return redirect()->back();
     }
 
+    function cancelOrder($id){
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->status = 'Cancelled';
+        $shipment->save();
+
+        return redirect()->back();
+    }
+
     function viewOrder($id){
         $bid = Bid::all();
 
@@ -199,6 +202,13 @@ class ShipmentController extends Controller
         return view('order.generate-invoice', compact('ship'));
     }
 
+    function orderHistory(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('order.order-history', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
 
     public function transferShipment($id)
     {
@@ -212,17 +222,17 @@ class ShipmentController extends Controller
 
     public function transfer(Request $request)
     {
-        $data1 = Shipment::find($request->id);
+        $data = Shipment::find($request->id);
         $data = $request->validate([
             'transferto_station_id' => 'required'
         ], [
             'transferto_station_id.required' => 'Transfer to Station ID is required'
         ]);
-        
-        $data1->station_id=$request->transferto_station_id;
-        $data1->status = 'Transferred';
-        $data1->save();
 
-        return redirect('/company/freight');
+        $data->station_id=$request->transferto_station_id;
+        $data->status = 'Transferred';
+        $data->save();
+
+        return redirect('company/freight');
     }
 }
