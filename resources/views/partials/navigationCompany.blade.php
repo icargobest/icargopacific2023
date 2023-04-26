@@ -61,7 +61,7 @@
 
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="{{route('companyOrderPanel')}}">
+                            <a class="nav-link" href="{{route('company.order')}}">
                             <div class="link">
                                 <i class="fa fa-list link-i-1"></i>
                                 <span>Order  </span>
@@ -77,7 +77,7 @@
                           </div>
 
                         <div class="links">
-                        <a class="nav-link" href="/company/freight">
+                        <a class="nav-link" href="{{route('freightPanel')}}">
                           <div class="link" >
                               <i class="fa fa-truck link-i-1"></i>
                               <span>Freight</span>
@@ -143,9 +143,6 @@
                             </a>
                         </div>
                     </div>
-
-        <!--             <div class="divider2">
-                    </div> -->
 
                         <div class="links bottom-nav">
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
