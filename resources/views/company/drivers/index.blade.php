@@ -1,4 +1,4 @@
-<title>Driver</title>
+<title>Company | Driver</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 

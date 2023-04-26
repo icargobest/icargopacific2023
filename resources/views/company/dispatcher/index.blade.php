@@ -1,4 +1,4 @@
-<title>Dispatcher</title>
+<title>Company | Dispatcher</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 <main class="container py-5" style="margin-top:-49px !important">

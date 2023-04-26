@@ -1,4 +1,4 @@
-<title>Stations Archived</title>
+<title>Company | Stations Archived</title>
 
 @extends('layouts.app')
 @include('partials.navigationCompany')

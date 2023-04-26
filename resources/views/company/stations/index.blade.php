@@ -1,4 +1,4 @@
-<title>Station</title>
+<title>Company | Station</title>
 
 
 @extends('layouts.app')

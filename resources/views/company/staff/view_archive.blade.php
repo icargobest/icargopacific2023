@@ -1,4 +1,4 @@
-<title>Staffs Archived</title>
+<title>Company | Staffs Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 

@@ -1,4 +1,4 @@
-<title>Dispatcher Archived</title>
+<title>Company |  Dispatcher Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
