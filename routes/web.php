@@ -176,9 +176,6 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 Route::get('/income', [IncomeController::class, 'index']);
-Route::get('/incomestaff', [IncomeStaffController::class, 'index']);
-Route::get('/dispatcherdashboard', [DispatcherDashboardController::class, 'index']);
-Route::get('/driver/dashboard', [DriverDashboardController::class, 'index']);
 
 //FREIGHT PAGE
 /*Route::get('/freight', function () {
