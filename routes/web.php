@@ -188,7 +188,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){
-         Route::get('/staff/order','index')->name('staff.order');
+         Route::get('/staff/order','staffIndex')->name('staff.order');
          Route::get('/staff/freight','freightStaff')->name('freightStaff');
     //     Route::post('/add_order','addOrder')->name('addOrder');
     //     Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');

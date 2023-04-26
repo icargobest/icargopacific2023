@@ -61,6 +61,7 @@ return new class extends Migration
             $table->string('mode_of_payment')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
             $table->string('company_bid')->nullable()->default;
+            $table->unsignedBigInteger('company_id')->nullable()->default;
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;

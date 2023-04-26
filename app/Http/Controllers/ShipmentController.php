@@ -8,6 +8,7 @@ use App\Models\Station;
 use App\Models\OrderHistory;
 use App\Models\Sender;
 use App\Models\Recipient;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
@@ -52,8 +53,9 @@ class ShipmentController extends Controller
     public function freightStaff(){
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $staff = Staff::all();
 
-        return view('staff_panel.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('staff_panel.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'staffs' => $staff]);
     }
 
     function postOrder(){
@@ -163,6 +165,7 @@ class ShipmentController extends Controller
 
         $shipment->bid_amount = $bid->bid_amount;
         $shipment->company_bid = $bid->company_name;
+        $shipment->company_id = $bid->company_id;
         $shipment->status = 'Processing';
         $shipment->save();
 

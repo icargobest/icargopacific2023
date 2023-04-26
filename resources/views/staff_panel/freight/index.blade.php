@@ -5,7 +5,7 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationCompany')
+  @extends('partials.navigationStaff')
 
   {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
   <div class="order-container container">
@@ -15,8 +15,7 @@
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred')))
-              {{-- CARD CREATED AFTER FILLING UP --}}
+               {{-- CARD CREATED AFTER FILLING UP --}}
               <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                   <div class="item-card container px-4">
                   <div class="card-body">
@@ -82,7 +81,6 @@
                   </div>
               </a>
               {{-- END OF CARD --}}
-              @endif
           @endforeach
           </div>
       </div>
