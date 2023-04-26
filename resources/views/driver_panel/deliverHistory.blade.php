@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationDriver')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">
@@ -55,7 +55,7 @@
                                 <td>August 02, 2023</td>
                                 <td>August 25, 2023</td>
                                 <td class="" style="overflow:auto;">                                
-                                    <label class="status-delivered">
+                                    <label class="status-deliveredv2">
                                         Delivered
                                     </label>
                                 </td>
@@ -70,7 +70,7 @@
                               <td>August 02, 2023</td>
                               <td>August 25, 2023</td>
                               <td class="" style="overflow:auto;">                                
-                                    <label class="status-canceled">
+                                    <label class="status-canceledv2">
                                         Canceled
                                     </label>
                               </td>
@@ -85,7 +85,7 @@
                             <td>August 02, 2023</td>
                             <td>August 25, 2023</td>
                             <td class="" style="overflow:auto; ">                                
-                                    <label class="status-canceled">
+                                    <label class="status-canceledv2">
                                         Canceled
                                     </label>
                             </td>
@@ -100,7 +100,7 @@
                           <td>August 02, 2023</td>
                           <td>August 25, 2023</td>
                           <td class="" style="overflow:auto; ">                                
-                                  <label class="status-delivered">
+                                  <label class="status-deliveredv2">
                                     Delivered
                                   </label>
                           </td>
@@ -115,7 +115,7 @@
                         <td>August 02, 2023</td>
                         <td>August 25, 2023</td>
                         <td class="" style="overflow:auto; ">                                
-                                <label class="status-delivered">
+                                <label class="status-deliveredv2">
                                     Delivered
                                 </label>
                         </td>
@@ -130,7 +130,7 @@
                       <td>August 02, 2023</td>
                       <td>August 25, 2023</td>
                       <td class="" style="overflow:auto; ">                                
-                              <label class="status-delivered">
+                              <label class="status-deliveredv2">
                                 Delivered
                               </label>
                       </td>

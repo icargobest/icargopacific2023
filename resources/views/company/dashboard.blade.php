@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>iCargo</title>
+    <title>Dashboard</title>
 
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
             <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
@@ -32,7 +32,7 @@
 @extends('partials.navigationCompany')
 @extends('layouts.app')
 
-@section('content')
+{{--@section('content')
 <div class="container">
     <div class="row justify-content-center">
         @include('flash-message')
@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-item">
                       <li class="nav-item">
-                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/freight">Freight</a>
+                        <a class="nav-link @if(isset($freight)){{$freight}}@endif" href="/company/freight">Freight</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill">Order</a>
@@ -80,5 +80,5 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}
 

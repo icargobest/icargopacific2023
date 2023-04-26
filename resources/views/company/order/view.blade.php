@@ -12,6 +12,14 @@
 
 
   <h4>Order #{{$ship->id}}</h4>
+  <div>
+    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+        <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
+            Track Order
+        </a>
+    @endif
+  </div>
+
   <div class="cards-holder">
 
     {{-- CARD CREATED AFTER FILLING UP --}}
@@ -26,7 +34,7 @@
                         <h6>SENDER</h6>
 
                         <ul>
-                            <li>Name | <span>{{$ship->sender_name}}</span></li>
+                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
                             <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
                             <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
                             <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
@@ -56,7 +64,7 @@
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
-                                    <li>Minimum Bid | <span>{{$ship->min_bid_amount}}</span></li>
+                                    <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
                                 @else
                                     <li>Company | <span>{{$ship->company_bid}}</span></li>
                                 @endif
@@ -80,20 +88,17 @@
 
                 <div class="image-wrapper col">
                     <div class="image-holder">
-                    <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                    <img src="{{asset($ship->photo)}}" alt="">
                     </div>
+                </div>
 
-                @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
-                    <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
-                        Track Order
-                    </a>
-                @else
+                @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
                     <form method="POST" action="{{route('addBid')}}">
                         @csrf
                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                         <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
-                        <div class="form-outline mb-5">
+                        <div class="form-outline mb-5 col-2">
                             <div class="bidInput">
                               <span>Bid<span class="required"></span></span>
                               <div class="form-outline">
@@ -143,16 +148,14 @@
 
 <script>
     // Get the minimum bid amount from the HTML using PHP
-    var minBidAmount = {{$ship->min_bid_amount}};
-
+    var maxBidAmount = {{$ship->min_bid_amount}};
     // Get a reference to the bid amount input field and the bid button
     var bidAmountInput = document.getElementById('form6Example3');
     var bidButton = document.getElementById('bidButton');
-
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount < minBidAmount) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount) {
             bidButton.disabled = true;
         } else {
             bidButton.disabled = false;
