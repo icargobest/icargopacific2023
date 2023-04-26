@@ -14,8 +14,8 @@ return new class extends Migration
      */
     public function up()
 {
-    
-    Schema::create('dispatchdashboard', function (Blueprint $table) {
+
+    Schema::create('dashboard', function (Blueprint $table) {
         $table->id();
         $table->integer('accepted')->default(0);
         $table->integer('pickedup')->default(0);
@@ -27,7 +27,7 @@ return new class extends Migration
         $table->timestamps();
     });
 
-    DB::table('dispatchdashboard')->insert([
+    DB::table('dashboard')->insert([
         [
             'accepted' => rand(0, 200),
             'pickedup' => rand(0, 200),
@@ -36,7 +36,7 @@ return new class extends Migration
             'forwarded' => rand(0, 200),
             'delivered' => rand(0, 200),
             'confirmed' => rand(0, 200)
-        ] 
+        ]
     ]);
 }
 
@@ -48,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dispatchdashboard');
+        Schema::dropIfExists('dashboard');
     }
 };
