@@ -13,6 +13,16 @@
 
   <h4>TRACKING ORDER</h4>
 
+
+  <div class="text-center">
+    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-3">
+        Invoice
+    </a>
+    <a href="#" class="btn btn-dark btn-sm col-3">
+        Print Waybill
+    </a>
+  </div>
+
   <div class="cards-holder">
     {{-- CARD CREATED AFTER FILLING UP --}}
             <div class="item-card container px-4">
@@ -76,14 +86,6 @@
                     <div class="image-holder">
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
-
-                    <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm">
-                        Invoice
-                    </a>
-                    <a href="#" class="btn btn-dark btn-sm">
-                        Print Waybill
-                    </a>
-                </div>
                 </div>
             </div>
             </div>
@@ -144,7 +146,7 @@
                 @endif
             </div>
         </div>
-        
+
     </div>
 </div>
 {{-- END OF ORDER CONTAINER --}}

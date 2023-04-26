@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateStaffRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class StaffController extends Controller
         return view('company.staff.create');
     }
 
-    public function store(CreateStaffRequest $request)
+    public function store(CreateUserRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -47,9 +47,16 @@ class StaffController extends Controller
             'password' => Hash::make($request->password),
             'type' => '5',
         ]);
+
+        $otherValidation = $request->validate([
+            'contact_no' => ['required', 'min:11', 'max:11'],
+        ], [
+            'contact_no.required' => 'Contact field is required.',
+            'contact_no.max' => 'Contact nuber must be a min and max of 11 characters'
+        ]);
     
         $staff = Staff::create([
-            'contact_no' => $request->contact_no,
+            'contact_no' =>  $otherValidation['contact_no'],
             'user_id' => $user->id,
             'company_id' => Auth::id(),
         ]);
@@ -74,16 +81,16 @@ class StaffController extends Controller
         return view('company.staff.edit', compact('staff', 'user'));
     }
 
-    public function update(CreateStaffRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $staffData = [
-            'contact_no' => $request->input('contact_no')
+            'contact_no' => $request->input('updateContactNo')
         ];
 
         $userData = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+            'name' => $request->input('updateFullName'),
+            'email' => $request->input('updateEmail'),
+            'password' => Hash::make($request->input('updatePassword')),
         ];
         
         $staff = Staff::find($id);
@@ -92,7 +99,8 @@ class StaffController extends Controller
         $user = $staff->user;
         $user->update($userData);
 
-        return back()->with('success', 'Staff #'.$id.' data updated successfully!');
+        return redirect()->route('staff.index')
+                ->with('success','Staff has been updated successfully.');
     }
 
 
