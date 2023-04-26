@@ -22,8 +22,6 @@
 
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
 
            {{--  ICONS --}}
             <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
@@ -59,7 +57,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="/driver/history">
+                            <a class="nav-link">
                                 <div class="link">
                                     <i class="fa fa-history link-i-1" ></i>
                                     <span>History</span>

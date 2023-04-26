@@ -52,11 +52,13 @@
                                 <td>{{ $staff->user->name}}</td>
                                 <td>{{ $staff->contact_no}}</td>
                                 <td>{{ $staff->user->email}}</td>
-                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/staff.show')@include('company/staff.restore')</td>
+                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">
+                                    @include('company/staff.show')
+                                    @include('company/staff.restore')
+                                </td>
                             </tr>
                         @endif
                     @endforeach
-
                 </tbody>
             </table>
         </div>

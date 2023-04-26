@@ -24,12 +24,6 @@
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
-            {{-- USER CSS --}}
-            <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
-
-
-
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>

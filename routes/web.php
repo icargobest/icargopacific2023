@@ -141,13 +141,13 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 
 // Driver Routes
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
-    Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
+    Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
     ->name('driver.dashboard');
 });
 
 // Dispatcher Routes
 Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
-    Route::get('/dispatcher/dashboard', [HomeController::class, 'dispatcherDashboard'])
+    Route::get('/dispatcher/dashboard', [DispatcherDashboardController::class, 'index'])
     ->name('dispatcher.dashboard')->middleware('verified');
 });
 
@@ -177,9 +177,6 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 Route::get('/income', [IncomeController::class, 'index']);
-Route::get('/incomestaff', [IncomeStaffController::class, 'index']);
-Route::get('/dispatcherdashboard', [DispatcherDashboardController::class, 'index']);
-Route::get('/driverdashboard', [DriverDashboardController::class, 'index']);
 
 //FREIGHT PAGE
 /*Route::get('/freight', function () {
