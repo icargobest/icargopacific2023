@@ -1,6 +1,10 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <title>Customer | Order Form</title>
+
+    <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
+
+    <title>Customer | Waybill Form</title>
+    <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 
 </head>
 
@@ -17,7 +21,6 @@
                 <li><i class="bi bi-1-circle-fill"></i><span>Sender Information</span></li>
                 <li><i class="bi bi-2-circle-fill"></i><span>Receiver Information</span></li>
                 <li><i class="bi bi-3-circle-fill"></i><span>Parcel Details</span></li>
-                <li class="mandatory"><span class="required">*</span> Fields are mandatory.</li>
             </ul>
         </div>
     </div>
@@ -35,19 +38,21 @@
             {{-- NAME INPUT --}}
             <div class="nameInput mb-4">
               <span>
-                <label class="form-label" for="nameSender">Full Name</label><span class="required">*</span>
+                <label class="form-label" for="form6Example1">Full Name</label><span class="required">*</span>
               </span>
                <div class="form-outline">
-                 <input type="text" id="nameSender" name="senderName" class="form-control" required />
+                 <input type="text" id="form6Example1" name="senderName" class="form-control" required />
                </div>
              </div>
 
            <!-- Address input -->
            <div class="addressInput mb-4">
              <span>
-              <label class="form-label" for="addressSender">Street Address</label><span class="required">*</span>
+              <label class="form-label" for="form6Example5">Street Address</label><span class="required">*</span>
             </span>
              <div class="form-outline">
+               <input type="text" id="form6Example5" name="senderAddress" class="form-control" required />
+             </div>  
                <input type="text" id="addressSender" name="senderAddress" class="form-control" required />
              </div>
            </div>
@@ -59,10 +64,10 @@
                {{-- MOBILE INPUT --}}
                <div class="mobileInput">
                 <span>
-                  <label class="form-label" for="mobileSender">Mobile Number</label><span class="required">*</span>
+                  <label class="form-label" for="form6Example3">Mobile Number</label><span class="required">*</span>
                 </span>
                  <div class="form-outline">
-                   <input type="text" id="mobileSender" name="senderMobile" class="form-control" required />
+                   <input type="text" id="form6Example3" name="senderMobile" class="form-control" required />
                  </div>
                </div>
 
@@ -73,10 +78,10 @@
                {{-- TELEPHONE INPUT --}}
                <div class="telephoneInput">
                 <span>
-                  <label class="form-label" for="telephoneSender">Telephone</label>
+                  <label class="form-label" for="form6Example3">Telephone</label>
                 </span>
                  <div class="form-outline">
-                   <input type="text" id="telephoneSender" name="senderTelephone" class="form-control" />
+                   <input type="text" id="form6Example3" name="senderTelephone" class="form-control" />
                  </div>
                </div>
 
@@ -85,11 +90,11 @@
            {{-- EMAIL INPUT --}}
            <div class="emailInput mb-4">
             <span>
-              <label class="form-label" for="emailSender">Email Address</label> <span class="required">*</span>
+              <label class="form-label" for="form6Example5">Email Address</label> <span class="required">*</span>
             </span>
              <div class="form-outline">
-               <input type="email" id="emailSender" name="senderEmail" class="form-control" required />
-             </div>
+               <input type="email" id="form6Example5" name="senderEmail" class="form-control" required />
+             </div> 
            </div>
 
 
@@ -100,10 +105,10 @@
                {{-- MUNICIPALITY --}}
                <div class="municipalityInput">
                 <span>
-                  <label class="form-label" for="municipalitySender">Municipality/City</label> <span class="required">*</span>
+                  <label class="form-label" for="form6Example3">Municipality/City</label> <span class="required">*</span>
                 </span>
                  <div class="form-outline">
-                   <input type="text" id="municipalitySender" name="senderCity" class="form-control" required />
+                   <input type="text" id="form6Example3" name="senderCity" class="form-control" required />
                  </div>
                </div>
 
@@ -113,10 +118,10 @@
                  {{-- POSTAL --}}
                  <div class="postalInput">
                   <span>
-                    <label class="form-label" for="postalSender">Postal Code</label> <span class="required">*</span>
+                    <label class="form-label" for="form6Example3">Postal Code</label> <span class="required">*</span>
                   </span>
                    <div class="form-outline">
-                     <input type="text" id="postalSender" name="senderZip" class="form-control" required />
+                     <input type="text" id="form6Example3" name="senderZip" class="form-control" required />
                    </div>
                  </div>
 
@@ -126,10 +131,10 @@
            <!--State input-->
            <div class="stateInput mb-4">
             <span>
-              <label class="form-label" for="stateSender">State</label> <span class="required">*</span>
+              <label class="form-label" for="form6Example3">State</label> <span class="required">*</span>
             </span>
              <div class="form-outline">
-               <input type="text" id="stateSender" name="senderState" class="form-control" required />
+               <input type="text" id="form6Example3" name="senderState" class="form-control" required />
              </div>
            </div>
 
@@ -154,21 +159,19 @@
 
             {{-- NAME INPUT --}}
             <div class="nameInput mb-4">
-              <span>
-                <label class="form-label" for="nameReceiver">Full Name</label><span class="required">*</span>
-              </span>
+               <span>Full Name <span class="required">*</span></span>
                <div class="form-outline">
-                 <input type="text" id="nameReceiver" name="receiverName" class="form-control" required />
+                 <input type="text" id="form6Example1" name="receiverName" class="form-control" required />
+                 {{-- <label class="form-label" for="form6Example1">Full Name</label> --}}
                </div>
              </div>
 
            <!-- Address input -->
            <div class="addressInput mb-4">
-             <span>
-              <label class="form-label" for="addressReceiver">Street Address</label><span class="required">*</span>
-            </span>
+             <span>Street Address <span class="required">*</span></span>
              <div class="form-outline">
-               <input type="text" id="addressReceiver" name="receiverAddress" class="form-control" required />
+               <input type="text" id="form6Example5" name="receiverAddress" class="form-control" required />
+               {{-- <label class="form-label" for="form6Example5">Street Address</label> --}}
              </div>
            </div>
 
@@ -178,11 +181,10 @@
 
                {{-- MOBILE INPUT --}}
                <div class="mobileInput">
-                <span>
-                  <label class="form-label" for="mobileReceiver">Mobile Number</label><span class="required">*</span>
-                </span>
+                 <span>Mobile Number <span class="required">*</span></span>
                  <div class="form-outline">
-                   <input type="text" id="mobileReceiver" name="receiverMobile" class="form-control" required />
+                   <input type="text" id="form6Example3" name="receiverMobile" class="form-control" required />
+                   {{-- <label class="form-label" for="form6Example3">Mobile Number</label> --}}
                  </div>
                </div>
 
@@ -192,11 +194,10 @@
 
                {{-- TELEPHONE INPUT --}}
                <div class="telephoneInput">
-                <span>
-                  <label class="form-label" for="telephoneReceiver">Telephone</label>
-                </span>
+                 <span>Telephone</span>
                  <div class="form-outline">
-                   <input type="text" id="telephoneReceiver" name="receiverTelephone" class="form-control" />
+                   <input type="text" id="form6Example3" name="receiverTelephone" class="form-control" />
+                   {{-- <label class="form-label" for="form6Example3">Telephone</label> --}}
                  </div>
                </div>
 
@@ -204,11 +205,10 @@
            </div>
            {{-- EMAIL INPUT --}}
            <div class="emailInput mb-4">
-            <span>
-              <label class="form-label" for="emailReceiver">Email Address</label><span class="required">*</span>
-            </span>
+             <span>Email Address <span class="required">*</span></span>
              <div class="form-outline">
-               <input type="email" id="emailReceiver" name="receiverEmail" class="form-control" required />
+               <input type="email" id="form6Example5" name="receiverEmail" class="form-control" required />
+               {{-- <label class="form-label" for="form6Example5">Email Address</label> --}}
              </div>
            </div>
 
@@ -219,11 +219,10 @@
              <div class="col">
                {{-- MUNICIPALITY --}}
                <div class="municipalityInput">
-                <span>
-                  <label class="form-label" for="cityReceiver">Municipality/City</label><span class="required">*</span>
-                </span>
+                 <span>Municipality/ City <span class="required">*</span></span>
                  <div class="form-outline">
-                   <input type="text" id="cityReceiver" name="receiverCity" class="form-control" required />
+                   <input type="text" id="form6Example3" name="receiverCity" class="form-control" required />
+                   {{-- <label class="form-label" for="form6Example3">Municipality/City</label> --}}
                  </div>
                </div>
 
@@ -232,11 +231,10 @@
              <div class="col">
                  {{-- POSTAL --}}
                  <div class="postalInput">
-                  <span>
-                    <label class="form-label" for="postalReceiver">Postal Code</label><span class="required">*</span>
-                  </span>
+                   <span>Postal Code <span class="required">*</span></span>
                    <div class="form-outline">
-                     <input type="text" id="postalReceiver" name="receiverZip" class="form-control" required />
+                     <input type="text" id="form6Example3" name="receiverZip" class="form-control" required />
+                     {{-- <label class="form-label" for="form6Example3">Postal Code</label> --}}
                    </div>
                  </div>
 
@@ -245,11 +243,10 @@
 
            <!--State input-->
            <div class="stateInput mb-4">
-             <span>
-              <label class="form-label" for="stateReceiver">State</label><span class="required">*</span>
-            </span>
+             <span>State <span class="required">*</span></span>
              <div class="form-outline">
-               <input type="text" id="stateReceiver" name="receiverState" class="form-control" required />
+               <input type="text" id="form6Example3" name="receiverState" class="form-control" required />
+               {{-- <label class="form-label" for="form6Example3">State</label> --}}
              </div>
            </div>
 
@@ -276,11 +273,10 @@
 
                 <div class="form-group col-4">
                   <div class="serviceInput">
-                    <span>
-                      <label for="serviceParcel">Service</label><span class="required">*</span>
-                    </span>
+                    <span>Service <span class="required">*</span></span>
                     <div class="form-outline">
-                      <select class="form-control" id="serviceParcel" name="service_type" required>
+                      {{-- <label for="exampleFormControlSelect1">Service</label> --}}
+                      <select class="form-control" id="exampleFormControlSelect1" name="service_type" required>
                           <option value="Standard">Standard</option>
                           <option value="Express">Express</option>
                       </select>
@@ -291,11 +287,10 @@
                 <!-- !Dropdown Type menu-->
                 <div class="form-group col-4">
                     <div class="typeInput">
-                      <span>
-                        <label for="typeParcel">Type</label><span class="required">*</span>
-                      </span>
+                      <span>Type<span class="required">*</span></span>
                       <div class="form-outline">
-                        <select class="form-control" id="typeParcel" name="order_type" required>
+                        {{-- <label for="exampleFormControlSelect1">Type</label> --}}
+                        <select class="form-control" id="exampleFormControlSelect1" name="order_type" required>
                             <option value="Document">Document</option>
                             <option value="Other">Other/s</option>
                         </select>
@@ -306,11 +301,9 @@
                 <!-- !Dropdown Type menu-->
                 <div class="form-group col-4">
                     <div class="mopInput">
-                      <span>
-                        Mode of Payment<span class="required">*</span>
-                      </span>
+                      <span>Mode of Payment<span class="required">*</span></span>
                       <div class="form-outline">
-                        <select class="form-control" id="paymentParcel" name="mode_of_payment" required>
+                        <select class="form-control" id="exampleFormControlSelect1" name="mode_of_payment" required>
                             <option value="COD">Cash On Delivery(COD)</option>
                             <option value="Gcash Payment">Gcash Payment</option>
                             <option value="Credit/Debit Card">Credit/Debit Card</option>
@@ -324,41 +317,37 @@
             <div class="row mb-5">
               <div class="col">
                   <div class="weightInput">
-                    <span>
-                      <label class="form-label" for="weightParcel">Weight</label><span class="required">*</span>
-                    </span>
+                    <span>Weight<span class="required">*</span></span>
                     <div class="form-outline">
-                      <input type="text" id="weightParcel" name="weight" class="form-control" required/>
+                      <input type="text" id="form6Example3" name="weight" class="form-control" required/>
+                      {{-- <label class="form-label" for="form6Example3">Weight</label> --}}
                     </div>
                   </div>
               </div>
               <div class="col">
                   <div class="lengthInput">
-                    <span>
-                      <label class="form-label" for="lengthParcel">Length</label><span class="required">*</span>
-                    </span>
+                    <span>Length<span class="required">*</span></span>
                     <div class="form-outline">
-                      <input type="text" id="lengthParcel" name="length" class="form-control" required/>
+                      <input type="text" id="form6Example3" name="length" class="form-control" required/>
+                      {{-- <label class="form-label" for="form6Example3">Length</label> --}}
                     </div>
                   </div>
               </div>
               <div class="col">
                   <div class="widthInput">
-                    <span>
-                      <label class="form-label" for="widthParcel">Width</label><span class="required">*</span>
-                    </span>
+                    <span>Width<span class="required">*</span></span>
                     <div class="form-outline">
-                      <input type="text" id="widthParcel" name="width" class="form-control" required/>
+                      <input type="text" id="form6Example3" name="width" class="form-control" required/>
+                      {{-- <label class="form-label" for="form6Example3">Width</label> --}}
                     </div>
                   </div>
               </div>
               <div class="col">
                   <div class="heightInput">
-                    <span>
-                      <label class="form-label" for="heightParcel">Height</label><span class="required">*</span>
-                    </span>
+                    <span>Height<span class="required">*</span></span>
                     <div class="form-outline">
-                      <input type="text" id="heightParcel" name="height" class="form-control" required/>
+                      <input type="text" id="form6Example3" name="height" class="form-control" required/>
+                      {{-- <label class="form-label" for="form6Example3">Height</label> --}}
                     </div>
                   </div>
               </div>
@@ -366,11 +355,10 @@
               <!--Dropdown category menu-->
               <div class="col">
                 <div class="categoryInput">
-                  <span>
-                    <label for="categoryParcel">Category</label><span class="required">*</span>
-                  </span>
+                  <span>Category<span class="required">*</span></span>
                   <div class="form-outline">
-                    <select class="form-control" id="categoryParcel" name="category">
+                    {{-- <label for="exampleFormControlSelect1">Category</label> --}}
+                    <select class="form-control" id="exampleFormControlSelect1" name="category">
                         <option value="Other">Other/s</option>
                     </select>
                   </div>
@@ -386,13 +374,14 @@
                     <label class="form-label" for="bidParcel">Maximum Bid</label><span class="required">*</span>
                   </span>
                   <div class="form-outline">
-                    <input type="text" id="bidParcel" name="amount" class="form-control" required/>
+                    <input type="text" id="form6Example3" name="amount" class="form-control" required/>
+                    {{-- <label class="form-label" for="form6Example3">Minimum Bid</label> --}}
                   </div>
                 </div>
             </div>
 
             <!--Image input-->
-            <div class="imageInput w-50 mb-4">
+            <div class="imageInput w-50">
               <span>Image<span class="required">*</span></span>
               <div class="form-outline mb-4">
                 <input type="file" name="photo"  id="photo"/>

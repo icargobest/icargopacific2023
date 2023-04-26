@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center">
+<div class="vertical-center" style="margin-top: -68px">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-4 login-container p-5">

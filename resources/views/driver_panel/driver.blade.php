@@ -23,12 +23,8 @@
                   <form action="/search" method="POST">
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
-                    <div class="row d-flex justify-content-center">
-                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                      <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
-                    </div>
+                    <input type="text" id="id" name="tracking_number">
+                    <button type="submit" class="btn btn-primary" style="width: 25%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
                 </form>
                 <div id="message"></div>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -70,7 +66,7 @@
                     <label>QR Scanner</label>
                   </div>
                   <div class="col-12 d-flex justify-content-center mb-4" style="">
-                    <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="col-12 col-md-3">
                       <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
                     </div>
                   </div>

@@ -1,17 +1,14 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center">
+<div style="margin-top: 68px">
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
-            <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
-        </div>
 
-        <div class="col-lg-4 login-container p-5">
+        <div class="col-lg-6 login-container p-5">
         
-                <div class="pb-3 login-header">{{ __('Reset Password') }}</div>
-                <div class="pb-3 blue">Reset Password</div>
+                <div class="pb-2 login-header mb-4">{{ __('Reset Password') }}</div>
+
                 
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
@@ -40,7 +37,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-text">
-                                    <i class="bi bi-lock-fill text-secondary"></i>
+                                    <i class="bi bi-envelope-fill text-secondary"></i>
                                 </span>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="New-Password">
 
@@ -57,7 +54,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-text">
-                                    <i class="bi bi-lock-fill text-secondary"></i>
+                                    <i class="bi bi-envelope-fill text-secondary"></i>
                                 </span>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm New-Password">
                             </div>
@@ -65,7 +62,7 @@
 
                         <div class="row mb-0 mt-5">
                             <div class="col-lg-12">
-                                <button type="submit" class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94; margin-top:175px;">
+                                <button type="submit" class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94;">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
