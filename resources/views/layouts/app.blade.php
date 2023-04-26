@@ -34,6 +34,8 @@
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
+            <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -93,14 +95,15 @@ li
                     </li>
                     <li><div class="dividerBlack1"></div></li>
                     
-                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa fa-gear"></i>Settings</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
+                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
+                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
+                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
                     <li><div class="dividerBlack"></div></li>
                     
-                    <li><a class="dropdown-item" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
+                    <li><a class="dropdown-item navFont" href="{{ route('change-password') }}"><i class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
+                    <li><a class="dropdown-item navFont" href="#" data-mdb-toggle="modal" data-mdb-target="#confirmModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
+                    <li><a class="dropdown-item navFont" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                             </form>

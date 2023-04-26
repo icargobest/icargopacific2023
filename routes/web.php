@@ -16,6 +16,7 @@ use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 
 
@@ -44,7 +45,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return view('/waybill/waybill-list');
+    return view('/company/order/transfer');
 });
 
 Auth::routes(['verify' => true]);
@@ -59,18 +60,24 @@ Route::get('/waybill', function () {
 });
 Route::post('/store', [CompanyController::class, 'store']);
 
-// Authenticated Lock Account Routes
+// Authenticated Account Routes
 Route::middleware('auth')->group(function(){
-    // To Update Users
+    // Lock Account
     Route::get('/users/status/{user_id}/{status_code}', [UsersController::class, 'updateStatus'])->name('users.status.update');
-    Route::get('/dispatcher/dashboard/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+
+    // Lock Account Panel
     Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
+    Route::get('/dispatcher/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
+
+    // Chnage Password
+    Route::get('settings/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+    Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 });
 
 // User/Customer Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
-    ->name('dashboard')->middleware('verified');
+    ->name('dashboard');
 });
 
 // Company Manager Routes
@@ -96,16 +103,26 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
             ->name('unarchive.station');
     });
 
-    //DRIVER PANEL
+    //Staff
+    Route::resource('company/staff', StaffController::class);
+    Route::controller(StaffController::class)->group(function(){
+        Route::get('/staff','index')->name('staff.view');
+        Route::get('/archived_staff','viewArchive')->name('staff.viewArchive');
+        Route::put('/staff/archive/{id}', 'archive')->name('staff.archive');
+        Route::put('/staff/unarchive/{id}', 'unarchive')->name('staff.unarchive');
+    });
+
+
+    //DRIVER
     Route::resource('company/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function() {
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
-        Route::get('archived-user', 'viewArchive')->name('drivers.viewArchive');
+        Route::get('archived-drivers', 'viewArchive')->name('drivers.viewArchive');
         Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
         Route::put('/drivers/unarchive/{id}','unarchive')->name('drivers.unarchive');
     });
 
-    //DISPATCHER PANEL
+    //DISPATCHER
     Route::resource('company/dispatcher', DispatcherController::class);
     Route::controller(DispatcherController::class)->group(function(){
         Route::get('/dispatcher/delete/{id}', 'destroy')->name('dispatcher.delete');
@@ -118,13 +135,13 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 // Super Admin Routes
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
-    ->name('super.admin.dashboard')->middleware('verified');
+    ->name('super.admin.dashboard');
 });
 
 // Driver Routes
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [HomeController::class, 'driverDashboard'])
-    ->name('driver.dashboard')->middleware('verified');
+    ->name('driver.dashboard');
 });
 
 // Dispatcher Routes
@@ -133,6 +150,13 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     ->name('dispatcher.dashboard')->middleware('verified');
 });
 
+// Staff Routes
+Route::middleware(['auth', 'user-access:staff'])->group(function () {
+    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
+    ->name('staff.dashboard')->middleware('verified');
+});
+
+
 
 
 // FORGOT PASSWORD PAGE
@@ -140,9 +164,7 @@ Route::get('/forgot-password', function () {
     return view('login/forgot-password');
 });
 
-
 // FIND TRACKING ID
-
 Route::get('/find', function () {
     return view('search');
 });
@@ -156,13 +178,9 @@ Route::get('/dashboard', function () {
 Route::get('/income', [IncomeController::class, 'index']);
 
 //FREIGHT PAGE
-Route::get('/freight', function () {
+/*Route::get('/freight', function () {
     return view('freight/freight');
-});
-
-
-
-
+});*/
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
@@ -177,34 +195,84 @@ Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\Dispat
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 
-
-
-
-
 Route::get('/company', [CompanyController::class, 'index']);
 
-//Employee Panel
-Route::controller(EmployeeController::class)->group(function(){
-    Route::get('/employees','index')->name('EmployeePanel');
-    Route::post('/add_employee', 'addEmployee')->name('addEmployee');
-    Route::get('/view_employee/{id}','viewEmployee')->name('viewEmployee');
-    Route::get('/view_employee_archive','viewArchive')->name('viewArchive');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::put('/employees/archive/{id}', 'archive')->name('archive');
-    Route::put('/employees/unarchive/{id}', 'unarchive')->name('unarchive');
-});
-// Auth::routes();
 
-//Waybill Panel
+
+Route::get('/order-form', function () {
+    return view('order/waybill-form');
+});
+
+//Order Panel
 Route::controller(ShipmentController::class)->group(function(){
-    Route::get('/waybill','index')->name('waybillPanel');
-    Route::post('add_waybill','addShipment')->name('addShipment');
-    Route::get('/view_shipment/{id}','viewShipment')->name('viewShipment');
+    Route::get('/company/order','index')->name('companyOrderPanel');
+    Route::get('/order','userIndex')->name('userOrderPanel');
+    Route::get('/company/freight','freight')->name('freightPanel');
+    Route::post('/add_order','addOrder')->name('addOrder');
+    Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
+    Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
+    Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
+    Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
     Route::get('/invoice/{id}','viewInvoice')->name('generate');
     Route::get('/invoice/{id}/generate','generateInvoice')->name('print');
     Route::post('add_bid', 'addBid')->name('addBid');
     Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+
+    Route::group(['prefix' => 'company'], function () {
+        Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
+        Route::post('/transfer','transfer')->name('shipment.transfer');
+    });
+});
+
+Route::get('/waybillForm', function () {
+    Route::get('company/order/waybill-form')->name('waybillForm');
+});
+
+//QR Code && Barcode Generation
+Route::get('/generate-code', function (Request $request) {
+    $code = $request->get('tracking_number');
+
+    // Generate QR code with logo
+    $qrCode = QrCode::format('svg')->size(500)->generate($code);
+
+    // Add logo to QR code
+    $logoPath = public_path('img/icargo.png');
+    $logo = file_get_contents($logoPath);
+    $svg = new \SimpleXMLElement($qrCode);
+    $image = $svg->addChild('image');
+    $image->addAttribute('href', 'data:image/png;base64,' . base64_encode($logo));
+    $image->addAttribute('x', '58');
+    $image->addAttribute('y', '58');
+    $image->addAttribute('width', '50');
+    $image->addAttribute('height', '50');
+    $image->addAttribute('opacity', '0.6');
+    $qrCodeWithLogo = $svg->asXML();
+
+    // Generate barcode
+    $barcode = DNS1D::getBarcodeSVG($code, 'C39');
+
+    // Generate file name
+    $fileName = 'code_' . time() . '.zip';
+
+    // Create zip archive
+    $zip = new \ZipArchive();
+    $zip->open(storage_path('app/public/' . $fileName), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+    $zip->addFromString('qr_code.svg', $qrCode);
+    $zip->addFromString('barcode.svg', $barcode);
+    $zip->close();
+
+    // Generate file path
+    $filePath = storage_path('app/public/' . $fileName);
+
+    // Return a response to download the zip archive
+    $response = response()->download($filePath)->deleteFileAfterSend(true);
+
+    // Display the barcode and QR code
+    $barcodeHtml = '<div> '. $barcode .'</div>';
+    $qrCodeHtml = '<div>'. $qrCodeWithLogo .'</div>';
+    $codeHtml = '<div style="margin: 5% 30% 5%">' . $barcodeHtml . '</div>' . '<div style="margin: 5% 30% 5%">' . $qrCodeHtml . '</div>' ;
+
+    return view('generate-code')->with('codeHtml', $codeHtml)->with('response', $response);
 });
 
 // Route to display the form and generated code
@@ -214,17 +282,11 @@ Route::get('/generate-code', function () {
 
 
 // Plan Controller / Monthly Subscription Routes
-Route::middleware("auth")->group(function() {
-    Route::get('plans',[PlanController::class,'index']);
+Route::middleware("auth")->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**

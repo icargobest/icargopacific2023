@@ -91,7 +91,7 @@
                                         Lock
                                     </a>
                                     @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:80px !important;">
+                                    <a href="{{ route('driver.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success" style="width:85px !important;">
                                         unlock
                                     </a>
                                 @endif
@@ -110,107 +110,5 @@
 
 
 
-
-<!-- Modal -->
-<div class="modal top fade" id="addDriverModal" tabindex="-1" aria-labelledby="addDriverModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addDriverModal">Add Driver</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-    
-      <div class="modal-divider"></div>
-
-        <div class="modal-body">
-          <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-
-            <!-- 2 column grid layout with text inputs for the first and last names -->
-            <div class="form-outline mb-4">
-                <div class="form-outline">
-                  <input type="text" id="form6Example1" name="name" class="form-control" required/>
-                  <label class="form-label" for="form6Example1">FULL NAME</label>
-
-                  @error('name')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
-                  
-              </div>
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="form6Example5"  name="email" class="form-control"required />
-              <label class="form-label" for="form6Example5">EMAIL</label>
-              @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-          
-            <!-- Password -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example3" name="password" class="form-control"required />
-              <label class="form-label" for="form6Example3">PASSWORD</label>
-              @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-            </div>    
-              
-            <!-- Confirm Password -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form6Example4" name="password_confirmation" class="form-control"required />
-              <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
-            </div>
-            
-
-            <div class="row mb-4">
-              <label class="form-label" for="vehicle_type"></label>
-              <select type="text" id="form6Example5" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
-                <option value="" hidden>DRIVERS DETAIL</option>
-                <option value="Motorcycle">Motorcycle</option>
-                <option value="Van">Van</option>
-                <option value="Truck">Truck</option>
-              </select>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="text" id="form6Example4" name="plate_no" class="form-control"required />
-                <label class="form-label" for="form6Example4">PLATE NO.</label>
-            </div>
-
-                  
-            <div class="button-modal-container">
-
-                <div class="leftmodal-button-container">
-                    <button type="reset" class="btn btn-outline-primary" data-mdb-dismiss="modal">
-                        Reset
-                    </button>
-                </div>
-    
-                <div class="rightmodal-button-container">
-    
-                    <button type="submit" class="btn btn-primary" id="addModal2"data-mdb-dismiss="modal">
-                        Save
-                    </button>
-
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        Back
-                    </button>
-                </div>
-
-          </form>
-        </div>
-
-    </div>
-  </div>
-</div>
-
-
+@include('company/drivers.create') 
 @include('partials.footer')	
