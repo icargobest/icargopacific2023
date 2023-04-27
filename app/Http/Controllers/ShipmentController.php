@@ -141,6 +141,7 @@ class ShipmentController extends Controller
             'order_type' => $request->order_type,
             'category' => $request->category,
             'min_bid_amount' => $request->amount,
+            'mode_of_payment' => $request->mode_of_payment,
             'photo' => '/storage/'.$path,
             'status' => 'Pending',
         ];
@@ -284,10 +285,28 @@ class ShipmentController extends Controller
         return view('order.generate-invoice', compact('ship'));
     }
 
+    public function viewWaybill($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('order.generate-waybill', compact('ship'));
+    }
+
+    public function viewWaybillCompany($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('company.order.generate-waybill', compact('ship'));
+    }
+
     public function viewInvoiceCompany($id)
     {
         $ship = Shipment::findOrFail($id);
         return view('company.order.generate-invoice', compact('ship'));
+    }
+
+    public function viewWaybillStaff($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('staff_panel.order.generate-waybill', compact('ship'));
     }
 
     public function viewInvoiceStaff($id)
