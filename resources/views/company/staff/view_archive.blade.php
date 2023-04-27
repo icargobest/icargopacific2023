@@ -1,4 +1,4 @@
-<title>Staffs Archived</title>
+<title>Company | Staffs Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
@@ -38,9 +38,9 @@
                 <thead>
                 <tr>
                     <th scope="col" style="text-align:center;">#</th>
-                    <th scope="col" style="text-align:center;">Driver Name</th>
-                    <th scope="col" style="text-align:center;">Vehicle Type</th>
-                    <th scope="col" style="text-align:center;">Plate No.</th>
+                    <th scope="col" style="text-align:center;">Staff Name</th>
+                    <th scope="col" style="text-align:center;">Contact No.</th>
+                    <th scope="col" style="text-align:center;">Emails</th>
                     <th scope="col" style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>

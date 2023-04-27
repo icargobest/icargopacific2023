@@ -1,8 +1,8 @@
-<title>Station</title>
+<title>Company | Station</title>
 
 
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany',['station' => "nav-selected"])
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -63,7 +63,8 @@
                                 <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
                                     @include('company/stations.view')
                                     @include('company/stations.edit')
-                                    @include('company/stations.archive')                                
+                                    @include('company/stations.archive')      
+
                                 </td>
 
 
@@ -75,8 +76,8 @@
         </div>
         
     </div>
-</main>
 
+</main>
 
 
 

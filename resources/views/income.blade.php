@@ -1,4 +1,10 @@
-@extends('layouts.chart')
+<title>Company | Dashboard</title>
+
+
+@extends('layouts.app')
+@include('partials.navigationCompany',['dashboard' => "nav-selected"])
+
+{{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('title', 'Monthly Income')

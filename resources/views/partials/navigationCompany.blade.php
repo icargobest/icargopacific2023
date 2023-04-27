@@ -53,7 +53,7 @@
                         <div class="links">
 
                             <a class="nav-link" href="/company/dashboard">
-                            <div class="link" >
+                            <div class="link @if(isset($dashboard)){{$dashboard}}@endif" >
                                 <i class="fa fa-tachometer link-i-1" ></i>
                                 <span>Dashboard</span>
                             </div>
@@ -86,54 +86,57 @@
                         </div>
                         <div class="links">
 
-                            <div class="link" >
+                            <div class="link" href="{{route('company.advFreightPanel')}}">
                                 <i class="fa fa-forward link-i-1"></i>
                                 <span>Adv. Freight Forwarding</span>
                             </div>
 
                         </div>
-                        <div id="toggle-icon" class="links" >
-                            <div class="link"style="display: flex;justify-content: space-between;">
-                                <i class="fa fa-history link-i-1" ><span>Employees</span></i>
-                                <i id="toggle-icon" class="bx bxs-chevron-down"></i>
-                            </div>
-                        </div>
+                        
 
-                        <div id="toggle-div1" class="links" >
-                        <a class="nav-link" href="/company/staff">
-                            <div class="link">
-                                <i class="fa fa-user link-i-1"></i>
-                                <span>Staff </span>
-                            </div>
-                        </a>
-                        </div>
-
-                        <div id="toggle-div2" class="links">
-                        <a class="nav-link" href="/company/dispatcher">
-                            <div class="link" >
-                                <i class="fa fa-id-card link-i-1"></i>
-                                <span>Dispatcher</span>
-                            </div>
-                        </a>
-                        </div>
-                        <div id="toggle-div3" class="links">
-                            <a class="nav-link" href="/company/drivers">
-                                <div class="link">
-                                    <i class="fa fa-id-card-o link-i-1"></i>
-                                    <span>Driver</span>
-                                </div>
-                            </a>
-                        </div>
 
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
-                                <div class="link">
+                                <div class="link @if(isset($station)){{$station}}@endif">
                                     <i class="fa fa-charging-station link-i-1" ></i>
                                     <span>Station</span>
                                 </div>
                             </a>
                         </div>
 
+                        <div id="toggle-icon" class="links" >
+                            <div class="link"style="display: flex;justify-content: space-between;">
+                                <i class="fa fa-history link-i-1"><span>Employees</span></i>
+                                <i id="" class="bx bxs-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div id="toggle-div1" class="links none" >
+                            <a class="nav-link" href="/company/staff">
+                                <div class="link @if(isset($staff)){{$staff}}@endif">
+                                    <i class="fa fa-user link-i-1 ml-30px"></i>
+                                    <span>Staff </span>
+                                </div>
+                            </a>
+                        </div>
+      
+                        <div id="toggle-div2" class="links none">
+                        <a class="nav-link" href="/company/dispatcher">
+                            <div class="link" >
+                                <i class="fa fa-id-card link-i-1 ml-30px"></i>
+                                <span>Dispatcher</span>
+                            </div>
+                        </a> 
+                        </div>
+                        
+                        <div id="toggle-div3" class="links none">
+                            <a class="nav-link" href="/company/drivers">
+                                <div class="link">
+                                    <i class="fa fa-id-card-o link-i-1 ml-30px"></i>
+                                    <span>Driver</span>
+                                </div>
+                            </a>
+                        </div>
+                        
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link">
@@ -154,6 +157,10 @@
                                       </form>
                               </div>
                           </a>
+
+                          {{-- Dropdown TRIAL --}}
+    
+
                       </div>
                     </div>
                 </div>

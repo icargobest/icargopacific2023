@@ -62,7 +62,7 @@
 
 
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block" id="addModal2" data-mdb-dismiss="modal">
+                <button type="submit" class="btn btn-success btn-block" id="addModal2" data-mdb-dismiss="modal">
                   Save changes
                 </button>
                 <a href="{{route('staff.index')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">

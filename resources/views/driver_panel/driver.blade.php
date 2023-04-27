@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.status')
-@include('partials.navigationCompany')
+@include('partials.navigationDriver')
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
