@@ -92,16 +92,18 @@
                             </div>
 
                         </div>
+                        
 
 
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
-                                <div class="link">
+                                <div class="link @if(isset($station)){{$station}}@endif">
                                     <i class="fa fa-charging-station link-i-1" ></i>
                                     <span>Station</span>
                                 </div>
                             </a>
                         </div>
+
                         <div id="toggle-icon" class="links" >
                             <div class="link"style="display: flex;justify-content: space-between;">
                                 <i class="fa fa-history link-i-1"><span>Employees</span></i>
@@ -110,7 +112,7 @@
                         </div>
                         <div id="toggle-div1" class="links none" >
                             <a class="nav-link" href="/company/staff">
-                                <div class="link">
+                                <div class="link @if(isset($staff)){{$staff}}@endif">
                                     <i class="fa fa-user link-i-1 ml-30px"></i>
                                     <span>Staff </span>
                                 </div>
@@ -134,6 +136,7 @@
                                 </div>
                             </a>
                         </div>
+                        
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link">

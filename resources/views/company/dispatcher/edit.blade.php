@@ -18,25 +18,28 @@
         <form action="{{ route('dispatcher.update',$user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Dispatcher Name:</strong>
+            <div class="row ">
+                <div class="col">
+                    <div class="form-outline mb-4">
                         <input type="text" name="name" value="{{ $user->user->name }}" class="form-control"
                             placeholder="Dispatcher name" required>
+                           <label class="form-label" for="name">Staff Name</label>
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="form-group">
-                      <strong>Contact Number:</strong>
+            </div>
+              <div class="form-outline mb-4">
+                <div class="col">
+                  <div class="form-outline mb-4">
                       <input type="text" name="contact_no" value="{{ $user->contact_no }}" class="form-control" 
                           oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                           minlength="11" 
                           maxlength="11"
                           placeholder="Contact Number:" required>
+                          <label class="form-label" for="name">Staff Name</label>
+
                       @error('name')
                       <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                       @enderror
@@ -45,7 +48,7 @@
              </div>
 
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary btn-block">
+              <button type="submit" class="btn btn-success btn-block">
                 Save changes
               </button>
               <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">

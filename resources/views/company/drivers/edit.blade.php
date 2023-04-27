@@ -87,7 +87,7 @@
                </div>
 
                    <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block" id="addModal2">
+                    <button type="submit" class="btn btn-success btn-block" id="addModal2">
                       Save changes
                     </button>
                     <a href="{{route('drivers.index')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
