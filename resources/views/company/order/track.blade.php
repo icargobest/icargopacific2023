@@ -18,8 +18,8 @@
     <a href="{{route('generateInvoice',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
         Invoice
     </a>
-    <a href="#" class="btn btn-dark btn-sm col-1">
-        Print Waybill
+    <a href="{{route('generateWaybill',$ship->id)}}" target="_blank" class="btn btn-dark btn-sm col-1">
+        Waybill
     </a>
     @if($ship->station_id == null && $ship->status == "Assort")
         @include('company.order.transfer')
@@ -151,4 +151,4 @@
         </div>
 
 {{-- END OF ORDER CONTAINER --}}
-@include('partials.footer')	
+@include('partials.footer')

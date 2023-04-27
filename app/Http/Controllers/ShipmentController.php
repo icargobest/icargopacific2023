@@ -285,10 +285,28 @@ class ShipmentController extends Controller
         return view('order.generate-invoice', compact('ship'));
     }
 
+    public function viewWaybill($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('order.generate-waybill', compact('ship'));
+    }
+
+    public function viewWaybillCompany($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('company.order.generate-waybill', compact('ship'));
+    }
+
     public function viewInvoiceCompany($id)
     {
         $ship = Shipment::findOrFail($id);
         return view('company.order.generate-invoice', compact('ship'));
+    }
+
+    public function viewWaybillStaff($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('staff_panel.order.generate-waybill', compact('ship'));
     }
 
     public function viewInvoiceStaff($id)
