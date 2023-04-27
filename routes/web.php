@@ -89,7 +89,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
         Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/invoice/{id}','viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}','viewInvoice')->name('generate');
     });
 });
 
@@ -170,12 +170,24 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
     ->name('driver.dashboard');
+
+    //DRIVER PAGE
+    Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+    Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+    Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+    Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
 });
 
 // Dispatcher Panel
 Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::get('/dispatcher/dashboard', [DispatcherDashboardController::class, 'index'])
     ->name('dispatcher.dashboard')->middleware('verified');
+
+    //DISPATCHER PAGE
+    Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+    Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+    Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+    Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 });
 
 // Staff Panel
