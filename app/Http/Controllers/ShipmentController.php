@@ -141,6 +141,7 @@ class ShipmentController extends Controller
             'order_type' => $request->order_type,
             'category' => $request->category,
             'min_bid_amount' => $request->amount,
+            'mode_of_payment' => $request->mode_of_payment,
             'photo' => '/storage/'.$path,
             'status' => 'Pending',
         ];

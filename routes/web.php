@@ -92,7 +92,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
         Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/invoice/{id}','viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}','viewInvoice')->name('generate');
     });
 });
 

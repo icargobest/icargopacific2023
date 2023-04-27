@@ -17,7 +17,7 @@
           @foreach ($shipments as $ship)
               @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred')))
               {{-- CARD CREATED AFTER FILLING UP --}}
-              <a class="cardItem" href="{{route('',$ship->id)}}">
+              <a class="cardItem" href="">
                   <div class="item-card container px-4">
                   <div class="card-body">
                       <div class="row">
