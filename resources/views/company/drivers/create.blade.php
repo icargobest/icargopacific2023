@@ -20,7 +20,7 @@
                                       <strong>{{ $message }}</strong>
                                   </span>
                                   @enderror
-                    <label class="form-label" for="name">Full Name</label>
+                    <label class="form-label" for="form6Example1">FULL NAME</label>
                   </div>
                 </div>
               </div>
@@ -64,10 +64,47 @@
                   </div>
                 </div>
               </div>
+
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                    minlength="11" 
+                    maxlength="11" 
+                    required 
+                    placeholder="">
+                    <label class="form-label" for="contact">CONTACT</label>
+                    @error('contact_no')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input id="license" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" autocomplete="license_number" 
+                    minlength="11" 
+                    maxlength="11"  
+                    required 
+                    placeholder="">
+                    <label class="form-label" for="licenseNum">LICENSE NUMBER</label>
+                    @error('license_number')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                </div>
+              </div>
             
             <div class="row mb-4">
               <label class="form-label" for="vehicle_type"></label>
-              <select type="text" id="vehicle_type" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+              <select type="text" id="vehicle_type" name="vehicle_type" class="dropdown-modal1" user required>
                 <option value="" hidden>Vehicle Type</option>
                 <option value="Motorcycle">Motorcycle</option>
                 <option value="Van">Van</option>
@@ -76,7 +113,7 @@
             </div>
 
             <div class="form-outline mb-4">
-                <input type="text" id="plate_no" name="plate_no" class="form-control"required />
+                <input type="text" id="plate_no" name="plate_no" class="form-control" value= "{{ $user->plate_no }}"required />
                 <label class="form-label" for="plate_no">Plate No.</label>
             </div>
 

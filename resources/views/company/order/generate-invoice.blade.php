@@ -1,5 +1,5 @@
 
-    <title>Invoice #{{$ship->id}}</title>
+    <title>Company | Invoice #{{$ship->id}}</title>
 
     <style>
         html,

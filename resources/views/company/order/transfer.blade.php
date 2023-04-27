@@ -1,3 +1,15 @@
+
+<head>
+    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+    <title>Company | Orders</title>
+</head>
+<br>
+@if($errors->any())
+@foreach($errors->all() as $err)
+    <strong>{{$err}}</strong>
+@endforeach
+@endif
+
 <button type="button" class="btn btn-dark btn-sm col-1" data-bs-toggle="modal" data-bs-target="#transferModal">Transfer</button>
 
 <!-- Modal -->

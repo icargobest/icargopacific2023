@@ -52,6 +52,9 @@ use App\Models\OrderTrackingLog;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/driver/history', function () {
+    return view('driver_panel.deliverHistory');
+});
 
 Auth::routes(['verify' => true]);
 

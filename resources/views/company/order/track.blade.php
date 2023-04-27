@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Orders</title>
+    <title>Company | Orders</title>
   </head>
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
@@ -151,3 +151,4 @@
         </div>
 
 {{-- END OF ORDER CONTAINER --}}
+@include('partials.footer')	
