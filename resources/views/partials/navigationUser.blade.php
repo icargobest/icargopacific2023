@@ -54,7 +54,7 @@
                 <div class="link1">
                     <div class="links">
                         <a class="nav-link" href="{{route('userOrderPanel')}}">
-                        <div class="link" >
+                        <div class="link @if(isset($order)){{$order}}@endif" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
                             <span>Order</span>
                         </div>

@@ -206,12 +206,12 @@ justify-content: space-between;
 }
 .links .link
 {
-margin: 8px 0px;
+/* margin: 8px 0px; */
 height: 20px;
 color: #fff;;
 display: flex;
 align-items: center;
-padding: 0px 12px;
+padding: 12px 12px;
 transition:  all 300ms ease-in-out;
 }
 
@@ -237,15 +237,16 @@ margin-bottom:4px;
 margin-bottom:2px;
 }
 
-.link-i-3
+.link-i-3 i
 {
-margin-bottom: 13px;
+margin-bottom: 13px !important;
 }
 
 .link-i-4
 {
 margin-bottom: 8px;
 }
+
 
 .links .link span
 {
@@ -265,10 +266,15 @@ margin-bottom: 8px;
 .sidebar .divider2
 {
     border-bottom: 1px solid #d6d6d6;
-    margin-top: 10px;
     width: 100%;
 }
 
+
+.links .link
+{
+width: 250px !important;
+
+}
 
 
 .links a:hover span, .links a:active span
@@ -294,6 +300,7 @@ background:#EAEBEE ;
 color: #1D4586;
 cursor: pointer;
 }
+
 
 .links .link i.arrow
 {
@@ -335,6 +342,23 @@ margin-top: 67px;
 }
 
 
+.ml-30px
+{
+margin-left: 30px;
+}
+
+
+.nav-selected
+{
+    background:#EAEBEE ;
+    color: #1D4586 !important;
+    cursor: pointer;
+}
+
+.invalid-feedback
+{
+color:#dc3545 !important;
+}
 
 
 /* navFont */
@@ -342,6 +366,45 @@ margin-top: 67px;
 {
 font-size: 12px !important;
 }
+
+
+/* MODAL HEADER */
+.mbc1
+{
+background-color: #ffc107 !important;
+}
+
+.mbc2
+{
+background-color: #198754 !important;
+}
+
+.mbc3
+{
+background-color: #dc3545 !important;
+}
+.span-red
+{
+color: #dc3545 !important;
+font-weight: bolder;
+font-size: 21.1766px !important;
+}
+
+.span-green
+{
+color: #198754 !important;
+font-weight: bolder;
+font-size: 21.1766px !important;
+    
+}
+
+/* BOOOTSTRAP MANIPULATION */
+.alert-dismissible .btn-close 
+{
+top: 20 !important;
+right:10 !important;
+}
+
 
 @media screen and (min-width: 664px) {
 

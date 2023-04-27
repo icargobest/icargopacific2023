@@ -1,4 +1,3 @@
-
 <button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$user->id}}">
   Show
 </button>
@@ -12,78 +11,66 @@
        </div>
        <div class="modal-body">
           <fieldset disabled>
-            <!-- Email input -->
-            <div class="label-container">
-              <label>DRIVER ID</label>
-            </div>
-             <div class="form-outline mb-2">
-               <input type="email" id="email" name="id" value="{{$user->id}}" class="form-control" />
+           {{--  Driver ID --}}
+             <div class="row">
+               <div class="col"> 
+                <div class="form-outline mb-4">
+                  <input type="text" id="id" name="id" value="{{$user->id}}" class="form-control" />
+                  <label class="form-label" for="id">Driver ID</label>
+                </div>
+               </div>
              </div>
 
 
-             <!-- Email input -->
-             <div class="label-container">
-              <label>DRIVER NAME</label>
-            </div>
-             <div class="form-outline mb-2">
-               <input type="email" id="email" name="name" value="{{$user->user->name}}" class="form-control" />
-             </div>
+             <!-- Name  -->
+             <div class="form-outline mb-4">
+              <div class="form-outline mb-4">
+                <input type="email" id="email" name="email" value="{{$user->user->name}}" class="form-control" />
+                <label class="form-label" for="email">Driver Name</label>
+              </div>
 
-             <!-- Email input -->
-             <div class="label-container">
-              <label>EMAIL</label>
-            </div>
-             <div class="form-outline mb-2">
+             <!-- Email  -->
+             <div class="form-outline mb-4">
                <input type="email" id="email" name="email" value="{{$user->user->email}}" class="form-control" />
+               <label class="form-label" for="email">Driver Email</label>
              </div>
 
-             <!-- Password input -->
-             <div class="label-container">
-              <label>VEHICLE TYPE</label>
-            </div>
-             <div class="form-outline mb-2">
-               <input type="text" id="vehicle_type" name="vehicle_type" value="{{$user->vehicle_type}}" class="form-control" />
+             <!-- Vehicle  -->
+             <div class="form-outline mb-4">
+              <input type="text" id="vehicle_type" name="vehicle_type" value="{{$user->vehicle_type}}" class="form-control" />
+              <label class="form-label" for="vehicle_type">Vehicle Type</label>
              </div>
 
-             <!-- Password input -->
-             <div class="label-container">
-              <label>CONTACT NUMBER</label>
-            </div>
-             <div class="form-outline mb-2">
-               <input type="text" id="vehicle_type" name="contact_no" value="{{$user->contact_no}}" class="form-control" />
-             </div>
+             <!-- Contact No.  -->
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="contact_no" value="{{$user->contact_no}}" class="form-control" />
+              <label class="form-label" for="contact_no">Contact No.</label>
+             </div>             
 
-             <!-- Password input -->
-             <div class="label-container">
-              <label>LICENSE NUMBER</label>
-            </div>
-             <div class="form-outline mb-2">
-               <input type="text" id="vehicle_type" name="license_number" value="{{$user->license_number}}" class="form-control" />
-             </div>
+             <!-- License No.  -->
 
-             <!-- Position -->
-             <div class="label-container">
-              <label>PLATE NUMBER</label>
-            </div>
-              <div class="form-outline mb-2">
-               <input type="text" id="station_email" name="plate_no" value="{{$user->plate_no}}" class="form-control" />
-             </div>
+             <div class="form-outline mb-4">
+              <input type="text" id="license_number" name="license_number" value="{{$user->license_number}}" class="form-control" />
+              <label class="form-label" for="license_number">Contact No.</label>
+             </div>             
 
+             <!-- Plate No. -->
+
+              <div class="form-outline mb-4">
+               <input type="text" id="plate_no" name="plate_no" value="{{$user->plate_no}}" class="form-control" />
+               <label class="form-label" for="plate_no">Plate No.</label>
+              </div>
              <!-- Created At. -->
-             <div class="label-container">
-              <label>CREATED AT</label>
-            </div>
-              <div class="form-outline mb-2">
-               <input type="text" id="station_email" name="created_at" value="{{$user->created_at}}" class="form-control" />
-             </div>
 
-             <!-- Updated At. -->
-             <div class="label-container">
-              <label>UPDATED AT</label>
-            </div>
-              <div class="form-outline mb-2">
-               <input type="text" id="station_email" name="updated_at" value="{{$user->updated_at}}" class="form-control" />
+             <div class="form-outline mb-4">
+               <input type="text" id="created_at" name="created_at" value="{{$user->created_at}}" class="form-control" />
+               <label class="form-label" for="created_at">Created At</label>
              </div>
+             <!-- Updated At. -->
+             <div class="form-outline mb-4">
+               <input type="text" id="updated_at" name="updated_at" value="{{$user->updated_at}}" class="form-control" />
+               <label class="form-label" for="updated_at">Updated At</label>
+              </div>
 
 
           </fieldset>

@@ -60,7 +60,7 @@
                 <label class="form-label" for="stationEmail">Updated At</label>
               </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
+                    <button type="submit" class="btn btn-success btn-block" data-mdb-dismiss="modal">
                         Save
                       </button>
                     <a href="{{route('stations.view')}}" class="btn btn-secondary btn-block">

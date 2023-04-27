@@ -8,7 +8,7 @@
   <!-- MDB -->
   <script type="text/javascript" src="/js/mdb.min.js"></script>
   <!-- Custom scripts -->
-  <script type="text/javascript"></script>
+  <script type="text/javascript" src="/js/sidebar.js"></script>
   <!--Bootstrap-->
 {{--   <script src="/js/bootstrap.bundle.js"></script> --}}
 </body>

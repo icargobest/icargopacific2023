@@ -29,7 +29,7 @@
 </head>
 
 
-@extends('partials.navigationCompany')
+@extends('partials.navigationStaff')
 @extends('layouts.app')
 
 @section('content')

@@ -53,9 +53,6 @@
                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required/>
               <label class="form-label" for="password_confirmation">CONFIRM PASSWORD</label>
             </div>
-
-            <h4>Dispatcher Information</h4>
-
             <!-- Contact input -->
             <div class="form-outline mb-4">
               <div class="form-outline">
