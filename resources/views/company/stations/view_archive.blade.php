@@ -60,7 +60,6 @@
                                 <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
                                     @include('company/stations.view')
                                     @include('company/stations.edit')
-                                    @include('company/stations.archive')                                
                                 </td>
                             </tr>
                         @endif

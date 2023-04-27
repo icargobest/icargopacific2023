@@ -1,30 +1,23 @@
 <head>
-  <title>Customer | Orders</title>
-</head>
+    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+    <title>Orders</title>
+  </head>
 
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-@include('layouts.app')
-@include('partials.navigationUser',['order' => "nav-selected"])
+  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+  @include('layouts.app')
+  @extends('partials.navigationStaff')
 
-{{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-<div class="order-container container">
+  {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
+  <div class="order-container container">
 
-  <h4>MY ITEMS</h4>
-  <div class="button-holder row  mx-1 mb-3">
-    <a href="/order-form">
-        <button type="button" class="btn btn-primary btn-sm btn-block">
-            Post Order
-        </button>
-    </a>
-  </div>
+    <h4>ORDER LIST</h4>
 
-    <div class="cards-holder">
+      <div class="cards-holder">
 
-        @foreach ($shipments as $ship)
-            @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
-                @if($ship->status != 'Cancelled' && $ship->status != 'Delivered')
+          @foreach ($shipments as $ship)
+              @if((Auth::user()->type == 'staff' && $ship->company_bid == null && $ship->status == 'Pending'))
                 {{-- CARD CREATED AFTER FILLING UP --}}
-                <a class="cardItem" href="{{route('viewOrder',$ship->id)}}">
+                <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
                     <div class="item-card container px-4">
                     <div class="card-body">
                         <div class="row">
@@ -78,23 +71,22 @@
                             </div>
                         </div>
 
-                    <div class="image-wrapper col">
-                        <div class="image-holder">
-                        <img src="{{asset($ship->photo)}}" alt="">
+                        <div class="image-wrapper col">
+                            <div class="image-holder">
+                            <img src="{{asset($ship->photo)}}" alt="">
+                            </div>
                         </div>
-                    </div>
 
                         </div>
                     </div>
                     </div>
                 </a>
                 {{-- END OF CARD --}}
-                @endif
-            @endif
-        @endforeach
-        </div>
-    </div>
-    {{-- END OF ORDER CONTAINER --}}
+              @endif
+          @endforeach
+          </div>
+      </div>
+      {{-- END OF ORDER CONTAINER --}}
 
-      <!-- End of Waybill List -->
-      @include('partials.footer')
+        <!-- End of Waybill List -->
+        @include('partials.footer')

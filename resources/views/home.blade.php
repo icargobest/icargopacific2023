@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('partials.navigationUser')
 
 @section('content')
 <div class="container">

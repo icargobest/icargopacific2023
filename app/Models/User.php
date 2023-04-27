@@ -33,6 +33,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
+
     protected function type(): Attribute
     {
         return new Attribute(

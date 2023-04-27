@@ -104,7 +104,7 @@
             
             <div class="row mb-4">
               <label class="form-label" for="vehicle_type"></label>
-              <select type="text" id="vehicle_type" name="vehicle_type"style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+              <select type="text" id="vehicle_type" name="vehicle_type" class="dropdown-modal1" user required>
                 <option value="" hidden>Vehicle Type</option>
                 <option value="Motorcycle">Motorcycle</option>
                 <option value="Van">Van</option>
@@ -113,7 +113,7 @@
             </div>
 
             <div class="form-outline mb-4">
-                <input type="text" id="plate_no" name="plate_no" class="form-control"required />
+                <input type="text" id="plate_no" name="plate_no" class="form-control" value= "{{ $user->plate_no }}"required />
                 <label class="form-label" for="plate_no">Plate No.</label>
             </div>
 

@@ -58,7 +58,8 @@
             </div>
             <!-- Password -->
             <div class="form-outline mb-4">
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required(true) autocomplete="new-password" placeholder="Password">
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" @required(true) autocomplete="new-password" placeholder="Password">
+
               @error('password')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

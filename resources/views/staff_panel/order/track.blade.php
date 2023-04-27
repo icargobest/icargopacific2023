@@ -1,11 +1,11 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Company | Orders</title>
+    <title>Orders</title>
   </head>
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationCompany')
+  @extends('partials.navigationStaff')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
@@ -15,7 +15,7 @@
 
 
   <div class="text-center">
-    <a href="{{route('generateInvoice',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
+    <a href="{{route('viewInvoiceStaff',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
         Invoice
     </a>
     <a href="#" class="btn btn-dark btn-sm col-1">
@@ -153,4 +153,3 @@
         </div>
 
 {{-- END OF ORDER CONTAINER --}}
-@include('partials.footer')	

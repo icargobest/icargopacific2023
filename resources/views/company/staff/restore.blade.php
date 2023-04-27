@@ -6,7 +6,7 @@
  <div class="modal top fade" id="restoreModal{{$staff->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header mbc2">
           <h5 class="modal-title" id="exampleModalLabel">Restore Data</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
