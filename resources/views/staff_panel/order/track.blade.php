@@ -18,8 +18,8 @@
     <a href="{{route('viewInvoiceStaff',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-1">
         Invoice
     </a>
-    <a href="#" class="btn btn-dark btn-sm col-1">
-        Print Waybill
+    <a href="{{route('staff.generateWaybill', $ship->id)}}" class="btn btn-dark btn-sm col-1">
+        Waybill
     </a>
 
     @if($ship->station_id == null && $ship->status == "Assort")
