@@ -55,7 +55,7 @@ class ShipmentSeeder extends Seeder
 
         // Insert shipment data
         $shipmentData = [
-            'station_id' => $stations->random()->id,
+            'station_id' => null,
             'tracking_number' => $faker->isbn13(),
             'user_id' => 1,
             'sender_id' => $sender->id,

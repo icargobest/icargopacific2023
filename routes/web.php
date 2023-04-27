@@ -102,16 +102,13 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/company/order','index')->name('company.order');
         Route::get('/company/freight','freight')->name('freightPanel');
+        Route::get('/company/advFreight','company_advFreightPanel')->name('company.advFreightPanel');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
         Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
-        Route::post('add_bid', 'addBid')->name('addBid');
+        Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/order/history', 'orderHistory')->name('orderHistory');
-
-        Route::group(['prefix' => 'company'], function () {
-            Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-            Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
-        });
+        Route::put('/transfer/{id}','transfer')->name('transfer.company');
     });
 
     // stations
@@ -194,11 +191,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
          Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
          Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
          Route::post('add_bid', 'staff_addBid')->name('staff_addBid');
-
-    //     Route::group(['prefix' => 'company'], function () {
-    //         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-    //         Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
-    //     });
+         Route::put('/staff/transfer/{id}','transfer')->name('transfer.staff');
      });
 
 });

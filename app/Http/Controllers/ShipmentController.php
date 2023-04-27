@@ -54,6 +54,13 @@ class ShipmentController extends Controller
         return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function company_advFreightPanel(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('company.freight.advance_freight', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
     public function freightStaff(){
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
@@ -255,18 +262,20 @@ class ShipmentController extends Controller
 
     function trackOrder_Company($id){
         $bid = Bid::all();
+        $stations = Station::all();
         $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
+        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
     }
 
     function trackOrder_Staff($id){
         $bid = Bid::all();
+        $stations = Station::all();
         $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('staff_panel.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
+        return view('staff_panel.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
     }
 
     public function viewInvoice($id)
@@ -294,30 +303,14 @@ class ShipmentController extends Controller
         return view('order.order-history', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
-
-    public function transferShipment($id)
-    {
-        $data = Shipment::find($id);
-        $stats = Station::all();
-        return view('/company/order/transfer',[
-            'shipments'=>$data,
-            'stations' => $stats,
-        ]);
-    }
-
     public function transfer(Request $request)
     {
-        $data = Shipment::find($request->id);
-        $data = $request->validate([
-            'transferto_station_id' => 'required'
-        ], [
-            'transferto_station_id.required' => 'Transfer to Station ID is required'
-        ]);
-
-        $data->station_id=$request->transferto_station_id;
+        $data = Shipment::findOrFail($request->id);
+        $data->station_id = $request->transfer_station_number;
         $data->status = 'Transferred';
         $data->save();
 
-        return redirect('company/freight');
+        return redirect()->back()->with('success', 'Transfer Success');
     }
+
 }
