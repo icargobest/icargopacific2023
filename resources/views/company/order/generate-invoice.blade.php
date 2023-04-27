@@ -74,18 +74,13 @@
             color: #fff;
         }
 
-        .print-btn {
-        background-color: #4CAF50; /* Green background color */
-        border: none; /* Remove border */
-        color: white; /* White text color */
-        padding: 12px 24px; /* Padding */
-        text-align: center; /* Center text */
-        text-decoration: none; /* Remove underline */
-        display: inline-block; /* Display as inline-block */
-        font-size: 16px; /* Font size */
-        margin: 4px 2px; /* Margin */
-        cursor: pointer; /* Add cursor on hover */
-        border-radius: 4px; /* Add rounded corners */
+        .print-button {
+            background-color: #333;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
         @media print {

@@ -39,8 +39,8 @@
                 <tr>
                     <th scope="col" style="text-align:center;">#</th>
                     <th scope="col" style="text-align:center;">Staff Name</th>
+                    <th scope="col" style="text-align:center;">Email</th>
                     <th scope="col" style="text-align:center;">Contact No.</th>
-                    <th scope="col" style="text-align:center;">Emails</th>
                     <th scope="col" style="text-align:center; width:300px">Action</th>
                 </tr>
                 </thead>
@@ -50,8 +50,8 @@
                             <tr>
                                 <td>{{ $staff->id }}</td>
                                 <td>{{ $staff->user->name}}</td>
-                                <td>{{ $staff->contact_no}}</td>
                                 <td>{{ $staff->user->email}}</td>
+                                <td>{{ $staff->contact_no}}</td>
                                 <td class="td-buttons d-flex justify-content-center"style="overflow:auto">
                                     @include('company/staff.show')
                                     @include('company/staff.restore')

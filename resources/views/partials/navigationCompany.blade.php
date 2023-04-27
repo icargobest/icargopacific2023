@@ -77,29 +77,31 @@
                           </div>
 
                         <div class="links">
-                        <a class="nav-link" href="{{route('freightPanel')}}">
-                          <div class="link" >
-                              <i class="fa fa-truck link-i-1"></i>
-                              <span>Freight</span>
-                          </div>
-
-                        </div>
-                        <div class="links">
-
+                            <a class="nav-link" href="{{route('freightPanel')}}">
                             <div class="link" >
-                                <i class="fa fa-forward link-i-1"></i>
-                                <span>Adv. Freight Forwarding</span>
+                                <i class="fa fa-truck link-i-1"></i>
+                                <span>Freight</span>
                             </div>
-
+                            </a>
                         </div>
-                        
+
+                        <div class="links">
+                            <a class="nav-link" href="{{route('company.advFreightPanel')}}">
+                                <div class="link">
+                                    <i class="fa fa-forward link-i-1"></i>
+                                    <span>Adv. Freight Forwarding</span>
+                                </div>
+                            </a>
+                        </div>
+
+
 
 
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link @if(isset($station)){{$station}}@endif">
                                     <i class="fa fa-charging-station link-i-1" ></i>
-                                    <span>Station</span>
+                                    <span>Stations</span>
                                 </div>
                             </a>
                         </div>
@@ -118,16 +120,16 @@
                                 </div>
                             </a>
                         </div>
-      
+
                         <div id="toggle-div2" class="links none">
                         <a class="nav-link" href="/company/dispatcher">
                             <div class="link" >
                                 <i class="fa fa-id-card link-i-1 ml-30px"></i>
                                 <span>Dispatcher</span>
                             </div>
-                        </a> 
+                        </a>
                         </div>
-                        
+
                         <div id="toggle-div3" class="links none">
                             <a class="nav-link" href="/company/drivers">
                                 <div class="link">
@@ -136,7 +138,7 @@
                                 </div>
                             </a>
                         </div>
-                        
+
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link">
@@ -159,7 +161,7 @@
                           </a>
 
                           {{-- Dropdown TRIAL --}}
-    
+
 
                       </div>
                     </div>
