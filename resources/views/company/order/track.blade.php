@@ -21,10 +21,8 @@
     <a href="#" class="btn btn-dark btn-sm col-1">
         Print Waybill
     </a>
-    @if($ship->station_id == 0)
-        <a href="{{route('viewTransfer', $ship->id)}}" class="btn btn-dark btn-sm col-1">
-            Transfer
-        </a>
+    @if($ship->station_id == null && $ship->status == "Assort")
+        @include('company.order.transfer')
     @endif
   </div>
 
@@ -96,7 +94,7 @@
             </div>
         {{-- END OF CARD --}}
 
-        <div class="row">
+        </br></br><div class="row">
             <div class="col-md-6">
                 <h3>Order Summary</h3>
                 @if($ship->status == 'Pending')

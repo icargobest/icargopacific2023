@@ -86,7 +86,7 @@
                         </div>
                         <div class="links">
 
-                            <div class="link" >
+                            <div class="link" href="{{route('company.advFreightPanel')}}">
                                 <i class="fa fa-forward link-i-1"></i>
                                 <span>Adv. Freight Forwarding</span>
                             </div>
