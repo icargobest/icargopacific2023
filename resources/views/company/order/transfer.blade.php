@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Orders</title>
+    <title>Company | Orders</title>
 </head>
 <br>
 @if($errors->any())
