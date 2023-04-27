@@ -1,10 +1,11 @@
+<title>Dispatcher Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
             <div class="employee-header-container">
-                <h3 class="">Archived Dispatchers</h3>
+                <h3 class="">Dispatchers Archived</h3>
             </div>
         
 
@@ -29,32 +30,6 @@
                 </div>
             </div>
 
-            <div class="top-container2">
-                <h5 class="fw-normal mb-2 d-inline"> FILTERS:</h5>
-                <div class="dropdown-container">
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Title</option>
-                        <option value="1">Head Developer</option>
-                        <option value="2">Head Designer</option>
-                        <option value="3">CEO</option>
-                    </select>
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Status</option>
-                        <option value="1">Active</option>
-                        <option value="2">Pending</option>
-                        <option value="3">Archived</option>
-                    </select>
-
-                    <select class="form-select bold-hover border-black capitalized b-shadow s-margin modified-select" aria-label="Default select example" style="width:150px;">
-                        <option value="1" hidden>Position</option>
-                        <option value="1">Head Developer</option>
-                        <option value="2">Head Designer</option>
-                        <option value="3">CEO</option>
-                    </select>
-                </div>
-            </div>
 
         </section>
 
@@ -73,11 +48,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                        @if ($user->dispatcherDetail->archived == true)
+                    @foreach ($dispatchers as $user)
+                        @if ($user->archived == true)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/dispatcher.show')@include('company/dispatcher.restore')</td>
                             </tr>

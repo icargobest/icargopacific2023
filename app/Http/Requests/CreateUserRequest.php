@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStaffRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     public function authorize()
     {
@@ -16,7 +16,6 @@ class CreateStaffRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'contact_no' => ['required', 'int', 'min:11', 'max:11'],
         ];
     }
 
@@ -30,8 +29,6 @@ class CreateStaffRequest extends FormRequest
             'email.required' => 'Email field is required.',
             'email.unique' => 'Email address must be unique within the organization',
             'email.email' => 'Email field must be email address.',
-            'contact_no.required' => 'Contact field is required.',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 characters'
         ];
     } 
 }

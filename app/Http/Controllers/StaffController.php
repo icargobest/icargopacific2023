@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateStaffRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class StaffController extends Controller
 {
@@ -39,26 +42,38 @@ class StaffController extends Controller
         return view('company.staff.create');
     }
 
-    public function store(CreateStaffRequest $request)
+    public function store(CreateUserRequest $request)
     {
+        DB::beginTransaction();
+        try {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => '5',
         ]);
+
+        $otherValidation = $request->validate([
+            'contact_no' => ['required', 'min:11', 'max:11'],
+        ], [
+            'contact_no.required' => 'Contact field is required.',
+            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
+        ]);
     
         $staff = Staff::create([
-            'contact_no' => $request->contact_no,
+            'contact_no' =>  $otherValidation['contact_no'],
             'user_id' => $user->id,
             'company_id' => Auth::id(),
         ]);
-    
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
         return redirect()->route('staff.index')
                 ->with('success','Staff has been created successfully.');
     }
     
-
     public function show($id)
     {
         $staff = $this->staff->getStaff($id);
@@ -74,16 +89,16 @@ class StaffController extends Controller
         return view('company.staff.edit', compact('staff', 'user'));
     }
 
-    public function update(CreateStaffRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $staffData = [
-            'contact_no' => $request->input('contact_no')
+            'contact_no' => $request->input('updateContactNo')
         ];
 
         $userData = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+            'name' => $request->input('updateFullName'),
+            'email' => $request->input('updateEmail'),
+            'password' => Hash::make($request->input('updatePassword')),
         ];
         
         $staff = Staff::find($id);
@@ -92,7 +107,8 @@ class StaffController extends Controller
         $user = $staff->user;
         $user->update($userData);
 
-        return back()->with('success', 'Staff #'.$id.' data updated successfully!');
+        return redirect()->route('staff.index')
+                ->with('success','Staff #'.$id.' has been updated successfully.');
     }
 
 
@@ -118,6 +134,15 @@ class StaffController extends Controller
         $staff->save();
 
         return redirect()->back()->with('success', 'Staff #'.$id.' data restored successfully.');
+    }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Staff  status updated successfully!');
     }
 
 }

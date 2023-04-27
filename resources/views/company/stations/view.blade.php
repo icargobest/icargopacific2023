@@ -3,11 +3,11 @@
     Show
  </button>
 
- <div class="modal top fade" id="showModal{{$station->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+ <div class="modal top fade" id="showModal{{$station->id}}" tabindex="-1" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
      <div class="modal-dialog ">
        <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">View</h5>
+         <div class="modal-header mbc1">
+           <h5 class="modal-title">View</h5>
            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
@@ -15,9 +15,9 @@
                <!-- 2 column grid layout with text inputs for the first and last names -->
 
              <!-- Station ID Input -->
-             <div class="row mb-4">
+             <div class="row">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline mb-4">
                   <input type="text" id="stationID" name="station_id" value="{{$station->station_number}}" class="form-control" />
                   <label class="form-label" for="stationID">Station Number</label>
                 </div>
@@ -61,7 +61,7 @@
              
             </fieldset>
                  <div class="modal-footer">
-                    <a class="btn btn-dark btn-block" data-mdb-dismiss="modal">
+                    <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
                         Back
                     </a>
                  </div>

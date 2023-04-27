@@ -3,11 +3,11 @@
    Edit
 </button>
 
-<div class="modal top fade" id="editModal{{$station->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top fade" id="editModal{{$station->id}}" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog ">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+        <div class="modal-header mbc2">
+          <h5 class="modal-title">Edit Data</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -63,7 +63,7 @@
                     <button type="submit" class="btn btn-primary btn-block" data-mdb-dismiss="modal">
                         Save
                       </button>
-                    <a href="{{route('stations.view')}}" class="btn btn-success btn-block">
+                    <a href="{{route('stations.view')}}" class="btn btn-secondary btn-block">
                         Cancel
                     </a>
                 </div>

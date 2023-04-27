@@ -10,7 +10,7 @@
             </div>
             <div class="container p-5 shadow" style=" background-color:white;">
             <div class="text-center">
-              
+
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
                   {{-- <div>
@@ -23,8 +23,12 @@
                   <form action="/search" method="POST">
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
-                    <input type="text" id="id" name="tracking_number">
-                    <button type="submit" class="btn btn-primary" style="width: 25%; background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
+                    <div class="row d-flex justify-content-center">
+                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
+                    </div>
                 </form>
                 <div id="message"></div>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,7 +53,7 @@
                     })
                 </script>
                 </form>
-                    
+
 
                   </div>
 
@@ -66,7 +70,7 @@
                     <label>QR Scanner</label>
                   </div>
                   <div class="col-12 d-flex justify-content-center mb-4" style="">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
                       <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
                     </div>
                   </div>
@@ -120,7 +124,7 @@
                     <span id="result"></span>
                   </div>
 
-                  
+
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -154,8 +158,8 @@
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
                         </div>
                       </div>
-                    </div> 
-                  </div> 
+                    </div>
+                  </div>
                   <!-- Success Delivery Modal -->
                   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -172,7 +176,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>    
+                  </div>
                   <!-- Delivered Modal -->
                   <div class="modal fade" id="deliveredModal" tabindex="-1" aria-labelledby="deliveredModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -189,13 +193,13 @@
                         </div>
                       </div>
                     </div>
-                  </div> 
+                  </div>
                 </section>
               </main>
             </div>
             </div>
-          
-        
+
+
       </div>
     </div>
   </div>
@@ -216,110 +220,149 @@
   <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
-    // after success to play camera Webcam Ajax paly to send data to Controller
-  function onScanSuccess(data) {
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
-      data: {"_token": "{{ csrf_token() }}", data: data},
-      success: function (data) {
-        // after success to get Data from controller if Shipment is available in the database
-        // iframe for waybill info
-        if (data.result == 1) {
-          var iframeContainer = document.getElementById('my-iframe-container');
-          // check if there is already an iframe in the container
-          if (iframeContainer.childElementCount > 0) {
-            iframeContainer.removeChild(iframeContainer.childNodes[0]);
-          }
-          var iframe = document.createElement('iframe');
-          iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframeContainer.appendChild(iframe);
-          html5QrcodeScanner.clear();
-
-          // add event listener to button when iframe is loaded
-          iframe.onload = function() {
-            // assume 'data' is the fetched data object
-            var button = iframe.contentDocument.getElementById("my-button");
-            var pickedUp = document.getElementById('picked-up');
-            var assort = document.getElementById('assort');
-            var delivered = document.getElementById('delivered');
-            var completed = document.getElementById('completed');
-
-            if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                pickedUp.classList.add('done');
+        // after success to play camera Webcam Ajax paly to send data to Controller
+    function onScanSuccess(data) {
+        $.ajax({
+        type: "POST",
+        cache: false,
+        url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
+        data: {"_token": "{{ csrf_token() }}", data: data},
+        success: function (data) {
+            // after success to get Data from controller if Shipment is available in the database
+            // iframe for waybill info
+            if (data.result == 1) {
+            var iframeContainer = document.getElementById('my-iframe-container');
+            // check if there is already an iframe in the container
+            if (iframeContainer.childElementCount > 0) {
+                iframeContainer.removeChild(iframeContainer.childNodes[0]);
             }
-            if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                assort.classList.add('done');
-            }
-            if (data.status === "delivery" || data.status === "delivered") {
-                delivered.classList.add('done');
-            }
-            if (data.status === "delivered") {
-                completed.classList.add('done');
-            }
+            var iframe = document.createElement('iframe');
+            iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+            iframe.style.width = '100%';
+            iframe.style.height = '500px';
+            iframeContainer.appendChild(iframe);
+            html5QrcodeScanner.clear();
+
+            // add event listener to button when iframe is loaded
+            iframe.onload = function() {
+                // assume 'data' is the fetched data object
+                var button = iframe.contentDocument.getElementById("my-button");
+                var pickedUp = document.getElementById('picked-up');
+                var assort = document.getElementById('assort');
+                var delivered = document.getElementById('delivered');
+                var completed = document.getElementById('completed');
+
+                if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                    pickedUp.classList.add('done');
+                }
+                if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                    assort.classList.add('done');
+                }
+                if (data.status === "delivery" || data.status === "delivered") {
+                    delivered.classList.add('done');
+                }
+                if (data.status === "delivered") {
+                    completed.classList.add('done');
+                }
 
 
-            button.addEventListener("click", function() {
-              if (data.status === "Processing") {
-                data.status = 'pickup';
-                var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
-                modal.show();
+                button.addEventListener("click", function() {
+                if (data.status === "Processing") {
+                    data.status = 'pickup';
+                    var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
+                    modal.show();
 
-                // Update the database with the new pickup value
-                $.ajax({
+                    // Update the database with the new pickup value
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
+                        data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "tracking_number": data.tracking_number,
+                            "shipment_id": data.id,
+                            "status": data.status
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                } else if (data.status === 'delivery') {
+                    data.status = 'delivered';
+                    var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
+                    deliveredModal.show();
+
+                    // Update the database with the new delivered value
+                    $.ajax({
                     type: "POST",
-                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
+                    data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                    success: function (response) {
+                        console.log(response);
+                    }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "tracking_number": data.tracking_number,
+                            "shipment_id": data.id,
+                            "status": data.status
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                } else if (data.status === 'delivered') {
+                    var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                    deliveredModal.show();
+                    $.ajax({
+                    type: "POST",
+                    url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "tracking_number": data.tracking_number,
+                        "shipment_id": data.id,
+                        "status": data.status
+                    },
                     success: function (response) {
                         console.log(response);
                     }
                 });
-              } else if (data.status === 'delivery') {
-                data.status = 'delivered';
-                var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
-                deliveredModal.show();
-
-                // Update the database with the new delivered value
-                $.ajax({
-                  type: "POST",
-                  url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
-                  data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                  success: function (response) {
-                    console.log(response);
-                  }
+                } else {
+                    var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
+                    modal.show();
+                }
                 });
-              } else if (data.status === 'delivered') {
-                var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                deliveredModal.show();
-              } else {
-                var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
-                modal.show();
-              }
-            });
-          };
-        } else {
-          return confirm('There is no shipment with this qr code');
+            };
+            } else {
+            return confirm('There is no shipment with this qr code');
+            }
         }
-      }
-    });
-  }
+        });
+    }
 
 
 
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", {fps: 10, qrbox: 250});
-    html5QrcodeScanner.render(onScanSuccess);
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {fps: 10, qrbox: 250});
+        html5QrcodeScanner.render(onScanSuccess);
 
   </script>
   <script type="text/javascript">
-    // Add event listener to Reset button
-    document.getElementById("resetButton").addEventListener("click", function() {
-        // Reload the current page
-        location.reload();
-    });
+        // Add event listener to Reset button
+        document.getElementById("resetButton").addEventListener("click", function() {
+            // Reload the current page
+            location.reload();
+        });
   </script>
 
 
@@ -328,15 +371,16 @@
 </div>
 <hr/>
 
-<script type="text/javascript">
-  $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   }
-  });
-</script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+    </script>
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
+
 <style>
   .result{
     background-color: green;
@@ -362,30 +406,30 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 6px;
-}
-a#reader__dashboard_section_swaplink {
-  background-color: blue; /* Green */
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-span a{
-  display:none
-}
+  }
+    a#reader__dashboard_section_swaplink {
+    background-color: blue; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    }
+    span a{
+    display:none
+    }
 
-#reader__camera_selection{
-  background: blueviolet;
-  color: aliceblue;
-}
-#reader__dashboard_section_csr span{
-  color:red
-}
+    #reader__camera_selection{
+    background: blueviolet;
+    color: aliceblue;
+    }
+    #reader__dashboard_section_csr span{
+    color:red
+    }
 </style>
 {{-- @include('partials.footer') --}}

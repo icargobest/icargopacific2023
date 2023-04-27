@@ -5,7 +5,7 @@
 
 @section('content')
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">Manager Dashboard</a>
+    <a class="navbar-brand" href="#">Company Manager Dashboard</a>
   </nav>
 <div class="row justify-content-center">
     <div class="col-md-6">

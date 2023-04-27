@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Shipment;
 use App\Models\Bid;
 use App\Models\Station;
 use App\Models\OrderHistory;
 use App\Models\Sender;
 use App\Models\Recipient;
+use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
@@ -19,6 +23,7 @@ class ShipmentController extends Controller
 {
     private $shipment;
     private $bid;
+    private $staff;
 
 
     public function index(){
@@ -35,11 +40,35 @@ class ShipmentController extends Controller
         return view('order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function staffIndex(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('staff_panel.order.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
     public function freight(){
         $shipment = Shipment::all();
         $bid = Bid::all();
 
         return view('company.freight.index', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function freightStaff(){
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $user = User::where('id', $company_id)->first();
+            if($user){
+                $company_name = $user->name;
+                $company_id = $user->id;
+                $company_email = $user->email; // Get the company_id from the
+            }
+        }
+        $bids = Bid::all();
+        $shipments = Shipment::all();
+        return view('staff_panel.freight.index', compact('company_name', 'company_id'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
     }
 
     function postOrder(){
@@ -109,14 +138,8 @@ class ShipmentController extends Controller
             'status' => 'Pending',
         ];
 
-
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
-
-
-
-
-
 
         // Update sender and recipient models
         $sender->shipment_id = $shipment->id;
@@ -146,6 +169,32 @@ class ShipmentController extends Controller
         return back();
     }
 
+    function staff_addBid(Request $request){
+
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $user = User::where('id', $company_id)->first();
+            if($user){
+                $company_name = $user->name;
+                $company_id = $user->id;
+                $company_email = $user->email; // Get the company_id from the
+            }
+        }
+            // Add the bid data
+            $data = [
+                'company_id' => $company_id,
+                'company_name' => $company_name,
+                'shipment_id' => $request->shipment_id,
+                'bid_amount' => $request->bid_amount,
+                'status' => 'Pending',
+            ];
+            $this->bid->addBid($data);
+            return back();
+
+    }
+
     function acceptBid(Request $request, $id){
         $bid = Bid::findOrFail($id);
         $shipment = Shipment::findOrFail($request->input('shipment_id'));
@@ -155,12 +204,22 @@ class ShipmentController extends Controller
 
         $shipment->bid_amount = $bid->bid_amount;
         $shipment->company_bid = $bid->company_name;
+        $shipment->company_id = $bid->company_id;
         $shipment->status = 'Processing';
         $shipment->save();
 
         Bid::where('shipment_id', $shipment->id)
         ->where('id', '!=', $bid->id)
         ->update(['status' => 'Rejected']);
+
+        return redirect()->back();
+    }
+
+    function cancelOrder($id){
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->status = 'Cancelled';
+        $shipment->save();
 
         return redirect()->back();
     }
@@ -179,24 +238,60 @@ class ShipmentController extends Controller
         return view('company.order.view',compact('ship'), ['bids' => $bid]);
     }
 
-    function trackOrder($id){
+    function viewOrder_Staff($id){
         $bid = Bid::all();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('staff_panel.order.view',compact('ship'), ['bids' => $bid]);
+    }
+
+    function trackOrder($id){
+        $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     function trackOrder_Company($id){
         $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
 
         $ship=$this->shipment->getShipmentId($id);
-        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order']);
+        return view('company.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
+    }
+
+    function trackOrder_Staff($id){
+        $bid = Bid::all();
+        $statuses = Shipment::pluck('status')->unique();
+
+        $ship=$this->shipment->getShipmentId($id);
+        return view('staff_panel.order.track',compact('ship'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     public function viewInvoice($id)
     {
         $ship = Shipment::findOrFail($id);
         return view('order.generate-invoice', compact('ship'));
+    }
+
+    public function viewInvoiceCompany($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('company.order.generate-invoice', compact('ship'));
+    }
+
+    public function viewInvoiceStaff($id)
+    {
+        $ship = Shipment::findOrFail($id);
+        return view('staff_panel.order.generate-invoice', compact('ship'));
+    }
+
+    function orderHistory(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        return view('order.order-history', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
 
@@ -218,11 +313,11 @@ class ShipmentController extends Controller
         ], [
             'transferto_station_id.required' => 'Transfer to Station ID is required'
         ]);
-        
+
         $data->station_id=$request->transferto_station_id;
         $data->status = 'Transferred';
         $data->save();
 
-        return redirect('/company/freight');
+        return redirect('company/freight');
     }
 }

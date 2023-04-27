@@ -24,6 +24,11 @@ class Shipment extends Model
         return $this->belongsTo(Recipient::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     public function histories()
     {
         return $this->hasMany(OrderHistory::class);
