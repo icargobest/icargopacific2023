@@ -57,6 +57,7 @@ class StaffController extends Controller
             'contact_no' => ['required', 'min:11', 'max:11'],
         ], [
             'contact_no.required' => 'Contact field is required.',
+            'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
             'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
     

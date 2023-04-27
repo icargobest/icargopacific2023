@@ -58,11 +58,8 @@ Route::get('/driver/history', function () {
 
 Auth::routes(['verify' => true]);
 
-// company account registration
-Route::get('/registerCompany', function () {
-    return view('/registerCompany');
-});
-Route::post('/store', [CompanyController::class, 'store']);
+//Company registration account
+Route::resource('company_registration', CompanyController::class);
 
 // Authenticated Account Routes
 Route::middleware('auth')->group(function(){
@@ -219,10 +216,6 @@ Route::get('/find', function () {
 
 Route::post('/search', [UserController::class, 'search']);
 
-// DASHBOARD PAGE
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-});
 Route::get('/income', [IncomeController::class, 'index']);
 
 
@@ -240,7 +233,7 @@ Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\Dispat
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 
-Route::get('/company', [CompanyController::class, 'index']);
+// Route::get('/company', [CompanyController::class, 'index']);
 
 
 
