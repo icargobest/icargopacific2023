@@ -1,17 +1,43 @@
+    @include('layouts.app')
+
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
+
+    <style>
+        body{
+            font-family: 'Poppins';
+        }
+        .img-size {
+            object-fit: contain;
+        }
+        th {
+            background-color: white !important;
+            color: black;
+            font-weight: normal;
+        }
+        td {
+            text-align: left;
+            font-weight: bold;
+        }
+    </style>
+
+    {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <!-- Exp start -->
-    <button type="button" class="btn text-white btn-block mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{$ship->id}}">
+    <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{$ship->id}}">
     VIEW
     </button>
+    {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <!-- tracking modal -->
     <div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" >
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- title -->
-                    <h4 class="modal-title mb-0" id="trackingModalToggleLabel">ORDER DETAILS</h4>
+                    <h4 class="modal-title mb-0" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
                     <!-- close button -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                {{-- CARD CREATED AFTER FILLING UP --}}
                 <!-- modal content -->
                 <div class="modal-body">
                     <div class="container">
@@ -22,38 +48,46 @@
                                 <img class="card shadow-0 img-size w-100" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
                                 <!-- <img class="card shadow-0 img-size" src="{{asset($ship->photo)}}" alt=""> -->
                                 <div class="d-flex justify-content-center">
-                                <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
-                                    <h6 class="mb-0 fw-bold text-capitalize">Minimum Bid: Php {{$ship->min_bid_amount}}</h6>
-                                </button>
+                                    <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
+                                        @if($ship->company_bid == null && $ship->bid_amount == null)
+                                            <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php {{$ship->min_bid_amount}}</h6>
+                                        @else
+                                            <h6 class="mb-0 fw-bold text-capitalize">Company: {{$ship->company_bid}}</h6>
+                                        @endif
+                                    </button>
                                 </div>
                                 <div class="row align-items-end">
-                                    @if($ship->company_bid != NULL && $ship->bid_amount != NULL)
+                                    {{-- TRACK ORDER--}}
+                                    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
                                     <div class="col-md-12 d-flex justify-content-center">
                                         <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn text-white btn-block " style="background-color:#214D94;">
                                             Track Order
                                         </a>
                                     </div>
-                                    @else
-                                        <div class="col-8">
-                                            <!-- Note error: Route [addBid] not defined. -->
-                                            <form method="POST" action="{{--{{route('addBid')}}--}}">
-                                            <!-- end note -->
+                                    @endif
+                                    {{-- END TRACK ORDER--}}
+                                    <div class="col-8">
+                                        {{-- BID NOW --}}
+                                        @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
+                                        <form method="POST" action="{{route('addBid.company')}}">
                                             @csrf
                                             <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                                             <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
                                             <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
                                             <label class="control-label control-label-left fw-bold">BID<span class="required"></span></label>
-                                            <input type="number" class="form-control typeahead btn-block w-100" placeholder="BID AMOUNT" id="form6Example3" id="bidAmount" name="bid_amount" required/>
-                                        </div>
-                                        <div class="col-4">
-                                            <button type="submit" class="btn btn-warning mt-2" id="bidButton"> 
-                                                BID
-                                            </button>
-                                        </div>
-                                    </form>
-                                    @endif
+                                            <input type="number" class="form-control btn-block w-100" placeholder="BID AMOUNT" id="form6Example3" id="bidAmount" name="bid_amount" required/>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-warning mt-2" id="bidButton"> 
+                                            BID NOW
+                                        </button>
+                                        </form>
+                                        @endif
+                                    {{-- END BID NOW --}}
+                                    </div>
                                 </div>
                             </div>
+                            {{-- CARD CREATED AFTER FILLING UP --}}
                             <!-- Product Information -->
                             <div class="col-xl-6">
                                 <div class="row">
@@ -110,10 +144,6 @@
                                         <th>Parcel Item:</th>
                                             <td>{{$ship->category}}</td>
                                         </tr>
-                                        <tr>
-                                            <th>Freight Charges:</th>
-                                            <td>Php 68</td>
-                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -153,10 +183,12 @@
                         <!-- END ACCEPT BID TABLE -->
                     </div>
                 </div>
+                {{-- END OF CARD --}}
             </div>
         </div>
     </div>
     <!-- Exp end -->
+    {{-- END OF ORDER CONTAINER --}}
 
     <script>
     // Get the minimum bid amount from the HTML using PHP

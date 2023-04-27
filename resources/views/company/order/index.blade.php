@@ -1,20 +1,11 @@
-<head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Company | Orders</title>
-  </head>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+        <title>Company | Orders</title>
+    </head>
 
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-  @include('layouts.app')
-  @include('partials.navigationCompany')
-
-  <!--Bootstrap CSS-->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  <!-- MDB -->
-  <link rel="stylesheet" href="/css/mdb.min.css" />
-  <!-- Google Poppins Font -->
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('layouts.app')
+    @include('partials.navigationCompany')
 
 	<style>
         body{
@@ -34,7 +25,7 @@
         }
     </style>
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-	<div class="container mw-100 my-0">
+	<div class="container mw-100 px-lg-5">
         <div class="bg-white shadow" style="max-width: 100%;">
             <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
                 <h3 class="text-white mb-0">ORDER LIST</h3>
@@ -58,27 +49,29 @@
                 </thead>
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
-                    <tr>
-                        <td>{{$ship->id}}</td>
-                        <!-- Photo not showing -->
-                        <!-- <td style="width: 70px;">
-                            <img src="{{asset($ship->photo)}}" class="card shadow-0 img-sizew-25" style="min-width: 70px;" alt=""/>
-                        </td> -->
-                        <td style="width: 70px;">
-                            <img class="card shadow-0 img-size w-25" style="min-width: 70px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                        </td>
-                        <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
-                        <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
-                        <td>{{$ship->category}}</td>
-                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
-                        <td>{{$ship->min_bid_amount}}</td>
-                        <td>Processing</td>
-                        <td>
-                            @include('company.order.view')
-                        </td>
-                    </tr>
-                    @endif
+                        @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
+                            @if(Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending')
+                            <tr>
+                                <td>{{$ship->id}}</td>
+                                <!-- Photo not showing -->
+                                <!-- <td style="width: 70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 img-sizew-25" style="min-width: 70px;" alt=""/>
+                                </td> -->
+                                <td style="width: 70px;">
+                                    <img class="card shadow-0 img-size w-25" style="min-width: 70px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                                </td>
+                                <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
+                                <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
+                                <td>{{$ship->category}}</td>
+                                <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
+                                <td>{{$ship->min_bid_amount}}</td>
+                                <td>{{$ship->status}}</td>
+                                <td>
+                                    <span class="d-flex align-items-start">@include('company.order.view')</span>
+                                </td>
+                            </tr>
+                            @endif
+                        @endif
                     @endforeach
                 </tbody>
                 </table>
@@ -87,6 +80,4 @@
             {{-- END OF CARD --}}
         </div>
     </div>
-
-    <!-- End of Waybill List -->
     @include('partials.footer')
