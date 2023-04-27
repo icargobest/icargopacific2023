@@ -15,6 +15,7 @@
                 <!-- modal content -->
                 <div class="modal-body">
                     <div class="container">
+                        <!-- Column for Product Image and Product Info -->
                         <div class="row">
                             <!-- Product Image -->
                             <div class="col-xl-6 ">
@@ -34,7 +35,9 @@
                                     </div>
                                     @else
                                         <div class="col-sm-8">
-                                            <form method="POST" action="{{route('addBid')}}">
+                                            <!-- Note error: Route [addBid] not defined. -->
+                                            <form method="POST" action="{{--{{route('addBid')}}--}}">
+                                            <!-- end note -->
                                             @csrf
                                             <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />
                                             <input type="hidden" name="company_name" value="{{Auth::user()->name}}" />
@@ -54,9 +57,10 @@
                             <!-- Product Information -->
                             <div class="col-xl-6">
                                 <div class="row">
-                                    <table class="m-2"style="width:100%">
+                                    <!-- Table for Alignment of Product Info -->
+                                    <table class="m-2" style="width:100%">
                                         <tr>
-                                            <th><h5 class="fw-bold opacity-75">SENDER</h5></th> 
+                                            <th colspan="2"><h5 class="fw-bold opacity-75">SENDER</h5></th> 
                                         </tr>
                                         <tr>
                                             <th>Name:</th>
@@ -70,11 +74,11 @@
                                             <th>Contact Number:</th>
                                             <td>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
                                         </tr>
-                                    </table>
-                                    <hr class="opacity-75">
-                                    <table class="m-2"style="width:100%">
                                         <tr>
-                                            <th><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
+                                            <td colspan="2"><hr class="opacity-75"></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
                                         </tr>
                                         <tr>
                                             <th>Name:</th>
@@ -88,11 +92,11 @@
                                             <th>Contact Number:</th>
                                             <td>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
                                         </tr>
-                                    </table>
-                                    <hr class="opacity-75">
-                                    <table class="m-2"style="width:100%">
                                         <tr>
-                                            <th><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
+                                            <td colspan="2"><hr class="opacity-75"></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
                                         </tr>
                                         <tr>
                                             <th>ID:</th>
@@ -114,6 +118,10 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        
+                        <!-- START ACCEPT BID TABLE -->
                         <hr class="opacity-75">
                         <section class="overflow-auto">
                             <table class="table table-striped table-hover">
@@ -141,7 +149,8 @@
                                     @endif
                                 @endforeach
                             </table>
-                            </section>
+                        </section>
+                        <!-- END ACCEPT BID TABLE -->
                     </div>
                 </div>
             </div>
