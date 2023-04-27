@@ -58,11 +58,8 @@ Route::get('/driver/history', function () {
 
 Auth::routes(['verify' => true]);
 
-// company account registration
-Route::get('/registerCompany', function () {
-    return view('/registerCompany');
-});
-Route::post('/store', [CompanyController::class, 'store']);
+//Company registration account
+Route::resource('company_registration', CompanyController::class);
 
 // Authenticated Account Routes
 Route::middleware('auth')->group(function(){
@@ -173,12 +170,24 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
     ->name('driver.dashboard');
+
+    //DRIVER PAGE
+    Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+    Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+    Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+    Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
 });
 
 // Dispatcher Panel
 Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::get('/dispatcher/dashboard', [DispatcherDashboardController::class, 'index'])
     ->name('dispatcher.dashboard')->middleware('verified');
+
+    //DISPATCHER PAGE
+    Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+    Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+    Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+    Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 });
 
 // Staff Panel
@@ -212,10 +221,6 @@ Route::get('/find', function () {
 
 Route::post('/search', [UserController::class, 'search']);
 
-// DASHBOARD PAGE
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-});
 Route::get('/income', [IncomeController::class, 'index']);
 
 
@@ -233,7 +238,7 @@ Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\Dispat
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 
-Route::get('/company', [CompanyController::class, 'index']);
+// Route::get('/company', [CompanyController::class, 'index']);
 
 
 
