@@ -21,8 +21,8 @@
     <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-3">
         Invoice
     </a>
-    <a href="#" class="btn btn-dark btn-sm col-3">
-        Print Waybill
+    <a href="{{route('user.generateWaybill', $ship->id)}}" class="btn btn-dark btn-sm col-3">
+        Waybill
     </a>
   </div>
 

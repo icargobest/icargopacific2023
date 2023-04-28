@@ -83,9 +83,9 @@
                   <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
-                  <div class="scanresult">
+                  <div class="scanresult" style="text-align:center;">
                     <label>Result:</label>
-                    <div class="track--wrapper">
+                    <div class="track--wrapper" style="display: none;">
                       <div class="track__item" id="picked-up">
                           <div class="track__thumb">
                               <i class="las la-briefcase"></i>
@@ -119,12 +119,18 @@
                           </div>
                       </div>
                     </div>
-
+                    <div id="status-summary-container"></div>
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
 
+<<<<<<< Updated upstream
 
+=======
+                  
+
+                  
+>>>>>>> Stashed changes
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -220,28 +226,29 @@
   <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
-        // after success to play camera Webcam Ajax paly to send data to Controller
-    function onScanSuccess(data) {
-        $.ajax({
-        type: "POST",
-        cache: false,
-        url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
-        data: {"_token": "{{ csrf_token() }}", data: data},
-        success: function (data) {
-            // after success to get Data from controller if Shipment is available in the database
-            // iframe for waybill info
-            if (data.result == 1) {
-            var iframeContainer = document.getElementById('my-iframe-container');
-            // check if there is already an iframe in the container
-            if (iframeContainer.childElementCount > 0) {
-                iframeContainer.removeChild(iframeContainer.childNodes[0]);
-            }
-            var iframe = document.createElement('iframe');
-            iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
-            iframe.style.width = '100%';
-            iframe.style.height = '500px';
-            iframeContainer.appendChild(iframe);
-            html5QrcodeScanner.clear();
+    // after success to play camera Webcam Ajax paly to send data to Controller
+  function onScanSuccess(data) {
+    $.ajax({
+      type: "POST",
+      cache: false,
+      url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
+      data: {"_token": "{{ csrf_token() }}", data: data},
+      success: function (data) {
+        // after success to get Data from controller if Shipment is available in the database
+        // iframe for waybill info
+        if (data.result == 1) {
+          var iframeContainer = document.getElementById('my-iframe-container');
+          // check if there is already an iframe in the container
+          if (iframeContainer.childElementCount > 0) {
+            iframeContainer.removeChild(iframeContainer.childNodes[0]);
+          }
+          var iframe = document.createElement('iframe');
+          iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+          iframe.style.width = '100%';
+          iframe.style.height = '500px';
+          iframeContainer.appendChild(iframe);
+          $('.track--wrapper').show();
+          html5QrcodeScanner.clear();
 
             // add event listener to button when iframe is loaded
             iframe.onload = function() {
@@ -265,12 +272,98 @@
                     completed.classList.add('done');
                 }
 
+                var statusContainer = document.getElementById("status-summary-container");
+                statusContainer.classList.add("tracking-status");
 
-                button.addEventListener("click", function() {
-                if (data.status === "Processing") {
-                    data.status = 'pickup';
-                    var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
-                    modal.show();
+                var relevantStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
+                var displayStatusCodes = [];
+
+                // Determine which status codes to display based on the current status
+                switch (data.status) {
+                  case "Processing":
+                    displayStatusCodes = ["Processing"];
+                    break;
+                  case "pickup":
+                    displayStatusCodes = ["Processing", "pickup"];
+                    break;
+                  case "received":
+                    displayStatusCodes = ["Processing", "pickup", "received"];
+                    break;
+                  case "delivery":
+                    displayStatusCodes = ["Processing", "pickup", "received", "delivery"];
+                    break;
+                  case "delivered":
+                    displayStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
+                    break;
+                  default:
+                    break;
+                }
+
+                // Reverse the order of the status codes to show the latest on top
+                displayStatusCodes.reverse();
+
+                // Loop through the relevant status codes and display the ones that should be displayed
+                for (var i = 0; i < relevantStatusCodes.length; i++) {
+                  var statusCode = relevantStatusCodes[i];
+                  if (displayStatusCodes.includes(statusCode)) {
+                    // Create a new status item
+                    var statusItem = document.createElement("div");
+                    statusItem.classList.add("status-item");
+                    if (statusCode === "delivered") {
+                      statusItem.classList.add("delivered");
+                    } else {
+                      statusItem.classList.add("in-transit");
+                    }
+
+                    // Create the status time element
+                    var statusTime = document.createElement("div");
+                    statusTime.classList.add("status-time");
+                    statusTime.textContent = new Date().toLocaleString();
+                    statusItem.appendChild(statusTime);
+
+                    // Create the status text element
+                    var statusText = document.createElement("div");
+                    statusText.classList.add("status-text");
+
+                    // Create the status title element
+                    var statusTitle = document.createElement("div");
+                    statusTitle.classList.add("status-title");
+                    if (statusCode === "Processing") {
+                      statusTitle.textContent = "Order is Being Processed";
+                    } else if (statusCode === "pickup") {
+                      statusTitle.textContent = "Parcel has been Picked Up by Driver";
+                    } else if (statusCode === "received") {
+                      statusTitle.textContent = "Parcel is in Logistics";
+                    } else if (statusCode === "delivery") {
+                      statusTitle.textContent = "Parcel is Out for Delivery";
+                    } else if (statusCode === "delivered") {
+                      statusTitle.textContent = "Parcel has been Delivered";
+                    }
+                    statusText.appendChild(statusTitle);
+
+                    // Create the status description element
+                    var statusDesc = document.createElement("div");
+                    statusDesc.classList.add("status-desc");
+                    if (statusCode === "delivered") {
+                      statusDesc.textContent = "Your parcel has been delivered.";
+                    } else {
+                      statusDesc.textContent = "Your parcel is on its way.";
+                    }
+                    statusText.appendChild(statusDesc);
+
+                    // Add the status text to the status item and the status item to the container
+                    statusItem.appendChild(statusText);
+                    statusContainer.insertBefore(statusItem, statusContainer.firstChild);
+                  }
+                }
+
+
+            button.addEventListener("click", function() {
+              // Update the status and date/time
+              if (data.status === "Processing") {
+                data.status = 'pickup';
+                var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
+                modal.show();
 
                     // Update the database with the new pickup value
                     $.ajax({
@@ -407,29 +500,40 @@
   cursor: pointer;
   border-radius: 6px;
   }
-    a#reader__dashboard_section_swaplink {
-    background-color: blue; /* Green */
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 6px;
-    }
-    span a{
-    display:none
-    }
+  a#reader__dashboard_section_swaplink {
+  background-color: blue; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  }
+  span a{
+  display:none
+  }
 
-    #reader__camera_selection{
+  #reader__camera_selection{
     background: blueviolet;
     color: aliceblue;
-    }
-    #reader__dashboard_section_csr span{
+  }
+  #reader__dashboard_section_csr span{
     color:red
-    }
+  }
+
+  #status-summary-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .status-summary {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
 </style>
 {{-- @include('partials.footer') --}}
