@@ -15,8 +15,8 @@
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending'))
-                @if(Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending')
+              @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company'))
+                @if(Auth::user()->type == 'company' )
                 {{-- CARD CREATED AFTER FILLING UP --}}
                 <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                     <div class="item-card container px-4">

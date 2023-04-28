@@ -241,10 +241,54 @@ class ShipmentController extends Controller
 
     function viewOrder_Company($id){
         $bid = Bid::all();
+        $shipment = Shipment::all();
+
+        // Check if the shipment ID exists in the order_history table
+        $order_history = OrderHistory::where('order_id', $id)->first();
+
+        // If the shipment ID does not exist in the order_history table, create a new record
+        if (!$order_history) {
+            $order_history = new OrderHistory;
+            $order_history->order_id = $id;
+            $order_history->save();
+        }
+
+        // Get the shipment status from the shipments table
+        $shipment_status = Shipment::where('id', $id)->pluck('status')->first();
+
+        // Update the corresponding column in the order_history table based on the shipment status
+        if ($shipment_status === 'Pending') {
+            $order_history->isPending = true;
+            $order_history->isPendingTime = now();
+        } elseif ($shipment_status === 'Processed') {
+            $order_history->isProcessed = true;
+            $order_history->isProcessedTime = now();
+        } elseif ($shipment_status === 'PickUp') {
+            $order_history->isPickUp = true;
+            $order_history->isPickUpTime = now();
+        } elseif ($shipment_status === 'Assort') {
+            $order_history->isAssort = true;
+            $order_history->isAssortTime = now();
+        } elseif ($shipment_status === 'Transferred') {
+            $order_history->isTransferred = true;
+            $order_history->isTransferredTime = now();
+        } elseif ($shipment_status === 'Arrived') {
+            $order_history->isArrived = true;
+            $order_history->isArrivedTime = now();
+        } elseif ($shipment_status === 'Dispatched') {
+            $order_history->isDispatched = true;
+            $order_history->isDispatchedTime = now();
+        } elseif ($shipment_status === 'Delivered') {
+            $order_history->isDelivered = true;
+            $order_history->isDeliveredTime = now();
+        }
+
+        $order_history->save();
 
         $ship=$this->shipment->getShipmentId($id);
         return view('company.order.view',compact('ship'), ['bids' => $bid]);
     }
+
 
     function viewOrder_Staff($id){
         $bid = Bid::all();
