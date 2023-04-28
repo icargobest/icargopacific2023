@@ -1,5 +1,8 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+    @extends('layouts.app')
+@extends('layouts.status')
+    <link rel="stylesheet" href="./line-awesome.min.css">
     <title>Orders</title>
   </head>
 
@@ -18,8 +21,8 @@
     <a href="{{route('generate',$ship->id)}}" target="_blank" class="btn btn-primary btn-sm col-3">
         Invoice
     </a>
-    <a href="#" class="btn btn-dark btn-sm col-3">
-        Print Waybill
+    <a href="{{route('user.generateWaybill', $ship->id)}}" class="btn btn-dark btn-sm col-3">
+        Waybill
     </a>
   </div>
 
@@ -91,62 +94,113 @@
             </div>
         {{-- END OF CARD --}}
 
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Order Summary</h3>
-                @if($ship->status == 'Pending')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status: Pending</h5>
-                            <p class="card-text">Your order is currently pending.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
+
+        <div id="order-status-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Order Summary</h3>
+                    <div id="order-status-container">
+                        @foreach($statuses as $status)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    @switch($status)
+                                        @case('Pending')
+                                            <h5 class="card-title">Order Status: Pending</h5>
+                                            <p class="card-text">Your order is currently pending.</p>
+                                            @break
+                                        @case('Processing')
+                                            <h5 class="card-title">Order Status: Processing</h5>
+                                            <p class="card-text">Your order is currently being processed.</p>
+                                            @break
+                                        @case('pickup')
+                                            <h5 class="card-title">Order Status: Picked-Up</h5>
+                                            <p class="card-text">Your order is already been Picked-Up.</p>
+                                            @break
+                                        @case('assort')
+                                            <h5 class="card-title">Order Status: Arrived at Sorting Facility</h5>
+                                            <p class="card-text">Your order has already been Arrived at Sorting Facility.</p>
+                                            @break
+                                        @case('Transferred')
+                                            <h5 class="card-title">Order Status</h5>
+                                            <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
+                                            <p class="card-text">Your order has already been transferred to another station.</p>
+                                            @break
+                                        @case('Departed')
+                                            <h5 class="card-title">Order Status: Departed</h5>
+                                            <p class="card-text">Your order has Departed from sorting facility.</p>
+                                            @break
+                                        @case('Arrived at')
+                                            <h5 class="card-title">Order Status: Arrived at Station {{$ship->station_id}}</h5>
+                                            <p class="card-text">Your order has arrived at the station.</p>
+                                            @break
+                                        @case('In Transit')
+                                            <h5 class="card-title">Order Status: In Transit</h5>
+                                            <p class="card-text">Your order is out for delivery.</p>
+                                            @break
+                                        @case('Delivered')
+                                            <h5 class="card-title">Order Status: Delivered</h5>
+                                            <p class="card-text">Your order has been delivered.</p>
+                                            @break
+                                        @default
+                                            <h5 class="card-title">Order Status: Unknown</h5>
+                                            <p class="card-text">We could not determine the status of your order.</p>
+                                            @endswitch
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @elseif($ship->status == 'Processing')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status: Processing</h5>
-                            <p class="card-text">Your order is currently being processed.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @elseif($ship->status == 'Transferred')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status</h5>
-                            <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
-                            <p class="card-text">Your order has already been transferred to another station.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @elseif($ship->status == 'Shipped')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status: Shipped</h5>
-                            <p class="card-text">Your order has been shipped.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @elseif($ship->status == 'In Transit')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status: In Transit</h5>
-                            <p class="card-text">Your order has been shipped.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @elseif($ship->status == 'Delivered')
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Status: Delivered</h5>
-                            <p class="card-text">Your order has been delivered.</p>
-                            <p class="card-text">Date : {{$ship->updated_at}}</p>
-                        </div>
-                    </div>
-                @endif
+                </div>
             </div>
         </div>
 
+
+        {{-- <div class="scanresult">
+            <label>Result:</label>
+            <div class="track--wrapper">
+                <div class="track__item {{ $ship->status == 'picked_up' ? 'active' : '' }}" id="picked-up">
+                    <div class="track__thumb">
+                        <i class="las la-briefcase"></i>
+                    </div>
+                    <div class="track__content">
+                        <h5 class="track__title">@lang('Picked Up')</h5>
+                    </div>
+                </div>
+                <div class="track__item {{ $ship->status == 'assort' ? 'active' : '' }}" id="assort">
+                    <div class="track__thumb">
+                        <i class="lar la-building"></i>
+                    </div>
+                    <div class="track__content">
+                        <h5 class="track__title">@lang('Logistics')</h5>
+                    </div>
+                </div>
+                <div class="track__item {{ $ship->status == 'delivered' ? 'active' : '' }}" id="delivered">
+                    <div class="track__thumb">
+                        <i class="las la-truck-pickup"></i>
+                    </div>
+                    <div class="track__content">
+                        <h5 class="track__title">@lang('Delivery')</h5>
+                    </div>
+                </div>
+                <div class="track__item {{ $ship->status == 'completed' ? 'active' : '' }}" id="completed">
+                    <div class="track__thumb">
+                        <i class="las la-check-circle"></i>
+                    </div>
+                    <div class="track__content">
+                        <h5 class="track__title">@lang('Completed')</h5>
+                    </div>
+                </div>
+            </div>
+
+            <span id="result"></span>
+          </div> --}}
     </div>
 </div>
 {{-- END OF ORDER CONTAINER --}}
+
+
+<style>
+    .status-green {
+        color: #00bf9a;
+    }
+</style>

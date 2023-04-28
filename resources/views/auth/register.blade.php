@@ -90,7 +90,7 @@
                             </div>
                         </div>   
                     </form>
-                    <a href="{{ url('/registerCompany') }}">
+                    <a href="{{ url('company_registration') }}">
                         <button type="button" class="mb-5 register-ascompany-button letter-spacing">
                             {{ __('Register as a company') }}
                         </button>

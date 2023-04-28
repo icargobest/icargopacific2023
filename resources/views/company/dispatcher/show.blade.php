@@ -1,4 +1,3 @@
-
 <button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$user->id}}">
   Show
 </button>
@@ -15,7 +14,7 @@
              <div class="row mb-4">
                <div class="col"> 
                  <div class="form-outline">
-                   <input type="text" id="forupdateFullNamem6Example1" name="updateFullName" value="{{ $user->name }}" class="form-control" />
+                   <input type="text" id="forupdateFullNamem6Example1" name="updateFullName" value="{{ $user->user->name }}" class="form-control" />
                    <label class="form-label" for="updateFullName">Dispatcher Name</label>
                   </div>
                </div>
@@ -23,14 +22,25 @@
 
              <!-- Email input -->
              <div class="form-outline mb-4">
-               <input type="email" id="updateEmail" name="updateEmail" value=" {{ $user->email }}" class="form-control" />
+               <input type="email" id="updateEmail" name="updateEmail" value=" {{ $user->user->email }}" class="form-control" />
                <label class="form-label" for="updateEmail">Dispatcher Email</label>
              </div>
 
              <div class="form-outline mb-4">
-               <input type="text" id="vehicle_type" name="vehicle_type" value="{{ $user->type }}" class="form-control" style="text-transform:capitalize;"/>
-               <label class="form-label" for="vehicle_type">Type</label>
+               <input type="text" id="contact_no" name="contact_no" value="{{ $user->contact_no }}" class="form-control" style="text-transform:capitalize;"/>
+               <label class="form-label" for="contact_no">Contact Number</label>
              </div>
+
+             
+             <div class="form-outline mb-4">
+              <input type="text" id="created_at" name="created_at" value="{{ $user->created_at }}" class="form-control" style="text-transform:capitalize;"/>
+              <label class="form-label" for="contact_no">Created At</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="text" id="updated_at" name="updated_at" value="{{ $user->updated_at }}" class="form-control" style="text-transform:capitalize;"/>
+              <label class="form-label" for="updated_at">Updated At</label>
+            </div>
 
 
           </fieldset>

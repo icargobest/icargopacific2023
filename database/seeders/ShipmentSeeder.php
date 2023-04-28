@@ -5,6 +5,12 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use App\Models\Shipment;
+use App\Models\Bid;
+use App\Models\Sender;
+use App\Models\Recipient;
+use App\Models\Station;
+use App\Models\User;
 
 class ShipmentSeeder extends Seeder
 {
@@ -18,11 +24,8 @@ class ShipmentSeeder extends Seeder
     $faker = Faker::create();
     foreach (range(1,5) as $index) {
         DB::table('shipments')->insert([
-<<<<<<< Updated upstream
             'station_id' => $faker->numberBetween(1,10),
             'station' => $faker->randomElement(['Test1','Test2', 'Test3']),
-=======
->>>>>>> Stashed changes
             'tracking_number' => $faker->numberBetween(500,1000),
             'user_id' => $faker->numberBetween(1,10),
             'sender_name' => $faker->name,
@@ -45,5 +48,4 @@ class ShipmentSeeder extends Seeder
             'status' => $faker->randomElement(['Pending', 'In Transit', 'Delivered'])
         ]);
     }
-}
 }

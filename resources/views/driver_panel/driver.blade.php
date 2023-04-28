@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.status')
-@include('partials.navigationCompany')
+@include('partials.navigationDriver')
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
@@ -10,7 +10,7 @@
             </div>
             <div class="container p-5 shadow" style=" background-color:white;">
             <div class="text-center">
-              
+
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
                   {{-- <div>
@@ -53,7 +53,7 @@
                     })
                 </script>
                 </form>
-                    
+
 
                   </div>
 
@@ -83,9 +83,9 @@
                   <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
-                  <div class="scanresult">
+                  <div class="scanresult" style="text-align:center;">
                     <label>Result:</label>
-                    <div class="track--wrapper">
+                    <div class="track--wrapper" style="display: none;">
                       <div class="track__item" id="picked-up">
                           <div class="track__thumb">
                               <i class="las la-briefcase"></i>
@@ -119,10 +119,12 @@
                           </div>
                       </div>
                     </div>
-
+                    <div id="status-summary-container"></div>
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
+
+                  
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -156,8 +158,8 @@
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
                         </div>
                       </div>
-                    </div> 
-                  </div> 
+                    </div>
+                  </div>
                   <!-- Success Delivery Modal -->
                   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -174,7 +176,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>    
+                  </div>
                   <!-- Delivered Modal -->
                   <div class="modal fade" id="deliveredModal" tabindex="-1" aria-labelledby="deliveredModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -191,13 +193,13 @@
                         </div>
                       </div>
                     </div>
-                  </div> 
+                  </div>
                 </section>
               </main>
             </div>
             </div>
-          
-        
+
+
       </div>
     </div>
   </div>
@@ -239,89 +241,215 @@
           iframe.style.width = '100%';
           iframe.style.height = '500px';
           iframeContainer.appendChild(iframe);
+          $('.track--wrapper').show();
           html5QrcodeScanner.clear();
 
-          // add event listener to button when iframe is loaded
-          iframe.onload = function() {
-            // assume 'data' is the fetched data object
-            var button = iframe.contentDocument.getElementById("my-button");
-            var pickedUp = document.getElementById('picked-up');
-            var assort = document.getElementById('assort');
-            var delivered = document.getElementById('delivered');
-            var completed = document.getElementById('completed');
+            // add event listener to button when iframe is loaded
+            iframe.onload = function() {
+                // assume 'data' is the fetched data object
+                var button = iframe.contentDocument.getElementById("my-button");
+                var pickedUp = document.getElementById('picked-up');
+                var assort = document.getElementById('assort');
+                var delivered = document.getElementById('delivered');
+                var completed = document.getElementById('completed');
 
-            if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                pickedUp.classList.add('done');
-            }
-            if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                assort.classList.add('done');
-            }
-            if (data.status === "delivery" || data.status === "delivered") {
-                delivered.classList.add('done');
-            }
-            if (data.status === "delivered") {
-                completed.classList.add('done');
-            }
+                if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                    pickedUp.classList.add('done');
+                }
+                if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
+                    assort.classList.add('done');
+                }
+                if (data.status === "delivery" || data.status === "delivered") {
+                    delivered.classList.add('done');
+                }
+                if (data.status === "delivered") {
+                    completed.classList.add('done');
+                }
+
+                var statusContainer = document.getElementById("status-summary-container");
+                statusContainer.classList.add("tracking-status");
+
+                var relevantStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
+                var displayStatusCodes = [];
+
+                // Determine which status codes to display based on the current status
+                switch (data.status) {
+                  case "Processing":
+                    displayStatusCodes = ["Processing"];
+                    break;
+                  case "pickup":
+                    displayStatusCodes = ["Processing", "pickup"];
+                    break;
+                  case "received":
+                    displayStatusCodes = ["Processing", "pickup", "received"];
+                    break;
+                  case "delivery":
+                    displayStatusCodes = ["Processing", "pickup", "received", "delivery"];
+                    break;
+                  case "delivered":
+                    displayStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
+                    break;
+                  default:
+                    break;
+                }
+
+                // Reverse the order of the status codes to show the latest on top
+                displayStatusCodes.reverse();
+
+                // Loop through the relevant status codes and display the ones that should be displayed
+                for (var i = 0; i < relevantStatusCodes.length; i++) {
+                  var statusCode = relevantStatusCodes[i];
+                  if (displayStatusCodes.includes(statusCode)) {
+                    // Create a new status item
+                    var statusItem = document.createElement("div");
+                    statusItem.classList.add("status-item");
+                    if (statusCode === "delivered") {
+                      statusItem.classList.add("delivered");
+                    } else {
+                      statusItem.classList.add("in-transit");
+                    }
+
+                    // Create the status time element
+                    var statusTime = document.createElement("div");
+                    statusTime.classList.add("status-time");
+                    statusTime.textContent = new Date().toLocaleString();
+                    statusItem.appendChild(statusTime);
+
+                    // Create the status text element
+                    var statusText = document.createElement("div");
+                    statusText.classList.add("status-text");
+
+                    // Create the status title element
+                    var statusTitle = document.createElement("div");
+                    statusTitle.classList.add("status-title");
+                    if (statusCode === "Processing") {
+                      statusTitle.textContent = "Order is Being Processed";
+                    } else if (statusCode === "pickup") {
+                      statusTitle.textContent = "Parcel has been Picked Up by Driver";
+                    } else if (statusCode === "received") {
+                      statusTitle.textContent = "Parcel is in Logistics";
+                    } else if (statusCode === "delivery") {
+                      statusTitle.textContent = "Parcel is Out for Delivery";
+                    } else if (statusCode === "delivered") {
+                      statusTitle.textContent = "Parcel has been Delivered";
+                    }
+                    statusText.appendChild(statusTitle);
+
+                    // Create the status description element
+                    var statusDesc = document.createElement("div");
+                    statusDesc.classList.add("status-desc");
+                    if (statusCode === "delivered") {
+                      statusDesc.textContent = "Your parcel has been delivered.";
+                    } else {
+                      statusDesc.textContent = "Your parcel is on its way.";
+                    }
+                    statusText.appendChild(statusDesc);
+
+                    // Add the status text to the status item and the status item to the container
+                    statusItem.appendChild(statusText);
+                    statusContainer.insertBefore(statusItem, statusContainer.firstChild);
+                  }
+                }
 
 
             button.addEventListener("click", function() {
+              // Update the status and date/time
               if (data.status === "Processing") {
                 data.status = 'pickup';
                 var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
                 modal.show();
 
-                // Update the database with the new pickup value
-                $.ajax({
+                    // Update the database with the new pickup value
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
+                        data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "tracking_number": data.tracking_number,
+                            "shipment_id": data.id,
+                            "status": data.status
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                } else if (data.status === 'delivery') {
+                    data.status = 'delivered';
+                    var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
+                    deliveredModal.show();
+
+                    // Update the database with the new delivered value
+                    $.ajax({
                     type: "POST",
-                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
+                    data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                    success: function (response) {
+                        console.log(response);
+                    }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "tracking_number": data.tracking_number,
+                            "shipment_id": data.id,
+                            "status": data.status
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                } else if (data.status === 'delivered') {
+                    var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                    deliveredModal.show();
+                    $.ajax({
+                    type: "POST",
+                    url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "tracking_number": data.tracking_number,
+                        "shipment_id": data.id,
+                        "status": data.status
+                    },
                     success: function (response) {
                         console.log(response);
                     }
                 });
-              } else if (data.status === 'delivery') {
-                data.status = 'delivered';
-                var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
-                deliveredModal.show();
-
-                // Update the database with the new delivered value
-                $.ajax({
-                  type: "POST",
-                  url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
-                  data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                  success: function (response) {
-                    console.log(response);
-                  }
+                } else {
+                    var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
+                    modal.show();
+                }
                 });
-              } else if (data.status === 'delivered') {
-                var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                deliveredModal.show();
-              } else {
-                var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
-                modal.show();
-              }
-            });
-          };
-        } else {
-          return confirm('There is no shipment with this qr code');
+            };
+            } else {
+            return confirm('There is no shipment with this qr code');
+            }
         }
-      }
-    });
-  }
+        });
+    }
 
 
 
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", {fps: 10, qrbox: 250});
-    html5QrcodeScanner.render(onScanSuccess);
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {fps: 10, qrbox: 250});
+        html5QrcodeScanner.render(onScanSuccess);
 
   </script>
   <script type="text/javascript">
-    // Add event listener to Reset button
-    document.getElementById("resetButton").addEventListener("click", function() {
-        // Reload the current page
-        location.reload();
-    });
+        // Add event listener to Reset button
+        document.getElementById("resetButton").addEventListener("click", function() {
+            // Reload the current page
+            location.reload();
+        });
   </script>
 
 
@@ -330,15 +458,16 @@
 </div>
 <hr/>
 
-<script type="text/javascript">
-  $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   }
-  });
-</script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+    </script>
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
+
 <style>
   .result{
     background-color: green;
@@ -364,8 +493,8 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 6px;
-}
-a#reader__dashboard_section_swaplink {
+  }
+  a#reader__dashboard_section_swaplink {
   background-color: blue; /* Green */
   border: none;
   color: white;
@@ -377,10 +506,10 @@ a#reader__dashboard_section_swaplink {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 6px;
-}
-span a{
+  }
+  span a{
   display:none
-}
+  }
 
 #reader__camera_selection{
   background: blueviolet;
@@ -389,6 +518,5 @@ span a{
 #reader__dashboard_section_csr span{
   color:red
 }
-
 </style>
 {{-- @include('partials.footer') --}}

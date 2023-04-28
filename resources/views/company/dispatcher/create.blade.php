@@ -53,6 +53,21 @@
                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required/>
               <label class="form-label" for="password_confirmation">CONFIRM PASSWORD</label>
             </div>
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="11" 
+                  maxlength="11"  required placeholder="">
+                  <label class="form-label" for="form6Example5">Contact</label>
+                  @error('contact_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
                     
             <div class="button-modal-container">
 

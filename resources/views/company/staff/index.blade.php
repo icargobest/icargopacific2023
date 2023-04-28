@@ -1,7 +1,7 @@
-<title>Staff</title>
+<title>Company | Staff</title>
 
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany',['staff' => "nav-selected"])
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -59,6 +59,15 @@
                                     @include('company.staff.show')
                                     @include('company.staff.edit')
                                     @include('company.staff.archive')
+                                    @if($staff->user->status == 1)
+                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;height:29.75px !important;">
+                                        Lock
+                                    </a>
+                                    @else
+                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:80px !important;height:29.75px !important;">
+                                        unlock
+                                    </a>
+                                @endif
                                 </td>
                             </tr>
                         @endif

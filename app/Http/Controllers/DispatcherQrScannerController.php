@@ -8,7 +8,7 @@ class DispatcherQrScannerController extends Controller
 {
     public function index(Request $request)
     {
-        return view('company.dispatcher.dispatcher');
+        return view('dispatcher_panel.dispatcher');
     }
     
     // Function to show the page we want to log in by scanner of QR code
@@ -49,7 +49,7 @@ class DispatcherQrScannerController extends Controller
         $id = $request->id;
         $shipment = Shipment::find($id);
         if ($shipment) {
-            $shipment->status = 'received';
+            $shipment->status = 'Assort';
             $shipment->save();
             return response()->json(['success' => true]);
         }
@@ -61,7 +61,7 @@ class DispatcherQrScannerController extends Controller
 		$id = $request->id;
         $shipment = Shipment::find($id);
         if ($shipment) {
-            $shipment->status = 'delivery';
+            $shipment->status = 'Dispatched';
             $shipment->save();
             return response()->json(['success' => true]);
         }

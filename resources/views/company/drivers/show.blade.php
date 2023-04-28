@@ -1,4 +1,3 @@
-
 <button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$user->id}}">
   Show
 </button>
@@ -25,26 +24,40 @@
 
              <!-- Name  -->
              <div class="form-outline mb-4">
-              <input type="text" id="name" name="name" value="{{$user->name}}" class="form-control" />
-              <label class="form-label" for="name">Driver Name</label>
-             </div>
+              <div class="form-outline mb-4">
+                <input type="email" id="email" name="email" value="{{$user->user->name}}" class="form-control" />
+                <label class="form-label" for="email">Driver Name</label>
+              </div>
 
              <!-- Email  -->
              <div class="form-outline mb-4">
-               <input type="text" id="email" name="email" value="{{$user->email}}" class="form-control" />
+               <input type="email" id="email" name="email" value="{{$user->user->email}}" class="form-control" />
                <label class="form-label" for="email">Driver Email</label>
              </div>
 
              <!-- Vehicle  -->
              <div class="form-outline mb-4">
-              <input type="text" id="vehicle_type" name="vehicle_type" value="{{$user->driverDetail->vehicle_type}}" class="form-control" />
-              <label class="form-label" for="email">Vehicle Type</label>
+              <input type="text" id="vehicle_type" name="vehicle_type" value="{{$user->vehicle_type}}" class="form-control" />
+              <label class="form-label" for="vehicle_type">Vehicle Type</label>
              </div>
+
+             <!-- Contact No.  -->
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="contact_no" value="{{$user->contact_no}}" class="form-control" />
+              <label class="form-label" for="contact_no">Contact No.</label>
+             </div>             
+
+             <!-- License No.  -->
+
+             <div class="form-outline mb-4">
+              <input type="text" id="license_number" name="license_number" value="{{$user->license_number}}" class="form-control" />
+              <label class="form-label" for="license_number">Contact No.</label>
+             </div>             
 
              <!-- Plate No. -->
 
               <div class="form-outline mb-4">
-               <input type="text" id="plate_no" name="plate_no" value="{{$user->driverDetail->plate_no}}" class="form-control" />
+               <input type="text" id="plate_no" name="plate_no" value="{{$user->plate_no}}" class="form-control" />
                <label class="form-label" for="plate_no">Plate No.</label>
               </div>
              <!-- Created At. -->

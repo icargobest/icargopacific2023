@@ -42,7 +42,7 @@ return new class extends Migration
         });
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('station_id');
+            $table->string('station_id')->nullable()->default;
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -61,6 +61,7 @@ return new class extends Migration
             $table->string('mode_of_payment')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
             $table->string('company_bid')->nullable()->default;
+            $table->unsignedBigInteger('company_id')->nullable()->default;
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
@@ -80,7 +81,20 @@ return new class extends Migration
                   ->references('id')->on('shipments')
                   ->onDelete('cascade');
         });
+
+        Schema::create('order_tracking_logs', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->string('tracking_number');
+            $table->string('shipment_id');
+            $table->string('status');
+            $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('shipments')->onDelete('cascade');
+        });
     }
+
+
 
 
     /**
@@ -95,5 +109,6 @@ return new class extends Migration
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
         Schema::dropIfExists('shipments');
+        Schema::dropIfExists('order_tracking_logs');
     }
 };

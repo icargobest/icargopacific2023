@@ -1,4 +1,4 @@
-<title>Dispatcher Archived</title>
+<title>Company |  Dispatcher Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
 
@@ -32,7 +32,7 @@
         </section>
 
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
         <div class="table-container">
@@ -47,13 +47,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                        @if ($user->driverDetail->archived == true)
+                    @foreach ($drivers as $user)
+                        @if ($user->archived == 1)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->driverDetail->vehicle_type }}</td>
-                                <td>{{ $user->driverDetail->plate_no }}</td>
+                                <td>{{ $user->user->name }}</td>
+                                <td>{{ $user->vehicle_type }}</td>
+                                <td>{{ $user->plate_no }}</td>
                                 <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/drivers.show')@include('company/drivers.restore')</td>
                             </tr>
                         @endif
@@ -61,6 +61,9 @@
 
                 </tbody>
             </table>
+            <div class="d-flex">
+            </div>
+
         </div>
     </div>  
 </main>
