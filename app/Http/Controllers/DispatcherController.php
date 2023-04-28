@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
+use DB;
 use App\Models\User;
 use App\Models\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class DispatcherController extends Controller
@@ -15,18 +16,23 @@ class DispatcherController extends Controller
     private $validate;
     private $update_user;
 
-    public function index(User $users)
+    function __construct()
     {
-        $type = '4';
-        $users = User::where('type','=', $type)->paginate(100);
-        return view('company/dispatcher.index', compact('users'));
+        $this->dispatcher = new Dispatcher;
     }
 
-    function viewArchive(User $users){
+    public function index(User $users)
+    {
+        $user_id = Auth::id();
+        $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
+        return view('company/dispatcher.index', compact('dispatchers'));
+    }
 
-        $type = '4';
-        $users = User::where('type','=', $type)->paginate(100);
-        return view('company/dispatcher.viewArchive', compact('users'));
+    function viewArchive(){
+
+        $user_id = Auth::id();
+        $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
+        return view('company/dispatcher.viewArchive', compact('dispatchers'));
     }
 
 
@@ -37,27 +43,35 @@ class DispatcherController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            'name.required' => 'Name field is required.',
-            'password.required' => 'Password field is required.',
-            'password.confirmed' => 'Password does not match.',
-            'password.min' => 'Password must be a minimum of 8 characters',
-            'email.required' => 'Email field is required.',
-            'email.unique' => 'Email address must be unique within the organization',
-            'email.email' => 'Email field must be email address.'
-        ]);
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'type' => '4',
+            ]);
+    
+            $otherValidation = $request->validate([
+                'contact_no' => ['required', 'min:11', 'max:11'],
+            ], [
+                'contact_no.required' => 'Contact field is required.',
+                'contact_no.max' => 'Contact number must be a min and max of 11 numbers'
+            ]);
         
-        $validated['type'] = '4'; // set the type to '3' driver
-        $validated['password'] = Hash::make($validated['password']);
-        $user = User::create($validated);
+            $drivers = Dispatcher::create([
+                'user_id' => $user->id,
+                'company_id' => Auth::id(),
+                'contact_no' =>  $otherValidation['contact_no'],
+            ]);
+          
+            DB::commit();
+          } catch (Exception $ex) {
+                DB::rollBack();
+                throw $ex;
+                
+          }
 
-        $user->dispatcherDetail()->create([
-            'vehicle_type' => false,
-        ]);
         return redirect()->route('dispatcher.index')->with('success','Dispatcher has been created successfully.');
     }
 
@@ -73,9 +87,19 @@ class DispatcherController extends Controller
 
     public function update($id, Request $request)
     {
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->update();
+        $dispatcherData = [
+            'contact_no' => $request->contact_no,
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+        ];
+        
+        $dispatcher = Dispatcher::find($id);
+        $dispatcher->update($dispatcherData);
+
+        $user = $dispatcher->user;
+        $user->update($userData);
         return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
     }
 
@@ -86,19 +110,17 @@ class DispatcherController extends Controller
 
     public function archive($id)
     {
-        $id = User::findOrFail($id);
-        $id->dispatcherDetail()->update([
-            'archived' => true,
-        ]);
+        $id = Dispatcher::findOrFail($id);
+        $id->archived = True;
+        $id->save();
         return back()->with('success', 'Dispatcher #'.$id->id.' Archived successfully!');
     }
 
     public function unarchive($id)
     {
-        $id = User::findOrFail($id);
-        $id->dispatcherDetail()->update([
-            'archived' => false,
-        ]);
+        $id = Dispatcher::findOrFail($id);
+        $id->archived = False;
+        $id->save();
         return back()->with('success', 'Dispatcher #'.$id->id.' Restore successfully!');
     }
 
@@ -108,7 +130,7 @@ class DispatcherController extends Controller
                 'status' => $status_code
             ]);
             $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Dispatcher #'.$user_id->id.' Update status successfully!');
+            return back()->with('success', 'Dispatcher status updated successfully!');
     }
 
 }

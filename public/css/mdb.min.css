@@ -13330,7 +13330,6 @@ input[type="file"].form-control.is-valid:focus-within
 }
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
-    margin-bottom: 1rem;
     background-image: none;
     border-color: #dc4c64;
 }
