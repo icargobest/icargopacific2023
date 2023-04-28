@@ -14,7 +14,6 @@ return new class extends Migration
      */
     public function up()
 {
-    
     Schema::create('dashboard', function (Blueprint $table) {
         $table->id();
         $table->integer('accepted')->default(0);
@@ -36,7 +35,7 @@ return new class extends Migration
             'forwarded' => rand(0, 200),
             'delivered' => rand(0, 200),
             'confirmed' => rand(0, 200)
-        ] 
+        ]
     ]);
 }
 

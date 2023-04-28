@@ -1,19 +1,16 @@
 <!-- Modal -->
-<div class="modal top   fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top   fade" id="addDispatcherModal" tabindex="-1" aria-labelledby="addDispatcherModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Dispatcher</h5>
+        <h5 class="modal-title">Add Dispatcher</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     
-      <div class="modal-divider"></div>
-
         <div class="modal-body">
             <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <div class="form-outline">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -23,8 +20,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                    
-                  <label class="form-label" for="form6Example1">DISPATCHER NAME</label>
+                  <label class="form-label" for="name">DISPATCHER NAME</label>
               </div>
             </div>
 
@@ -37,7 +33,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-              <label class="form-label" for="form6Example5">EMAIL</label>
+              <label class="form-label" for="email">EMAIL</label>
             </div>
           
             <!-- Password -->
@@ -49,13 +45,28 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-              <label class="form-label" for="form6Example3">PASSWORD</label>
+              <label class="form-label" for="password">PASSWORD</label>
             </div>    
               
             <!-- Confirm Password -->
             <div class="form-outline mb-4">
-                <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
-              <label class="form-label" for="form6Example4">CONFIRM PASSWORD</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required/>
+              <label class="form-label" for="password_confirmation">CONFIRM PASSWORD</label>
+            </div>
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="11" 
+                  maxlength="11"  required placeholder="">
+                  <label class="form-label" for="form6Example5">Contact</label>
+                  @error('contact_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
             </div>
                     
             <div class="button-modal-container">

@@ -1,6 +1,12 @@
 @extends('layouts.chart')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+@include('layouts.app')
+@extends('partials.navigationStaff')
+
+@extends('layouts.chart')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @section('title', 'Monthly Income')
 
 @section('content')
@@ -21,7 +27,7 @@
             <div class="card-header">Weekly Income</div>
             <div class="card-body">
                 <div id="weekly_chart_div"></div>
-                
+
             </div>
         </div>
     </div>
@@ -30,7 +36,7 @@
             <div class="card-header">Yearly Income</div>
             <div class="card-body">
                 <div id="yearly_chart_div"></div>
-                
+
             </div>
         </div>
     </div>
@@ -39,7 +45,7 @@
             <div class="card-header">Daily Income</div>
             <div class="card-body">
                 <div id="daily_chart_div"></div>
-                
+
             </div>
         </div>
     </div>
@@ -118,7 +124,7 @@
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawWeeklyChart);
-    
+
     function drawWeeklyChart() {
         var data = google.visualization.arrayToDataTable([
             ['Week', 'Income'],
@@ -127,15 +133,15 @@
             ['Week 3', {{ $week3 }}],
             ['Week 4', {{ $week4 }}]
         ]);
-    
+
         var options = {
             title: 'Weekly Income Chart',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
-    
+
         var chart = new google.visualization.LineChart(document.getElementById('weekly_chart_div'));
-    
+
         chart.draw(data, options);
     }
 </script>
@@ -179,7 +185,7 @@
         var data = google.visualization.arrayToDataTable([
             ['Day', 'Income'],
             @foreach ($dailyData as $row)
-              
+
                 ['{{ date('D', strtotime($row->day)) }}', {{ $row->income }}],
             @endforeach
         ]);
