@@ -161,6 +161,4 @@ bidAmountInput.addEventListener('input', function(event) {
     }
 });
 </script>
-
-
 {{-- END OF ORDER CONTAINER --}}
