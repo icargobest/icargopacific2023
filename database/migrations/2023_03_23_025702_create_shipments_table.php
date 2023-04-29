@@ -73,24 +73,28 @@ return new class extends Migration
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->string('status');
+            $table->boolean('isPending')->default(false);
+            $table->dateTime('isPendingTime')->nullable();
+            $table->boolean('isProcessed')->default(false);
+            $table->dateTime('isProcessedTime')->nullable();
+            $table->boolean('isPickUp')->default(false);
+            $table->dateTime('isPickUpTime')->nullable();
+            $table->boolean('isAssort')->default(false);
+            $table->dateTime('isAssortTime')->nullable();
+            $table->boolean('isTransferred')->default(false);
+            $table->dateTime('isTransferredTime')->nullable();
+            $table->boolean('isArrived')->default(false);
+            $table->dateTime('isArrivedTime')->nullable();
+            $table->boolean('isDispatched')->default(false);
+            $table->dateTime('isDispatchedTime')->nullable();
+            $table->boolean('isDelivered')->default(false);
+            $table->dateTime('isDeliveredTime')->nullable();
             $table->timestamps();
 
             // Define foreign key constraint for the order_id column
             $table->foreign('order_id')
                   ->references('id')->on('shipments')
                   ->onDelete('cascade');
-        });
-
-        Schema::create('order_tracking_logs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('order_id');
-            $table->string('tracking_number');
-            $table->string('shipment_id');
-            $table->string('status');
-            $table->timestamps();
-
-            $table->foreign('order_id')->references('id')->on('shipments')->onDelete('cascade');
         });
     }
 
