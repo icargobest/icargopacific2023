@@ -1,6 +1,6 @@
 {{-- @extends('layouts.app') --}}
 
-<section style="border:solid red 2px; padding:100px 0px;">
+<section style="padding:100px 0px;" id="contactUS">
     <div class="container" >
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="backgroud-color: white; ">
@@ -15,7 +15,7 @@
                                     <span class="input-group-text">
                                         <i class="bi bi-envelope-fill text-secondary"></i>
                                     </span>
-                                    <input name="email" type="email" class="form-control" required autofocus placeholder="E-mail Address">
+                                    <input name="email" type="email" class="form-control" required placeholder="E-mail Address">
                                 </div>
                             </div>
                         </div>
