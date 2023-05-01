@@ -1,0 +1,335 @@
+.borderRed{
+    border: 1px dashed red;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.user-container{
+    display: flex;
+    gap: 90px;
+}
+.mobileNav{
+    display: none;
+}
+.navBar-menu{
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.navBar-menu a{
+    color: #214D94;
+}
+.navBar-menu li{
+    height: 100%;
+    cursor: pointer;
+
+    display: grid;
+    place-items: center;
+
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+.active{
+    font-weight: bold;
+    border-bottom: 3px solid #F9CD1A;
+}
+.accessBtns{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.accessBtns .loginBtn, .accessBtns .registerBtn{
+    width: 95px;
+    padding: 3px;
+    border-radius: 4px;
+
+    display: grid;
+    place-items: center;
+
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 400;
+}
+.accessBtns .loginBtn{
+    border: 1px solid #214D94;
+    color: #214D94;
+}
+.accessBtns .registerBtn{
+    background-color: #F9CD1A;
+    color: #214D94;
+}
+/* HEROSECTION */
+.hero-container{
+    width: 100%;
+    padding: 20px;
+    height: 700px;
+    background-image: url(../img/herosection.png);
+    background-position: center;
+}
+.hero-container .text-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+.text-wrapper h1{
+    font-size: 50px;
+    color: #fff;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.text-wrapper h1 .andText{
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+}
+.text-wrapper .freightText{
+    color: rgb(242, 203, 48);
+}
+.text-wrapper p{
+    width: 400px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    color: #fff;
+}
+.button-holder button{
+    width: 175px;
+    height: 35px;
+    background-color: rgb(242, 203, 48);
+    color: #214D94;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+.exploreBtn button{
+    height: 45px;
+    width: 300px;
+    border:2px solid #214D94;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    background-color: #fff;
+    color: #F9CD1A;
+}
+.exploreBtn button i{
+    color: #214D94;
+}
+
+/* PRICING */
+.info-header{
+    gap: 40px;
+
+    background-color: rgb(33, 77, 148, 0.9);
+    color: #fff;
+    height: 400px;
+    letter-spacing: 1px;
+}
+
+.textPricing-wrapper h4 span{
+    color: #F9CD1A;
+}
+.textPricing-wrapper h6{
+    font-weight: 500;
+}
+.plans-wrapper{
+    justify-content: center;
+}
+
+.cardPlan{
+    background-color: #fff;
+    min-width: 235px;
+    min-height: 330px;
+    padding: 0 10px;
+
+    border: 1px solid #dcdde5;
+    border-radius: 8px;
+}
+.cardPlan:hover{
+    transform: scale(1.1);
+}
+.cardPlan h5{
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #214D94;
+}
+.duration{
+    border-bottom: 1px solid rgba(126, 126, 126, 0.5);
+}
+.timeDue{
+    font-size: 16px;
+}
+.cardPlan .timeDue div{
+    height: 70px;
+    width: 70px;
+    background-color: #ffdb49;
+    border-radius: 50%;
+    color: #214D94;
+    font-size: 25px;
+    font-weight: bold;
+}
+.cardPlan .buttonHolder button{
+    background-color: #ffdb49;
+    border-radius: 6px;
+    height: 35px;
+    width: 100%;
+    font-weight: bold;
+    color: #214D94;
+    letter-spacing: 1px;
+}
+.price h3{
+    color: #214D94;
+}
+.price h3 span{
+    color: #F9CD1A;
+}
+/* SERVICES */
+.ourService{
+    align-items: start;
+}
+
+.service-wrapper{
+    color: #fff;
+}
+.serviceDesc{
+    background-color: #214D94;
+}
+.serviceDesc h1{
+    font-size: 45px;
+    color: #fff;
+}
+.serviceDesc h1 span{
+    color: #F9CD1A;
+}
+.serviceDesc p{
+    letter-spacing: 1px;
+    line-height: 40px;
+}
+.services-holder{
+    color: #214D94;
+    background-color: #E4EAF4;
+}
+.iconTitle i{
+    font-size: 35px;
+    font-weight: bold;
+}
+.iconTitle h5{
+    border-bottom: 5px solid #F9CD1A;
+}
+
+@media (max-width: 768px) {
+    .navBar-menu{
+        display: none;
+    }
+    .user-container{
+        display: none;
+    }
+    .mobileNav{
+        position: relative;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+
+        display: grid;
+        place-items: center;
+
+        background-color: #fff;
+        border: 1px solid #dcdde5;
+        border-radius: 6px;
+        font-size: 25px;
+        color: #214D94;
+    }
+    .mobileNavlist{
+        width: 350px;
+        padding-top: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 60px 0 0 0;
+
+        border-radius: 6px;
+        background-color: #fff;
+
+        transition: 1s;
+        opacity: 0;
+        display: none;
+    }
+    .mobileNavlist ul a li{
+        font-size: 18px;
+        color: #214D94;
+        padding-right: 10px;
+    }
+    .mobileNavlist ul{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .accessNav{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .accessNav li a{
+        font-size: 18px;
+        color: #214D94;
+        padding-right: 10px;
+    }
+    .displayItem{
+        display: block;
+        opacity: 1;
+    }
+    
+/* HERO SECTION */
+
+    .hero-container{
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: -800px;
+    }
+    .text-wrapper h1{
+        font-size: 25px;
+    }
+    .text-wrapper h1 .andText{
+        font-size: 15px;
+    }
+    .text-wrapper p{
+        width: 350px;
+    }
+
+    /* PRICING */
+
+    .textPricing-wrapper {
+        gap: 40px !important;
+    }
+    .textPricing-wrapper h4 {
+        height: 16px;
+    }
+    .plans-wrapper{
+        overflow-x: scroll;
+        justify-content: start;
+    }
+
+    .cardPlan:hover{
+        transform: scale(1.0);
+    }
+    /* SERVICES */
+
+    .ourService{
+        align-items: center;
+    }
+    .ourService p{
+        display: none;
+    }
+    .iconTitle{
+        padding: 25px;
+        border: 3px solid #214D94;
+        border-radius: 8px;
+    }
+}
