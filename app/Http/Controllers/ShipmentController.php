@@ -41,7 +41,7 @@ class ShipmentController extends Controller
             if ($ship->status === 'Pending') {
                 $order_history_item->isPending = true;
                 $order_history_item->isPendingTime = $time;
-            } elseif ($ship->status === 'Processed') {
+            } elseif ($ship->status === 'Processing') {
                 $order_history_item->isProcessed = true;
                 $order_history_item->isProcessedTime = $time;
             } elseif ($ship->status === 'PickUp') {
