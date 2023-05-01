@@ -119,18 +119,11 @@
                           </div>
                       </div>
                     </div>
-                    <div id="status-summary-container"></div>
+                    <div id="status-summary-container" style=""></div>
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
 
-<<<<<<< Updated upstream
-
-=======
-                  
-
-                  
->>>>>>> Stashed changes
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -243,7 +236,7 @@
             iframeContainer.removeChild(iframeContainer.childNodes[0]);
           }
           var iframe = document.createElement('iframe');
-          iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+          iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + data.tracking_number + '</h1></div><div style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button></div></body></html>';
           iframe.style.width = '100%';
           iframe.style.height = '500px';
           iframeContainer.appendChild(iframe);
@@ -526,8 +519,17 @@
   }
 
   #status-summary-container {
-    border: 1px solid #ddd;
-    padding: 10px;
+    /* border: 1px solid #ddd;
+    padding: 10px; */
+    margin: 30px 0px;
+  }
+
+  #status-summary-container .status-item:nth-child(even){
+    background-color: #9cf79c;
+  }
+
+  #status-summary-container .status-item:nth-child(odd){
+    background-color: rgb(188, 255, 188);
   }
 
   .status-summary {
