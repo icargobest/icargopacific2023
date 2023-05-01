@@ -119,18 +119,11 @@
                           </div>
                       </div>
                     </div>
-                    <div id="status-summary-container"></div>
+                    <div id="status-summary-container" style="margin-top: 20px;"></div>
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
 
-<<<<<<< Updated upstream
-
-=======
-                  
-
-                  
->>>>>>> Stashed changes
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -227,141 +220,151 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-SdfTTHSsNYsKuyEKgI16zZGt4ZLcKu0aVYjC8q3PLVPMvFWIuEBQKDNQX9IfZzRbZEN1PH6Q2N35A8WcKdhdNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
-  function onScanSuccess(data) {
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
-      data: {"_token": "{{ csrf_token() }}", data: data},
-      success: function (data) {
-        // after success to get Data from controller if Shipment is available in the database
-        // iframe for waybill info
-        if (data.result == 1) {
-          var iframeContainer = document.getElementById('my-iframe-container');
-          // check if there is already an iframe in the container
-          if (iframeContainer.childElementCount > 0) {
-            iframeContainer.removeChild(iframeContainer.childNodes[0]);
-          }
-          var iframe = document.createElement('iframe');
-          iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframeContainer.appendChild(iframe);
-          $('.track--wrapper').show();
-          html5QrcodeScanner.clear();
-
-            // add event listener to button when iframe is loaded
-            iframe.onload = function() {
-                // assume 'data' is the fetched data object
-                var button = iframe.contentDocument.getElementById("my-button");
-                var pickedUp = document.getElementById('picked-up');
-                var assort = document.getElementById('assort');
-                var delivered = document.getElementById('delivered');
-                var completed = document.getElementById('completed');
-
-                if (data.status === "pickup" || data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                    pickedUp.classList.add('done');
-                }
-                if (data.status === "received" || data.status === "delivery" || data.status === "delivered") {
-                    assort.classList.add('done');
-                }
-                if (data.status === "delivery" || data.status === "delivered") {
-                    delivered.classList.add('done');
-                }
-                if (data.status === "delivered") {
-                    completed.classList.add('done');
-                }
-
-                var statusContainer = document.getElementById("status-summary-container");
-                statusContainer.classList.add("tracking-status");
-
-                var relevantStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
-                var displayStatusCodes = [];
-
-                // Determine which status codes to display based on the current status
-                switch (data.status) {
-                  case "Processing":
-                    displayStatusCodes = ["Processing"];
-                    break;
-                  case "pickup":
-                    displayStatusCodes = ["Processing", "pickup"];
-                    break;
-                  case "received":
-                    displayStatusCodes = ["Processing", "pickup", "received"];
-                    break;
-                  case "delivery":
-                    displayStatusCodes = ["Processing", "pickup", "received", "delivery"];
-                    break;
-                  case "delivered":
-                    displayStatusCodes = ["Processing", "pickup", "received", "delivery", "delivered"];
-                    break;
-                  default:
-                    break;
-                }
-
-                // Reverse the order of the status codes to show the latest on top
-                displayStatusCodes.reverse();
-
-                // Loop through the relevant status codes and display the ones that should be displayed
-                for (var i = 0; i < relevantStatusCodes.length; i++) {
-                  var statusCode = relevantStatusCodes[i];
-                  if (displayStatusCodes.includes(statusCode)) {
-                    // Create a new status item
-                    var statusItem = document.createElement("div");
-                    statusItem.classList.add("status-item");
-                    if (statusCode === "delivered") {
-                      statusItem.classList.add("delivered");
-                    } else {
-                      statusItem.classList.add("in-transit");
-                    }
-
-                    // Create the status time element
-                    var statusTime = document.createElement("div");
-                    statusTime.classList.add("status-time");
-                    statusTime.textContent = new Date().toLocaleString();
-                    statusItem.appendChild(statusTime);
-
-                    // Create the status text element
-                    var statusText = document.createElement("div");
-                    statusText.classList.add("status-text");
-
-                    // Create the status title element
-                    var statusTitle = document.createElement("div");
-                    statusTitle.classList.add("status-title");
-                    if (statusCode === "Processing") {
-                      statusTitle.textContent = "Order is Being Processed";
-                    } else if (statusCode === "pickup") {
-                      statusTitle.textContent = "Parcel has been Picked Up by Driver";
-                    } else if (statusCode === "received") {
-                      statusTitle.textContent = "Parcel is in Logistics";
-                    } else if (statusCode === "delivery") {
-                      statusTitle.textContent = "Parcel is Out for Delivery";
-                    } else if (statusCode === "delivered") {
-                      statusTitle.textContent = "Parcel has been Delivered";
-                    }
-                    statusText.appendChild(statusTitle);
-
-                    // Create the status description element
-                    var statusDesc = document.createElement("div");
-                    statusDesc.classList.add("status-desc");
-                    if (statusCode === "delivered") {
-                      statusDesc.textContent = "Your parcel has been delivered.";
-                    } else {
-                      statusDesc.textContent = "Your parcel is on its way.";
-                    }
-                    statusText.appendChild(statusDesc);
-
-                    // Add the status text to the status item and the status item to the container
-                    statusItem.appendChild(statusText);
-                    statusContainer.insertBefore(statusItem, statusContainer.firstChild);
+    var hasScanned = false;
+    function onScanSuccess(data) {
+      if (hasScanned) return; // check flag
+      hasScanned = true;
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: "{{action('App\Http\Controllers\DispatcherQrScannerController@checkUser')}}",
+            data: {"_token": "{{ csrf_token() }}", data: data},
+            success: function (data) {
+                // after success to get Data from controller if Shipment is available in the database
+                // iframe for waybill info
+                if (data.result == 1) {
+                  var iframeContainer = document.getElementById('my-iframe-container');
+                  // check if there is already an iframe in the container
+                  if (iframeContainer.childElementCount > 0) {
+                    iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
-                }
+                  var iframe = document.createElement('iframe');
+                  iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+                  iframe.style.width = '100%';
+                  iframe.style.height = '500px';
+                  iframeContainer.appendChild(iframe);
+                  $('.track--wrapper').show();
+                  html5QrcodeScanner.clear();
+
+                    // add event listener to button when iframe is loaded
+                    iframe.onload = function() {
+                    var button = iframe.contentDocument.getElementById("my-button");
+                    var pickedUp = document.getElementById('picked-up');
+                    var assort = document.getElementById('assort');
+                    var delivered = document.getElementById('delivered');
+                    var completed = document.getElementById('completed');
+
+                    if (data.status === "PickedUp" || data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                        pickedUp.classList.add('done');
+                    }
+                    if (data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                        assort.classList.add('done');
+                    }
+                    if (data.status === "Dispatched" || data.status === "Delivered") {
+                        delivered.classList.add('done');
+                    }
+                    if (data.status === "Delivered") {
+                        completed.classList.add('done');
+                    }
+
+                    var statusContainer = document.getElementById("status-summary-container");
+                    statusContainer.classList.add("tracking-status");
+
+                    var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                    var displayStatusCodes = [];
+
+                    // Determine which status codes to display based on the current status
+                    switch (data.status) {
+                      case "Processing":
+                        displayStatusCodes = ["Processing"];
+                        break;
+                      case "PickedUp":
+                        displayStatusCodes = ["Processing", "PickedUp"];
+                        break;
+                      case "Assort":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort"];
+                        break;
+                      case "Dispatched":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                        break;
+                      case "Delivered":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                        break;
+                      default:
+                        break;
+                    }
+
+                    // Reverse the order of the status codes to show the latest on top
+                    displayStatusCodes.reverse();
+
+                    // Loop through the relevant status codes and display the ones that should be displayed
+                    for (var i = 0; i < relevantStatusCodes.length; i++) {
+                      var statusCode = relevantStatusCodes[i];
+                      if (displayStatusCodes.includes(statusCode)) {
+                        // Create a new status item
+                        var statusItem = document.createElement("div");
+                        statusItem.classList.add("status-item");
+                        if (statusCode === "Delivered") {
+                          statusItem.classList.add("delivered");
+                        } else {
+                          statusItem.classList.add("in-transit");
+                        }
+
+                        // Create the status time element
+                        var statusTime = document.createElement("div");
+                        statusTime.classList.add("status-time");
+                        statusTime.textContent = new Date().toLocaleString();
+                        statusItem.appendChild(statusTime);
+
+                        // Create the status text element
+                        var statusText = document.createElement("div");
+                        statusText.classList.add("status-text");
+
+                        // Create the status title element
+                        var statusTitle = document.createElement("div");
+                        statusTitle.classList.add("status-title");
+                        if (statusCode === "Processing") {
+                          statusTitle.textContent = "Order is Being Processed";
+                        } else if (statusCode === "PickedUp") {
+                          statusTitle.textContent = "Parcel has been Picked Up by Driver";
+                        } else if (statusCode === "Assort") {
+                          statusTitle.textContent = "Parcel is in Logistics";
+                        } else if (statusCode === "Dispatched") {
+                          statusTitle.textContent = "Parcel is Out for Delivery";
+                        } else if (statusCode === "Delivered") {
+                          statusTitle.textContent = "Parcel has been Delivered";
+                        }
+                        statusText.appendChild(statusTitle);
+
+                        // Create the status description element
+                        var statusDesc = document.createElement("div");
+                        statusDesc.classList.add("status-desc");
+                        if (statusCode === "Delivered") {
+                          statusDesc.textContent = "Parcel has been Delivered.";
+                        } else if (statusCode === "Dispatched"){
+                          statusDesc.textContent = "Parcel out for delivery.";
+                        } else if (statusCode === "Assort"){
+                          statusDesc.textContent = "Parcel is in Logistics.";
+                        } else if (statusCode === "PickedUp"){
+                          statusDesc.textContent = "Parcel picked up.";
+                        } else if (statusCode === "Processing"){
+                          statusDesc.textContent = "Parcel is being Processed.";
+                        } else {
+                          statusDesc.textContent = "Your parcel is on its way.";
+                        }
+                        statusText.appendChild(statusDesc);
+
+                        // Add the status text to the status item and the status item to the container
+                        statusItem.appendChild(statusText);
+                        statusContainer.insertBefore(statusItem, statusContainer.firstChild);
+                      }
+                    }
 
 
             button.addEventListener("click", function() {
               // Update the status and date/time
               if (data.status === "Processing") {
-                data.status = 'pickup';
+                data.status = 'PickedUp';
                 var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
                 modal.show();
 
@@ -387,8 +390,8 @@
                             console.log(response);
                         }
                     });
-                } else if (data.status === 'delivery') {
-                    data.status = 'delivered';
+                } else if (data.status === 'Dispatched') {
+                    data.status = 'Delivered';
                     var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
                     deliveredModal.show();
 
@@ -414,7 +417,7 @@
                             console.log(response);
                         }
                     });
-                } else if (data.status === 'delivered') {
+                } else if (data.status === 'Delivered') {
                     var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                     deliveredModal.show();
                     $.ajax({
@@ -525,15 +528,74 @@
     color:red
   }
 
-  #status-summary-container {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
+  .tracking-status {
+  display: flex;
+  flex-direction: column;
+}
 
-  .status-summary {
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: bold;
-  }
+.status-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.status-time {
+  width: 120px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.status-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.status-desc {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.status-desc a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.status-item.delivered .status-title {
+  color: #28a745;
+}
+
+.status-item.in-transit .status-title {
+  color: #000000;
+}
+
+.status-item .status-title:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.status-item.delivered .status-title:before {
+  background-color: #28a745;
+}
+
+.status-item.in-transit .status-title:before {
+  background-color: #000000;
+}
+
+.status-item:not(:first-child) .status-time {
+  opacity: 0.5;
+}
 </style>
 {{-- @include('partials.footer') --}}
