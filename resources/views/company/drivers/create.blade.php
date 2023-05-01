@@ -21,7 +21,7 @@
                                   </span>
                                   @enderror
                     <label class="form-label" for="form6Example1">FULL NAME</label>
-                  </div>
+                  </div>  
                 </div>
               </div>
   
@@ -113,7 +113,7 @@
             </div>
 
             <div class="form-outline mb-4">
-                <input type="text" id="plate_no" name="plate_no" class="form-control" value= "{{ $user->plate_no }}"required />
+                <input type="text" id="plate_no" name="plate_no" class="form-control" {{-- value= "{{ $user->plate_no }}" --}}required />
                 <label class="form-label" for="plate_no">Plate No.</label>
             </div>
 
