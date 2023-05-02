@@ -34,8 +34,10 @@ class StaffController extends Controller
 
     public function viewArchive()
     {
-        $user_id = Auth::id();
-        $staff = $this->staff->where('company_id', $user_id)->get();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
+        $staff = $this->staff->with('user')->where('company_id', $user_id)->get();
         return view('company.staff.view_archive', compact('staff'));
     }
     
