@@ -71,12 +71,15 @@
                             <span>Add. Freight Forwarding</span>
                         </div>
                     </div>
-        
+
+                    
                     <div class="links">
+                        <a class="nav-link" href="/forward">
                         <div class="link">
                             <i class="fa fa-user"></i>
                             <span>Transfer to Forwarding</span>
                         </div>
+                        </a>
                     </div>
         
                     <div class="links">
@@ -92,30 +95,8 @@
     
     <!--             <div class="divider2">
                 </div> -->
-    
-                <div class="link2">
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-bell"></i>
-                            <span>Notifications</span>
-                        </div>
-                    </div>
-                    
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-envelope"></i>
-                            <span>Messages</span>
-                        </div>
-                    </div>
         
-                    <div class="links">
-                        <div class="link">
-                            <i class="fa fa-plus"></i>
-                            <span>List Items</span>
-                        </div>
-                    </div>
-        
-                    <div class="links">
+                    <div class="links bottom-nav">
                         <div class="link">
                             <i class="fa fa-sign-out"></i>
                             <span>Logout</span>

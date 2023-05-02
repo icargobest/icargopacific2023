@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center" style="margin-top: -68px">
+<div class="vertical-center">
 <div class="container">
     <div class="row justify-content-center">
     
@@ -13,12 +13,10 @@
                 <div class="pb-2 login-header">{{ __('Register as a company') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
                 
-                    <form method="POST" action="/store">
+                    <form method="POST" action="{{ route('company_registration.store') }}">
                         @csrf
-                        {{-- @include('flash-message') --}}
-                        <div class="row mb-3">
-                            {{-- <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label> --}}
-
+                    
+                        <div class="row mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
@@ -33,9 +31,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label> --}}
-
+                        <div class="row mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="bi bi-envelope-fill text-secondary"></i>
@@ -50,9 +46,8 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label> --}}
-
+                        <div class="row mb-4">
+                        
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="bi bi-lock-fill text-secondary"></i>
@@ -67,9 +62,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            {{-- <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label> --}}
-
+                        <div class="row mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="bi bi-lock-fill text-secondary"></i>
@@ -77,6 +70,68 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-Type Password">
                             </div>
                         </div>
+
+                        <hr>
+                        {{-- contact number --}}
+
+                         <!-- Contact input -->
+                         <div class="row mb-4">
+                            <div class="input-group">
+                                 <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="contact" 
+                                type="text" 
+                                class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" 
+                                value="{{ old('contact_no') }}" 
+                                autocomplete="contact_no"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                                minlength="11" 
+                                maxlength="11"
+                                @required(true)
+                                placeholder="Contact No">
+
+                                @error('contact_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        {{-- contact name --}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="contactnum" type="text" class="form-control @error('contact_name') is-invalid" @enderror" name="contact_name" value="{{ old('contact_name') }}" required autocomplete="contact_name" autofocus placeholder="Contact Name">
+
+                                @error('contact_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- contact address--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="contactnum" type="text" class="form-control @error('company_address') is-invalid" @enderror" name="company_address" value="{{ old('company_address') }}" required autocomplete="company_address" autofocus placeholder="Company Address">
+
+                                @error('company_address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="row mb-0">
                             <div class="col-12">

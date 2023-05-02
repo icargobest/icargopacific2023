@@ -1,62 +1,79 @@
-@include('partials.navigation', ['dispatcher' => 'fw-bold'])
-    <!--Employee List-->
-    <div class="bg-light p-4 rounded">
-        <h1>Dispatcher List</h1>
-        <div class="lead">
-            <a href="{{route('dispatcher.viewArchive')}}" class="btn btn-primary">
-                Archived Dispatcher
+<title>Company | Dispatcher</title>
+@extends('layouts.app')
+@include('partials.navigationCompany')
+<main class="container py-5" style="margin-top:-49px !important">
+    <div class="main-wrapper border border-2" style=" max-width: 100%;">
+        <div class="employee-header-container">
+            <h3 class="">DISPATCHER LIST</h3>
+        </div>
+
+        <div class="addemployee" style="" >
+            <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#addDispatcherModal">Add Dispatcher</button>
+            <a href="{{route('dispatcher.viewArchive')}}">
+                <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
+                    Archived
+                 </button>
             </a>
-            @include('company/dispatcher.create')
-            
-            <!-- Modal -->
+        </div>
+
+        <section class="search-filter-container">
+
+            <div class="top-container1" style="max-width: 800px;">
+                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
+                <div class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Search Employee" aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </section>
+
         <div class="mt-2">
             @include('flash-message')
         </div>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col" width="5%">ID</th>
-                <th scope="col" width="25%">Dispatcher Name</th>
-                <th scope="col" width="1%" colspan="5">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                @if ($user->dispatcherDetail->archived == false)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>@include('company/dispatcher.show')</td>
-                    <td>@include('company/dispatcher.edit')</td>
-                    <td>@include('company/dispatcher.archive')</td>
-                    <td>
-                        @if($user->status == 1)
-                        <a href="{{ route('dispatcher.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm">
-                            Lock
-                        </a>
-                        @else
-                         <a href="{{ route('dispatcher.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm">
-                            unlock
-                         </a>
-                        @endif
-                    </td>
-                </tr>
-                @endif
-            @endforeach
-            </tbody>
-        </table>
-        {!! $users->links() !!}
-        <div class="d-flex">
-        </div>
 
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col"style="text-align:center;">#</th>
+                    <th scope="col"style="text-align:center;">Dispatcher Name</th>
+                    <th scope="col"style="text-align:center; width:350px;">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dispatchers as $user)
+                        @if ($user->archived == 0)
+                            <tr>
+                                <td >{{ $user->id }}</td>
+                                <td class="capitalized">{{ $user->user->name }}</td>
+                                <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
+                                    @include('company/dispatcher.show')
+                                    @include('company/dispatcher.edit')
+                                    @include('company/dispatcher.archive')
+                                    @if($user->user->status == 1)
+                                    <a href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;">
+                                        Lock
+                                    </a>
+                                    @else
+                                     <a href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:85px !important;">
+                                        unlock
+                                     </a>
+                                    @endif  
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
     </div>
-    <!-- MDB -->
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-    <!--Bootstrap JS-->
-    <script src="/js/bootstrap.bundle.js"></script>
-</body>
-</html>
-{{-- @include('partials.footer') --}}
+</main>
+
+
+@include('company/dispatcher.create')
+@include('partials.footer')	

@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    what is this
     <ul>
         @foreach ($company as $comp)
         <li>

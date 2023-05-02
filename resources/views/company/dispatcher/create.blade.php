@@ -1,86 +1,96 @@
-<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Add Dispatcher
-</button>
-<div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Dispatcher</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
+<!-- Modal -->
+<div class="modal top   fade" id="addDispatcherModal" tabindex="-1" aria-labelledby="addDispatcherModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Dispatcher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    
         <div class="modal-body">
-          <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <!-- Dispatcher Name -->
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                  <label class="form-label" for="form6Example1">Dispatcher Name</label>
-                </div>
+            <div class="form-outline mb-4">
+                <div class="form-outline">
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  <label class="form-label" for="name">DISPATCHER NAME</label>
               </div>
             </div>
 
-            <!-- Dispatcher Email -->
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
 
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                  <label class="form-label" for="form6Example1">Email</label>
-                </div>
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              <label class="form-label" for="email">EMAIL</label>
+            </div>
+          
+            <!-- Password -->
+            <div class="form-outline mb-4">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              <label class="form-label" for="password">PASSWORD</label>
+            </div>    
+              
+            <!-- Confirm Password -->
+            <div class="form-outline mb-4">
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required/>
+              <label class="form-label" for="password_confirmation">CONFIRM PASSWORD</label>
+            </div>
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="11" 
+                  maxlength="11"  required placeholder="">
+                  <label class="form-label" for="form6Example5">Contact</label>
+                  @error('contact_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
               </div>
             </div>
+                    
+            <div class="button-modal-container">
 
-            <!-- Dispatcher password -->
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                  <label class="form-label" for="form6Example1">Password</label>
+                <div class="leftmodal-button-container">
+                    <button type="reset" class="btn btn-outline-primary" data-mdb-dismiss="modal">
+                        Reset
+                    </button>
                 </div>
-              </div>
-            </div>
+    
+                <div class="rightmodal-button-container">
+    
+                    <button type="submit" class="btn btn-primary" id="addModal2"data-mdb-dismiss="modal">
+                        Save
+                    </button>
 
-             <!-- Dispatcher confirm password -->
-             <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
-                  <label class="form-label" for="form6Example1">Confirm Password</label>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        Back
+                    </button>
                 </div>
-              </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block">
-                  Save
-                </button>
-                <button type="reset" class="btn btn-danger btn-block mb-4">
-                  Clear
-                </button>
-              </div>
           </form>
         </div>
-      </div>
+
     </div>
   </div>
-</div>
 </div>

@@ -1,6 +1,8 @@
 <head>
   <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-  <title>Orders</title>
+  <title>Customer | Orders</title>
+  <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+
 </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
@@ -11,12 +13,10 @@
 <div class="order-container container">
 
   <h4>MY ITEMS</h4>
-  <div class="button-holder mb-3">
-    <a href="/waybillForm">
-      <button type="button" class="btn btn-primary">
-        Post Order
-      </button>
-    </a>
+  <div class="button-holder row justify-content-end px-2 mb-3">
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+      Post Order
+    </button>
   </div>
 
   <div class="cards-holder">
@@ -27,7 +27,7 @@
       <div class="card-body">
         <div class="row">
   
-          <div class="details-wrapper col-lg-10 col-sm-12">
+          <div class="details-wrapper col-xl-10 col-lg-7 col-sm-12">
             <div class="recepients-wrapper row">
   
               <div class="senderInfo col-lg-6">
@@ -76,7 +76,7 @@
             </div>
           </div>
   
-          <div class="image-wrapper col">
+          <div class="image-wrapper col-xl-2 col-lg-5 col-sm-12">
             <div class="image-holder">
               <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
             </div>
@@ -85,142 +85,6 @@
         </div>
       </div>
     </div>
-</a>
-{{-- END OF CARD --}}
-
-
-{{-- CARD CREATED AFTER FILLING UP --}}
-<a class="cardItem" href="#">
-  <div class="item-card container px-4">
-    <div class="card-body">
-      <div class="row">
-
-        <div class="details-wrapper col-lg-10 col-sm-12">
-          <div class="recepients-wrapper row">
-
-            <div class="senderInfo col-lg-6">
-              <h6>SENDER</h6>
-
-              <ul>
-                  <li>Name | <span>Edan Franco</span></li>
-                  <li>Address | <span>Kristen Griffit</span></li>
-                  <li>Number | <span>0999-999-9999</span></li>
-              </ul>                  
-            </div>
-            <div class="receiverInfo col-lg-6">
-              <h6>RECEIVER</h6>
-
-              <ul>
-                  <li>Name | <span>Fletcher Peck</span></li>
-                  <li>Address | <span>Maxwell Wood</span></li>
-                  <li>Number | <span>0999-999-9999</span></li>
-              </ul>
-            </div>
-
-          </div>
-          <div class="parcelInfo-wrapper">
-
-            <div class="itemInfo">
-              <h6>ITEM INFORMATION</h6>
-
-              <div class="parcelDetails row">
-
-                <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>
-                        <li>ID | <span>#68</span></li>
-                        <li>Size & Weight | <span>17x30x41 | 97 kg</span></li>
-                  </ul>
-                </div>
-                <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>     
-                        <li>Category | <span>Appliances</span></li>
-                        <li>Mode of Pament | <span>COD</span></li>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="image-wrapper col">
-          <div class="image-holder">
-            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</a>
-{{-- END OF CARD --}}
-
-
-{{-- CARD CREATED AFTER FILLING UP --}}
-<a class="cardItem" href="#">
-  <div class="item-card container px-4">
-    <div class="card-body">
-      <div class="row">
-
-        <div class="details-wrapper col-lg-10 col-sm-12">
-          <div class="recepients-wrapper row">
-
-            <div class="senderInfo col-lg-6">
-              <h6>SENDER</h6>
-
-              <ul>
-                  <li>Name | <span>Edan Franco</span></li>
-                  <li>Address | <span>Kristen Griffit</span></li>
-                  <li>Number | <span>0999-999-9999</span></li>
-              </ul>                  
-            </div>
-            <div class="receiverInfo col-lg-6">
-              <h6>RECEIVER</h6>
-
-              <ul>
-                  <li>Name | <span>Fletcher Peck</span></li>
-                  <li>Address | <span>Maxwell Wood</span></li>
-                  <li>Number | <span>0999-999-9999</span></li>
-              </ul>
-            </div>
-
-          </div>
-          <div class="parcelInfo-wrapper">
-
-            <div class="itemInfo">
-              <h6>ITEM INFORMATION</h6>
-
-              <div class="parcelDetails row">
-
-                <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>
-                        <li>ID | <span>#68</span></li>
-                        <li>Size & Weight | <span>17x30x41 | 97 kg</span></li>
-                  </ul>
-                </div>
-                <div class="listLayout col-lg-6 col-sm-12">
-                  <ul>     
-                        <li>Category | <span>Appliances</span></li>
-                        <li>Mode of Pament | <span>COD</span></li>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="image-wrapper col">
-          <div class="image-holder">
-            <img src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </a>
 {{-- END OF CARD --}}
 
@@ -255,7 +119,7 @@
                     <form method="POST" action="{{route('addShipment')}}">
                         {{-- <h1>SENDER INFO</h1> --}}
                         @csrf
-                        <input type="hidden" name="user_id" value="{{-- {{Auth::user()->id}} --}}" class="form-control" />
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control" />
 
                         {{-- NAME INPUT --}}
                         <div class="nameInput mb-3">
@@ -644,7 +508,7 @@
                 <th>Action</th>
             </tr>
             </thead>
-            {{-- <tbody>
+            <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bade == Auth::user()->name && $ship->status == 'Processing') || (Auth::user()->type == 'company' && $ship->company_bade == null && $ship->status == 'Pending'))
                         <tr>
@@ -666,7 +530,7 @@
                     @endif
                 @endforeach
             </tbody>
-        </table> --}}
+        </table>
       </div>
     </div>
     </div>

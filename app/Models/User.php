@@ -24,14 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'status'
     ];
 
-    public function driverDetail(){
-        return $this->hasOne(Driver::class, 'user_id', 'id')->withDefault();
-    }
-
-    public function dispatcherDetail(){
-        return $this->hasOne(Dispatcher::class, 'user_id', 'id')->withDefault();
-    }
-
     protected $hidden = [
         'password',
         'remember_token',
@@ -40,6 +32,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
 
     protected function type(): Attribute
     {
