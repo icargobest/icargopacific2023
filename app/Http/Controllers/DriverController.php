@@ -6,6 +6,8 @@ use DB;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Driver;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +23,22 @@ class DriverController extends Controller
     
     public function index()
     {
-        $user_id = Auth::id();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
         $drivers = $this->driver->with('user')->where('company_id', $user_id)->get();
         return view('company/drivers.index', compact('drivers'));
+    }
+
+    public function staffIndex()
+    {
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first();
+        if ($staff) {
+            $company_id = $staff->company_id;
+            $drivers = $this->driver->with('user')->where('company_id', $company_id)->get();
+        }
+        return view('staff_panel/drivers.index', compact('drivers'));
     }
 
     function viewArchive(){
@@ -69,14 +84,26 @@ class DriverController extends Controller
                 'license_number.required' => 'License number field is required.',
                 'license_number.max' => 'Plate number must be a min and max of 11 characters'
             ]);
-        
+
+            if(Auth::user()->type == 'staff'){
+                $id = Auth::id();
+                $staff = Staff::where('user_id', $id)->first();
+                $company_id = $staff->company_id;
+                $company = Company::where('user_id', $company_id)->first();
+                $user_id = $company->id;
+
+            }else{
+                $id = Auth::id();
+                $company = Company::where('user_id', $id)->first();
+                $user_id = $company->id;
+            }
             $drivers = Driver::create([
                 'user_id' => $user->id,
                 'vehicle_type' => $otherValidation['vehicle_type'],
                 'plate_no' => $otherValidation['plate_no'],
                 'license_number' => $otherValidation['license_number'],
                 'contact_no' =>  $otherValidation['contact_no'],
-                'company_id' => Auth::id(),
+                'company_id' => $user_id,
             ]);
           
             DB::commit();
@@ -86,7 +113,7 @@ class DriverController extends Controller
                 
           }
        
-        return redirect()->route('drivers.index')->with('success','Driver has been created successfully.');
+        return back()->with('success','Driver has been created successfully.');
     }
 
     public function show(User $users)
