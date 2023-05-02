@@ -4,19 +4,24 @@
   <div class="container center p-3">
       <div class="row">
         <div class="col-sm-12 col-12">
-          <div class="card">
-          <div class="text-center">
-            <div class="card-header text-center p-3">
-              <h2>Dispatcher</h2>
+          
+          
+            <div>
+              <h2  class="fw-bold">DISPATCHER</h2>
             </div>
-            <div class="card-body">
+
+            <div class="container p-5 shadow" style=" background-color:white;">
+            <div class="text-center">
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
                   <div>
-                    <p>Enter tracking ID to search for parcel:</p>
-
-                    <input type="text" placeholder="Enter tracking ID">
-                    <button type="button" class="btn btn-primary">Search</button>
+                    <label>Enter Tracking ID to Search Parcel:</label>
+                    <div class="row d-flex justify-content-center">
+                    <input type="text" placeholder="Enter tracking ID" class="col-md-7 col-lg-3">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">Search</button>
+                    </div>
 
                   </div>
 
@@ -33,7 +38,7 @@
                     <label>QR Scanner</label>
                   </div>
                   <div class="col-12 d-flex justify-content-center mb-4">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
                       <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
                     </div>
                   </div>
@@ -43,7 +48,7 @@
                     <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px">Reset</a>
                   </div> --}}
 
-                  <div class="container" style="text-align:center;">
+                  <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
                   <div class="scanresult" style="text-align:center;">
@@ -158,8 +163,9 @@
                 </section>
               </main>
             </div>
-          </div>
-        </div>
+            </div>
+          
+        
       </div>
     </div>
   </div>
