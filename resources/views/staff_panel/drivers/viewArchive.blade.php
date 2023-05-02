@@ -11,7 +11,7 @@
 
 
         <div class="addemployee" style="height:75.6px;" >
-            <a href="{{route('drivers.index')}}">
+            <a href="{{route('driver.index')}}">
                 <button type="button" class="btn btn-primary m-button1" style="height:32.8px">
                     Back
                 </button>
@@ -54,7 +54,7 @@
                                 <td>{{ $user->user->name }}</td>
                                 <td>{{ $user->vehicle_type }}</td>
                                 <td>{{ $user->plate_no }}</td>
-                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/drivers.show')@include('company/drivers.restore')</td>
+                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('staff_panel/drivers.show')@include('staff_panel/drivers.restore')</td>
                             </tr>
                         @endif
                     @endforeach

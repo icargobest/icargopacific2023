@@ -48,6 +48,17 @@ class DriverController extends Controller
         return view('company/drivers.viewArchive', compact('drivers'));
     }
 
+    function staffviewArchive(){
+
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first();
+        if ($staff) {
+            $company_id = $staff->company_id;
+            $drivers = $this->driver->with('user')->where('company_id', $company_id)->get();
+        }
+        return view('staff_panel/drivers.viewArchive', compact('drivers'));
+    }
+
 
     public function create()
     {

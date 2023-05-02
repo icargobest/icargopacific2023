@@ -10,7 +10,7 @@
 
         <div class="addemployee" style="" >
             <button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#addDriversModal">Add Driver</button>
-            <a href="{{route('drivers.viewArchive')}}">
+            <a href="{{route('driver.viewArchive')}}">
                 <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
                     Archived
                  </button>

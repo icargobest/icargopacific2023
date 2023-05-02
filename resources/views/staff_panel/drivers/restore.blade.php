@@ -10,7 +10,7 @@
         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{route('drivers.unarchive', $user->id)}}">
+        <form method="POST" action="{{route('driver.unarchive', $user->id)}}">
           @csrf
           @method ('PUT')
           <h4>Are you sure you want to <span class="span-green">restore</span> this Driver?</h4>
