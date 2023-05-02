@@ -16,11 +16,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         {{-- @include('flash-message') --}}
-<<<<<<< Updated upstream
-                        <div class="row mb-4">
-=======
                         <div class="row mb-3">
->>>>>>> Stashed changes
                             {{-- <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label> --}}
 
                             <div class="input-group">

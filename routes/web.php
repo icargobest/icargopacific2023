@@ -50,7 +50,7 @@ use App\Models\OrderTrackingLog;
 
 
 Route::get('/', function () {
-    return view('/company/order/transfer');
+    return view('/waybill/history');
 });
 Route::get('/driver/history', function () {
     return view('driver_panel.deliverHistory');
