@@ -19,7 +19,7 @@
     </style>
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
         <div class="order-container container">
-                <h4 class="text-dark my-3">MY ITEM #{{$ship->id}}</h4>
+                <h4 class="text-dark">MY ITEM #{{$ship->id}}</h4>
                 <div class="cards-holder">
                     <card class="item-card bg-white btn-wrapper p-4">
                         <!-- Mobile Sender and Receiver -->
