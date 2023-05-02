@@ -1,6 +1,6 @@
 <title>Company | Dispatcher Archived</title>
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationStaff')
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -11,7 +11,7 @@
 
 
         <div class="addemployee" style="height:75.6px;" >
-            <a href="{{route('dispatcher.index')}}">
+            <a href="{{route('dispatchers.index')}}">
                 <button type="button" class="btn btn-primary m-button1" style="height:32.8px">
                     Back
                 </button>
@@ -54,7 +54,7 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('company/dispatcher.show')@include('company/dispatcher.restore')</td>
+                                <td class="td-buttons d-flex justify-content-center"style="overflow:auto">@include('staff_panel/dispatcher.show')@include('staff_panel/dispatcher.restore')</td>
                             </tr>
                         @endif
                     @endforeach
