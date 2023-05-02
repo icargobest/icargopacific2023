@@ -71,12 +71,15 @@
                             <span>Add. Freight Forwarding</span>
                         </div>
                     </div>
-        
+
+                    
                     <div class="links">
+                        <a class="nav-link" href="/forward">
                         <div class="link">
                             <i class="fa fa-user"></i>
                             <span>Transfer to Forwarding</span>
                         </div>
+                        </a>
                     </div>
         
                     <div class="links">

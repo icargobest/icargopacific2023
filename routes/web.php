@@ -48,7 +48,6 @@ use App\Models\OrderTrackingLog;
 // });
 
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -58,11 +57,8 @@ Route::get('/driver/history', function () {
 
 Auth::routes(['verify' => true]);
 
-// company account registration
-Route::get('/registerCompany', function () {
-    return view('/registerCompany');
-});
-Route::post('/store', [CompanyController::class, 'store']);
+//Company registration account
+Route::resource('company_registration', CompanyController::class);
 
 // Authenticated Account Routes
 Route::middleware('auth')->group(function(){
@@ -92,7 +88,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
         Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/invoice/{id}','viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}','viewInvoice')->name('generate');
+        Route::get('/user/waybill/{id}','viewWaybill')->name('user.generateWaybill');
     });
 });
 
@@ -105,16 +102,14 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/company/order','index')->name('company.order');
         Route::get('/company/freight','freight')->name('freightPanel');
+        Route::get('/company/advFreight','company_advFreightPanel')->name('company.advFreightPanel');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
         Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
-        Route::post('add_bid', 'addBid')->name('addBid');
+        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
+        Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/order/history', 'orderHistory')->name('orderHistory');
-
-        Route::group(['prefix' => 'company'], function () {
-            Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-            Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
-        });
+        Route::put('/transfer/{id}','transfer')->name('transfer.company');
     });
 
     // stations
@@ -176,12 +171,24 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
     ->name('driver.dashboard');
+
+    //DRIVER PAGE
+    Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+    Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+    Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+    Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
 });
 
 // Dispatcher Panel
 Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::get('/dispatcher/dashboard', [DispatcherDashboardController::class, 'index'])
     ->name('dispatcher.dashboard')->middleware('verified');
+
+    //DISPATCHER PAGE
+    Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+    Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+    Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+    Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 });
 
 // Staff Panel
@@ -197,11 +204,8 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
          Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
          Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
          Route::post('add_bid', 'staff_addBid')->name('staff_addBid');
-
-    //     Route::group(['prefix' => 'company'], function () {
-    //         Route::get('/transfer/{id}','transferShipment')->name('viewTransfer');
-    //         Route::put('/transfer/{id}','transfer')->name('shipment.transfer');
-    //     });
+         Route::put('/staff/transfer/{id}','transfer')->name('transfer.staff');
+         Route::get('/staff/waybill/{id}','viewWaybillStaff')->name('staff.generateWaybill');
      });
 
 });
@@ -219,10 +223,6 @@ Route::get('/find', function () {
 
 Route::post('/search', [UserController::class, 'search']);
 
-// DASHBOARD PAGE
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-});
 Route::get('/income', [IncomeController::class, 'index']);
 
 
@@ -240,7 +240,7 @@ Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\Dispat
 Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
 
 
-Route::get('/company', [CompanyController::class, 'index']);
+// Route::get('/company', [CompanyController::class, 'index']);
 
 
 

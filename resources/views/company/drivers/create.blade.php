@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal top fade" id="addDriverModal" tabindex="-1" aria-labelledby="addDriverModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -6,10 +5,14 @@
         <h5 class="modal-title" id="addDriverModal">Add Driver</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+    
+      <div class="modal-divider"></div>
 
         <div class="modal-body">
           <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <!-- 2 column grid layout with text inputs for the first and last names -->
             <!-- Driver Name -->
             <div class="row mb-4">
                 <div class="col">
@@ -35,7 +38,7 @@
                                       <strong>{{ $message }}</strong>
                                   </span>
                                   @enderror
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="form6Example1">EMAIL</label>
                   </div>
                 </div>
               </div>
@@ -50,7 +53,7 @@
                                           <strong>{{ $message }}</strong>
                                       </span>
                                   @enderror
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="form6Example1">PASSWORD</label>
                   </div>
                 </div>
               </div>
@@ -59,64 +62,75 @@
                <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required/>
-                    <label class="form-label" for="password_confirmation">Confirm Password</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-4">
-                <div class="col">
-                  <div class="form-outline">
-                    <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                    minlength="11" 
-                    maxlength="11" 
-                    required 
-                    placeholder="">
-                    <label class="form-label" for="contact">CONTACT</label>
-                    @error('contact_no')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-4">
-                <div class="col">
-                  <div class="form-outline">
-                    <input id="license" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" autocomplete="license_number" 
-                    minlength="11" 
-                    maxlength="11"  
-                    required 
-                    placeholder="">
-                    <label class="form-label" for="licenseNum">LICENSE NUMBER</label>
-                    @error('license_number')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input type="password" id="form6Example1" name="password_confirmation" class="form-control" required/>
+                    <label class="form-label" for="form6Example1">CONFIRM PASSWORD</label>
                   </div>
                 </div>
               </div>
             
+            <h4>Driver Details</h4>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="phone" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" autocomplete="contact_no" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="11" 
+                  maxlength="11" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">CONTACT</label>
+                  @error('contact_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- License input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="license" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" autocomplete="license_number" 
+                  minlength="11" 
+                  maxlength="11"  
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">LICENSE NUMBER</label>
+                  @error('license_number')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
             <div class="row mb-4">
               <label class="form-label" for="vehicle_type"></label>
-              <select type="text" id="vehicle_type" name="vehicle_type" class="dropdown-modal1" user required>
-                <option value="" hidden>Vehicle Type</option>
+              <select type="text" id="form6Example5" name="vehicle_type" style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+                <option value="" hidden>VEHICLE TYPE</option>
                 <option value="Motorcycle">Motorcycle</option>
                 <option value="Van">Van</option>
                 <option value="Truck">Truck</option>
               </select>
             </div>
 
+            <!-- Plate input -->
             <div class="form-outline mb-4">
-                <input type="text" id="plate_no" name="plate_no" class="form-control" {{-- value= "{{ $user->plate_no }}" --}}required />
-                <label class="form-label" for="plate_no">Plate No.</label>
+              <div class="form-outline">
+                  <input id="plate" type="text" class="form-control @error('plate_no') is-invalid @enderror" name="plate_no" value="{{ old('plate_no') }}" autocomplete="plate_no" 
+                  minlength="6" 
+                  maxlength="8"  
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">PLATE</label>
+                  @error('plate_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
             </div>
-
                   
             <div class="button-modal-container">
 
