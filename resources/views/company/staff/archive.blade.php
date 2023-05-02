@@ -7,14 +7,14 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header mbc3">
-        <h5 class="modal-title">ARCHIVE DRIVER</h5>
+        <h5 class="modal-title">ARCHIVE STAFF</h5>
         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="POST" action="{{route('staff.archive', $staff->id)}}">
           @csrf
           @method ('PUT')
-          <h4>Are you sure you want to <span class="span-red">archived</span> this driver?</h4>
+          <h4>Are you sure you want to <span class="span-red">archived</span> this staff?</h4>
           <div class="modal-footer">
               <button type="submit" class="btn btn-danger btn-block">
                 Archive
