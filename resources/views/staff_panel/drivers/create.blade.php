@@ -68,7 +68,7 @@
                 </div>
               </div>
             
-            <h4>Driver Details</h4>
+
 
             <!-- Contact input -->
             <div class="form-outline mb-4">
