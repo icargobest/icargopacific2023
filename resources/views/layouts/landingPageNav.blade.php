@@ -72,17 +72,17 @@ li
                     </div>
                     
                     <div class="accessNav">
-                        @if (Route::has('login'))
+                        {{-- @if (Route::has('login')) --}}
                         <li class="loginBtn border-top pt-3">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
 
-                        @if (Route::has('register'))
+                        {{-- @if (Route::has('register')) --}}
                         <li class="registerBtn">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
                     </div>
                     
                 </ul>
@@ -107,17 +107,17 @@ li
             @guest
 
             <div class="accessBtns ">
-                @if (Route::has('login'))
+                {{-- @if (Route::has('login')) --}}
                 <li class="loginBtn">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-                @endif
+                {{-- @endif --}}
 
-                @if (Route::has('register'))
+                {{-- @if (Route::has('register')) --}}
                 <li class="registerBtn">
                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
-                @endif
+                {{-- @endif --}}
             </div>
             
 
