@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <hr class="opacity-75">
-                       {{--END OF ORDER DETAILS--}}
+                        {{--END OF ORDER DETAILS--}}
 
                         {{-- TRACKING ORDER START --}}
                         <div id="order-status-container">
