@@ -1,14 +1,13 @@
 @extends('layouts.app')
-@include('partials.navigationDriver')
-<title>Driver | History</title>
-
+@include('partials.navigationCompany')
+<title>Company | Order History</title>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">
-      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">DELIVER HISTORY</h3>
+      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">ORDER HISTORY</h3>
     </div>
     <div class="main-wrapper" style=" max-width:">
 
-        <section class="search-filter-container">
+        <section class="search-filter-container mb-4">
 
             <div class="top-container1" style="max-width: 800px; margin-top: 15px">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
@@ -73,62 +72,6 @@
                                     </label>
                               </td>
                           </tr>
-                          <tr>
-                            <td>69</td>
-                            <td><img src="/img/order_image.png" alt="item-image"></td>  
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>17x30x41 | 97 kg</td>
-                            <td>August 02, 2023</td>
-                            <td>August 25, 2023</td>
-                            <td class="" style="overflow:auto; ">                                
-                                    <label class="status-canceledv2">
-                                        Canceled
-                                    </label>
-                            </td>
-                        </tr>
-                        <tr>
-                          <td>69</td>
-                          <td><img src="/img/order_image.png" alt="item-image"></td>  
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>17x30x41 | 97 kg</td>
-                          <td>August 02, 2023</td>
-                          <td>August 25, 2023</td>
-                          <td class="" style="overflow:auto; ">                                
-                                  <label class="status-deliveredv2">
-                                    Delivered
-                                  </label>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td>69</td>
-                        <td><img src="/img/order_image.png" alt="item-image"></td>  
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>17x30x41 | 97 kg</td>
-                        <td>August 02, 2023</td>
-                        <td>August 25, 2023</td>
-                        <td class="" style="overflow:auto; ">                                
-                                <label class="status-deliveredv2">
-                                    Delivered
-                                </label>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>69</td>
-                      <td><img src="/img/order_image.png" alt="item-image"></td>  
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>17x30x41 | 97 kg</td>
-                      <td>August 02, 2023</td>
-                      <td>August 25, 2023</td>
-                      <td class="" style="overflow:auto; ">                                
-                              <label class="status-deliveredv2">
-                                Delivered
-                              </label>
-                      </td>
-                  </tr>
                           
                           
                 </tbody>

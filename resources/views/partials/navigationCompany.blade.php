@@ -23,6 +23,7 @@
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
             {{-- ICONS --}}
