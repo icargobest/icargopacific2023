@@ -104,7 +104,7 @@ li
                 
             </nav>
             
-            @guest
+            {{-- @guest --}}
 
             <div class="accessBtns ">
                 {{-- @if (Route::has('login')) --}}
@@ -121,7 +121,7 @@ li
             </div>
             
 
-            @else
+            {{-- @else
            <a><span class="spanUser">
             {{ Auth::user()->name }}
             </span>
@@ -185,7 +185,7 @@ li
                 @endif
         <main class="py-4">
              @yield('content')
-        </main>
+        </main> --}}
 
         <script type="text/javascript">
             const menuBtn = document.querySelector(".mobileNav");
