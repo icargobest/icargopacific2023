@@ -51,7 +51,7 @@ class DriverQrScannerController extends Controller
         $id = $request->id;
         $shipment = Shipment::find($id);
         if ($shipment) {
-            $shipment->status = 'pickup';
+            $shipment->status = 'PickedUp';
             $shipment->save();
             return response()->json(['success' => true]);
         }
@@ -63,7 +63,7 @@ class DriverQrScannerController extends Controller
         $id = $request->id;
         $shipment = Shipment::find($id);
         if ($shipment) {
-            $shipment->status = 'delivered';
+            $shipment->status = 'Delivered';
             $shipment->save();
             return response()->json(['success' => true]);
         }
