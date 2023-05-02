@@ -208,16 +208,6 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
          Route::get('/staff/waybill/{id}','viewWaybillStaff')->name('staff.generateWaybill');
      });
 
-     //DRIVER
-    Route::resource('staff/driver', DriverController::class);
-    Route::controller(DriverController::class)->group(function(){
-        Route::get('/staff/driver','staffIndex')->name('driver.index');;
-        Route::get('/driver/delete/{id}', 'destroy')->name('drivers.delete');
-        Route::get('archived-driver', 'staffviewArchive')->name('driver.viewArchive');
-        Route::put('/driver/archive/{id}', 'archive')->name('driver.archive');
-        Route::put('/driver/unarchive/{id}','unarchive')->name('driver.unarchive');
-    });
-
 });
 
 
