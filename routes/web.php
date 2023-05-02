@@ -48,7 +48,6 @@ use App\Models\OrderTrackingLog;
 // });
 
 
-
 Route::get('/', function () {
     return view('welcome');
 });
