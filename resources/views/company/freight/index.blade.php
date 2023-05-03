@@ -3,7 +3,7 @@
     <title>Orders</title>
   </head>
   @extends('layouts.app')
-  @include('partials.navigationCompany')
+  @include('partials.navigationCompany',['freight' => "nav-selected"])
 
   {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
   <div class="order-container container">

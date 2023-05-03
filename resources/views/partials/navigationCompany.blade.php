@@ -81,7 +81,7 @@
 
                         <div class="links">
                             <a class="nav-link" href="{{route('freightPanel')}}">
-                            <div class="link" >
+                            <div class="link  @if(isset($freight)){{$freight}}@endif" >
                                 <i class="fa fa-truck link-i-1"></i>
                                 <span>Freight</span>
                             </div>
