@@ -110,16 +110,40 @@ class ShipmentController extends Controller
         return view('company.freight.advance_freight', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function staff_advFreightPanel(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            }
+        }
+
+        $this->TrackOrderLog();
+
+        return view('staff_panel.freight.advance_freight', compact('company_name', 'company_id_staff'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
     public function freightStaff(){
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
         if ($staff) {
             $company_id = $staff->company_id; // Get the company_id from the staff record
-            $user = User::where('id', $company_id)->first();
-            if($user){
-                $company_name = $user->name;
-                $company_id = $user->id;
-                $company_email = $user->email; // Get the company_id from the
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
             }
         }
 
@@ -127,7 +151,7 @@ class ShipmentController extends Controller
 
         $bids = Bid::all();
         $shipments = Shipment::all();
-        return view('staff_panel.freight.index', compact('company_name', 'company_id'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
+        return view('staff_panel.freight.index', compact('company_name', 'company_id_staff'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
     }
 
     function postOrder(){

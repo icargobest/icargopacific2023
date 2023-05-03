@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Staff;
+use App\Models\Driver;
+use App\Models\Dispatcher;
 
 class CreateUsersSeeder extends Seeder
 {
@@ -88,5 +88,40 @@ class CreateUsersSeeder extends Seeder
                 ]);
             }
         }
+        // Creating a dispatcher user
+        $dispatcher = User::create([
+            'name' => 'Dispatcher User',
+            'email' => 'dispatcher@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'type' => 4 // set the user type to dispatcher
+        ]);
+
+        // Creating a dispatcher record
+        Dispatcher::create([
+            'user_id' => $dispatcher->id,
+            'company_id' => 1,
+            'contact_no' => '1234567890'
+        ]);
+
+        // Creating a driver user
+        $driver = User::create([
+            'name' => 'Driver User',
+            'email' => 'driver@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'type' => 3 // set the user type to driver
+        ]);
+
+        // Creating a driver record
+        Driver::create([
+            'user_id' => $driver->id,
+            'company_id' => 1,
+            'dispatcher_id' => 1,
+            'contact_no' => '0987654321',
+            'vehicle_type' => 'SUV',
+            'license_number' => 'ABC123',
+            'plate_no' => 'XYZ-123'
+        ]);
     }
 }
