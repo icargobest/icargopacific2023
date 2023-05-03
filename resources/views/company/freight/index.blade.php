@@ -2,10 +2,8 @@
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Orders</title>
   </head>
-
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-  @include('layouts.app')
-  @extends('partials.navigationCompany')
+  @extends('layouts.app')
+  @include('partials.navigationCompany')
 
   {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
   <div class="order-container container">

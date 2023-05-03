@@ -62,8 +62,8 @@
 
                     </div>
                     <div class="links">
-                        <a class="nav-link" href="{{route('orderHistory')}}">
-                        <div class="link">
+                        <a class="nav-link" href="{{ url('/userpanel/orderHistory')}}">
+                        <div class="link @if(isset($history)){{$history}}@endif">
                             <i class="bi bi-cart-check-fill link-i-3"></i>
                             <span>Order History </span>
                         </div>

@@ -63,18 +63,20 @@
                         </div>
                         <div class="links">
                             <a class="nav-link" href="{{route('company.order')}}">
-                            <div class="link">
+                            <div class="link @if(isset($order)){{$order}}@endif">
                                 <i class="fa fa-list link-i-1"></i>
-                                <span>Order  </span>
+                                <span>Order</span>
                             </div>
                             </a>
                         </div>
 
                         <div class="links">
-                            <div class="link">
+                            <a class="nav-link"  href="{{ url('/company/history/orderHistory') }}">
+                            <div class="link @if(isset($history)){{$history}}@endif">
                                 <i class="fa fa-history link-i-1"></i>
                                 <span>Order History</span>
                             </div>
+                            </a>
                           </div>
 
                         <div class="links">

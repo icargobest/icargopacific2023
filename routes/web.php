@@ -55,6 +55,13 @@ Route::get('/driver/history', function () {
     return view('driver_panel.deliverHistory');
 });
 
+Route::get('/userpanel/orderHistory', function () {
+    return view('userpanel.orderHistory');
+});
+
+Route::get('/company/history/orderHistory', function () {
+    return view('company.history.orderHistory');
+});
 Auth::routes(['verify' => true]);
 
 //Company registration account

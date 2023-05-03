@@ -50,6 +50,16 @@
 
                 <div class="links-wrapper">
                     <div class="link1">
+
+                        <div class="links">
+                            <a class="nav-link "href="/driver/dashboard">
+                                <div class="link">
+                                    <i class="fa fa-tachometer link-i-1" ></i>
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                        </div>
+                        
                         <div class="links">
                             <a class="nav-link">
                                 <div class="link">

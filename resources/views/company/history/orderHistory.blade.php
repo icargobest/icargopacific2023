@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany' ,['history' => "nav-selected"])
 <title>Company | Order History</title>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">
