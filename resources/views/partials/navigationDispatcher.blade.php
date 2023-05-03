@@ -22,6 +22,8 @@
 
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
 
            {{--  ICONS --}}
             <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
