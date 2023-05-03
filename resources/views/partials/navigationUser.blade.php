@@ -48,11 +48,20 @@
 
             <div class="links-wrapper">
                 <div class="link1">
+
+                    <div class="links">
+                        <a class="nav-link"href="{{route('dashboard')}}">
+                            <div class="link @if(isset($dashboard)){{$dashboard}}@endif">
+                                <i class="fa fa-tachometer link-i-1" ></i>
+                                <span>Dashboard</span>
+                            </div>
+                        </a>
+                    </div>
                     <div class="links">
                         <a class="nav-link" href="{{route('userOrderPanel')}}">
                         <div class="link @if(isset($order)){{$order}}@endif" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
-                            <span>Order</span>
+                            <span class="link-i-span">Order</span>
                         </div>
                         </a>
                     </div>
@@ -60,7 +69,7 @@
                         <a class="nav-link" href="{{ url('/userpanel/orderHistory')}}">
                         <div class="link @if(isset($history)){{$history}}@endif">
                             <i class="bi bi-cart-check-fill link-i-3"></i>
-                            <span>Order History </span>
+                            <span class="link-i-span">Order History </span>
                         </div>
                         </a>
                     </div>

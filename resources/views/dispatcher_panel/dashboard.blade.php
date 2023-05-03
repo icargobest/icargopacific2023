@@ -1,6 +1,8 @@
-@include('partials.navigationDispatcher', ['driver' => 'fw-bold'])
+<title>Dispatcher | Dashboard</title>
+
+@include('partials.navigationDispatcher', ['dashboard' =>"nav-selected"])
 @extends('layouts.app')
-@extends('layouts.chart')
+{{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('title', 'Dispatcher Dashboard')

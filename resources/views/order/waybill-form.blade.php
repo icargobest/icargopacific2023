@@ -5,7 +5,8 @@
 </head>
 
 @include('layouts.app')
-@include('partials.navigationUser')
+@include('partials.navigationUser',['order' => "nav-selected"])
+
 
 <div class="waybillForm-container container">
 

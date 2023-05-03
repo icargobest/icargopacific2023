@@ -1,6 +1,6 @@
 <head>
     
-    <title>Orders</title>
+    <title>Company | Adv. Freight</title>
 
     <style>
         table {
@@ -22,7 +22,8 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany',['advance' => "nav-selected"])
+
 
 <div class="mx-2">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -104,7 +105,7 @@
                         <td>COD</td>
 
                         <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <button class="btn created-button mx-auto">Forward</button>
+                        <a href="{{ url('/company/freight/transfers') }}"><button class="btn created-button mx-auto">Forward</button></a>
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
                     @endif

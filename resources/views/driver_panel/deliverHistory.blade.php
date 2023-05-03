@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@include('partials.navigationDriver')
+@include('partials.navigationDriver',['history' => "nav-selected"])
 <title>Driver | History</title>
 
 <main class="container py-5" style="margin-top:-49px !important">

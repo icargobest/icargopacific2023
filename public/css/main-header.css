@@ -247,10 +247,16 @@ align-items: center;
 font-size: 17px;
 min-height: 20px;
 padding-top: 2px;
+margin-left: 7px !important;
 }
 .link-i-4
 {
 margin-bottom: 8px;
+}
+
+.link-i-span
+{
+margin-left: 13px !important;
 }
 
 

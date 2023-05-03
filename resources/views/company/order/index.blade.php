@@ -12,12 +12,6 @@
     <link rel="stylesheet" href="/css/mdb.min.css" />
 
 	<style>
-        body{
-            font-family: 'Poppins';
-        }
-        .img-size {
-            object-fit: contain;
-        }
         th {
             background-color: white !important;
             color: black;
@@ -34,7 +28,7 @@
             <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
                 <h3 class="text-white mb-0">ORDER LIST</h3>
             </div>
-            {{-- TABLE CREATED AFTER FILLING UP --}}
+            {{-- TABLE START--}}
             <section class="mb-5 px-5 my-3 overflow-auto">
                 <table class="table table-striped table-hover">
                 <thead class="text-white" style="background-color: #214D94;">
@@ -57,8 +51,11 @@
                             <tr>
                                 <td>{{$ship->id}}</td>
                                 <!-- Photo not showing -->
-                                 <td style="width: 70px;">
-                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 img-size w-25" style="min-width: 70px;" />
+                                <!-- <td style="width: 70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt=""/>
+                                </td> -->
+                                <td style="width: 70px;">
+                                    <img class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""/>
                                 </td>
                                 <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
                                 <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
@@ -66,14 +63,13 @@
                                 <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                 <td>{{$ship->min_bid_amount}}</td>
                                 <td>{{$ship->status}}</td>
-                                <td  >
+                                <td>
                                     {{-- <span class="d-flex align-items-start"> --}}
                                     <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                                         <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
                                         VIEW
                                         </button>
                                     </a>
-                                    {{-- </span> --}}
                                 </td>
                             </tr>
                             @endif
@@ -85,4 +81,5 @@
             {{-- END OF TABLE --}}
         </div>
     </div>
+    {{-- END OF ORDER CONTAINER --}}
     @include('partials.footer')

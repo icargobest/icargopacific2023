@@ -1,5 +1,7 @@
+<title>Dispatcher | History</title>
+
 @extends('layouts.app')
-@include('partials.navigationDispatcher')
+@include('partials.navigationDispatcher', ['history' =>"nav-selected"])
 <title>Dispatcher | History</title>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">

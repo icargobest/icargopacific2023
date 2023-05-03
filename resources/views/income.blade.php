@@ -139,41 +139,6 @@
     </div>         
 </div>
 
-                        <div class="div">
-                            <span class="chartTitle">Daily Income</span>
-                            <div id="daily_chart_div"></div>
-                        </div>
-                  </div>
-
-
-
-                  
-                  <div class="carousel-item ">
-                    <span class="chartTitle">Weekly Income</span>
-                    <div id="weekly_chart_div"></div>
-                  </div>
-                  <div class="carousel-item">
-                    <span class="chartTitle">Monthly Income</span>
-                        <div id="monthly_chart_div"></div>
-                  </div>
-                  <div class="carousel-item">
-                    <span class="chartTitle">Yearly Income</span>
-                        <div id="yearly_chart_div"></div>
-                  </div>
-    
-                {{-- </div> --}}
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only" style="color:blue">Next</span>
-                </a>
-              </div>
-              
-            </div>
-        </div>
 
 
 </div>

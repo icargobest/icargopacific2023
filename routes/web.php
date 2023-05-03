@@ -47,17 +47,51 @@ use App\Http\Controllers\DriverDashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/driver/history', function () {
-    return view('driver_panel.deliverHistory');
-});
 
+
+/* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
     return view('userpanel.orderHistory');
 });
 
+/* Company Tab */
+
 Route::get('/company/history/orderHistory', function () {
     return view('company.history.orderHistory');
 });
+
+
+Route::get('/company/freight/transfers', function () {
+    return view('company.freight.transfers');
+});
+
+
+/* Drivers Tab */
+Route::get('/driver/qr', function () {
+    return view('driver_panel.driver');
+});
+
+
+Route::get('/driver/history', function () {
+    return view('driver_panel.deliverHistory');
+});
+
+/* Dispatcher Tab */
+Route::get('/dispatcher/qr', function () {
+    return view('dispatcher_panel.dispatcher');
+});
+
+
+Route::get('/dispatcher/history', function () {
+    return view('dispatcher_panel.dispatchHistory');
+});
+
+
+
+
+
+
+
 Auth::routes(['verify' => true]);
 
 //Company registration account

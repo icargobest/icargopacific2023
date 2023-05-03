@@ -1,6 +1,6 @@
 <head>
     
-    <title>Company | Orders</title>
+    <title>Company | Transfer Forwarding</title>
 
     <style>
         table {
@@ -58,7 +58,8 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany',['advance' => "nav-selected"])
+
 
 <div class="mx-4">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">

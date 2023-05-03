@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@extends('partials.navigationUser')
+@include('partials.navigationUser',['history' => "nav-selected"])
+
 <title>Customer | Order History</title>
-<div class="content-container">
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
           <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">ORDER HISTORY</h3>
@@ -81,7 +81,6 @@
             
         </div>
     </main>
-</div>
 
 
 @include('partials.footer')	

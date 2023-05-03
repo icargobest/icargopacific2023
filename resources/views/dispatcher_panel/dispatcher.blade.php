@@ -1,4 +1,5 @@
-@include('partials.navigationDispatcher', ['driver' => 'fw-bold'])
+<title>Dispatcher | Qr Scanner</title>
+@include('partials.navigationDispatcher', ['qr' =>"nav-selected"])
 @extends('layouts.app')
 @extends('layouts.status')
 <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">

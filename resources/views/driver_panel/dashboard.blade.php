@@ -1,6 +1,8 @@
-@include('partials.navigationDriver', ['driver' => 'fw-bold'])
+<title>Driver | Dashboard</title>
+
+@include('partials.navigationDriver', ['dashboard' =>"nav-selected"])
 @extends('layouts.app')
-@extends('layouts.chart')
+{{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('title', 'Driver Dashboard')

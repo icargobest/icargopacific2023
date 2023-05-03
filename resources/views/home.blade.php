@@ -1,6 +1,7 @@
-@extends('layouts.app')
-@extends('partials.navigationUser')
+<title>Customer | Dashboard</title>
 
+@extends('layouts.app')
+@include('partials.navigationUser',['dashboard' => "nav-selected"])
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
