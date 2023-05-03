@@ -1,8 +1,6 @@
 <head>
-    
-    <title>Company | Adv. Freight</title>
-
-    <style>
+<title>Company | Adv. Freight</title>
+<style>
         table {
     border-collapse: collapse;
     border-color: transparent !important;
@@ -16,11 +14,9 @@
     border: 1px solid black;
     
   }
-    </style>
+</style>
 
 </head>
-
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
