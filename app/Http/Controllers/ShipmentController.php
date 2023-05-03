@@ -40,7 +40,7 @@ class ShipmentController extends Controller
             } elseif ($ship->status === 'Processing') {
                 $order_history_item->isProcessed = true;
                 $order_history_item->isProcessedTime = $time;
-            } elseif ($ship->status === 'PickUp') {
+            } elseif ($ship->status === 'PickedUp') {
                 $order_history_item->isPickUp = true;
                 $order_history_item->isPickUpTime = $time;
             } elseif ($ship->status === 'Assort') {
@@ -256,7 +256,6 @@ class ShipmentController extends Controller
     function addBid(Request $request){
         $data = [
             'company_id' => $request->company_id,
-            'company_name' => $request->company_name,
             'shipment_id' => $request->shipment_id,
             'bid_amount' => $request->bid_amount,
             'status' => 'Pending',
@@ -286,7 +285,6 @@ class ShipmentController extends Controller
             // Add the bid data
             $data = [
                 'company_id' => $company_id_staff,
-                'company_name' => $company_name,
                 'shipment_id' => $request->shipment_id,
                 'bid_amount' => $request->bid_amount,
                 'status' => 'Pending',
@@ -306,7 +304,6 @@ class ShipmentController extends Controller
         $bid->save();
 
         $shipment->bid_amount = $bid->bid_amount;
-        $shipment->company_bid = $bid->company_name;
         $shipment->company_id = $bid->company_id;
         $shipment->status = 'Processing';
         $shipment->save();

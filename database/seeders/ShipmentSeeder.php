@@ -72,11 +72,9 @@ class ShipmentSeeder extends Seeder
             'status' => 'Pending',
         ];
         $shipmentModel = new Shipment();
-        $shipment = $shipmentModel->create($shipmentData);
+        $shipmentModel->create($shipmentData);
 
         // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
         $sender->save();
         $recipient->save();
     }
