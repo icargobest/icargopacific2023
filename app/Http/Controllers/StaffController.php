@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,9 @@ class StaffController extends Controller
 
     public function index()
     {
-        $user_id = Auth::id();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
         $staff = $this->staff->with('user')->where('company_id', $user_id)->get();
         return view('company.staff.index', compact('staff'));
     }
@@ -31,8 +34,10 @@ class StaffController extends Controller
 
     public function viewArchive()
     {
-        $user_id = Auth::id();
-        $staff = $this->staff->where('company_id', $user_id)->get();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
+        $staff = $this->staff->with('user')->where('company_id', $user_id)->get();
         return view('company.staff.view_archive', compact('staff'));
     }
     
@@ -60,11 +65,15 @@ class StaffController extends Controller
             'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
             'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
-    
+        
+            $id = Auth::id();
+            $company = Company::where('user_id', $id)->first();
+            $user_id = $company->id;
+
         $staff = Staff::create([
             'contact_no' =>  $otherValidation['contact_no'],
             'user_id' => $user->id,
-            'company_id' => Auth::id(),
+            'company_id' => $user_id,
         ]);
             DB::commit();
         } catch (Exception $ex) {
