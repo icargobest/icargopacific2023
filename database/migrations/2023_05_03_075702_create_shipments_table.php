@@ -16,6 +16,8 @@ return new class extends Migration
     {
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id')->nullable();
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('sender_name');
             $table->string('sender_mobile');
             $table->string('sender_tel')->nullable()->default;
@@ -28,6 +30,8 @@ return new class extends Migration
         });
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id')->nullable();
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('recipient_name');
             $table->string('recipient_mobile');
             $table->string('recipient_tel')->nullable()->default;
