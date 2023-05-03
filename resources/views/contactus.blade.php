@@ -3,7 +3,7 @@
 <section style="padding:100px 0px;" id="contactUS">
     <div class="container" >
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="backgroud-color: white; ">
+            <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="background-color: white; ">
                 <div>
                     <div class="h3" style="font-weight: bold; letter-spacing: 2px;">Contact Us</div>
                     <div class="pb-3 blue text-center ps-lg-5 pe-lg-5 mb-2" style="letter-spacing: 1px">Feel free to contact us anytime. We will get back to you as soon as we can!</div>
@@ -41,7 +41,7 @@
 
                         <div class="row d-flex justify-content-center">
                             <div class="col-4">
-                                <button class="login-button fw-bold" style="font-size:15px; letter-spacing:1px; padding:5px; border-radius:10px">Submit</button>
+                                <button class="login-button fw-bold" style="background-color: #F9CD1A; font-size:15px; letter-spacing:1px; padding:5px; border-radius:10px">Submit</button>
                             </div>
                         </div>
                         
