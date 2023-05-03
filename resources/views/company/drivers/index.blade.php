@@ -38,7 +38,7 @@
         </section>
 
         <div class="mt-2">
-            @include('partials.messages')
+            @include('flash-message')
         </div>
 
 
