@@ -5,9 +5,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
-use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +18,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
-use App\Models\OrderTrackingLog;
 
 
 
@@ -200,6 +196,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
        Route::controller(ShipmentController::class)->group(function(){
          Route::get('/staff/order','staffIndex')->name('staff.order');
          Route::get('/staff/freight','freightStaff')->name('freightStaff');
+         Route::get('/staff/advfreight','staff_advFreightPanel')->name('staff.advFreightPanel');
          Route::get('/staff/view_shipment/{id}','viewOrder_Staff')->name('viewOrder_Staff');
          Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
          Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
@@ -207,6 +204,26 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
          Route::put('/staff/transfer/{id}','transfer')->name('transfer.staff');
          Route::get('/staff/waybill/{id}','viewWaybillStaff')->name('staff.generateWaybill');
      });
+
+     //DRIVER
+    Route::resource('staff/driver', DriverController::class);
+    Route::controller(DriverController::class)->group(function(){
+        Route::get('/staff/driver','staffIndex')->name('driver.index');;
+        Route::get('/driver/delete/{id}', 'destroy')->name('drivers.delete');
+        Route::get('archived-driver', 'staffviewArchive')->name('driver.viewArchive');
+        Route::put('/driver/archive/{id}', 'archive')->name('driver.archive');
+        Route::put('/driver/unarchive/{id}','unarchive')->name('driver.unarchive');
+    });
+
+    //DISPATCHER
+    Route::resource('staff/dispatchers', DispatcherController::class);
+    Route::controller(DispatcherController::class)->group(function(){
+        Route::get('/staff/dispatcher','staffIndex')->name('dispatchers.index');;
+        Route::get('/dispatchers/delete/{id}', 'destroy')->name('dispatchers.delete');
+        Route::get('archived-dispatchers', 'staffviewArchive')->name('dispatchers.viewArchive');
+        Route::put('/dispatchers/archive/{id}', 'archive')->name('dispatchers.archive');
+        Route::put('/dispatchers/unarchive/{id}','unarchive')->name('dispatchers.unarchive');
+    });
 
 });
 
