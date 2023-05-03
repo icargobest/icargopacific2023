@@ -4,135 +4,198 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-.mainDashboardContainer{
-    height: 2000px;
+.mainContainer{
     width: 100%;
-    padding: 20px 50px;
+    padding: 15px 15px;
 }
-
-.dashboardTitle{
-    font-size: 30px;
-    color: #214D94;
-    letter-spacing: 3px;
-    font-weight: bolder;
-    
-}
-
-.shippingStatus{
-    margin-top: 40px;
-    box-shadow: 2px 2px 5px #838383;
+.DashboardContainer{
     border-radius: 5px;
+    box-shadow: 2px 2px 5px #838383;
+    border: 1px #d6d6d6 solid;
     background-color: #ffffff;
-    padding: 20px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 2px solid red;
+    width: 100%;
+    padding: 10px 5px;
+}
+
+.dashboardTitle, .title
+{
+margin-bottom: 20px;
+letter-spacing: 3px;
+color: #214D94;
+font-size: 15px;
+font-weight: bolder;
+}
+.shippingStatus
+{
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+border-radius: 5px;
+padding: 10px 5px;
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
 }
 
 .title{
-    font-weight: bolder;
-    letter-spacing: 3px;
-    font-size: 25px;
-    color: #214D94;
-    margin-bottom: 20px;
+font-style:14px !important;
+margin-bottom: 0px !important;
 }
 
 .cardContainer{
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    height: 85%;
-    
+    padding:5px;
+    overflow: auto;
 }
 
-.cards{
-    margin-right: auto;
-    margin: 10px 0px;
-    border-radius: 5px;
-    height: 30%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    padding: 15px 15px;
-    justify-content: space-between;
+.cards
+{
+min-width: 250px;
+width: 100%;
+max-width:500px;
+margin-bottom: 20px;
+border-radius: 5px;
+display: flex;
+flex-direction: column;
+padding: 10px 10px;
 }
+.cardTitle
+{
 
-.cardTitle{
-    display: flex;
-    justify-content: end;
-    font-weight: bolder;
-    letter-spacing: 3px;
-    font-size: 20px;
-    color: #ffffff;
-
+display: flex;
+justify-content: end;
+font-weight: bolder;
+letter-spacing: 3px;
+font-size: 14px;
+color: #ffffff;
 }
 .cardIconCount{
     font-weight: bolder;
     letter-spacing: 3px;
-    font-size: 25px;
+    font-size: 16px;
     color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 .icon{
-    font-size: 40px;
+    font-size: 20px;
     color: #ffffff;
 }
+.graphContainer
+{
 
-.carousel-item{
-/*     border: 2px blue solid; */
-margin-top: 40px;
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
 }
-/* .graphContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top:  50px;
-    height: 35%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.chartAlign{
+    overflow-x: auto;
+    overflow-y: hidden;
 }
-.chart{
+.mainChart, .mainChart1{
+  
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: #ffffff;
-    box-shadow: 2px 2px 5px #838383;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    height: 45%;
-    width: 48%;
-    display: flex;
-    padding: 10px 10px;
-    padding-top: 30px;
-    
-} 
-*/
+    padding: 5px 5px;
+    width: 100%;
+    margin-bottom: 20px;
 
-/* .chartTitle{
+}
+.chart{
+    border-radius:5px;
+    border: 1px #d6d6d6 solid;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.chartTitle{
     font-weight: bolder;
     margin: auto;
-    font-size: 20px;
+    font-size: 15px;
     color: #214D94;
     margin-bottom: 20px;
+}
+
+@media screen and (min-width: 668px) 
+    {
+    .shippingStatus
+    {
+        margin-bottom: 30px;
+    }
+    .dashboardTitle, .title
+    {
+        font-size: 25px;
+    }
+    .title{
+        font-size: 20px;
+        color: #214D94;
+    }
+
+    .cardContainer
+    {
+        display: flex;
+        flex-direction: column;
+        overflow-x: auto;
+    }
+    .cardAlign
+    {
+      
     display: flex;
-    justify-content: left;
-}  */
+    flex-direction: row;
+    justify-content: space-between;
+    }
 
-svg
-{
-width:1800px !important;
-}
+    .cards
+    {
+    height: 160px;
+    margin-right: 0px;
+    margin: 10px 10px;
+    width: 32%;
+    min-width: 250px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    }
+    
+    .cardTitle
+    {
+        margin-bottom: 15px;
+        font-size: 25px;
 
-rect
-{
-    width: 100% !important;
-}
+    }
+    .cardIconCount
+    {
+        font-size: 30px;
+    }
+    .icon
+    {
+        font-size: 50px;
+    }
+    
+    .chartAlign
+    {   
+        width: 100%;
+        display: flex;
+        justify-content: row;
+        margin-bottom: 20px;
+    }
+    .mainChart, .mainChart1{
+        width: 50%;
+        
+    }
+    .mainChart1{
+        margin-right: 50px;
+    }
+    .chart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .chartTitle{
+        font-size: 25px;
+    }
 
-text
-{
-margin: 0px 20px !important;
+
+    
 }

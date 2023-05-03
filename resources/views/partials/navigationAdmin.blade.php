@@ -7,6 +7,11 @@
     <title>Dashboard</title>
 
     
+<<<<<<< HEAD:resources/views/partials/admin-nav.blade.php
+    {{-- dashboard css --}}
+    <link rel="stylesheet" type="text/css" href="{{url('css/admindashboard.css')}}">
+
+=======
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="/css/bootstrap.css">
         <!-- Font Awesome -->
@@ -19,6 +24,7 @@
 
 
     <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+>>>>>>> develop:resources/views/partials/navigationAdmin.blade.php
 
     <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
 

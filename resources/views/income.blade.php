@@ -17,96 +17,127 @@
 
 @section('content')
 <div class="content-container" style="margin-top: -30px !important;">
-    <div class="mainDashboardContainer">
-        <span class = "dashboardTitle">
-            Company Manager Dashboard  
-        </span>
-        <div class="shippingStatus">
-            <span class = "title">
-                <i class="fa fa-truck"></i>
-                Shipping Status
-            </span>
-            <div class="cardContainer">
-                <div style="background-color: #4966AB;" class="cards ">
-                    <span class="cardTitle">
-                        ACCEPTED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-handshake-o"></i></span>
-                        {{ $dashboard->accepted }}
-                    </div>
-                </div>
-                <div style="background-color: #284C8E;" class="cards">
-                    <span class="cardTitle">
-                        PICKED UP
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-cubes"></i></span>
-                        {{ $dashboard->pickedup }}
-                    </div>
-                </div>
-                <div style="background-color: #006979;" class="cards">
-                    <span class="cardTitle">
-                        RECEIVED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-check-square"></i></span>
-                        {{ $dashboard->received }}
-                    </div>
-                </div>
-                <div style="background-color: #2F4858;" class="cards">
-                    <span class="cardTitle">
-                        DISPATCHED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-truck"></i></span>
-                        {{ $dashboard->dispatched }}
-                    </div>
-                </div>
-                <div style="background-color: #7089D2;" class="cards">
-                    <span class="cardTitle">
-                        FORWARDED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-cube"></i></span>
-                        {{ $dashboard->forwarded }}
-                    </div>
-                </div>
-                <div style="background-color: #97AEFA;" class="cards">
-                    <span class="cardTitle">
-                        DELIVERED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-thumbs-up"></i> </i></span>
-                        {{ $dashboard->delivered }}
-                    </div>
-                </div>
-                <div style="background-color: #0083BB;" class="cards">
-                    <span class="cardTitle">
-                        CONFIRMED
-                    </span>
-                    <div class="cardIconCount">
-                        <span class="icon"><i class="fa fa-cart-arrow-down"></i></span>
-                        {{ $dashboard->confirmed }}
-                    </div>
+    <div class="mainContainer">
+        <div class="DashboardContainer">
+            <div class = "dashboardTitle">
+                Company Dashboard  
             </div>
-        </div>
- 
-        </div>
-        <div class="cots1 .active" style="height:450px; width:100%; padding:0px 10px">
-            <div id="carouselExampleIndicators" class="carousel slide" style="text-align:center; font-weight:bolder; font-size:20px;"data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                        <div class="div">
-                            <span class="chartTitle">Daily Income</span>
-                            <div id="daily_chart_div"></div>
+            <div class="shippingStatus">
+                <span class = "title">
+                    <i class="fa fa-truck"></i>
+                    Shipping Status
+                </span>
+                <div class="cardContainer">
+
+                    <div class="cardAlign">
+                        <div style="background-color: #4966AB;" class="cards ">
+                            <span class="cardTitle">
+                                ACCEPTED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-handshake-o"></i></span>
+                                {{ $dashboard->accepted }}
+                            </div>
                         </div>
+                        <div style="background-color: #284C8E;" class="cards">
+                            <span class="cardTitle">
+                                PICKED UP
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-cubes"></i></span>
+                                {{ $dashboard->pickedup }}
+                            </div>
+                        </div>
+                        <div style="background-color: #006979;" class="cards">
+                            <span class="cardTitle">
+                                RECEIVED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-check-square"></i></span>
+                                {{ $dashboard->received }}
+                            </div>
+                        </div>
+                    </div>   
+
+                    <div class="cardAlign">
+                        <div style="background-color: #2F4858;" class="cards">
+                            <span class="cardTitle">
+                                DISPATCHED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-truck"></i></span>
+                                {{ $dashboard->dispatched }}
+                            </div>
+                        </div>
+                        <div style="background-color: #7089D2;" class="cards">
+                            <span class="cardTitle">
+                                FORWARDED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-cube"></i></span>
+                                {{ $dashboard->forwarded }}
+                            </div>
+                        </div>
+                        <div style="background-color: #97AEFA;" class="cards">
+                            <span class="cardTitle">
+                                DELIVERED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-thumbs-up"></i> </i></span>
+                                {{ $dashboard->delivered }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cardAlign">
+                        <div style="background-color: #0083BB;" class="cards">
+                            <span class="cardTitle">
+                                CONFIRMED
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="icon"><i class="fa fa-cart-arrow-down"></i></span>
+                                {{ $dashboard->confirmed }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <marquee behavior="" direction="down"> --}}
+            <div class="graphContainer">
+                <div class="chartAlign">
+                    <div class="mainChart1">
+                        <div class="chart">
+                            <div id="daily_chart_div"></div>
+                        </div>  
+                        <span class="chartTitle">Daily Income</span>
+                    </div>
+                    <div class="mainChart">
+                        <div class="chart">
+                        <div id="weekly_chart_div"></div>
+                        </div> 
+                        <span class="chartTitle">Weekly Income</span>
+                    </div>
+                </div>
+                <div class="chartAlign">
+                    <div class="mainChart1">
+                        <div class="chart">
+                        <div id="monthly_chart_div"></div>
+                        </div> 
+                        <span class="chartTitle">Monthly Income</span>
+                    </div>
+                    <div class="mainChart">
+                        <div class="chart">
+                        <div id="yearly_chart_div"></div>
+                        </div> 
+                        <span class="chartTitle">Yearly Income</span>
+                    </div>
+                </div>
+                
+            </div>
+        {{-- </marquee> --}}
+        </div>  
+    </div>         
+</div>
 
                         <div class="div">
                             <span class="chartTitle">Daily Income</span>
@@ -157,7 +188,8 @@
             @endforeach
         ]);
         var options = {
-            title: 'Monthly Income',
+            width: 450,
+            // title: 'Monthly Income',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
@@ -181,7 +213,8 @@
         ]);
     
         var options = {
-            title: 'Weekly Income Chart',
+            width: 450,
+            // title: 'Weekly Income Chart',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
@@ -208,7 +241,8 @@
             ['2030', {{ $chartData[8][1] }}]
         ]);
         var options = {
-            title: 'Yearly Income',
+            width: 450,
+            // title: 'Yearly Income',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
@@ -231,7 +265,9 @@
             @endforeach
         ]);
         var options = {
-            title: 'Daily Income',
+            width: 450,
+            // height: 200,
+            // title: 'Daily Income',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
