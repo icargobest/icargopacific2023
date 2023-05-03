@@ -112,6 +112,25 @@ li
                             </form>
                 </ul>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                        <a href="{{ route('users.status.update', ['user_id' => auth()->user()->id, 'status_code' => 0]) }}" class="btn btn-danger">
+                            Confirm
+                        </a>
+                    </div>
+                  </div>
+                </div>
+            </div>
             @endguest
         </div>
     </div> 

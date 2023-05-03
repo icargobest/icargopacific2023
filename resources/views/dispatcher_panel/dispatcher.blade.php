@@ -425,4 +425,4 @@
 <style>
 
 </style>
-{{-- @include('partials.footer') --}}
+@include('partials.footer')

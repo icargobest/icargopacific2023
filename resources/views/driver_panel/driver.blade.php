@@ -124,6 +124,9 @@
                     <span id="result"></span>
                   </div>
 
+                  
+
+                  
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -477,7 +480,3 @@
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
 
-<style>
-
-</style>
-{{-- @include('partials.footer') --}}

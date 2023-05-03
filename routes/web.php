@@ -147,7 +147,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
     //DRIVER
     Route::resource('company/drivers', DriverController::class);
-    Route::controller(DriverController::class)->group(function(){
+    Route::controller(DriverController::class)->group(function() {
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
         Route::get('archived-drivers', 'viewArchive')->name('drivers.viewArchive');
         Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');

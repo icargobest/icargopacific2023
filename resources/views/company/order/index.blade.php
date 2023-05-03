@@ -47,7 +47,7 @@
                         <th>SIZE & WIDTH</th>
                         <th>MAXIMUM BID</th>
                         <th>STATUS</th>
-                        <th> </th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,15 +66,14 @@
                                 <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                 <td>{{$ship->min_bid_amount}}</td>
                                 <td>{{$ship->status}}</td>
-                                <td>
-
-                                    <span class="d-flex align-items-start">
+                                <td  >
+                                    {{-- <span class="d-flex align-items-start"> --}}
                                     <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                                         <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
                                         VIEW
                                         </button>
                                     </a>
-                                    </span>
+                                    {{-- </span> --}}
                                 </td>
                             </tr>
                             @endif

@@ -17,7 +17,6 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
@@ -29,12 +28,9 @@
             <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
 
 
-
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-</head>
-
 <div class="main-container">
 
 
@@ -59,7 +55,6 @@
                             <span>Order</span>
                         </div>
                         </a>
-
                     </div>
                     <div class="links">
                         <a class="nav-link" href="{{ url('/userpanel/orderHistory')}}">
