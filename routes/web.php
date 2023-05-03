@@ -49,7 +49,7 @@ use App\Models\OrderTrackingLog;
 
 
 Route::get('/', function () {
-    return view('/waybill/history');
+    return view('company/freight/transfers');
 });
 Route::get('/driver/history', function () {
     return view('driver_panel.deliverHistory');
