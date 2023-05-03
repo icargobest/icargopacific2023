@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class CompanyController extends Controller
+class CompaniesController extends Controller
 {
     private $company;
     function __construct()
@@ -18,11 +18,11 @@ class CompanyController extends Controller
     }
 
     public function index(){
-        return view('registerCompany');
+        return view('icargo_superadmin_panel.companies.index');
     }
 
     public function create(){
-        return view('registerCompany');
+        return view('icargo_superadmin_panel/companies/create');
     }
      // company registration
      public function store(CreateCompanyRequest $request)
@@ -43,13 +43,13 @@ class CompanyController extends Controller
             'company_address' => $request->company_address,
         ]);
             DB::commit();
-            auth()->login($user); // log in the user programmatically
+        
         } catch (Exception $ex) {
             DB::rollBack();
             throw $ex;
         }
 
-         return redirect()->route('company.dashboard') // redirect to the company dashboard page
-                         ->with('success', 'Registered successfully. You are now logged in.');
+         return redirect()->route('companies.index')
+                         ->with('success', 'Company account has been created successfully.');
      }
 }

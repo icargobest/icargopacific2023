@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@include('partials.navigationAdmin')
+@include('partials.navigationSuperAdmin')
 
 @section('content')
 <div class="container">
