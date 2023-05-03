@@ -1,0 +1,106 @@
+html{
+    scroll-behavior: smooth;
+}
+.borderRed{
+    border: 1px solid red;
+}
+.waybillForm-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.infoTitle{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+}
+.waybillForm-container i{
+    color: #F9CD1A;
+}
+.infoTitle span{
+    color: #214D94;
+}
+
+.reminder-wrapper ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.reminder-wrapper ul li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+ul .mandatory{
+    font-weight: bold;
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+}
+
+/* FORM  */
+
+.userInputs{
+    flex-direction: column;
+    gap: 20px;
+}
+
+.senderForm-wrapper{
+    background-color: #fff;
+}
+
+.senderForm-wrapper header,
+.receiverForm-wrapper header,
+.parcelForm-wrapper header{
+    padding: 10px 15px;
+    width: 100%;
+    background-color: #214D94;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.senderForm input{
+    border: 1px solid rgb(53, 53, 53,0.6) !important;
+}
+.required{
+    color: red;
+}
+.button-holder button{
+    background-color: #214D94;
+    width: 120px;
+}
+
+.parcelForm-wrapper select{
+    border: 1px solid rgb(53, 53, 53,0.6) !important;
+}
+.receiverButton-holder{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.imageInput input{
+    padding: 8px;
+    color: #214D94;
+    background-color: rgb(249, 205, 26,0.9) !important;
+    font-size: 13px;
+}
+.receiverForm-wrapper{
+    display: none !important;
+}
+.parcelForm-wrapper{
+    display: none !important;
+}
+
+/* DISPLAY TRIGGER */
+
+.displayItem{
+    display: block !important;
+}

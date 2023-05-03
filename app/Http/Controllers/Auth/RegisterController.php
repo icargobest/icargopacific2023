@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,11 +26,14 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Redirect the user to the login page after registration.
      *
-     * @var string
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function registered(Request $request, $user)
+    {
+        return redirect('login')->with('success','Registered successfully');
+    }
 
     /**
      * Create a new controller instance.
@@ -53,6 +57,14 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'name.required' => 'Name field is required.',
+            'password.required' => 'Password field is required.',
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+            'email.required' => 'Email field is required.',
+            'email.unique' => 'Email address must be unique within the organization',
+            'email.email' => 'Email field must be email address.'
         ]);
     }
 

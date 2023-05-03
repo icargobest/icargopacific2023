@@ -4,41 +4,26 @@ margin: 0px;
 padding: 0px;
 box-sizing: border-box;
 font-family: 'Poppins', sans-serif;
-
 }
 body
 {
 background: #EAEBEE;
-
 }
 
-.main-container
+body:-webkit-scrollbar {
+    display: none;
+}
+
+a
+{
+text-decoration: none !important;
+}
+
+/* Logo User and Dropdown Button Container */
+.header-container
 {
 display: flex;
-}
-
-.content-container
-{
-width: 100vw;
-padding-left: 50px;
-background: #EAEBEE;
-margin-top: 65px;
-z-index: 10;
-}
-
-.random-div
-{
-display: flex;
-flex-direction: column;
-}
-
-
-.logo-container 
-{
-height: 80px;
-width: 100vw;
-display: flex;
-align-items: center;
+justify-content: space-between;
 }
 .header-container
 {
@@ -52,53 +37,96 @@ background: #fff;
 display: flex;
 align-items: center;
 z-index: 10;
+/* border: 2px solid blue; */
+
 }
 
+.logo img
+{
+width: 220px;
+}
+
+.user-container
+{
+display: flex;
+height: 100%;
+align-items: center;
+justify-content: flex-end;
+margin-right: 10px;
+padding-bottom: 5px;;
+}
+
+
+
+.header-dropdown
+{   
+inset: 10px 0px auto auto !important;
+background-color: #fff !important;
+}
+
+
+.spanUser
+{
+display: none;
+color: #214D94;
+font-weight: bolder;
+margin: 0px 5px;
+font-size: 14.04px !important;
+}
+.spanUser2
+{
+display: block;
+padding: 10px;
+color: #353535;
+font-weight: bolder;
+text-transform: capitalize !important;
+}
+
+.userButton
+{
+    max-width: 100px !important;
+    width: 100px;
+    max-height: 23.04px !important;
+    border-radius:20px !important;
+    background: #F9CD1A;
+    color: #fff;
+    border: none !important;
+    margin: 0px !important;
+    font-size: 14.4px;
+}
+
+.dividerBlack, .dividerBlack1
+{
+    border-bottom: 1px solid #353535;
+    margin-top: 10px;
+    margin: auto;
+    width: 85%;
+}
+
+
+
+.header-dropdown i
+{
+
+margin-right: 10px;
+color: #F9C800;
+}
+
+
+/* Navigation Bar */
 .sidebar
 {
 padding-top: 10px;
 position: fixed;
-top: 67px;
+top: 69px;
 left: 0px;
 width: 50px;
 height: 100vh;
 background: #1d4586;
 overflow: hidden;
 transition:all 500ms ease-in-out;
+z-index: 10;
 }
-
-.sidebar:hover
-{
-width: 250px;
-}
-
-.sidebar .wrapper
-{
-width: 250px;
-height: 100%;
-}
-.sidebar .logo
-{
-
-padding: 20px 0px;
-background: #fff;
-margin-bottom: 20px;
-}
-
-.sidebar .logo span
-{
-width: 60px;
-text-align: center;
-display: block
-}
-
-.search-bar-container
-{
-display: flex;
-margin: 0px 5px;
-
-}
-
 
 .search-bar-container input
 {
@@ -138,17 +166,55 @@ border-top-right-radius: 0;
 border-bottom-right-radius: 0;
 }
 
+.sidebar:hover
+{
+width: 250px;
+}
+.sidebar .wrapper
+{
+width: 250px;
+height: 100%;
+}
+.sidebar .logo
+{
 
+padding: 20px 0px;
+background: #fff;
+margin-bottom: 20px;
+}
+
+.sidebar .logo span
+{
+width: 60px;
+text-align: center;
+display: block
+}
+.search-bar-container
+{
+display: flex;
+margin: 0px 5px;
+}
+
+
+.links-wrapper
+{
+height:80vh;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+}
 .links .link
 {
-margin: 8px 0px;
+/* margin: 8px 0px; */
 height: 20px;
-color:#888;
+color: #fff;;
 display: flex;
 align-items: center;
-padding: 0px 12px;
+padding: 12px 12px;
 transition:  all 300ms ease-in-out;
 }
+
 
 .links .link i
 {
@@ -156,15 +222,38 @@ display: inline-block;
 width: 22px;
 height: 22px;
 padding-top: 2px;
+padding-left: 8px;
+max-height: 14.4px !important;
+
 }
+
+.link-i-1
+{
+margin-bottom:4px;
+}
+
+.link-i-2
+{
+margin-bottom:2px;
+}
+
+.link-i-3 i
+{
+margin-bottom: 13px !important;
+}
+
+.link-i-4
+{
+margin-bottom: 8px;
+}
+
 
 .links .link span
 {
-display: inline-block;
-font-style: 17px;
-margin-left: 20px;
-white-space: nowrap; 
-display: inline-block; 
+    font-size: 12px;
+    margin-left: 20px;
+    white-space: nowrap; 
+    text-decoration: none;
 }
 
 .sidebar .divider
@@ -177,9 +266,34 @@ display: inline-block;
 .sidebar .divider2
 {
     border-bottom: 1px solid #d6d6d6;
-    margin-top: 10px;
     width: 100%;
 }
+
+
+.links .link
+{
+width: 250px !important;
+
+}
+
+
+.links a:hover span, .links a:active span
+{
+color: #1D4586;
+cursor: pointer;
+}
+
+.links a:hover .link, .links a:active .link
+{
+background:#EAEBEE
+}
+
+.links a:hover i, .links a:active i
+{ 
+color: #1D4586;
+}
+
+
 .links .link:hover
 {
 background:#EAEBEE ;
@@ -188,28 +302,133 @@ cursor: pointer;
 }
 
 
-.logo img
+.links .link i.arrow
 {
-width: 220px;
+transform: rotate(-180deg);
+min-height: 20px;
+padding: 0px !important;
 }
 
-
-
-.links-wrapper
+.bottom-nav
 {
-height: 75vh;
+position: fixed;
+bottom: 0;
+}
+
+.links a
+{
+color: #fff;
+}
+
+.none
+{
+display: none;
+}
+
+/* Holds Content Container*/
+.main-container
+{
 display: flex;
-flex-direction: column;
-justify-content: space-between;
+margin-top: 1px;
 }
 
 
+/* Contents */
+.content-container
+{
+width: 100vw;
+padding-left: 50px;
+margin-top: 67px;
+}
+
+
+.ml-30px
+{
+margin-left: 30px;
+}
+
+
+.nav-selected
+{
+    background:#EAEBEE ;
+    color: #1D4586 !important;
+    cursor: pointer;
+}
+
+.invalid-feedback
+{
+color:#dc3545 !important;
+}
+
+
+/* navFont */
+.navFont
+{
+font-size: 12px !important;
+}
+
+
+/* MODAL HEADER */
+.mbc1
+{
+background-color: #ffc107 !important;
+}
+
+.mbc2
+{
+background-color: #198754 !important;
+}
+
+.mbc3
+{
+background-color: #dc3545 !important;
+}
+.span-red
+{
+color: #dc3545 !important;
+font-weight: bolder;
+font-size: 21.1766px !important;
+}
+
+.span-green
+{
+color: #198754 !important;
+font-weight: bolder;
+font-size: 21.1766px !important;
+    
+}
+
+/* BOOOTSTRAP MANIPULATION */
+.alert-dismissible .btn-close 
+{
+top: 20 !important;
+right:10 !important;
+}
 
 
 @media screen and (min-width: 664px) {
+
+/* Logo User and Dropdown Button Container */
+
+.logo img
+{
+margin-left: 5px;
+}
+
+.spanUser
+{
+display: block;
+}
+.spanUser2
+{
+display: none;
+}
+
+/* NavigationBar/SideBar */
 .sidebar
 {
 width: 250px;
+/* display: none; */
 }
 
 .sidebar .divider2
@@ -218,6 +437,11 @@ width: 250px;
     margin-top: 30px;
     width: 100%;
 }
+
+.dividerBlack1
+{
+display: none;
+}
 .content-container
 {
 padding-left: 250px;
@@ -225,7 +449,7 @@ padding-left: 250px;
 
 .links .link
 {
-height: 40px;
+height: 30px;
 }
 
 .search-bar-container

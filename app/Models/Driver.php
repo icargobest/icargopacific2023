@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'company_id', 'vehicle_type', 'plate_no', 'license_number', 'contact_no'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withDefault();
+    }
+
 }

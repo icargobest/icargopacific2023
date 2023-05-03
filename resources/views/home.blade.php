@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('partials.navigationUser')
 
 @section('content')
 <div class="container">
@@ -13,8 +14,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    You are login as user role.
                 </div>
             </div>
         </div>
