@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\User;
 use App\Models\Dispatcher;
+use App\Models\Staff;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -21,18 +23,44 @@ class DispatcherController extends Controller
         $this->dispatcher = new Dispatcher;
     }
 
-    public function index(User $users)
+    public function index()
     {
-        $user_id = Auth::id();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
         $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
         return view('company/dispatcher.index', compact('dispatchers'));
     }
 
+    public function staffIndex()
+    {
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first();
+        if ($staff) {
+            $company_id = $staff->company_id;
+            $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
+        }
+        return view('staff_panel/dispatcher.index', compact('dispatchers'));
+    }
+
     function viewArchive(){
 
-        $user_id = Auth::id();
+        $id = Auth::id();
+        $company = Company::where('user_id', $id)->first();
+        $user_id = $company->id;
         $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
         return view('company/dispatcher.viewArchive', compact('dispatchers'));
+    }
+
+    function staffviewArchive(){
+
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first();
+        if ($staff) {
+            $company_id = $staff->company_id;
+            $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
+        }
+        return view('staff_panel/dispatcher.viewArchive', compact('dispatchers'));
     }
 
 
@@ -58,10 +86,22 @@ class DispatcherController extends Controller
                 'contact_no.required' => 'Contact field is required.',
                 'contact_no.max' => 'Contact number must be a min and max of 11 numbers'
             ]);
-        
+            
+            if(Auth::user()->type == 'staff'){
+                $id = Auth::id();
+                $staff = Staff::where('user_id', $id)->first();
+                $company_id = $staff->company_id;
+                $company = Company::where('id', $company_id)->first();
+                $user_id = $company->id;
+
+            }else{
+                $id = Auth::id();
+                $company = Company::where('user_id', $id)->first();
+                $user_id = $company->id;
+            }
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
-                'company_id' => Auth::id(),
+                'company_id' => $user_id,
                 'contact_no' =>  $otherValidation['contact_no'],
             ]);
           
@@ -72,7 +112,7 @@ class DispatcherController extends Controller
                 
           }
 
-        return redirect()->route('dispatcher.index')->with('success','Dispatcher has been created successfully.');
+        return back()->with('success','Dispatcher has been created successfully.');
     }
 
     public function show(User $users)

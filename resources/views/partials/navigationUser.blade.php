@@ -7,7 +7,7 @@
     <title>Document</title>
 
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
-            {{-- <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet"> --}}
+            <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
             <!--Bootstrap CSS-->
             <link rel="stylesheet" href="/css/bootstrap.css">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
