@@ -16,7 +16,7 @@
 
             @foreach ($shipments as $ship)
                 @if(Auth::user()->type == 'staff')
-                    @if($ship->company_id == $company_id)
+                    @if($ship->company_id == $company_id_staff)
                     {{-- CARD CREATED AFTER FILLING UP --}}
                         <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
                             <div class="item-card container px-4">
