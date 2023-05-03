@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Shipment;
 use App\Models\Bid;
+use App\Models\Company;
 use App\Models\Station;
 use App\Models\OrderHistory;
 use App\Models\Sender;
@@ -13,17 +14,12 @@ use App\Models\Recipient;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\View;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
 
 class ShipmentController extends Controller
 {
     private $shipment;
     private $bid;
-    private $staff;
 
     public function TrackOrderLog(){
         $order_history = OrderHistory::all();
@@ -185,7 +181,6 @@ class ShipmentController extends Controller
         $path = $request->file('photo')->storeAs('images', $fileName, 'public');
 
         $shipmentData = [
-            'station_id' => $request->station_id,
             'tracking_number' => fake()->isbn13(),
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
@@ -255,16 +250,18 @@ class ShipmentController extends Controller
         $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
         if ($staff) {
             $company_id = $staff->company_id; // Get the company_id from the staff record
-            $user = User::where('id', $company_id)->first();
-            if($user){
-                $company_name = $user->name;
-                $company_id = $user->id;
-                $company_email = $user->email; // Get the company_id from the
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
             }
         }
             // Add the bid data
             $data = [
-                'company_id' => $company_id,
+                'company_id' => $company_id_staff,
                 'company_name' => $company_name,
                 'shipment_id' => $request->shipment_id,
                 'bid_amount' => $request->bid_amount,
