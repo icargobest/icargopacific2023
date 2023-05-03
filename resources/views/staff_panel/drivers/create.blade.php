@@ -1,15 +1,15 @@
-<div class="modal top fade" id="addDriverModal" tabindex="-1" aria-labelledby="addDriverModal" aria-hidden="true">
+<div class="modal top fade" id="addDriversModal" tabindex="-1" aria-labelledby="addDriversModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addDriverModal">Add Driver</h5>
+        <h5 class="modal-title" id="addDriversModal">Add Driver</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     
       <div class="modal-divider"></div>
 
         <div class="modal-body">
-          <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('driver.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
