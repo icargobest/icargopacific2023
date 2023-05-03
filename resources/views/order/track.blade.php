@@ -3,7 +3,7 @@
         @extends('layouts.app')
         @extends('layouts.status')
         <link rel="stylesheet" href="./line-awesome.min.css">
-        <title>Customer | Tracking Order #{{$ship->id}}</title>
+        <title>Customer | Order Tracking #{{$ship->id}}</title>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @include('layouts.app')
@@ -26,7 +26,7 @@
     
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
         <div class="order-container container">
-                <h4 class="text-dark">TRACKING ORDER #{{$ship->id}}</h4>
+                <h4 class="text-dark">ORDER TRACKING #{{$ship->id}}</h4>
                 <div class="cards-holder">
                     <card class="item-card bg-white btn-wrapper p-4">
                         {{--START OF ORDER DETAILS--}}
@@ -139,18 +139,16 @@
                                 <div>
                                     <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;"> -->
                                     <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                                    <div class="text-center">
-                                        <a href="{{route('generate',$ship->id)}}" target="_blank">
-                                            <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                            Invoice
-                                            </button>
-                                        </a>
-                                        <a href="{{route('user.generateWaybill', $ship->id)}}">
-                                            <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                            Waybill
-                                            </button>
-                                        </a>
-                                    </div>
+                                    <a href="{{route('generate',$ship->id)}}" target="_blank">
+                                        <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                        Invoice
+                                        </button>
+                                    </a>
+                                    <a href="{{route('user.generateWaybill', $ship->id)}}">
+                                        <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                        Waybill
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -159,9 +157,32 @@
 
                         {{-- TRACKING ORDER START --}}
                         <div id="order-status-container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h3>Order Summary</h3>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10">
+                                    <!-- <h3>Order Summary</h3> -->
+                                    <h4 class="fw-bold border-0">DELIVERED</h4>
+                                    <div class="card mb-3" style="background-color: #66D066;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-2 d-flex justify-content-center">
+                                                    <span class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width:100px; height:100px;">
+                                                        <i class="bi bi-archive-fill fa-4x" style="color: #66D066;"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <h4 class="card-title border-0 fw-bold">YOUR PACKAGE HAS ARRIVED</h4>
+                                                    <p class="card-text">YYYY-MM-DD H:I:S</p>
+                                                    <p class="card-text">Location: </p>
+                                                </div>
+                                                <div class="col-xl-5 d-flex align-items-end">
+                                                    <ul>
+                                                        <li><p class="card-text mt-5">Company:</p></li>
+                                                        <li class="d-flex align-items-end"><h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @foreach($logs as $log)
                                         @if($ship->id == $log->order_id)
                                             @if($log->isDelivered == true)

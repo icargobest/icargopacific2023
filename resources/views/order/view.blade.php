@@ -127,7 +127,6 @@
                             </div>
                             <!-- Product Image -->
                             <div class="col-xl-3">
-                                
                                 <div>
                                     <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px;"> -->
                                     <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; " src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
@@ -141,7 +140,7 @@
                                             <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-danger  btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                            <button type="submit" class="btn btn-danger btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
                                                     Cancel Order
                                                 </button>
                                             </form>
