@@ -57,11 +57,8 @@
                             <tr>
                                 <td>{{$ship->id}}</td>
                                 <!-- Photo not showing -->
-                                <!-- <td style="width: 70px;">
-                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 img-sizew-25" style="min-width: 70px;" alt=""/>
-                                </td> -->
-                                <td style="width: 70px;">
-                                    <img class="card shadow-0 img-size w-25" style="min-width: 70px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""/>
+                                 <td style="width: 70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 img-size w-25" style="min-width: 70px;" />
                                 </td>
                                 <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
                                 <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
