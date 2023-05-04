@@ -291,8 +291,7 @@
                 <!-- !Dropdown Type menu-->
                 <div class="form-group col-4">
                     <div class="typeInput">
-                      <span>
-                        <label for="typeParcel">Type</label><span class="required">*</span>
+                      <span><label for="typeParcel">Type</label><span class="required">*</span>
                       </span>
                       <div class="form-outline">
                         <select class="form-control" id="typeParcel" name="order_type" required>
@@ -305,17 +304,16 @@
 
                 <!-- !Dropdown Type menu-->
                 <div class="form-group col-4">
-                    <div class="mopInput">
-                      <span>
-                        Mode of Payment<span class="required">*</span>
+                    <div class="paymentInput">
+                        <span><label for="mode_of_payment">Mode of Payment</label><span class="required">*</span>
                       </span>
                       <div class="form-outline">
-                        <select class="form-control" id="paymentParcel" name="mode_of_payment" required>
+                        <select class="form-control" name="mode_of_payment">
                             <option value="COD">Cash On Delivery(COD)</option>
                             <option value="Gcash Payment">Gcash Payment</option>
                             <option value="Credit/Debit Card">Credit/Debit Card</option>
                         </select>
-                        </div>
+                      </div>
                     </div>
                 </div>
               </div>
@@ -328,7 +326,7 @@
                       <label class="form-label" for="weightParcel">Weight</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="weightParcel" name="weight" class="form-control" required/>
+                      <input type="number" id="weightParcel" name="weight" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -338,7 +336,7 @@
                       <label class="form-label" for="lengthParcel">Length</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="lengthParcel" name="length" class="form-control" required/>
+                      <input type="number" id="lengthParcel" name="length" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -348,7 +346,7 @@
                       <label class="form-label" for="widthParcel">Width</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="widthParcel" name="width" class="form-control" required/>
+                      <input type="number" id="widthParcel" name="width" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -358,7 +356,7 @@
                       <label class="form-label" for="heightParcel">Height</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="heightParcel" name="height" class="form-control" required/>
+                      <input type="number" id="heightParcel" name="height" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -371,7 +369,8 @@
                   </span>
                   <div class="form-outline">
                     <select class="form-control" id="categoryParcel" name="category">
-                        <option value="Other">Other/s</option>
+                        <option value="Domestic">Domestic</option>
+                        <option value="International">International</option>
                     </select>
                   </div>
                 </div>
@@ -386,7 +385,7 @@
                     <label class="form-label" for="bidParcel">Maximum Bid</label><span class="required">*</span>
                   </span>
                   <div class="form-outline">
-                    <input type="text" id="bidParcel" name="amount" class="form-control" required/>
+                    <input type="number" id="bidParcel" name="amount" class="form-control" required/>
                   </div>
                 </div>
             </div>

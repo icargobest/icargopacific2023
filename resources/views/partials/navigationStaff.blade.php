@@ -85,13 +85,32 @@
                             </a>
                         </div>
                         <div class="links">
-
-                            <div class="link" >
-                                <i class="fa fa-forward link-i-1"></i>
-                                <span>Adv. Freight Forwarding</span>
-                            </div>
-
+                            <a class="nav-link" href="{{route('staff.advFreightPanel')}}">
+                                <div class="link" >
+                                    <i class="fa fa-forward link-i-1"></i>
+                                    <span>Adv. Freight Forwarding</span>
+                                </div>
+                            </a>
                         </div>
+
+                        <div class="links">
+                            <a class="nav-link" href="/staff/dispatcher">
+                                <div class="link" >
+                                    <i class="fa fa-id-card link-i-1"></i>
+                                    <span>Dispatcher</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="links">
+                            <a class="nav-link" href="/staff/driver">
+                                <div class="link">
+                                    <i class="fa fa-id-card-o link-i-1"></i>
+                                    <span>Driver</span>
+                                </div>
+                            </a>
+                        </div>
+
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
                                 <div class="link">

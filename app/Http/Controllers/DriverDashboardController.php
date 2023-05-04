@@ -11,6 +11,6 @@ class DriverDashboardController extends Controller
     public function index()
     {
         $dashboard = DB::table('dashboard')->first();
-        return view('driver\dashboard', compact('dashboard'));
+        return view('driver_panel.dashboard', compact('dashboard'));
     }
 }
