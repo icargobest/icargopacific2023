@@ -15,6 +15,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\Dispatcher;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class ShipmentController extends Controller
@@ -27,8 +28,15 @@ class ShipmentController extends Controller
         $shipment = Shipment::all();
 
         foreach ($shipment as $ship) {
-            $time = $ship->updated_at;
             $order_history_item = $order_history->where('order_id', $ship->id)->first();
+            $time = $ship->updated_at;
+
+            $datetime = Carbon::parse($time);
+
+            $philippine_time = $datetime->tz('Asia/Manila');
+
+            $formatted_datetime = $philippine_time->format('Y-m-d H:i:s');
+
 
             if (!$order_history_item) {
                 $order_history_item = new OrderHistory;
@@ -37,28 +45,28 @@ class ShipmentController extends Controller
 
             if ($ship->status === 'Pending') {
                 $order_history_item->isPending = true;
-                $order_history_item->isPendingTime = $time;
+                $order_history_item->isPendingTime = $formatted_datetime;
             } elseif ($ship->status === 'Processing') {
                 $order_history_item->isProcessed = true;
-                $order_history_item->isProcessedTime = $time;
+                $order_history_item->isProcessedTime = $formatted_datetime;
             } elseif ($ship->status === 'PickedUp') {
                 $order_history_item->isPickUp = true;
-                $order_history_item->isPickUpTime = $time;
+                $order_history_item->isPickUpTime = $formatted_datetime;
             } elseif ($ship->status === 'Assort') {
                 $order_history_item->isAssort = true;
-                $order_history_item->isAssortTime = $time;
+                $order_history_item->isAssortTime = $formatted_datetime;
             } elseif ($ship->status === 'Transferred') {
                 $order_history_item->isTransferred = true;
-                $order_history_item->isTransferredTime = $time;
+                $order_history_item->isTransferredTime = $formatted_datetime;
             } elseif ($ship->status === 'Arrived') {
                 $order_history_item->isArrived = true;
-                $order_history_item->isArrivedTime = $time;
+                $order_history_item->isArrivedTime = $formatted_datetime;
             } elseif ($ship->status === 'Dispatched') {
                 $order_history_item->isDispatched = true;
-                $order_history_item->isDispatchedTime = $time;
+                $order_history_item->isDispatchedTime = $formatted_datetime;
             } elseif ($ship->status === 'Delivered') {
                 $order_history_item->isDelivered = true;
-                $order_history_item->isDeliveredTime = $time;
+                $order_history_item->isDeliveredTime = $formatted_datetime;
             }
 
             $order_history_item->save();

@@ -7,6 +7,7 @@
   @include('layouts.app')
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
+@extends('partials.navigationCompany')
 
 
   <h4>Order #{{$ship->id}}</h4>

@@ -5,7 +5,6 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationCompany')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
@@ -104,7 +103,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Delivered</h5>
                                     <p class="card-text">Your order has been delivered.</p>
-                                    <p class="card-text">Date : {{$log->isDeliveredTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isDeliveredTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -113,7 +112,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: In Transit</h5>
                                     <p class="card-text">Your order is out for delivery.</p>
-                                    <p class="card-text">Date : {{$log->isDispatchedTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isDispatchedTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -122,7 +121,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Arrived at {{$ship->station_id}}</h5>
                                     <p class="card-text">Your order has been arrived at sorting facility.</p>
-                                    <p class="card-text">Date : {{$log->isArrivedTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isArrivedTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -132,7 +131,7 @@
                                     <h5 class="card-title">Order Status: Transferred</h5>
                                     <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
                                     <p class="card-text">Your order has already been transferred to another station.</p>
-                                    <p class="card-text">Date : {{$log->isTransferredTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isTransferredTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -141,7 +140,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Arrived at (current_station)</h5>
                                     <p class="card-text">Your order is already been picked up by our logistic Company.</p>
-                                    <p class="card-text">Date : {{$log->isAssortTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isAssortTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -150,7 +149,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Picked Up</h5>
                                     <p class="card-text">Your order is already been picked up by our logistic Company.</p>
-                                    <p class="card-text">Date : {{$log->isPickUpTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isPickUpTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -159,7 +158,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Processing</h5>
                                     <p class="card-text">Your order is currently being processed.</p>
-                                    <p class="card-text">Date : {{$log->isProcessedTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isProcessedTime))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -168,7 +167,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Order Status: Pending</h5>
                                     <p class="card-text">Your order is currently pending.</p>
-                                    <p class="card-text">Date : {{$log->isPendingTime}}</p>
+                                    <p class="card-text">Date : {{date('F d, Y h:i A', strtotime($log->isPendingTime))}}</p>
                                 </div>
                             </div>
                         @endif
