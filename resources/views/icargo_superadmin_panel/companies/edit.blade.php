@@ -1,17 +1,21 @@
 
-<button type="button" class="btn btn-warning btn-sm" data-mdb-toggle="modal" data-mdb-target="#showModal{{$company->id}}">
-    SHOW
- </button>
+<button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{$company->id}}">
+   EDIT
+</button>
 
- <div class="modal top fade" id="showModal{{$company->id}}" tabindex="-1" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-     <div class="modal-dialog ">
-       <div class="modal-content">
-         <div class="modal-header mbc1">
-           <h5 class="modal-title">VIEW Company</h5>
-           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-            <fieldset disabled>
+<div class="modal top fade" id="editModal{{$company->id}}" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header mbc2">
+          <h5 class="modal-title">EDIT COMPANY</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <p class="small text-muted">
+              <span class="fw-bold">Caution:</span> Changing company passwords without consent may violate privacy and compliance regulations. Consider sending a password reset email link instead. </p> 
+            <form method="POST" action="{{route('companies.update', $company->id)}}">
+              @csrf
+              @method('PUT')
               <div class="row mb-4">
                 <div class="input-group">
                     <span class="input-group-text">
@@ -103,14 +107,25 @@
                 </div>
             </div>
 
-            </fieldset>
-                 <div class="modal-footer">
-                    <a class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
-                        Back
-                    </a>
-                 </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
+           
+              <button type="button" class="btn btn-outline-primary btn-block" >
+                Send password reset link
+              </button>
+           
+            <hr>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-block" id="addModal2" data-mdb-dismiss="modal">
+                  Save changes
+                </button>
+                <a href="{{route('companies.index')}}" class="btn btn-secondary btn-block" data-mdb-dismiss="modal">
+                  Cancel
+                </a>
+              </div>
+                </div>
+            </form>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>

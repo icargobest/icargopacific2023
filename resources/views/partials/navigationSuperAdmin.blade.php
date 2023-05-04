@@ -55,7 +55,7 @@
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-plus"></i>
-                            <a class="nav-link" href=""><span>Companies</span></a>
+                            <a class="nav-link" href="{{route('companies.view')}}"><span>Companies</span></a>
                         </div>
                     </div>
                     <div class="links">

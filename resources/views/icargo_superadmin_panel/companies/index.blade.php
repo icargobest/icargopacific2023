@@ -11,74 +11,61 @@
 
         <div class="addemployee" style="" >
             @include('icargo_superadmin_panel.companies.create')
-            <a href="{{route('staff.viewArchive')}}">
-                <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
-                    Archived
-                 </button>
-            </a>
         </div>
 
-        <section class="search-filter-container">
+        <a href="{{ route('companies.viewArchive') }}">
+            <button type="button" class="btn btn-success btn-sm m-button2" style="height:32.8px">
+                Archived
+            </button>
+        </a>
 
+        <section class="search-filter-container">
             <div class="top-container1" style="max-width: 800px;">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
                 <div class="input-group rounded">
                     <input type="search" class="form-control rounded" placeholder="Search Company" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
-                      <i class="fas fa-search"></i>
+                        <i class="fas fa-search"></i>
                     </span>
                 </div>
-            </div>      
+            </div>
         </section>
 
         <div class="mt-2">
             @include('flash-message')
         </div>
 
-
         <div class="table-container">
             <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th scope="col"style="text-align:center;">#</th>
-                    <th scope="col"style="text-align:center;">Company Name</th>
-                    <th scope="col"style="text-align:center;">Email</th>
-                    <th scope="col"style="text-align:center;">Contact No</th>
-                    <th scope="col"style="text-align:center;">Address</th>
-                    <th scope="col"style="text-align:center; width:300px">Action</th>
-                </tr>
+                    <tr>
+                        <th scope="col" style="text-align:center;">#</th>
+                        <th scope="col" style="text-align:center;">Company Name</th>
+                        <th scope="col" style="text-align:center;">Email</th>
+                        <th scope="col" style="text-align:center;">Contact No</th>
+                        <th scope="col" style="text-align:center;">Address</th>
+                        <th scope="col" style="text-align:center; width:300px">Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($staff as $staff)
-                        @if ($staff->archived == 0)
-                            <tr>
-                                <td >{{$staff->id}}</td>
-                                <td class="capitalized">{{$staff->user->name}}</td>
-                                <td>{{$staff->user->email}}</td>
-                                <td>{{$staff->contact_no}}</td>
-                                <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
-                                    @include('company.staff.show')
-                                    @include('company.staff.edit')
-                                    @include('company.staff.archive')
-                                    @if($staff->user->status == 1)
-                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;height:29.75px !important;">
-                                        Lock
-                                    </a>
-                                    @else
-                                    <a href="{{ route('staff.status.update', ['user_id' => $staff->user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:80px !important;height:29.75px !important;">
-                                        unlock
-                                    </a>
-                                @endif
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach --}}
+                    @foreach ($companies as $company)
+                        <tr>
+                            <td>{{ $company->id }}</td>
+                            <td class="capitalized">{{ $company->user->name }}</td>
+                            <td>{{ $company->user->email }}</td>
+                            <td>{{ $company->contact_no }}</td>
+                            <td>{{ $company->company_address }}</td>
+                            <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
+                                @include('icargo_superadmin_panel.companies.show')
+                                @include('icargo_superadmin_panel.companies.edit')
+                                {{-- @include('icargo_superadmin_panel.companies.delete') --}}
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        
     </div>
 </main>
 
-@include('company.staff.create')
-@include('partials.footer')	
+@include('partials.footer')

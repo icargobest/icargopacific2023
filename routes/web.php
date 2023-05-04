@@ -34,17 +34,6 @@ use App\Http\Controllers\DriverDashboardController;
 */
 
 
-// LOGIN PAGE
-// Route::get('/', function () {
-//     return view('login/index');
-// });
-
-// // REGISTER ACCOUNT PAGE
-// Route::get('/register', function () {
-//     return view('login/register');
-// });
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -86,10 +75,6 @@ Route::get('/dispatcher/qr', function () {
 Route::get('/dispatcher/history', function () {
     return view('dispatcher_panel.dispatchHistory');
 });
-
-
-
-
 
 
 
@@ -201,7 +186,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
 // Super Admin Panel
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
-    Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
+    Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
     ->name('super.admin.dashboard');
 
       //Companies
