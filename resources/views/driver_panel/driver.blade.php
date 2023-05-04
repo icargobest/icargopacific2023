@@ -1,6 +1,9 @@
+<title>Driver | Qr Scanner</title>
+
 @extends('layouts.app')
 @extends('layouts.status')
-@include('partials.navigationDriver')
+@include('partials.navigationDriver',['qr' => "nav-selected"])
+
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
@@ -124,19 +127,22 @@
                     <span id="result"></span>
                   </div>
 
+                  
+
+                  
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="pickupModalLabel">Shipment Picked Up</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment has been picked up.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div>
@@ -148,13 +154,13 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="alreadyPickedModalLabel">Shipment Received by Dispatcher</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Waiting for dispatcher to dispatch the shipment.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -165,13 +171,13 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="successModalLabel">Shipment Success!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment Delivered Succesfully.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
                         </div>
                       </div>
                     </div>
@@ -182,13 +188,13 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="deliveredModalLabel">Shipment Success</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment Delivered.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATIS</button>
                         </div>
                       </div>
                     </div>
@@ -239,7 +245,7 @@
                     iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
                   var iframe = document.createElement('iframe');
-                  iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+                  iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + data.tracking_number + '</h1></div><div style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button></div></body></html>';
                   iframe.style.width = '100%';
                   iframe.style.height = '500px';
                   iframeContainer.appendChild(iframe);
@@ -477,125 +483,3 @@
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
 
-<style>
-  .result{
-    background-color: green;
-    color:#fff;
-    padding:20px;
-  }
-  .row{
-    display:flex;
-  }
-  #reader {
-    background: black;
-    width:300px;
-  }
-  .container button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-  }
-  a#reader__dashboard_section_swaplink {
-  background-color: blue; /* Green */
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-  }
-  span a{
-  display:none
-  }
-
-  #reader__camera_selection{
-    background: blueviolet;
-    color: aliceblue;
-  }
-  #reader__dashboard_section_csr span{
-    color:red
-  }
-
-  .tracking-status {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-item {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.status-time {
-  width: 120px;
-  font-size: 14px;
-  font-weight: bold;
-  margin-right: 10px;
-  text-align: right;
-}
-
-.status-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.status-desc {
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-.status-desc a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.status-item.delivered .status-title {
-  color: #28a745;
-}
-
-.status-item.in-transit .status-title {
-  color: #000000;
-}
-
-.status-item .status-title:before {
-  content: '';
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.status-item.delivered .status-title:before {
-  background-color: #28a745;
-}
-
-.status-item.in-transit .status-title:before {
-  background-color: #000000;
-}
-
-.status-item:not(:first-child) .status-time {
-  opacity: 0.5;
-}
-</style>
-{{-- @include('partials.footer') --}}

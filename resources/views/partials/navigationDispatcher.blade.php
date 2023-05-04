@@ -22,6 +22,8 @@
 
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
 
            {{--  ICONS --}}
             <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
@@ -48,17 +50,27 @@
 
                 <div class="links-wrapper">
                     <div class="link1">
+
                         <div class="links">
-                            <a class="nav-link">
-                                <div class="link">
+                            <a class="nav-link"href="/dispatcher/dashboard">
+                                <div class="link @if(isset($dashboard)){{$dashboard}}@endif">
+                                    <i class="fa fa-tachometer link-i-1" ></i>
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="links">
+                            <a class="nav-link" href="{{ url('/dispatcher/qr') }}">
+                                <div class="link @if(isset($qr)){{$qr}}@endif">
                                     <i class="fa fa-qrcode link-i-1" ></i>
                                     <span>Qr Scanner</span>
                                 </div>
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link">
-                                <div class="link">
+                            <a class="nav-link" href="/dispatcher/history">
+                                <div class="link @if(isset($history)){{$history}}@endif">
                                     <i class="fa fa-history link-i-1" ></i>
                                     <span>History</span>
                                 </div>
