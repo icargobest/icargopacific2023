@@ -4,8 +4,9 @@
     </head>
 
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    @include('layouts.app')
-    @include('partials.navigationCompany')
+    
+    @extends('layouts.app')
+    @include('partials.navigationCompany',['order' => "nav-selected"])
 
     <!-- MBD -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -40,7 +41,7 @@
                         <th>SIZE & WIDTH</th>
                         <th>MAXIMUM BID</th>
                         <th>STATUS</th>
-                        <th> </th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>

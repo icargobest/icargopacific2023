@@ -23,6 +23,7 @@
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
             {{-- ICONS --}}
@@ -62,23 +63,25 @@
                         </div>
                         <div class="links">
                             <a class="nav-link" href="{{route('company.order')}}">
-                            <div class="link">
+                            <div class="link @if(isset($order)){{$order}}@endif">
                                 <i class="fa fa-list link-i-1"></i>
-                                <span>Order  </span>
+                                <span>Order</span>
                             </div>
                             </a>
                         </div>
 
                         <div class="links">
-                            <div class="link">
+                            <a class="nav-link"  href="{{ url('/company/history/orderHistory') }}">
+                            <div class="link @if(isset($history)){{$history}}@endif">
                                 <i class="fa fa-history link-i-1"></i>
                                 <span>Order History</span>
                             </div>
+                            </a>
                           </div>
 
                         <div class="links">
                             <a class="nav-link" href="{{route('freightPanel')}}">
-                            <div class="link" >
+                            <div class="link  @if(isset($freight)){{$freight}}@endif" >
                                 <i class="fa fa-truck link-i-1"></i>
                                 <span>Freight</span>
                             </div>
@@ -87,7 +90,7 @@
 
                         <div class="links">
                             <a class="nav-link" href="{{route('company.advFreightPanel')}}">
-                                <div class="link">
+                                <div class="link @if(isset($advance)){{$advance}}@endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>
                                 </div>
@@ -107,7 +110,7 @@
                         </div>
 
                         <div id="toggle-icon" class="links" >
-                            <div class="link"style="display: flex;justify-content: space-between;">
+                            <div class="link "style="display: flex;justify-content: space-between;">
                                 <i class="fa fa-history link-i-1"><span>Employees</span></i>
                                 <i id="" class="bx bxs-chevron-down"></i>
                             </div>
@@ -123,7 +126,7 @@
 
                         <div id="toggle-div2" class="links none">
                         <a class="nav-link" href="/company/dispatcher">
-                            <div class="link" >
+                            <div class="link  @if(isset($dispatcher)){{$dispatcher}}@endif" >
                                 <i class="fa fa-id-card link-i-1 ml-30px"></i>
                                 <span>Dispatcher</span>
                             </div>
@@ -131,8 +134,8 @@
                         </div>
 
                         <div id="toggle-div3" class="links none">
-                            <a class="nav-link" href="/company/drivers">
-                                <div class="link">
+                            <a class="nav-link" href="/company/drivers ">
+                                <div class="link @if(isset($drivers)){{$drivers}}@endif">
                                     <i class="fa fa-id-card-o link-i-1 ml-30px"></i>
                                     <span>Driver</span>
                                 </div>
