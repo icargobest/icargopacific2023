@@ -39,7 +39,7 @@ class CompanyController extends Controller
             'password' => Hash::make($request->password),
             'type' => '2',
         ]);
-
+        $user->sendEmailVerificationNotification();
         $otherValidation = $request->validate([
             'contact_no' => ['required', 'min:11', 'max:11'],
             'contact_name' => ['required', 'string', 'max:255'],

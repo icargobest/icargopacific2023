@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Driver;
 use App\Models\Dispatcher;
+use App\Models\SubscriptionTrials;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,5 +44,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return new Attribute(
             get: fn ($value) =>  ["user", "super-admin", "company", "driver", "dispatcher", "staff"][$value],
         );
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(SubscriptionTrials::class);
+    }
+
+    public function subscribed()
+    {
+        return $this->subscription_trials && $this->subscription_trials->trial_ends_at->gt(now());
     }
 }

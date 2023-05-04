@@ -1,6 +1,7 @@
 @extends('layouts.app')
    
 @section('content')
+<br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -9,7 +10,7 @@
                 <div class="card-body">
    
                     <div class="alert alert-success">
-                        Subscription purchase successfully!
+                        Free trial activated successfully!
                     </div>
    
                 </div>

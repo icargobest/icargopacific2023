@@ -21,6 +21,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 
 
@@ -79,7 +80,7 @@ Route::middleware('auth')->group(function(){
 // User/Customer Panel
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
-    ->name('dashboard');
+    ->name('dashboard')->middleware('verified');
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
@@ -242,12 +243,17 @@ Route::get('/waybillForm', function () {
 
 // Plan Controller / Monthly Subscription Routes
 Route::middleware("auth")->group(function () {
-    Route::group(['prefix' => 'subscriptions'], function () {
+    Route::group(['prefix' => '/company/subscriptions'], function () {
     Route::get('/plans', [PlanController::class, 'index']);
-    Route::get('/plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-    Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+    Route::get('/plans/{plan}', [PlanController::class, 'show'])->name('plans.show');
+    Route::post('/subscription', [PlanController::class, 'subscription'])->name('subscription.create');
     });
 });
+
+Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
+Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
 
 /*Route::group(['middleware' => ['auth']], function() {
         /**

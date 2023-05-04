@@ -14,15 +14,15 @@ class CreateUsersSeeder extends Seeder
     public function run()
 {
     // Insert company records
-    $companies = [        [            'name' => 'Company',            'email' => 'company@gmail.com',            'password' => bcrypt('password'),        ],
-        [            'name' => 'Company2',            'email' => 'company2@gmail.com',            'password' => bcrypt('password'),        ],
-    ];
-    foreach ($companies as $company) {
-        DB::table('companies')->insert($company);
-    }
+    // $companies = [['name' => 'Company','email' => 'company@gmail.com','password' => bcrypt('password'),],
+    //     ['name' => 'Company2','email' => 'company2@gmail.com','password' => bcrypt('password'),],
+    // ];
+    // foreach ($companies as $company) {
+    //     DB::table('companies')->insert($company);
+    // } 
 
     // Retrieve the ID of the desired company
-    $company_id = DB::table('companies')->where('name', 'Company')->value('id');
+    // $company_id = DB::table('companies')->where('name', 'Company')->value('id');
 
     // Insert user records
     $users = [

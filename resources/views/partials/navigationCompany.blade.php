@@ -136,7 +136,7 @@
                         </div>
                         
                         <div class="links">
-                            <a class="nav-link" href="/company/stations">
+                            <a class="nav-link" href="/company/subscriptions/plans">
                                 <div class="link">
                                     <i class="fa fa-credit-card link-i-1" ></i>
                                     <span>Subscription</span>
