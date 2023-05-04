@@ -5,15 +5,13 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationCompany')
-
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
 
 
   <h4>Order #{{$ship->id}}</h4>
   <div>
-    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+    @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
         <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn btn-primary btn">
             Track Order
         </a>
@@ -74,7 +72,7 @@
                         <ul>
                             <li>Category | <span>{{$ship->category}}</span></li>
                             <li>Mode of Pament | <span>COD</span></li>
-                            @if($ship->company_bid != null && $ship->bid_amount != null)
+                            @if($ship->company_id != null && $ship->bid_amount != null)
                                 <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
                             @endif
                         </ul>
