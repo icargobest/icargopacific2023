@@ -1,5 +1,5 @@
     <head>
-        <title>Customer | Order Details #{{$ship->id}}</title>
+        <title>Customer | Order Details #{{ $ship->id }}</title>
     </head>
 
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
@@ -11,6 +11,7 @@
             background-color: white !important;
             color: black;
         }
+
         td {
             text-align: left;
             padding: 5px;
