@@ -21,7 +21,7 @@
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <div class="container mw-100">
         <div class="bg-white shadow" style="max-width: 100%;">
-            <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
+            <div class="waybill-head employee-header-container" style="background-color: #214D94;">
                 <h3 class="text-white mb-0">ORDER LIST</h3>
             </div>
             {{-- TABLE START--}}
