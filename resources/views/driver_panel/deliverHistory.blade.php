@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@include('partials.navigationDriver')
+@include('partials.navigationDriver',['history' => "nav-selected"])
+<title>Driver | History</title>
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">
@@ -35,7 +36,6 @@
                     <th scope="col">Photo</th>
                     <th scope="col">Pickup</th>
                     <th scope="col">Dropoff</th>
-                    <th scope="col">Parcel Item</th>
                     <th scope="col">Parcel Size&Width</th>
                     <th scope="col">Order Date</th>
                     <th scope="col">Delivered Date</th>
@@ -50,7 +50,6 @@
                                 <td><img src="/img/order_image.png" alt="item-image"></td>  
                                 <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                                 <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                                <td>TOOL</td>
                                 <td>17x30x41 | 97 kg</td>
                                 <td>August 02, 2023</td>
                                 <td>August 25, 2023</td>
@@ -65,7 +64,6 @@
                               <td><img src="/img/order_image.png" alt="item-image"></td>  
                               <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                               <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                              <td>TOOL</td>
                               <td>17x30x41 | 97 kg</td>
                               <td>August 02, 2023</td>
                               <td>August 25, 2023</td>
@@ -80,7 +78,6 @@
                             <td><img src="/img/order_image.png" alt="item-image"></td>  
                             <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                             <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>TOOL</td>
                             <td>17x30x41 | 97 kg</td>
                             <td>August 02, 2023</td>
                             <td>August 25, 2023</td>
@@ -95,7 +92,6 @@
                           <td><img src="/img/order_image.png" alt="item-image"></td>  
                           <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                           <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>TOOL</td>
                           <td>17x30x41 | 97 kg</td>
                           <td>August 02, 2023</td>
                           <td>August 25, 2023</td>
@@ -110,7 +106,6 @@
                         <td><img src="/img/order_image.png" alt="item-image"></td>  
                         <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                         <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>TOOL</td>
                         <td>17x30x41 | 97 kg</td>
                         <td>August 02, 2023</td>
                         <td>August 25, 2023</td>
@@ -125,7 +120,6 @@
                       <td><img src="/img/order_image.png" alt="item-image"></td>  
                       <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
                       <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>TOOL</td>
                       <td>17x30x41 | 97 kg</td>
                       <td>August 02, 2023</td>
                       <td>August 25, 2023</td>

@@ -1,19 +1,21 @@
+@extends('layouts.app')
+@include('partials.navigationCompany')
 
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Company | Orders</title>
+    <br>
+    @if($errors->any())
+    @foreach($errors->all() as $err)
+        <strong>{{$err}}</strong>
+    @endforeach
+    @endif
 </head>
-<br>
-@if($errors->any())
-@foreach($errors->all() as $err)
-    <strong>{{$err}}</strong>
-@endforeach
-@endif
 
 <button type="button" class="btn btn-dark btn-sm col-1" data-bs-toggle="modal" data-bs-target="#transferModal">Transfer</button>
 
 <!-- Modal -->
-<div class="modal top fade" id="transferModal" tabindex="-1" aria-labelledby="transferModal" aria-hidden="true">
+<div class="modal top fade" id="transferModal" tabindex="-1" aria-labelledby="transferModal" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,9 +31,9 @@
 
                 <div class="row mb-4">
                     <div class="col">
-                    <div class="form-outline">
-                        <label class="form-label" for="trackingNum">Tracking Number: {{$ship->tracking_number}} </label>
-                    </div>
+                        <div class="form-outline">
+                            <label class="form-label" for="trackingNum">Tracking Number: {{$ship->tracking_number}} </label>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -44,24 +46,27 @@
                         }
                         ?>
                     </select>
-                  </div>
+                </div>
 
               <div class="button-modal-container">
 
-                  <div class="rightmodal-button-container">
+                <div class="rightmodal-button-container">
 
-                      <button type="submit" class="btn btn-primary" data-mdb-dismiss="modal">
-                          Continue
-                      </button>
+                        <button type="submit" class="btn btn-primary" data-mdb-dismiss="modal">
+                            Continue
+                        </button>
 
-                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                          Back
-                      </button>
-                  </div>
-
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                            Back
+                        </button>
+                    </div>
+                </div>
             </form>
           </div>
-
       </div>
     </div>
   </div>
+
+@include('partials.footer')	
+
+

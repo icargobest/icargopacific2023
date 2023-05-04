@@ -5,9 +5,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
-use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +18,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
-use App\Models\OrderTrackingLog;
 
 
 
@@ -51,9 +47,50 @@ use App\Models\OrderTrackingLog;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/* Users Tab */
+Route::get('/userpanel/orderHistory', function () {
+    return view('userpanel.orderHistory');
+});
+
+/* Company Tab */
+
+Route::get('/company/history/orderHistory', function () {
+    return view('company.history.orderHistory');
+});
+
+
+Route::get('/company/freight/transfers', function () {
+    return view('company.freight.transfers');
+});
+
+
+/* Drivers Tab */
+Route::get('/driver/qr', function () {
+    return view('driver_panel.driver');
+});
+
+
 Route::get('/driver/history', function () {
     return view('driver_panel.deliverHistory');
 });
+
+/* Dispatcher Tab */
+Route::get('/dispatcher/qr', function () {
+    return view('dispatcher_panel.dispatcher');
+});
+
+
+Route::get('/dispatcher/history', function () {
+    return view('dispatcher_panel.dispatchHistory');
+});
+
+
+
+
+
+
 
 Auth::routes(['verify' => true]);
 
@@ -144,7 +181,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
     //DRIVER
     Route::resource('company/drivers', DriverController::class);
-    Route::controller(DriverController::class)->group(function(){
+    Route::controller(DriverController::class)->group(function() {
         Route::get('/drivers/delete/{id}', 'destroy')->name('drivers.delete');
         Route::get('archived-drivers', 'viewArchive')->name('drivers.viewArchive');
         Route::put('/drivers/archive/{id}', 'archive')->name('drivers.archive');
@@ -189,6 +226,11 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
     Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
     Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
+
+    Route::controller(ShipmentController::class)->group(function(){
+        Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
+        Route::get('/dispatcher/order_list/dispatch', 'toDispatch_view')->name('toDispatch_view');
+    });
 });
 
 // Staff Panel
@@ -200,6 +242,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
        Route::controller(ShipmentController::class)->group(function(){
          Route::get('/staff/order','staffIndex')->name('staff.order');
          Route::get('/staff/freight','freightStaff')->name('freightStaff');
+         Route::get('/staff/advfreight','staff_advFreightPanel')->name('staff.advFreightPanel');
          Route::get('/staff/view_shipment/{id}','viewOrder_Staff')->name('viewOrder_Staff');
          Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
          Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');

@@ -5,17 +5,15 @@
 @include('partials.navigationCompany',['dashboard' => "nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ asset('css/companydashboard.css') }}">
 
 @section('title', 'Monthly Income')
 @section('content')
 
-@section('title', 'Monthly Income')
-
-@section('content')
+<style>
+    
+</style>
 <div class="content-container" style="margin-top: -30px !important;">
     <div class="mainContainer">
         <div class="DashboardContainer">
@@ -35,16 +33,16 @@
                                 ACCEPTED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-handshake-o"></i></span>
+                                <span class="d-icon"><i class="fa fa-handshake-o"></i></span>
                                 {{ $dashboard->accepted }}
                             </div>
                         </div>
-                        <div style="background-color: #284C8E;" class="cards">
+                        <div style="background-color: #284C8E;" class="cardsM">
                             <span class="cardTitle">
                                 PICKED UP
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-cubes"></i></span>
+                                <span class="d-icon"><i class="fa fa-cubes"></i></span>
                                 {{ $dashboard->pickedup }}
                             </div>
                         </div>
@@ -53,7 +51,7 @@
                                 RECEIVED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-check-square"></i></span>
+                                <span class="d-icon"><i class="fa fa-check-square"></i></span>
                                 {{ $dashboard->received }}
                             </div>
                         </div>
@@ -65,16 +63,16 @@
                                 DISPATCHED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-truck"></i></span>
+                                <span class="d-icon"><i class="fa fa-truck"></i></span>
                                 {{ $dashboard->dispatched }}
                             </div>
                         </div>
-                        <div style="background-color: #7089D2;" class="cards">
+                        <div style="background-color: #7089D2;" class="cardsM">
                             <span class="cardTitle">
                                 FORWARDED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-cube"></i></span>
+                                <span class="d-icon"><i class="fa fa-cube"></i></span>
                                 {{ $dashboard->forwarded }}
                             </div>
                         </div>
@@ -83,7 +81,7 @@
                                 DELIVERED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-thumbs-up"></i> </i></span>
+                                <span class="d-icon"><i class="fa fa-thumbs-up"></i> </i></span>
                                 {{ $dashboard->delivered }}
                             </div>
                         </div>
@@ -95,46 +93,55 @@
                                 CONFIRMED
                             </span>
                             <div class="cardIconCount">
-                                <span class="icon"><i class="fa fa-cart-arrow-down"></i></span>
+                                <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
                                 {{ $dashboard->confirmed }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <marquee behavior="" direction="down"> --}}
+
             <div class="graphContainer">
-                <div class="chartAlign">
-                    <div class="mainChart1">
-                        <div class="chart">
-                            <div id="daily_chart_div"></div>
-                        </div>  
-                        <span class="chartTitle">Daily Income</span>
+                <div class="upContainer">
+                    <div class="chartTitle" >
+                        <i class="fa fa-bar-chart" style="margin-right: 5px;"></i>
+                        Income Static
                     </div>
-                    <div class="mainChart">
-                        <div class="chart">
-                        <div id="weekly_chart_div"></div>
-                        </div> 
-                        <span class="chartTitle">Weekly Income</span>
+                    <div class="dashButtons">
+                        <button class="dashboardBtns" id="btnDaily" onclick="opendaily();">D<span class="dashButtons2">ail</span>y</button>
+                        <button class="dashboardBtns" id="btnWeekly" onclick="openweekly();">W<span class="dashButtons2">eekl</span>y</button>
+                        <button class="dashboardBtns" id="btnMonthly" onclick="openmonthly();">M<span class="dashButtons2">onth</span>y</button>
+                        <button class="dashboardBtns" id="btnYearly" onclick="openyearly();">Y<span class="dashButtons2">earl</span>y</button>
                     </div>
                 </div>
-                <div class="chartAlign">
-                    <div class="mainChart1">
-                        <div class="chart">
-                        <div id="monthly_chart_div"></div>
-                        </div> 
-                        <span class="chartTitle">Monthly Income</span>
-                    </div>
-                    <div class="mainChart">
-                        <div class="chart">
-                        <div id="yearly_chart_div"></div>
-                        </div> 
-                        <span class="chartTitle">Yearly Income</span>
+                <div class="mainChartDaily" id="daily">
+                    <div class="chartType">Daily Income</div>
+                    <div class="chart">
+                        <div id="daily_chart_div"></div>
                     </div>
                 </div>
-                
+                <div class="mainChartWeekly" id="weekly">
+                    <div class="chartType">Weekly Income</div>
+                    <div class="chart">
+                    <div id="weekly_chart_div"></div>
+                    </div> 
+                </div>
+                <div class="mainChartMonthly" id="monthly">
+                    <div class="chartType">Monthly Income</div>
+                    <div class="chart">
+                    <div id="monthly_chart_div"></div>
+                    </div> 
+                </div>
+                <div class="mainChartYearly" id="yearly">
+                    <div class="chartType">Yearly Income</div>
+                    <div class="chart">
+                    <div id="yearly_chart_div"></div>
+                    </div> 
+                </div>
             </div>
-        {{-- </marquee> --}}
+
+            {{-- <marquee behavior="" direction="down"> --}}
+            {{-- </marquee> --}}
         </div>  
     </div>         
 </div>
@@ -150,7 +157,8 @@
             @endforeach
         ]);
         var options = {
-            width: 450,
+            width: 1500,
+            height: 500,
             // title: 'Monthly Income',
             curveType: 'function',
             legend: { position: 'bottom' }
@@ -175,7 +183,8 @@
         ]);
     
         var options = {
-            width: 450,
+            width: 1200,
+            height: 500,
             // title: 'Weekly Income Chart',
             curveType: 'function',
             legend: { position: 'bottom' }
@@ -203,7 +212,8 @@
             ['2030', {{ $chartData[8][1] }}]
         ]);
         var options = {
-            width: 450,
+            width: 1500,
+            height: 500,
             // title: 'Yearly Income',
             curveType: 'function',
             legend: { position: 'bottom' }
@@ -227,7 +237,8 @@
             @endforeach
         ]);
         var options = {
-            width: 450,
+            width: 1200,
+            height: 500,
             // height: 200,
             // title: 'Daily Income',
             curveType: 'function',
@@ -238,7 +249,84 @@
     }
 </script>
 
+<script>
+    let day = document.getElementById("daily");
+    let week = document.getElementById("weekly");
+    let month = document.getElementById("monthly");
+    let year = document.getElementById("yearly");
 
+    let btnd = document.getElementById("btnDaily");
+    let btnw = document.getElementById("btnWeekly");
+    let btnm = document.getElementById("btnMonthly");
+    let btny = document.getElementById("btnYearly");
+        
+    function opendaily(){
+        btnd.classList.add("btn-open");
+        day.classList.add("open-daily");
+        week.classList.add("close-weekly");
+        month.classList.add("close-monthly");
+        year.classList.add("close-yearly");
+
+        day.classList.remove("close-daily");
+        week.classList.remove("open-weekly");
+        month.classList.remove("open-monthly");
+        year.classList.remove("open-yearly");
+
+        btnd.classList.add("btn-open");
+        btnw.classList.remove("btn-open");
+        btnm.classList.remove("btn-open");
+        btny.classList.remove("btn-open");
+    }
+    function openweekly(){
+        week.classList.add("open-weekly");
+        day.classList.add("close-daily");
+        month.classList.add("close-monthly");
+        year.classList.add("close-yearly");
+
+        week.classList.remove("close-weekly");
+        day.classList.remove("open-daily");
+        month.classList.remove("open-monthly");
+        year.classList.remove("open-yearly");
+
+        btnd.classList.remove("btn-open");
+        btnw.classList.add("btn-open");
+        btnm.classList.remove("btn-open");
+        btny.classList.remove("btn-open");
+    }
+    function openmonthly(){
+        month.classList.add("open-monthly");
+        day.classList.add("close-daily");
+        week.classList.add("close-weekly");
+        year.classList.add("close-yearly");
+
+        month.classList.remove("close-monthly");
+        day.classList.remove("open-daily");
+        week.classList.remove("open-weekly");
+        year.classList.remove("open-yearly");
+
+        btnd.classList.remove("btn-open");
+        btnw.classList.remove("btn-open");
+        btnm.classList.add("btn-open");
+        btny.classList.remove("btn-open");
+    }
+    function openyearly(){
+        year.classList.add("open-yearly");
+        day.classList.add("close-daily");
+        week.classList.add("close-weekly");
+        month.classList.add("close-monthly");
+
+        year.classList.remove("close-yearly");
+        day.classList.remove("open-daily");
+        week.classList.remove("open-weekly");
+        month.classList.remove("open-monthly");
+
+        btnd.classList.remove("btn-open");
+        btnw.classList.remove("btn-open");
+        btnm.classList.remove("btn-open");
+        btny.classList.add("btn-open");
+    }
+    
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

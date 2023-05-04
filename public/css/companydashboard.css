@@ -27,7 +27,7 @@ font-weight: bolder;
 }
 .shippingStatus
 {
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ border: 1px #d6d6d6 solid;
 border-radius: 5px;
 padding: 10px 5px;
 display: flex;
@@ -45,7 +45,7 @@ margin-bottom: 0px !important;
     overflow: auto;
 }
 
-.cards
+.cards, .cardsM
 {
 min-width: 250px;
 width: 100%;
@@ -75,45 +75,86 @@ color: #ffffff;
     flex-direction: row;
     justify-content: space-between;
 }
-.icon{
+.d-icon{
     font-size: 20px;
     color: #ffffff;
 }
+
 .graphContainer
 {
-
-display: flex;
-flex-wrap: wrap;
-flex-direction: row;
-}
-.chartAlign{
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-.mainChart, .mainChart1{
-  
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 1px #d6d6d6 solid;
     background-color: #ffffff;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    padding: 5px 5px;
-    width: 100%;
-    margin-bottom: 20px;
+    padding: 10px 5px;
+}
 
-}
-.chart{
-    border-radius:5px;
-    border: 1px #d6d6d6 solid;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
 .chartTitle{
     font-weight: bolder;
     margin: auto;
-    font-size: 15px;
+    font-size: 18px;
     color: #214D94;
     margin-bottom: 20px;
+}
+
+.dashboardBtns{
+    background-color: #ffffff;
+    border: 1px solid #214D94;
+    border-radius: 6px;
+    color: #214D94;
+    text-decoration: none;
+    font-size: 16px;
+    min-width: 40px;
+    max-width: 80px;
+    max-height: 50px;
+    width: 20%;
+    margin: 0px 5px;
+    transition-duration: 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.dashboardBtns:hover {
+    background-color: #214D94;
+    color: white;
+}
+
+.dashButtons{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+.dashButtons2{
+    text-align: center;
+    visibility: hidden;
+}
+
+.mainChartYearly, .mainChartMonthly, .mainChartWeekly, .mainChartDaily
+{
+    border-radius:5px;
+    padding: 15px;  
+}
+
+.mainChartMonthly, .mainChartWeekly, .mainChartYearly{
+    display: none;
+}
+
+.chartType{
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+.chart{
+    border: 1px #d6d6d6 solid;
+    border-radius:5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+}
+svg{
+    margin-top: -20px !important;
 }
 
 @media screen and (min-width: 668px) 
@@ -142,19 +183,21 @@ flex-direction: row;
       
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    margin-bottom: 30px;
     }
 
-    .cards
+    .cards, .cardsM
     {
     height: 160px;
     margin-right: 0px;
-    margin: 10px 10px;
     width: 32%;
     min-width: 250px;
     display: flex;
-    justify-content: space-between;
     padding: 20px;
+    }
+    .cardsM{
+    margin-right: 30px;
+    margin-left: 30px;
     }
     
     .cardTitle
@@ -167,35 +210,59 @@ flex-direction: row;
     {
         font-size: 30px;
     }
-    .icon
+    .d-icon
     {
         font-size: 50px;
     }
-    
-    .chartAlign
-    {   
-        width: 100%;
-        display: flex;
-        justify-content: row;
-        margin-bottom: 20px;
-    }
-    .mainChart, .mainChart1{
-        width: 50%;
-        
-    }
-    .mainChart1{
-        margin-right: 50px;
-    }
-    .chart{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
+    .graphContainer
+    {
+        padding: 15px 10px;
     }
     .chartTitle{
-        font-size: 25px;
+        font-size: 20px;
+    }
+    .dashButtons2{
+        visibility: visible;
+    }
+    .dashButtons{
+        display: flex;
+        justify-content: end;
+    }
+    .dashboardBtns{
+        padding: 0px 5px;
+
     }
 
+}
 
-    
+
+.open-daily{
+    display: block;
+}
+.open-weekly{
+    display: block;
+}
+.open-monthly{
+    display: block;
+}
+.open-yearly{
+    display: block;
+}
+
+.close-daily{
+    display: none;
+}
+.close-weekly{
+    display: none;
+}
+.close-monthly{
+    display: none;
+}
+.close-yearly{
+    display: none;
+}
+
+.btn-open{
+    color: #ffffff;
+    background-color: #214D94;
 }

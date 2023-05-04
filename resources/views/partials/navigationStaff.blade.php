@@ -85,12 +85,12 @@
                             </a>
                         </div>
                         <div class="links">
-
-                            <div class="link" >
-                                <i class="fa fa-forward link-i-1"></i>
-                                <span>Adv. Freight Forwarding</span>
-                            </div>
-
+                            <a class="nav-link" href="{{route('staff.advFreightPanel')}}">
+                                <div class="link" >
+                                    <i class="fa fa-forward link-i-1"></i>
+                                    <span>Adv. Freight Forwarding</span>
+                                </div>
+                            </a>
                         </div>
 
                         <div class="links">

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
 
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
             <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
@@ -18,10 +17,10 @@
             <!-- MDB -->
             <link rel="stylesheet" href="/css/mdb.min.css" />
             <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
-
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
             {{-- USER CSS --}}
@@ -29,12 +28,9 @@
             <link rel="stylesheet" href="{{ asset('css/style_waybillForm.css') }}">
 
 
-
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-</head>
-
 <div class="main-container">
 
 
@@ -52,20 +48,28 @@
 
             <div class="links-wrapper">
                 <div class="link1">
+
+                    <div class="links">
+                        <a class="nav-link"href="{{route('dashboard')}}">
+                            <div class="link @if(isset($dashboard)){{$dashboard}}@endif">
+                                <i class="fa fa-tachometer link-i-1" ></i>
+                                <span>Dashboard</span>
+                            </div>
+                        </a>
+                    </div>
                     <div class="links">
                         <a class="nav-link" href="{{route('userOrderPanel')}}">
                         <div class="link @if(isset($order)){{$order}}@endif" >
                             <i class="bi bi-cart-plus-fill link-i-3"></i>
-                            <span>Order</span>
+                            <span class="link-i-span">Order</span>
                         </div>
                         </a>
-
                     </div>
                     <div class="links">
-                        <a class="nav-link" href="{{route('orderHistory')}}">
-                        <div class="link">
+                        <a class="nav-link" href="{{ url('/userpanel/orderHistory')}}">
+                        <div class="link @if(isset($history)){{$history}}@endif">
                             <i class="bi bi-cart-check-fill link-i-3"></i>
-                            <span>Order History </span>
+                            <span class="link-i-span">Order History </span>
                         </div>
                         </a>
                     </div>

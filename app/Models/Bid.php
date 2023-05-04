@@ -14,4 +14,10 @@ class Bid extends Model
     public function addBid($data){
         return $this->create($data);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'company_id');
+    }
+
 }
