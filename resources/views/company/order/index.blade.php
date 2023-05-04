@@ -4,12 +4,8 @@
     </head>
 
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    
     @extends('layouts.app')
     @include('partials.navigationCompany',['order' => "nav-selected"])
-
-    <!-- MBD -->
-    <link rel="stylesheet" href="/css/mdb.min.css" />
 
 	<style>
         th {
@@ -23,7 +19,7 @@
         }
     </style>
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-	<div class="container mw-100 px-lg-5">
+    <div class="container mw-100">
         <div class="bg-white shadow" style="max-width: 100%;">
             <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
                 <h3 class="text-white mb-0">ORDER LIST</h3>
@@ -64,12 +60,12 @@
                                 <td>{{$ship->min_bid_amount}}</td>
                                 <td>{{$ship->status}}</td>
                                 <td>
-                                    <!-- <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
+                                    <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                                         <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
                                         VIEW
                                         </button>
-                                    </a> -->
-                                    <span class="d-flex align-items-start">@include('company.order.view')</span>
+                                    </a>
+                                    {{--<span class="d-flex align-items-start">@include('company.order.view')</span>--}}
                                     
                                 </td>
                             </tr>

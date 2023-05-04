@@ -1,4 +1,6 @@
-@include('layouts.app')
+{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @extends('layouts.app')
+    @include('partials.navigationCompany',['order' => "nav-selected"])
 
 <!-- MDB -->
 <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -11,7 +13,7 @@
         object-fit: contain;
     }
     th {
-        background-color: white !important;
+        background-color: transparent !important;
         color: black;
         font-weight: normal;
     }
@@ -21,21 +23,22 @@
     }
 </style>
 
-{{-- ORDER CONTAINER RECONCEPTUALIZE --}}
+{{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
 <!-- Exp start -->
-<button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{$ship->id}}">
+<!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{$ship->id}}">
 VIEW
-</button>
+</button> -->
+
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <!-- tracking modal -->
-<div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" >
+<!-- <div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" > -->
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <!-- title -->
                 <h4 class="modal-title mb-0" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
                 <!-- close button -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             {{-- CARD CREATED AFTER FILLING UP --}}
             <!-- modal content -->
@@ -78,8 +81,8 @@ VIEW
                                         <input type="number" class="form-control typeahead btn-block w-100" placeholder="BID AMOUNT" id="form6Example3" id="bidAmount" name="bid_amount" required/>
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-warning mt-2" id="bidButton"> 
-                                        BID NOW
+                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton"> 
+                                        BID
                                     </button>
                                     </form>
                                     @endif
@@ -184,7 +187,7 @@ VIEW
             {{-- END OF CARD --}}
         </div>
     </div>
-</div>
+<!-- </div> -->
 <!-- Exp end -->
 {{-- END OF ORDER CONTAINER --}}
 
