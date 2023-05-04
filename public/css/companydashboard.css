@@ -126,7 +126,7 @@ color: #ffffff;
 }
 .dashButtons2{
     text-align: center;
-    visibility: hidden;
+    display: none;
 }
 
 .mainChartYearly, .mainChartMonthly, .mainChartWeekly, .mainChartDaily
@@ -222,7 +222,7 @@ svg{
         font-size: 20px;
     }
     .dashButtons2{
-        visibility: visible;
+        display: block;
     }
     .dashButtons{
         display: flex;
