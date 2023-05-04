@@ -146,6 +146,9 @@
     </div>         
 </div>
 
+
+
+</div>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawMonthlyChart);
