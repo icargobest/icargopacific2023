@@ -23,7 +23,7 @@ class CheckLock
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('warning', 'Your account has been locked, Please Contact Admin!');
+            return redirect()->route('login')->with('warning', 'Your Account is lock, Please Contact Admin!');
         }
         return $next($request);
     }

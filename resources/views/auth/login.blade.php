@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    svg{
+        width:  1.5rem;
+        height: 1.5rem;
+    }
+</style>
 <div class="vertical-center">
 <div class="container">
     <div class="row justify-content-center">

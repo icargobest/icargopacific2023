@@ -1,10 +1,11 @@
-@extends('layouts.app')
-@include('partials.navigationDriver',['history' => "nav-selected"])
-<title>Driver | History</title>
+<title>Dispatcher | History</title>
 
+@extends('layouts.app')
+@include('partials.navigationDispatcher', ['history' =>"nav-selected"])
+<title>Dispatcher | History</title>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="mt-4">
-      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">DELIVER HISTORY</h3>
+      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">DISPATCH HISTORY</h3>
     </div>
     <div class="main-wrapper" style=" max-width:">
 
@@ -39,6 +40,7 @@
                     <th scope="col">Parcel Size&Width</th>
                     <th scope="col">Order Date</th>
                     <th scope="col">Delivered Date</th>
+                    <th scope="col">Dispatched Driver</th>
                     <th scope="col">Status</th>
                 </tr>
                 </thead>
@@ -53,6 +55,7 @@
                                 <td>17x30x41 | 97 kg</td>
                                 <td>August 02, 2023</td>
                                 <td>August 25, 2023</td>
+                                <td>*DRIVER NAME</td>
                                 <td class="" style="overflow:auto;">                                
                                     <label class="status-deliveredv2">
                                         Delivered
@@ -67,6 +70,7 @@
                               <td>17x30x41 | 97 kg</td>
                               <td>August 02, 2023</td>
                               <td>August 25, 2023</td>
+                              <td>*DRIVER NAME</td>
                               <td class="" style="overflow:auto;">                                
                                     <label class="status-canceledv2">
                                         Canceled
@@ -81,6 +85,7 @@
                             <td>17x30x41 | 97 kg</td>
                             <td>August 02, 2023</td>
                             <td>August 25, 2023</td>
+                            <td>*DRIVER NAME</td>
                             <td class="" style="overflow:auto; ">                                
                                     <label class="status-canceledv2">
                                         Canceled
@@ -95,6 +100,7 @@
                           <td>17x30x41 | 97 kg</td>
                           <td>August 02, 2023</td>
                           <td>August 25, 2023</td>
+                          <td>*DRIVER NAME</td>
                           <td class="" style="overflow:auto; ">                                
                                   <label class="status-deliveredv2">
                                     Delivered
@@ -109,6 +115,7 @@
                         <td>17x30x41 | 97 kg</td>
                         <td>August 02, 2023</td>
                         <td>August 25, 2023</td>
+                        <td>*DRIVER NAME</td>
                         <td class="" style="overflow:auto; ">                                
                                 <label class="status-deliveredv2">
                                     Delivered
@@ -123,6 +130,7 @@
                       <td>17x30x41 | 97 kg</td>
                       <td>August 02, 2023</td>
                       <td>August 25, 2023</td>
+                      <td>*DRIVER NAME</td>
                       <td class="" style="overflow:auto; ">                                
                               <label class="status-deliveredv2">
                                 Delivered
