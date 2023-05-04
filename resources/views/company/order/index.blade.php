@@ -63,11 +63,13 @@
                                 <td>{{$ship->min_bid_amount}}</td>
                                 <td>{{$ship->status}}</td>
                                 <td>
-                                    <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
+                                    <!-- <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
                                         <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
                                         VIEW
                                         </button>
-                                    </a>
+                                    </a> -->
+                                    <span class="d-flex align-items-start">@include('company.order.view')</span>
+                                    
                                 </td>
                             </tr>
                             @endif
