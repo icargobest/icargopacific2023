@@ -36,9 +36,9 @@ VIEW
         <div class="modal-content">
             <div class="modal-header">
                 <!-- title -->
-                <h4 class="modal-title mb-0" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
+                <h4 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
                 <!-- close button -->
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             {{-- CARD CREATED AFTER FILLING UP --}}
             <!-- modal content -->
@@ -112,7 +112,7 @@ VIEW
                                         <td>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><hr class="opacity-75"></td>
+                                        <td class="px-5" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
@@ -130,7 +130,7 @@ VIEW
                                         <td>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><hr class="opacity-75"></td>
+                                        <td class="px-5" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
@@ -153,7 +153,7 @@ VIEW
                     </div>
                     
                     <!-- START ACCEPT BID TABLE -->
-                    <hr class="opacity-75">
+                    <hr class="px-5" class="opacity-75">
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
                             <thead>
