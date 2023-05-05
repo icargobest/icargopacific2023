@@ -32,7 +32,8 @@ VIEW
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <!-- tracking modal -->
 <!-- <div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" > -->
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="container">
+<div class="modal-dialog modal-dialog-centered modal-xxl">
         <div class="modal-content">
             <div class="modal-header">
                 <!-- title -->
@@ -42,12 +43,12 @@ VIEW
             </div>
             {{-- CARD CREATED AFTER FILLING UP --}}
             <!-- modal content -->
-            <div class="modal-body">
+            <div class="modal-body p-2">
                 <div class="container">
                     <!-- Column for Product Image and Product Info -->
                     <div class="row">
                         <!-- Product Image -->
-                        <div class="col-xl-6 ">
+                        <div class="col-xl-3">
                             <img class="card shadow-0 img-size w-100" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
                             <!-- <img class="card shadow-0 img-size w-100" src="{{asset($ship->photo)}}" alt=""> -->
                             <div class="d-flex justify-content-center">
@@ -92,7 +93,7 @@ VIEW
                         </div>
                         {{-- CARD CREATED AFTER FILLING UP --}}
                         <!-- Product Information -->
-                        <div class="col-xl-6">
+                        <div class="col-xl-9">
                             <div class="row">
                                 <!-- Table for Alignment of Product Info -->
                                 <table class="m-2" style="width:100%">
@@ -187,6 +188,7 @@ VIEW
             {{-- END OF CARD --}}
         </div>
     </div>
+</div>
 <!-- </div> -->
 <!-- Exp end -->
 {{-- END OF ORDER CONTAINER --}}
