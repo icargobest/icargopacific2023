@@ -60,8 +60,8 @@
                                         <td>{{$ship->sender->sender_email}}</td>
                                     </tr>
                                     </table>
-                                    </table>
                                 </div>
+                                <hr class="opacity-75 d-block d-lg-none">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
