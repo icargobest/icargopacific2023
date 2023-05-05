@@ -49,7 +49,7 @@ VIEW
                         <!-- Product Image -->
                         <div class="col-xl-6 ">
                             <img class="card shadow-0 img-size w-100" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                            <!-- <img class="card shadow-0 img-size" src="{{asset($ship->photo)}}" alt=""> -->
+                            <!-- <img class="card shadow-0 img-size w-100" src="{{asset($ship->photo)}}" alt=""> -->
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
                                     @if($ship->company_bid == null && $ship->bid_amount == null)
