@@ -16,6 +16,8 @@ return new class extends Migration
     {
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id')->nullable();
+            // $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('sender_name');
             $table->string('sender_mobile');
             $table->string('sender_tel')->nullable()->default;
@@ -29,6 +31,8 @@ return new class extends Migration
         });
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id')->nullable();
+            // $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('recipient_name');
             $table->string('recipient_mobile');
             $table->string('recipient_tel')->nullable()->default;
@@ -45,11 +49,11 @@ return new class extends Migration
             $table->string('station_id')->nullable()->default;
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
+            // $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
             $table->unsignedBigInteger('recipient_id');
-            $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
+            // $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
             $table->decimal('weight', 8, 2);
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2);
@@ -60,7 +64,8 @@ return new class extends Migration
             $table->unsignedBigInteger('min_bid_amount');
             $table->string('mode_of_payment')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
-            $table->string('company_bid')->nullable()->default;
+            $table->unsignedBigInteger('company_id')->nullable()->default;
+            // $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
@@ -92,9 +97,9 @@ return new class extends Migration
             $table->timestamps();
 
             // Define foreign key constraint for the order_id column
-            $table->foreign('order_id')
-                  ->references('id')->on('shipments')
-                  ->onDelete('cascade');
+            // $table->foreign('order_id')
+            //       ->references('id')->on('shipments')
+            //       ->onDelete('cascade');
         });
     }
 
@@ -108,7 +113,7 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('order_histories');
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');

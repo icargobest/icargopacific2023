@@ -13,6 +13,7 @@ use App\Models\Sender;
 use App\Models\Recipient;
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\Dispatcher;
 use Illuminate\Http\Request;
 
 
@@ -440,6 +441,52 @@ class ShipmentController extends Controller
         $data->save();
         $this->TrackOrderLog();
         return redirect()->back()->with('success', 'Transfer Success');
+    }
+
+    public function toPickUp_view(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        $user_id = Auth::id();
+        $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($dispatcher) {
+            $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->user_id;
+                $user = User::where('id', $company_id_dispatcher)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            }
+        }
+
+        $this->TrackOrderLog();
+
+        return view('dispatcher_panel.order.pickup', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient',]);
+    }
+
+    public function toDispatch_view(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+
+        $user_id = Auth::id();
+        $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($dispatcher) {
+            $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->user_id;
+                $user = User::where('id', $company_id_dispatcher)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            }
+        }
+
+        $this->TrackOrderLog();
+
+        return view('dispatcher_panel.order.dispatch', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
 }
