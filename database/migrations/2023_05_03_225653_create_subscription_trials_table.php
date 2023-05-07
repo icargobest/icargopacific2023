@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bids', function (Blueprint $table) {
+        Schema::create('subscription_trials', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
-            $table->string('company_name');
-            $table->unsignedBigInteger('shipment_id');
-            $table->unsignedBigInteger('bid_amount');
-            $table->string('status');
+            $table->foreignId('user_id');
+            $table->string('email');
+            $table->string('plan_id');
+            $table->string('subscription_id')->nullable();
+            $table->timestamp('trial_ends_at')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bids');
+        Schema::dropIfExists('subscription_trials');
     }
 };

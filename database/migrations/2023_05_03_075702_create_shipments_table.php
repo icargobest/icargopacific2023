@@ -16,8 +16,6 @@ return new class extends Migration
     {
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipment_id')->nullable();
-            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('sender_name');
             $table->string('sender_mobile');
             $table->string('sender_tel')->nullable()->default;
@@ -26,12 +24,11 @@ return new class extends Migration
             $table->string('sender_city');
             $table->string('sender_state');
             $table->string('sender_zip');
+            $table->unsignedBigInteger('shipment_id')->nullable()->default;
             $table->timestamps();
         });
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipment_id')->nullable();
-            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->string('recipient_name');
             $table->string('recipient_mobile');
             $table->string('recipient_tel')->nullable()->default;
@@ -40,6 +37,7 @@ return new class extends Migration
             $table->string('recipient_city');
             $table->string('recipient_state');
             $table->string('recipient_zip');
+            $table->unsignedBigInteger('shipment_id')->nullable()->default;
             $table->timestamps();
         });
         Schema::create('shipments', function (Blueprint $table) {
@@ -62,8 +60,7 @@ return new class extends Migration
             $table->unsignedBigInteger('min_bid_amount');
             $table->string('mode_of_payment')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
-            $table->unsignedBigInteger('company_id')->nullable()->default;
-            $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
+            $table->string('company_bid')->nullable()->default;
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;

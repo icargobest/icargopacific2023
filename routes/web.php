@@ -282,11 +282,12 @@ Route::middleware("auth")->group(function () {
     });
 });
 
+Route::middleware('auth')->group(function(){
 Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
 Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
 Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
 Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
-
+});
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes

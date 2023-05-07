@@ -28,6 +28,15 @@ class SubscriptionController extends Controller
     $user = Auth::user();
     Stripe::setApiKey(env('STRIPE_SECRET'));
     // Create a new Stripe customer
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'card_number' => 'required|string',
+        'expiry_month' => 'required|string',
+        'expiry_year' => 'required|string',
+        'cvc' => 'required|string',
+    ]);
+
     $customer = Customer::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -42,12 +51,14 @@ class SubscriptionController extends Controller
                 'price' => 'price_1N3Y3bA6dkExbPGE1cY1BHEo', // Replace with your actual price ID
             ],
         ],
+        
         'trial_end' => strtotime('+30 days'),
     ]);
 
     // Save the subscription details to the database
     $user == SubscriptionTrials::create([
-        'user_id' => $subscription->id,
+        'user_id' => $request->user_id,
+        'name' => $request->name,
         'email' => $request->email,
         'stripe_id' => $subscription->id,
         'trial_ends_at' => now()->addDays(30),

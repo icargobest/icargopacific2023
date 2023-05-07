@@ -30,7 +30,7 @@ class VerificationController extends Controller
     {
         $user = auth()->user();
         if ($user->type == 'company') {
-            return '/company/dashboard';
+            return '/company/subscriptions/plans';
         } else {
             return '/home';
         }

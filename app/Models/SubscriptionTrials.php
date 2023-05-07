@@ -15,4 +15,10 @@ class SubscriptionTrials extends Model
         'stripe_id',
         'trial_ends_at',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

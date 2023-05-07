@@ -256,6 +256,7 @@ class ShipmentController extends Controller
     function addBid(Request $request){
         $data = [
             'company_id' => $request->company_id,
+            'company_name' => $request->company_name,
             'shipment_id' => $request->shipment_id,
             'bid_amount' => $request->bid_amount,
             'status' => 'Pending',
