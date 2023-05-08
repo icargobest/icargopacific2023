@@ -19,7 +19,7 @@
             padding: 5px;
             color: #214D94;
         }
-            .status-green {
+        .status-green {
             color: #00bf9a;
         }
     </style>
@@ -139,10 +139,11 @@
                         
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
-                            <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;"> -->
-                            <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                            <a href="{{asset($ship->photo)}}" target="_blank">
+                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:cover; min-width:140px; max-width:509px; max-height: 509px; margin-left: auto; margin-right: auto;">
+                            </a>
                             <a href="{{route('generate',$ship->id)}}" target="_blank">
-                                <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1" style="background-color: #214D94; min-width:140px; max-width:509px;">
                                 Invoice
                                 </button>
                             </a>
@@ -150,6 +151,13 @@
                                 <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
                                 Waybill
                                 </button>
+                            </a>
+                            <a href="{{route('viewOrder', $ship->id)}}">
+                                <div class="my-1 d-flex justify-content-center">
+                                    <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
+                                    Back
+                                    </button>
+                                </div>
                             </a>
                         </div>
                     </div>

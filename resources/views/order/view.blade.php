@@ -132,8 +132,9 @@
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <div>
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;"> -->
-                                <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                                <a href="{{asset($ship->photo)}}" target="_blank">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:cover; min-width:140px; max-width:509px;  max-height:509px; margin-left: auto; margin-right: auto;">
+                                </a>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
                                         <a href="">
@@ -151,14 +152,22 @@
                                     @endif
                                 @endif
                                 @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
-                                <div class="pt-2">
+                                <div class="my-1">
                                     <a href="{{route('trackOrder',$ship->id)}}">
                                         <button type="button" class="btn btn-primary btn-block" style="min-width:140px; max-width:509px; background-color: #214D94;">
                                         Track Item</button>
                                     </a>
                                 </div>
                                 @endif
+                                <a href="{{route('userOrderPanel')}}">
+                                    <div class="my-1">
+                                        <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
+                                        BACK
+                                        </button>
+                                    </div>
+                                </a>
                             </div>
+                            
                         </div>
                     </div>
                     <hr class="opacity-75">
