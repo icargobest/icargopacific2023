@@ -1,3 +1,8 @@
+<head>
+        <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+        <title>Customer | Order Details #{{$ship->id}}</title>
+    </head>
+
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @extends('layouts.app')
     @include('partials.navigationCompany', ['order' => "nav-selected"])
@@ -32,17 +37,18 @@ VIEW
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <!-- tracking modal -->
 <!-- <div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" > -->
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="container">
+<div class="modal-dialog modal-dialog-centered modal-xxl">
         <div class="modal-content">
             <div class="modal-header">
                 <!-- title -->
-                <h4 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
+                <h3 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">Order Details #{{$ship->id}}</h3>
                 <!-- close button -->
                 <!-- <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             {{-- CARD CREATED AFTER FILLING UP --}}
             <!-- modal content -->
-            <div class="modal-body">
+            <div class="modal-body p-2">
                 <div class="container">
                     <!-- Column for Product Image and Product Info -->
                     <div class="row">
@@ -92,7 +98,7 @@ VIEW
                         </div>
                         {{-- CARD CREATED AFTER FILLING UP --}}
                         <!-- Product Information -->
-                        <div class="col-xl-6">
+                        <div class="col-xl-9">
                             <div class="row">
                                 <!-- Table for Alignment of Product Info -->
                                 <table class="m-2" style="width:100%">
@@ -187,6 +193,7 @@ VIEW
             {{-- END OF CARD --}}
         </div>
     </div>
+</div>
 <!-- </div> -->
 <!-- Exp end -->
 {{-- END OF ORDER CONTAINER --}}

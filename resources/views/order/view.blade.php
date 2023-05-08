@@ -53,8 +53,8 @@
                                         <td>{{$ship->sender->sender_email}}</td>
                                     </tr>
                                     </table>
-                                    </table>
                                 </div>
+                                <hr class="opacity-75 d-block d-lg-none">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
@@ -130,10 +130,10 @@
                             </div>
                         </div>
                         <!-- Product Image -->
-                        <div class="col-xl-3">
+                        <div class="col-xl-3 text-center">
                             <div>
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px;"> -->
-                                <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; " src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;"> -->
+                                <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
                                         <a href="">

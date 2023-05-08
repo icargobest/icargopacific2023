@@ -188,8 +188,8 @@
                                         <td>{{$ship->sender->sender_email}}</td>
                                     </tr>
                                     </table>
-                                    </table>
                                 </div>
+                                <hr class="opacity-75 d-block d-lg-none">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
@@ -266,115 +266,211 @@
                         </div>
 
                         <!-- Product Image -->
-                        <div class="col-xl-3">
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;"> -->
-                                <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                                <a href="{{route('generate',$ship->id)}}" target="_blank">
-                                    <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                    Invoice
-                                    </button>
-                                </a>
-                                <a href="{{route('user.generateWaybill', $ship->id)}}">
-                                    <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                    Waybill
-                                    </button>
-                                </a>
+                        <div class="col-xl-3 text-center">
+                            <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;"> -->
+                            <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                            <a href="{{route('generate',$ship->id)}}" target="_blank">
+                                <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                Invoice
+                                </button>
+                            </a>
+                            <a href="{{route('user.generateWaybill', $ship->id)}}">
+                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                Waybill
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <hr class="opacity-75">
                     {{--END OF ORDER DETAILS--}}
 
-                        {{-- TRACKING ORDER START --}}
-                        <div id="order-status-container">
-                            <div class="row justify-content-center">
-                                <div class="col-md-10">
-                                    <!-- <h3>Order Summary</h3> -->
-                                    <h4 class="fw-bold border-0">DELIVERED</h4>
-                                    <div class="card mb-3" style="background-color: #66D066;">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-2 d-flex justify-content-center">
-                                                    <span class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width:100px; height:100px;">
-                                                        <i class="bi bi-archive-fill fa-4x" style="color: #66D066;"></i>
-                                                    </span>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <h4 class="card-title border-0 fw-bold">YOUR PACKAGE HAS ARRIVED</h4>
-                                                    <p class="card-text">YYYY-MM-DD H:I:S</p>
-                                                    <p class="card-text">Location: </p>
-                                                </div>
-                                                <div class="col-xl-5 d-flex align-items-end">
-                                                    <ul>
-                                                        <li><p class="card-text mt-5">Company:</p></li>
-                                                        <li class="d-flex align-items-end"><h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5></li>
-                                                    </ul>
+                    {{-- TRACKING ORDER START --}}
+                    <div id="order-status-container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10">
+                                <!-- <h3>Order Summary</h3> -->
+                                @foreach($logs as $log)
+                                    @if($ship->id == $log->order_id)
+                                        @if($log->isDelivered == true)
+                                            <h4 class="fw-bold border-0">DELIVERED</h4>
+                                            <div class="card mb-3" style="background-color: #66D066;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="bi bi-archive-fill fa-3x" style="color: #66D066;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN DELIVERED</h5>
+                                                            <p class="card-text mb-0">{{$log->isDeliveredTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @foreach($logs as $log)
-                                        @if($ship->id == $log->order_id)
-                                            @if($log->isDelivered == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Delivered</h5>
-                                                        <p class="card-text">Your order has been delivered.</p>
-                                                        <p class="card-text">Date : {{$log->isDeliveredTime}}</p>
+                                        @endif
+                                        @if($log->isDispatched == true)
+                                            <h4 class="fw-bold border-0">IN TRANSIT</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="fa fa-truck fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT FOR DELIVERY</h5>
+                                                            <p class="card-text mb-0">{{$log->isDispatchedTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isDispatched == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: In Transit</h5>
-                                                        <p class="card-text">Your order is out for delivery.</p>
-                                                        <p class="card-text">Date : {{$log->isDispatchedTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isArrived == true)
+                                            <h4 class="fw-bold border-0">ARRIVED AT {{$ship->station_id}}</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="fa fa-sort fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ARRIVED AT SORTING FACILITY</h5>
+                                                            <p class="card-text mb-0">{{$log->isArrivedTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isArrived == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Arrived at {{$ship->station_id}}</h5>
-                                                        <p class="card-text">Your order has been arrived at sorting facility.</p>
-                                                        <p class="card-text">Date : {{$log->isArrivedTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isTransferred == true)
+                                            <h4 class="fw-bold border-0">TRANSFERRED TO STATION: {{$ship->station_id}}</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="fa fa-scanner-gun fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
+                                                            <p class="card-text mb-0">{{$log->isTransferredTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isTransferred == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Transferred</h5>
-                                                        <h5 class="card-text">Transferred to Station: {{$ship->station_id}}</h5>
-                                                        <p class="card-text">Your order has already been transferred to another station.</p>
-                                                        <p class="card-text">Date : {{$log->isTransferredTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isAssort == true)
+                                            <h4 class="fw-bold border-0">ARRIVED AT (current_station)</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
+                                                            <p class="card-text mb-0">{{$log->isAssortTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isAssort == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Arrived at (current_station)</h5>
-                                                        <p class="card-text">Your order is already been picked up by our logistic Company.</p>
-                                                        <p class="card-text">Date : {{$log->isAssortTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isPickUp == true)
+                                            <h4 class="fw-bold border-0">PICKED UP</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="bi bi-archive-fill fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
+                                                            <p class="card-text mb-0">{{$log->isPickUpTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isPickUp == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Picked Up</h5>
-                                                        <p class="card-text">Your order is already been picked up by our logistic Company.</p>
-                                                        <p class="card-text">Date : {{$log->isPickUpTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isProcessed == true)
+                                            <h4 class="fw-bold border-0">PROCESSING</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY BEING PROCESSED</h5>
+                                                            <p class="card-text mb-0">{{$log->isProcessedTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            @if($log->isProcessed == true)
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Order Status: Processing</h5>
-                                                        <p class="card-text">Your order is currently being processed.</p>
-                                                        <p class="card-text">Date : {{$log->isProcessedTime}}</p>
+                                            </div>
+                                        @endif
+                                        @if($log->isPending == true)
+                                            <h4 class="fw-bold border-0">PENDING</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                                <i class="bi bi-check-circle-fill fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
+                                                            <p class="card-text mb-0">{{$log->isPendingTime}}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif
