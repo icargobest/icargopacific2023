@@ -18,12 +18,6 @@
                         <i class="bi bi-person-fill text-secondary"></i>
                     </span>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $company->user->name }}" required autocomplete="name" autofocus placeholder="Name">
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
 
@@ -34,11 +28,6 @@
                     </span>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $company->user->email}}" required autocomplete="email" placeholder="E-mail Address">
 
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
 
@@ -61,12 +50,6 @@
                     maxlength="11"
                     @required(true)
                     placeholder="Contact No">
-
-                    @error('contact_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
 
@@ -78,30 +61,28 @@
                         <i class="bi bi-person-fill text-secondary"></i>
                     </span>
                     <input id="contactnum" type="text" class="form-control @error('contact_name') is-invalid" @enderror" name="contact_name" value="{{ $company->contact_name }}" required autocomplete="contact_name" autofocus placeholder="Contact Name">
-
-                    @error('contact_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
 
-            {{-- contact address--}}
+            {{-- company address--}}
             <div class="row mb-4">
                 <div class="input-group">
                     <span class="input-group-text">
                         <i class="bi bi-person-fill text-secondary"></i>
                     </span>
                     <input id="contactnum" type="text" class="form-control @error('company_address') is-invalid" @enderror" name="company_address" value="{{$company->company_address  }}" required autocomplete="company_address" autofocus placeholder="Company Address">
-
-                    @error('company_address')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
+
+            {{-- Created at --}}
+            <div class="form-outline mb-4">
+                <input type="text" name="created_at" value="{{$company->created_at}}" class="form-control" />
+              </div>
+
+              {{-- Updated at --}}
+              <div class="form-outline mb-4">
+                <input type="text" name="updated_at" value="{{$company->updated_at}}" class="form-control" />
+              </div>
 
             </fieldset>
                  <div class="modal-footer">

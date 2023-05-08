@@ -100,13 +100,25 @@ class CompaniesController extends Controller
             ->with('success', 'Company account has been archived successfully.');
     }
 
+    public function unarchive(Request $request, $id)
+    {
+        $company = Company::findOrFail($id);
+
+        $company->update([
+            'archived' => 0,
+        ]);
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company account has been restored successfully.');
+    }
+
     public function viewArchive()
     {
         $companies = Company::with('user')
             ->where('archived', 1)
             ->get();
 
-        return view('icargo_superadmin_panel.companies.archive', compact('companies'));
+        return view('icargo_superadmin_panel.companies.viewArchive', compact('companies'));
     }
 
     public function restore(Request $request, $id)
@@ -119,5 +131,11 @@ class CompaniesController extends Controller
 
         return redirect()->route('companies.index')
             ->with('success', 'Company account has been restored successfully.');
+    }
+
+    public function destroy($id)
+    {
+        Company::destroy($id);
+        return redirect()->route('companies.index')->with('success', 'Staff member has been deleted successfully.');
     }
 }
