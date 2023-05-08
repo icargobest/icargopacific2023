@@ -4,18 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
     
-        <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
+        <div class="col-md-7 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
             <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
         </div>
     
-        <div class="col-lg-4 login-container p-5">
-            
+        <div class="col-lg-5 login-container p-5">
                 <div class="pb-2 login-header">{{ __('Register as a company') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
                 
                     <form method="POST" action="{{ route('company_registration.store') }}">
                         @csrf
-                    
+                        @include('flash-message')
                         <div class="row mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">
