@@ -132,8 +132,8 @@
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <div>
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;"> -->
-                                <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                                 <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;">
+                                {{-- <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""> --}}
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
                                         <a href="">
@@ -150,7 +150,7 @@
                                         </form>
                                     @endif
                                 @endif
-                                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+                                @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
                                 <div class="pt-2">
                                     <a href="{{route('trackOrder',$ship->id)}}">
                                         <button type="button" class="btn btn-primary btn-block" style="min-width:140px; max-width:509px; background-color: #214D94;">
