@@ -260,10 +260,10 @@
                     var delivered = document.getElementById('delivered');
                     var completed = document.getElementById('completed');
 
-                    if (data.status === "PickedUp" || data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                    if (data.status === "PickedUp" || data.status === "Assort" || data.status === "Dispatched" ||  data.status === "Transferred" || data.status === "Arrived" || data.status === "Delivered") {
                         pickedUp.classList.add('done');
                     }
-                    if (data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                    if (data.status === "Assort" ||  data.status === "Transferred" || data.status === "Arrived" || data.status === "Dispatched" || data.status === "Delivered") {
                         assort.classList.add('done');
                     }
                     if (data.status === "Dispatched" || data.status === "Delivered") {
@@ -276,7 +276,7 @@
                     var statusContainer = document.getElementById("status-summary-container");
                     statusContainer.classList.add("tracking-status");
 
-                    var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                    var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
                     var displayStatusCodes = [];
 
                     // Determine which status codes to display based on the current status
@@ -290,11 +290,25 @@
                       case "Assort":
                         displayStatusCodes = ["Processing", "PickedUp", "Assort"];
                         break;
+                      case "Transferred":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred"];
+                        break;
+                      case "Arrived":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived"];
+                        break;
                       case "Dispatched":
-                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                        if (data.isArrived === 1 && data.isTransferred === 1){
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched"];
+                        } else {
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                        }
                         break;
                       case "Delivered":
-                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                        if (data.isArrived === 1 && data.isTransferred === 1){
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
+                        } else {
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                        }
                         break;
                       default:
                         break;
@@ -319,7 +333,21 @@
                         // Create the status time element
                         var statusTime = document.createElement("div");
                         statusTime.classList.add("status-time");
-                        statusTime.textContent = new Date().toLocaleString();
+                        if (statusCode === "Processing") {
+                            statusTime.textContent = data.isProcessedTime;
+                        } else if (statusCode === "PickedUp") {
+                            statusTime.textContent = data.isPickUpTime;
+                        } else if (statusCode === "Assort") {
+                            statusTime.textContent = data.isAssortTime;
+                        } else if (statusCode === "Transferred") {
+                            statusTime.textContent = data.isTransferredTime;
+                        } else if (statusCode === "Arrived") {
+                            statusTime.textContent = data.isArrivedTime;
+                        } else if (statusCode === "Dispatched") {
+                            statusTime.textContent = data.isDispatchedTime;
+                        } else if (statusCode === "Delivered") {
+                            statusTime.textContent = data.isDeliveredTime;
+                        }
                         statusItem.appendChild(statusTime);
 
                         // Create the status text element
@@ -335,6 +363,10 @@
                           statusTitle.textContent = "Parcel has been Picked Up by Driver";
                         } else if (statusCode === "Assort") {
                           statusTitle.textContent = "Parcel is in Logistics";
+                        } else if (statusCode === "Transferred") {
+                          statusTitle.textContent = "Parcel is in Transit";
+                        } else if (statusCode === "Arrived") {
+                          statusTitle.textContent = "Parcel arrived in Logistics";
                         } else if (statusCode === "Dispatched") {
                           statusTitle.textContent = "Parcel is Out for Delivery";
                         } else if (statusCode === "Delivered") {
@@ -349,6 +381,10 @@
                           statusDesc.textContent = "Parcel has been Delivered.";
                         } else if (statusCode === "Dispatched"){
                           statusDesc.textContent = "Parcel out for delivery.";
+                        } else if (statusCode === "Arrived") {
+                          statusDesc.textContent = "Parcel arrived in Logistics.";
+                        } else if (statusCode === "Transferred") {
+                          statusDesc.textContent = "Parcel is in Transit.";
                         } else if (statusCode === "Assort"){
                           statusDesc.textContent = "Parcel is in Logistics.";
                         } else if (statusCode === "PickedUp"){
@@ -367,78 +403,83 @@
                     }
 
 
+
             button.addEventListener("click", function() {
               // Update the status and date/time
               if (data.status === "Processing") {
                 data.status = 'PickedUp';
+                data.isPickUp = true;
+                data.isPickUpTime = new Date();
                 var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
                 modal.show();
 
-                    // Update the database with the new pickup value
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                        data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
-                        success: function (response) {
-                            console.log(response);
-                        }
-                    });
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            "tracking_number": data.tracking_number,
-                            "shipment_id": data.id,
-                            "status": data.status
-                        },
-                        success: function (response) {
-                            console.log(response);
-                        }
-                    });
-                } else if (data.status === 'Dispatched') {
-                    data.status = 'Delivered';
-                    var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
-                    deliveredModal.show();
-
-                    // Update the database with the new delivered value
-                    $.ajax({
+                // Update the database with the new pickup value
+                $.ajax({
                     type: "POST",
-                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                    url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
+                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
                     success: function (response) {
-                        console.log(response);
+                      console.log(response);
                     }
-                    });
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            "tracking_number": data.tracking_number,
-                            "shipment_id": data.id,
-                            "status": data.status
-                        },
-                        success: function (response) {
-                            console.log(response);
-                        }
-                    });
-                } else if (data.status === 'Delivered') {
-                    var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                    deliveredModal.show();
-                    $.ajax({
+                });
+                $.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                     data: {
-                        "_token": "{{ csrf_token() }}",
-                        "tracking_number": data.tracking_number,
-                        "shipment_id": data.id,
-                        "status": data.status
+                      "_token": "{{ csrf_token() }}",
+                      "tracking_number": data.tracking_number,
+                      "shipment_id": data.id,
+                      "status": data.status
                     },
                     success: function (response) {
-                        console.log(response);
+                      console.log(response);
                     }
                 });
+              } else if (data.status === 'Dispatched') {
+                data.status = 'Delivered';
+                data.isDelivered = true;
+                data.isDeliveredTime = new Date();
+                var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
+                deliveredModal.show();
+
+                // Update the database with the new delivered value
+                $.ajax({
+                type: "POST",
+                url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
+                data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                success: function (response) {
+                  console.log(response);
+                }
+                });
+                $.ajax({
+                  type: "POST",
+                  url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                  data: {
+                    "_token": "{{ csrf_token() }}",
+                    "tracking_number": data.tracking_number,
+                    "shipment_id": data.id,
+                    "status": data.status
+                  },
+                  success: function (response) {
+                    console.log(response);
+                  }
+                });
+              } else if (data.status === 'Delivered') {
+                  var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                  deliveredModal.show();
+                  $.ajax({
+                    type: "POST",
+                    url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                      "tracking_number": data.tracking_number,
+                      "shipment_id": data.id,
+                      "status": data.status
+                    },
+                    success: function (response) {
+                      console.log(response);
+                    }
+                  });
                 } else {
                     var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
                     modal.show();

@@ -60,8 +60,8 @@
                                         <td>{{$ship->sender->sender_email}}</td>
                                     </tr>
                                     </table>
-                                    </table>
                                 </div>
+                                <hr class="opacity-75 d-block d-lg-none">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
@@ -138,19 +138,19 @@
                         </div>
                         
                         <!-- Product Image -->
-                        <div class="col-xl-3">
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;"> -->
-                                <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
-                                <a href="{{route('generate',$ship->id)}}" target="_blank">
-                                    <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                    Invoice
-                                    </button>
-                                </a>
-                                <a href="{{route('user.generateWaybill', $ship->id)}}">
-                                    <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                    Waybill
-                                    </button>
-                                </a>
+                        <div class="col-xl-3 text-center">
+                            <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;"> -->
+                            <img class="card shadow-0 w-100" style="object-fit:contain; min-width:140px; max-width:509px;  margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                            <a href="{{route('generate',$ship->id)}}" target="_blank">
+                                <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                Invoice
+                                </button>
+                            </a>
+                            <a href="{{route('user.generateWaybill', $ship->id)}}">
+                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                Waybill
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <hr class="opacity-75">
@@ -176,7 +176,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN DELIVERED</h5>
                                                             <p class="card-text mb-0">{{$log->isDeliveredTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -199,7 +199,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT FOR DELIVERY</h5>
                                                             <p class="card-text mb-0">{{$log->isDispatchedTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -222,7 +222,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ARRIVED AT SORTING FACILITY</h5>
                                                             <p class="card-text mb-0">{{$log->isArrivedTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -245,7 +245,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
                                                             <p class="card-text mb-0">{{$log->isTransferredTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -268,7 +268,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">{{$log->isAssortTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -291,7 +291,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">{{$log->isPickUpTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -314,7 +314,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY BEING PROCESSED</h5>
                                                             <p class="card-text mb-0">{{$log->isProcessedTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -337,7 +337,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">{{$log->isPendingTime}}</p>
-                                                            <p class="card-text">Location:  </p>
+                                                            
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
