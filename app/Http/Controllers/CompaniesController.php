@@ -27,6 +27,35 @@ class CompaniesController extends Controller
         return view('icargo_superadmin_panel.companies.create');
     }
 
+    // company registration
+    public function companyRegistrationOutsidePanel(CreateCompanyRequest $request)
+    {  
+       DB::beginTransaction();
+       try {
+       $user = User::create([
+           'name' => $request->name,
+           'email' => $request->email,
+           'password' => Hash::make($request->password),
+           'type' => '2',
+       ]);
+   
+       $company = Company::create([
+           'user_id' => $user->id,
+           'contact_no' =>  $request->contact_no,
+           'contact_name' => $request->contact_name,
+           'company_address' => $request->company_address,
+       ]);
+           DB::commit();
+           auth()->login($user); // log in the user programmatically
+       } catch (Exception $ex) {
+           DB::rollBack();
+           throw $ex;
+       }
+
+        return redirect()->route('company.dashboard') // redirect to the company dashboard page
+                        ->with('success', 'Registered successfully. You are now logged in.');
+    }
+    
     public function store(CreateCompanyRequest $request)
     {
         DB::beginTransaction();

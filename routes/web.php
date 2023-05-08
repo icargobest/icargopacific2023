@@ -81,7 +81,12 @@ Route::get('/dispatcher/history', function () {
 Auth::routes(['verify' => true]);
 
 //Company registration account
-Route::resource('company_registration', CompanyController::class);
+Route::get('company_registration', function () {
+    return view('registerCompany');
+});
+Route::post('company_registration/store', 
+    [CompaniesController::class, 'companyRegistrationOutsidePanel'])->name('add.company');
+
 
 // Authenticated Account Routes
 Route::middleware('auth')->group(function(){
