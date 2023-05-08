@@ -107,6 +107,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/order','userIndex')->name('userOrderPanel');
         Route::post('/add_order','addOrder')->name('addOrder');
+        Route::get('/edit_order/{id}','edit_order')->name('edit_order');
+        Route::put('/edit_order/{id}/submit','update_order')->name('update_order');
         Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
         Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
         Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');

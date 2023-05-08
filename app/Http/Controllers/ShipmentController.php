@@ -229,15 +229,15 @@ class ShipmentController extends Controller
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
-            'weight' => $request->weight,
-            'length' => $request->length,
-            'width' => $request->width,
-            'height' => $request->height,
-            'service_type' => $request->service_type,
-            'order_type' => $request->order_type,
-            'category' => $request->category,
-            'min_bid_amount' => $request->amount,
-            'mode_of_payment' => $request->mode_of_payment,
+            'weight' => $request->input('weight'),
+            'length' => $request->input('length'),
+            'width' => $request->input('width'),
+            'height' => $request->input('height'),
+            'service_type' => $request->input('service_type'),
+            'order_type' => $request->input('order_type'),
+            'category' => $request->input('category'),
+            'min_bid_amount' => $request->input('amount'),
+            'mop' => $request->input('mop'),
             'photo' => '/storage/' . $path,
             'status' => 'Pending',
         ];
@@ -246,10 +246,10 @@ class ShipmentController extends Controller
         $shipment = $shipmentModel->create($shipmentData);
 
         // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
-        $sender->save();
-        $recipient->save();
+        // $sender->shipment_id = $shipment->id;
+        // $recipient->shipment_id = $shipment->id;
+        // $sender->save();
+        // $recipient->save();
 
         $time = $shipment->updated_at;
 
@@ -527,5 +527,53 @@ class ShipmentController extends Controller
         $this->TrackOrderLog();
 
         return view('dispatcher_panel.order.dispatch', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function edit_order($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        return view('order.edit', compact('shipment'));
+    }
+
+    public function update_order(Request $request, $id)
+    {
+        $shipment = Shipment::find($id);
+
+        $shipment->sender->sender_name = $request->input('senderName');
+        $shipment->sender->sender_address = $request->input('senderAddress');
+        $shipment->sender->sender_mobile = $request->input('senderMobile');
+        $shipment->sender->sender_tel = $request->input('senderTelephone');
+        $shipment->sender->sender_email = $request->input('senderEmail');
+        $shipment->sender->sender_city = $request->input('senderCity');
+        $shipment->sender->sender_zip = $request->input('senderZip');
+        $shipment->sender->sender_state = $request->input('senderState');
+
+        $shipment->sender->save();
+
+        $shipment->recipient->recipient_name = $request->input('receiverName');
+        $shipment->recipient->recipient_address = $request->input('receiverAddress');
+        $shipment->recipient->recipient_mobile = $request->input('receiverMobile');
+        $shipment->recipient->recipient_tel = $request->input('receiverTelephone');
+        $shipment->recipient->recipient_email = $request->input('receiverEmail');
+        $shipment->recipient->recipient_city = $request->input('receiverCity');
+        $shipment->recipient->recipient_zip = $request->input('receiverZip');
+        $shipment->recipient->recipient_state = $request->input('receiverState');
+
+        $shipment->recipient->save();
+
+        $shipment->weight = $request->input('weight');
+        $shipment->length = $request->input('length');
+        $shipment->width = $request->input('width');
+        $shipment->height = $request->input('height');
+        $shipment->service_type = $request->input('service_type');
+        $shipment->order_type = $request->input('order_type');
+        $shipment->category = $request->input('category');
+        $shipment->mop = $request->input('mop');
+        $shipment->min_bid_amount = $request->input('amount');
+
+        $shipment->save();
+
+        return redirect()->route('viewOrder', $id)->with('success', 'Order information has been updated!');
     }
 }

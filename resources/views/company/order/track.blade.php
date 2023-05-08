@@ -116,7 +116,7 @@
                                     </tr>
                                     <tr>
                                         <th>Mode of Payment:</th>
-                                        <td>COD</td>
+                                        <td>{{$ship->mop}}</td>
                                     </tr>
                                     @if($ship->bid_amount != null && $ship->company_bid != null)
                                         <tr>
