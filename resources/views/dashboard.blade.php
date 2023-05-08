@@ -2,7 +2,13 @@
 
 
 @extends('layouts.app')
-@include('partials.navigationSuperAdmin')
+@extends('layouts.chart')
+@include('partials.navigationCompany',['dashboard' => "nav-selected"])
+
+{{-- @extends('layouts.chart') --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@section('title', 'Monthly Income')
 
 @section('content')
 <nav class="navbar navbar-light bg-light">
@@ -19,8 +25,8 @@
     </div>
   
     <body>
-        <h1>Registered Companies: {{ $companycount }}</h1>
-        <h1>Registered Users: {{ $usercount }}</h1>
+        <h1>Registered Companies: {{ $count }}</h1>
+        <h1>Registered Users: {{ $count1 }}</h1>
     </body>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});

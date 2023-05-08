@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
+use App\Models\Dashboard;
+use App\Models\Forward;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +44,7 @@ class CompanyController extends Controller
             'contact_name' => $request->contact_name,
             'company_address' => $request->company_address,
         ]);
+     
             DB::commit();
             auth()->login($user); // log in the user programmatically
         } catch (Exception $ex) {
