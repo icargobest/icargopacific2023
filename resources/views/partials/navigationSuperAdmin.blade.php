@@ -49,53 +49,30 @@
                     <div class="links">
                         <div class="link" >
                             <i class="fa fa-gauge"></i>
-                            <a class="nav-link @if(isset($dashboard)){{$dashboard}}@endif" href="/dashboard"><span>Dashboard</span></a>
+                            <a class="nav-link" href="/dashboard"><span>Dashboard</span></a>
                         </div>
                     </div>
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-plus"></i>
-                            <span>Create Waybill List</span>
+                            <a class="nav-link" href="{{route('companies.view')}}"><span>Companies</span></a>
                         </div>
                     </div>
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-table"></i>
-                            <a class="nav-link @if(isset($waybill)){{$waybill}}@endif" href="/waybill"><span>Waybill</span></a>
+                            <a class="nav-link" href=""><span>Commission</span></a>
                         </div>
                     </div>
                     
                     <div class="links">
                         <div class="link">
                             <i class="fa fa-user"></i>
-                            <span>Add. Freight Forwarding</span>
+                            <a class="nav-link" href="/dashboard"><span>Subscription</span></a>
                         </div>
-                    </div>
-
-                    
-                    <div class="links">
-                        <a class="nav-link" href="/forward">
-                        <div class="link">
-                            <i class="fa fa-user"></i>
-                            <span>Transfer to Forwarding</span>
-                        </div>
-                        </a>
-                    </div>
-        
-                    <div class="links">
-                        
-                        <a class="nav-link @if(isset($employee)){{$employee}}@endif" href="/employees">
-                        <div class="link">
-                            <i class="fa fa-user"></i>
-                            <span>Employee</span>
-                        </div>
-                        </a>
                     </div>
                 </div>
     
-    <!--             <div class="divider2">
-                </div> -->
-        
                     <div class="links bottom-nav">
                         <div class="link">
                             <i class="fa fa-sign-out"></i>
