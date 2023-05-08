@@ -50,9 +50,19 @@
 
                 <div class="links-wrapper">
                     <div class="link1">
+
                         <div class="links">
-                            <a class="nav-link">
-                                <div class="link">
+                            <a class="nav-link"href="/driver/dashboard">
+                                <div class="link @if(isset($dashboard)){{$dashboard}}@endif">
+                                    <i class="fa fa-tachometer link-i-1" ></i>
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="links">
+                            <a class="nav-link" href="{{ url('/driver/qr') }}">
+                                <div class="link @if(isset($qr)){{$qr}}@endif">
                                     <i class="fa fa-qrcode link-i-1" ></i>
                                     <span>Qr Scanner</span>
                                 </div>
@@ -60,7 +70,7 @@
                         </div>
                         <div class="links">
                             <a class="nav-link" href="/driver/history">
-                                <div class="link">
+                                <div class="link @if(isset($history)){{$history}}@endif">
                                     <i class="fa fa-history link-i-1" ></i>
                                     <span>History</span>
                                 </div>

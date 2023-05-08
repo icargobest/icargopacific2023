@@ -5,6 +5,11 @@ text-decoration: none;
 }
 
 
+.container
+{
+max-width: 100% !important;
+}
+
 .employee-header-container
 {
 height: 53px;

@@ -5,7 +5,8 @@
 </head>
 
 @include('layouts.app')
-@include('partials.navigationUser')
+@include('partials.navigationUser',['order' => "nav-selected"])
+
 
 <div class="waybillForm-container container">
 
@@ -326,7 +327,7 @@
                       <label class="form-label" for="weightParcel">Weight</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="weightParcel" name="weight" class="form-control" required/>
+                      <input type="number" id="weightParcel" name="weight" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -336,7 +337,7 @@
                       <label class="form-label" for="lengthParcel">Length</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="lengthParcel" name="length" class="form-control" required/>
+                      <input type="number" id="lengthParcel" name="length" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -346,7 +347,7 @@
                       <label class="form-label" for="widthParcel">Width</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="widthParcel" name="width" class="form-control" required/>
+                      <input type="number" id="widthParcel" name="width" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -356,7 +357,7 @@
                       <label class="form-label" for="heightParcel">Height</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                      <input type="text" id="heightParcel" name="height" class="form-control" required/>
+                      <input type="number" id="heightParcel" name="height" class="form-control" required/>
                     </div>
                   </div>
               </div>
@@ -385,7 +386,7 @@
                     <label class="form-label" for="bidParcel">Maximum Bid</label><span class="required">*</span>
                   </span>
                   <div class="form-outline">
-                    <input type="text" id="bidParcel" name="amount" class="form-control" required/>
+                    <input type="number" id="bidParcel" name="amount" class="form-control" required/>
                   </div>
                 </div>
             </div>

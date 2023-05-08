@@ -1,7 +1,12 @@
 <title>Company | Staffs Archived</title>
 @extends('layouts.app')
 @include('partials.navigationCompany')
-
+<style>
+    svg{
+        width:  1.5rem;
+        height: 1.5rem;
+    }
+</style>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
             <div class="employee-header-container">
