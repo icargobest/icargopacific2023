@@ -17,11 +17,11 @@ class SuperDashboardController extends Controller
         $incomes = Income::all();
         $totalMonthly = 0;
 
-        $count = Companies::where('type', 2)->count();
-        $count1 = Users::where('type', 0)->count();
+        $companycount = Companies::where('type', 2)->count();
+        $usercount = Users::where('type', 0)->count();
        
         
 
-        return view('dashboard', compact('incomes', 'count', 'count1'));
+        return view('dashboard', compact('incomes', 'companycount', 'usercount'));
     }
 }
