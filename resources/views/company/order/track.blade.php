@@ -24,7 +24,7 @@
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
-            <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">ORDER TRACKING #{{$ship->id}}</h3>
+            <h3 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">Order Tracking #{{$ship->id}}</h3>
         </div>
         <div class="order-container container">
             <div class="cards-holder">

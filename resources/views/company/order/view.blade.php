@@ -1,3 +1,8 @@
+<head>
+        <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+        <title>Customer | Order Details #{{$ship->id}}</title>
+    </head>
+
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @extends('layouts.app')
     @include('partials.navigationCompany',['order' => "nav-selected"])
@@ -37,7 +42,7 @@ VIEW
         <div class="modal-content">
             <div class="modal-header">
                 <!-- title -->
-                <h4 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">ORDER DETAILS #{{$ship->id}}</h4>
+                <h3 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">Order Details #{{$ship->id}}</h3>
                 <!-- close button -->
                 <!-- <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
