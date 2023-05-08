@@ -194,6 +194,15 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
     ->name('super.admin.dashboard');
 
+      //Registered User Accounts
+      Route::resource('icargo/user_accounts', UsersController::class);
+      Route::controller(UsersController::class)->group(function(){
+          Route::get('/user_accounts','index')->name('companies.view');
+          Route::get('/user_accounts/archived','viewArchive')->name('user_accounts.viewArchive');
+          Route::put('/user_accounts/archive/{id}', 'archive')->name('user_accounts.archive');
+          Route::put('/user_accounts/unarchive/{id}', 'unarchive')->name('user_accounts.unarchive');
+      });
+
       //Companies
       Route::resource('icargo/companies', CompaniesController::class);
       Route::controller(CompaniesController::class)->group(function(){
