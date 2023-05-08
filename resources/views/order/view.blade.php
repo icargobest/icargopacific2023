@@ -5,7 +5,7 @@
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @extends('layouts.app')
     @include('partials.navigationUser',['order' => "nav-selected"])
-    
+
     <style>
         th {
             background-color: white !important;
@@ -18,7 +18,7 @@
             color: #214D94;
         }
     </style>
-    {{-- ORDER CONTAINER RECONCEPTUALIZE --}}   
+    {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
             <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">MY ITEM #{{$ship->id}}</h3>
@@ -96,10 +96,10 @@
                                         <th>Size & Weight:</th>
                                         <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                     </tr>
-                                    @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
-                                            <td>{{$ship->company_bid}}</td>
+                                            <td>{{$ship->company_id}}</td>
                                         </tr>
                                     @endif
                                     </table>
@@ -114,7 +114,7 @@
                                         <th>Mode of Payment:</th>
                                         <td>COD</td>
                                     </tr>
-                                    @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Bid Amount:</th>
                                             <td>{{$ship->bid_amount}}</td>
@@ -132,13 +132,13 @@
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <div>
-                                <!-- <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;"> -->
-                                <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt="">
+                                 <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;">
+                                {{-- <img class="card shadow-0 img-size w-100" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""> --}}
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
                                         <a href="">
                                             <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
-                                                Edit    
+                                                Edit
                                             </button>
                                         </a>
                                         <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
@@ -150,7 +150,7 @@
                                         </form>
                                     @endif
                                 @endif
-                                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+                                @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
                                 <div class="pt-2">
                                     <a href="{{route('trackOrder',$ship->id)}}">
                                         <button type="button" class="btn btn-primary btn-block" style="min-width:140px; max-width:509px; background-color: #214D94;">
@@ -181,7 +181,7 @@
                                 <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                 <tbody>
                                     <tr>
-                                        <td>{{$bid->company_name}}</td>
+                                        <td><strong>{{$bid->user->name}}</strong></td>
                                         <td>{{$bid->bid_amount}}</td>
                                         <td>{{$bid->status}}</td>
                                         @if($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
@@ -197,8 +197,8 @@
                         </table>
                     </section>
                 </card>
-            </div>  
+            </div>
         </div>
     </main>
-        
+
     {{-- END OF ORDER CONTAINER --}}
