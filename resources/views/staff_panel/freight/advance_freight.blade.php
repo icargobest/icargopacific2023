@@ -2,22 +2,23 @@
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Orders</title>
   </head>
-  @extends('layouts.app')
-  @include('partials.navigationCompany',['freight' => "nav-selected"])
+
+  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+  @include('layouts.app')
+  @extends('partials.navigationStaff')
 
   {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
   <div class="order-container container">
 
-    <h4>FREIGHT LIST</h4>
+    <h4>ADVANCE FREIGHT LIST</h4>
 
       <div class="cards-holder">
 
           @foreach ($shipments as $ship)
-              @if(Auth::user()->type == 'company')
-                @if(Auth::user()->id == $ship->company_id)
-              {{-- && $ship->company_bid == Auth::user()->name && $ship->status != 'Delivered' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred'))) --}}
+            @if(Auth::user()->type == 'staff')
+                @if($ship->company_id == $company_id_staff)
                     {{-- CARD CREATED AFTER FILLING UP --}}
-                    <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">
+                    <a class="cardItem" href="">
                         <div class="item-card container px-4">
                         <div class="card-body">
                             <div class="row">
@@ -83,7 +84,7 @@
                     </a>
                     {{-- END OF CARD --}}
                 @endif
-              @endif
+            @endif
           @endforeach
           </div>
       </div>
