@@ -16,6 +16,8 @@ return new class extends Migration
 {
     Schema::create('dashboard', function (Blueprint $table) {
         $table->id();
+        $table->integer('user_id')->default(0);
+        $table->integer('company_id')->default(0);
         $table->integer('accepted')->default(0);
         $table->integer('pickedup')->default(0);
         $table->integer('received')->default(0);
@@ -27,6 +29,15 @@ return new class extends Migration
     });
 
     DB::table('dashboard')->insert([
+        [
+            'accepted' => rand(0, 200),
+            'pickedup' => rand(0, 200),
+            'received' => rand(0, 200),
+            'dispatched' => rand(0, 200),
+            'forwarded' => rand(0, 200),
+            'delivered' => rand(0, 200),
+            'confirmed' => rand(0, 200)
+        ],
         [
             'accepted' => rand(0, 200),
             'pickedup' => rand(0, 200),

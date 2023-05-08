@@ -19,6 +19,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Models\OrderTrackingLog;
+use App\Http\Controllers\SuperDashboardController;
 
 
 
@@ -285,13 +287,8 @@ Route::post('/search', [UserController::class, 'search']);
 
 Route::get('/income', [IncomeController::class, 'index']);
 
-<<<<<<< HEAD
-//FREIGHT PAGE
-/*Route::get('/freight', function () {
-    return view('freight/freight');
-});*/
-=======
->>>>>>> e40e1369456c902ecb4cd5e78a1359999ae5f2c6
+Route::get('/super-admin/dashboard', [SuperDashboardController::class, 'index']);
+
 
 //DRIVER PAGE
 Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
