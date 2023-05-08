@@ -62,11 +62,11 @@ Route::get('/company/history/orderHistory', function () {
     return view('company.history.orderHistory');
 });
 
-
-Route::get('/company/freight/transfers', function () {
-    return view('company.freight.transfers');
+Route::middleware(['auth', 'user-access:company'])->group(function () {
+    Route::controller(ShipmentController::class)->group(function(){
+        Route::get('/company/freight/transfers','advfreight')->name('advFreight');
+    });
 });
-
 
 /* Drivers Tab */
 Route::get('/driver/qr', function () {

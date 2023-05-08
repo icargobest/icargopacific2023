@@ -95,15 +95,17 @@
               <i class="fa fa-calendar"></i>
             </span>
           </div>
-
+          @foreach ($shipments as $ship)
+          @if(Auth::user()->type == 'company')
+          @if(Auth::user()->id == $ship->company_id)
           <div class="div mb-4">
-            <label class="form-label" for="transfer_station_number"></label>
+            <label class="form-label" for="transfer_to_company"></label>
             <select type="text" name="select_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
               <option value="" hidden>SELECT COMPANY</option>
               <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
+                 foreach ($bids as $bid) {
+                    echo "<option value='{$bid['company_name']}'>{$bid['company_name']}</option>";
+                 }
                 ?>
             </select>
           </div>
@@ -144,11 +146,11 @@
           <div class="second-div ">
               <div class="receiverInfo border pt-4">
                 <ul>
-                    <li class="mb-3">ID : <span><strong>#28</strong></span></li>
+                    <li class="mb-3">ID : <span><strong>{{$ship['user_id']}}</strong></span></li>
                     <li class="mb-3">PICKUP : <span><strong>Sample Pick-up</strong></li>
                     <li class="mb-3">DROP-OFF : <span><strong>Sample Drop-off</strong></li>
-                    <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>29X88 | 6KG</strong></span></li>
-                    <li class="mb-3">PARCEL ITEM : <span><strong>Computer & Tablets</strong></span></li>
+                    <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</strong></span></li>
+                    <li class="mb-3">PARCEL ITEM : <span><strong>{{$ship['order_type']}}</strong></span></li>
                 </ul>
               </div>
 
@@ -157,5 +159,8 @@
               </div>
           </div>
         </div>
+        @endif
+        @endif
+        @endforeach
       </div>
 </div>

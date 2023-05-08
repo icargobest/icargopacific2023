@@ -61,7 +61,7 @@ VIEW
                             </div>
                             <div class="row align-items-end">
                                 {{-- TRACK ORDER--}}
-                                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+                                @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
                                 <div class="col-md-12 d-flex justify-content-center">
                                     <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn text-white btn-block " style="background-color:#214D94;">
                                         Track Order
@@ -71,7 +71,7 @@ VIEW
                                 {{-- END TRACK ORDER--}}
                                 <div class="col-8">
                                     {{-- BID NOW --}}
-                                    @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
+                                    @if($ship->company_id == NULL && $ship->bid_amount == NULL)
                                     <form method="POST" action="{{route('addBid.company')}}">
                                         @csrf
                                         <input type="hidden" name="company_id" value="{{Auth::user()->id}}" />

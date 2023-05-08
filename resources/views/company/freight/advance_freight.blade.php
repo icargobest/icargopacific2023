@@ -73,7 +73,7 @@
 
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred')))
+                    @if(Auth::user()->id == $ship->company_id || (Auth::user()->type == 'company' && $ship->company_id == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_id == Auth::user()->name && $ship->status == 'Assort')))
          
                     <tr>
                         
@@ -101,7 +101,7 @@
                         <td>COD</td>
 
                         <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <a href="{{ url('/company/freight/transfers') }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <a href="{{ route('advFreight') }}"><button class="btn created-button mx-auto">Forward</button></a>
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
                     @endif
