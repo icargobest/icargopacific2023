@@ -46,11 +46,15 @@
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</td>
+                                        <td>{{$ship->sender->sender_address}}, 
+                                            {{$ship->sender->sender_city}}, 
+                                            {{$ship->sender->sender_state}}, 
+                                            {{$ship->sender->sender_zip}}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
+                                        <td>{{$ship->sender->sender_mobile}} 
+                                            @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
@@ -62,7 +66,7 @@
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
-                                        <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> <!-- This code is here because of nagiging vertical yung sender -->
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> <!-- This code is here because of nagiging vertical yung receiver -->
                                     </tr>
                                     <tr>
                                         <th width="40%">Name:</th>
@@ -70,11 +74,15 @@
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</td>
+                                        <td>{{$ship->recipient->recipient_address}}, 
+                                            {{$ship->recipient->recipient_city}}, 
+                                            {{$ship->recipient->recipient_state}},
+                                            {{$ship->recipient->recipient_zip}}</td>
                                         </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
+                                        <td>{{$ship->recipient->recipient_mobile}}
+                                             @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
@@ -98,9 +106,10 @@
                                     </tr>
                                     <tr>
                                         <th>Size & Weight:</th>
-                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
+                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | 
+                                            {{intval($ship->weight)}}Kg</td>
                                     </tr>
-                                    @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
                                             <td>{{$ship->company_bid}}</td>
@@ -118,7 +127,7 @@
                                         <th>Mode of Payment:</th>
                                         <td>COD</td>
                                     </tr>
-                                    @if($ship->bid_amount != null && $ship->company_bid != null)
+                                    @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Bid Amount:</th>
                                             <td>{{$ship->bid_amount}}</td>
@@ -137,14 +146,16 @@
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <a href="{{asset($ship->photo)}}" target="_blank">
-                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:cover; min-width:140px; max-width:509px; max-height:509px; margin-left: auto; margin-right: auto;">
+                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"
+                                  style="object-fit:cover; min-width:140px; max-width:509px; max-height:250px; margin-left: auto; margin-right: auto;">
                             </a>
                             <a href="{{route('viewInvoiceStaff',$ship->id)}}" target="_blank">
-                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1" style="background-color: #214D94; min-width:140px; max-width:509px;">
+                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1"
+                                 style="background-color: #214D94; min-width:140px; max-width:509px; background-color:#214D94;">
                                 Invoice
                                 </button>
                             </a>
-                            <a href="{{route('staff.generateWaybill', $ship->id)}}">
+                            <a href="{{route('staff.generateWaybill', $ship->id)}}" target="_blank">
                                 <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
                                 Waybill
                                 </button>
@@ -177,7 +188,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-archive-fill fa-3x" style="color: #66D066;"></i>
                                                             </span>
                                                         </div>
@@ -200,7 +212,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block text-center">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-truck fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -223,7 +236,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-sort fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -246,7 +260,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-scanner-gun fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -269,7 +284,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -292,7 +308,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-archive-fill fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -315,7 +332,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -338,14 +356,15 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-check-circle-fill fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isPendingTime))}}</p>
-                                                            
+                                                            <p class="card-text mb-0"></p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>

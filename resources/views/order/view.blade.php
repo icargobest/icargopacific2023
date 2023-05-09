@@ -99,7 +99,7 @@
                                     @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
-                                            <td>{{$ship->company_id}}</td>
+                                            <td>{{$ship->company_bid}}</td>
                                         </tr>
                                     @endif
                                     </table>
@@ -133,7 +133,7 @@
                         <div class="col-xl-3 text-center">
                             <div>
                                 <a href="{{asset($ship->photo)}}" target="_blank">
-                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:cover; min-width:140px; max-width:509px;  max-height:509px; margin-left: auto; margin-right: auto;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="" style="object-fit:cover; min-width:140px; max-width:509px;  height:250px; margin-left: auto; margin-right: auto;">
                                 </a>
                                 @if($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
@@ -142,10 +142,17 @@
                                                 Edit
                                             </button>
                                         </a>
+                                        <a href="{{route('userOrderPanel')}}">
+                                            <div class="my-1">
+                                                <button type="button" class="btn btn-block btn-dark shadow-0" style="min-width:140px; max-width:509px;">
+                                                BACK
+                                                </button>
+                                            </div>
+                                        </a>
                                         <form method="POST" action="{{route('cancelOrder', $ship->id)}}">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-danger btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-danger btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
                                                 Cancel Order
                                             </button>
                                         </form>
@@ -158,14 +165,14 @@
                                         Track Item</button>
                                     </a>
                                 </div>
-                                @endif
                                 <a href="{{route('userOrderPanel')}}">
                                     <div class="my-1">
-                                        <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
+                                        <button type="button" class="btn btn-block btn-dark shadow-0" style="min-width:140px; max-width:509px;">
                                         BACK
                                         </button>
                                     </div>
                                 </a>
+                                @endif
                             </div>
                             
                         </div>

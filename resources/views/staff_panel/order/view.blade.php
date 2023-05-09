@@ -49,7 +49,7 @@ VIEW
                         <!-- Product Image -->
                         <div class="col-xl-3">
                             <a href="{{asset($ship->photo)}}" target="_blank">
-                                <img class="card shadow-0 w-100" style="object-fit:cover;  max-height:509px;" src="{{asset($ship->photo)}}" alt="">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; max-height:250px;" src="{{asset($ship->photo)}}" alt="">
                             </a>
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
@@ -62,7 +62,11 @@ VIEW
                             </div>
                             <div class="row align-items-end">
                                 {{-- TRACK ORDER--}}
-                                @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+                                @if (
+                                    $ship->company_id != null &&
+                                        $ship->bid_amount != null &&
+                                        $ship->status != 'Cancelled' &&
+                                        $ship->status != 'Delivered')
                                 <div class="col-md-12 d-flex justify-content-center">
                                     <a href="{{route('trackOrder_Staff',$ship->id)}}" class="btn text-white btn-block " style="background-color:#214D94;">
                                         Track Order
@@ -119,11 +123,15 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
+                                        <td>{{$ship->sender->sender_address}}, 
+                                            {{$ship->sender->sender_city}}, 
+                                            {{$ship->sender->sender_state}}, 
+                                            {{$ship->sender->sender_zip}}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
+                                        <td>{{$ship->sender->sender_mobile}} 
+                                            @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
                                     </tr>
                                     <tr>
                                         <td class="px-5" colspan="2"><hr class="opacity-75"></td>
@@ -137,11 +145,15 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
+                                        <td>{{$ship->recipient->recipient_address}}, 
+                                            {{$ship->recipient->recipient_city}}, 
+                                            {{$ship->recipient->recipient_state}}, 
+                                            {{$ship->recipient->recipient_zip}}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
+                                        <td>{{$ship->recipient->recipient_mobile}}
+                                             @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
                                     </tr>
                                     <tr>
                                         <td class="px-5" colspan="2"><hr class="opacity-75"></td>
@@ -155,7 +167,8 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Size & Weight:</th>
-                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
+                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | 
+                                            {{intval($ship->weight)}}Kg</td>
                                     </tr>
                                     <tr>
                                     <th>Parcel Item:</th>
@@ -185,7 +198,7 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td>{{$bid->company_name}}</td>
+                                                <td>{{$bid->user->name}}</td>
                                                 <td>{{$bid->bid_amount}}</td>
                                                 <td>{{$bid->status}}</td>
                                             </tr>

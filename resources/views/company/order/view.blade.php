@@ -56,11 +56,11 @@ VIEW
                         <!-- Product Image -->
                         <div class="col-xl-3">
                             <a href="{{asset($ship->photo)}}" target="_blank">
-                                <img class="card shadow-0 w-100" style="object-fit:cover; max-height:509px;" src="{{asset($ship->photo)}}" alt="">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; height:250px;" src="{{asset($ship->photo)}}" alt="">
                             </a>
                                 <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
-                                    @if ($ship->company_id == null && $ship->bid_amount == null)
+                                    @if ($ship->company_bid == null && $ship->bid_amount == null)
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
                                             {{ $ship->min_bid_amount }}</h6>
                                     @else
