@@ -4,21 +4,13 @@
 </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-@extends('layouts.app')
-@include('partials.navigationCompany', ['order' => 'nav-selected'])
+    @extends('layouts.app')
+    @include('partials.navigationCompany')
 
 <!-- MDB -->
 <link rel="stylesheet" href="/css/mdb.min.css" />
 
 <style>
-    body {
-        font-family: 'Poppins';
-    }
-
-    .img-size {
-        object-fit: contain;
-    }
-
     th {
         background-color: transparent !important;
         color: black;
@@ -54,18 +46,18 @@ VIEW
             <div class="modal-body p-2">
                 <div class="container">
                     <!-- Column for Product Image and Product Info -->
-                    <div class="row">
+                    <div class="row overflow-hidden">
                         <!-- Product Image -->
                         <div class="col-xl-3">
-                            {{-- <img class="card shadow-0 img-size w-100"
-                                src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80"
-                                alt=""> --}}
-                            <img class="card shadow-0 img-size w-100" src="{{ asset($ship->photo) }}" alt="photo">
-                            <div class="d-flex justify-content-center">
+                            <a href="{{asset($ship->photo)}}" target="_blank">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; height:250px;" src="{{asset($ship->photo)}}" alt="">
+                            </a>
+                                <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
-                                    @if ($ship->company_id == null && $ship->bid_amount == null)
+                                    @if ($ship->company_bid == null && $ship->bid_amount == null)
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
-                                            {{ $ship->min_bid_amount }}</h6>
+                                            {{ $ship->min_bid_amount }}
+                                        </h6>
                                     @else
                                         <h6 class="mb-0 fw-bold text-capitalize">Company: {{ $company_name }}</h6>
                                     @endif
@@ -80,10 +72,17 @@ VIEW
                                         $ship->status != 'Delivered')
                                     <div class="col-md-12 d-flex justify-content-center">
                                         <a href="{{ route('trackOrder_Company', $ship->id) }}"
-                                            class="btn text-white btn-block " style="background-color:#214D94;">
+                                            class="btn btn-primary btn-block " style="background-color:#214D94;">
                                             Track Order
                                         </a>
                                     </div>
+                                    <a class="cardItem my-1" href="{{route('freightPanel')}}">
+                                        <div  class="d-flex justify-content-center">
+                                            <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                            BACK
+                                            </button>
+                                        </div>
+                                    </a>
                                 @endif
                                 {{-- END TRACK ORDER --}}
                                 <div class="col-8">
@@ -105,10 +104,17 @@ VIEW
                                     <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton">
                                         BID
                                     </button>
+                                </div>
+                                <a class="cardItem my-2" href="{{route('company.order')}}">
+                                    <div  class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                        BACK
+                                        </button>
                                     </form>
                                     @endif
                                     {{-- END BID NOW --}}
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {{-- CARD CREATED AFTER FILLING UP --}}
@@ -139,7 +145,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2">
+                                        <td class="px-3" colspan="2">
                                             <hr class="opacity-75">
                                         </td>
                                     </tr>
@@ -167,7 +173,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2">
+                                        <td class="px-3" colspan="2">
                                             <hr class="opacity-75">
                                         </td>
                                     </tr>
@@ -189,13 +195,23 @@ VIEW
                                         <th>Parcel Item:</th>
                                         <td>{{ $ship->category }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Mode of Payment:</th>
+                                        <td>{{$ship->mop}}</td>
+                                    </tr>
+                                    @if ($ship->bid_amount != null && $ship->company_id != null)
+                                        <tr>
+                                            <th>Bid Amount:</th>
+                                            <td>{{ $ship->bid_amount }}</td>
+                                        </tr>
+                                    @endif
                                 </table>
                             </div>
                         </div>
                     </div>
 
                     <!-- START ACCEPT BID TABLE -->
-                    <hr class="px-5" class="opacity-75">
+                    <hr class="px-3" class="opacity-75">
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
                             <thead>

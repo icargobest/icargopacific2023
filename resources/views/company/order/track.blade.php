@@ -1,6 +1,6 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-        <title>Customer | Order Tracking #{{$ship->id}}</title>
+        <title>Company | Order Tracking #{{$ship->id}}</title>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @extends('layouts.app')
@@ -31,7 +31,7 @@
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{--START OF ORDER DETAILS--}}
                     <!-- Mobile Sender and Receiver -->
-                    <div class="row overflow-auto">
+                    <div class="row overflow-hidden">
                         <!-- Product Information -->
                         <div class="col-xl-9">
                             <div class="row">
@@ -103,12 +103,12 @@
                                     @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
-                                            <td>{{$ship->company_id}}</td>
+                                            <td>{{$company_name}}</td>
                                         </tr>
                                     @endif
                                     </table>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
                                         <th width="40%">Category:</th>
@@ -136,14 +136,16 @@
 
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center"">
-                            <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;">
-                                {{-- <img class="card shadow-0 w-100 center" style="object-fit:contain; min-width:140px; max-width:509px; margin-left: auto; margin-right: auto;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""> --}}
+                            <a href="{{asset($ship->photo)}}" target="_blank">
+                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"
+                                  style="object-fit:cover; min-width:140px; max-width:509px; max-height:250px; margin-left: auto; margin-right: auto;">
+                            </a>
                             <a href="{{route('generateInvoice',$ship->id)}}" target="_blank">
-                                <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
+                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1" style="background-color: #214D94; min-width:140px; max-width:509px;">
                                 Invoice
                                 </button>
                             </a>
-                            <a href="{{route('generateWaybill',$ship->id)}}">
+                            <a href="{{route('generateWaybill',$ship->id)}}" target="_blank">
                                 <button type="button" class="btn btn-dark btn-block shadow-0 my-1" style="min-width:140px; max-width:509px;">
                                 Waybill
                                 </button>
@@ -151,6 +153,13 @@
                             @if($ship->station_id == null && $ship->status == "Assort")
                                 @include('company.order.transfer')
                             @endif
+                            <a href="{{route('viewOrder_Company', $ship->id)}}">
+                                <div class="my-1">
+                                    <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
+                                    BACK
+                                    </button>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <hr class="opacity-75">
@@ -158,7 +167,7 @@
 
                     {{-- TRACKING ORDER START --}}
                     <div id="order-status-container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center overflow-hidden">
                             <div class="col-md-10">
                                 <!-- <h3>Order Summary</h3> -->
                                 @foreach($logs as $log)
@@ -169,7 +178,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-archive-fill fa-3x" style="color: #66D066;"></i>
                                                             </span>
                                                         </div>
@@ -180,7 +190,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,7 +202,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-truck fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -202,7 +213,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -214,7 +225,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-sort fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -225,7 +237,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -237,7 +249,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-scanner-gun fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -248,7 +261,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,7 +273,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -271,7 +285,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,7 +297,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-archive-fill fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -294,7 +309,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -306,7 +321,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="fa fa-hand-holding fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -317,7 +333,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -329,7 +345,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-2 d-none d-lg-block">
-                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark" style="width:80px; height:80px;">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
                                                                 <i class="bi bi-check-circle-fill fa-3x" style="color: #D9D9D9;"></i>
                                                             </span>
                                                         </div>
@@ -340,7 +357,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
