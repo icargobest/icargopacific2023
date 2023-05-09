@@ -103,8 +103,8 @@
             <select type="text" name="select_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
               <option value="" hidden>SELECT COMPANY</option>
               <?php
-                 foreach ($bids as $bid) {
-                    echo "<option value='{$bid['company_name']}'>{$bid['company_name']}</option>";
+                 foreach ($companies as $company) {
+                    echo "<option value='{$company['user_id']}'>{$company['user_id']}</option>";
                  }
                 ?>
             </select>
@@ -146,7 +146,7 @@
           <div class="second-div ">
               <div class="receiverInfo border pt-4">
                 <ul>
-                    <li class="mb-3">ID : <span><strong>{{$ship['user_id']}}</strong></span></li>
+                    <li class="mb-3">ID : <span><strong>{{$ship['id']}}</strong></span></li>
                     <li class="mb-3">PICKUP : <span><strong>Sample Pick-up</strong></li>
                     <li class="mb-3">DROP-OFF : <span><strong>Sample Drop-off</strong></li>
                     <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</strong></span></li>

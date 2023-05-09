@@ -36,17 +36,6 @@ class CompanyController extends Controller
             'type' => '2',
         ]);
         $user->sendEmailVerificationNotification();
-        $otherValidation = $request->validate([
-            'contact_no' => ['required', 'min:11', 'max:11'],
-            'contact_name' => ['required', 'string', 'max:255'],
-            'company_address' => ['required', 'string', 'max:255'],
-        ], [
-            'contact_no.required' => 'Contact field is required.',
-            'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
-            'contact_name.required' => 'Name field is required.',
-            'company_address.required' => 'Company Address field is required.',
-        ]);    
         $company = Company::create([
             'user_id' => $user->id,
             'contact_no' =>  $request->contact_no,

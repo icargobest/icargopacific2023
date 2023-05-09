@@ -105,10 +105,10 @@ class ShipmentController extends Controller
     public function advfreight(){
         $shipment = Shipment::all();
         $bid = Bid::all();
-
+        $company = Company::all();
         $this->TrackOrderLog();
         
-        return view('company.freight.transfers', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.freight.transfers', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'companies' => $company]);
     }
 
     public function company_advFreightPanel(){
