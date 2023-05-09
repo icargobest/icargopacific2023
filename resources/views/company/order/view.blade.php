@@ -11,12 +11,6 @@
 <link rel="stylesheet" href="/css/mdb.min.css" />
 
 <style>
-    body{
-        font-family: 'Poppins';
-    }
-    .img-size {
-        object-fit: contain;
-    }
     th {
         background-color: transparent !important;
         color: black;
