@@ -36,8 +36,23 @@ use App\Http\Controllers\SuperDashboardController;
 */
 
 
-Route::get('/', function () {
+// LOGIN PAGE
+// Route::get('/', function () {
+//     return view('login/index');
+// });
+
+// // REGISTER ACCOUNT PAGE
+// Route::get('/register', function () {
+//     return view('login/register');
+// });
+
+
+/* Route::get('/', function () {
     return view('welcome');
+}); */
+
+Route::get('/', function () {
+    return view('profile.user');
 });
 
 
