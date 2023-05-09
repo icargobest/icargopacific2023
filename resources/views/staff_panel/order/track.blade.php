@@ -20,7 +20,7 @@
             color: #00bf9a;
         }
     </style>
-    
+
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
@@ -46,14 +46,14 @@
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->sender->sender_address}}, 
-                                            {{$ship->sender->sender_city}}, 
-                                            {{$ship->sender->sender_state}}, 
+                                        <td>{{$ship->sender->sender_address}},
+                                            {{$ship->sender->sender_city}},
+                                            {{$ship->sender->sender_state}},
                                             {{$ship->sender->sender_zip}}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->sender->sender_mobile}} 
+                                        <td>{{$ship->sender->sender_mobile}}
                                             @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
                                     </tr>
                                     <tr>
@@ -74,8 +74,8 @@
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->recipient->recipient_address}}, 
-                                            {{$ship->recipient->recipient_city}}, 
+                                        <td>{{$ship->recipient->recipient_address}},
+                                            {{$ship->recipient->recipient_city}},
                                             {{$ship->recipient->recipient_state}},
                                             {{$ship->recipient->recipient_zip}}</td>
                                         </tr>
@@ -106,7 +106,7 @@
                                     </tr>
                                     <tr>
                                         <th>Size & Weight:</th>
-                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | 
+                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} |
                                             {{intval($ship->weight)}}Kg</td>
                                     </tr>
                                     @if($ship->bid_amount != null && $ship->company_id != null)
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <a href="{{asset($ship->photo)}}" target="_blank">
@@ -181,7 +181,7 @@
                             <div class="col-md-10">
                                 <!-- <h3>Order Summary</h3> -->
                                 @foreach($logs as $log)
-                                    @if($ship->id == $log->order_id)
+                                    @if($ship->id == $log->shipment_id)
                                         @if($log->isDelivered == true)
                                             <h4 class="fw-bold border-0">DELIVERED</h4>
                                             <div class="card mb-3" style="background-color: #66D066;">
@@ -196,7 +196,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN DELIVERED</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isDeliveredTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -220,7 +220,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT FOR DELIVERY</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isDispatchedTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -244,7 +244,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ARRIVED AT SORTING FACILITY</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isArrivedTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -292,7 +292,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isAssortTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -316,7 +316,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isPickUpTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -340,7 +340,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY BEING PROCESSED</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isProcessedTime))}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>

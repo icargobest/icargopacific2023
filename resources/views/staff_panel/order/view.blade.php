@@ -94,7 +94,7 @@ VIEW
                                         <input type="number" id="form6Example3" id="bidAmount" name="bid_amount" class="form-control typeahead btn-block w-100" required/>
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton"> 
+                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton">
                                         BID
                                     </button>
                                 </div>
@@ -117,7 +117,7 @@ VIEW
                                 <!-- Table for Alignment of Product Info -->
                                 <table class="m-2" style="width:100%">
                                     <tr>
-                                        <th colspan="2"><h5 class="fw-bold opacity-75">SENDER</h5></th> 
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">SENDER</h5></th>
                                     </tr>
                                     <tr>
                                         <th>Name:</th>
@@ -125,14 +125,14 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->sender->sender_address}}, 
-                                            {{$ship->sender->sender_city}}, 
-                                            {{$ship->sender->sender_state}}, 
+                                        <td>{{$ship->sender->sender_address}},
+                                            {{$ship->sender->sender_city}},
+                                            {{$ship->sender->sender_state}},
                                             {{$ship->sender->sender_zip}}</td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td>{{$ship->sender->sender_mobile}} 
+                                        <td>{{$ship->sender->sender_mobile}}
                                             @if($ship->sender->sender_tel != NULL)
                                             | {{$ship->sender->sender_tel}}
                                             @endif
@@ -142,7 +142,7 @@ VIEW
                                         <td class="px-3" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
-                                        <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th>
                                     </tr>
                                     <tr>
                                         <th>Name:</th>
@@ -150,9 +150,9 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{$ship->recipient->recipient_address}}, 
-                                            {{$ship->recipient->recipient_city}}, 
-                                            {{$ship->recipient->recipient_state}}, 
+                                        <td>{{$ship->recipient->recipient_address}},
+                                            {{$ship->recipient->recipient_city}},
+                                            {{$ship->recipient->recipient_state}},
                                             {{$ship->recipient->recipient_zip}}</td>
                                     </tr>
                                     <tr>
@@ -167,7 +167,7 @@ VIEW
                                         <td class="px-3" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
-                                        <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th>
                                     </tr>
                                     <tr>
                                         <th>ID:</th>
@@ -175,7 +175,7 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Size & Weight:</th>
-                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | 
+                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} |
                                             {{intval($ship->weight)}}Kg</td>
                                     </tr>
                                     <tr>
@@ -196,7 +196,7 @@ VIEW
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- START ACCEPT BID TABLE -->
                     <hr class="px-3" class="opacity-75">
                     <section class="overflow-auto">
@@ -216,7 +216,7 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td>{{$bid->user->name}}</td>
+                                                <td>{{$company_name}}</td>
                                                 <td>{{$bid->bid_amount}}</td>
                                                 <td>{{$bid->status}}</td>
                                             </tr>

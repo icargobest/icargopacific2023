@@ -115,7 +115,7 @@
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
                                                 <th>Company:</th>
-                                                <td>{{ $ship->company_id }}</td>
+                                                <td>{{$company_name}}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -149,7 +149,7 @@
                         <div class="col-xl-3 text-center">
                             <div>
                                 <a href="{{asset($ship->photo)}}" target="_blank">
-                                    <img src="{{ asset($ship->photo) }}" class="card shadow-0 w-100" alt="" 
+                                    <img src="{{ asset($ship->photo) }}" class="card shadow-0 w-100" alt=""
                                         style="object-fit:cover; min-width:140px; max-width:509px;  height:250px; margin-left: auto; margin-right: auto;">
                                 </a>
                                 @if ($ship->company_bid == null && $ship->bid_amount == null)
@@ -171,10 +171,7 @@
                                         <form method="POST" action="{{ route('cancelOrder', $ship->id) }}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-danger btn-block shadow-0 my-1"
-                                                style="min-width:140px; max-width:509px;">
-                                                Cancel Order
-                                            </button>
+                                            @include('order.cancel')
                                         </form>
                                     @endif
                                 @endif
@@ -199,7 +196,7 @@
                                 </a>
                                 @endif
                             </div>
-                            
+
                         </div>
                     </div>
                     <hr class="opacity-75">
@@ -222,7 +219,7 @@
                                     <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                     <tbody>
                                         <tr>
-                                            <td><strong>{{ $bid->user->name }}</strong></td>
+                                            <td><strong>{{ $bid->company_name }}</strong></td>
                                             <td>{{ $bid->bid_amount }}</td>
                                             <td>{{ $bid->status }}</td>
                                             @if ($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')

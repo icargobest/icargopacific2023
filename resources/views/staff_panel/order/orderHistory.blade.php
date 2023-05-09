@@ -64,7 +64,7 @@
                                         <td>{{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
                                             | {{ intval($shipment->weight) }}Kg</td>
                                         @foreach ($orderLogs as $log)
-                                            @if ($log->order_id == $shipment->id)
+                                            @if ($log->shipment_id == $shipment->id)
                                                 <td>{{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}</td>
                                                 <td>{{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
                                                 </td>

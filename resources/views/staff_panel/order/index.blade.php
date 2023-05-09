@@ -63,7 +63,7 @@
                                         </button>
                                     </a>
                                     {{--<span class="d-flex align-items-start">@include('staff_panel.order.view')</span>--}}
-                                    
+
                                 </td>
                             </tr>
                         @endif

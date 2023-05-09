@@ -54,7 +54,7 @@
                                     <td>{{$shipment->recipient->recipient_address}}, {{$shipment->recipient->recipient_city}}, {{$shipment->recipient->recipient_state}}, {{$shipment->recipient->recipient_zip}}</td>
                                     <td>{{intval($shipment->length)}}x{{intval($shipment->width)}}x{{intval($shipment->height)}} | {{intval($shipment->weight)}}Kg</td>
                                     @foreach($orderLogs as $log)
-                                        @if($log->order_id == $shipment->id)
+                                        @if($log->shipment_id == $shipment->id)
                                             <td>{{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}</td>
                                             @if($shipment->status == 'Cancelled')
                                                 <td>-----</td>
