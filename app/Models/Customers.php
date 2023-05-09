@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bid extends Model
+class Customers extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
-
-    public function addBid($data){
-        return $this->create($data);
-    }
+    protected $table = 'users';
 }

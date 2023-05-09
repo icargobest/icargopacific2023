@@ -11,7 +11,7 @@ class DispatcherQrScannerController extends Controller
     {
         return view('dispatcher_panel.dispatcher');
     }
-    
+
     // Function to show the page we want to log in by scanner of QR code
     public function checkUser(Request $request)
     {
@@ -57,7 +57,7 @@ class DispatcherQrScannerController extends Controller
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;
                     $order_id = $shipment->id;
-                    $time = OrderHistory::where('order_id', $order_id)->first();
+                    $time = OrderHistory::where('shipment_id', $order_id)->first();
                     if ($time) {
                         $isPending = $time->isPending;
                         $isPendingTime = $time->isPendingTime;
@@ -79,9 +79,9 @@ class DispatcherQrScannerController extends Controller
                 }
             }
         }
-        return response()->json(['isPendingTime' => $isPendingTime, 'isProcessedTime' => $isProcessedTime, 'isAssortTime' => $isAssortTime, 'isPickUpTime' => $isPickUpTime, 
+        return response()->json(['isPendingTime' => $isPendingTime, 'isProcessedTime' => $isProcessedTime, 'isAssortTime' => $isAssortTime, 'isPickUpTime' => $isPickUpTime,
                                 'isTransferredTime' => $isTransferredTime, 'isArrivedTime' => $isArrivedTime, 'isDispatchedTime' => $isDispatchedTime, 'isDeliveredTime' => $isDeliveredTime,
-                                'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp, 
+                                'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp,
                                 'isTransferred' => $isTransferred, 'isArrived' => $isArrived, 'isDispatched' => $isDispatched, 'isDelivered' => $isDelivered,
                                 'result' => $result, 'status' => $status, 'tracking_number' => $tracking_number, 'id' => $id]);
     }

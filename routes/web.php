@@ -21,6 +21,7 @@ use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
+use App\Http\Controllers\SuperDashboardController;
 
 
 
@@ -107,12 +108,15 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
-        Route::get('/order','userIndex')->name('userOrderPanel');
-        Route::post('/add_order','addOrder')->name('addOrder');
-        Route::get('/view_shipment/{id}','viewOrder')->name('viewOrder');
-        Route::get('/track_order/{id}','trackOrder')->name('trackOrder');
-        Route::put('/accept_bid/{id}', 'acceptBid')->name('acceptBid');
-        Route::put('/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
+        Route::get('/user/order','userIndex')->name('userOrderPanel');
+        Route::post('/user/add_order','addOrder')->name('addOrder');
+        Route::get('/user/order_history', 'orderHistory_user')->name('orderHistory.user');
+        Route::get('/user/edit_order/{id}','edit_order')->name('edit_order');
+        Route::put('/user/edit_order/{id}/submit','update_order')->name('update_order');
+        Route::get('/user/view_shipment/{id}','viewOrder')->name('viewOrder');
+        Route::get('/user/track_order/{id}','trackOrder')->name('trackOrder');
+        Route::put('/user/accept_bid/{id}', 'acceptBid')->name('acceptBid');
+        Route::put('/user/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
         Route::get('/user/invoice/{id}','viewInvoice')->name('generate');
         Route::get('/user/waybill/{id}','viewWaybill')->name('user.generateWaybill');
     });
@@ -133,7 +137,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
         Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
-        Route::get('/order/history', 'orderHistory')->name('orderHistory');
+        Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
     });
 
@@ -242,10 +246,11 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
          Route::get('/staff/order','staffIndex')->name('staff.order');
          Route::get('/staff/freight','freightStaff')->name('freightStaff');
          Route::get('/staff/advfreight','staff_advFreightPanel')->name('staff.advFreightPanel');
+        Route::get('/staff/order_history', 'orderHistory_staff')->name('orderHistory_Staff');
          Route::get('/staff/view_shipment/{id}','viewOrder_Staff')->name('viewOrder_Staff');
          Route::get('/staff/track_order/{id}','trackOrder_Staff')->name('trackOrder_Staff');
-         Route::get('/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
-         Route::post('add_bid', 'staff_addBid')->name('staff_addBid');
+         Route::get('/staff/invoice/{id}','viewInvoiceStaff')->name('viewInvoiceStaff');
+         Route::post('/staff/add_bid', 'staff_addBid')->name('staff_addBid');
          Route::put('/staff/transfer/{id}','transfer')->name('transfer.staff');
          Route::get('/staff/waybill/{id}','viewWaybillStaff')->name('staff.generateWaybill');
      });
@@ -286,6 +291,8 @@ Route::get('/find', function () {
 Route::post('/search', [UserController::class, 'search']);
 
 Route::get('/income', [IncomeController::class, 'index']);
+
+Route::get('/super-admin/dashboard', [SuperDashboardController::class, 'index']);
 
 
 //DRIVER PAGE
