@@ -35,7 +35,7 @@
                         <th>DROPOFF</th>
                         <th>ITEM</th>
                         <th>SIZE & WIDTH</th>
-                        <th>MAXIMUM BID</th>
+                        <th>MAX BID</th>
                         <th>MOP</th>
                         <th>STATUS</th>
                         <th>ACTION</th>

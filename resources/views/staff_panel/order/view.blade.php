@@ -1,6 +1,6 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-        <title>Customer | Order Details #{{$ship->id}}</title>
+        <title>Staff | Order Details #{{$ship->id}}</title>
     </head>
 
 {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
@@ -45,25 +45,27 @@ VIEW
             <div class="modal-body p-2">
                 <div class="container">
                     <!-- Column for Product Image and Product Info -->
-                    <div class="row">
+                    <div class="row overflow-hidden">
                         <!-- Product Image -->
                         <div class="col-xl-3">
                             <a href="{{asset($ship->photo)}}" target="_blank">
-                                <img class="card shadow-0 w-100" style="object-fit:cover; max-height:250px;" src="{{asset($ship->photo)}}" alt="">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; max-height:300px;" src="{{asset($ship->photo)}}" alt="">
                             </a>
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
                                     @if($ship->company_bid == null && $ship->bid_amount == null)
-                                        <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php {{$ship->min_bid_amount}}</h6>
+                                        <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
+                                            {{$ship->min_bid_amount}}
+                                        </h6>
                                     @else
-                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{$ship->company_bid}}</h6>
+                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{$company_name}}</h6>
                                     @endif
                                 </button>
                             </div>
                             <div class="row align-items-end">
                                 {{-- TRACK ORDER--}}
                                 @if (
-                                    $ship->company_bid != null &&
+                                    $ship->company_id != null &&
                                         $ship->bid_amount != null &&
                                         $ship->status != 'Cancelled' &&
                                         $ship->status != 'Delivered')
@@ -137,7 +139,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2"><hr class="opacity-75"></td>
+                                        <td class="px-3" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th> 
@@ -162,7 +164,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2"><hr class="opacity-75"></td>
+                                        <td class="px-3" colspan="2"><hr class="opacity-75"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th> 
@@ -180,6 +182,10 @@ VIEW
                                         <th>Parcel Item:</th>
                                         <td>{{$ship->category}}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Mode of Payment:</th>
+                                        <td>{{$ship->mop}}</td>
+                                    </tr>
                                     @if ($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Bid Amount:</th>
@@ -192,7 +198,7 @@ VIEW
                     </div>
                     
                     <!-- START ACCEPT BID TABLE -->
-                    <hr class="px-5" class="opacity-75">
+                    <hr class="px-3" class="opacity-75">
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
                             <thead>

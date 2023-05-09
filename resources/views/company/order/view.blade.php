@@ -46,7 +46,7 @@ VIEW
             <div class="modal-body p-2">
                 <div class="container">
                     <!-- Column for Product Image and Product Info -->
-                    <div class="row">
+                    <div class="row overflow-hidden">
                         <!-- Product Image -->
                         <div class="col-xl-3">
                             <a href="{{asset($ship->photo)}}" target="_blank">
@@ -56,7 +56,8 @@ VIEW
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
                                     @if ($ship->company_bid == null && $ship->bid_amount == null)
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
-                                            {{ $ship->min_bid_amount }}</h6>
+                                            {{ $ship->min_bid_amount }}
+                                        </h6>
                                     @else
                                         <h6 class="mb-0 fw-bold text-capitalize">Company: {{ $company_name }}</h6>
                                     @endif
@@ -144,7 +145,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2">
+                                        <td class="px-3" colspan="2">
                                             <hr class="opacity-75">
                                         </td>
                                     </tr>
@@ -172,7 +173,7 @@ VIEW
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-5" colspan="2">
+                                        <td class="px-3" colspan="2">
                                             <hr class="opacity-75">
                                         </td>
                                     </tr>
@@ -200,7 +201,7 @@ VIEW
                     </div>
 
                     <!-- START ACCEPT BID TABLE -->
-                    <hr class="px-5" class="opacity-75">
+                    <hr class="px-3" class="opacity-75">
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
                             <thead>

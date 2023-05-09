@@ -28,10 +28,10 @@
             <div class="cards-holder">
                 <card class="item-card bg-white btn-wrapper p-4">
                     <!-- Mobile Sender and Receiver -->
-                    <div class="row overflow-auto">
+                    <div class="row overflow-hidden">
                         <!-- Product Information -->
                         <div class="col-xl-9">
-                            <div class="row">
+                            <div class="row overflow-hidden">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>

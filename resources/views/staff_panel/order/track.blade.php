@@ -31,7 +31,7 @@
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{--START OF ORDER DETAILS--}}
                     <!-- Mobile Sender and Receiver -->
-                    <div class="row">
+                    <div class="row overflow-hidden">
                         <!-- Product Information -->
                         <div class="col-xl-9">
                             <div class="row">
@@ -112,12 +112,12 @@
                                     @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
-                                            <td>{{$ship->company_bid}}</td>
+                                            <td>{{$company_name}}</td>
                                         </tr>
                                     @endif
                                     </table>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
                                         <th width="40%">Category:</th>
@@ -177,7 +177,7 @@
 
                     {{-- TRACKING ORDER START --}}
                     <div id="order-status-container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center overflow-hidden">
                             <div class="col-md-10">
                                 <!-- <h3>Order Summary</h3> -->
                                 @foreach($logs as $log)
@@ -200,7 +200,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +224,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -248,7 +248,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,7 +272,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -296,7 +296,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,7 +320,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -344,7 +344,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -367,7 +367,7 @@
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">{{$ship->company_bid}}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
