@@ -195,18 +195,36 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     ->name('super.admin.dashboard');
 
       //Registered User Accounts
-      Route::resource('icargo/user_accounts', UsersController::class);
+      Route::resource('icargo/registered_users', UsersController::class);
       Route::controller(UsersController::class)->group(function(){
-          Route::get('/user_accounts','index')->name('companies.view');
-          Route::get('/user_accounts/archived','viewArchive')->name('user_accounts.viewArchive');
-          Route::put('/user_accounts/archive/{id}', 'archive')->name('user_accounts.archive');
-          Route::put('/user_accounts/unarchive/{id}', 'unarchive')->name('user_accounts.unarchive');
-      });
+          Route::get('icargo/registered_users','index')->name('registered_users.view');
+        
+          // update data
+          Route::put('registered_users/update+company/{id}', [UsersController::class, 'updateCompany'])->name('update.company');
+          Route::put('registered_users/update+driver/{id}', [UsersController::class, 'updateDriver'])->name('update.driver');
+          Route::put('registered_users/update+dispatcher/{id}', [UsersController::class, 'updateDispatcher'])->name('update.dispatcher');
+          Route::put('registered_users/update+staff/{id}', [UsersController::class, 'updateStaff'])->name('update.staff');
+
+        Route::get('/registered_users/archived','viewArchive')->name('registered_users.viewArchive');
+
+        //  archive data
+        Route::put('registered_users/archive+company/{id}', [UsersController::class, 'archiveCompany'])->name('archive.company');
+        Route::put('registered_users/archive+driver/{id}', [UsersController::class, 'archiveDriver'])->name('archive.driver');
+        Route::put('registered_users/archive+dispatcher/{id}', [UsersController::class, 'archiveDispatcher'])->name('archive.dispatcher');
+        Route::put('registered_users/archive+staff/{id}', [UsersController::class, 'archiveStaff'])->name('archive.staff');
+
+        //  unarchive data
+        Route::put('registered_users/unarchive+company/{id}', [UsersController::class, 'unarchiveCompany'])->name('unarchive.company');
+        Route::put('registered_users/unarchive+driver/{id}', [UsersController::class, 'unarchiveDriver'])->name('unarchive.driver');
+        Route::put('registered_users/unarchive+dispatcher/{id}', [UsersController::class, 'unarchiveDispatcher'])->name('unarchive.dispatcher');
+        Route::put('registered_users/unarchive+staff/{id}', [UsersController::class, 'unarchiveStaff'])->name('unarchive.staff');
+
+          Route::put('/registered_users/unarchive/{id}', 'unarchive')->name('registered_users.unarchive');
+    });
 
       //Companies
       Route::resource('icargo/companies', CompaniesController::class);
       Route::controller(CompaniesController::class)->group(function(){
-          Route::get('/companies','index')->name('companies.view');
           Route::get('/companies_staff','viewArchive')->name('companies.viewArchive');
           Route::put('/companies/archive/{id}', 'archive')->name('companies.archive');
           Route::put('/companies/unarchive/{id}', 'unarchive')->name('companies.unarchive');

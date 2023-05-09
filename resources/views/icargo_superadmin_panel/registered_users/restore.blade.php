@@ -11,10 +11,10 @@
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('companies.unarchive', $company->id)}}">
+          <form method="POST" action="{{route('registered_users.unarchive', $company->id)}}">
             @csrf
             @method ('PUT')
-            <h4>Are you sure you want to <span class="span-green">restore </span>{{$company->user->name}}?</h4>
+            <h4>Are you sure you want to <span class="span-green">restore </span> this user?</h4>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success btn-block">
                   Restore

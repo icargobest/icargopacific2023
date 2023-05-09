@@ -28,6 +28,18 @@
             </div>
             <div class="modal-body">
                 <fieldset disabled>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $company->id }}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >Company ID</label
+                        >
+                    </div>
+
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">

@@ -10,10 +10,10 @@
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
             <div class="employee-header-container">
-                <h3 class="">Companies archived</h3>
+                <h3 class="">Registered Users archived</h3>
             </div>
         <div class="addemployee" style="height:75.6px;" >
-            <a href="{{route('companies.index')}}">
+            <a href="{{ route ('registered_users.view')}}">
                 <button type="button" class="btn btn-primary m-button1" style="height:32.8px">
                     Back
                 </button>
@@ -42,27 +42,92 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align:center;">#</th>
-                        <th scope="col" style="text-align:center;">Company Name</th>
+                        <th scope="col" style="text-align:center;">ID</th>
+                        <th scope="col" style="text-align:center;">Name</th>
                         <th scope="col" style="text-align:center;">Email</th>
-                        <th scope="col" style="text-align:center;">Contact No</th>
-                        <th scope="col" style="text-align:center;">Address</th>
+                        <th scope="col" style="text-align:center;">Type</th>
+                        <th scope="col" style="text-align:center;">Company ID</th>
                         <th scope="col" style="text-align:center; width:300px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($companies as $company)
-                        <tr>
-                            <td>{{ $company->id }}</td>
-                            <td class="capitalized">{{ $company->user->name }}</td>
-                            <td>{{ $company->user->email }}</td>
-                            <td>{{ $company->contact_no }}</td>
-                            <td>{{ $company->company_address }}</td>
-                            <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
-                                @include('icargo_superadmin_panel.companies.show')
-                                @include('icargo_superadmin_panel.companies.restore')
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $company->user->id }}</td>
+                        <td class="capitalized">{{ $company->user->name }}</td>
+                        <td>{{ $company->user->email }}</td>
+                        <td>{{ $company->user->type }}</td>
+                        <td>{{ $company->id }}</td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($company->user->type == "company")
+                                @include('icargo_superadmin_panel.registered_users.show.company')
+                                @include('icargo_superadmin_panel.registered_users.restore.company')
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach 
+                    
+                    @foreach ($dispatchers as $dispatcher)
+                    <tr>
+                        <td>{{ $dispatcher->user->id }}</td>
+                        <td class="capitalized">
+                            {{ $dispatcher->user->name }}
+                        </td>
+                        <td>{{ $dispatcher->user->email }}</td>
+                        <td>{{ $dispatcher->user->type }}</td>
+                        <td>{{ $dispatcher->company_id }}</td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($dispatcher->user->type == "dispatcher")
+                                @include('icargo_superadmin_panel.registered_users.show.dispatcher')
+                                @include('icargo_superadmin_panel.registered_users.restore.dispatcher')
+                            @endif 
+                        </td>
+                    </tr>
+                    @endforeach 
+                    
+                    @foreach ($drivers as $driver)
+                    <tr>
+                        <td>{{ $driver->user->id }}</td>
+                        <td class="capitalized">{{ $driver->user->name }}</td>
+                        <td>{{ $driver->user->email }}</td>
+                        <td>{{ $driver->user->type }}</td>
+                        <td>{{ $driver->company_id }}</td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($driver->user->type == "driver")
+                                @include('icargo_superadmin_panel.registered_users.show.driver')
+                                @include('icargo_superadmin_panel.registered_users.restore.driver')
+                            @endif 
+                        </td>
+                    </tr>
+
+                    @endforeach 
+                    
+                    @foreach ($staffs as $staff)
+                    <tr>
+                        <td>{{ $staff->user->id }}</td>
+                        <td class="capitalized">{{ $staff->user->name }}</td>
+                        <td>{{ $staff->user->email }}</td>
+                        <td>{{ $staff->user->type }}</td>
+                        <td>{{ $staff->company_id }}</td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($staff->user->type == "staff")
+                                @include('icargo_superadmin_panel.registered_users.show.staff')
+                                @include('icargo_superadmin_panel.registered_users.restore.staff')
+                            @endif
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
