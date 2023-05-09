@@ -19,6 +19,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Models\OrderTrackingLog;
+use App\Http\Controllers\SuperDashboardController;
 
 
 
@@ -288,6 +290,8 @@ Route::get('/find', function () {
 Route::post('/search', [UserController::class, 'search']);
 
 Route::get('/income', [IncomeController::class, 'index']);
+
+Route::get('/super-admin/dashboard', [SuperDashboardController::class, 'index']);
 
 
 //DRIVER PAGE
