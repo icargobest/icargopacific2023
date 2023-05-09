@@ -67,7 +67,7 @@ VIEW
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
                                             {{ $ship->min_bid_amount }}</h6>
                                     @else
-                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{$company_name}}</h6>
+                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{ $company_name }}</h6>
                                     @endif
                                 </button>
                             </div>
@@ -92,8 +92,6 @@ VIEW
                                         <form method="POST" action="{{ route('addBid.company') }}">
                                             @csrf
                                             <input type="hidden" name="company_id" value="{{ Auth::user()->id }}" />
-                                            <input type="hidden" name="company_name"
-                                                value="{{ Auth::user()->name }}" />
                                             <input type="hidden" name="shipment_id" value="{{ $ship->id }}" />
                                             <label class="control-label control-label-left fw-bold">BID<span
                                                     class="required"></span></label>
@@ -213,7 +211,7 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td>{{ $bid->user->name }}</td>
+                                                <td>{{ $bid->company_name }} </td>
                                                 <td>{{ $bid->bid_amount }}</td>
                                                 <td>{{ $bid->status }}</td>
                                             </tr>

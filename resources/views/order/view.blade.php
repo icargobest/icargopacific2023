@@ -206,7 +206,7 @@
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody>
                                             <tr>
-                                                <td><strong>{{ $bid->user->name }}</strong></td>
+                                                <td><strong>{{ $bid->company_name }}</strong></td>
                                                 <td>{{ $bid->bid_amount }}</td>
                                                 <td>{{ $bid->status }}</td>
                                                 @if ($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')

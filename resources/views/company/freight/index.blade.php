@@ -14,7 +14,7 @@
 
           @foreach ($shipments as $ship)
               @if(Auth::user()->type == 'company')
-                @if(Auth::user()->id == $ship->company_id)
+                @if($company->id == $ship->company_id)
               {{-- && $ship->company_bid == Auth::user()->name && $ship->status != 'Delivered' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred'))) --}}
                     {{-- CARD CREATED AFTER FILLING UP --}}
                     <a class="cardItem" href="{{route('viewOrder_Company',$ship->id)}}">

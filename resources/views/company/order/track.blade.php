@@ -162,7 +162,7 @@
                             <div class="col-md-10">
                                 <!-- <h3>Order Summary</h3> -->
                                 @foreach($logs as $log)
-                                    @if($ship->id == $log->order_id)
+                                    @if($ship->id == $log->shipment_id)
                                         @if($log->isDelivered == true)
                                             <h4 class="fw-bold border-0">DELIVERED</h4>
                                             <div class="card mb-3" style="background-color: #66D066;">
