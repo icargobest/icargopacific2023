@@ -22,7 +22,7 @@
     <div class="container mw-100">
         <div class="bg-white shadow" style="max-width: 100%;">
             <div class="waybill-head employee-header-container" style="background-color: #214D94;">
-                <h3 class="text-white mb-0">ORDER LIST</h3>
+                <h3 class="text-white mb-0">Order List</h3>
             </div>
             {{-- TABLE START--}}
             <section class="mb-5 px-5 my-3 overflow-auto">
