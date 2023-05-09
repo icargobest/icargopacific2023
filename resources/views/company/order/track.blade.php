@@ -20,7 +20,7 @@
             color: #00bf9a;
         }
     </style>
-    
+
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center"">
                             <img src="{{asset($ship->photo)}}" class="card shadow-0 w-100" alt="television"  style="object-fit:contain; min-width:140px; max-width:509px; max-height:509px; margin-left: auto; margin-right: auto;">
@@ -182,7 +182,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN DELIVERED</h5>
                                                             <p class="card-text mb-0">{{$log->isDeliveredTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -205,7 +205,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT FOR DELIVERY</h5>
                                                             <p class="card-text mb-0">{{$log->isDispatchedTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -228,7 +228,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ARRIVED AT SORTING FACILITY</h5>
                                                             <p class="card-text mb-0">{{$log->isArrivedTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -251,7 +251,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
                                                             <p class="card-text mb-0">{{$log->isTransferredTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -274,7 +274,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">{{$log->isAssortTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -297,7 +297,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">{{$log->isPickUpTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -320,7 +320,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY BEING PROCESSED</h5>
                                                             <p class="card-text mb-0">{{$log->isProcessedTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -343,7 +343,7 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">{{$log->isPendingTime}}</p>
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
