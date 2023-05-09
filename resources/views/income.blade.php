@@ -239,7 +239,6 @@
         var options = {
             width: 1200,
             height: 500,
-            // height: 200,
             // title: 'Daily Income',
             curveType: 'function',
             legend: { position: 'bottom' }
