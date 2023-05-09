@@ -45,7 +45,7 @@ use App\Http\Controllers\DriverDashboardController;
 
 
 Route::get('/', function () {
-    return view('company/freight/transfers');
+    return view('company/freight.transfers');
 });
 Route::get('/driver/history', function () {
     return view('driver_panel.deliverHistory');

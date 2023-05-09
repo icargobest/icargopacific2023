@@ -124,13 +124,9 @@
                     <span id="result"></span>
                   </div>
 
-<<<<<<< Updated upstream
-
-=======
                   
 
                   
->>>>>>> Stashed changes
                   <!-- Pickup Modal -->
                   <div class="modal fade" id="pickupModal" tabindex="-1" aria-labelledby="pickupModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">

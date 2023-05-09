@@ -104,7 +104,7 @@
                         <td>COD</td>
 
                         <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <button class="btn created-button mx-auto">Forward</button>
+                    @include('company/freight.tracking')
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
                     @endif
@@ -120,5 +120,3 @@
         
     </div>
 </div>
-
-<script></script>

@@ -3,13 +3,28 @@
 <button type="button" class="btn btn-dark btn-sm" data-mdb-toggle="modal" data-mdb-target="#trackModal {{-- {{$ship->id}} --}}">
   Tracking
 </button>
+<style>
+  .child2 td{
+    text-align: left !important;
+  }
+  .child2 th{
+    text-align: left !important;
+  }
 
+  td.contact,th.contact{
+    border-bottom: 1px solid black !important;
+  }
+
+  #tracking-status {
+  text-align: left !important;
+  }
+</style>
 <div class="modal fade" id="trackModal{{-- {{$ship->id}} --}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="modal-header border-bottom">
+      <div class="modal-header border-bottom" style="background-color:white !important;">
         <!-- title -->
-        <h5 class="modal-title" id="exampleModalLabel">WAYBILL TRACKING</h5>
+        <h4 class="modal-title" id="exampleModalLabel" style="color:black !important;"><strong> WAYBILL TRACKING </strong></h4>
         <!-- close button -->
         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -18,56 +33,73 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-sm-6">
-              <div class="child1 ">
+              <div class="child1 col-md-3 col-sm-3 w-100">
                 <div class="parcel-pic">
                   <img src="/img/box.jpg"
-                  alt="login form" class="img-fluid w-50 h-50 mb-2" style="border-radius: 0 1rem 1rem 0;" /> 
+                  alt="login form" class="img-fluid rounded mx-auto d-block mb-2" style="border-radius: 0 1rem 1rem 0; margin-left:50%;" /> 
                 </div>
               </div>
-              <div>
-                <table class="table table-sm table-hover table-transparent table-no-bottom-space" id="tracking-table">
+              <div class="child2 col-md-9 col-sm-9 me-0 w-100">  
+                <table class="table table-sm table-hover table-borderless table-no-bottom-space" id="tracking-table" >
                   <tbody>
                       <tr>
+                          <th ><strong>SENDER</strong></th>
+                      </tr>
+                      <tr>
+                          <th>NAME:</th>
+                          <td class="fw-bold" value="">Doner Barton</td>
+                      </tr>
+                      <tr>
+                          <th>ADDRESS:</th>
+                          <td class="fw-bold" value="">Binan City</td>
+                      </tr>
+                      <tr>
+                          <th class="contact">CONTACT NUMBER:</th>
+                          <td class="contact fw-bold" value="">09995686210</td>
+                      </tr>
+                      <tr>
+                          <th><strong>RECIEVER</strong></th>
+                      </tr>
+                      <tr>
+                          <th>NAME:</th>
+                          <td class="fw-bold" value="">James Watson</td>
+                      </tr>
+                      <tr>
+                          <th>ADDRESS:</th>
+                          <td class="fw-bold" value="" >Muntinlupa</td>
+                      </tr>
+                      <tr>
+                          <th class="contact">CONTACT NUMBER:</th>
+                          <td class="contact fw-bold">09586545201</td>
+                      </tr>
+                      <tr>
+                          <th><strong>PARCEL INFORMATION</strong></th>
+                      </tr>
+                      <tr>
                           <th>ID:</th>
-                          <td class="fw-bold" value="{{-- {{$ship->id}} --}}">26</td>
+                          <td class="fw-bold" value="">26</td>
                       </tr>
                       <tr>
-                          <th>Pickup:</th>
-                          <td class="fw-bold" value="{{-- {{$ship->sender_name}} --}}, {{-- {{$ship->sender_address}} --}}">John Doe Binan City</td>
+                          <th>PARCEL SIZE & WEIGHT:</th>
+                          <td class="fw-bold" value="" >17X30X41 |  97 KG </td>
                       </tr>
                       <tr>
-                          <th>Drop off:</th>
-                          <td class="fw-bold" value="{{-- {{$ship->recipient_name}} --}}, {{-- {{$ship->recipient_address}} --}}">Muntinlupa</td>
+                          <th>PARCEL ITEM:</th>
+                          <td class="fw-bold">Tools</td>
                       </tr>
                       <tr>
-                          <th>Parcel Size & Weight:</th>
-                          <td class="fw-bold" value="{{-- {{$ship->length}}x{{$ship->width}}x{{$ship->height}} | {{$ship->weight}}Kg --}}">17x30x41 | 97 kg</td>
-                      </tr>
-                      <tr>
-                          <th>Parcel Item</th>
-                          <td class="fw-bold" value="" >Tools</td>
-                      </tr>
-                      <tr>
-                          <th>Parcel Charges:</th>
+                          <th>PARCEL CHARGES:</th>
                           <td class="fw-bold">Php 68</td>
                       </tr>
                       
                   </tbody>
-                </table>
-                    <!-- highlighted price -->
-                    <div class="price-div rounded ms-0" >
-                      <!-- highlighted price -->
-                      <div class="ms-0 mx-4" >
-                        <strong class="ms-3">Current Bid:</strong>
-                        <span><strong>{{-- {{$ship->bid_amount}} --}}Php 68</strong></span>
-                      </div>
-                    </div> 
+                </table>   
               </div>
-              </div>
+            </div>
               <div class="col-md-6 col-sm-6">
                 <div class="child2 h-100 border">
-                  <div class="d-block border-bottom bg-primary">
-                      <h6 class="ms-3 pt-2" id="tracking-status">STATUS</h6>
+                  <div class="d-block border-bottom bg-primary" style="background-color: #0C2F68 !important;">
+                      <h6 class="ms-3 pt-2 text-left" id="tracking-status">STATUS</h6>
                   </div>
                   <div class="container mt-3">
                     {{-- naghahanap pa ng tamang code para sa line --}}

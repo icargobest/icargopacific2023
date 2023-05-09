@@ -86,75 +86,95 @@
       </div>
       <div class="parent-div">
 
-        <div class="first-child col-sm-6 col-md-6 ">
-
-          <div class="div input-group rounded mb-4" style="width: 98% !important;">
-            <input type="search" class="form-control rounded" placeholder="SHIPPING DATE" aria-label="Search" aria-describedby="search-addon" style="margin-left: 15px;" />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fa fa-calendar"></i>
-            </span>
-          </div>
-
-          <div class="div mb-4">
-            <label class="form-label" for="transfer_station_number"></label>
-            <select type="text" name="select_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
-              <option value="" hidden>SELECT COMPANY</option>
-              <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
-                ?>
-            </select>
-          </div>
-
-          <div class="div mb-4">
-            <select type="text" name="select_transport" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
-              <option value="" hidden>SELECT TRANSPORT</option>
-              <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
-                ?>
-            </select>
-          </div>
-
-          <div class="div mb-4">
-            <select type="text" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
-              <option value="" hidden>SELECT METHOD</option>
-              <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
-                ?>
-            </select>
-          </div>
-
-          <div class="div mb-4">
-            <input type="search" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
-          </div>
-
-          <div class="div mb-4">
-            <input type="search" class="form-control rounded" placeholder="TOTAL AMOUNT"/>
-          </div>
-        
-        </div>
-
-        <div class="second-child col-sm-6 col-md-6 border">
-          <div class="second-div ">
-              <div class="receiverInfo border pt-4">
-                <ul>
-                    <li class="mb-3">ID : <span><strong>#28</strong></span></li>
-                    <li class="mb-3">PICKUP : <span><strong>Sample Pick-up</strong></li>
-                    <li class="mb-3">DROP-OFF : <span><strong>Sample Drop-off</strong></li>
-                    <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>29X88 | 6KG</strong></span></li>
-                    <li class="mb-3">PARCEL ITEM : <span><strong>Computer & Tablets</strong></span></li>
-                </ul>
+        <div class="card-body">
+          <div class="row">
+              <!-- Forms -->
+              <div class="col-sm-6">
+                  <div class="input-group pb-3">
+                      <input type="date" class="form-control" style="background-color: #EAEBEE"/>
+                  </div>
+                  <div class="input-group pb-3">
+                      <select class="form-control" style="background-color: #EAEBEE">
+                          <option>Select Company</option>
+                          <option>Company 1</option>
+                          <option>Company 2</option>
+                          <option>Company 3</option>
+                      </select>
+                      <!--  Icon
+                      <span class="input-group-append">
+                          <span class="input-group-text bg-white">
+                              <i class="fas fa-chevron-down"></i>
+                          </span>
+                      </span>
+                      -->  
+                  </div>
+                  <div class="input-group pb-3">
+                      <select class="form-control" style="background-color: #EAEBEE;">
+                          <option>Select Transport</option>
+                          <option>Boat</option>
+                          <option>Truck</option>
+                          <option>Van</option>
+                      </select>
+                  </div>
+                  <div class="input-group pb-3 ">
+                      <select class="form-control" style="background-color: #EAEBEE">
+                          <option>Select Method</option>
+                          <option>Cash</option>
+                          <option>Bill</option>
+                          <option>Bank</option>
+                      </select>
+                  </div>
+                  <div class="input-group pb-3">
+                      <div class="form-outline">
+                          <input type="number" class="form-control" style="background-color: #EAEBEE"/>
+                          <label class="form-label">Freight Charges</label>
+                      </div>
+                  </div>
+                  <div class="input-group pb-3">
+                      <div class="form-outline">
+                          <input type="number" class="form-control" style="background-color: #EAEBEE"/>
+                          <label class="form-label">Total Amount</label>
+                      </div>
+                  </div>
               </div>
-
-              <div class="mt-4 text-center">
-                <button class="btn btn-primary w-100">SUBMIT</button>
+              <!--  Forms End -->
+              <!-- Form -->
+              <div class="col-sm-6">   
+                  <div class="border border-secondary p-3 rounded">
+                      <table class="table table-responsive table-sm table-striped m-0">
+                          <tbody>
+                              <tr>
+                                  <th scope="row">ID:</th>
+                                  <td class="fw-bold">28</td>
+                              </tr>
+                              <tr>
+                                  <th scope="row">Pick-up:</th>
+                                  <td class="fw-bold">Muntinlupa City</td>
+                              </tr>
+                              <tr>
+                                  <th scope="row">Drop-off:</th>
+                                  <td class="fw-bold">Las Pinas City</td>
+                              </tr>
+                              <tr>
+                                  <th scope="row">Parcel Size & Weight:</th>
+                                  <td class="fw-bold">Sample Size & Weight</td>
+                              </tr>
+                              <tr>
+                                  <th scope="row border-bottom-0">Parcel Item:</th>
+                                  <td class="fw-bold">Computer & Gadgets</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="d-grid gap-2 col-12 pt-4">
+                      <button class="btn text-light shadow-0" style="background-color: #214D94;">
+                      <h6 class="mb-0">Submit</h6>
+                      </button>
+                  </div>
               </div>
+              
           </div>
+          
         </div>
       </div>
 </div>
