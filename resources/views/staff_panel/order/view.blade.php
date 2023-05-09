@@ -5,7 +5,6 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationStaff')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
@@ -13,7 +12,7 @@
 
   <h4>Order #{{$ship->id}}</h4>
   <div>
-    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
+    @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
         <a href="{{route('trackOrder_Staff',$ship->id)}}" class="btn btn-primary btn">
             Track Order
         </a>
@@ -63,10 +62,10 @@
                             <ul>
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                @if($ship->company_bid == null && $ship->bid_amount == null)
+                                @if($ship->company_id == null && $ship->bid_amount == null)
                                     <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
                                 @else
-                                    <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                    <li>Company | <span>{{$company_name}}</span></li>
                                 @endif
                             </ul>
                         </div>
@@ -74,7 +73,7 @@
                             <ul>
                                 <li>Category | <span>{{$ship->category}}</span></li>
                                 <li>Mode of Pament | <span>{{$ship->mop}}</span></li>
-                                @if($ship->company_bid != null && $ship->bid_amount != null)
+                                @if($ship->company_id != null && $ship->bid_amount != null)
                                     <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
                                 @endif
                             </ul>
@@ -91,7 +90,7 @@
                     <img src="{{asset($ship->photo)}}" alt="">
                     </div>
                 </div>
-                @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
+                @if($ship->company_id == NULL && $ship->bid_amount == NULL)
                     <form method="POST" action="{{route('staff_addBid')}}">
                         @csrf
                         <input type="hidden" name="staff_id" value="{{Auth::user()->id}}" />

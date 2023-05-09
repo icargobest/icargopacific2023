@@ -67,7 +67,7 @@ VIEW
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
                                             {{ $ship->min_bid_amount }}</h6>
                                     @else
-                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{ $company_name }}</h6>
+                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{$company_name}}</h6>
                                     @endif
                                 </button>
                             </div>

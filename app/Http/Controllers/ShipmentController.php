@@ -352,28 +352,23 @@ class ShipmentController extends Controller
     function viewOrder($id)
     {
         $bid = Bid::all();
+        $ship = Shipment::findOrFail($id);
 
-        $ship = $this->shipment->getShipmentId($id);
+        $user = User::where('id', $ship->company_id)->first();
+        $company_name = $user->name;
+
         $this->TrackOrderLog();
-        return view('order.view', compact('ship'), ['bids' => $bid]);
+        return view('order.view', compact('ship','company_name'), ['bids' => $bid]);
     }
 
     function viewOrder_Company($id)
     {
         $bid = Bid::all();
-        $ship = Shipment::all();
+        $ship = Shipment::findOrFail($id);
 
-        $user_id = Auth::id();
-        $company = Company::where('user_id', $user_id)->first(); // Retrieve the first matching company record
-        if ($company) {
-            $company_id =  $company->user_id;
-            $user = User::where('id', $company_id)->first(); // Retrieve the first matching user record
-            if ($user) {
-                $company_name = $user->name;
-            }
-        }
+        $user = User::where('id', $ship->company_id)->first();
+        $company_name = $user->name;
 
-        $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
         return view('company.order.view', compact('ship', 'company_name'), ['bids' => $bid]);
     }
@@ -381,22 +376,11 @@ class ShipmentController extends Controller
     function viewOrder_Staff($id)
     {
         $bid = Bid::all();
+        $ship = Shipment::findOrFail($id);
 
-        $user_id = Auth::id();
-        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
-        if ($staff) {
-            $company_id = $staff->company_id; // Get the company_id from the staff record
-            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
-            if ($company) {
-                $company_id_staff =  $company->user_id;
-                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
-                if ($user) {
-                    $company_name = $user->name;
-                }
-            }
-        }
+        $user = User::where('id', $ship->company_id)->first();
+        $company_name = $user->name;
 
-        $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
         return view('staff_panel.order.view', compact('ship', 'company_name'), ['bids' => $bid]);
     }
@@ -407,9 +391,14 @@ class ShipmentController extends Controller
         $logs = OrderHistory::all();
         $statuses = Shipment::pluck('status')->unique();
 
-        $ship = $this->shipment->getShipmentId($id);
+        $ship = Shipment::findOrFail($id);
+
+
+        $user = User::where('id', $ship->company_id)->first();
+        $company_name = $user->name;
+
         $this->TrackOrderLog();
-        return view('order.track', compact('ship', 'logs'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
+        return view('order.track', compact('ship', 'logs', 'company_name'), ['bids' => $bid, 'order', 'statuses' => $statuses]);
     }
 
     function trackOrder_Company($id)
@@ -419,15 +408,11 @@ class ShipmentController extends Controller
         $stations = Station::all();
         $statuses = Shipment::pluck('status')->unique();
 
-        $user_id = Auth::id();
-        $company = Company::where('user_id', $user_id)->first(); // Retrieve the first matching company record
-        if ($company) {
-            $company_id =  $company->user_id;
-            $user = User::where('id', $company_id)->first(); // Retrieve the first matching user record
-            if ($user) {
-                $company_name = $user->name;
-            }
-        }
+        $ship = Shipment::findOrFail($id);
+
+
+        $user = User::where('id', $ship->company_id)->first();
+        $company_name = $user->name;
 
         $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
@@ -541,7 +526,7 @@ class ShipmentController extends Controller
         }
 
         $this->TrackOrderLog();
-        return view('staff_panel.order.orderHistory', compact('shipments', 'bids', 'orderLogs', 'company_id_staff'),['sender', 'recipient']);
+        return view('staff_panel.order.orderHistory', compact('shipments', 'bids', 'orderLogs', 'company_id_staff'), ['sender', 'recipient']);
     }
 
     public function transfer(Request $request)

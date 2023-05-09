@@ -5,7 +5,6 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationStaff')
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="order-container container">
@@ -69,7 +68,7 @@
                             <ul>
                                 <li>ID | <span>{{$ship->id}}</span></li>
                                 <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                <li>Company | <span>{{$ship->company_bid}}</span></li>
+                                <li>Company | <span>{{$company_name}}</span></li>
                             </ul>
                         </div>
                         <div class="listLayout col-lg-6 col-sm-12">

@@ -115,7 +115,7 @@
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
                                                 <th>Company:</th>
-                                                <td>{{ $ship->company_id }}</td>
+                                                <td>{{$company_name}}</td>
                                             </tr>
                                         @endif
                                     </table>
