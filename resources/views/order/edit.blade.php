@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <title>Customer | Order Form</title>
+    <title>Customer | Edit Order Form</title>
 
 </head>
 
@@ -12,6 +12,7 @@
 
     <div class="reminder-wrapper row px-3">
         <div class="card col p-4 shadow-sm">
+            <strong><span class="infoTitle"><span>EDIT ORDER FORM</span></span></strong><br>
             <span class="infoTitle"><i class="bi bi-info-circle-fill"></i><span>NOTICE!</span></span><br>
             <h6>Complete the following Information to Proceed</h6>
             <ul class="mt-3 ">
@@ -23,15 +24,15 @@
         </div>
     </div>
 
-    <form class="userInputs d-flex px-3" method="POST" action="{{ route('addOrder') }}" enctype="multipart/form-data">
+    <form class="userInputs d-flex px-3" method="POST" action="{{route('update_order', $shipment->id)}}" enctype="multipart/form-data">
         {{-- SENDER FORM --}}
         @csrf
+        @method('PUT')
         <div class="senderForm-wrapper row p-0 shadow-sm">
-            <header class="mb-3"><span>SENDER INFORMATION</span><i class="bi bi-1-circle-fill"></i></header>
+            <header class="mb-3"><span>SENDER INFORMATION (Edit)</span><i class="bi bi-1-circle-fill"></i></header>
 
             <div class="senderForm p-4">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" class="form-control" />
-                <input type="hidden" name="station_id" value="0" class="form-control" />
 
                 {{-- NAME INPUT --}}
                 <div class="nameInput mb-4">
@@ -39,7 +40,8 @@
                         <label class="form-label" for="nameSender">Full Name</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="nameSender" name="senderName" class="form-control" required />
+                        <input type="text" id="nameSender" value="{{ $shipment->sender->sender_name }}"
+                            name="senderName" class="form-control" required />
                     </div>
                 </div>
 
@@ -50,7 +52,8 @@
                             class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="addressSender" name="senderAddress" class="form-control" required />
+                        <input type="text" id="addressSender" value="{{ $shipment->sender->sender_address }}"
+                            name="senderAddress" class="form-control" required />
                     </div>
                 </div>
 
@@ -65,8 +68,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="mobileSender" name="senderMobile" class="form-control"
-                                    required />
+                                <input type="text" id="mobileSender" value="{{ $shipment->sender->sender_mobile }}"
+                                    name="senderMobile" class="form-control" required />
                             </div>
                         </div>
 
@@ -80,8 +83,8 @@
                                 <label class="form-label" for="telephoneSender">Telephone</label>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="telephoneSender" name="senderTelephone"
-                                    class="form-control" />
+                                <input type="text" id="telephoneSender" value="{{ $shipment->sender->sender_tel }}"
+                                    name="senderTelephone" class="form-control" />
                             </div>
                         </div>
 
@@ -94,7 +97,8 @@
                             class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="email" id="emailSender" name="senderEmail" class="form-control" required />
+                        <input type="email" id="emailSender" name="senderEmail"
+                            value="{{ $shipment->sender->sender_email }}" class="form-control" required />
                     </div>
                 </div>
 
@@ -110,8 +114,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="municipalitySender" name="senderCity" class="form-control"
-                                    required />
+                                <input type="text" id="municipalitySender" name="senderCity"
+                                    value="{{ $shipment->sender->sender_city }}" class="form-control" required />
                             </div>
                         </div>
 
@@ -125,8 +129,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="postalSender" name="senderZip" class="form-control"
-                                    required />
+                                <input type="text" id="postalSender" value="{{ $shipment->sender->sender_zip }}"
+                                    name="senderZip" class="form-control" required />
                             </div>
                         </div>
 
@@ -139,7 +143,8 @@
                         <label class="form-label" for="stateSender">State</label> <span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="stateSender" name="senderState" class="form-control" required />
+                        <input type="text" id="stateSender" value="{{ $shipment->sender->sender_state }}"
+                            name="senderState" class="form-control" required />
                     </div>
                 </div>
 
@@ -158,7 +163,8 @@
         {{-- RECEIVER FORM --}}
 
         <div class="receiverForm-wrapper row p-0 shadow-sm" id="receiverForm">
-            <header class="mb-3"><span>RECEIVER INFORMATION</span> <i class="bi bi-2-circle-fill"></i></header>
+            <header class="mb-3"><span>RECEIVER INFORMATION (Edit)</span> <i class="bi bi-2-circle-fill"></i>
+            </header>
 
             <div class="senderForm p-4">
 
@@ -168,7 +174,8 @@
                         <label class="form-label" for="nameReceiver">Full Name</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="nameReceiver" name="receiverName" class="form-control" required />
+                        <input type="text" id="nameReceiver" value="{{ $shipment->recipient->recipient_name }}"
+                            name="receiverName" class="form-control" required />
                     </div>
                 </div>
 
@@ -179,8 +186,9 @@
                             class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="addressReceiver" name="receiverAddress" class="form-control"
-                            required />
+                        <input type="text" id="addressReceiver"
+                            value="{{ $shipment->recipient->recipient_address }}" name="receiverAddress"
+                            class="form-control" required />
                     </div>
                 </div>
 
@@ -195,8 +203,9 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="mobileReceiver" name="receiverMobile" class="form-control"
-                                    required />
+                                <input type="text" id="mobileReceiver"
+                                    value="{{ $shipment->recipient->recipient_mobile }}" name="receiverMobile"
+                                    class="form-control" required />
                             </div>
                         </div>
 
@@ -210,7 +219,8 @@
                                 <label class="form-label" for="telephoneReceiver">Telephone</label>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="telephoneReceiver" name="receiverTelephone"
+                                <input type="text" id="telephoneReceiver"
+                                    value="{{ $shipment->recipient->recipient_tel }}" name="receiverTelephone"
                                     class="form-control" />
                             </div>
                         </div>
@@ -224,8 +234,8 @@
                             class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="email" id="emailReceiver" name="receiverEmail" class="form-control"
-                            required />
+                        <input type="email" id="emailReceiver" value="{{ $shipment->recipient->recipient_email }}"
+                            name="receiverEmail" class="form-control" required />
                     </div>
                 </div>
 
@@ -241,8 +251,9 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="cityReceiver" name="receiverCity" class="form-control"
-                                    required />
+                                <input type="text" id="cityReceiver"
+                                    value="{{ $shipment->recipient->recipient_city }}" name="receiverCity"
+                                    class="form-control" required />
                             </div>
                         </div>
 
@@ -256,8 +267,9 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="text" id="postalReceiver" name="receiverZip" class="form-control"
-                                    required />
+                                <input type="text" id="postalReceiver"
+                                    value="{{ $shipment->recipient->recipient_zip }}" name="receiverZip"
+                                    class="form-control" required />
                             </div>
                         </div>
 
@@ -270,8 +282,8 @@
                         <label class="form-label" for="stateReceiver">State</label><span class="required">*</span>
                     </span>
                     <div class="form-outline">
-                        <input type="text" id="stateReceiver" name="receiverState" class="form-control"
-                            required />
+                        <input type="text" id="stateReceiver" value="{{ $shipment->recipient->recipient_state }}"
+                            name="receiverState" class="form-control" required />
                     </div>
                 </div>
 
@@ -290,7 +302,7 @@
         {{-- PARCEL DETAILS FORM --}}
 
         <div class="parcelForm-wrapper row p-0 shadow-sm mb-4" id="parcelForm">
-            <header class="mb-3"><span>PARCEL DETAILS</span> <i class="bi bi-3-circle-fill"></i></header>
+            <header class="mb-3"><span>PARCEL DETAILS (Edit)</span> <i class="bi bi-3-circle-fill"></i></header>
 
             <div class="senderForm p-4">
 
@@ -303,8 +315,10 @@
                             </span>
                             <div class="form-outline">
                                 <select class="form-control" id="serviceParcel" name="service_type" required>
-                                    <option value="Standard">Standard</option>
-                                    <option value="Express">Express</option>
+                                    <option value="Standard"
+                                        {{ $shipment->service_type == 'Standard' ? 'selected' : '' }}>Standard</option>
+                                    <option value="Express"
+                                        {{ $shipment->service_type == 'Express' ? 'selected' : '' }}>Express</option>
                                 </select>
                             </div>
                         </div>
@@ -317,8 +331,10 @@
                             </span>
                             <div class="form-outline">
                                 <select class="form-control" id="typeParcel" name="order_type" required>
-                                    <option value="Document">Document</option>
-                                    <option value="Other">Other/s</option>
+                                    <option value="Document"
+                                        {{ $shipment->order_type == 'Document' ? 'selected' : '' }}>Document</option>
+                                    <option value="Other" {{ $shipment->order_type == 'Other' ? 'selected' : '' }}>
+                                        Other/s</option>
                                 </select>
                             </div>
                         </div>
@@ -331,11 +347,14 @@
                             </span>
                             <div class="form-outline">
                                 <select class="form-control" id="paymentParcel" name="mop" required>
-                                    <option value="COD">Cash On
+                                    <option value="COD"
+                                        {{ $shipment->mop == 'COD' ? 'selected' : '' }}>Cash On
                                         Delivery(COD)</option>
-                                    <option value="Gcash Payment">Gcash
+                                    <option value="Gcash Payment"
+                                        {{ $shipment->mop == 'Gcash Payment' ? 'selected' : '' }}>Gcash
                                         Payment</option>
-                                    <option value="Credit/Debit Card">
+                                    <option value="Credit/Debit Card"
+                                        {{ $shipment->mop == 'Credit/Debit Card' ? 'selected' : '' }}>
                                         Credit/Debit Card</option>
                                 </select>
                             </div>
@@ -352,8 +371,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="number" id="weightParcel" name="weight" class="form-control"
-                                    required />
+                                <input type="number" id="weightParcel" value="{{ intval($shipment->weight) }}"
+                                    name="weight" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -364,8 +383,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="number" id="lengthParcel" name="length" class="form-control"
-                                    required />
+                                <input type="number" id="lengthParcel" value="{{ intval($shipment->length) }}"
+                                    name="length" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -376,8 +395,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="number" id="widthParcel" name="width" class="form-control"
-                                    required />
+                                <input type="number" id="widthParcel" value="{{ intval($shipment->width) }}"
+                                    name="width" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -388,8 +407,8 @@
                                     class="required">*</span>
                             </span>
                             <div class="form-outline">
-                                <input type="number" id="heightParcel" name="height" class="form-control"
-                                    required />
+                                <input type="number" id="heightParcel" value="{{ intval($shipment->height) }}"
+                                    name="height" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -402,8 +421,11 @@
                             </span>
                             <div class="form-outline">
                                 <select class="form-control" id="categoryParcel" name="category">
-                                    <option value="Domestic">Domestic</option>
-                                    <option value="International">International</option>
+                                    <option value="Domestic"
+                                        {{ $shipment->category == 'Domestic' ? 'selected' : '' }}>Domestic</option>
+                                    <option value="International"
+                                        {{ $shipment->category == 'International' ? 'selected' : '' }}>International
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -419,7 +441,8 @@
                                 class="required">*</span>
                         </span>
                         <div class="form-outline">
-                            <input type="number" id="bidParcel" name="amount" class="form-control" required />
+                            <input type="number" id="bidParcel" value="{{ $shipment->min_bid_amount }}"
+                                name="amount" class="form-control" required />
                         </div>
                     </div>
                 </div>
@@ -428,7 +451,10 @@
                 <div class="imageInput w-50 mb-4">
                     <span>Image<span class="required">*</span></span>
                     <div class="form-outline mb-4">
-                        <input type="file" name="photo" id="photo" />
+                        <div>
+                            <img src="{{asset($shipment->photo)}}" alt="Image preview" width="200px">
+                        </div>
+                        <input type="file" value="{{asset($shipment->photo)}}" name="photo" id="photo" />
                     </div>
                 </div>
 

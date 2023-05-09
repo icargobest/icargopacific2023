@@ -75,7 +75,7 @@
                         <div class="listLayout col-lg-6 col-sm-12">
                             <ul>
                                 <li>Category | <span>{{$ship->category}}</span></li>
-                                <li>Mode of Pament | <span>COD</span></li>
+                                <li>Mode of Pament | <span>{{$ship->mop}}</span></li>
                                 <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
                             </ul>
                         </div>
