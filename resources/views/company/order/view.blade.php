@@ -195,6 +195,16 @@ VIEW
                                         <th>Parcel Item:</th>
                                         <td>{{ $ship->category }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Mode of Payment:</th>
+                                        <td>{{$ship->mop}}</td>
+                                    </tr>
+                                    @if ($ship->bid_amount != null && $ship->company_id != null)
+                                        <tr>
+                                            <th>Bid Amount:</th>
+                                            <td>{{ $ship->bid_amount }}</td>
+                                        </tr>
+                                    @endif
                                 </table>
                             </div>
                         </div>

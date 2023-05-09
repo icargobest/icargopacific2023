@@ -108,7 +108,7 @@
                                     @endif
                                     </table>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                     <tr>
                                         <th width="40%">Category:</th>
