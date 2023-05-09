@@ -325,6 +325,10 @@ class ShipmentController extends Controller
 
         $shipment->status = 'Cancelled';
         $shipment->save();
+
+        Bid::where('shipment_id', $shipment->id)
+            ->update(['status' => 'Order Cancelled']);
+
         $this->TrackOrderLog();
 
         return redirect()->back();

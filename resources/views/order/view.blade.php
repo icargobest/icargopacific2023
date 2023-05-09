@@ -171,10 +171,7 @@
                                         <form method="POST" action="{{ route('cancelOrder', $ship->id) }}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-danger btn-block shadow-0 my-1"
-                                                style="min-width:140px; max-width:509px;">
-                                                Cancel Order
-                                            </button>
+                                            @include('order.cancel')
                                         </form>
                                     @endif
                                 @endif
