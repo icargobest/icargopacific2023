@@ -36,13 +36,14 @@
                         <th>ITEM</th>
                         <th>SIZE & WIDTH</th>
                         <th>MAXIMUM BID</th>
+                        <th>MOP</th>
                         <th>STATUS</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach ($shipments as $ship)
-                    @if((Auth::user()->type == 'staff' && $ship->company_bid == null && $ship->status == 'Pending'))
+                    @if((Auth::user()->type == 'staff' && $ship->status == 'Pending'))
                             <tr>
                                 <td>{{$ship->id}}</td>
                                 <td style="width:70px; height:70px;">
@@ -53,6 +54,7 @@
                                 <td>{{$ship->category}}</td>
                                 <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                 <td>{{$ship->min_bid_amount}}</td>
+                                <td>{{$ship->mop}}</td>
                                 <td>{{$ship->status}}</td>
                                 <td>
                                     <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">

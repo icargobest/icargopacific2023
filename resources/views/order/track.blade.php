@@ -28,129 +28,131 @@
             <h4 class="text-dark">ORDER TRACKING #{{ $ship->id }}</h4>
             <div class="cards-holder">
                 <card class="item-card bg-white btn-wrapper p-4">
-                    {{-- START OF ORDER DETAILS --}}
-                    <!-- Mobile Sender and Receiver -->
-                    <div class="row overflow-auto">
-                        <!-- Product Information -->
-                        <div class="col-xl-9">
-                            <div class="row">
-                                <div class="col-lg-6 pt-2">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
-                                            </th>
-                                            <!-- This code is here because of nagiging vertical yung sender -->
-                                        </tr>
-                                        <tr>
-                                            <th width="40%">Name:</th>
-                                            <td width="60%">{{ $ship->sender->sender_name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address:</th>
-                                            <td>{{ $ship->sender->sender_address }} ,
-                                                {{ $ship->sender->sender_city }} ,
-                                                {{ $ship->sender->sender_state }} ,
-                                                {{ $ship->sender->sender_zip }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Contact Number:</th>
-                                            <td>{{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
-                                                    | {{ $ship->sender->sender_tel }}
+                    <div class="cards-holder">
+                        <card class="item-card bg-white btn-wrapper p-4">
+                            {{-- START OF ORDER DETAILS --}}
+                            <!-- Mobile Sender and Receiver -->
+                            <div class="row overflow-auto">
+                                <!-- Product Information -->
+                                <div class="col-xl-9">
+                                    <div class="row">
+                                        <div class="col-lg-6 pt-2">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                    </th>
+                                                    <!-- This code is here because of nagiging vertical yung sender -->
+                                                </tr>
+                                                <tr>
+                                                    <th width="40%">Name:</th>
+                                                    <td width="60%">{{ $ship->sender->sender_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Address:</th>
+                                                    <td>{{ $ship->sender->sender_address }} ,
+                                                        {{ $ship->sender->sender_city }} ,
+                                                        {{ $ship->sender->sender_state }} ,
+                                                        {{ $ship->sender->sender_zip }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Contact Number:</th>
+                                                    <td>{{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
+                                                            | {{ $ship->sender->sender_tel }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email:</th>
+                                                    <td>{{ $ship->sender->sender_email }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <hr class="opacity-75 d-block d-lg-none">
+                                        <div class="col-lg-6 pt-2">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                    </th>
+                                                    <!-- This code is here because of nagiging vertical yung sender -->
+                                                </tr>
+                                                <tr>
+                                                    <th width="40%">Name:</th>
+                                                    <td width="60%">{{ $ship->recipient->recipient_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Address:</th>
+                                                    <td>{{ $ship->recipient->recipient_address }} ,
+                                                        {{ $ship->recipient->recipient_city }} ,
+                                                        {{ $ship->recipient->recipient_state }} ,
+                                                        {{ $ship->recipient->recipient_zip }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Contact Number:</th>
+                                                    <td>{{ $ship->recipient->recipient_mobile }} @if ($ship->recipient->recipient_tel != null)
+                                                            | {{ $ship->recipient->recipient_tel }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email:</th>
+                                                    <td>{{ $ship->recipient->recipient_email }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <hr class="opacity-75">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                        <div class="col-lg-6 pt-2">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th width="40%">ID:</th>
+                                                    <td width="60%">{{ $ship->id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size & Weight:</th>
+                                                    <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
+                                                        | {{ intval($ship->weight) }}Kg</td>
+                                                </tr>
+                                                @if ($ship->bid_amount != null && $ship->company_bid != null)
+                                                    <tr>
+                                                        <th>Company:</th>
+                                                        <td>{{ $ship->company_bid }}</td>
+                                                    </tr>
                                                 @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email:</th>
-                                            <td>{{ $ship->sender->sender_email }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <hr class="opacity-75 d-block d-lg-none">
-                                <div class="col-lg-6 pt-2">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
-                                            </th>
-                                            <!-- This code is here because of nagiging vertical yung sender -->
-                                        </tr>
-                                        <tr>
-                                            <th width="40%">Name:</th>
-                                            <td width="60%">{{ $ship->recipient->recipient_name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address:</th>
-                                            <td>{{ $ship->recipient->recipient_address }} ,
-                                                {{ $ship->recipient->recipient_city }} ,
-                                                {{ $ship->recipient->recipient_state }} ,
-                                                {{ $ship->recipient->recipient_zip }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Contact Number:</th>
-                                            <td>{{ $ship->recipient->recipient_mobile }} @if ($ship->recipient->recipient_tel != null)
-                                                    | {{ $ship->recipient->recipient_tel }}
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th width="40%">Category:</th>
+                                                    <td width="60%">{{ $ship->category }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Mode of Payment:</th>
+                                                    <td>{{$ship->mop}}</td>
+                                                </tr>
+                                                @if ($ship->bid_amount != null && $ship->company_bid != null)
+                                                    <tr>
+                                                        <th>Bid Amount:</th>
+                                                        <td>{{ $ship->bid_amount }}</td>
+                                                    </tr>
                                                 @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email:</th>
-                                            <td>{{ $ship->recipient->recipient_email }}</td>
-                                        </tr>
-                                    </table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 d-xl-none">
+                                            <hr class="opacity-75">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <hr class="opacity-75">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
-                                <div class="col-lg-6 pt-2">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th width="40%">ID:</th>
-                                            <td width="60%">{{ $ship->id }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Size & Weight:</th>
-                                            <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
-                                                | {{ intval($ship->weight) }}Kg</td>
-                                        </tr>
-                                        @if ($ship->bid_amount != null && $ship->company_id != null)
-                                            <tr>
-                                                <th>Company:</th>
-                                                <td>{{ $ship->company_bid }}</td>
-                                            </tr>
-                                        @endif
-                                    </table>
-                                </div>
-                                <div class="col-lg-6">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th width="40%">Category:</th>
-                                            <td width="60%">{{ $ship->category }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Mode of Payment:</th>
-                                            <td>COD</td>
-                                        </tr>
-                                        @if ($ship->bid_amount != null && $ship->company_id != null)
-                                            <tr>
-                                                <th>Bid Amount:</th>
-                                                <td>{{ $ship->bid_amount }}</td>
-                                            </tr>
-                                        @endif
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 d-xl-none">
-                                    <hr class="opacity-75">
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">

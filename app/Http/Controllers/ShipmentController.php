@@ -229,15 +229,15 @@ class ShipmentController extends Controller
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
-            'weight' => $request->weight,
-            'length' => $request->length,
-            'width' => $request->width,
-            'height' => $request->height,
-            'service_type' => $request->service_type,
-            'order_type' => $request->order_type,
-            'category' => $request->category,
-            'min_bid_amount' => $request->amount,
-            'mode_of_payment' => $request->mode_of_payment,
+            'weight' => $request->input('weight'),
+            'length' => $request->input('length'),
+            'width' => $request->input('width'),
+            'height' => $request->input('height'),
+            'service_type' => $request->input('service_type'),
+            'order_type' => $request->input('order_type'),
+            'category' => $request->input('category'),
+            'min_bid_amount' => $request->input('amount'),
+            'mop' => $request->input('mop'),
             'photo' => '/storage/' . $path,
             'status' => 'Pending',
         ];
@@ -246,10 +246,10 @@ class ShipmentController extends Controller
         $shipment = $shipmentModel->create($shipmentData);
 
         // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
-        $sender->save();
-        $recipient->save();
+        // $sender->shipment_id = $shipment->id;
+        // $recipient->shipment_id = $shipment->id;
+        // $sender->save();
+        // $recipient->save();
 
         $time = $shipment->updated_at;
 
@@ -372,6 +372,7 @@ class ShipmentController extends Controller
                 $company_name = $user->name;
             }
         }
+
         $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
         return view('company.order.view', compact('ship', 'company_name'), ['bids' => $bid]);
@@ -381,9 +382,23 @@ class ShipmentController extends Controller
     {
         $bid = Bid::all();
 
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if ($company) {
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if ($user) {
+                    $company_name = $user->name;
+                }
+            }
+        }
+
         $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
-        return view('staff_panel.order.view', compact('ship'), ['bids' => $bid]);
+        return view('staff_panel.order.view', compact('ship', 'company_name'), ['bids' => $bid]);
     }
 
     function trackOrder($id)
@@ -404,9 +419,19 @@ class ShipmentController extends Controller
         $stations = Station::all();
         $statuses = Shipment::pluck('status')->unique();
 
+        $user_id = Auth::id();
+        $company = Company::where('user_id', $user_id)->first(); // Retrieve the first matching company record
+        if ($company) {
+            $company_id =  $company->user_id;
+            $user = User::where('id', $company_id)->first(); // Retrieve the first matching user record
+            if ($user) {
+                $company_name = $user->name;
+            }
+        }
+
         $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
-        return view('company.order.track', compact('ship', 'logs'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
+        return view('company.order.track', compact('ship', 'logs', 'company_name'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
     }
 
     function trackOrder_Staff($id)
@@ -416,9 +441,23 @@ class ShipmentController extends Controller
         $stations = Station::all();
         $statuses = Shipment::pluck('status')->unique();
 
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if ($company) {
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if ($user) {
+                    $company_name = $user->name;
+                }
+            }
+        }
+
         $ship = $this->shipment->getShipmentId($id);
         $this->TrackOrderLog();
-        return view('staff_panel.order.track', compact('ship', 'logs'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
+        return view('staff_panel.order.track', compact('ship', 'logs', 'company_name'), ['bids' => $bid, 'order', 'statuses' => $statuses, 'stations' => $stations]);
     }
 
     public function viewInvoice($id)
@@ -463,12 +502,46 @@ class ShipmentController extends Controller
         return view('staff_panel.order.generate-invoice', compact('ship'));
     }
 
-    function orderHistory()
+    function orderHistory_user()
     {
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $orderLogs = OrderHistory::all();
         $this->TrackOrderLog();
-        return view('order.order-history', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('order.orderHistory', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'orderLogs' => $orderLogs]);
+    }
+
+    function orderHistory_company()
+    {
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+        $orderLogs = OrderHistory::all();
+        $this->TrackOrderLog();
+        return view('company.order.orderHistory', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'orderLogs' => $orderLogs]);
+    }
+
+    function orderHistory_staff()
+    {
+        $shipments = Shipment::all();
+        $bids = Bid::all();
+        $orderLogs = OrderHistory::all();
+
+        $user_id = Auth::id();
+        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
+        if ($staff) {
+            $company_id = $staff->company_id; // Get the company_id from the staff record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if ($company) {
+                $company_id_staff =  $company->user_id;
+                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
+                if ($user) {
+                    $company_name = $user->name;
+                }
+            }
+        }
+
+        $this->TrackOrderLog();
+        return view('staff_panel.order.orderHistory', compact('shipments', 'bids', 'orderLogs', 'company_id_staff'),['sender', 'recipient']);
     }
 
     public function transfer(Request $request)
@@ -527,5 +600,53 @@ class ShipmentController extends Controller
         $this->TrackOrderLog();
 
         return view('dispatcher_panel.order.dispatch', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function edit_order($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        return view('order.edit', compact('shipment'));
+    }
+
+    public function update_order(Request $request, $id)
+    {
+        $shipment = Shipment::find($id);
+
+        $shipment->sender->sender_name = $request->input('senderName');
+        $shipment->sender->sender_address = $request->input('senderAddress');
+        $shipment->sender->sender_mobile = $request->input('senderMobile');
+        $shipment->sender->sender_tel = $request->input('senderTelephone');
+        $shipment->sender->sender_email = $request->input('senderEmail');
+        $shipment->sender->sender_city = $request->input('senderCity');
+        $shipment->sender->sender_zip = $request->input('senderZip');
+        $shipment->sender->sender_state = $request->input('senderState');
+
+        $shipment->sender->save();
+
+        $shipment->recipient->recipient_name = $request->input('receiverName');
+        $shipment->recipient->recipient_address = $request->input('receiverAddress');
+        $shipment->recipient->recipient_mobile = $request->input('receiverMobile');
+        $shipment->recipient->recipient_tel = $request->input('receiverTelephone');
+        $shipment->recipient->recipient_email = $request->input('receiverEmail');
+        $shipment->recipient->recipient_city = $request->input('receiverCity');
+        $shipment->recipient->recipient_zip = $request->input('receiverZip');
+        $shipment->recipient->recipient_state = $request->input('receiverState');
+
+        $shipment->recipient->save();
+
+        $shipment->weight = $request->input('weight');
+        $shipment->length = $request->input('length');
+        $shipment->width = $request->input('width');
+        $shipment->height = $request->input('height');
+        $shipment->service_type = $request->input('service_type');
+        $shipment->order_type = $request->input('order_type');
+        $shipment->category = $request->input('category');
+        $shipment->mop = $request->input('mop');
+        $shipment->min_bid_amount = $request->input('amount');
+
+        $shipment->save();
+
+        return redirect()->route('viewOrder', $id)->with('success', 'Order information has been updated!');
     }
 }

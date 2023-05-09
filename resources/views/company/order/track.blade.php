@@ -103,7 +103,7 @@
                                     @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
                                             <th>Company:</th>
-                                            <td>{{$ship->company_bid}}</td>
+                                            <td>{{$ship->company_id}}</td>
                                         </tr>
                                     @endif
                                     </table>
@@ -116,7 +116,7 @@
                                     </tr>
                                     <tr>
                                         <th>Mode of Payment:</th>
-                                        <td>COD</td>
+                                        <td>{{$ship->mop}}</td>
                                     </tr>
                                     @if($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
@@ -185,7 +185,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN DELIVERED</h5>
-                                                            <p class="card-text mb-0">{{$log->isDeliveredTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -209,8 +209,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT FOR DELIVERY</h5>
-                                                            <p class="card-text mb-0">{{$log->isDispatchedTime}}</p>
-
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isDispatchedTime)) }}</p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -233,7 +232,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ARRIVED AT SORTING FACILITY</h5>
-                                                            <p class="card-text mb-0">{{$log->isArrivedTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isArrivedTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -257,7 +256,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
-                                                            <p class="card-text mb-0">{{$log->isTransferredTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -281,7 +280,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
-                                                            <p class="card-text mb-0">{{$log->isAssortTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isAssortTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -305,7 +304,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
-                                                            <p class="card-text mb-0">{{$log->isPickUpTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isPickUpTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -329,7 +328,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY BEING PROCESSED</h5>
-                                                            <p class="card-text mb-0">{{$log->isProcessedTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isProcessedTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -353,7 +352,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
-                                                            <p class="card-text mb-0">{{$log->isPendingTime}}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">

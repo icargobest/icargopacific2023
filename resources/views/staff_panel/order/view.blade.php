@@ -63,7 +63,7 @@ VIEW
                             <div class="row align-items-end">
                                 {{-- TRACK ORDER--}}
                                 @if (
-                                    $ship->company_id != null &&
+                                    $ship->company_bid != null &&
                                         $ship->bid_amount != null &&
                                         $ship->status != 'Cancelled' &&
                                         $ship->status != 'Delivered')
@@ -89,7 +89,7 @@ VIEW
                                         <input type="hidden" name="staff_id" value="{{Auth::user()->id}}" />
                                         <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
                                         <label class="control-label control-label-left fw-bold">BID<span class="required"></span></label>
-                                        <input type="number" class="form-control typeahead btn-block w-100" placeholder="BID AMOUNT" id="form6Example3" id="bidAmount" name="bid_amount" required/>
+                                        <input type="number" id="form6Example3" id="bidAmount" name="bid_amount" class="form-control typeahead btn-block w-100" required/>
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton"> 
@@ -131,7 +131,10 @@ VIEW
                                     <tr>
                                         <th>Contact Number:</th>
                                         <td>{{$ship->sender->sender_mobile}} 
-                                            @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
+                                            @if($ship->sender->sender_tel != NULL)
+                                            | {{$ship->sender->sender_tel}}
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="px-5" colspan="2"><hr class="opacity-75"></td>
@@ -153,7 +156,10 @@ VIEW
                                     <tr>
                                         <th>Contact Number:</th>
                                         <td>{{$ship->recipient->recipient_mobile}}
-                                             @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
+                                             @if($ship->recipient->recipient_tel != NULL)
+                                                | {{$ship->recipient->recipient_tel}}
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="px-5" colspan="2"><hr class="opacity-75"></td>
@@ -171,9 +177,15 @@ VIEW
                                             {{intval($ship->weight)}}Kg</td>
                                     </tr>
                                     <tr>
-                                    <th>Parcel Item:</th>
+                                        <th>Parcel Item:</th>
                                         <td>{{$ship->category}}</td>
                                     </tr>
+                                    @if ($ship->bid_amount != null && $ship->company_id != null)
+                                        <tr>
+                                            <th>Bid Amount:</th>
+                                            <td>{{ $ship->bid_amount }}</td>
+                                        </tr>
+                                    @endif
                                 </table>
                             </div>
                         </div>
