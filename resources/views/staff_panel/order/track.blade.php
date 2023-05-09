@@ -31,7 +31,7 @@
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{--START OF ORDER DETAILS--}}
                     <!-- Mobile Sender and Receiver -->
-                    <div class="row overflow-auto">
+                    <div class="row">
                         <!-- Product Information -->
                         <div class="col-xl-9">
                             <div class="row">
@@ -164,7 +164,7 @@
                                 @include('staff_panel.order.transfer')
                             @endif
                             <a href="{{route('viewOrder_Staff',$ship->id)}}">
-                                <div class="my-1 d-flex justify-content-center">
+                                <div class="my-1">
                                     <button type="button" class="btn btn-block shadow-0 btn-dark mb-1" style="min-width:140px; max-width:509px;">
                                     BACK
                                     </button>
@@ -267,8 +267,8 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
-                                                            <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isTransferredTime))}}</p>
-                                                            
+                                                            <p class="card-text mb-0">Date: {{date('F d, Y h:i A', strtotime($log->isTransferredTime))}}</p>
+                                                            <p> </p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>
@@ -364,7 +364,6 @@
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">Date : {{date('F d, Y h:i A', strtotime($log->isPendingTime))}}</p>
-                                                            <p class="card-text mb-0"></p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0" >Company:</p>

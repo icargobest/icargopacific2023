@@ -209,7 +209,7 @@
                                 </tbody>
                             </form>
                         @endif
-                    @endforeach
+                        @endforeach
                         </table>
                     </section>
                 </card>

@@ -154,7 +154,7 @@
                                 @include('company.order.transfer')
                             @endif
                             <a href="{{route('viewOrder_Company', $ship->id)}}">
-                                <div class="my-1 d-flex justify-content-center">
+                                <div class="my-1">
                                     <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
                                     BACK
                                     </button>
