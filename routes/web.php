@@ -44,14 +44,14 @@ use App\Http\Controllers\DriverDashboardController;
 // });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /* Route::get('/', function () {
+    return view('welcome');
+}); */
+
+Route::get('/', function () {
     return view('profile.user');
 });
- */
+
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {

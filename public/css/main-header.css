@@ -170,6 +170,11 @@ border-bottom-right-radius: 0;
 {
 width: 250px;
 }
+.sidebar:hover span
+{
+display: block;
+}
+
 .sidebar .wrapper
 {
 width: 250px;
@@ -265,7 +270,7 @@ margin-left: 13px !important;
     font-size: 12px;
     margin-left: 20px;
     white-space: nowrap; 
-    text-decoration: none;
+    text-decoration: none;  
 }
 
 .sidebar .divider
@@ -325,6 +330,11 @@ padding: 0px !important;
 {
 position: fixed;
 bottom: 0;
+}
+
+.bottom-nav span
+{
+display: none;
 }
 
 .links a
@@ -442,6 +452,12 @@ display: none;
 {
 width: 250px;
 /* display: none; */
+}
+
+
+.sidebar span
+{
+display: block;
 }
 
 .sidebar .divider2
