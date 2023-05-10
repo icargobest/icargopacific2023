@@ -170,11 +170,6 @@ border-bottom-right-radius: 0;
 {
 width: 250px;
 }
-.sidebar:hover span
-{
-display: block;
-}
-
 .sidebar .wrapper
 {
 width: 250px;
@@ -334,7 +329,7 @@ bottom: 0;
 
 .bottom-nav span
 {
-display: none;
+visibility: hidden;
 }
 
 .links a
@@ -454,10 +449,9 @@ width: 250px;
 /* display: none; */
 }
 
-
-.sidebar span
+.bottom-nav span
 {
-display: block;
+visibility:visible;
 }
 
 .sidebar .divider2
