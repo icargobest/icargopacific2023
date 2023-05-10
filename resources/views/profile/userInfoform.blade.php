@@ -88,7 +88,7 @@
 </style>
 
 
-    <button type="submit" class="profileButton" onclick="openPopup()">EDIT</button>
+    
     <div class="usereditform" id="usereditform">
         <form>
             <div class="title">

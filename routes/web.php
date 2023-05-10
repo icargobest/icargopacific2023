@@ -44,18 +44,14 @@ use App\Http\Controllers\DriverDashboardController;
 // });
 
 
-Route::get('/', function () {
-<<<<<<< HEAD
-    return view('profile.user');
-=======
+ Route::get('/', function () {
     return view('welcome');
->>>>>>> TALARO-BRANCH
-});
+}); 
 
-/* Route::get('/', function () {
-    return view('profile.user');
-});
- */
+// Route::get('/', function () {
+//     return view('profile.user');
+// });
+
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
