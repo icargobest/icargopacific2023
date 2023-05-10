@@ -11,10 +11,6 @@
 @section('title', 'Monthly Income')
 @section('content')
 
-<style>
-    
-</style>
-
 <div class="content-container" style="margin-top:-14px !important;">
     <div class="mainContainer">
         <div class="DashboardContainer">
@@ -158,7 +154,7 @@
             @endforeach
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Monthly Income',
             curveType: 'function',
@@ -184,7 +180,7 @@
         ]);
     
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
             // title: 'Weekly Income Chart',
             curveType: 'function',
@@ -213,7 +209,7 @@
             ['2030', {{ $chartData[8][1] }}]
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Yearly Income',
             curveType: 'function',
@@ -238,7 +234,7 @@
             @endforeach
         ]);
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
             // title: 'Daily Income',
             curveType: 'function',

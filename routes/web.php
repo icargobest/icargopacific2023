@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BidController;
-use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShipmentController;
@@ -19,8 +18,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
-use App\Models\OrderTrackingLog;
-use App\Http\Controllers\SuperDashboardController;
 
 
 
@@ -52,7 +49,7 @@ use App\Http\Controllers\SuperDashboardController;
 }); */
 
 Route::get('/', function () {
-    return view('profile.user');
+    return view('profile.photoform');
 });
 
 
@@ -92,6 +89,10 @@ Route::get('/dispatcher/qr', function () {
 Route::get('/dispatcher/history', function () {
     return view('dispatcher_panel.dispatchHistory');
 });
+
+
+
+
 
 
 
@@ -203,17 +204,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
 // Super Admin Panel
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
-    Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
+    Route::get('/super-admin/dashboard', [HomeController::class, 'superAdminDashboard'])
     ->name('super.admin.dashboard');
-
-      //Companies
-      Route::resource('icargo/companies', CompaniesController::class);
-      Route::controller(CompaniesController::class)->group(function(){
-          Route::get('/companies','index')->name('companies.view');
-          Route::get('/companies_staff','viewArchive')->name('companies.viewArchive');
-          Route::put('/companies/archive/{id}', 'archive')->name('companies.archive');
-          Route::put('/companies/unarchive/{id}', 'unarchive')->name('companies.unarchive');
-      });
 });
 
 // Driver Panel
@@ -238,8 +230,6 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
     Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
     Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-    Route::post('dispatchers/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
-    Route::post('dispatchers/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
 
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
@@ -301,8 +291,6 @@ Route::get('/find', function () {
 Route::post('/search', [UserController::class, 'search']);
 
 Route::get('/income', [IncomeController::class, 'index']);
-
-Route::get('/super-admin/dashboard', [SuperDashboardController::class, 'index']);
 
 
 //DRIVER PAGE
