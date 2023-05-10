@@ -44,6 +44,11 @@
 
 .login-container{
     background-color: white;
+    min-height: 760px;
+}
+
+.change-pass-container{
+    background-color: white;
 }
 
 .login-header{
@@ -88,4 +93,8 @@
     color: white;
     padding: 5px;
     font-size: 18px;
+}
+
+.login-form{
+    min-height: 407px;
 }

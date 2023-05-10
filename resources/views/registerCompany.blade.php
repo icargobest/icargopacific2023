@@ -1,14 +1,19 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    div ::-webkit-scrollbar-track{
+    background-color: tomato;
+}
+</style>
 <div class="vertical-center">
 <div class="container">
     <div class="row justify-content-center">
     
-        <div class="col-md-7 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
+        <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
             <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
         </div>
     
-        <div class="col-lg-5 login-container p-5">
+        <div class="col-lg-4 login-container p-5">
                 <div class="pb-2 login-header">{{ __('Register as a company') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
                 
@@ -141,7 +146,7 @@
                         </div>
                     </form>
                     <a href="{{ route('register') }}">
-                        <button type="button" class="mb-5 register-ascompany-button letter-spacing">
+                        <button type="button" class="register-ascompany-button letter-spacing">
                             {{ __('Register as a user') }}
                         </button>   
                     </a>
