@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('unarchive.dispatcher', $dispatcher->id)}}"
+                    action="{{route('restore.dispatcher', $dispatcher->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

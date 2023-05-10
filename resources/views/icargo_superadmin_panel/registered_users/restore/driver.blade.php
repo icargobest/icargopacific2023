@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('unarchive.driver', $driver->id)}}"
+                    action="{{route('restore.driver', $driver->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('unarchive.company', $company->id)}}"
+                    action="{{route('restore.company', $company->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

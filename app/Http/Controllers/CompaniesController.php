@@ -112,8 +112,7 @@ class CompaniesController extends Controller
             'company_address' => $request->company_address,
         ]);
 
-        return redirect()->route('companies.index', $id)
-            ->with('success', 'Company account has been updated successfully.');
+        return back()->with('success', 'Company account has been updated successfully.');
     }
 
     public function archive(Request $request, $id)
@@ -124,8 +123,7 @@ class CompaniesController extends Controller
             'archived' => 1,
         ]);
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company account has been archived successfully.');
+        return back()->with('success', 'Company account has been archived successfully.');
     }
 
     public function unarchive(Request $request, $id)
@@ -136,8 +134,7 @@ class CompaniesController extends Controller
             'archived' => 0,
         ]);
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company account has been restored successfully.');
+        return back()->with('success', 'Company account has been restored successfully.');
     }
 
     public function viewArchive()
@@ -157,13 +154,12 @@ class CompaniesController extends Controller
             'archived' => 0,
         ]);
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company account has been restored successfully.');
+        return back()->with('success', 'Company account has been restored successfully.');
     }
 
     public function destroy($id)
     {
         Company::destroy($id);
-        return redirect()->route('companies.index')->with('success', 'Staff member has been deleted successfully.');
+        return back()->with('success', 'Staff member has been deleted successfully.');
     }
 }

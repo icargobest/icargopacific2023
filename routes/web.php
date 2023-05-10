@@ -198,28 +198,33 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
       Route::resource('icargo/registered_users', UsersController::class);
       Route::controller(UsersController::class)->group(function(){
           Route::get('icargo/registered_users','index')->name('registered_users.view');
+          Route::get('registered_users/archived','viewArchive')->name('registered_users.viewArchive');
         
-          // update data
-          Route::put('registered_users/update+company/{id}', [UsersController::class, 'updateCompany'])->name('update.company');
-          Route::put('registered_users/update+driver/{id}', [UsersController::class, 'updateDriver'])->name('update.driver');
-          Route::put('registered_users/update+dispatcher/{id}', [UsersController::class, 'updateDispatcher'])->name('update.dispatcher');
-          Route::put('registered_users/update+staff/{id}', [UsersController::class, 'updateStaff'])->name('update.staff');
+          // update registered user
+          Route::put('icargo/registered_users/update+company/{id}', [CompaniesController::class, 'update'])->name('update.company');
+          Route::put('icargo/registered_users/update+driver/{id}', [DriverController::class, 'update'])->name('update.driver');
+          Route::put('icargo/registered_users/update+dispatcher/{id}', [DispatcherController::class, 'update'])->name('update.dispatcher');
+          Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'update'])->name('update.staff');
 
-        Route::get('/registered_users/archived','viewArchive')->name('registered_users.viewArchive');
 
-        //  archive data
-        Route::put('registered_users/archive+company/{id}', [UsersController::class, 'archiveCompany'])->name('archive.company');
-        Route::put('registered_users/archive+driver/{id}', [UsersController::class, 'archiveDriver'])->name('archive.driver');
-        Route::put('registered_users/archive+dispatcher/{id}', [UsersController::class, 'archiveDispatcher'])->name('archive.dispatcher');
-        Route::put('registered_users/archive+staff/{id}', [UsersController::class, 'archiveStaff'])->name('archive.staff');
+        //  archive registered user
+        Route::put('icargo/registered_users/archive+company/{id}', [CompaniesController::class, 'archive'])->name('archive.company');
+        Route::put('icargo/registered_users/archive+driver/{id}', [DriverController::class, 'archive'])->name('archive.driver');
+        Route::put('icargo/registered_users/archive+dispatcher/{id}', [DispatcherController::class, 'archive'])->name('archive.dispatcher');
+        Route::put('icargo/registered_users/archive+staff/{id}', [StaffController::class, 'archive'])->name('archive.staff');
 
-        //  unarchive data
-        Route::put('registered_users/unarchive+company/{id}', [UsersController::class, 'unarchiveCompany'])->name('unarchive.company');
-        Route::put('registered_users/unarchive+driver/{id}', [UsersController::class, 'unarchiveDriver'])->name('unarchive.driver');
-        Route::put('registered_users/unarchive+dispatcher/{id}', [UsersController::class, 'unarchiveDispatcher'])->name('unarchive.dispatcher');
-        Route::put('registered_users/unarchive+staff/{id}', [UsersController::class, 'unarchiveStaff'])->name('unarchive.staff');
+        //  unarchive registered user
+        Route::put('icargo/registered_users/unarchive+company/{id}', [CompaniesController::class, 'unarchive'])->name('unarchive.company');
+        Route::put('icargo/registered_users/unarchive+driver/{id}', [DriverController::class, 'unarchive'])->name('unarchive.driver');
+        Route::put('icargo/registered_users/unarchive+dispatcher/{id}', [DispatcherController::class, 'unarchive'])->name('unarchive.dispatcher');
+        Route::put('icargo/registered_users/unarchive+staff/{id}', [StaffController::class, 'unarchive'])->name('unarchive.staff');
 
-          Route::put('/registered_users/unarchive/{id}', 'unarchive')->name('registered_users.unarchive');
+        //  restore archived registered user
+        Route::put('icargo/registered_users/restore+company/{id}', [CompaniesController::class, 'restore'])->name('restore.company');
+        Route::put('icargo/registered_users/restore+driver/{id}', [DriverController::class, 'restore'])->name('restore.driver');
+        Route::put('icargo/registered_users/restore+dispatcher/{id}', [DispatcherController::class, 'restore'])->name('restore.dispatcher');
+        Route::put('icargo/registered_users/restore+staff/{id}', [StaffController::class, 'restore'])->name('restore.staff');
+
     });
 
       //Companies
