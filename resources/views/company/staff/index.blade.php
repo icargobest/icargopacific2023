@@ -35,7 +35,7 @@
                       <i class="fas fa-search"></i>
                     </span>
                 </div>
-            </div>      
+            </div>
         </section>
 
         <div class="mt-2">
@@ -82,9 +82,9 @@
                 </tbody>
             </table>
         </div>
-        
+
     </div>
 </main>
 
 @include('company.staff.create')
-@include('partials.footer')	
+@include('partials.footer')
