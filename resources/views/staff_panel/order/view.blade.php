@@ -239,17 +239,19 @@ VIEW
 
 <script>
     // Get the minimum bid amount from the HTML using PHP
-    var maxBidAmount = {{$ship->min_bid_amount}};
+    var maxBidAmount = {{ $ship->min_bid_amount }};
     // Get a reference to the bid amount input field and the bid button
     var bidAmountInput = document.getElementById('form6Example3');
     var bidButton = document.getElementById('bidButton');
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount > maxBidAmount) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount && bidAmount < 0) {
             bidButton.disabled = true;
+            bidButton.style.cursor = "not-allowed"; // add cursor validation
         } else {
             bidButton.disabled = false;
+            bidButton.style.cursor = "pointer"; // add cursor validation
         }
     });
 </script>
