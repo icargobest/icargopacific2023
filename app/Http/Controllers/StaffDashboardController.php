@@ -8,8 +8,10 @@ use App\Models\WeeklyIncome;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\DailyIncome;
+use Illuminate\Support\Facades\Auth;
 
-class IncomeStaffController extends Controller
+
+class StaffDashboardController extends Controller
 {
     public function index()
     {
@@ -28,7 +30,8 @@ class IncomeStaffController extends Controller
 
         $totalYearly = $totalMonthly;
 
-        $dashboard = DB::table('dashboard')->first();
+        $user_id = Auth::id();
+        $dashboard = DB::table('dashboard')->where('user_id', $user_id)->first();
 
         // Prepare the data for use in the line chart
         $chartData = [
@@ -46,6 +49,6 @@ class IncomeStaffController extends Controller
         $dailyData = DailyIncome::select('day', 'income')->orderBy('day')->get();
         
 
-        return view('incomestaff', compact('incomes', 'totalMonthly', 'totalYearly', 'dashboard', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
+        return view('company\staff\dashboard', compact('incomes', 'totalMonthly', 'totalYearly', 'dashboard', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 }

@@ -1,92 +1,79 @@
-<head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Orders</title>
-  </head>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+        <title>Staff | Orders</title>
+    </head>
 
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-  @include('layouts.app')
-  @extends('partials.navigationStaff')
+    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @extends('layouts.app')
+    @include('partials.navigationStaff',['order' => "nav-selected"])
 
-  {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-  <div class="order-container container">
+	<style>
+        th {
+            background-color: white !important;
+            color: black;
+            font-weight: normal;
+        }
+        td {
+            text-align: left;
+            font-weight: bold;
+        }
+    </style>
+    {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
+    <div class="container mw-100">
+        <div class="bg-white shadow" style="max-width: 100%;">
+            <div class="waybill-head employee-header-container" style="background-color: #214D94;">
+                <h3 class="text-white mb-0">Order List</h3>
+            </div>
+            {{-- TABLE START--}}
+            <section class="mb-5 px-5 my-3 overflow-auto">
+                <table class="table table-striped table-hover">
+                <thead class="text-white" style="background-color: #214D94;">
+                    <tr>
+                        <th>ID</th>
+                        <th>PHOTO</th>
+                        <th>PICKUP</th>
+                        <th>DROPOFF</th>
+                        <th>ITEM</th>
+                        <th>SIZE & WIDTH</th>
+                        <th>MAX BID</th>
+                        <th>MOP</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($shipments as $ship)
+                    @if((Auth::user()->type == 'staff' && $ship->status == 'Pending'))
+                            <tr>
+                                <td>{{$ship->id}}</td>
+                                <td style="width:70px; height:70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25 h-100" style="min-width:70px; object-fit:cover;" alt=""/>
+                                </td>
+                                <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
+                                <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
+                                <td>{{$ship->category}}</td>
+                                <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
+                                <td>{{$ship->min_bid_amount}}</td>
+                                <td>{{$ship->mop}}</td>
+                                <td>{{$ship->status}}</td>
+                                <td>
+                                    <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
+                                        <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
+                                        VIEW
+                                        </button>
+                                    </a>
+                                    {{--<span class="d-flex align-items-start">@include('staff_panel.order.view')</span>--}}
 
-    <h4>ORDER LIST</h4>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+                </table>
+            </section>
+            {{-- END OF TABLE --}}
+        </div>
+    </div>
+    {{-- END OF ORDER CONTAINER --}}
+    @include('partials.footer')
 
-      <div class="cards-holder">
-
-          @foreach ($shipments as $ship)
-              @if((Auth::user()->type == 'staff' && $ship->company_bid == null && $ship->status == 'Pending'))
-                {{-- CARD CREATED AFTER FILLING UP --}}
-                <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
-                    <div class="item-card container px-4">
-                    <div class="card-body">
-                        <div class="row">
-
-                        <div class="details-wrapper col-lg-10 col-sm-12">
-                            <div class="recepients-wrapper row">
-
-                            <div class="senderInfo col-lg-6">
-                                <h6>SENDER</h6>
-
-                                <ul>
-                                    <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
-                                    <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
-                                    <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
-                                </ul>
-                            </div>
-                            <div class="receiverInfo col-lg-6">
-                                <h6>RECEIVER</h6>
-
-                                <ul>
-                                    <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
-                                    <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
-                                    <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                                </ul>
-                            </div>
-
-                            </div>
-                            <div class="parcelInfo-wrapper">
-
-                            <div class="itemInfo">
-                                <h6>ITEM INFORMATION</h6>
-
-                                <div class="parcelDetails row">
-
-                                <div class="listLayout col-lg-6 col-sm-12">
-                                    <ul>
-                                        <li>ID | <span>{{$ship->id}}</span></li>
-                                        <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                    </ul>
-                                </div>
-                                <div class="listLayout col-lg-6 col-sm-12">
-                                    <ul>
-                                        <li>Category | <span>{{$ship->category}}</span></li>
-                                        <li>Mode of Pament | <span>COD</span></li>
-                                    </ul>
-                                </div>
-
-                                </div>
-                            </div>
-
-                            </div>
-                        </div>
-
-                        <div class="image-wrapper col">
-                            <div class="image-holder">
-                            <img src="{{asset($ship->photo)}}" alt="">
-                            </div>
-                        </div>
-
-                        </div>
-                    </div>
-                    </div>
-                </a>
-                {{-- END OF CARD --}}
-              @endif
-          @endforeach
-          </div>
-      </div>
-      {{-- END OF ORDER CONTAINER --}}
-
-        <!-- End of Waybill List -->
-        @include('partials.footer')

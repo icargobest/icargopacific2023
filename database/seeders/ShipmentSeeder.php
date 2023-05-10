@@ -34,7 +34,6 @@ class ShipmentSeeder extends Seeder
             'sender_city' => $faker->city(),
             'sender_state' => $faker->state(),
             'sender_zip' => $faker->postcode(),
-            'shipment_id' => null,
         ];
         $senderModel = new Sender();
         $sender = $senderModel->create($senderData);
@@ -49,7 +48,6 @@ class ShipmentSeeder extends Seeder
             'recipient_city' => $faker->city(),
             'recipient_state' => $faker->state(),
             'recipient_zip' => $faker->postcode(),
-            'shipment_id' => null,
         ];
         $recipientModel = new Recipient();
         $recipient = $recipientModel->create($recipientData);
@@ -74,11 +72,5 @@ class ShipmentSeeder extends Seeder
         ];
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
-
-        // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
-        $sender->save();
-        $recipient->save();
     }
 }
