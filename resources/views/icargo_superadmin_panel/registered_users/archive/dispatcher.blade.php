@@ -12,7 +12,7 @@
     class="modal top fade"
     id="archiveModalDispatcher{{$dispatcher->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModal{{$dispatcher->id}}"
+    aria-labelledby="archiveModalDispatcher{{$dispatcher->id}}"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"

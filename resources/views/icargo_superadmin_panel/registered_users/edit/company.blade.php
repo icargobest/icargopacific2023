@@ -11,7 +11,7 @@
     class="modal top fade"
     id="editModalCompany{{$company->id}}"
     tabindex="-1"
-    aria-labelledby="editModal"
+    aria-labelledby="editModalCompany"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"

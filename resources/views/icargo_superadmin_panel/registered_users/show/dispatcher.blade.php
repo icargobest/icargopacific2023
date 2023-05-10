@@ -28,6 +28,18 @@
             </div>
             <div class="modal-body">
                 <fieldset disabled>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $dispatcher->user->id }}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >User Account ID</label
+                        >
+                    </div>
+                    
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -65,7 +77,7 @@
                             class="form-control"
                         />
                         <label class="form-label" for="updateEmail"
-                            >Dispatcher User ID</label
+                            >Dispatcher ID</label
                         >
                     </div>
 

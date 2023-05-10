@@ -11,7 +11,7 @@
     class="modal top fade"
     id="editModalDriver{{$driver->id}}"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="editModalDriver"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"

@@ -12,7 +12,7 @@
     class="modal top fade"
     id="restoreModalDriver{{$driver->id}}"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="restoreModalDriver"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('restore.driver', $driver->id)}}"
+                    action="{{route('unarchive.driver', $driver->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

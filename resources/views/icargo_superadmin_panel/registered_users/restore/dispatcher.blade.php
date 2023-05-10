@@ -12,7 +12,7 @@
     class="modal top fade"
     id="restoreModalDispatcher{{$dispatcher->id}}"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="restoreModalDispatcher"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('restore.dispatcher', $dispatcher->id)}}"
+                    action="{{route('unarchive.dispatcher', $dispatcher->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

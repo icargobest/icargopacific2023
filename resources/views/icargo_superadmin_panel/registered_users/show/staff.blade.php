@@ -2,14 +2,14 @@
     type="button"
     class="btn btn-warning btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#showModal{{$staff->user->id}}"
+    data-mdb-target="#showModalStaff{{$staff->user->id}}"
 >
     SHOW
 </button>
 
 <div
     class="modal top fade"
-    id="showModal{{$staff->user->id}}"
+    id="showModalStaff{{$staff->user->id}}"
     tabindex="-1"
     aria-hidden="true"
     data-mdb-backdrop="static"
@@ -28,6 +28,18 @@
             </div>
             <div class="modal-body">
                 <fieldset disabled>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $staff->user->id }}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >User Account ID</label
+                        >
+                    </div>
+
                     <div class="form-outline mb-4">
                         <input
                             type="text"

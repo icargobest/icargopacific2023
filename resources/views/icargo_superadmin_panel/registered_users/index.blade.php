@@ -18,36 +18,19 @@
             </button>
         </a>
 
-        <section class="search-filter-container">
-            <div class="top-container1" style="max-width: 800px">
-                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
-                <div class="input-group rounded">
-                    <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Search Company"
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                    />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
-            </div>
-        </section>
 
         <div class="mt-2">@include('flash-message')</div>
 
         <div class="table-container">
-            <table class="table table-striped">
+            <table class="table table-striped table-borderless hover" id="registeredUsers">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center">User ID</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
+                        <th scope="col" style="text-align: center">Contact No</th>
                         <th scope="col" style="text-align: center">Type</th>
                         <th scope="col" style="text-align: center">
-                            Company ID
+                            Company
                         </th>
                         <th
                             scope="col"
@@ -60,11 +43,11 @@
                 <tbody>
                     @foreach ($companies as $company)
                     <tr>
-                        <td>{{ $company->user->id }}</td>
                         <td class="capitalized">{{ $company->user->name }}</td>
                         <td>{{ $company->user->email }}</td>
+                        <td>{{ $company->contact_no}}</td>
                         <td>{{ $company->user->type }}</td>
-                        <td>{{ $company->id }}</td>
+                        <td>{{ $company->user->name }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
@@ -80,13 +63,17 @@
                     
                     @foreach ($dispatchers as $dispatcher)
                     <tr>
-                        <td>{{ $dispatcher->user->id }}</td>
                         <td class="capitalized">
                             {{ $dispatcher->user->name }}
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
+                        <td>{{ $dispatcher->contact_no}}</td>
                         <td>{{ $dispatcher->user->type }}</td>
-                        <td>{{ $dispatcher->company_id }}</td>
+                        <td>
+                            @if ($dispatcher->company && $dispatcher->company->user)
+                                {{ $dispatcher->company->user->name }}
+                            @endif
+                        </td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
@@ -102,11 +89,15 @@
                     
                     @foreach ($drivers as $driver)
                     <tr>
-                        <td>{{ $driver->user->id }}</td>
                         <td class="capitalized">{{ $driver->user->name }}</td>
                         <td>{{ $driver->user->email }}</td>
+                        <td>{{ $driver->contact_no }}</td>
                         <td>{{ $driver->user->type }}</td>
-                        <td>{{ $driver->company_id }}</td>
+                        <td>
+                            @if ($driver->company && $driver->company->user)
+                                {{ $driver->company->user->name }}
+                            @endif
+                        </td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
@@ -123,11 +114,15 @@
 
                     @foreach ($staffs as $staff)
                     <tr>
-                        <td>{{ $staff->user->id }}</td>
                         <td class="capitalized">{{ $staff->user->name }}</td>
                         <td>{{ $staff->user->email }}</td>
+                        <td>{{ $staff->contact_no }}</td>
                         <td>{{ $staff->user->type }}</td>
-                        <td>{{ $staff->company_id }}</td>
+                        <td>
+                            @if ($staff->company && $staff->company->user)
+                                {{ $staff->company->user->name }}
+                            @endif
+                        </td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
@@ -140,10 +135,38 @@
                         </td>
                     </tr>
                     @endforeach
+
+                    @foreach ($customers as $customer)
+                    <tr>
+                        <td class="capitalized">{{ $customer->user->name }}</td>
+                        <td>{{ $customer->user->email }}</td>
+                        <td>{{ $customer->contact_no }}</td>
+                        <td>{{ $customer->user->type }}</td>
+                        <td>{{ $customer->company_id }}</td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($customer->user->type == "user")
+                                @include('icargo_superadmin_panel.registered_users.show.customer')
+                                @include('icargo_superadmin_panel.registered_users.edit.customer')
+                                @include('icargo_superadmin_panel.registered_users.archive.customer')
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    let table = new DataTable('#registeredUsers');
+</script>
 
 @include('partials.footer')

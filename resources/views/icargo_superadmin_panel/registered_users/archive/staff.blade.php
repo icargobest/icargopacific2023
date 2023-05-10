@@ -12,7 +12,7 @@
     class="modal top fade"
     id="archiveModalStaff{{$staff->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModal{{$staff->id}}"
+    aria-labelledby="archiveModalStaff{{$staff->id}}"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"

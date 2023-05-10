@@ -12,7 +12,7 @@
     class="modal top fade"
     id="archiveModalDriver{{$driver->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModal{{$driver->id}}"
+    aria-labelledby="archiveModalDriver{{$driver->id}}"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"

@@ -101,9 +101,16 @@ class CompaniesController extends Controller
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
 
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->email ?? $user->email,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
 
         $company->update([
@@ -144,17 +151,6 @@ class CompaniesController extends Controller
             ->get();
 
         return view('icargo_superadmin_panel.companies.viewArchive', compact('companies'));
-    }
-
-    public function restore(Request $request, $id)
-    {
-        $company = Company::findOrFail($id);
-
-        $company->update([
-            'archived' => 0,
-        ]);
-
-        return back()->with('success', 'Company account has been restored successfully.');
     }
 
     public function destroy($id)

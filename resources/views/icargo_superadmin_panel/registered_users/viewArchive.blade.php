@@ -129,6 +129,25 @@
                         </td>
                     </tr>
                     @endforeach
+
+                    @foreach ($customers as $customer)
+                    <tr>
+                        <td>{{ $customer->user->id }}</td>
+                        <td class="capitalized">{{ $customer->user->name }}</td>
+                        <td>{{ $customer->user->email }}</td>
+                        <td>{{ $customer->user->type }}</td>
+                        <td> </td>
+                        <td
+                            class="td-buttons d-flex justify-content-center"
+                            style="overflow: auto"
+                        >
+                            @if ($customer->user->type == "user")
+                                @include('icargo_superadmin_panel.registered_users.show.customer')
+                                @include('icargo_superadmin_panel.registered_users.restore.customer')
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

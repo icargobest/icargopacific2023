@@ -12,7 +12,7 @@
     class="modal top fade"
     id="restoreModalStaff{{$staff->id}}"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="restoreModalStaff"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('restore.staff', $staff->id)}}"
+                    action="{{route('unarchive.staff', $staff->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

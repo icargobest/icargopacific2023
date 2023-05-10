@@ -12,7 +12,7 @@
     class="modal top fade"
     id="restoreModalCompany{{$company->id}}"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="restoreModalCompany"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -31,7 +31,7 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('restore.company', $company->id)}}"
+                    action="{{route('unarchive.company', $company->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>

@@ -3,16 +3,16 @@
     type="button"
     class="btn btn-danger btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#archiveModalCompany{{$company->id}}"
+    data-mdb-target="#archiveModal{{$customer->id}}"
 >
     Archive
 </button>
 
 <div
     class="modal top fade"
-    id="archiveModalCompany{{$company->id}}"
+    id="archiveModal{{$customer->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModalCompany{{$company->id}}"
+    aria-labelledby="archiveModal{{$customer->id}}"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -20,7 +20,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header mbc3">
-                <h5 class="modal-title">ARCHIVE COMPANY</h5>
+                <h5 class="modal-title">ARCHIVE CUSTOMER</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -31,13 +31,13 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('archive.company', $company->id)}}"
+                    action="{{route('registered_customers.archive', $customer->id)}}"
                 >
-                    @csrf @method('PUT')
+                    @csrf @method ('PUT')
                     <h4>
                         Are you sure you want to
-                        <span class="span-red">archive</span> {{
-                        $company->user->name}}?
+                        <span class="span-red">archived</span>
+                        {{$customer->user->name}}?
                     </h4>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger btn-block">

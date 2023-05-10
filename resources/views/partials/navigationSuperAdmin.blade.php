@@ -20,7 +20,16 @@
             crossorigin="anonymous"
         ></script>
         <link rel="stylesheet" href="{{ asset('css/main-header.css') }}" />
-        <link rel="stylesheet" href="/css/waybill-list.css" />
+
+        {{-- Data Table --}}
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+        />
 
         <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}" />
 
@@ -78,6 +87,16 @@
                                         class="nav-link"
                                         href="{{route('companies.index')}}"
                                         ><span>Companies</span></a
+                                    >
+                                </div>
+                            </div>
+                            <div class="links">
+                                <div class="link">
+                                    <i class="fa fa-plus"></i>
+                                    <a
+                                        class="nav-link"
+                                        href="{{route('customers.index')}}"
+                                        ><span>Customers</span></a
                                     >
                                 </div>
                             </div>

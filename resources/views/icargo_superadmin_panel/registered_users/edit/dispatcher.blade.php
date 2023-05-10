@@ -11,7 +11,7 @@
     id="editModalDispatcher{{$dispatcher->id}}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
+    aria-labelledby="editModalDispatcher"
     aria-hidden="true"
 >
     <div class="modal-dialog">
