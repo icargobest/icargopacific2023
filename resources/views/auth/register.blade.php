@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center">
+<div class="py-4 vertical-center">
 <div class="container">
     <div class="row justify-content-center shadow">
 

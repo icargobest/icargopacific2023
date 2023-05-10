@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<style>
-    div ::-webkit-scrollbar-track{
-    background-color: tomato;
-}
-</style>
-<div class="vertical-center">
+<div class="py-4 vertical-center">
 <div class="container">
     <div class="row justify-content-center">
     

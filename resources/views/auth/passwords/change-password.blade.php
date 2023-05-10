@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="vertical-center">
+<div class="py-4 vertical-center">
     <div class="container center p-5">
         <div class="row justify-content-center">
             <div class="col-md-6 border shadow change-pass-container p-5" style="">

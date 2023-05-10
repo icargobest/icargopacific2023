@@ -6,7 +6,7 @@
         height: 1.5rem;
     }
 </style>
-<div class="vertical-center">
+<div class="py-4 vertical-center">
 <div class="container">
     <div class="row justify-content-center shadow">
         <div class="col-lg-4 login-container p-5">
@@ -66,14 +66,14 @@
                             </div>
                         </div>
 
-                        <div class="">
+                        <div class="mb-5 pb-5">
                             <div class="row justify-content-center">
                                 <div class="col-12">
                                 <button type="submit" class="btn btn-primary mb-2 login-button letter-spacing" style="background-color: #F7CF0F; border:none; color: #214D94; width: 100%; font-weight:500;">
                                     {{ __('LOGIN') }}
                                 </button>
                                 </div>
-                                <div class="col-8 text-center mb-5">
+                                <div class="col-8 text-center mb-5 pb-5">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link " href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
