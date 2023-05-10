@@ -45,7 +45,11 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Personal Information</h5>
+<<<<<<< HEAD
                   <button type="submit" class="profileButton" onclick="openPopup()">EDIT</button>
+=======
+                  @include('profile.userInfoform')
+>>>>>>> TALARO-BRANCH
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>
@@ -64,7 +68,11 @@
               <div class="profileContent">
                   <div class="titleButton">
                     <h5 style="font-weight: bolder">Adress</h5>
+<<<<<<< HEAD
                     <button type="submit" class="profileButton" onclick="addressopenPopup()">EDIT</button>
+=======
+                    @include('profile.addressform')
+>>>>>>> TALARO-BRANCH
                     {{-- <button class="profileButton">EDIT</button> --}}
                   </div>
                   <div class="profileDivider2 "></div>
@@ -83,7 +91,11 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Social</h5>
+<<<<<<< HEAD
                   <button type="submit" class="profileButton" onclick="socialopenPopup()">EDIT</button>
+=======
+                  @include('profile.socialform')
+>>>>>>> TALARO-BRANCH
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>

@@ -23,6 +23,7 @@
             {{-- CSS --}}
             <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
             <link rel="stylesheet" href="/css/waybill-list.css" />
 
             {{-- ICONS --}}
@@ -53,40 +54,42 @@
                         <div class="links">
 
                             <a class="nav-link" href="/company/dashboard">
-                            <div class="link" >
-                                <i class="fa fa-tachometer link-i-1" ></i>
-                                <span>Dashboard</span>
-                            </div>
+                                <div class="link @if(isset($dashboard)){{$dashboard}}@endif">
+                                    <i class="fa fa-tachometer link-i-1"></i>
+                                    <span>Dashboard</span>
+                                </div>
                             </a>
 
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="{{route('staff.order')}}">
-                            <div class="link">
-                                <i class="fa fa-list link-i-1"></i>
-                                <span>Order  </span>
-                            </div>
+                            <a class="nav-link" href="{{ route('staff.order') }}">
+                                <div class="link @if(isset($order)){{$order}}@endif">
+                                    <i class="fa fa-list link-i-1"></i>
+                                    <span>Order </span>
+                                </div>
                             </a>
                         </div>
 
                         <div class="links">
-                            <div class="link">
-                                <i class="fa fa-history link-i-1"></i>
-                                <span>Order History</span>
-                            </div>
-                          </div>
+                            <a class="nav-link" href="{{ route('orderHistory_Staff') }}">
+                                <div class="link @if(isset($history)){{$history}}@endif">
+                                    <i class="fa fa-history link-i-1"></i>
+                                    <span>Order History</span>
+                                </div>
+                            </a>
+                        </div>
 
                         <div class="links">
-                            <a class="nav-link" href="{{route('freightStaff')}}">
-                                <div class="link" >
+                            <a class="nav-link" href="{{ route('freightStaff') }}">
+                                <div class="link @if(isset($freight)){{$freight}}@endif">
                                     <i class="fa fa-truck link-i-1"></i>
                                     <span>Freight</span>
                                 </div>
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="{{route('staff.advFreightPanel')}}">
-                                <div class="link" >
+                            <a class="nav-link" href="{{ route('staff.advFreightPanel') }}">
+                                <div class="link @if(isset($advance)){{$advance}}@endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>
                                 </div>
@@ -118,32 +121,33 @@
 
                         <div class="links">
                             <a class="nav-link" href="/company/stations">
-                                <div class="link">
-                                    <i class="fa fa-charging-station link-i-1" ></i>
+                                <div class="link @if(isset($station)){{$station}}@endif">
+                                    <i class="fa fa-charging-station link-i-1"></i>
                                     <span>Station</span>
                                 </div>
                             </a>
                         </div>
                     </div>
 
-        <!--             <div class="divider2">
+                    <!--             <div class="divider2">
                     </div> -->
 
-                        <div class="links bottom-nav">
-                          <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                              <div class="link ">
-                                  <i class="fa fa-sign-out"></i>
-                                      <span>Logout</span>
-                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                          @csrf
-                                      </form>
-                              </div>
-                          </a>
-                      </div>
+                    <div class="links bottom-nav">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <div class="link ">
+                                <i class="fa fa-sign-out"></i>
+                                <span>Logout</span>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </a>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <div class="content-container">
+        </div>
+    </div>
+
+    <div class="content-container">

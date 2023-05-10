@@ -46,13 +46,9 @@
                             @if(Auth::user()->type == 'company' && $ship->company_bid == null && $ship->status == 'Pending')
                             <tr>
                                 <td>{{$ship->id}}</td>
-                                <!-- Photo not showing -->
-                                <td style="width: 70px;">
-                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width:70px; object-fit:contain;" alt=""/>
+                                <td style="width:70px; height:70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25 h-100" style="min-width:70px; object-fit:cover;" alt=""/>
                                 </td>
-                                <!-- <td style="width: 70px;">
-                                    <img class="card shadow-0 w-25" style="min-width:70px; object-fit:contain;" src="https://images.unsplash.com/photo-1600331073565-d1f0831de6cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80" alt=""/>
-                                </td> -->
                                 <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
                                 <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
                                 <td>{{$ship->category}}</td>
