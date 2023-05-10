@@ -2,14 +2,14 @@
     type="button"
     class="btn btn-warning btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#showModal{{$company->id}}"
+    data-mdb-target="#showModal{{$customer->id}}"
 >
     SHOW
 </button>
 
 <div
     class="modal top fade"
-    id="showModal{{$company->id}}"
+    id="showModal{{$customer->id}}"
     tabindex="-1"
     aria-hidden="true"
     data-mdb-backdrop="static"
@@ -18,7 +18,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header mbc1">
-                <h5 class="modal-title">VIEW Company</h5>
+                <h5 class="modal-title">VIEW Customer</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -28,11 +28,10 @@
             </div>
             <div class="modal-body">
                 <fieldset disabled>
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"
-                            value=" {{ $company->user->id }}"
+                            value=" {{ $customer->user->id }}"
                             class="form-control"
                         />
                         <label class="form-label" for="updateEmail"
@@ -43,11 +42,11 @@
                     <div class="form-outline mb-4">
                         <input
                             type="text"
-                            value=" {{ $company->id }}"
+                            value=" {{ $customer->id }}"
                             class="form-control"
                         />
                         <label class="form-label" for="updateEmail"
-                            >Company ID</label
+                            >Customer ID</label
                         >
                     </div>
 
@@ -61,7 +60,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ $company->user->name }}"
+                                value="{{ $customer->user->name }}"
                                 autocomplete="name"
                                 autofocus
                                 placeholder="Name"
@@ -81,7 +80,7 @@
                                 type="email"
                                 class="form-control @error('email') is-invalid @enderror"
                                 name="email"
-                                value="{{ $company->user->email}}"
+                                value="{{ $customer->user->email}}"
                                 autocomplete="email"
                                 placeholder="E-mail Address"
                             />
@@ -89,9 +88,8 @@
                     </div>
 
                     <hr />
-                    {{-- contact number --}}
 
-                    <!-- Contact input -->
+                    {{-- contact number --}}
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -102,7 +100,7 @@
                                 type="text"
                                 class="form-control @error('contact_no') is-invalid @enderror"
                                 name="contact_no"
-                                value="{{ $company->contact_no }}"
+                                value="{{ $customer->contact_no }}"
                                 autocomplete="contact_no"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                 minlength="11"
@@ -112,33 +110,18 @@
                         </div>
                     </div>
 
-                    {{-- contact name --}}
+                    {{-- address--}}
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-person-fill text-secondary"></i>
                             </span>
                             <input id="contactnum" type="text"
-                            class="form-control @error('contact_name')
-                            is-invalid" @enderror" name="contact_name" value="{{
-                            $company->contact_name }}" 
-                            autocomplete="contact_name" autofocus
-                            placeholder="Contact Name">
-                        </div>
-                    </div>
-
-                    {{-- company address--}}
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('company_address')
-                            is-invalid" @enderror" name="company_address"
-                            value="{{$company->company_address }}"
-                            autocomplete="company_address" autofocus
-                            placeholder="Company Address">
+                            class="form-control @error('address')
+                            is-invalid" @enderror" name="address"
+                            value="{{$customer->address }}"
+                            autocomplete="address" autofocus
+                            placeholder="Address">
                         </div>
                     </div>
 
@@ -147,7 +130,7 @@
                         <input
                             type="text"
                             name="created_at"
-                            value="{{$company->created_at}}"
+                            value="{{$customer->created_at}}"
                             class="form-control"
                         />
                     </div>
@@ -157,7 +140,7 @@
                         <input
                             type="text"
                             name="updated_at"
-                            value="{{$company->updated_at}}"
+                            value="{{$customer->updated_at}}"
                             class="form-control"
                         />
                     </div>

@@ -2,16 +2,16 @@
     type="button"
     class="btn btn-success btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#editModal{{$company->id}}"
+    data-mdb-target="#editModalCompany{{$company->id}}"
 >
     EDIT
 </button>
 
 <div
     class="modal top fade"
-    id="editModal{{$company->id}}"
+    id="editModalCompany{{$company->id}}"
     tabindex="-1"
-    aria-labelledby="editModal"
+    aria-labelledby="editModalCompany"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -36,7 +36,7 @@
                 </p>
                 <form
                     method="POST"
-                    action="{{route('companies.update', $company->id)}}"
+                    action="{{route('update.company', $company->id)}}"
                 >
                     @csrf @method('PUT')
                     <div class="row mb-4">
@@ -65,6 +65,31 @@
                     </div>
 
                     <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password" >
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Re-Type Password">
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i
@@ -90,47 +115,10 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password"
-                                type="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                autocomplete="new-password"
-                                placeholder="Password"
-                            />
-
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password-confirm"
-                                type="password"
-                                class="form-control"
-                                name="password_confirmation"
-                                autocomplete="new-password"
-                                placeholder="Re-Type Password"
-                            />
-                        </div>
-                    </div>
-
                     <hr />
-
                     {{-- contact number --}}
+
+                    <!-- Contact input -->
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -215,7 +203,7 @@
                             Save changes
                         </button>
                         <a
-                            href="{{route('companies.index')}}"
+                            href="{{ route ('registered_users.view')}}"
                             class="btn btn-secondary btn-block"
                             data-mdb-dismiss="modal"
                         >

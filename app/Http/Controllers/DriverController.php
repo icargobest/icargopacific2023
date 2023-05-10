@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Driver;
 use App\Models\User;
@@ -13,12 +12,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use App\Drivers;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class DriverController extends Controller
 {
-    private $type;
-    private $validate;
-    private $update_user;
     private $driver;
     
     public function index()

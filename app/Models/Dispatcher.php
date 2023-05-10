@@ -16,4 +16,8 @@ class Dispatcher extends Model
         return $this->belongsTo(User::class)->withDefault();
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
