@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('contact_no');
-            $table->string('contact_name');   
+            $table->string('contact_name');
             $table->string('company_address');
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

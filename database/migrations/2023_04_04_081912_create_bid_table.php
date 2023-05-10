@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('bids', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
-            $table->string('company_name');
+            // $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('shipment_id');
+            // $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->unsignedBigInteger('bid_amount');
             $table->string('status');
             $table->timestamps();

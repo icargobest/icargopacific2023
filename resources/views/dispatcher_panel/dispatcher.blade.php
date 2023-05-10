@@ -1,21 +1,30 @@
-@include('partials.navigation', ['driver' => 'fw-bold'])
+<title>Dispatcher | Qr Scanner</title>
+@include('partials.navigationDispatcher', ['qr' =>"nav-selected"])
+@extends('layouts.app')
+@extends('layouts.status')
+<link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
 
   <div class="container center p-3">
       <div class="row">
         <div class="col-sm-12 col-12">
-          <div class="card">
-          <div class="text-center">
-            <div class="card-header text-center p-3">
-              <h2>Dispatcher</h2>
+          
+          
+            <div>
+              <h2  class="fw-bold">DISPATCHER</h2>
             </div>
-            <div class="card-body">
+
+            <div class="container p-5 shadow" style=" background-color:white;">
+            <div class="text-center">
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
                   <div>
-                    <p>Enter tracking ID to search for parcel:</p>
-
-                    <input type="text" placeholder="Enter tracking ID">
-                    <button type="button" class="btn btn-primary">Search</button>
+                    <label>Enter Tracking ID to Search Parcel:</label>
+                    <div class="row d-flex justify-content-center">
+                    <input type="text" placeholder="Enter tracking ID" class="col-md-7 col-lg-3">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">Search</button>
+                    </div>
 
                   </div>
 
@@ -32,7 +41,7 @@
                     <label>QR Scanner</label>
                   </div>
                   <div class="col-12 d-flex justify-content-center mb-4">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
                       <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
                     </div>
                   </div>
@@ -42,7 +51,7 @@
                     <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px">Reset</a>
                   </div> --}}
 
-                  <div class="container" style="text-align:center;">
+                  <div class="container d-flex justify-content-center mb-4" style="text-align:center;">
                     <div id = "reader" style="margin:auto;" width="230" height="230" style="border: 1px solid gray"></div>
                   </div>
                   <div class="scanresult" style="text-align:center;">
@@ -93,15 +102,51 @@
                           <h5 class="modal-title" id="receivedModalLabel">Shipment Received</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment has been received.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <!-- Assort Modal -->
+                  <div class="modal fade" id="assortModal" tabindex="-1" aria-labelledby="assortModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="assortModalLabel">Assort Shipment</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Please select the appropriate action:</p>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary" id="dispatch-btn">Dispatch</button>
+                            <button type="button" class="btn btn-secondary" id="transfer-btn">Transfer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Transfer Modal -->
+                  <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="transferModalLabel">Shipment Transferred</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>Shipment Transferred.</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div> 
 
                   <!-- Out for Delivery Modal -->
                   <div class="modal fade" id="outfordeliveryModal" tabindex="-1" aria-labelledby="outfordeliveryModalLabel" aria-hidden="true">
@@ -111,15 +156,32 @@
                           <h5 class="modal-title" id="outfordeliveryModalLabel">Shipment Permission</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment Out for delivery.</p>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div> 
                   </div>   
+                  <!-- Arrived Modal -->
+                  <div class="modal fade" id="arrivedModal" tabindex="-1" aria-labelledby="arrivedModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="arrivedModalLabel">Shipment Arrived</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>Shipment Arrived.</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>  
                   <!-- Successful Delivery Modal -->
                   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -128,11 +190,11 @@
                           <h5 class="modal-title" id="successModalLabel">Shipment Success</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment has been Delivered.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
                         </div>
                       </div>
                     </div>
@@ -145,34 +207,40 @@
                           <h5 class="modal-title" id="notpickupModalLabel">Shipment Status</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-info">
                           <p>Shipment has not been Picked Up yet.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">OK</button>
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
                   </div> 
                 </section>
+                <form method="POST" action="{{ url('/generate-code') }}">
+                  @csrf
+                  <div class="row text-center d-flex justify-content-center mt-5">
+                  <div class="col-12">
+                      <label for="data">Enter Data:</label>
+                  </div>
+                  <div class="col-12 mb-3">
+                      <input type="text" name="data" id="data" required>
+                  </div>
+                  <div class="generate-code col-12">
+                      <button type="submit" class="col-md-7 col-lg-3" style="padding:5px; letter-spacing:1px;">GENERATE CODE</button>
+                  </div>
+                </div>
+              </form>
               </main>
             </div>
-          </div>
-        </div>
+            </div>
+          
+        
       </div>
     </div>
   </div>
 
-<form method="POST" action="{{ url('/generate-code') }}">
-    @csrf
-    <div>
-        <label for="data">Enter data:</label>
-        <input type="text" name="data" id="data" required>
-    </div>
-    <div>
-        <button type="submit">Generate code</button>
-    </div>
-</form>
+
 
 
 
@@ -213,7 +281,7 @@
                     iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
                   var iframe = document.createElement('iframe');
-                  iframe.srcdoc = '<html><head></head><body><h1>' + data.tracking_number + '</h1><br><button id="my-button">Update Shipment Status</button></body></html>';
+                  iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + data.tracking_number + '</h1></div><div style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button></div></body></html>';
                   iframe.style.width = '100%';
                   iframe.style.height = '500px';
                   iframeContainer.appendChild(iframe);
@@ -228,10 +296,10 @@
                     var delivered = document.getElementById('delivered');
                     var completed = document.getElementById('completed');
 
-                    if (data.status === "PickedUp" || data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                    if (data.status === "PickedUp" || data.status === "Assort" || data.status === "Dispatched" ||  data.status === "Transferred" || data.status === "Arrived" || data.status === "Delivered") {
                         pickedUp.classList.add('done');
                     }
-                    if (data.status === "Assort" || data.status === "Dispatched" || data.status === "Delivered") {
+                    if (data.status === "Assort" ||  data.status === "Transferred" || data.status === "Arrived" || data.status === "Dispatched" || data.status === "Delivered") {
                         assort.classList.add('done');
                     }
                     if (data.status === "Dispatched" || data.status === "Delivered") {
@@ -244,7 +312,7 @@
                     var statusContainer = document.getElementById("status-summary-container");
                     statusContainer.classList.add("tracking-status");
 
-                    var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                    var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
                     var displayStatusCodes = [];
 
                     // Determine which status codes to display based on the current status
@@ -258,11 +326,25 @@
                       case "Assort":
                         displayStatusCodes = ["Processing", "PickedUp", "Assort"];
                         break;
+                      case "Transferred":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred"];
+                        break;
+                      case "Arrived":
+                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived"];
+                        break;
                       case "Dispatched":
-                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                        if (data.isArrived === 1 && data.isTransferred === 1){
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched"];
+                        } else {
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                        }
                         break;
                       case "Delivered":
-                        displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                        if (data.isArrived === 1 && data.isTransferred === 1){
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
+                        } else {
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                        }
                         break;
                       default:
                         break;
@@ -287,7 +369,21 @@
                         // Create the status time element
                         var statusTime = document.createElement("div");
                         statusTime.classList.add("status-time");
-                        statusTime.textContent = new Date().toLocaleString();
+                        if (statusCode === "Processing") {
+                            statusTime.textContent = data.isProcessedTime;
+                        } else if (statusCode === "PickedUp") {
+                            statusTime.textContent = data.isPickUpTime;
+                        } else if (statusCode === "Assort") {
+                            statusTime.textContent = data.isAssortTime;
+                        } else if (statusCode === "Transferred") {
+                            statusTime.textContent = data.isTransferredTime;
+                        } else if (statusCode === "Arrived") {
+                            statusTime.textContent = data.isArrivedTime;
+                        } else if (statusCode === "Dispatched") {
+                            statusTime.textContent = data.isDispatchedTime;
+                        } else if (statusCode === "Delivered") {
+                            statusTime.textContent = data.isDeliveredTime;
+                        }
                         statusItem.appendChild(statusTime);
 
                         // Create the status text element
@@ -303,6 +399,10 @@
                           statusTitle.textContent = "Parcel has been Picked Up by Driver";
                         } else if (statusCode === "Assort") {
                           statusTitle.textContent = "Parcel is in Logistics";
+                        } else if (statusCode === "Transferred") {
+                          statusTitle.textContent = "Parcel is in Transit";
+                        } else if (statusCode === "Arrived") {
+                          statusTitle.textContent = "Parcel arrived in Logistics";
                         } else if (statusCode === "Dispatched") {
                           statusTitle.textContent = "Parcel is Out for Delivery";
                         } else if (statusCode === "Delivered") {
@@ -317,6 +417,10 @@
                           statusDesc.textContent = "Parcel has been Delivered.";
                         } else if (statusCode === "Dispatched"){
                           statusDesc.textContent = "Parcel out for delivery.";
+                        } else if (statusCode === "Arrived") {
+                          statusDesc.textContent = "Parcel arrived in Logistics.";
+                        } else if (statusCode === "Transferred") {
+                          statusDesc.textContent = "Parcel is in Transit.";
                         } else if (statusCode === "Assort"){
                           statusDesc.textContent = "Parcel is in Logistics.";
                         } else if (statusCode === "PickedUp"){
@@ -335,26 +439,34 @@
                     }
 
                     button.addEventListener("click", function() {
-                      if (data.status === 'PickedUp') {
-                        data.status = 'Assort';
-                        var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
-                        modal.show();
+                    if (data.status === 'PickedUp') {
+                      data.status = 'Assort';
+                      data.isAssort = true;
+                      data.isAssortTime = new Date();
+                      var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
+                      modal.show();
 
-                        // Update the database with the new received value
-                        $.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                          success: function (response) {
-                            console.log(response);
-                          }
-                        });
-                      } else if (data.status === 'Assort') {
+                      $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
+                        data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                        success: function (response) {
+                          console.log(response);
+                        }
+                      });
+                    } else if (data.status === 'Assort' || data.status === 'Arrived') {
+                      // display modal for user to pick between Dispatch or Transfer
+                      var assortModal = new bootstrap.Modal(document.getElementById('assortModal'), {});
+                      assortModal.show();
+
+                      // listen for user's selection
+                      $('#dispatch-btn').click(function() {
+                        var outfordeliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
                         data.status = 'Dispatched';
-                        var deliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
-                        deliveryModal.show();
+                        data.isDispatched = true;
+                        data.isDispatchedTime = new Date();
+                        outfordeliveryModal.show();
 
-                        // Update the database with the new out for delivery value
                         $.ajax({
                           type: "POST",
                           url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
@@ -363,14 +475,48 @@
                             console.log(response);
                           }
                         });
-                      } else if (data.status === 'Delivered') {
-                        var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                        deliveredModal.show();
-                      } else {
-                        var modal = new bootstrap.Modal(document.getElementById('notpickupModal'), {});
-                        modal.show();
-                      }
-                    });
+                      });
+
+                      $('#transfer-btn').click(function() {
+                        var transferModal = new bootstrap.Modal(document.getElementById('transferModal'), {});
+                        data.status = 'Transferred';
+                        data.isTransferred = true;
+                        data.isTransferred = new Date();
+                        transferModal.show();
+
+                        $.ajax({
+                          type: "POST",
+                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
+                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                          success: function (response) {
+                            console.log(response);
+                          }
+                        });
+                      });
+                    } else if (data.status === 'Transferred') {
+                      data.status = 'Arrived';
+                      data.isArrived = true;
+                      data.isArrived = new Date();
+                      var modal = new bootstrap.Modal(document.getElementById('arrivedModal'), {});
+                      modal.show();
+
+                      $.ajax({
+                        type: "POST",
+                        url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateArrived') }}",
+                        data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                        success: function (response) {
+                          console.log(response);
+                        }
+                      });
+                    } else if (data.status === 'Delivered') {
+                      var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                      deliveredModal.show();
+                    } else {
+                      var modal = new bootstrap.Modal(document.getElementById('notpickupModal'), {});
+                      modal.show();
+                    }
+                  });
+
                   };
 
                 } else {
@@ -408,124 +554,3 @@
 </script>
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
-<style>
-  .result{
-    background-color: green;
-    color:#fff;
-    padding:20px;
-  }
-  .row{
-    display:flex;
-  }
-  #reader {
-    background: black;
-    width:300px;
-  }
-  button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-a#reader__dashboard_section_swaplink {
-  background-color: blue; /* Green */
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-span a{
-  display:none
-}
-
-#reader__camera_selection{
-  background: blueviolet;
-  color: aliceblue;
-}
-#reader__dashboard_section_csr span{
-  color:red
-}
-.tracking-status {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-item {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.status-time {
-  width: 120px;
-  font-size: 14px;
-  font-weight: bold;
-  margin-right: 10px;
-  text-align: right;
-}
-
-.status-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.status-desc {
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-.status-desc a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.status-item.delivered .status-title {
-  color: #28a745;
-}
-
-.status-item.in-transit .status-title {
-  color: #000000;
-}
-
-.status-item .status-title:before {
-  content: '';
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.status-item.delivered .status-title:before {
-  background-color: #28a745;
-}
-
-.status-item.in-transit .status-title:before {
-  background-color: #000000;
-}
-
-.status-item:not(:first-child) .status-time {
-  opacity: 0.5;
-}
-</style>
-{{-- @include('partials.footer') --}}

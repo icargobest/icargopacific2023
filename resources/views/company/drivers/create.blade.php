@@ -24,7 +24,7 @@
                                   </span>
                                   @enderror
                     <label class="form-label" for="form6Example1">FULL NAME</label>
-                  </div>
+                  </div>  
                 </div>
               </div>
   

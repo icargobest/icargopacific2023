@@ -97,3 +97,184 @@
     border-radius: 10px;
 }
 
+.driver-waybill-info{
+    border:2px solid red;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+ .tracking-number{
+    border:2px solid red;
+ 
+}
+
+ .update-status-container{
+    border:2px solid red;
+  
+}
+
+.status-summary-container .status-i{
+    background-color: #66D066;
+}
+
+/* PARCEL STATUS */
+
+.result{
+    background-color: green;
+    color:#fff;
+    padding:20px;
+  }
+  .row{
+    display:flex;
+  }
+  #reader {
+    background: black;
+    width:300px;
+  }
+  #reader__dashboard button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  }
+
+  .generate-code button{
+    background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  }
+  a#reader__dashboard_section_swaplink {
+    display: none
+  }
+  span a{
+    display:none
+  }
+
+  #reader__status_span{
+    display:none
+  }
+
+  #reader__camera_selection{
+    background: blueviolet;
+    color: aliceblue;
+  }
+  #reader__dashboard_section_csr span{
+    color:red
+  }
+
+  .tracking-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  /* margin-bottom: 20px; */
+  padding: 10px;
+}
+
+.status-time {
+  width: 150px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: right;
+  display: flex
+}
+
+.status-text {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px
+}
+
+.status-title {
+  font-size: 16px;
+  font-weight: bold;
+  /* margin-bottom: 5px; */
+}
+
+.status-desc {
+  font-size: 14px;
+  line-height: 1.2;
+  display: flex;
+  flex-direction:flex-start;
+}
+
+.status-desc a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.status-item.delivered .status-title {
+  color: #28a745;
+}
+
+.status-item.in-transit .status-title {
+  color: #000000;
+}
+
+.status-item .status-title:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: none
+}
+
+.status-item.delivered .status-title:before {
+  background-color: #28a745;
+}
+
+.status-item.in-transit .status-title:before {
+  background-color: #000000;
+}
+
+.status-item:not(:first-child) .status-time {
+  opacity: 0.5;
+}
+
+#status-summary-container .status-item:nth-child(even){
+    background-color: #9cf79c;
+}
+
+#status-summary-container .status-item:nth-child(odd){
+    background-color: rgb(188, 255, 188);
+}
+
+/* MODAL */
+.modal-footer{
+    display:flex !important;
+    justify-content: center !important;
+   }
+  
+   .close{
+    background-color: transparent !important;
+    color: white
+   }
+  
+  .modal-info{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
