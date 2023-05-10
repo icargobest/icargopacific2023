@@ -45,7 +45,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Personal Information</h5>
-                  @include('profile.userInfoform');
+                  @include('profile.userInfoform')
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>
@@ -64,7 +64,7 @@
               <div class="profileContent">
                   <div class="titleButton">
                     <h5 style="font-weight: bolder">Adress</h5>
-                    @include('profile.addressform');
+                    @include('profile.addressform')
                     {{-- <button class="profileButton">EDIT</button> --}}
                   </div>
                   <div class="profileDivider2 "></div>
@@ -83,7 +83,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Social</h5>
-                  @include('profile.socialform');
+                  @include('profile.socialform')
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>
