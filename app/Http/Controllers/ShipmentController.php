@@ -116,16 +116,6 @@ class ShipmentController extends Controller
         return view('company.freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
-    public function company_advFreightPanel()
-    {
-        $shipment = Shipment::all();
-        $company = Company::where('user_id', Auth::user()->id)->first();
-        $bid = Bid::all();
-
-        $this->TrackOrderLog();
-
-        return view('company.freight.advance_freight', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
-    }
 
     public function advfreight(){
         $shipment = Shipment::all();
@@ -288,7 +278,6 @@ class ShipmentController extends Controller
         $company = Company::where('user_id', $request->company_id)->first();
         $data = [
             'company_id' => $request->company_id,
-            'company_name' => $request->company_name,
             'shipment_id' => $request->shipment_id,
             'bid_amount' => $request->bid_amount,
             'status' => 'Pending',

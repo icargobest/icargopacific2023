@@ -64,13 +64,6 @@ VIEW
                                 </button>
                             </div>
                             <div class="row align-items-end">
-<<<<<<< HEAD
-                                {{-- TRACK ORDER--}}
-                                @if($ship->company_id != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <a href="{{route('trackOrder_Company',$ship->id)}}" class="btn text-white btn-block " style="background-color:#214D94;">
-                                        Track Order
-=======
                                 {{-- TRACK ORDER --}}
                                 @if (
                                     $ship->company_id != null &&
@@ -89,7 +82,6 @@ VIEW
                                             BACK
                                             </button>
                                         </div>
->>>>>>> develop
                                     </a>
                                 @endif
                                 {{-- END TRACK ORDER --}}
