@@ -6,10 +6,6 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-.mainform{
-    border: red solid 2px
-
-}
 .companyeditform{
     max-width: 600px;
     width: 60%;
@@ -76,7 +72,7 @@
 }
 </style>
 
-<div class="mainform">
+
     <button type="submit" class="profileButton" onclick="openPopup()">&#x2715</button>
     <div class="companyeditform" id="companyeditform">
         <form>
@@ -97,7 +93,6 @@
             </div>  
         </form>
     </div>
-</div>
 
 <Script>
     let companypopup = document.getElementById("companyeditform");

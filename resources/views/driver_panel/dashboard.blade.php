@@ -9,7 +9,7 @@
 @section('title', 'Driver Dashboard')
 @section('content')
 
-<div class="content-container" style="margin-top:-14px !important;">
+
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
@@ -102,7 +102,6 @@
     </div>         
 </div>
 
-</div>
 
 {{-- <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">Driver Dashboard</a>

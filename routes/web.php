@@ -49,7 +49,7 @@ use App\Http\Controllers\DriverDashboardController;
 }); */
 
 Route::get('/', function () {
-    return view('profile.photoform');
+    return view('profile.user');
 });
 
 

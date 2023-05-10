@@ -14,8 +14,8 @@
       
         <div class="profileTab">
           <div class="profileBackground">
-            {{-- @include('profile.photoform'); --}}
-            <i class="fa fa-pencil profileIcon"></i>
+            <button type="submit" class=" profileIcon" onclick="photopenPopup()"><i class="fa fa-pencil"></i></button>
+            {{-- <i class="fa fa-pencil profileIcon"></i> --}}
             <div class="profilePicture">
               <img src="https://cdn.donmai.us/original/a7/d9/__nakiri_ayame_and_nakiri_ayame_hololive_drawn_by_kakinotane_e__a7d97d0312f20a4f5a65126d16c87caf.jpg" alt="HTML tutorial">
             </div>
@@ -45,7 +45,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Personal Information</h5>
-                  @include('profile.userInfoform');
+                  <button type="submit" class="profileButton" onclick="openPopup()">EDIT</button>
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>
@@ -64,7 +64,7 @@
               <div class="profileContent">
                   <div class="titleButton">
                     <h5 style="font-weight: bolder">Adress</h5>
-                    @include('profile.addressform');
+                    <button type="submit" class="profileButton" onclick="addressopenPopup()">EDIT</button>
                     {{-- <button class="profileButton">EDIT</button> --}}
                   </div>
                   <div class="profileDivider2 "></div>
@@ -83,7 +83,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Social</h5>
-                  @include('profile.socialform');
+                  <button type="submit" class="profileButton" onclick="socialopenPopup()">EDIT</button>
                   {{-- <button class="profileButton">EDIT</button> --}}
                 </div>
                 <div class="profileDivider2 "></div>
@@ -102,9 +102,11 @@
     </div>
 </main>
 
-
+{{-- @include('profile.photoform') --}}
+@include('profile.userInfoform')
+@include('profile.addressform')
 @include('partials.footer')	
-
+@include('profile.socialform')
 <style>
 .py-4
 {

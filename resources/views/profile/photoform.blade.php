@@ -73,7 +73,7 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <button type="submit" class=" profileIcon" onclick="photopenPopup()"><i class="fa fa-pencil"></i></button>
+    
         <div class="socialeditform" id="socialeditform">
             <form>
                 <div class="title">

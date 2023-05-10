@@ -78,7 +78,7 @@
     </style>
     
 
-        <button type="submit" class="profileButton" onclick="socialopenPopup()">EDIT</button>
+        
         <div class="socialeditform" id="socialeditform">
             <form>
                 <div class="title">

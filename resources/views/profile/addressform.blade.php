@@ -75,7 +75,7 @@
 </style>
 
 
-    <button type="submit" class="profileButton" onclick="addressopenPopup()">EDIT</button>
+    
     <div class="addresseditform" id="addresseditform">
         <form>
             <div class="title">
