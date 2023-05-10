@@ -1,6 +1,6 @@
 {{-- @extends('layouts.app') --}}
 
-<section style="padding:100px 0px;" id="contactUS">
+<section style="padding:100px 0px; background-color:white;" id="contactUS">
     <div class="container" >
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="background-color: white; ">

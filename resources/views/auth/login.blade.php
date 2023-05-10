@@ -8,7 +8,7 @@
 </style>
 <div class="vertical-center">
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center shadow">
         <div class="col-lg-4 login-container p-5">
                 <div class="pb-2 login-header">{{ __('LOGIN') }}</div>
                 <div class="pb-3 blue">Sign-in to your Account</div>
@@ -56,8 +56,8 @@
 
                         <div class="">
                             <div class="col-12 ms-2 mb-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <div class="form-check" style="padding-left: 0px">
+                                    <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
