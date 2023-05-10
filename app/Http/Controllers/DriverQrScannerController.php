@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shipment;
+use App\Models\OrderHistory;
 use Illuminate\Support\Facades\Auth;
 class DriverQrScannerController extends Controller
 {
@@ -20,6 +21,23 @@ class DriverQrScannerController extends Controller
         $tracking_number = null;
         $id = null;
         $user_id = null;
+        $order_id = null;
+        $isPending = null;
+        $isPendingTime = null;
+        $isProcessed = null;
+        $isProcessedTime = null;
+        $isPickUp = null;
+        $isPickUpTime = null;
+        $isAssort = null;
+        $isAssortTime = null;
+        $isTransferred = null;
+        $isTransferredTime = null;
+        $isArrived = null;
+        $isArrivedTime = null;
+        $isDispatched = null;
+        $isDispatchedTime = null;
+        $isDelivered = null;
+        $isDeliveredTime = null;
 
         if ($request->data) {
             $data = explode('-', $request->data);
@@ -39,10 +57,34 @@ class DriverQrScannerController extends Controller
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;
+                    $order_id = $shipment->id;
+                    $time = OrderHistory::where('shipment_id', $order_id)->first();
+                    if ($time) {
+                        $isPending = $time->isPending;
+                        $isPendingTime = $time->isPendingTime;
+                        $isProcessed = $time->isProcessed;
+                        $isProcessedTime = $time->isProcessedTime;
+                        $isPickUp = $time->isPickUp;
+                        $isPickUpTime = $time->isPickUpTime;
+                        $isAssort = $time->isAssort;
+                        $isAssortTime = $time->isAssortTime;
+                        $isTransferred = $time->isTransferred;
+                        $isTransferredTime = $time->isTransferredTime;
+                        $isArrived = $time->isArrived;
+                        $isArrivedTime = $time->isArrivedTime;
+                        $isDispatched = $time->isDispatched;
+                        $isDispatchedTime = $time->isDispatchedTime;
+                        $isDelivered = $time->isDelivered;
+                        $isDeliveredTime = $time->isDeliveredTime;
+                    }
                 }
             }
         }
-        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number, 'id' => $id]);
+        return response()->json(['isPendingTime' => $isPendingTime, 'isProcessedTime' => $isProcessedTime, 'isAssortTime' => $isAssortTime, 'isPickUpTime' => $isPickUpTime,
+                                'isTransferredTime' => $isTransferredTime, 'isArrivedTime' => $isArrivedTime, 'isDispatchedTime' => $isDispatchedTime, 'isDeliveredTime' => $isDeliveredTime,
+                                'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp,
+                                'isTransferred' => $isTransferred, 'isArrived' => $isArrived, 'isDispatched' => $isDispatched, 'isDelivered' => $isDelivered,
+                                'result' => $result, 'status' => $status, 'tracking_number' => $tracking_number, 'id' => $id]);
     }
 
 
@@ -50,24 +92,34 @@ class DriverQrScannerController extends Controller
     {
         $id = $request->id;
         $shipment = Shipment::find($id);
+        $time = OrderHistory::find($id);
         if ($shipment) {
             $shipment->status = 'PickedUp';
             $shipment->save();
-            return response()->json(['success' => true]);
         }
-        return response()->json(['success' => false]);
+        if ($time) {
+            $time->isPickUp= true;
+            $time->isPickUpTime = now();
+            $time->save();
+        }
+        return response()->json(['success' => true]);
     }
 
     public function updateDelivered(Request $request)
     {
         $id = $request->id;
         $shipment = Shipment::find($id);
+        $time = OrderHistory::find($id);
         if ($shipment) {
             $shipment->status = 'Delivered';
             $shipment->save();
-            return response()->json(['success' => true]);
         }
-        return response()->json(['success' => false]);
+        if ($time) {
+            $time->isDelivered= true;
+            $time->isDeliveredTime = now();
+            $time->save();
+        }
+        return response()->json(['success' => true]);
     }
 
 }

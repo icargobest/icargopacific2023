@@ -3,6 +3,13 @@
 @extends('layouts.app')
 @include('partials.navigationCompany',['staff' => "nav-selected"])
 
+
+<style>
+    svg{
+        width:  1.5rem;
+        height: 1.5rem;
+    }
+</style>
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
         <div class="employee-header-container">
@@ -28,7 +35,7 @@
                       <i class="fas fa-search"></i>
                     </span>
                 </div>
-            </div>      
+            </div>
         </section>
 
         <div class="mt-2">
@@ -75,9 +82,9 @@
                 </tbody>
             </table>
         </div>
-        
+
     </div>
 </main>
 
 @include('company.staff.create')
-@include('partials.footer')	
+@include('partials.footer')

@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use App\Models\Shipment;
-use App\Models\Bid;
 use App\Models\Sender;
 use App\Models\Recipient;
 use App\Models\Station;
@@ -73,11 +72,5 @@ class ShipmentSeeder extends Seeder
         ];
         $shipmentModel = new Shipment();
         $shipment = $shipmentModel->create($shipmentData);
-
-        // Update sender and recipient models
-        $sender->shipment_id = $shipment->id;
-        $recipient->shipment_id = $shipment->id;
-        $sender->save();
-        $recipient->save();
     }
 }

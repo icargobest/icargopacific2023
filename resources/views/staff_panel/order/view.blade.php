@@ -1,148 +1,241 @@
-<head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Orders</title>
-  </head>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+        <title>Staff | Order Details #{{$ship->id}}</title>
+    </head>
 
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-  @include('layouts.app')
-  @extends('partials.navigationStaff')
+{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @extends('layouts.app')
+    @include('partials.navigationStaff',['order' => "nav-selected"])
+
+<!-- MDB -->
+<link rel="stylesheet" href="/css/mdb.min.css" />
+
+<style>
+    th {
+        background-color: transparent !important;
+        color: black;
+        font-weight: normal;
+    }
+    td {
+        text-align: left;
+        font-weight: bold;
+    }
+</style>
+
+{{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
+<!-- Exp start -->
+<!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{$ship->id}}">
+VIEW
+</button> -->
 
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-<div class="order-container container">
-
-
-  <h4>Order #{{$ship->id}}</h4>
-  <div>
-    @if($ship->company_bid != NULL && $ship->bid_amount != NULL && $ship->status != 'Cancelled' && $ship->status != 'Delivered')
-        <a href="{{route('trackOrder_Staff',$ship->id)}}" class="btn btn-primary btn">
-            Track Order
-        </a>
-    @endif
-  </div>
-
-  <div class="cards-holder">
-
-    {{-- CARD CREATED AFTER FILLING UP --}}
-            <div class="item-card container px-4">
-            <div class="card-body">
-                <div class="row">
-
-                <div class="details-wrapper col-lg-10 col-sm-12">
-                    <div class="recepients-wrapper row">
-
-                    <div class="senderInfo col-lg-6">
-                        <h6>SENDER</h6>
-
-                        <ul>
-                            <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
-                            <li>Address | <span>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</span></li>
-                            <li>Number | <span>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->sender->sender_email}}</span></li>
-                        </ul>
-                    </div>
-                    <div class="receiverInfo col-lg-6">
-                        <h6>RECEIVER</h6>
-
-                        <ul>
-                            <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
-                            <li>Address | <span>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}} , {{$ship->recipient->recipient_state}} , {{$ship->recipient->recipient_zip}}</span></li>
-                            <li>Number | <span>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</span></li>
-                            <li>Email | <span>{{$ship->recipient->recipient_email}}</span></li>
-                        </ul>
-                    </div>
-
-                    </div>
-                    <div class="parcelInfo-wrapper">
-
-                    <div class="itemInfo">
-                        <h6>ITEM INFORMATION</h6>
-
-                        <div class="parcelDetails row">
-
-                        <div class="listLayout col-lg-6 col-sm-12">
-                            <ul>
-                                <li>ID | <span>{{$ship->id}}</span></li>
-                                <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                @if($ship->company_bid == null && $ship->bid_amount == null)
-                                    <li>Maximum Bid | <span>{{$ship->min_bid_amount}}</span></li>
-                                @else
-                                    <li>Company | <span>{{$ship->company_bid}}</span></li>
-                                @endif
-                            </ul>
-                        </div>
-                        <div class="listLayout col-lg-6 col-sm-12">
-                            <ul>
-                                <li>Category | <span>{{$ship->category}}</span></li>
-                                <li>Mode of Pament | <span>COD</span></li>
-                                @if($ship->company_bid != null && $ship->bid_amount != null)
-                                    <li>Bid Amount | <span>{{$ship->bid_amount}}</span></li>
-                                @endif
-                            </ul>
-                        </div>
-
-                        </div>
-                    </div>
-
-                    </div>
-                </div>
-
-                <div class="image-wrapper col">
-                    <div class="image-holder">
-                    <img src="{{asset($ship->photo)}}" alt="">
-                    </div>
-                </div>
-                @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
-                    <form method="POST" action="{{route('staff_addBid')}}">
-                        @csrf
-                        <input type="hidden" name="staff_id" value="{{Auth::user()->id}}" />
-                        <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
-                        <div class="form-outline mb-5 col-2">
-                            <div class="bidInput">
-                              <span>Bid<span class="required"></span></span>
-                              <div class="form-outline">
-                                <input type="text" id="form6Example3" id="bidAmount" name="bid_amount" class="form-control" required/>
-                                {{-- <label class="form-label" for="form6Example3">Minimum Bid</label> --}}
-                                <div class="col">
-                                    <button type="submit" class="btn btn-success btn-sm" id="bidButton">Bid</button>
+<!-- tracking modal -->
+<!-- <div class="modal fade" id="viewModal{{$ship->id}}" aria-hidden="true" aria-labelledby="trackingModalToggleLabel" tabindex="-1" data-bs-backdrop="true" > -->
+<div class="container">
+<div class="modal-dialog modal-dialog-centered modal-xxl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- title -->
+                <h3 class="modal-title mb-0 p-2" id="trackingModalToggleLabel">Order Details #{{$ship->id}}</h3>
+                <!-- close button -->
+                <!-- <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            {{-- CARD CREATED AFTER FILLING UP --}}
+            <!-- modal content -->
+            <div class="modal-body p-2">
+                <div class="container">
+                    <!-- Column for Product Image and Product Info -->
+                    <div class="row overflow-hidden">
+                        <!-- Product Image -->
+                        <div class="col-xl-3">
+                            <a href="{{asset($ship->photo)}}" target="_blank">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; max-height:300px;" src="{{asset($ship->photo)}}" alt="">
+                            </a>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
+                                    @if($ship->company_bid == null && $ship->bid_amount == null)
+                                        <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
+                                            {{$ship->min_bid_amount}}
+                                        </h6>
+                                    @else
+                                        <h6 class="mb-0 fw-bold text-capitalize">Company: {{$company_name}}</h6>
+                                    @endif
+                                </button>
+                            </div>
+                            <div class="row align-items-end">
+                                {{-- TRACK ORDER--}}
+                                @if (
+                                    $ship->company_id != null &&
+                                        $ship->bid_amount != null &&
+                                        $ship->status != 'Cancelled' &&
+                                        $ship->status != 'Delivered')
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <a href="{{route('trackOrder_Staff',$ship->id)}}" class="btn text-white btn-block " style="background-color:#214D94;">
+                                        Track Order
+                                    </a>
                                 </div>
-                              </div>
+                                <a class="cardItem my-1" href="{{route('freightStaff')}}">
+                                    <div  class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-block btn-dark text-white mb-1">
+                                        BACK
+                                        </button>
+                                    </div>
+                                </a>
+                                @endif
+                                {{-- END TRACK ORDER--}}
+                                <div class="col-8">
+                                    {{-- BID NOW --}}
+                                    @if($ship->company_bid == NULL && $ship->bid_amount == NULL)
+                                    <form method="POST" action="{{route('staff_addBid')}}">
+                                        @csrf
+                                        <input type="hidden" name="staff_id" value="{{Auth::user()->id}}" />
+                                        <input type="hidden" name="shipment_id" value="{{$ship->id}}" />
+                                        <label class="control-label control-label-left fw-bold">BID<span class="required"></span></label>
+                                        <input type="number" id="form6Example3" id="bidAmount" name="bid_amount" class="form-control typeahead btn-block w-100" required/>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton">
+                                        BID
+                                    </button>
+                                </div>
+                                <a class="cardItem mt-2" href="{{route('staff.order')}}">
+                                    <div  class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                        BACK
+                                        </button>
+                                    </form>
+                                    @endif
+                                    {{-- END BID NOW --}}
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </form>
-                @endif
-                </div>
-                </div>
-
-                <table class="table table-striped">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Company</th>
-                            <th>Bid Amount</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    @foreach($bids as $bid)
-                        @if($ship->id == $bid->shipment_id)
-                            <form action="{{route('acceptBid', $bid->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                                <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
-                                <tbody>
+                        {{-- CARD CREATED AFTER FILLING UP --}}
+                        <!-- Product Information -->
+                        <div class="col-xl-9">
+                            <div class="row">
+                                <!-- Table for Alignment of Product Info -->
+                                <table class="m-2" style="width:100%">
                                     <tr>
-                                        <td>{{$bid->company_name}}</td>
-                                        <td>{{$bid->bid_amount}}</td>
-                                        <td>{{$bid->status}}</td>
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">SENDER</h5></th>
                                     </tr>
-                                </tbody>
-                            </form>
-                        @endif
-                    @endforeach
-                </table>
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td>{{$ship->sender->sender_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td>{{$ship->sender->sender_address}},
+                                            {{$ship->sender->sender_city}},
+                                            {{$ship->sender->sender_state}},
+                                            {{$ship->sender->sender_zip}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number:</th>
+                                        <td>{{$ship->sender->sender_mobile}}
+                                            @if($ship->sender->sender_tel != NULL)
+                                            | {{$ship->sender->sender_tel}}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-3" colspan="2"><hr class="opacity-75"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">RECEIVER</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td>{{$ship->recipient->recipient_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td>{{$ship->recipient->recipient_address}},
+                                            {{$ship->recipient->recipient_city}},
+                                            {{$ship->recipient->recipient_state}},
+                                            {{$ship->recipient->recipient_zip}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number:</th>
+                                        <td>{{$ship->recipient->recipient_mobile}}
+                                             @if($ship->recipient->recipient_tel != NULL)
+                                                | {{$ship->recipient->recipient_tel}}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-3" colspan="2"><hr class="opacity-75"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <td>{{$ship->id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Size & Weight:</th>
+                                        <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} |
+                                            {{intval($ship->weight)}}Kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Parcel Item:</th>
+                                        <td>{{$ship->category}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mode of Payment:</th>
+                                        <td>{{$ship->mop}}</td>
+                                    </tr>
+                                    @if ($ship->bid_amount != null && $ship->company_id != null)
+                                        <tr>
+                                            <th>Bid Amount:</th>
+                                            <td>{{ $ship->bid_amount }}</td>
+                                        </tr>
+                                    @endif
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- START ACCEPT BID TABLE -->
+                    <hr class="px-3" class="opacity-75">
+                    <section class="overflow-auto">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Bid Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            @foreach($bids as $bid)
+                                @if($ship->id == $bid->shipment_id)
+                                    <form action="{{route('acceptBid', $bid->id)}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
+                                        <tbody class="table table-striped">
+                                            <tr>
+                                                <td>{{$company_name}}</td>
+                                                <td>{{$bid->bid_amount}}</td>
+                                                <td>{{$bid->status}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </form>
+                                @endif
+                            @endforeach
+                        </table>
+                    </section>
+                    <!-- END ACCEPT BID TABLE -->
+                </div>
             </div>
-            </div>
-        {{-- END OF CARD --}}
+            {{-- END OF CARD --}}
+        </div>
     </div>
 </div>
+<!-- </div> -->
+<!-- Exp end -->
+{{-- END OF ORDER CONTAINER --}}
 
 <script>
     // Get the minimum bid amount from the HTML using PHP
@@ -160,6 +253,3 @@
         }
     });
 </script>
-
-
-{{-- END OF ORDER CONTAINER --}}

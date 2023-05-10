@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         foreach ($shipment as $ship) {
             $time = $ship->updated_at;
-            $order_history_item = $order_history->where('order_id', $ship->id)->first();
+            $order_history_item = $order_history->where('shipment_id', $ship->id)->first();
 
             if (!$order_history_item) {
                 $order_history_item = new OrderHistory;

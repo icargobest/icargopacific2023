@@ -5,7 +5,7 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
   @include('layouts.app')
-  @extends('partials.navigationStaff')
+  @include('partials.navigationStaff')
 
   {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
   <div class="order-container container">
@@ -16,7 +16,7 @@
 
             @foreach ($shipments as $ship)
                 @if(Auth::user()->type == 'staff')
-                    @if($ship->company_id == $company_id)
+                    @if($ship->company_id == $staff->company_id)
                     {{-- CARD CREATED AFTER FILLING UP --}}
                         <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
                             <div class="item-card container px-4">
