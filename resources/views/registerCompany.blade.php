@@ -12,7 +12,7 @@
                 <div class="pb-2 login-header">{{ __('Register as a company') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
                 
-                    <form method="POST" action="{{ route('company_registration.store') }}">
+                    <form method="POST" action="{{ route('add.company') }}">
                         @csrf
                         @include('flash-message')
                         <div class="row mb-4">

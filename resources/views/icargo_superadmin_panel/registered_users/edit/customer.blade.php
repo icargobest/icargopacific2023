@@ -2,16 +2,16 @@
     type="button"
     class="btn btn-success btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#editModal{{$company->id}}"
+    data-mdb-target="#editModalCustomer{{$customer->id}}"
 >
     EDIT
 </button>
 
 <div
     class="modal top fade"
-    id="editModal{{$company->id}}"
+    id="editModalCustomer{{$customer->id}}"
     tabindex="-1"
-    aria-labelledby="editModal"
+    aria-labelledby="editModalCustomer"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -19,7 +19,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header mbc2">
-                <h5 class="modal-title">EDIT COMPANY</h5>
+                <h5 class="modal-title">EDIT CUSTOMER</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -29,14 +29,14 @@
             </div>
             <div class="modal-body">
                 <p class="small text-muted">
-                    <span class="fw-bold">Caution:</span> Changing company
-                    passwords without consent may violate privacy and compliance
+                    <span class="fw-bold">Caution:</span> Changing someone's
+                    password without consent may violate privacy and compliance
                     regulations. Consider sending a password reset email link
                     instead.
                 </p>
                 <form
                     method="POST"
-                    action="{{route('companies.update', $company->id)}}"
+                    action="{{route('update.customer', $customer->id)}}"
                 >
                     @csrf @method('PUT')
                     <div class="row mb-4">
@@ -49,7 +49,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ $company->user->name }}"
+                                value="{{ $customer->user->name }}"
                                 required
                                 autocomplete="name"
                                 autofocus
@@ -67,32 +67,6 @@
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $company->user->email}}"
-                                required
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
                                 <i class="bi bi-lock-fill text-secondary"></i>
                             </span>
                             <input
@@ -100,7 +74,6 @@
                                 type="password"
                                 class="form-control @error('password') is-invalid @enderror"
                                 name="password"
-                                autocomplete="new-password"
                                 placeholder="Password"
                             />
 
@@ -122,9 +95,34 @@
                                 type="password"
                                 class="form-control"
                                 name="password_confirmation"
-                                autocomplete="new-password"
                                 placeholder="Re-Type Password"
                             />
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i
+                                    class="bi bi-envelope-fill text-secondary"
+                                ></i>
+                            </span>
+                            <input
+                                id="email"
+                                type="email"
+                                class="form-control @error('email') is-invalid @enderror"
+                                name="email"
+                                value="{{ $customer->user->email}}"
+                                required
+                                autocomplete="email"
+                                placeholder="E-mail Address"
+                            />
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -141,7 +139,7 @@
                                 type="text"
                                 class="form-control @error('contact_no') is-invalid @enderror"
                                 name="contact_no"
-                                value="{{ $company->contact_no }}"
+                                value="{{ $customer->contact_no }}"
                                 autocomplete="contact_no"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                 minlength="11"
@@ -158,38 +156,18 @@
                         </div>
                     </div>
 
-                    {{-- contact name --}}
+                    {{-- address--}}
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-person-fill text-secondary"></i>
                             </span>
                             <input id="contactnum" type="text"
-                            class="form-control @error('contact_name')
-                            is-invalid" @enderror" name="contact_name" value="{{
-                            $company->contact_name }}" required
-                            autocomplete="contact_name" autofocus
-                            placeholder="Contact Name"> @error('contact_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- contact address--}}
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('company_address')
-                            is-invalid" @enderror" name="company_address"
-                            value="{{$company->company_address }}" required
-                            autocomplete="company_address" autofocus
-                            placeholder="Company Address">
-                            @error('company_address')
+                            class="form-control @error('address') is-invalid"
+                            @enderror" name="address"
+                            value="{{$customer->address }}" required
+                            autocomplete="address" autofocus
+                            placeholder="Address"> @error('address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -215,7 +193,7 @@
                             Save changes
                         </button>
                         <a
-                            href="{{route('companies.index')}}"
+                            href="{{ route ('registered_users.view')}}"
                             class="btn btn-secondary btn-block"
                             data-mdb-dismiss="modal"
                         >
