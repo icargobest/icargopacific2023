@@ -39,7 +39,7 @@
                             <div class="form-outline">
                                 <input type="text" id="updateFullName"
                                 name="updateFullName" @error('updateFullName')
-                                is-invalid @enderror"
+                                is-invalid @enderror
                                 value="{{$staff->user->name}}"
                                 class="form-control" @required(true) />
                                 <label class="form-label" for="name"
