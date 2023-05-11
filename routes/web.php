@@ -44,57 +44,56 @@ use App\Http\Controllers\DriverDashboardController;
 // });
 
 
- Route::get('/', function () {
-     return view('welcome');
- }); 
+Route::get('/', function () {
+    return view('welcome');
+}); 
 
 /* Route::get('/', function () {
-    return view('staff_panel.profile.user');
+   return view('staff_panel.profile.user');
 });  */
 
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
-    return view('userpanel.orderHistory');
+   return view('userpanel.orderHistory');
 });
 
 /* Company Tab */
 
 Route::get('/company/history/orderHistory', function () {
-    return view('company.history.orderHistory');
+   return view('company.history.orderHistory');
 });
 
 
 Route::get('/company/freight/transfers', function () {
-    return view('company.freight.transfers');
+   return view('company.freight.transfers');
 });
 
 
 Route::get('/company/advance_freight/index', function () {
-    return view('company.advance_freight.index');
+   return view('company.advance_freight.index');
 });
 
 
 /* Drivers Tab */
 Route::get('/driver/qr', function () {
-    return view('driver_panel.driver');
+   return view('driver_panel.driver');
 });
 
 
 Route::get('/driver/history', function () {
-    return view('driver_panel.deliverHistory');
+   return view('driver_panel.deliverHistory');
 });
 
 /* Dispatcher Tab */
 Route::get('/dispatcher/qr', function () {
-    return view('dispatcher_panel.dispatcher');
+   return view('dispatcher_panel.dispatcher');
 });
 
 
 Route::get('/dispatcher/history', function () {
-    return view('dispatcher_panel.dispatchHistory');
+   return view('dispatcher_panel.dispatchHistory');
 });
-
 
 
 
