@@ -11,10 +11,7 @@
 @section('title', 'Dispatcher Dashboard')
 @section('content')
 
-<<<<<<< HEAD
-=======
 <div class="" style="margin-top:-14px !important;">
->>>>>>> TALARO-BRANCH
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
