@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Models\User;
 use App\Models\Dispatcher;
 use App\Models\Staff;
 use App\Models\Company;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class DispatcherController extends Controller
 {
-    private $type;
-    private $validate;
-    private $update_user;
+    private $dispatcher;
 
     function __construct()
     {
