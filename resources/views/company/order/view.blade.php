@@ -260,7 +260,7 @@ VIEW
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount > maxBidAmount && bidAmount < 0) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount || bidAmount <= 0) {
             bidButton.disabled = true;
             bidButton.style.cursor = "not-allowed"; // add cursor validation
         } else {

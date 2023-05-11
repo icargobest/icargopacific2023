@@ -46,39 +46,26 @@
                 </thead>
                 <tbody class="history-tbody">
                     @foreach ($shipments as $shipment)
-                        @if (Auth::user()->type == 'company')
-                            @if (Auth::user()->id == $shipment->company_id)
-                                @if ($shipment->status == 'Delivered')
-                                    <tr>
-                                        <td>{{ $shipment->id }}</td>
-                                        <td>
-                                            <img src="{{ asset($shipment->photo) }}" alt="photo" />
-                                        </td>
-                                        <td>{{ $shipment->sender->sender_address }},
-                                            {{ $shipment->sender->sender_city }}, {{ $shipment->sender->sender_state }},
-                                            {{ $shipment->sender->sender_zip }}</td>
-                                        <td>{{ $shipment->recipient->recipient_address }},
-                                            {{ $shipment->recipient->recipient_city }},
-                                            {{ $shipment->recipient->recipient_state }},
-                                            {{ $shipment->recipient->recipient_zip }}</td>
-                                        <td>{{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
-                                            | {{ intval($shipment->weight) }}Kg</td>
-                                        @foreach ($orderLogs as $log)
-                                            @if ($log->shipment_id == $shipment->id)
-                                                <td>{{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}</td>
-                                                <td>{{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
-                                                </td>
-                                                <td class="" style="overflow:auto;">
-                                                    <label class="status-deliveredv2">
-                                                        Delivered
-                                                    </label>
-                                                </td>
-                                            @endif
-                                        @endforeach
-                                    </tr>
+                        <tr>
+                            <td>{{ $shipment->id }}</td>
+                            <td><img src="{{ asset($shipment->photo) }}" alt="photo" /></td>
+                            <td>{{ $shipment->sender->sender_address }}, {{ $shipment->sender->sender_city }},
+                                {{ $shipment->sender->sender_state }}, {{ $shipment->sender->sender_zip }}</td>
+                            <td>{{ $shipment->recipient->recipient_address }},
+                                {{ $shipment->recipient->recipient_city }}, {{ $shipment->recipient->recipient_state }},
+                                {{ $shipment->recipient->recipient_zip }}</td>
+                            <td>{{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
+                                | {{ intval($shipment->weight) }}Kg</td>
+                            @foreach ($orderLogs as $log)
+                                @if ($log->shipment_id == $shipment->id)
+                                    <td>{{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}</td>
+                                    <td>{{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}</td>
+                                    <td class="" style="overflow:auto;">
+                                        <label class="status-deliveredv2">Delivered</label>
+                                    </td>
                                 @endif
-                            @endif
-                        @endif
+                            @endforeach
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
