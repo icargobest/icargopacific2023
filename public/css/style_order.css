@@ -5,7 +5,7 @@
 }
 
 .borderRed{
-    border: 1px solid red !important;
+    border: 1px dashed red !important;
 }
 
 .order-container{
@@ -24,6 +24,7 @@
 .order-container h6{
     font-size: 18px;
     letter-spacing: 1px;
+    color: #f9cd1a;
 }
 .button-holder{
     width: 100%;
@@ -32,15 +33,16 @@
     justify-content: flex-end;
 }
 
-.button-holder button{
-    width: 150px;
+.orderBtn{
+    width: 200px !important;
     height: 35px;
 
-    font-size: 13px;
+    font-size: 15px !important;
+    font-weight: bold !important;
     font-weight: 500;
     letter-spacing: 1px;
 
-    background-color: #214D94;
+    background-color: #214D94 !important;
 }
 
 .cards-holder{
@@ -60,6 +62,18 @@
 
 /* CARD DETAILS */
 
+.item-card .titleID span{
+    font-size: 22px;
+    color: #214D94;
+}
+.titleID .orderStatus{
+    font-size: 12px !important;
+    padding: 3px 10px;
+    border: 1px solid #214D94;
+    border-radius: 4px;
+    background-color: #F5F6FE;
+    color: #f9cd1a;
+}
 .order-container .item-card{
     /* height: 260px; */
     padding: 15px;
@@ -81,6 +95,7 @@
 }
 .order-container li{
     list-style: none;
+    color: rgba(53, 53, 53, 0.785);
 }
 .itemInfo ul{
     width: 100%;
@@ -96,6 +111,7 @@
 .recepients-wrapper ul span, .parcelDetails ul span{
     font-size: 15px;
     color: #214D94;
+    font-weight: bold;
 }
 
  /* CARD IMAGE */
@@ -187,7 +203,7 @@
     width: 100%;
 }
 
-.button-holder button{
+.orderBtn{
     width: 100% !important;
     height: 45px;
 
