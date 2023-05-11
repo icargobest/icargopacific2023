@@ -115,7 +115,12 @@
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
                                                 <th>Company:</th>
-                                                <td>{{ $ship->company_id }}</td>
+                                                <td>{{ $company_name }}</td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <th>Minimum Bid:</th>
+                                                <td>{{ $ship->min_bid_amount }}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -128,7 +133,7 @@
                                         </tr>
                                         <tr>
                                             <th>Mode of Payment:</th>
-                                            <td>{{$ship->mop}}</td>
+                                            <td>{{ $ship->mop }}</td>
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
@@ -148,33 +153,31 @@
                         <!-- Product Image -->
                         <div class="col-xl-3 text-center">
                             <div>
-                                <a href="{{asset($ship->photo)}}" target="_blank">
-                                    <img src="{{ asset($ship->photo) }}" class="card shadow-0 w-100" alt="" 
+                                <a href="{{ asset($ship->photo) }}" target="_blank">
+                                    <img src="{{ asset($ship->photo) }}" class="card shadow-0 w-100" alt=""
                                         style="object-fit:cover; min-width:140px; max-width:509px;  height:250px; margin-left: auto; margin-right: auto;">
                                 </a>
                                 @if ($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
-                                        <a href="{{route('edit_order', $ship->id)}}">
+                                        <a href="{{ route('edit_order', $ship->id) }}">
                                             <button type="button"
                                                 class="btn btn-primary primary btn-block shadow-0 my-1"
                                                 style="min-width:140px; max-width:509px;">
                                                 Edit
                                             </button>
                                         </a>
-                                        <a href="{{route('userOrderPanel')}}">
+                                        <a href="{{ route('userOrderPanel') }}">
                                             <div class="my-1">
-                                                <button type="button" class="btn btn-block btn-dark shadow-0" style="min-width:140px; max-width:509px;">
-                                                BACK
+                                                <button type="button" class="btn btn-block btn-dark shadow-0"
+                                                    style="min-width:140px; max-width:509px;">
+                                                    BACK
                                                 </button>
                                             </div>
                                         </a>
                                         <form method="POST" action="{{ route('cancelOrder', $ship->id) }}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-danger btn-block shadow-0 my-1"
-                                                style="min-width:140px; max-width:509px;">
-                                                Cancel Order
-                                            </button>
+                                            @include('order.cancel')
                                         </form>
                                     @endif
                                 @endif
@@ -183,60 +186,61 @@
                                         $ship->bid_amount != null &&
                                         $ship->status != 'Cancelled' &&
                                         $ship->status != 'Delivered')
-                                <div class="pt-2">
-                                    <a href="{{ route('trackOrder', $ship->id) }}">
-                                        <button type="button" class="btn btn-primary btn-block"
-                                            style="min-width:140px; max-width:509px; background-color: #214D94;">
-                                            Track Item</button>
-                                    </a>
-                                </div>
-                                <a href="{{route('userOrderPanel')}}">
-                                    <div class="my-1">
-                                        <button type="button" class="btn btn-block btn-dark shadow-0" style="min-width:140px; max-width:509px;">
-                                        BACK
-                                        </button>
+                                    <div class="pt-2">
+                                        <a href="{{ route('trackOrder', $ship->id) }}">
+                                            <button type="button" class="btn btn-primary btn-block"
+                                                style="min-width:140px; max-width:509px; background-color: #214D94;">
+                                                Track Item</button>
+                                        </a>
                                     </div>
-                                </a>
+                                    <a href="{{ route('userOrderPanel') }}">
+                                        <div class="my-1">
+                                            <button type="button" class="btn btn-block btn-dark shadow-0"
+                                                style="min-width:140px; max-width:509px;">
+                                                BACK
+                                            </button>
+                                        </div>
+                                    </a>
                                 @endif
                             </div>
-                            
+
                         </div>
                     </div>
                     <hr class="opacity-75">
                     <!-- table starts here -->
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
-                        <thead class="text-white" style="background-color: #214D94;">
-                            <tr class="text-warning">
-                                <th>COMPANY</th>
-                                <th>BID</th>
-                                <th>DATE</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        @foreach ($bids as $bid)
-                            @if ($ship->id == $bid->shipment_id)
-                                <form action="{{ route('acceptBid', $bid->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                    <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>{{ $bid->user->name }}</strong></td>
-                                            <td>{{ $bid->bid_amount }}</td>
-                                            <td>{{ $bid->status }}</td>
-                                            @if ($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
-                                                <td><button tpye="submit" class="btn btn-success btn-sm"
-                                                    disabled>Accept</button></td>
-                                            @else
-                                                <td><button tpye="submit"
-                                                    class="btn btn-success btn-sm">Accept</button></td>
-                                            @endif
-                                        </tr>
-                                    </tbody>
-                                </form>
-                            @endif
-                        @endforeach
+                            <thead class="text-white" style="background-color: #214D94;">
+                                <tr class="text-warning">
+                                    <th>COMPANY</th>
+                                    <th>BID</th>
+                                    <th>DATE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            @foreach ($bids as $bid)
+                                @if ($ship->id == $bid->shipment_id)
+                                    <form action="{{ route('acceptBid', $bid->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>{{ $bid->company_name }}</strong></td>
+                                                <td>{{ $bid->bid_amount }}</td>
+                                                <td>{{ $bid->status }}</td>
+                                                @if ($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
+                                                    <td><button tpye="submit" class="btn btn-success btn-sm"
+                                                            disabled>Accept</button></td>
+                                                @else
+                                                    <td><button tpye="submit"
+                                                            class="btn btn-success btn-sm">Accept</button></td>
+                                                @endif
+                                            </tr>
+                                        </tbody>
+                                    </form>
+                                @endif
+                            @endforeach
                         </table>
                     </section>
                 </card>

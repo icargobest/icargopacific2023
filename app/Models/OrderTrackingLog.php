@@ -9,7 +9,7 @@ class OrderTrackingLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'tracking_number', 'shipment_id', 'status'];
+    protected $fillable = ['shipment_id', 'tracking_number', 'shipment_id', 'status'];
 
     public function order()
     {

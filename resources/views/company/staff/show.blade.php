@@ -14,7 +14,7 @@
             <fieldset disabled>
                <!-- 2 column grid layout with text inputs for the first and last names -->
                <div class="row">
-                 <div class="col"> 
+                 <div class="col">
                    <div class="form-outline mb-4">
                      <input type="text" id="updateFullName" name="updateFullName" value="{{$staff->user->name}}" class="form-control" />
                       <label class="form-label" for="id">Staff ID</label>
@@ -40,13 +40,13 @@
                <!-- Contact No input -->
 
                <div class="form-outline mb-4">
-                 <input type="text" id="updateStaff" name="updateStaff" value="{{$staff->created_at}}" class="form-control" />
+                 <input type="text" id="updateStaff" name="updateStaff" value="{{date('Y-m-d h:i:s A', strtotime($staff->created_at))}}" class="form-control" />
                </div>
 
                <!-- Contact No input -->
 
                <div class="form-outline mb-4">
-                 <input type="text" id="updateStaffAt" name="updateStaffAt" value="{{$staff->updated_at}}" class="form-control" />
+                 <input type="text" id="updateStaffAt" name="updateStaffAt" value="{{date('Y-m-d h:i:s A', strtotime($staff->updated_at))}}" class="form-control" />
                </div>
 
             </fieldset>

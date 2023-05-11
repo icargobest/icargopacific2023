@@ -121,7 +121,7 @@
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
                                                 <th>Company:</th>
-                                                <td>{{ $ship->company_id }}</td>
+                                                <td>{{ $company_name }}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -190,7 +190,7 @@
                             <div class="col-md-10">
                                 <!-- <h3>Order Summary</h3> -->
                                 @foreach ($logs as $log)
-                                    @if ($ship->id == $log->order_id)
+                                    @if ($ship->id == $log->shipment_id)
                                         @if ($log->isDelivered == true)
                                             <h4 class="fw-bold border-0">DELIVERED</h4>
                                             <div class="card mb-3" style="background-color: #66D066;">
@@ -205,16 +205,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                HAS BEEN DELIVERED</h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN
+                                                                DELIVERED</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isDeliveredTime }}</p>
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
+                                                            </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,24 +235,23 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                IS OUT FOR DELIVERY</h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT
+                                                                FOR DELIVERY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isDispatchedTime }}</p>
-
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDispatchedTime)) }}
+                                                            </p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endif
                                         @if ($log->isArrived == true)
-                                            <h4 class="fw-bold border-0">ARRIVED AT {{ $ship->station_id }}
-                                            </h4>
+                                            <h4 class="fw-bold border-0">ARRIVED AT {{ $ship->station_id }}</h4>
                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                 <div class="card-body">
                                                     <div class="row">
@@ -264,16 +264,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                HAS ARRIVED AT SORTING FACILITY</h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS
+                                                                ARRIVED AT SORTING FACILITY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isArrivedTime }}</p>
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isArrivedTime)) }}
+                                                            </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -294,17 +295,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                HAS ALREADY BEEN TRANSFERRED TO ANOTHER STATION
-                                                            </h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS
+                                                                ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isTransferredTime }}</p>
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}
+                                                            </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -324,17 +325,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY
-                                                            </h5>
-                                                            <p class="card-text mb-0">{{ $log->isAssortTime }}
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
+                                                                ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
+                                                            <p class="card-text mb-0">
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isAssortTime)) }}
                                                             </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -354,17 +355,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                IS ALREADY BEEN PICKED UP BY LOGISTIC COMPANY
-                                                            </h5>
-                                                            <p class="card-text mb-0">{{ $log->isPickUpTime }}
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
+                                                                ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
+                                                            <p class="card-text mb-0">
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPickUpTime)) }}
                                                             </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -384,16 +385,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                IS CURRENTLY BEING PROCESSED</h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
+                                                                CURRENTLY BEING PROCESSED</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isProcessedTime }}</p>
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isProcessedTime)) }}
+                                                            </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -413,16 +415,17 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-lg-5">
-                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER
-                                                                IS CURRENTLY PENDING</h5>
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
+                                                                CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ $log->isPendingTime }}</p>
+                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}
+                                                            </p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
                                                             <p class="card-text mb-0">Company:</p>
-                                                            <h5 class="card-title fw-bold mb-0">
-                                                                {{ $ship->company_bid }}</h5>
+                                                            <h5 class="card-title fw-bold mb-0">{{ $company_name }}
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>

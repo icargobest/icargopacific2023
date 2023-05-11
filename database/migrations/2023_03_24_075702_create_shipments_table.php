@@ -14,6 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
             $table->string('sender_name');
@@ -59,7 +60,7 @@ return new class extends Migration
             $table->string('mop')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
             $table->unsignedBigInteger('company_id')->nullable()->default;
-            $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
@@ -69,9 +70,22 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('bids', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('shipment_id');
+            $table->unsignedBigInteger('bid_amount');
+            $table->string('status');
+            $table->timestamps();
+
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
+        });
+
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('shipment_id');
             $table->boolean('isPending')->default(false);
             $table->dateTime('isPendingTime')->nullable();
             $table->boolean('isProcessed')->default(false);
@@ -91,9 +105,9 @@ return new class extends Migration
             $table->timestamps();
 
             // Define foreign key constraint for the order_id column
-            // $table->foreign('order_id')
-            //       ->references('id')->on('shipments')
-            //       ->onDelete('cascade');
+            $table->foreign('shipment_id')
+                  ->references('id')->on('shipments')
+                  ->onDelete('cascade');
         });
     }
 
@@ -107,11 +121,12 @@ return new class extends Migration
      */
     public function down()
     {
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('order_histories');
-        Schema::dropIfExists('shipments');
+
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
-        Schema::dropIfExists('order_tracking_logs');
+
+        Schema::dropIfExists('order_histories');
+        Schema::dropIfExists('bids');
+        Schema::dropIfExists('shipments');
     }
 };
