@@ -96,9 +96,9 @@ VIEW
                                                 <input type="hidden" name="shipment_id" value="{{ $ship->id }}" />
                                                 <label class="control-label control-label-left fw-bold">BID<span
                                                         class="required"></span></label>
-                                                <input type="number" id="form6Example3" id="bidAmount"
-                                                    name="bid_amount" class="form-control typeahead btn-block w-100"
-                                                    required />
+                                                <input type="number" class="form-control typeahead btn-block w-100"
+                                                    placeholder="BID AMOUNT" id="form6Example3" id="bidAmount"
+                                                    name="bid_amount" required />
                                     </div>
                                     <div class="col-4">
                                         <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton">
@@ -265,16 +265,12 @@ VIEW
         // Add an event listener to the bid amount input field to check the value and disable the button if necessary
         bidAmountInput.addEventListener('input', function(event) {
             var bidAmount = parseFloat(event.target.value);
-            if (isNaN(bidAmount) || bidAmount > maxBidAmount || bidAmount <= 0) {
+            if (isNaN(bidAmount) || bidAmount > maxBidAmount || bidAmount <= 0 || bidAmount == null) {
                 bidButton.disabled = true;
                 bidButton.style.cursor = "not-allowed"; // add cursor validation
             } else {
                 bidButton.disabled = false;
                 bidButton.style.cursor = "pointer"; // add cursor validation
-            }
-            if (event.target.value.trim() === '') {
-                bidButton.disabled = true;
-                bidButton.style.cursor = "not-allowed"; // add cursor validation
             }
         });
     </script>

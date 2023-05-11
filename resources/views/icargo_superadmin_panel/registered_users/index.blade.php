@@ -18,7 +18,6 @@
             </button>
         </a>
 
-
         <div class="mt-2">@include('flash-message')</div>
 
         <div class="table-container">
@@ -141,7 +140,7 @@
                         <td class="capitalized">{{ $customer->user->name }}</td>
                         <td>{{ $customer->user->email }}</td>
                         <td>{{ $customer->contact_no }}</td>
-                        <td>{{ $customer->user->type }}</td>
+                        <td>customer</td>
                         <td>{{ $customer->company_id }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"

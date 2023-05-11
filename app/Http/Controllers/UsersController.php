@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Dispatcher;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\User;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -86,7 +81,7 @@ class UsersController extends Controller
             compact('companies' , 'drivers' , 'dispatchers',  'staffs' , 'customers'));
     }    
 
-    // update, archive, unarchive functions used its own model controller
+    // update, archive, and unarchive functions use its own model controller
 
     public function destroy($id)
     {
