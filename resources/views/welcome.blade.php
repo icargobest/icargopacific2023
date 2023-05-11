@@ -78,8 +78,7 @@
                     <a href="#Home"><li>Home</li></a> 
                     <a href="#Services"><li>Services</li></a> 
                     <a href="#Pricing"><li>Pricing</li></a> 
-                    <a href="#contactUS"><li>Contact Us</li></a>
-                     
+                    <a href="#contactUS"><li>Contact Us</li></a> 
                 </div>
                 
                 <div class="accessNav">
@@ -112,7 +111,6 @@
             <li><a href="#Services">Services</a></li>
             <li><a href="#Pricing">Pricing</a> </li>
             <li><a href="#contactUS">Contact Us</a></li>
-            
             
         </nav>
         

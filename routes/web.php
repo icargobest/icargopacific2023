@@ -44,13 +44,13 @@ use App\Http\Controllers\DriverDashboardController;
 // });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//  Route::get('/', function () {
+//     return view('welcome');
+// }); 
 
-/* Route::get('/', function () {
-    return view('profile.user');
-}); */
+Route::get('/', function () {
+    return view('staff_panel.profile.user');
+}); 
 
 
 /* Users Tab */
@@ -68,6 +68,8 @@ Route::get('/company/history/orderHistory', function () {
 Route::get('/company/freight/transfers', function () {
     return view('company.freight.transfers');
 });
+
+
 
 
 /* Drivers Tab */

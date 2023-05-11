@@ -1,7 +1,7 @@
-<title>Company | Staff</title>
+<title>Staff | Profile</title>
 
 @extends('layouts.app')
-@include('partials.navigationUser',['staff' => "nav-selected"])
+@include('partials.navigationStaff',['staff' => "nav-selected"])
 
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
