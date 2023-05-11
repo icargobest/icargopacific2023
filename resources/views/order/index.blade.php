@@ -10,13 +10,18 @@
 <div class="order-container container">
 
   <h4>MY ITEMS</h4>
-  <div class="button-holder row  mx-1 mb-3">
     <a href="/order-form">
-        <button type="button" class="btn btn-primary btn-sm btn-block">
+        <button type="button" class="orderBtn btn btn-primary btn-sm btn-sm-block mb-3">
             Post Order
         </button>
     </a>
-  </div>
+  {{-- <div class="button-holder row borderRed mb-3">
+    <a href="/order-form">
+        <button type="button" class="btn btn-primary btn-sm btn-sm-block">
+            Post Order
+        </button>
+    </a>
+  </div> --}}
 
     <div class="cards-holder">
 
@@ -27,13 +32,16 @@
                 <a class="cardItem" href="{{route('viewOrder',$ship->id)}}">
                     <div class="item-card container px-4">
                     <div class="card-body">
+                        <div class="row mb-3 titleID">
+                            <div class="col d-flex gap-4 align-items-center"><span class="fw-bold">ORDER #{{$ship->id}}</span> <span class="orderStatus fw-bold"> ORDER STATUS </span></div>
+                        </div>
                         <div class="row">
 
                         <div class="details-wrapper col-lg-10 col-sm-12">
                             <div class="recepients-wrapper row">
 
                             <div class="senderInfo col-lg-6">
-                                <h6>SENDER</h6>
+                                <h6 class="fw-bold">SENDER</h6>
 
                                 <ul>
                                     <li>Name | <span>{{$ship->sender->sender_name}}</span></li>
@@ -42,7 +50,7 @@
                                 </ul>
                             </div>
                             <div class="receiverInfo col-lg-6">
-                                <h6>RECEIVER</h6>
+                                <h6 class="fw-bold">RECEIVER</h6>
 
                                 <ul>
                                     <li>Name | <span>{{$ship->recipient->recipient_name}}</span></li>
@@ -55,20 +63,20 @@
                             <div class="parcelInfo-wrapper">
 
                             <div class="itemInfo">
-                                <h6>ITEM INFORMATION</h6>
+                                <h6 class="fw-bold">ITEM INFORMATION</h6>
 
                                 <div class="parcelDetails row">
 
                                 <div class="listLayout col-lg-6 col-sm-12">
                                     <ul>
-                                        <li>ID | <span>{{$ship->id}}</span></li>
+                                        {{-- <li>ID | <span>{{$ship->id}}</span></li> --}}
                                         <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
+                                        <li>Category | <span>{{$ship->category}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="listLayout col-lg-6 col-sm-12">
                                     <ul>
-                                        <li>Category | <span>{{$ship->category}}</span></li>
-                                        <li>Mode of Pament | <span>{{$ship->mop}}</span></li>
+                                        <li>Mode of Pament | <span>COD</span></li>
                                     </ul>
                                 </div>
 
