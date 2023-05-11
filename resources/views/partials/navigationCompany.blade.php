@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="links">
-                            <a class="nav-link"  href="{{ url('/company/history/orderHistory') }}">
+                            <a class="nav-link"  href="{{ route('orderHistory_Company') }}">
                             <div class="link @if(isset($history)){{$history}}@endif">
                                 <i class="fa fa-history link-i-1"></i>
                                 <span>Order History</span>
