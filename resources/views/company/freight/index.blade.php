@@ -25,7 +25,7 @@
         <div class="main-wrapper border border-2" style=" max-width: 100%;">
     
             <div class="employee-header-container">
-                <h3 class="">ADVANCE FREIGHT LIST</h3>
+                <h3 class="">FREIGHT LIST</h3>
             </div>
     
             <section class="search-filter-container mb-4">
