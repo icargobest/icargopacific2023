@@ -33,10 +33,8 @@
                         <th>PHOTO</th>
                         <th>PICKUP</th>
                         <th>DROPOFF</th>
-                        <th>ITEM</th>
-                        <th>SIZE & WIDTH</th>
                         <th>MAX BID</th>
-                        <th>MOP</th>
+                        <th>TOTAL PRICE</th>
                         <th>STATUS</th>
                         <th>ACTION</th>
                     </tr>
@@ -51,10 +49,8 @@
                                 </td>
                                 <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
                                 <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
-                                <td>{{$ship->category}}</td>
-                                <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                 <td>{{$ship->min_bid_amount}}</td>
-                                <td>{{$ship->mop}}</td>
+                                <td>{{$ship->total_price}}</td>
                                 <td>{{$ship->status}}</td>
                                 <td>
                                     <a class="cardItem" href="{{route('viewOrder_Staff',$ship->id)}}">
