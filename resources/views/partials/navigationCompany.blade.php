@@ -91,8 +91,8 @@
                         </div>
 
                         <div class="links">
-                            <a class="nav-link" href="{{ route('company.advFreightPanel') }}">
-                                <div class="link @if (isset($advance)) {{ $advance }} @endif">
+                            <a class="nav-link" href="/company/advance_freight/index">
+                                <div class="link @if (isset($advance)) {{$advance}} @endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>
                                 </div>
@@ -137,7 +137,7 @@
 
                         <div id="toggle-div3" class="links none">
                             <a class="nav-link" href="/company/drivers ">
-                                <div class="link @if (isset($drivers)) {{ $drivers }} @endif">
+                                <div class="link @if (isset($drivers)) {{ $drivers}} @endif">
                                     <i class="fa fa-id-card-o link-i-1 ml-30px"></i>
                                     <span>Driver</span>
                                 </div>

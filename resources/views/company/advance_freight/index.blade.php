@@ -1,5 +1,5 @@
 <head>
-<title>Company | Adv. Freight</title>
+<title>Company | Advance Freight</title>
 <style>
         table {
     border-collapse: collapse;
@@ -100,8 +100,10 @@
                         {{-- Mode of Pament --}}
                         <td>COD</td>
 
-                        <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <a href="{{ url('/company/freight/transfers') }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <td class="tdbutton" style="max-width:120px">
+                        {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
+                        @include('company/freight.advance_tracking')
+                        <a href="{{ url('/company/freight/advtransfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
                     @endif
@@ -117,5 +119,3 @@
         
     </div>
 </div>
-
-<script></script>

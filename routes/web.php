@@ -70,6 +70,9 @@ Route::get('/company/freight/transfers', function () {
 });
 
 
+Route::get('/company/advance_freight/index', function () {
+    return view('company.advance_freight.index');
+});
 
 
 /* Drivers Tab */
