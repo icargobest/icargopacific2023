@@ -42,7 +42,7 @@
 
         </section>
 
-        <section class="mb-5 px-4 h-90" style="overflow-x:auto">            
+        <section class="mb-5 px-2 h-90" style="overflow-x:auto">            
                 <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <col>
