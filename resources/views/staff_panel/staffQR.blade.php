@@ -1,45 +1,38 @@
-<title>Dispatcher | Qr Scanner</title>
-@include('partials.header')
-@include('partials.navigationDispatcher', ['qr' =>"nav-selected"])
+<title>Track Parcel</title>
+
 @extends('layouts.app')
 @extends('layouts.status')
-<link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
+@include('partials.navigationStaff',['qr' => "nav-selected"])
 
+@php
+    use Illuminate\Http\Request;
+    $request = Request::capture();
+@endphp
+
+<link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
         <div class="col-sm-12 col-12">
-          
-          
             <div>
-              <h2  class="fw-bold">DISPATCHER</h2>
+              <h2 class="fw-bold">PARCEL TRACKING</h2>
             </div>
-
             <div class="container p-5 shadow" style=" background-color:white;">
             <div class="text-center">
+
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
-                  <div>
-                    <section class="container qrcontent" id="qrcontent">
-                      {{-- <div>
-                        <p>Enter tracking ID to search for parcel:</p>
-
-                        <input type="text" placeholder="Enter tracking ID">
-                        <button type="button" class="btn btn-primary">Search</button>
-
-                      </div> --}}
-                      <form action="/search" method="POST">
-                        @csrf
-                        <label for="id">Enter Tracking ID:</label>
-                        <div class="row d-flex justify-content-center">
-                          <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                          <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
-                        </div>
-                    </form>
-                    <div id="message"></div>
-
-                  </div>
+                  <form action="/search" method="POST">
+                    @csrf
+                    <label for="id">Enter Tracking ID:</label>
+                    <div class="row d-flex justify-content-center">
+                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3" value="{{ $request->input('tracking_number') }}">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
+                    </div>
+                  </form>
+                <div id="message"></div>
+              </div>
 
                   <!--
                   <div class="input-group mb-3">
@@ -53,7 +46,7 @@
                   <div style="display:none">
                     <label>QR Scanner</label>
                   </div>
-                  <div class="col-12 d-flex justify-content-center mb-4">
+                  <div class="col-12 d-flex justify-content-center mb-4" style="">
                     <div class="col-12 col-md-3 d-flex justify-content-center">
                       <a class="btn btn-danger mt-3" id="resetButton" style="padding:5px; width: 50%;">Reset</a>
                     </div>
@@ -107,173 +100,15 @@
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
-                  <!-- Received Modal -->
-                  <div class="modal fade" id="receivedmodal" tabindex="-1" aria-labelledby="receivedModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="receivedModalLabel">Shipment Received</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment has been received.</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Assort Modal -->
-                  <div class="modal fade" id="assortModal" tabindex="-1" aria-labelledby="assortModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="assortModalLabel">Assort Shipment</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <p>Please select the appropriate action:</p>
-                          <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-primary" id="dispatch-btn">Dispatch</button>
-                            <button type="button" class="btn btn-secondary" id="transfer-btn">Transfer</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Transfer Modal -->
-                  <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="transferModalLabel">Shipment Transferred</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment Transferred.</p>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
-                        </div>
-                      </div>
-                    </div> 
-                  </div> 
-
-                  <!-- Out for Delivery Modal -->
-                  <div class="modal fade" id="outfordeliveryModal" tabindex="-1" aria-labelledby="outfordeliveryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="outfordeliveryModalLabel">Shipment Permission</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment Out for delivery.</p>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>   
-                  <!-- Arrived Modal -->
-                  <div class="modal fade" id="arrivedModal" tabindex="-1" aria-labelledby="arrivedModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="arrivedModalLabel">Shipment Arrived</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment Arrived.</p>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>  
-                  <!-- Successful Delivery Modal -->
-                  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="successModalLabel">Shipment Success</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment has been Delivered.</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> 
-                  <!-- Not yet picked up Modal -->
-                  <div class="modal fade" id="notpickupModal" tabindex="-1" aria-labelledby="notpickupModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="notpickupModalLabel">Shipment Status</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>Shipment has not been Picked Up yet.</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> 
-                  <!-- No shipment modal Modal -->
-                  <div class="modal fade" id="noShipmentModal" tabindex="-1" aria-labelledby="noShipmentModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="noShipmentModalLabel">Shipment Alert</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>The shipment does not exist.</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> 
                 </section>
-                <form method="POST" action="{{ url('/generate-code') }}">
-                  @csrf
-                  <div class="row text-center d-flex justify-content-center mt-5">
-                  <div class="col-12">
-                      <label for="data">Enter Data:</label>
-                  </div>
-                  <div class="col-12 mb-3">
-                      <input type="text" name="data" id="data" required>
-                  </div>
-                  <div class="generate-code col-12">
-                      <button type="submit" class="col-md-7 col-lg-3" style="padding:5px; letter-spacing:1px;">GENERATE CODE</button>
-                  </div>
-                </div>
-              </form>
               </main>
             </div>
             </div>
-          
-        
+
+
       </div>
     </div>
   </div>
-
-
-
-
-
 
     <!-- MDB -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
@@ -311,7 +146,7 @@
                     iframeContainer.removeChild(iframeContainer.childNodes[0]);
                   }
                   var iframe = document.createElement('iframe');
-                  iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + data.tracking_number + '</h1></div><div style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button></div></body></html>';
+                  iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + data.tracking_number + '</h1></div><div style="text-align:center; width:100%;"></div></body></html>';
                   iframe.style.width = '100%';
                   iframe.style.height = '500px';
                   iframeContainer.appendChild(iframe);
@@ -467,99 +302,19 @@
                         statusContainer.insertBefore(statusItem, statusContainer.firstChild);
                       }
                     }
-
-                    button.addEventListener("click", function() {
-                    if (data.status === 'PickedUp') {
-                      data.status = 'Assort';
-                      data.isAssort = true;
-                      data.isAssortTime = new Date();
-                      var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
-                      modal.show();
-
-                      $.ajax({
-                        type: "POST",
-                        url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
-                        data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                        success: function (response) {
-                          console.log(response);
-                        }
-                      });
-                    } else if (data.status === 'Assort' || data.status === 'Arrived') {
-                      // display modal for user to pick between Dispatch or Transfer
-                      var assortModal = new bootstrap.Modal(document.getElementById('assortModal'), {});
-                      assortModal.show();
-
-                      // listen for user's selection
-                      $('#dispatch-btn').click(function() {
-                        var outfordeliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
-                        data.status = 'Dispatched';
-                        data.isDispatched = true;
-                        data.isDispatchedTime = new Date();
-                        outfordeliveryModal.show();
-
-                        $.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                          success: function (response) {
-                            console.log(response);
-                          }
-                        });
-                      });
-
-                      $('#transfer-btn').click(function() {
-                        var transferModal = new bootstrap.Modal(document.getElementById('transferModal'), {});
-                        data.status = 'Transferred';
-                        data.isTransferred = true;
-                        data.isTransferred = new Date();
-                        transferModal.show();
-
-                        $.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                          success: function (response) {
-                            console.log(response);
-                          }
-                        });
-                      });
-                    } else if (data.status === 'Transferred') {
-                      data.status = 'Arrived';
-                      data.isArrived = true;
-                      data.isArrived = new Date();
-                      var modal = new bootstrap.Modal(document.getElementById('arrivedModal'), {});
-                      modal.show();
-
-                      $.ajax({
-                        type: "POST",
-                        url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateArrived') }}",
-                        data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                        success: function (response) {
-                          console.log(response);
-                        }
-                      });
-                    } else if (data.status === 'Delivered') {
-                      var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                      deliveredModal.show();
-                    } else {
-                      var modal = new bootstrap.Modal(document.getElementById('notpickupModal'), {});
-                      modal.show();
-                    }
-                  });
-
-                  };
-
-                } else {
-                    var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
-                    modal.show();
-                }
+            };
+            } else {
+            return confirm('There is no shipment with this qr code');
             }
-        })
-      }
+        }
+        });
+    }
 
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", {fps: 10, qrbox: 250});
-    html5QrcodeScanner.render(onScanSuccess);
+
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {fps: 10, qrbox: 250});
+        html5QrcodeScanner.render(onScanSuccess);
 
   </script>
 
@@ -585,7 +340,7 @@ $('form').submit(function(e) {
                     iframeContainer.removeChild(iframeContainer.childNodes[0]);
                 }
                 var iframe = document.createElement('iframe');
-                iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button><p>Tracking Number:</p><h1 style="margin:0px;">' + response.shipment.tracking_number + '</h1></div><div style="text-align:center; width:100%;"></div></body></html>';
+                iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><p>Tracking Number:</p><h1 style="margin:0px;">' + response.shipment.tracking_number + '</h1></div><div style="text-align:center; width:100%;"></div></body></html>';
                 iframe.style.width = '100%';
                 iframe.style.height = '500px';
                 iframeContainer.appendChild(iframe);
@@ -741,89 +496,9 @@ $('form').submit(function(e) {
                         statusContainer.insertBefore(statusItem, statusContainer.firstChild);
                       }
                     }
-              button.addEventListener("click", function() {
-              if (response.shipment.status === "PickedUp") {
-                response.shipment.status = 'Assort';
-                response.order_history.isAssort = true;
-                response.order_history.isAssortTime = new Date();
-                var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
-                modal.show();
-
-                // Update the database with the new pickup value
-                $.ajax({
-                    type: "POST",
-                    url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, pickup: response.shipment.status},
-                    success: function (response) {
-                      console.log(response);
-                    }
-                });
-              } else if (response.shipment.status === 'Assort' || response.shipment.status === 'Arrived') {
-                // display modal for user to pick between Dispatch or Transfer
-                var assortModal = new bootstrap.Modal(document.getElementById('assortModal'), {});
-                assortModal.show();
-                // listen for user's selection
-                $('#dispatch-btn').click(function() {
-                  var outfordeliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
-                  response.shipment.status = 'Dispatched';
-                  response.order_history.isDispatched = true;
-                  response.order_history.isDispatchedTime = new Date();
-                  outfordeliveryModal.show();
-
-                  $.ajax({
-                    type: "POST",
-                    url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
-                    success: function (response) {
-                      console.log(response);
-                    }
-                  });
-                });
-
-                $('#transfer-btn').click(function() {
-                  var transferModal = new bootstrap.Modal(document.getElementById('transferModal'), {});
-                  response.shipment.status = 'Transferred';
-                  response.order_history.isTransferred = true;
-                  response.order_history.isTransferred = new Date();
-                  transferModal.show();
-
-                  $.ajax({
-                    type: "POST",
-                    url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
-                    success: function (response) {
-                      console.log(response);
-                    }
-                  });
-                });
-              } else if (response.shipment.status === 'Transferred') {
-                  response.shipment.status = 'Arrived';
-                  response.order_history.isArrived = true;
-                  response.order_history.isArrived = new Date();
-                  var modal = new bootstrap.Modal(document.getElementById('arrivedModal'), {});
-                  modal.show();
-
-                  $.ajax({
-                    type: "POST",
-                    url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateArrived') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
-                    success: function (response) {
-                      console.log(response);
-                    }
-                  });
-                } else if (data.status === 'Delivered') {
-                  var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-                  deliveredModal.show();
-                } else {
-                  var modal = new bootstrap.Modal(document.getElementById('notpickupModal'), {});
-                  modal.show();
-                }
-              });
-
-              };
+            };
             } else {
-              var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
-              modal.show();
+            return confirm('There is no shipment with this qr code');
             }
         }
         });
@@ -831,11 +506,11 @@ $('form').submit(function(e) {
   </script>
 
   <script type="text/javascript">
-    // Add event listener to Reset button
-    document.getElementById("resetButton").addEventListener("click", function() {
-        // Reload the current page
-        location.reload();
-    });
+        // Add event listener to Reset button
+        document.getElementById("resetButton").addEventListener("click", function() {
+            // Reload the current page
+            location.reload();
+        });
   </script>
 
 
@@ -844,12 +519,13 @@ $('form').submit(function(e) {
 </div>
 <hr/>
 
-<script type="text/javascript">
-  $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   }
-  });
-</script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+    </script>
     <!--Bootstrap-->
     <script src="/js/bootstrap.bundle.js"></script>
+
