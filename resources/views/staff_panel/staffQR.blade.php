@@ -21,11 +21,18 @@
 
               <main class="wrapper">
                 <section class="container qrcontent" id="qrcontent">
+                {{-- <div>
+                    <p>Enter tracking ID to search for parcel:</p>
+
+                    <input type="text" placeholder="Enter tracking ID">
+                    <button type="button" class="btn btn-primary">Search</button>
+
+                  </div> --}}
                   <form action="/search" method="POST">
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
                     <div class="row d-flex justify-content-center">
-                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3" value="{{ $request->input('tracking_number') }}">
+                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
                     </div>
                     <div class="row d-flex justify-content-center">
                       <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
@@ -128,13 +135,14 @@
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
     var hasScanned = false;
+    var $j = jQuery.noConflict();
     function onScanSuccess(data) {
       if (hasScanned) return; // check flag
       hasScanned = true;
-        $.ajax({
+        $j.ajax({
             type: "POST",
             cache: false,
-            url: "{{action('App\Http\Controllers\DispatcherQrScannerController@checkUser')}}",
+            url: "{{action('App\Http\Controllers\StaffQrScannerController@checkUser')}}",
             data: {"_token": "{{ csrf_token() }}", data: data},
             success: function (data) {
                 // after success to get Data from controller if Shipment is available in the database
@@ -304,13 +312,12 @@
                     }
             };
             } else {
-            return confirm('There is no shipment with this qr code');
+                var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
+                modal.show();
             }
         }
         });
     }
-
-
 
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "reader", {fps: 10, qrbox: 250});
@@ -318,15 +325,16 @@
 
   </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-var hasSearched = false;
-$('form').submit(function(e) {
-    e.preventDefault();
-    if (hasSearched) return; // check flag
-    hasSearched = true;
-    var formData = $(this).serialize();
-    $.ajax({
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var $j = jQuery.noConflict();
+    var hasSearched = false;
+    $j('form').submit(function(e) {
+      e.preventDefault();
+      if (hasSearched) return; // check flag
+      hasSearched = true;
+      var formData = $(this).serialize();
+      $j.ajax({
         url: $(this).attr('action'),
         type: 'POST',
         data: formData,
