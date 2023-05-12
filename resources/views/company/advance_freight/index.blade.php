@@ -17,6 +17,7 @@
 </style>
 
 </head>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
