@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<div class="vertical-center">
+<div class="py-4 vertical-center">
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center shadow">
 
         <div class="col-md-8 border text-center login-image-container d-none d-lg-block" style="padding:0px;">
             <img class="login-image" src="/img/login_imagev2.jpg" alt="login_image">
@@ -13,7 +13,7 @@
                 <div class="pb-2 login-header">{{ __('Register') }}</div>
                 <div class="pb-3 blue">Create your Account</div>
 
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}"  style="margin-bottom: 37px">
                         @csrf
                         {{-- @include('flash-message') --}}
                         <div class="row mb-3">
@@ -85,12 +85,13 @@
                                 </button>
                             </div>
                         </div>   
+                        <a href="{{ url('company_registration') }}">
+                            <button type="button" class="register-ascompany-button letter-spacing">
+                                {{ __('Register as a company') }}
+                            </button>
+                        </a>
                     </form>
-                    <a href="{{ url('company_registration') }}">
-                        <button type="button" class="mb-5 register-ascompany-button letter-spacing">
-                            {{ __('Register as a company') }}
-                        </button>
-                    </a>
+
 
                     <div class="text-center mt-3 pt-3">
                         <p>Already have an account?

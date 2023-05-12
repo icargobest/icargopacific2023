@@ -3,21 +3,9 @@
     </head>
 
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationUser', ['order' => 'nav-selected'])
-
-    <style>
-        th {
-            background-color: white !important;
-            color: black;
-        }
-
-        td {
-            text-align: left;
-            padding: 5px;
-            color: #214D94;
-        }
-    </style>
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
         <div class="mt-4">
@@ -249,3 +237,15 @@
     </main>
 
     {{-- END OF ORDER CONTAINER --}}
+    <style>
+        th {
+            background-color: white !important;
+            color: black;
+        }
+
+        td {
+            text-align: left;
+            padding: 5px;
+            color: #214D94;
+        }
+    </style>

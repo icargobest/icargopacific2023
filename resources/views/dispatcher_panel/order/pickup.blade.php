@@ -2,9 +2,7 @@
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Dispatcher | Pick Up Orders</title>
 </head>
-
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDispatcher')
 

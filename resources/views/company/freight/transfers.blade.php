@@ -1,66 +1,9 @@
 <head>
-    
-    <title>Company | Transfer Forwarding</title>
-
-    <style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-  }
-  th{
-    color: white !important;
-  }
-  td, th {
-    text-align: center !important;
-    padding: 10px;
-    border: 1px solid black;
-    
-  }
-
-  .parent-div{
-    display: flex;
-    flex-direction: row;
-  }
-
-  .first-child{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-  }
-/* 
-
-  input[type=search] {
-    width: 60%;
-
-  } */
-  input[type=text] {
-    width: 100%;
-
-  }
-
-  .div{
-    display: flex;
-    justify-content: center;
-  }
-
-  .second-div{
-    display: flex;
-    flex-direction: column;
-  }
-
-  li{
-
-    font-size: 18px;
-  }
-    </style>
-
+<title>Company | Transfer Forwarding</title>
 </head>
-
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
-
-
 <div class="mx-4">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
 
@@ -146,3 +89,58 @@
         </div>
       </div>
 </div>
+
+
+
+
+<style>
+  table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+
+}
+
+.parent-div{
+display: flex;
+flex-direction: row;
+}
+
+.first-child{
+display: flex;
+flex-direction: column;
+margin: auto;
+}
+/* 
+
+input[type=search] {
+width: 60%;
+
+} */
+input[type=text] {
+width: 100%;
+
+}
+
+.div{
+display: flex;
+justify-content: center;
+}
+
+.second-div{
+display: flex;
+flex-direction: column;
+}
+
+li{
+
+font-size: 18px;
+}
+</style>

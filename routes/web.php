@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BidController;
-use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
@@ -19,8 +18,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
-use App\Models\OrderTrackingLog;
-use App\Http\Controllers\SuperDashboardController;
 
 
 
@@ -36,47 +33,75 @@ use App\Http\Controllers\SuperDashboardController;
 */
 
 
+// LOGIN PAGE
+// Route::get('/', function () {
+//     return view('login/index');
+// });
+
+// // REGISTER ACCOUNT PAGE
+// Route::get('/register', function () {
+//     return view('login/register');
+// });
+
+
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
+
+
+/* Profile Tab */
+/*  Route::get('/', function () {
+   return view('staff_panel.profile.user');
+});   */
 
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
-    return view('userpanel.orderHistory');
+   return view('userpanel.orderHistory');
 });
 
 /* Company Tab */
 
 Route::get('/company/history/orderHistory', function () {
-    return view('company.history.orderHistory');
+   return view('company.history.orderHistory');
 });
 
 
 Route::get('/company/freight/transfers', function () {
-    return view('company.freight.transfers');
+   return view('company.freight.transfers');
+});
+
+
+Route::get('/company/advance_freight/index', function () {
+   return view('company.advance_freight.index');
 });
 
 
 /* Drivers Tab */
 Route::get('/driver/qr', function () {
-    return view('driver_panel.driver');
+   return view('driver_panel.driver');
 });
 
 
 Route::get('/driver/history', function () {
-    return view('driver_panel.deliverHistory');
+   return view('driver_panel.deliverHistory');
 });
 
 /* Dispatcher Tab */
 Route::get('/dispatcher/qr', function () {
-    return view('dispatcher_panel.dispatcher');
+   return view('dispatcher_panel.dispatcher');
 });
 
 
 Route::get('/dispatcher/history', function () {
-    return view('dispatcher_panel.dispatchHistory');
+   return view('dispatcher_panel.dispatchHistory');
 });
+
+/* Staff Tab */
+
+Route::get('/staff/advance_freight/index', function () {
+    return view('staff_panel.advance_freight.index');
+ });
 
 
 
@@ -274,8 +299,6 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
     Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
     Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-    Route::post('dispatchers/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
-    Route::post('dispatchers/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
 
     Route::controller(ShipmentController::class)->group(function () {
         Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
@@ -343,8 +366,6 @@ Route::get('/find', function () {
 Route::post('/search', [UserController::class, 'search']);
 
 Route::get('/income', [IncomeController::class, 'index']);
-
-Route::get('/super-admin/dashboard', [SuperDashboardController::class, 'index']);
 
 
 //DRIVER PAGE

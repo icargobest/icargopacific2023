@@ -6,6 +6,7 @@
         <title>Customer | Order Tracking #{{ $ship->id }}</title>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @extends('partials.header')
     @extends('layouts.app')
     @include('partials.navigationUser', ['order' => 'nav-selected'])
 

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal top   fade" id="addDispatcherModal" tabindex="-1" aria-labelledby="addDispatcherModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal top  fade" id="addDispatcherModal" tabindex="-1" aria-labelledby="addDispatcherModal" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

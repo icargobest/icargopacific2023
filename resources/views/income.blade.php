@@ -1,6 +1,5 @@
 <title>Company | Dashboard</title>
-
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['dashboard' => "nav-selected"])
 
@@ -11,10 +10,7 @@
 @section('title', 'Monthly Income')
 @section('content')
 
-<style>
-    
-</style>
-<div class="content-container" style="margin-top: -30px !important;">
+<div class="content-container" style="margin-top:-14px !important;">
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
@@ -139,9 +135,6 @@
                     </div> 
                 </div>
             </div>
-
-            {{-- <marquee behavior="" direction="down"> --}}
-            {{-- </marquee> --}}
         </div>  
     </div>         
 </div>
@@ -160,7 +153,7 @@
             @endforeach
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Monthly Income',
             curveType: 'function',
@@ -186,7 +179,7 @@
         ]);
     
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
             // title: 'Weekly Income Chart',
             curveType: 'function',
@@ -215,7 +208,7 @@
             ['2030', {{ $chartData[8][1] }}]
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Yearly Income',
             curveType: 'function',
@@ -240,9 +233,8 @@
             @endforeach
         ]);
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
-            // height: 200,
             // title: 'Daily Income',
             curveType: 'function',
             legend: { position: 'bottom' }
@@ -330,12 +322,6 @@
     }
     
 </script>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 
 @endsection
 @include('partials.footer')
