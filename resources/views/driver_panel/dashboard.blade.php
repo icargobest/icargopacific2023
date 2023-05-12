@@ -4,7 +4,7 @@
 @extends('layouts.app')
 {{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="{{ asset('css/driverdashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/companydashboard.css') }}">
 
 @section('title', 'Driver Dashboard')
 @section('content')
