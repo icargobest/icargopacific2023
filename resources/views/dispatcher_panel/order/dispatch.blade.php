@@ -28,6 +28,9 @@
         <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
             <h3 class="text-white mb-0">ORDER LIST | TO DISPATCH</h3>
         </div>
+        <div class="mt-2">
+            @include('flash-message')
+        </div>
         {{-- TABLE START--}}
         <section class="mb-5 px-5 my-3 overflow-auto">
             <table class="table table-striped table-hover">
@@ -41,7 +44,7 @@
                     <th>SIZE & WIDTH</th>
                     <th>MAXIMUM BID</th>
                     <th>STATUS</th>
-                    <th>ACTION</th>
+                    <th>DRIVER NAME</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,12 +64,15 @@
                             <td>{{$ship->min_bid_amount}}</td>
                             <td>{{$ship->status}}</td>
                             <td>
-                                {{-- <span class="d-flex align-items-start"> --}}
-                                <a class="cardItem" href=" ">
-                                    <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
-                                    ASSIGN DRIVER
-                                    </button>
-                                </a>
+                                @if($ship->driver_id == null)
+                                    @include('dispatcher_panel/order.assignDriver')
+                                @else
+                                    @foreach ($drivers as $driver)
+                                        @if($driver->id == $ship->driver_id)
+                                            {{$driver->user->name}}
+                                        @endif
+                                    @endforeach
+                                @endif
                             </td>
                         </tr>
                         @endif

@@ -32,105 +32,49 @@
             <table class="table table-striped history-table border border-2 shadow">
                 <thead>
                 <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Pickup</th>
-                    <th scope="col">Dropoff</th>
-                    <th scope="col">Parcel Size&Width</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Delivered Date</th>
+                    <th scope="col"></th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Date Delivered</th>
                     <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody class="history-tbody">
-                    
-                        
-                            <tr>
-                                <td>69</td>
-                                <td><img src="/img/order_image.png" alt="item-image"></td>  
-                                <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                                <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                                <td>17x30x41 | 97 kg</td>
-                                <td>August 02, 2023</td>
-                                <td>August 25, 2023</td>
-                                <td class="" style="overflow:auto;">                                
-                                    <label class="status-deliveredv2">
-                                        Delivered
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                              <td>69</td>
-                              <td><img src="/img/order_image.png" alt="item-image"></td>  
-                              <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                              <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                              <td>17x30x41 | 97 kg</td>
-                              <td>August 02, 2023</td>
-                              <td>August 25, 2023</td>
-                              <td class="" style="overflow:auto;">                                
-                                    <label class="status-canceledv2">
-                                        Canceled
-                                    </label>
-                              </td>
-                          </tr>
-                          <tr>
-                            <td>69</td>
-                            <td><img src="/img/order_image.png" alt="item-image"></td>  
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>17x30x41 | 97 kg</td>
-                            <td>August 02, 2023</td>
-                            <td>August 25, 2023</td>
-                            <td class="" style="overflow:auto; ">                                
-                                    <label class="status-canceledv2">
-                                        Canceled
-                                    </label>
-                            </td>
-                        </tr>
-                        <tr>
-                          <td>69</td>
-                          <td><img src="/img/order_image.png" alt="item-image"></td>  
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>17x30x41 | 97 kg</td>
-                          <td>August 02, 2023</td>
-                          <td>August 25, 2023</td>
-                          <td class="" style="overflow:auto; ">                                
-                                  <label class="status-deliveredv2">
-                                    Delivered
-                                  </label>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td>69</td>
-                        <td><img src="/img/order_image.png" alt="item-image"></td>  
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>17x30x41 | 97 kg</td>
-                        <td>August 02, 2023</td>
-                        <td>August 25, 2023</td>
-                        <td class="" style="overflow:auto; ">                                
-                                <label class="status-deliveredv2">
-                                    Delivered
-                                </label>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>69</td>
-                      <td><img src="/img/order_image.png" alt="item-image"></td>  
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>17x30x41 | 97 kg</td>
-                      <td>August 02, 2023</td>
-                      <td>August 25, 2023</td>
-                      <td class="" style="overflow:auto; ">                                
-                              <label class="status-deliveredv2">
-                                Delivered
-                              </label>
-                      </td>
-                  </tr>
-                          
-                          
+                    @foreach ($shipments as $ship)
+                        @if(Auth::user()->type == 'driver')
+                            @if($ship->driver_id == $driverID)
+                                <tr>
+                                    <!-- Photo not showing -->
+                                    <td style="width: 70px;">
+                                        <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
+                                    </td>
+                                    <td>{{$company_name}}</td>
+                                    <td>{{ date('Y-m-d h:i:s A', strtotime($ship->created_at)) }}</td>
+                                    @if($ship->status == 'Delivered')
+                                        <td>{{ date('Y-m-d h:i:s A', strtotime($ship->updated_at)) }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    @switch($ship->status)
+                                        @case('Processing')
+                                        <td>To Pick-up</td>
+                                            @break
+                                        @case('Arrived')
+                                        <td>Delivered</td>
+                                            @break
+                                        @case('Dispatched')
+                                        <td>Out for Delivery</td>
+                                            @break
+                                        @case('Delivered')
+                                            <td>Delivered</td>
+                                            @break
+                                        @default
+                                            <td></td>
+                                    @endswitch
+                                </tr>
+                            @endif
+                        @endif
+                    @endforeach
                 </tbody>
             </table>
         </div>

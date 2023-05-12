@@ -257,6 +257,10 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
     Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
     Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
+
+    Route::controller(ShipmentController::class)->group(function(){
+        Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
+    });
 });
 
 // Dispatcher Panel
@@ -275,7 +279,13 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     Route::controller(ShipmentController::class)->group(function () {
         Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
         Route::get('/dispatcher/order_list/dispatch', 'toDispatch_view')->name('toDispatch_view');
+        Route::get('/dispatcher/history', 'dispatcherHistory_view')->name('driver.history');
     });
+    //DISPATCHER
+    Route::controller(DispatcherController::class)->group(function(){
+        Route::get('/dispatcher/order_list/dispatch/{shipment_id}/{driver_id}', 'assignDriver')->name('dispatcher.assign');
+    });
+
 });
 
 // Staff Panel
