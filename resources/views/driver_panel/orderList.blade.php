@@ -45,7 +45,7 @@
                 <tbody class="history-tbody">
                         @foreach ($shipments as $ship)
                             @if(Auth::user()->type == 'driver')
-                                @if($ship->driver_id == $driverID && ($ship->status == 'Processing' || $ship->status == 'Dispatched'))
+                                @if($ship->driver_id == $driverID && ($ship->status == 'Processing' || $ship->status == 'Picked-Up'|| $ship->status == 'Dispatched'))
                                     <tr>
                                         <td>{{$ship->id}}</td>
                                         <!-- Photo not showing -->
@@ -65,22 +65,7 @@
                                         <td>{{$ship->category}}</td>
                                         <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                         <td>{{$ship->min_bid_amount}}</td>
-                                        @switch($ship->status)
-                                            @case('Processing')
-                                            <td>To Pick-up</td>
-                                                @break
-                                            @case('Assort')
-                                            <td>Delivered</td>
-                                                @break
-                                            @case('Dispatched')
-                                            <td>Out for Delivery</td>
-                                                @break
-                                            @case('Delivered')
-                                                <td>Delivered</td>
-                                                @break
-                                            @default
-                                                <td></td>
-                                        @endswitch
+                                        <td>{{$ship->status}}</td>
                                     </tr>
                                 @endif
                             @endif
