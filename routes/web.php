@@ -48,9 +48,11 @@ Route::get('/', function () {
     return view('welcome');
 }); 
 
-/* Route::get('/', function () {
+
+/* Profile Tab */
+/*  Route::get('/', function () {
    return view('staff_panel.profile.user');
-});  */
+});   */
 
 
 /* Users Tab */
@@ -95,8 +97,11 @@ Route::get('/dispatcher/history', function () {
    return view('dispatcher_panel.dispatchHistory');
 });
 
+/* Staff Tab */
 
-
+Route::get('/staff/advance_freight/index', function () {
+    return view('staff_panel.advance_freight.index');
+ });
 
 
 

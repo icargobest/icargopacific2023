@@ -36,26 +36,30 @@
                         <colgroup span="3"></colgroup>
                         <colgroup span="3"></colgroup>
                         <colgroup span="3"></colgroup>
+                        <thead>
                         <tr>
-                            
                             <th colspan="3" scope="colgroup">SENDER</th>
                             <th colspan="3" scope="colgroup">RECEIVER</th>
                             <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                             <th colspan="1" scope="colgroup"></th>
                         </tr>
-                        <tr>
-                            <th scope="col">NAME</th>
-                            <th scope="col">ADDRESS</th>
-                            <th scope="col">NUMBER</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">ADDRESS</th>
-                            <th scope="col">NUMBER</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">SIZE & WEIGHT</th>
-                            <th scope="col">CATEGORY</th>
-                            <th scope="col">MODE of PAYMENT</th>
-                            <th scope="col">ACTION</th>
-                        </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th scope="col">NAME</th>
+                                <th scope="col">ADDRESS</th>
+                                <th scope="col">NUMBER</th>
+                                <th scope="col">NAME</th>
+                                <th scope="col">ADDRESS</th>
+                                <th scope="col">NUMBER</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">SIZE & WEIGHT</th>
+                                <th scope="col">CATEGORY</th>
+                                <th scope="col">MODE of PAYMENT</th>
+                                <th scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+
                     </thead>
     
                     <tbody>
