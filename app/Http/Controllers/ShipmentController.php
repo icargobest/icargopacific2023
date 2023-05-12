@@ -513,36 +513,36 @@ class ShipmentController extends Controller
 
     function orderHistory_company()
     {
-        $shipment = Shipment::all();
-        $bid = Bid::all();
+        $user_id = Auth::id();
+        $company = Company::where('user_id', $user_id)->first();
+        $shipments = Shipment::where('company_id', $company->id)
+            ->where('status', 'Delivered')
+            ->get();
+        $bids = Bid::all();
         $orderLogs = OrderHistory::all();
         $this->TrackOrderLog();
-        return view('company.order.orderHistory', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'orderLogs' => $orderLogs]);
+        return view('company.order.orderHistory', [
+            'shipments' => $shipments,
+            'bids' => $bids,
+            'sender',
+            'recipient',
+            'orderLogs' => $orderLogs
+        ]);
     }
 
     function orderHistory_staff()
     {
-        $shipments = Shipment::all();
-        $bids = Bid::all();
-        $orderLogs = OrderHistory::all();
-
         $user_id = Auth::id();
-        $staff = Staff::where('user_id', $user_id)->first(); // Retrieve the first matching staff record
-        if ($staff) {
-            $company_id = $staff->company_id; // Get the company_id from the staff record
-            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
-            if ($company) {
-                $company_id_staff =  $company->user_id;
-                $user = User::where('id', $company_id_staff)->first(); // Retrieve the first matching user record
-                if ($user) {
-                    $company_name = $user->name;
-                }
-            }
-        }
-
+        $staff = Staff::with('company')->where('user_id', $user_id)->firstOrFail();
+        $shipments = Shipment::with(['sender', 'recipient'])->where('company_id', $staff->company_id)
+            ->where('status', 'Delivered')->get();
+        $orderLogs = OrderHistory::all();
         $this->TrackOrderLog();
-        return view('staff_panel.order.orderHistory', compact('shipments', 'bids', 'orderLogs', 'company_id_staff'), ['sender', 'recipient']);
+        return view('staff_panel.order.orderHistory', compact('shipments', 'orderLogs'));
     }
+
+
+
 
     public function transfer(Request $request)
     {
@@ -612,6 +612,7 @@ class ShipmentController extends Controller
     public function update_order(Request $request, $id)
     {
         $shipment = Shipment::find($id);
+        $bids = Bid::where('shipment_id', $shipment->id)->exist();
 
         $shipment->sender->sender_name = $request->input('senderName');
         $shipment->sender->sender_address = $request->input('senderAddress');
@@ -647,6 +648,6 @@ class ShipmentController extends Controller
 
         $shipment->save();
 
-        return redirect()->route('viewOrder', $id)->with('success', 'Order information has been updated!');
+        return redirect()->route('viewOrder', $id, compact('bids'))->with('success', 'Order information has been updated!');
     }
 }
