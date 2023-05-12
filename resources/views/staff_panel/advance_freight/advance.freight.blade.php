@@ -1,5 +1,5 @@
 <head>
-    <title>Staff | Freight</title>
+    <title>Staff | Advance Freight</title>
     
     
     </head>
@@ -11,7 +11,7 @@
         <div class="main-wrapper border border-2" style=" max-width: 100%;">
     
             <div class="employee-header-container">
-                <h3 class="">FREIGHT LIST</h3>
+                <h3 class="">ADVANCE FREIGHT LIST</h3>
             </div>
     
             <section class="search-filter-container mb-4">
@@ -58,9 +58,9 @@
                     </thead>
     
                     <tbody>
-            @foreach ($shipments as $ship)
-                @if(Auth::user()->type == 'staff')
-                    @if($ship->company_id == $staff->company_id)
+                @foreach ($shipments as $ship)
+                    @if(Auth::user()->type == 'staff')
+                        @if($ship->company_id == $company_id_staff)
                         <tr>
                             
                             {{-- sender namae --}}
@@ -88,14 +88,14 @@
     
                             <td class="tdbutton" style="max-width:120px">
                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
-                            @include('staff_panel/freight.freight.tracking')
-                            <a href="{{ url('/staff_panel/freight/freight.transfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
+                            @include('staff_panel/advance_freight.advance.tracking')
+                            <a href="{{ url('/staff_panel/advance_freight/advance.transfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
                             <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                         </tr>
 
+                        @endif
                     @endif
-                @endif
-            @endforeach
+                @endforeach
 
                     </tbody>
                     </table>
@@ -124,5 +124,4 @@
         
     }
     </style>
-
     @include('partials.footer')
