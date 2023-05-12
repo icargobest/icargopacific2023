@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Search;
 use Illuminate\Http\Request;
+use App\Models\OrderHistory;
 
 class UserController extends Controller
 {
@@ -13,13 +14,22 @@ class UserController extends Controller
         $shipment = Search::where('tracking_number', $tracking_number)->first();
 
         if ($shipment) {
-            return response()->json([
-                'message' => 'Tracking number found!',
-                'data' => $shipment,
-            ]);
+            $order_history = OrderHistory::where('order_id', $shipment->id)->first();
+
+            if ($order_history) {
+                return response()->json([
+                    'message' => 'Shipment found!',
+                    'shipment' => $shipment,
+                    'order_history' => $order_history,
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Order history not found for shipment.',
+                ]);
+            }
         } else {
             return response()->json([
-                'message' => 'Tracking number not found.',
+                'message' => 'Shipment not found.',
             ]);
         }
     }
