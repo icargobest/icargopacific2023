@@ -172,24 +172,13 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/transfer/{id}', 'transfer')->name('transfer.company');
     });
 
-    // stations
-    Route::group(['prefix' => 'company/stations'], function () {
-        Route::get('/', [StationController::class, 'index'])
-            ->name('stations.view');
-        Route::post('/add-station', [StationController::class, 'store'])
-            ->name('add.station');
-        Route::get('/view_station/{id}', [StationController::class, 'show'])
-            ->name('show.station');
-        Route::get('/stations_archive', [StationController::class, 'viewArchive'])
-            ->name('view.stations.archived');
-        Route::get('/edit/{id}', [StationController::class, 'edit'])
-            ->name('edit.station');
-        Route::put('/update/{id}', [StationController::class, 'update'])
-            ->name('update.station');
-        Route::put('/archive/{id}', [StationController::class, 'archive'])
-            ->name('archive.station');
-        Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
-            ->name('unarchive.station');
+    //stations
+    Route::resource('company/stations', StationController::class);
+    Route::controller(StationController::class)->group(function () {
+        Route::get('company/stations', 'index')->name('stations.view');
+        Route::get('company/archived_stations', 'viewArchive')->name('view.stations.archived');
+        Route::put('company/stations/archive/{id}', 'archive')->name('archive.station');
+        Route::put('company/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
     });
 
     //Staff
@@ -329,6 +318,15 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::post('/staff/add_bid', 'staff_addBid')->name('staff_addBid');
         Route::put('/staff/transfer/{id}', 'transfer')->name('transfer.staff');
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');
+    });
+
+    //Stations
+    Route::resource('staff/stations', StationController::class);
+    Route::controller(StationController::class)->group(function () {
+        Route::get('staff/stations', 'index')->name('stations.view');
+        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archived');
+        Route::put('staff/stations/archive/{id}', 'archive')->name('archive.station');
+        Route::put('staff/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
     });
 
     //DRIVER

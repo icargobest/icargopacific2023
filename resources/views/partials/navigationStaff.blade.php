@@ -79,7 +79,7 @@
                         </div>
 
                         <div class="links">
-                            <a class="nav-link" href="/company/stations">
+                            <a class="nav-link" href="/staff/stations">
                                 <div class="link @if(isset($station)){{$station}}@endif">
                                     <i class="fa fa-charging-station link-i-1"></i>
                                     <span>Station</span>
