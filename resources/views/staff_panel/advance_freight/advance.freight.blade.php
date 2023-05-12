@@ -3,6 +3,7 @@
     
     
     </head>
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationStaff')
     
