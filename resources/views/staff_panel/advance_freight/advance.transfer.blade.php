@@ -1,6 +1,6 @@
 <head>
     
-    <title>Company | Transfer Forwarding</title>
+    <title>Staff | Transfer Forwarding</title>
 
     
 
@@ -8,7 +8,7 @@
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
-@include('partials.navigationCompany',['advance' => "nav-selected"])
+@include('partials.navigationStaff')
 
 
 <div class="content-containe mx-4 pt-4">
@@ -143,3 +143,5 @@
       
     }
   </style>
+
+@include('partials.footer')
