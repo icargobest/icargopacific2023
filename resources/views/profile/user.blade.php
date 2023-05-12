@@ -11,7 +11,6 @@
     </div>
     <div class="profile-wrapper" style="">
 
-      
         <div class="profileTab">
           <div class="profileBackground">
             <button type="button" class="profileIcon" style="" data-bs-toggle="modal" data-bs-target="#editimage"><i class="fa fa-pencil "></i></button>

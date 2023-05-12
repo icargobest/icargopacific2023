@@ -265,7 +265,7 @@ margin-left: 13px !important;
     font-size: 12px;
     margin-left: 20px;
     white-space: nowrap; 
-    text-decoration: none;
+    text-decoration: none;  
 }
 
 .sidebar .divider
@@ -325,6 +325,11 @@ padding: 0px !important;
 {
 position: fixed;
 bottom: 0;
+}
+
+.bottom-nav span
+{
+visibility: hidden;
 }
 
 .links a
@@ -442,6 +447,11 @@ display: none;
 {
 width: 250px;
 /* display: none; */
+}
+
+.bottom-nav span
+{
+visibility:visible;
 }
 
 .sidebar .divider2
