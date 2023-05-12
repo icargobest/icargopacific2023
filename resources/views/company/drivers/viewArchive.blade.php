@@ -1,4 +1,5 @@
 <title>Company |  Dispatcher Archived</title>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany')
 <style>

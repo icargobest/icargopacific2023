@@ -9,13 +9,13 @@
     <link href="https://fonts.googleapis.com">
 	<style>
 		/* Style for the modal overlay */
-		body {
+		.body {
 			background-color: #f2f2f2;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 100vh;
 			font-family: 'Poppins';
+			margin: 10px 0px
 		}
 
         /* Style for the logo and qrcode */
@@ -56,7 +56,7 @@
 			border-radius: 10px;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 			max-width: 100%;
-			max-height: 100%;
+
 		}
 		
 		.sticker h1 {
@@ -144,6 +144,7 @@
 </head>
 
 <body>
+	<div class="body">
 	<div class="sticker">
 		<button class="print-button" onclick="window.print()">
 			Print
@@ -253,5 +254,6 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 </body>
 </html>

@@ -1,12 +1,13 @@
 <title>Company | Station</title>
 
-@extends('layouts.app') @include('partials.navigationCompany',['station' =>
-"nav-selected"])
+@include('partials.header') 
+@extends('layouts.app') 
+@include('partials.navigationCompany',['station' =>"nav-selected"])
 <style>
-    svg {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
+svg {
+width: 1.5rem;
+height: 1.5rem;
+}
 </style>
 <main class="container py-5" style="margin-top: -49px !important">
     <div class="main-wrapper border border-2" style="max-width: 100%">

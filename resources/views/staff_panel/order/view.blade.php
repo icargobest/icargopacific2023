@@ -4,6 +4,7 @@
     </head>
 
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationStaff', ['order' => 'nav-selected'])
 

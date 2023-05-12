@@ -3,9 +3,9 @@
     <title>Staff | Orders</title>
 </head>
 
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-@extends('layouts.app') @include('partials.navigationStaff',['order' =>
-"nav-selected"])
+@include('partials.header')
+@extends('layouts.app') 
+@include('partials.navigationStaff',['order' =>"nav-selected"])
 
 <style>
     th {

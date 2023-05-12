@@ -39,7 +39,7 @@
                             <div class="form-outline">
                                 <input type="text" id="updateFullName"
                                 name="updateFullName" @error('updateFullName')
-                                is-invalid @enderror"
+                                is-invalid @enderror
                                 value="{{$staff->user->name}}"
                                 class="form-control" @required(true) />
                                 <label class="form-label" for="name"
@@ -57,7 +57,7 @@
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="email" id="updateEmail" name="updateEmail"
-                        @error('updateEmail') is-invalid @enderror"
+                        @error('updateEmail') is-invalid @enderror
                         value="{{$staff->user->email}}" class="form-control"
                         @required(true)/>
                         <label class="form-label" for="email">Email</label>

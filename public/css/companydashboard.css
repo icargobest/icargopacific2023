@@ -183,17 +183,18 @@ svg{
       
     display: flex;
     flex-direction: row;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     }
 
     .cards, .cardsM
     {
-    height: 160px;
+    height: 140px;
     margin-right: 0px;
-    width: 32%;
+    margin-bottom: 0px;
+    width: 31%;
     min-width: 250px;
     display: flex;
-    padding: 20px;
+    padding: 15px;
     }
     .cardsM{
     margin-right: 30px;

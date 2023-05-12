@@ -1,5 +1,7 @@
 <title>Company | Driver</title>
-@extends('layouts.app') @include('partials.navigationCompany',['drivers' =>
+@include('partials.header')
+@extends('layouts.app') 
+@include('partials.navigationCompany',['drivers' =>
 "nav-selected"])
 <style>
     svg {
