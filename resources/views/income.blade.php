@@ -1,5 +1,5 @@
 <title>Company | Dashboard</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['dashboard' => "nav-selected"])
 

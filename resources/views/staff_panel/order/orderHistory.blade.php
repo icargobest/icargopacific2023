@@ -1,4 +1,6 @@
-@extends('layouts.app') @include('partials.navigationStaff', ['history' => 'nav-selected'])
+@include('partials.header')
+@extends('layouts.app') 
+@include('partials.navigationStaff', ['history' => 'nav-selected'])
 
 <title>Staff | Order History</title>
 <main class="container py-5" style="margin-top: -49px !important">

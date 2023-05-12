@@ -1,3 +1,4 @@
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDriver',['history' => "nav-selected"])
 <title>Driver | History</title>

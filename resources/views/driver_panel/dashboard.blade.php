@@ -1,5 +1,5 @@
 <title>Driver | Dashboard</title>
-
+@include('partials.header')
 @include('partials.navigationDriver', ['dashboard' =>"nav-selected"])
 @extends('layouts.app')
 {{-- @extends('layouts.chart') --}}
@@ -13,7 +13,7 @@
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
-                Dispatcher Dashboard  
+                Driver Dashboard  
             </div>
 
             <div class="shippingStatus">

@@ -1,7 +1,7 @@
 <title>Company | Staff</title>
-
-@extends('layouts.app') @include('partials.navigationCompany',['staff' =>
-"nav-selected"])
+@include('partials.header')
+@extends('layouts.app') 
+@include('partials.navigationCompany',['staff' =>"nav-selected"])
 
 <style>
     svg {

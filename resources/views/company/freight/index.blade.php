@@ -1,22 +1,7 @@
-<head>
+    <head>
     <title>Company | Freight</title>
-    <style>
-            table {
-        border-collapse: collapse;
-        border-color: transparent !important;
-      }
-      th{
-        color: white !important;
-      }
-      td, th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black;
-        
-      }
-    </style>
-    
     </head>
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationCompany',['freight' => "nav-selected"])
     
@@ -50,12 +35,16 @@
                         <colgroup span="3"></colgroup>
                         <colgroup span="3"></colgroup>
                         <tr>
+                        <thead>
                             
                             <th colspan="3" scope="colgroup">SENDER</th>
                             <th colspan="3" scope="colgroup">RECEIVER</th>
                             <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                             <th colspan="1" scope="colgroup"></th>
+                        </thead>
+
                         </tr>
+                        <thead>
                         <tr>
                             <th scope="col">NAME</th>
                             <th scope="col">ADDRESS</th>
@@ -69,6 +58,8 @@
                             <th scope="col">MODE of PAYMENT</th>
                             <th scope="col">ACTION</th>
                         </tr>
+                    </thead>
+
                     </thead>
     
                     <tbody>
@@ -119,3 +110,19 @@
             
         </div>
     </div>
+
+
+<style>
+table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black; 
+}
+</style>

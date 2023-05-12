@@ -3,7 +3,7 @@
     <title>Customer | Order Form</title>
 
 </head>
-
+@include('partials.header')
 @include('layouts.app')
 @include('partials.navigationUser', ['order' => 'nav-selected'])
 
