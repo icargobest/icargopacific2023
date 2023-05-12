@@ -1,23 +1,7 @@
-<head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}" />
-    <title>Company | Orders</title>
-</head>
-
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-@extends('layouts.app') @include('partials.navigationCompany', ['order' => 'nav-selected'])
-
-<style>
-    th {
-        background-color: white !important;
-        color: black;
-        font-weight: normal;
-    }
-
-    td {
-        text-align: left;
-        font-weight: bold;
-    }
-</style>
+@include('partials.header')
+<title>Company | Orders</title>
+@extends('layouts.app') 
+@include('partials.navigationCompany', ['order' => 'nav-selected'])
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="container mw-100">
     <div class="bg-white shadow" style="max-width: 100%">
@@ -96,3 +80,17 @@
 </script>
 
 {{-- END OF ORDER CONTAINER --}} @include('partials.footer')
+
+
+<style>
+    th {
+        background-color: white !important;
+        color: black;
+        font-weight: normal;
+    }
+
+    td {
+        text-align: left;
+        font-weight: bold;
+    }
+</style>

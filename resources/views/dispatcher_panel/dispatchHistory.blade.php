@@ -1,5 +1,5 @@
 <title>Dispatcher | History</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDispatcher', ['history' =>"nav-selected"])
 <title>Dispatcher | History</title>

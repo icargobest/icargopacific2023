@@ -1,22 +1,7 @@
-<head>
+    <head>
     <title>Company | Freight</title>
-    <style>
-            table {
-        border-collapse: collapse;
-        border-color: transparent !important;
-      }
-      th{
-        color: white !important;
-      }
-      td, th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black;
-        
-      }
-    </style>
-    
     </head>
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationCompany',['freight' => "nav-selected"])
     
@@ -119,3 +104,19 @@
             
         </div>
     </div>
+
+
+<style>
+table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black; 
+}
+</style>

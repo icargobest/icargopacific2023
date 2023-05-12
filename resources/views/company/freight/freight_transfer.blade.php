@@ -1,19 +1,6 @@
 <head>
-    
-    <title>Company | Transfer Forwarding</title>
-
-    <style>
-      #table-div th, #table-div td{
-        background-color: transparent !important;
-        color:black !important;
-        text-align: left !important;
-        
-      }
-    </style>
-
+<title>Company | Transfer Forwarding</title>
 </head>
-
-  {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
@@ -141,3 +128,12 @@
       </div>
     </div>
 </div>
+
+<style>
+    #table-div th, #table-div td{
+      background-color: transparent !important;
+      color:black !important;
+      text-align: left !important;
+      
+    }
+</style>
