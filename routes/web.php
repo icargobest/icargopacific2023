@@ -18,6 +18,9 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Models\OrderTrackingLog;
+use App\Http\Controllers\SuperDashboardController;
+use App\Http\Controllers\StaffDashboardController;
 
 
 
@@ -303,8 +306,8 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
-        ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
+    ->name('staff.dashboard')->middleware('verified');
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function () {

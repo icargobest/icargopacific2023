@@ -19,7 +19,7 @@ class UserController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Tracking number not found.',
+                'message' => 'Tracking number not so found.',
             ]);
         }
     }
