@@ -41,8 +41,8 @@
                 </thead>
                 <tbody class="history-tbody">
                     @foreach ($shipments as $ship)
-                        @if(Auth::user()->type == 'driver')
-                            @if($ship->driver_id == $driverID)
+                        @if(Auth::user()->type == 'driver' && ($ship->status == 'Delivered' || $ship->status == 'Assort'))
+                            @if($ship->driver_id == $driverID )
                                 <tr>
                                     <!-- Photo not showing -->
                                     <td style="width: 70px;">
@@ -50,20 +50,10 @@
                                     </td>
                                     <td>{{$company_name}}</td>
                                     <td>{{ date('Y-m-d h:i:s A', strtotime($ship->created_at)) }}</td>
-                                    @if($ship->status == 'Delivered')
-                                        <td>{{ date('Y-m-d h:i:s A', strtotime($ship->updated_at)) }}</td>
-                                    @else
-                                        <td></td>
-                                    @endif
+                                    <td>{{ date('Y-m-d h:i:s A', strtotime($ship->updated_at)) }}</td>
                                     @switch($ship->status)
-                                        @case('Processing')
-                                        <td>To Pick-up</td>
-                                            @break
-                                        @case('Arrived')
+                                        @case('Assort')
                                         <td>Delivered</td>
-                                            @break
-                                        @case('Dispatched')
-                                        <td>Out for Delivery</td>
                                             @break
                                         @case('Delivered')
                                             <td>Delivered</td>

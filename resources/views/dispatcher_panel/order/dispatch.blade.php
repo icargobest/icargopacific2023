@@ -50,31 +50,31 @@
             <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->type == 'dispatcher')
-                        @if($ship->company_id == $company_id_dispatcher && $ship->status == 'Arrived')
-                        <tr>
-                            <td>{{$ship->id}}</td>
-                            <!-- Photo not showing -->
-                            <td style="width: 70px;">
-                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
-                            </td>
-                            <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
-                            <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
-                            <td>{{$ship->category}}</td>
-                            <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
-                            <td>{{$ship->min_bid_amount}}</td>
-                            <td>{{$ship->status}}</td>
-                            <td>
-                                @if($ship->driver_id == null)
-                                    @include('dispatcher_panel/order.assignDriver')
-                                @else
-                                    @foreach ($drivers as $driver)
-                                        @if($driver->id == $ship->driver_id)
-                                            {{$driver->user->name}}
-                                        @endif
-                                    @endforeach
-                                @endif
-                            </td>
-                        </tr>
+                        @if($ship->company_id == $company_id_dispatcher && $ship->status == 'Arrived' && $ship->driver_id == null)
+                            <tr>
+                                <td>{{$ship->id}}</td>
+                                <!-- Photo not showing -->
+                                <td style="width: 70px;">
+                                    <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
+                                </td>
+                                <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
+                                <td>{{$ship->recipient->recipient_address}}, {{$ship->recipient->recipient_city}}, {{$ship->recipient->recipient_state}}, {{$ship->recipient->recipient_zip}}</td>
+                                <td>{{$ship->category}}</td>
+                                <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
+                                <td>{{$ship->min_bid_amount}}</td>
+                                <td>{{$ship->status}}</td>
+                                <td>
+                                    @if($ship->driver_id == null)
+                                        @include('dispatcher_panel/order.assignDriver')
+                                    @else
+                                        @foreach ($drivers as $driver)
+                                            @if($driver->id == $ship->driver_id)
+                                                {{$driver->user->name}}
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </td>
+                            </tr>
                         @endif
                     @endif
                 @endforeach

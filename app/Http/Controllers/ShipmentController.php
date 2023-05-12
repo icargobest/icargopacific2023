@@ -631,6 +631,30 @@ class ShipmentController extends Controller
         return view('driver_panel.deliverHistory', compact('driverID', 'company_name'), ['shipments' => $shipment]);
     }
 
+    public function driverOrder_view(){
+        $shipment = Shipment::all();
+
+        $user_id = Auth::id();
+        $driver = Driver::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($driver) {
+            $driverID = $driver->id; // Get the driver_id from the driver record
+            $company_id = $driver->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            } 
+        }
+
+        $this->TrackOrderLog();
+
+        return view('driver_panel.orderList', compact('driverID', 'company_name'), ['shipments' => $shipment]);
+    }
+
     public function dispatcherHistory_view(){
         $shipment = Shipment::all();
         $bid = Bid::all();

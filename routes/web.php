@@ -260,6 +260,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
 
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
+        Route::get('/driver/order', 'driverOrder_view')->name('driver.order');
     });
 });
 

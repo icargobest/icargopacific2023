@@ -42,27 +42,29 @@
                 </tr>
                 </thead>
                 <tbody class="history-tbody">
-                    @foreach ($shipments as $ship)
-                        @if(Auth::user()->type == 'dispatcher')
-                            @if($ship->company_id == $company_id_dispatcher && $ship->driver_id == $driverID && $ship->driver_id != null)
-                                <tr>
-                                    <!-- Photo not showing -->
-                                    <td style="width: 70px;">
-                                        <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
-                                    </td>
-                                    <td>{{$company_name}}</td>
-                                    <td>{{$ship->created_at}}</td>
-                                    <td>{{$ship->updated_at}}</td>
-                                    <td>
-                                        @foreach ($drivers as $driver)
-                                            @if($driver->id == $ship->driver_id)
-                                                {{$driver->user->name}}
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td>{{$ship->status}}</td>
-                                </tr>
-                            @endif
+                    @foreach ($drivers as $user)
+                        @if($user->dispatcher_id == Auth::id())
+                            @foreach ($shipments as $ship)
+                                    @if($ship->company_id == $company_id_dispatcher && $ship->driver_id == $user->id && $ship->driver_id != null)
+                                        <tr>
+                                            <!-- Photo not showing -->
+                                            <td style="width: 70px;">
+                                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
+                                            </td>
+                                            <td>{{$company_name}}</td>
+                                            <td>{{$ship->created_at}}</td>
+                                            <td>{{$ship->updated_at}}</td>
+                                            <td>
+                                                @foreach ($drivers as $driver)
+                                                    @if($driver->id == $ship->driver_id)
+                                                        {{$driver->user->name}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{$ship->status}}</td>
+                                        </tr>
+                                    @endif
+                            @endforeach
                         @endif
                     @endforeach
                 </tbody>
