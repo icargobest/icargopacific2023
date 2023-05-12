@@ -50,13 +50,16 @@
                     <colgroup span="3"></colgroup>
                     <colgroup span="3"></colgroup>
                     <tr>
-                        
+                    <thead>
                         <th colspan="3" scope="colgroup">SENDER</th>
                         <th colspan="3" scope="colgroup">RECEIVER</th>
                         <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                         <th colspan="1" scope="colgroup"></th>
+                    </thead>
+
                     </tr>
                     <tr>
+                    </thead>
                         <th scope="col">NAME</th>
                         <th scope="col">ADDRESS</th>
                         <th scope="col">NUMBER</th>
@@ -68,6 +71,7 @@
                         <th scope="col">CATEGORY</th>
                         <th scope="col">MODE of PAYMENT</th>
                         <th scope="col">ACTION</th>
+                    </thead> 
                     </tr>
                 </thead>
 
