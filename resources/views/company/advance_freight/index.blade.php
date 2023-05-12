@@ -1,22 +1,9 @@
 <head>
-<title>Company | Adv. Freight</title>
-<style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-  }
-  th{
-    color: white !important;
-  }
-  td, th {
-    text-align: center !important;
-    padding: 10px;
-    border: 1px solid black;
-    
-  }
-</style>
+<title>Company | Advance Freight</title>
+
 
 </head>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
@@ -42,7 +29,7 @@
 
         </section>
 
-        <section class="mb-5 px-4 h-90" style="overflow-x:auto">            
+        <section class="mb-5 px-2 h-90" style="overflow-x:auto">            
                 <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <col>
@@ -50,13 +37,16 @@
                     <colgroup span="3"></colgroup>
                     <colgroup span="3"></colgroup>
                     <tr>
-                        
+                    <thead>
                         <th colspan="3" scope="colgroup">SENDER</th>
                         <th colspan="3" scope="colgroup">RECEIVER</th>
                         <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                         <th colspan="1" scope="colgroup"></th>
+                    </thead>
+
                     </tr>
                     <tr>
+                    <thead>
                         <th scope="col">NAME</th>
                         <th scope="col">ADDRESS</th>
                         <th scope="col">NUMBER</th>
@@ -68,6 +58,7 @@
                         <th scope="col">CATEGORY</th>
                         <th scope="col">MODE of PAYMENT</th>
                         <th scope="col">ACTION</th>
+                    </thead> 
                     </tr>
                 </thead>
 
@@ -100,8 +91,10 @@
                         {{-- Mode of Pament --}}
                         <td>COD</td>
 
-                        <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <a href="{{ url('/company/freight/transfers') }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <td class="tdbutton" style="max-width:120px">
+                        {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
+                        @include('company/freight.advance_tracking')
+                        <a href="{{ url('/company/freight/advtransfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
                     @endif
@@ -118,4 +111,18 @@
     </div>
 </div>
 
-<script></script>
+<style>
+    table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+
+}
+</style>

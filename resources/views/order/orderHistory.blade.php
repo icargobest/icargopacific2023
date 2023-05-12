@@ -1,3 +1,4 @@
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationUser',['history' => "nav-selected"])
 

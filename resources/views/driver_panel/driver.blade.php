@@ -1,9 +1,8 @@
 <title>Driver | Qr Scanner</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @extends('layouts.status')
 @include('partials.navigationDriver',['qr' => "nav-selected"])
-
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">

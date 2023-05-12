@@ -1,26 +1,19 @@
 <title>Dispatcher | Dashboard</title>
-
+@include('partials.header')
 @extends('layouts.app')
-
 @include('partials.navigationDispatcher', ['dashboard' =>"nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="{{ asset('css/dispatcherdashboard.css') }}">
-
+<link rel="stylesheet" href="{{ asset('css/companydashboard.css') }}">
 @section('title', 'Dispatcher Dashboard')
 @section('content')
-
-<<<<<<< HEAD
-=======
 <div class="" style="margin-top:-14px !important;">
->>>>>>> TALARO-BRANCH
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
                 Dispatcher Dashboard  
             </div>
-
             <div class="shippingStatus">
                 <span class = "title">
                     <i class="fa fa-truck"></i>

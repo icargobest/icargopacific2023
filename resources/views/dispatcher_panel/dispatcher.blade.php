@@ -1,4 +1,5 @@
 <title>Dispatcher | Qr Scanner</title>
+@include('partials.header')
 @include('partials.navigationDispatcher', ['qr' =>"nav-selected"])
 @extends('layouts.app')
 @extends('layouts.status')
