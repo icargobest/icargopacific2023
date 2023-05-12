@@ -24,7 +24,8 @@
         </div>
     </div>
 
-    <form class="userInputs d-flex px-3" method="POST" action="{{route('update_order', $shipment->id)}}" enctype="multipart/form-data">
+    <form class="userInputs d-flex px-3" method="POST" action="{{ route('update_order', $shipment->id) }}"
+        enctype="multipart/form-data">
         {{-- SENDER FORM --}}
         @csrf
         @method('PUT')
@@ -347,8 +348,7 @@
                             </span>
                             <div class="form-outline">
                                 <select class="form-control" id="paymentParcel" name="mop" required>
-                                    <option value="COD"
-                                        {{ $shipment->mop == 'COD' ? 'selected' : '' }}>Cash On
+                                    <option value="COD" {{ $shipment->mop == 'COD' ? 'selected' : '' }}>Cash On
                                         Delivery(COD)</option>
                                     <option value="Gcash Payment"
                                         {{ $shipment->mop == 'Gcash Payment' ? 'selected' : '' }}>Gcash
@@ -442,7 +442,8 @@
                         </span>
                         <div class="form-outline">
                             <input type="number" id="bidParcel" value="{{ $shipment->min_bid_amount }}"
-                                name="amount" class="form-control" required />
+                                @if ($shipment->bids()->exists()) readonly="readonly" @endif name="amount" class="form-control"
+                                required />
                         </div>
                     </div>
                 </div>
@@ -452,9 +453,10 @@
                     <span>Image<span class="required">*</span></span>
                     <div class="form-outline mb-4">
                         <div>
-                            <img src="{{asset($shipment->photo)}}" alt="Image preview" width="200px">
+                            <img src="{{ asset($shipment->photo) }}" alt="Image preview" width="200px">
                         </div>
-                        <input type="file" value="{{asset($shipment->photo)}}" name="photo" id="photo" />
+                        <input type="file" value="{{ asset($shipment->photo) }}" name="photo"
+                            id="photo" />
                     </div>
                 </div>
 
