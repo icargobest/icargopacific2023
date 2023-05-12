@@ -52,7 +52,7 @@
                                         <td style="width: 70px;">
                                             <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
                                         </td>
-                                        @if($ship->status == 'Processing')
+                                        @if($ship->status == ('Processing' || 'Picked-Up'))
                                             <td>{{$ship->sender->sender_address}}, {{$ship->sender->sender_city}}, {{$ship->sender->sender_state}}, {{$ship->sender->sender_zip}}</td>
                                         @else
                                             <td>Company Warehouse</td>
