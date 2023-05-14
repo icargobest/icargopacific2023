@@ -293,10 +293,11 @@
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
     var hasScanned = false;
+    var $j = jQuery.noConflict();
     function onScanSuccess(data) {
       if (hasScanned) return; // check flag
       hasScanned = true;
-        $.ajax({
+        $j.ajax({
             type: "POST",
             cache: false,
             url: "{{action('App\Http\Controllers\DispatcherQrScannerController@checkUser')}}",
@@ -476,7 +477,7 @@
                       var modal = new bootstrap.Modal(document.getElementById('receivedmodal'), {});
                       modal.show();
 
-                      $.ajax({
+                      $j.ajax({
                         type: "POST",
                         url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
                         data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
@@ -497,7 +498,7 @@
                         data.isDispatchedTime = new Date();
                         outfordeliveryModal.show();
 
-                        $.ajax({
+                        $j.ajax({
                           type: "POST",
                           url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
                           data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
@@ -514,7 +515,7 @@
                         data.isTransferred = new Date();
                         transferModal.show();
 
-                        $.ajax({
+                        $j.ajax({
                           type: "POST",
                           url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
                           data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
@@ -530,7 +531,7 @@
                       var modal = new bootstrap.Modal(document.getElementById('arrivedModal'), {});
                       modal.show();
 
-                      $.ajax({
+                      $j.ajax({
                         type: "POST",
                         url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateArrived') }}",
                         data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
@@ -564,14 +565,15 @@
   </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-var hasSearched = false;
-$('form').submit(function(e) {
-    e.preventDefault();
-    if (hasSearched) return; // check flag
-    hasSearched = true;
-    var formData = $(this).serialize();
-    $.ajax({
+  <script>
+    var $j = jQuery.noConflict();
+    var hasSearched = false;
+    $j('form').submit(function(e) {
+      e.preventDefault();
+      if (hasSearched) return; // check flag
+      hasSearched = true;
+      var formData = $(this).serialize();
+      $j.ajax({
         url: $(this).attr('action'),
         type: 'POST',
         data: formData,
@@ -750,7 +752,7 @@ $('form').submit(function(e) {
                 modal.show();
 
                 // Update the database with the new pickup value
-                $.ajax({
+                $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateReceived') }}",
                     data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, pickup: response.shipment.status},
@@ -770,7 +772,7 @@ $('form').submit(function(e) {
                   response.order_history.isDispatchedTime = new Date();
                   outfordeliveryModal.show();
 
-                  $.ajax({
+                  $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
                     data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
@@ -787,7 +789,7 @@ $('form').submit(function(e) {
                   response.order_history.isTransferred = new Date();
                   transferModal.show();
 
-                  $.ajax({
+                  $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
                     data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
@@ -803,7 +805,7 @@ $('form').submit(function(e) {
                   var modal = new bootstrap.Modal(document.getElementById('arrivedModal'), {});
                   modal.show();
 
-                  $.ajax({
+                  $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateArrived') }}",
                     data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
@@ -845,7 +847,7 @@ $('form').submit(function(e) {
 <hr/>
 
 <script type="text/javascript">
-  $.ajaxSetup({
+  $j.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
    }
