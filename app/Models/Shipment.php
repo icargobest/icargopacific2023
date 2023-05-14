@@ -12,7 +12,7 @@ class Shipment extends Model
     protected $guarded = [];
 
     protected $table = 'shipments';
-    protected $fillable = ['station_id', 'company_name', 'tracking_number', 'user_id', 'sender_id', 'recipient_id', 'weight', 'length', 'width', 'height', 'service_type', 'order_type', 'category', 'mop', 'min_bid_amount', 'total_price', 'status', 'advTransferredto', 'advTransferredStatus', 'photo'];
+    protected $fillable = ['station_id', 'company_name', 'tracking_number', 'user_id', 'sender_id', 'recipient_id', 'weight', 'length', 'width', 'height', 'service_type', 'order_type', 'category', 'mop', 'min_bid_amount', 'total_price', 'status', 'advTransferredto', 'advTransferredStatus', 'photo', 'driver_id'];
 
     public function sender()
     {
@@ -34,7 +34,13 @@ class Shipment extends Model
         return $this->hasMany(OrderHistory::class);
     }
 
-    function getShipmentId($id){
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    function getShipmentId($id)
+    {
         return $this->find($id);
     }
 }

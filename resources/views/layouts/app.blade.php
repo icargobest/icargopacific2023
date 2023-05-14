@@ -96,8 +96,8 @@ li
                     </li>
                     <li><div class="dividerBlack1"></div></li>
                     
-{{--                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-user"></i>Profile</a></li>
-                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
+                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-user"></i>Profile</a></li>
+      {{--          <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
                     <li><div class="dividerBlack"></div></li> --}}
@@ -161,7 +161,7 @@ li
                     </div>
                 </div>
                 @endif
-                <main class="py-4">
+                <main class="">
                     @yield('content')
                </main>
 @include('partials.footer')	

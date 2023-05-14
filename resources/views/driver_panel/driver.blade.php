@@ -1,9 +1,8 @@
 <title>Driver | Qr Scanner</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @extends('layouts.status')
 @include('partials.navigationDriver',['qr' => "nav-selected"])
-
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
@@ -35,26 +34,6 @@
                 </form>
                 <div id="message"></div>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
-                    $('form').submit(function(e) {
-                        e.preventDefault();
-                        var formData = $(this).serialize();
-                        $.ajax({
-                            url: $(this).attr('action'),
-                            type: 'POST',
-                            data: formData,
-                            success: function(response) {
-                                $('#message').text(response.message);
-                                if (response.data) {
-                                    $('#message').append('<br>ID: ' + response.data.tracking_number);
-                                }
-                            },
-                            error: function(response) {
-                                $('#message').text('An error occurred while searching for user.');
-                            }
-                        })
-                    })
-                </script>
                 </form>
 
 
@@ -199,6 +178,22 @@
                       </div>
                     </div>
                   </div>
+                  <div class="modal fade" id="noShipmentModal" tabindex="-1" aria-labelledby="noShipmentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="noShipmentModalLabel">Shipment Alert</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>The shipment does not exist.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
                 </section>
               </main>
             </div>
@@ -227,13 +222,14 @@
   <script type="text/javascript">
     // after success to play camera Webcam Ajax paly to send data to Controller
     var hasScanned = false;
+    var $j = jQuery.noConflict();
     function onScanSuccess(data) {
       if (hasScanned) return; // check flag
       hasScanned = true;
-        $.ajax({
+        $j.ajax({
             type: "POST",
             cache: false,
-            url: "{{action('App\Http\Controllers\DispatcherQrScannerController@checkUser')}}",
+            url: "{{action('App\Http\Controllers\DriverQrScannerController@checkUser')}}",
             data: {"_token": "{{ csrf_token() }}", data: data},
             success: function (data) {
                 // after success to get Data from controller if Shipment is available in the database
@@ -414,7 +410,7 @@
                 modal.show();
 
                 // Update the database with the new pickup value
-                $.ajax({
+                j({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
                     data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
@@ -422,7 +418,7 @@
                       console.log(response);
                     }
                 });
-                $.ajax({
+                j({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                     data: {
@@ -443,7 +439,7 @@
                 deliveredModal.show();
 
                 // Update the database with the new delivered value
-                $.ajax({
+                $j.ajax({
                 type: "POST",
                 url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
                 data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
@@ -451,7 +447,7 @@
                   console.log(response);
                 }
                 });
-                $.ajax({
+                $j.ajax({
                   type: "POST",
                   url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                   data: {
@@ -467,7 +463,7 @@
               } else if (data.status === 'Delivered') {
                   var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                   deliveredModal.show();
-                  $.ajax({
+                  $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                     data: {
@@ -487,7 +483,8 @@
                 });
             };
             } else {
-            return confirm('There is no shipment with this qr code');
+                var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
+                modal.show();
             }
         }
         });
@@ -500,6 +497,277 @@
         html5QrcodeScanner.render(onScanSuccess);
 
   </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var $j = jQuery.noConflict();
+    var hasSearched = false;
+    $j('form').submit(function(e) {
+      e.preventDefault();
+      if (hasSearched) return; // check flag
+      hasSearched = true;
+      var formData = $(this).serialize();
+      $j.ajax({
+          url: $(this).attr('action'),
+          type: 'POST',
+          data: formData,
+          success: function(response) {
+              $('#message').text(response.message);
+              if (response.shipment) {
+                  // after success to get Data from controller if Shipment is available in the database
+                  var iframeContainer = document.getElementById('my-iframe-container');
+                  // check if there is already an iframe in the container
+                  if (iframeContainer.childElementCount > 0) {
+                      iframeContainer.removeChild(iframeContainer.childNodes[0]);
+                  }
+                  var iframe = document.createElement('iframe');
+                  iframe.srcdoc = '<html><head></head><body class="driver-waybill-info" style=""><div class="col-4" style="text-align:center; width:100%;"><button id="my-button" style="background-color:#1D4586; border-radius: 10px; padding:10px; color:white;font-size:20px; letter-spacing:1px; margin:20px 0px">Update Shipment Status</button><p>Tracking Number:</p><h1 style="margin:0px;">' + response.shipment.tracking_number + '</h1></div><div style="text-align:center; width:100%;"></div></body></html>';
+                  iframe.style.width = '100%';
+                  iframe.style.height = '500px';
+                  iframeContainer.appendChild(iframe);
+                  $('.track--wrapper').show();
+                  html5QrcodeScanner.clear();
+
+                  // add event listener to button when iframe is loaded
+                  iframe.onload = function() {
+                      var button = iframe.contentDocument.getElementById("my-button");
+                      var pickedUp = document.getElementById('picked-up');
+                      var assort = document.getElementById('assort');
+                      var delivered = document.getElementById('delivered');
+                      var completed = document.getElementById('completed');
+
+                      if (response.shipment.status === "PickedUp" || response.shipment.status === "Assort" || response.shipment.status === "Dispatched" ||  response.shipment.status === "Transferred" || response.shipment.status === "Arrived" || response.shipment.status === "Delivered") {
+                          pickedUp.classList.add('done');
+                      }
+                      if (response.shipment.status === "Assort" ||  response.shipment.status === "Transferred" || response.shipment.status === "Arrived" || response.shipment.status === "Dispatched" || response.shipment.status === "Delivered") {
+                          assort.classList.add('done');
+                      }
+                      if (response.shipment.status === "Dispatched" || response.shipment.status === "Delivered") {
+                          delivered.classList.add('done');
+                      }
+                      if (response.shipment.status === "Delivered") {
+                          completed.classList.add('done');
+                      }
+
+                      var statusContainer = document.getElementById("status-summary-container");
+                      statusContainer.classList.add("tracking-status");
+
+                      var relevantStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
+                      var displayStatusCodes = [];
+
+                      // Determine which status codes to display based on the current status
+                      switch (response.shipment.status) {
+                        case "Processing":
+                          displayStatusCodes = ["Processing"];
+                          break;
+                        case "PickedUp":
+                          displayStatusCodes = ["Processing", "PickedUp"];
+                          break;
+                        case "Assort":
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort"];
+                          break;
+                        case "Transferred":
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred"];
+                          break;
+                        case "Arrived":
+                          displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived"];
+                          break;
+                        case "Dispatched":
+                          if (response.order_history.isArrived === 1 && response.order_history.isTransferred === 1){
+                            displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched"];
+                          } else {
+                            displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched"];
+                          }
+                          break;
+                        case "Delivered":
+                          if (response.order_history.isArrived === 1 && response.order_history.isTransferred === 1){
+                            displayStatusCodes = ["Processing", "PickedUp", "Assort", "Transferred", "Arrived", "Dispatched", "Delivered"];
+                          } else {
+                            displayStatusCodes = ["Processing", "PickedUp", "Assort", "Dispatched", "Delivered"];
+                          }
+                          break;
+                        default:
+                          break;
+                      }
+
+                      // Reverse the order of the status codes to show the latest on top
+                      displayStatusCodes.reverse();
+
+                      // Loop through the relevant status codes and display the ones that should be displayed
+                      for (var i = 0; i < relevantStatusCodes.length; i++) {
+                        var statusCode = relevantStatusCodes[i];
+                        if (displayStatusCodes.includes(statusCode)) {
+                          // Create a new status item
+                          var statusItem = document.createElement("div");
+                          statusItem.classList.add("status-item");
+                          if (statusCode === "Delivered") {
+                            statusItem.classList.add("delivered");
+                          } else {
+                            statusItem.classList.add("in-transit");
+                          }
+
+                          // Create the status time element
+                          var statusTime = document.createElement("div");
+                          statusTime.classList.add("status-time");
+                          if (statusCode === "Processing") {
+                              statusTime.textContent = response.order_history.isProcessedTime;
+                          } else if (statusCode === "PickedUp") {
+                              statusTime.textContent = response.order_history.isPickUpTime;
+                          } else if (statusCode === "Assort") {
+                              statusTime.textContent = response.order_history.isAssortTime;
+                          } else if (statusCode === "Transferred") {
+                              statusTime.textContent = response.order_history.isTransferredTime;
+                          } else if (statusCode === "Arrived") {
+                              statusTime.textContent = response.order_history.isArrivedTime;
+                          } else if (statusCode === "Dispatched") {
+                              statusTime.textContent = response.order_history.isDispatchedTime;
+                          } else if (statusCode === "Delivered") {
+                              statusTime.textContent = response.order_history.isDeliveredTime;
+                          }
+                          statusItem.appendChild(statusTime);
+
+                          // Create the status text element
+                          var statusText = document.createElement("div");
+                          statusText.classList.add("status-text");
+
+                          // Create the status title element
+                          var statusTitle = document.createElement("div");
+                          statusTitle.classList.add("status-title");
+                          if (statusCode === "Processing") {
+                            statusTitle.textContent = "Order is Being Processed";
+                          } else if (statusCode === "PickedUp") {
+                            statusTitle.textContent = "Parcel has been Picked Up by Driver";
+                          } else if (statusCode === "Assort") {
+                            statusTitle.textContent = "Parcel is in Logistics";
+                          } else if (statusCode === "Transferred") {
+                            statusTitle.textContent = "Parcel is in Transit";
+                          } else if (statusCode === "Arrived") {
+                            statusTitle.textContent = "Parcel arrived in Logistics";
+                          } else if (statusCode === "Dispatched") {
+                            statusTitle.textContent = "Parcel is Out for Delivery";
+                          } else if (statusCode === "Delivered") {
+                            statusTitle.textContent = "Parcel has been Delivered";
+                          }
+                          statusText.appendChild(statusTitle);
+
+                          // Create the status description element
+                          var statusDesc = document.createElement("div");
+                          statusDesc.classList.add("status-desc");
+                          if (statusCode === "Delivered") {
+                            statusDesc.textContent = "Parcel has been Delivered.";
+                          } else if (statusCode === "Dispatched"){
+                            statusDesc.textContent = "Parcel out for delivery.";
+                          } else if (statusCode === "Arrived") {
+                            statusDesc.textContent = "Parcel arrived in Logistics.";
+                          } else if (statusCode === "Transferred") {
+                            statusDesc.textContent = "Parcel is in Transit.";
+                          } else if (statusCode === "Assort"){
+                            statusDesc.textContent = "Parcel is in Logistics.";
+                          } else if (statusCode === "PickedUp"){
+                            statusDesc.textContent = "Parcel picked up.";
+                          } else if (statusCode === "Processing"){
+                            statusDesc.textContent = "Parcel is being Processed.";
+                          } else {
+                            statusDesc.textContent = "Your parcel is on its way.";
+                          }
+                          statusText.appendChild(statusDesc);
+
+                          // Add the status text to the status item and the status item to the container
+                          statusItem.appendChild(statusText);
+                          statusContainer.insertBefore(statusItem, statusContainer.firstChild);
+                        }
+                      }
+                button.addEventListener("click", function() {
+                // Update the status and date/time
+                if (response.shipment.status === "Processing") {
+                  response.shipment.status = 'PickedUp';
+                  response.order_history.isPickUp = true;
+                  response.order_history.isPickUpTime = new Date();
+                  var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
+                  modal.show();
+
+                  // Update the database with the new pickup value
+                  $j.ajax({
+                      type: "POST",
+                      url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
+                      data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, pickup: response.shipment.status},
+                      success: function (response) {
+                        console.log(response);
+                      }
+                  });
+                  $j.ajax({
+                      type: "POST",
+                      url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                      data: {
+                        "_token": "{{ csrf_token() }}",
+                        "tracking_number": response.shipment.tracking_number,
+                        "shipment_id": response.shipment.id,
+                        "status": response.shipment.status
+                      },
+                      success: function (response) {
+                        console.log(response);
+                      }
+                  });
+                } else if (response.shipment.status === 'Dispatched') {
+                  response.shipment.status = 'Delivered';
+                  response.order_history.isDelivered = true;
+                  response.order_history.isDeliveredTime = new Date();
+                  var deliveredModal = new bootstrap.Modal(document.getElementById('deliveredModal'), {});
+                  deliveredModal.show();
+
+                  // Update the database with the new delivered value
+                  $j.ajax({
+                  type: "POST",
+                  url: "{{ action('App\Http\Controllers\DriverQrScannerController@updateDelivered') }}",
+                  data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
+                  success: function (response) {
+                    console.log(response);
+                  }
+                  });
+                  $j.ajax({
+                    type: "POST",
+                    url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                      "tracking_number": response.shipment.tracking_number,
+                      "shipment_id": response.shipment.id,
+                      "status": response.shipment.status
+                    },
+                    success: function (response) {
+                      console.log(response);
+                    }
+                  });
+                } else if (response.shipment.status === 'Delivered') {
+                    var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+                    deliveredModal.show();
+                    j({
+                      type: "POST",
+                      url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
+                      data: {
+                        "_token": "{{ csrf_token() }}",
+                        "tracking_number": response.shipment.tracking_number,
+                        "shipment_id": response.shipment.id,
+                        "status": response.shipment.status
+                      },
+                      success: function (response) {
+                        console.log(response);
+                      }
+                    });
+                  } else {
+                      var modal = new bootstrap.Modal(document.getElementById('alreadyPickedModal'), {});
+                      modal.show();
+                  }
+                  });
+              };
+              } else {
+                var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
+                modal.show();
+              }
+          }
+          });
+      });
+  </script>
+
   <script type="text/javascript">
         // Add event listener to Reset button
         document.getElementById("resetButton").addEventListener("click", function() {
@@ -515,7 +783,7 @@
 <hr/>
 
     <script type="text/javascript">
-        $.ajaxSetup({
+        $j.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }

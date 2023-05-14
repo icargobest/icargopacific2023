@@ -1,5 +1,5 @@
 <title>Dispatcher | History</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDispatcher', ['history' =>"nav-selected"])
 <title>Dispatcher | History</title>
@@ -33,112 +33,40 @@
             <table class="table table-striped history-table border border-2 shadow">
                 <thead>
                 <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Pickup</th>
-                    <th scope="col">Dropoff</th>
-                    <th scope="col">Parcel Size&Width</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Delivered Date</th>
-                    <th scope="col">Dispatched Driver</th>
+                    <th scope="col"></th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Date Dispatched</th>
+                    <th scope="col">Driver Name</th>
                     <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody class="history-tbody">
-                    
-                        
-                            <tr>
-                                <td>69</td>
-                                <td><img src="/img/order_image.png" alt="item-image"></td>  
-                                <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                                <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                                <td>17x30x41 | 97 kg</td>
-                                <td>August 02, 2023</td>
-                                <td>August 25, 2023</td>
-                                <td>*DRIVER NAME</td>
-                                <td class="" style="overflow:auto;">                                
-                                    <label class="status-deliveredv2">
-                                        Delivered
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                              <td>69</td>
-                              <td><img src="/img/order_image.png" alt="item-image"></td>  
-                              <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                              <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                              <td>17x30x41 | 97 kg</td>
-                              <td>August 02, 2023</td>
-                              <td>August 25, 2023</td>
-                              <td>*DRIVER NAME</td>
-                              <td class="" style="overflow:auto;">                                
-                                    <label class="status-canceledv2">
-                                        Canceled
-                                    </label>
-                              </td>
-                          </tr>
-                          <tr>
-                            <td>69</td>
-                            <td><img src="/img/order_image.png" alt="item-image"></td>  
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                            <td>17x30x41 | 97 kg</td>
-                            <td>August 02, 2023</td>
-                            <td>August 25, 2023</td>
-                            <td>*DRIVER NAME</td>
-                            <td class="" style="overflow:auto; ">                                
-                                    <label class="status-canceledv2">
-                                        Canceled
-                                    </label>
-                            </td>
-                        </tr>
-                        <tr>
-                          <td>69</td>
-                          <td><img src="/img/order_image.png" alt="item-image"></td>  
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                          <td>17x30x41 | 97 kg</td>
-                          <td>August 02, 2023</td>
-                          <td>August 25, 2023</td>
-                          <td>*DRIVER NAME</td>
-                          <td class="" style="overflow:auto; ">                                
-                                  <label class="status-deliveredv2">
-                                    Delivered
-                                  </label>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td>69</td>
-                        <td><img src="/img/order_image.png" alt="item-image"></td>  
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                        <td>17x30x41 | 97 kg</td>
-                        <td>August 02, 2023</td>
-                        <td>August 25, 2023</td>
-                        <td>*DRIVER NAME</td>
-                        <td class="" style="overflow:auto; ">                                
-                                <label class="status-deliveredv2">
-                                    Delivered
-                                </label>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>69</td>
-                      <td><img src="/img/order_image.png" alt="item-image"></td>  
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>503 Boni Ave. cor San Rafael Street, Mandaluyong City, Philippines</td>
-                      <td>17x30x41 | 97 kg</td>
-                      <td>August 02, 2023</td>
-                      <td>August 25, 2023</td>
-                      <td>*DRIVER NAME</td>
-                      <td class="" style="overflow:auto; ">                                
-                              <label class="status-deliveredv2">
-                                Delivered
-                              </label>
-                      </td>
-                  </tr>
-                          
-                          
+                    @foreach ($drivers as $user)
+                        @if($user->dispatcher_id == Auth::id())
+                            @foreach ($shipments as $ship)
+                                    @if($ship->company_id == $company_id_dispatcher && $ship->driver_id == $user->id && $ship->driver_id != null)
+                                        <tr>
+                                            <!-- Photo not showing -->
+                                            <td style="width: 70px;">
+                                                <img src="{{asset($ship->photo)}}" class="card shadow-0 w-25" style="min-width: 70px; object-fit: contain;" alt="Photo"/>
+                                            </td>
+                                            <td>{{$company_name}}</td>
+                                            <td>{{$ship->created_at}}</td>
+                                            <td>{{$ship->updated_at}}</td>
+                                            <td>
+                                                @foreach ($drivers as $driver)
+                                                    @if($driver->id == $ship->driver_id)
+                                                        {{$driver->user->name}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{$ship->status}}</td>
+                                        </tr>
+                                    @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                 </tbody>
             </table>
         </div>

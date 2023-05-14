@@ -1,22 +1,9 @@
 <head>
-<title>Company | Adv. Freight</title>
-<style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-  }
-  th{
-    color: white !important;
-  }
-  td, th {
-    text-align: center !important;
-    padding: 10px;
-    border: 1px solid black;
-    
-  }
-</style>
+<title>Company | Advance Freight</title>
+
 
 </head>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
@@ -47,7 +34,7 @@
 
         </section>
 
-        <section class="mb-5 px-4 h-90" style="overflow-x:auto">            
+        <section class="mb-5 px-2 h-90" style="overflow-x:auto">            
                 <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <col>
@@ -55,13 +42,16 @@
                     <colgroup span="3"></colgroup>
                     <colgroup span="3"></colgroup>
                     <tr>
-                        
+                    <thead>
                         <th colspan="3" scope="colgroup">SENDER</th>
                         <th colspan="3" scope="colgroup">RECEIVER</th>
                         <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                         <th colspan="1" scope="colgroup"></th>
+                    </thead>
+
                     </tr>
                     <tr>
+                    <thead>
                         <th scope="col">NAME</th>
                         <th scope="col">ADDRESS</th>
                         <th scope="col">NUMBER</th>
@@ -73,6 +63,7 @@
                         <th scope="col">CATEGORY</th>
                         <th scope="col">MODE of PAYMENT</th>
                         <th scope="col">ACTION</th>
+                    </thead> 
                     </tr>
                 </thead>
 
@@ -133,4 +124,18 @@
     @include('company.freight.requests') 
 </div>
 
-<script></script>
+<style>
+    table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+
+}
+</style>

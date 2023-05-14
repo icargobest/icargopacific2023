@@ -1,28 +1,13 @@
 <head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Customer | Order Details #{{ $ship->id }}</title>
 </head>
-
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    @extends('layouts.app')
-    @include('partials.navigationCompany')
+@include('partials.header')
+@extends('layouts.app')
+@include('partials.navigationCompany', ['order' => 'nav-selected'])
 
 <!-- MDB -->
 <link rel="stylesheet" href="/css/mdb.min.css" />
-
-<style>
-    th {
-        background-color: transparent !important;
-        color: black;
-        font-weight: normal;
-    }
-
-    td {
-        text-align: left;
-        font-weight: bold;
-    }
-</style>
-
 {{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
 <!-- Exp start -->
 <!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $ship->id }}">
@@ -49,10 +34,11 @@ VIEW
                     <div class="row overflow-hidden">
                         <!-- Product Image -->
                         <div class="col-xl-3">
-                            <a href="{{asset($ship->photo)}}" target="_blank">
-                                <img class="card shadow-0 w-100" style="object-fit:cover; height:250px;" src="{{asset($ship->photo)}}" alt="">
+                            <a href="{{ asset($ship->photo) }}" target="_blank">
+                                <img class="card shadow-0 w-100" style="object-fit:cover; height:250px;"
+                                    src="{{ asset($ship->photo) }}" alt="">
                             </a>
-                                <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 <button class="btn btn-warning opacity-50 w-75 my-3 px-3 py-2 btn-block" disabled>
                                     @if ($ship->company_bid == null && $ship->bid_amount == null)
                                         <h6 class="mb-0 fw-bold text-capitalize">Maximum Bid: Php
@@ -76,10 +62,11 @@ VIEW
                                             Track Order
                                         </a>
                                     </div>
-                                    <a class="cardItem my-1" href="{{route('freightPanel')}}">
-                                        <div  class="d-flex justify-content-center">
-                                            <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
-                                            BACK
+                                    <a class="cardItem my-1" href="{{ route('freightPanel') }}">
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button"
+                                                class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                                BACK
                                             </button>
                                         </div>
                                     </a>
@@ -99,18 +86,19 @@ VIEW
                                                 name="bid_amount" required />
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton">
+                                    <button type="submit" class="btn btn-warning mt-2 btn-block" id="bidButton"
+                                        style="cursor: not-allowed;" disabled>
                                         BID
                                     </button>
                                 </div>
-                                <a class="cardItem my-2" href="{{route('company.order')}}">
-                                    <div  class="d-flex justify-content-center">
+                                <a class="cardItem my-2" href="{{ route('company.order') }}">
+                                    <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
-                                        BACK
+                                            BACK
                                         </button>
-                                    </form>
-                                    @endif
-                                    {{-- END BID NOW --}}
+                                        </form>
+                                        @endif
+                                        {{-- END BID NOW --}}
                                     </div>
                                 </a>
                             </div>
@@ -195,7 +183,7 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Mode of Payment:</th>
-                                        <td>{{$ship->mop}}</td>
+                                        <td>{{ $ship->mop }}</td>
                                     </tr>
                                     @if ($ship->bid_amount != null && $ship->company_id != null)
                                         <tr>
@@ -257,10 +245,25 @@ VIEW
     // Add an event listener to the bid amount input field to check the value and disable the button if necessary
     bidAmountInput.addEventListener('input', function(event) {
         var bidAmount = parseFloat(event.target.value);
-        if (isNaN(bidAmount) || bidAmount > maxBidAmount) {
+        if (isNaN(bidAmount) || bidAmount > maxBidAmount || bidAmount <= 0 || bidAmount == null) {
             bidButton.disabled = true;
+            bidButton.style.cursor = "not-allowed"; // add cursor validation
         } else {
             bidButton.disabled = false;
+            bidButton.style.cursor = "pointer"; // add cursor validation
         }
     });
 </script>
+
+<style>
+th {
+background-color: transparent !important;
+color: black;
+font-weight: normal;
+}
+
+td {
+text-align: left;
+font-weight: bold;
+}
+</style>

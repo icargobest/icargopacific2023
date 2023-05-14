@@ -64,6 +64,9 @@ return new class extends Migration
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
             $table->unsignedBigInteger('company_id')->nullable()->default;
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('driver_id')->nullable()->default;
+            $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade');
+            // $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
