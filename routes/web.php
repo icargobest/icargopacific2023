@@ -18,6 +18,10 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Http\Controllers\SubscriptionController;
+use App\Models\OrderTrackingLog;
+use App\Http\Controllers\SuperDashboardController;
+use App\Http\Controllers\QueryController;
 
 
 
@@ -67,16 +71,6 @@ Route::get('/company/history/orderHistory', function () {
 });
 
 
-Route::get('/company/freight/transfers', function () {
-   return view('company.freight.transfers');
-});
-
-
-Route::get('/company/advance_freight/index', function () {
-   return view('company.advance_freight.index');
-});
-
-
 /* Drivers Tab */
 Route::get('/driver/qr', function () {
    return view('driver_panel.driver');
@@ -103,6 +97,8 @@ Route::get('/staff/advance_freight/index', function () {
     return view('staff_panel.advance_freight.index');
  });
 
+ /* Contact Us */
+Route::post('/contactUS', [QueryController::class, 'save'])->name('sendQuery');
 
 
 Auth::routes(['verify' => true]);
@@ -135,7 +131,7 @@ Route::middleware('auth')->group(function () {
 // User/Customer Panel
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
-        ->name('dashboard');
+        ->name('dashboard')->middleware("verified");
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function () {
@@ -159,19 +155,22 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         ->name('company.dashboard')->middleware('verified');
 
     //Order Routes
-    Route::controller(ShipmentController::class)->group(function () {
-        Route::get('/company/order', 'index')->name('company.order');
-        Route::get('/company/freight', 'freight')->name('freightPanel');
-        Route::get('/company/advFreight', 'company_advFreightPanel')->name('company.advFreightPanel');
-        Route::get('/company/view_shipment/{id}', 'viewOrder_Company')->name('viewOrder_Company');
-        Route::get('/company/track_order/{id}', 'trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/company/invoice/{id}', 'viewInvoiceCompany')->name('generateInvoice');
-        Route::get('/company/waybill/{id}', 'viewWaybillCompany')->name('generateWaybill');
+    Route::controller(ShipmentController::class)->group(function(){
+        Route::get('/company/order','index')->name('company.order');
+        Route::get('/company/freight','freight')->name('freightPanel');
+        Route::get('/company/advFreight','company_advFreightPanel')->name('company.advFreightPanel');
+        Route::get('/company/freight/transfers/{id}','advfreight')->name('adv_Freight');
+        Route::put('/company/freight/transfers/{id}', 'advTransfer')->name('advFreight.transfer');
+        Route::get('/company/advFreight/accept/{id}', 'accept_transfer');
+        Route::get('/company/advFreight/decline/{id}', 'decline_transfer');
+        Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
+        Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
+        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
+        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
-        Route::get('/company/track_parcel', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@index']);
-        Route::post('/company/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@checkUser']);
+        
     });
 
     // stations
@@ -226,7 +225,9 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 // Super Admin Panel
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
-        ->name('super.admin.dashboard');
+        ->name('super.admin.dashboard')->middleware("verified");
+
+    Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
 
     //Registered User Accounts
     Route::resource('icargo/registered_users', UsersController::class);
@@ -277,7 +278,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 // Driver Panel
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
-        ->name('driver.dashboard');
+    ->name('driver.dashboard')->middleware('verified');
 
     //DRIVER PAGE
     Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
@@ -414,6 +415,21 @@ Route::middleware("auth")->group(function () {
     });
 });
 
+Route::middleware('auth')->group(function(){
+Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
+Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
+});
+
+Route::get('pay',[SubscriptionController::class, 'pay']);
+Route::get('success',[SubscriptionController::class, 'success']);
+
+Route::get('/paymongo', function () {
+    return view('pay');
+});
+
+Route::get('/pay/callback', [SubscriptionController::class, 'handlePaymentCallback']);
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes

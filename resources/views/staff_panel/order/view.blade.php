@@ -1,4 +1,4 @@
-    <head>
+<head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Staff | Order Details #{{ $ship->id }}</title>
     </head>
