@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="links">
-                            <a class="nav-link" href="/company/advance_freight/index">
+                            <a class="nav-link" href="{{route('company.advFreightPanel')}}">
                                 <div class="link @if (isset($advance)) {{$advance}} @endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>

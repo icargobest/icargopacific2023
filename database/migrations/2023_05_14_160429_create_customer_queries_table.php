@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscription_trials', function (Blueprint $table) {
+        Schema::create('customer_queries', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
             $table->string('email');
-            $table->string('stripe_id');
-            $table->timestamp('trial_ends_at')->nullable()->default;
+            $table->string('name');
+            $table->string('cust_query')->nullable()->default();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscription_trials');
+        Schema::dropIfExists('customer_queries');
     }
 };

@@ -126,7 +126,7 @@ class ShipmentController extends Controller
         
         $this->TrackOrderLog();
 
-        return view('company.freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
+        return view('company.advance_freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
     }
 
     public function company_advFreightPanel()
@@ -137,7 +137,7 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('company.freight.advance_freight', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.advance_freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function staff_advFreightPanel()

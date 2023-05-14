@@ -21,6 +21,7 @@ use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
+use App\Http\Controllers\QueryController;
 
 
 
@@ -96,6 +97,8 @@ Route::get('/staff/advance_freight/index', function () {
     return view('staff_panel.advance_freight.index');
  });
 
+ /* Contact Us */
+Route::post('/contactUS', [QueryController::class, 'save'])->name('sendQuery');
 
 
 Auth::routes(['verify' => true]);
@@ -223,6 +226,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
         ->name('super.admin.dashboard')->middleware("verified");
+
+    Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
 
     //Registered User Accounts
     Route::resource('icargo/registered_users', UsersController::class);

@@ -29,6 +29,9 @@
                 <thead>
                   <th>Tracking Number</th>
                   <th>Order Type</th>
+                  <th>Sender Name</th>
+                  <th>Recipient Name</th>
+                  <th>Bid Amount</th>
                 </thead>
                 @foreach ($shipments as $ship)
                 @if(Auth::user()->type == 'company' && $ship->advTransferredto == Auth::user()->id && $ship->advTransferredStatus == "Pending")
@@ -36,6 +39,9 @@
 
                   <td>{{$ship->tracking_number}}</td>
                   <td>{{$ship->order_type}}</td>
+                  <td>{{$ship->sender->sender_name}}</td>
+                  <td>{{$ship->recipient->recipient_name}}</td>
+                  <td>{{$ship->bid_amount}}</td>
 
                   <td>
                     <a href="{{url('/company/advFreight/accept', $ship->id)}}" class="btn btn-success">Accept</a>

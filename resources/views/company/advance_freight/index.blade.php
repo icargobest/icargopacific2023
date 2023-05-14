@@ -121,7 +121,7 @@
         
         
     </div>
-    @include('company.freight.requests') 
+    @include('company.advance_freight.requests') 
 </div>
 
 <style>

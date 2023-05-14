@@ -18,38 +18,4 @@
         </div>
     </div>
   
-    <!-- <body>
-         <h1>Registered Companies: {{ $companycount }}</h1>
-        <h1>Registered Users: {{ $usercount }}</h1> 
-    </body>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawMonthlyChart);
-
-    function drawMonthlyChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Month', 'Income'],
-            @foreach ($incomes as $income)
-            ['{{ date('M', strtotime($income->date)) }}', {{ $income->amount }}],
-            @endforeach
-        ]);
-
-        var options = {
-            title: 'Monthly Income',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('monthly_chart_div'));
-
-        chart.draw(data, options);
-    }
-</script> -->
-
-
-
-
-
-
-
 @endsection

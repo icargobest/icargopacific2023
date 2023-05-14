@@ -52,29 +52,17 @@
           </div>
 
           <div class="div mb-4">
-            <select type="text" name="select_transport" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
-              <option value="" hidden>SELECT TRANSPORT</option>
-              <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
-                ?>
-            </select>
-          </div>
-
-          <div class="div mb-4">
-            <select type="text" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
+            <select type="text" id="select_method" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
               <option value="" hidden>SELECT METHOD</option>
               <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
+                    echo "<option value='COD'>Cash On Delivery</option>";
+                    echo "<option value='Card'>Card Payment</option>";
                 ?>
             </select>
           </div>
 
           <div class="div mb-4">
-            <input type="search" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
+            <input type="search" id="freight_charges" name="freight_charges" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
           </div>
 
           <div class="div mb-4">
@@ -88,8 +76,8 @@
               <div class="receiverInfo border pt-4">
                 <ul>
                     <li class="mb-3">ID : <span><strong>{{$ship['id']}}</strong></span></li>
-                    <li class="mb-3">PICKUP : <span><strong>Sample Pick-up</strong></li>
-                    <li class="mb-3">DROP-OFF : <span><strong>Sample Drop-off</strong></li>
+                    <li class="mb-3">PICKUP : <span><strong>{{$ship->sender['sender_address']}}</strong></li>
+                    <li class="mb-3">DROP-OFF : <span><strong>{{$ship->recipient['recipient_address']}}</strong></li>
                     <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</strong></span></li>
                     <li class="mb-3">PARCEL ITEM : <span><strong>{{$ship['order_type']}}</strong></span></li>
                 </ul>
@@ -107,8 +95,6 @@
         @endif
       </div>
 </div>
-<<<<<<< HEAD
-=======
 
 
 
@@ -164,4 +150,3 @@ li{
 font-size: 18px;
 }
 </style>
->>>>>>> develop
