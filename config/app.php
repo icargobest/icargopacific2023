@@ -195,7 +195,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
-
+        Ixudra\Curl\CurlServiceProvider::class,
 
     ],
 
@@ -251,6 +251,7 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Curl'          => Ixudra\Curl\Facades\Curl::class,
     ])->toArray(),
 
 ];

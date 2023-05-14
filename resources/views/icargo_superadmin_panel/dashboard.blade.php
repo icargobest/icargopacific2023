@@ -18,9 +18,9 @@
         </div>
     </div>
   
-    <body>
-        <h1>Registered Companies: {{ $companycount }}</h1>
-        <h1>Registered Users: {{ $usercount }}</h1>
+    <!-- <body>
+         <h1>Registered Companies: {{ $companycount }}</h1>
+        <h1>Registered Users: {{ $usercount }}</h1> 
     </body>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
@@ -44,7 +44,7 @@
 
         chart.draw(data, options);
     }
-</script>
+</script> -->
 
 
 

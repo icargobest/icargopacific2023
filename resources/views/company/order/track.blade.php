@@ -244,6 +244,30 @@
                                             </div>
                                         @endif
                                         @if($log->isTransferred == true)
+                                        @if($ship->company_name != NULL && $ship->station_id == NULL)
+                                        <h4 class="fw-bold border-0">TRANSFERRED TO COMPANY: {{$ship->company_name}}</h4>
+                                            <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 d-none d-lg-block">
+                                                            <span class="bg-light rounded-circle d-flex align-items-center justify-content-center bg-dark"
+                                                             style="width:80px; height:80px;">
+                                                                <i class="fa fa-scanner-gun fa-3x" style="color: #D9D9D9;"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER COMPANY</h5>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}</p>
+
+                                                        </div>
+                                                        <div class="col-lg-5 mt-lg-5 text-sm-end">
+                                                            <p class="card-text mb-0" >Company:</p>
+                                                            <h5 class="card-title fw-bold mb-0">{{$company_name}}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @elseif($ship->company_name == NULL && $ship->station_id != NULL)
                                             <h4 class="fw-bold border-0">TRANSFERRED TO STATION: {{$ship->station_id}}</h4>
                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                 <div class="card-body">
@@ -266,6 +290,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endif
                                         @endif
                                         @if($log->isAssort == true)
                                             <h4 class="fw-bold border-0">ARRIVED AT (current_station)</h4>

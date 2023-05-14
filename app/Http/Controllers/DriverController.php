@@ -98,6 +98,8 @@ class DriverController extends Controller
                 'license_number.max' => 'Plate number must be a min and max of 11 characters'
             ]);
 
+            $user->sendEmailVerificationNotification();
+            
             if(Auth::user()->type == 'staff'){
                 $id = Auth::id();
                 $staff = Staff::where('user_id', $id)->first();

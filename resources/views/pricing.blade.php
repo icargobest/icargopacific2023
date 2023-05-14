@@ -24,7 +24,7 @@
                 <div class="price w-100 h-50 p-4 d-flex flex-column align-items-center gap-5">
                     <h3 class="pt-2 fw-bold"><span>₱ </span>FREE</h3>
                     <div class="buttonHolder w-100">
-                        <button>START</button>
+                      <a href="https://paymongo.page/l/icargo-pacific"> <button>START</button></a> 
                     </div>
                 </div>
             </div>

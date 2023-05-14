@@ -59,7 +59,11 @@
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
-
+@if($errors->any())
+    @foreach($errors->all() as $err)
+        <strong>{{$err}}</strong>
+    @endforeach
+@endif
 
 <div class="mx-4">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -95,12 +99,17 @@
               <i class="fa fa-calendar"></i>
             </span>
           </div>
-          @foreach ($shipments as $ship)
           @if(Auth::user()->type == 'company')
-          @if(Auth::user()->id == $ship->company_id)
+          
+         
+          <form action="{{route('advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <input type="hidden" name="id" value="{{$ship->id}}">
+
           <div class="div mb-4">
             <label class="form-label" for="transfer_to_company"></label>
-            <select type="text" name="select_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <select type="text" id="transfer_to_company" name="transfer_to_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
               <option value="" hidden>SELECT COMPANY</option>
               <?php
                  foreach ($companies as $company) {
@@ -111,7 +120,7 @@
           </div>
 
           <div class="div mb-4">
-            <select type="text" name="select_transport" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <select type="text" name="select_transport" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
               <option value="" hidden>SELECT TRANSPORT</option>
               <?php
                 // foreach ($stations as $station) {
@@ -122,7 +131,7 @@
           </div>
 
           <div class="div mb-4">
-            <select type="text" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <select type="text" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
               <option value="" hidden>SELECT METHOD</option>
               <?php
                 // foreach ($stations as $station) {
@@ -157,10 +166,12 @@
               <div class="mt-4 text-center">
                 <button class="btn btn-primary w-100">SUBMIT</button>
               </div>
+              
           </div>
         </div>
+      </form>
+        
+        
         @endif
-        @endif
-        @endforeach
       </div>
 </div>

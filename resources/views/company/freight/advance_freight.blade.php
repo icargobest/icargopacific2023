@@ -23,7 +23,12 @@
 
 <div class="mx-2">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
-
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        {{session()->get('message')}}
+    </div>  
+    @endif
         <div class="employee-header-container">
             <h3 class="">ADVANCE FREIGHT LIST</h3>
         </div>
@@ -73,7 +78,8 @@
 
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->id == $ship->company_id || (Auth::user()->type == 'company' && $ship->company_id == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_id == Auth::user()->name && $ship->status == 'Assort')))
+                    @if(Auth::user()->type == 'company')
+                    @if($company->id == $ship->company_id)
          
                     <tr>
                         
@@ -99,23 +105,32 @@
                         <td>{{$ship->category}}</td>
                         {{-- Mode of Pament --}}
                         <td>COD</td>
-
-                        <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <a href="{{ route('advFreight') }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <td class="tdbutton" style="max-width:120px">
+                        <a href="{{ route('trackOrder_Company', $ship->id) }}"><button class="btn created-button mx-auto">Tracking</button></a>
+                        @if($ship->advTransferredStatus == NULL)
+                        <a href="{{ route('adv_Freight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        @elseif($ship->advTransferredStatus == 'Accepted')
+                        Transfer Accepted
+                        @else
+                        Pending for transfer
+                        @endif
+                        
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
+                    @endif
                     @endif
                     @endforeach
                 </tbody>
                 </table>
-
+                
 
         </section>
 
 
-
+        
         
     </div>
+    @include('company.freight.requests') 
 </div>
 
 <script></script>
