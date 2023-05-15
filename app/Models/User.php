@@ -66,6 +66,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(SubscriptionTrials::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function subscribed()
     {
         return $this->subscription_trials && $this->subscription_trials->trial_ends_at->gt(now());
