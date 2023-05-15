@@ -46,15 +46,7 @@
                                     @include('staff_panel/drivers.edit')
                                     @include('staff_panel/drivers.archive')                                
                                     
-                                    @if($user->user->status == 1)
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->user->id, 'status_code' => 0]) }}" class="btn btn-danger btn-sm" style="width:80px !important;">
-                                        Lock
-                                    </a>
-                                    @else
-                                    <a href="{{ route('driver.status.update', ['user_id' => $user->user->id, 'status_code' => 1]) }}" class="btn btn-success btn-sm" style="width:80px !important;">
-                                        unlock
-                                    </a>
-                                @endif
+
                                 </td>
 
 

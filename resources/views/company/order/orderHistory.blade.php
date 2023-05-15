@@ -1,3 +1,4 @@
+@include('partials.header')
 @extends('layouts.app') @include('partials.navigationCompany', ['history' => 'nav-selected'])
 
 <title>Company | Order History</title>

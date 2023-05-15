@@ -1,206 +1,165 @@
-
+<!DOCTYPE html>
+<html>
+<head>
     <title>Invoice #{{$ship->id}}</title>
-
+    <!--Bootstrap CSS-->
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	{{-- POPPINS FONT --}}
+    <link href="https://fonts.googleapis.com">
+    <title>Invoice #{{$ship->id}}</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
-        html,
         body {
-            margin: 10px;
-            padding: 10px;
-            font-family: sans-serif;
+            font-family: 'Poppins';
         }
-        h1,h2,h3,h4,h5,h6,p,span,label {
-            font-family: sans-serif;
+        p {
+            margin:4px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 0px !important;
-        }
-        table thead th {
-            height: 28px;
-            text-align: left;
-            font-size: 16px;
-            font-family: sans-serif;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        .heading {
-            font-size: 24px;
-            margin-top: 12px;
-            margin-bottom: 12px;
-            font-family: sans-serif;
-        }
-        .small-heading {
-            font-size: 18px;
-            font-family: sans-serif;
-        }
-        .total-heading {
-            font-size: 18px;
-            font-weight: 700;
-            font-family: sans-serif;
-        }
-        .order-details tbody tr td:nth-child(1) {
-            width: 20%;
-        }
-        .order-details tbody tr td:nth-child(3) {
-            width: 20%;
-        }
-
-        .text-start {
-            text-align: left;
-        }
-        .text-end {
-            text-align: right;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .company-data span {
-            margin-bottom: 4px;
-            display: inline-block;
-            font-family: sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-        }
-        .no-border {
-            border: 1px solid #fff !important;
-        }
-        .bg-blue {
-            background-color: #414ab1;
-            color: #fff;
-        }
-
-        .print-btn {
-        background-color: #4CAF50; /* Green background color */
-        border: none; /* Remove border */
-        color: white; /* White text color */
-        padding: 12px 24px; /* Padding */
-        text-align: center; /* Center text */
-        text-decoration: none; /* Remove underline */
-        display: inline-block; /* Display as inline-block */
-        font-size: 16px; /* Font size */
-        margin: 4px 2px; /* Margin */
-        cursor: pointer; /* Add cursor on hover */
-        border-radius: 4px; /* Add rounded corners */
-        }
-
         @media print {
             .print-button {
                 display: none;
             }
         }
+        .print-button {
+            background-color: #333;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
     </style>
+</head>
 <body>
-    <button class="print-button" onclick="window.print()">Print</button>
-
-    <table class="order-details">
-        <thead>
-            <tr>
-                <th width="25%" colspan="1">
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',2,50) }}" alt="barcode">
-                </th>
-                <th width="25%" colspan="5" class="text-end company-data">
-
-                    <span>Invoice Id: {{$ship->id}}</span> <br>
-                    <span>Date: {{date(' d / m / Y')}}</span> <br>
-                    <span>Company: {{$ship->company_bid}}</span> <br>
-                </th>
-            </tr>
-            <tr class="bg-blue">
-                <th width="50%" colspan="1">Order Details</th>
-                <th width="25%" colspan="2">Sender Details</th>
-                <th width="25%" colspan="2">Recipient Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Order Id: {{$ship->id}}</td>
-
-                <td>Full Name:</td>
-                <td>{{$ship->sender->sender_name}}</td>
-
-                <td>Full Name:</td>
-                <td>{{$ship->recipient->recipient_name}}</td>
-            </tr>
-            <tr>
-                <td>Tracking Id/No.: {{$ship->tracking_number}}</td>
-
-                <td>Email Id:</td>
-                <td>{{$ship->sender->sender_email}}</td>
-
-                <td>Email Id:</td>
-                <td>{{$ship->recipient->recipient_email}}</td>
-            </tr>
-            <tr>
-                <td>Ordered Date: {{$ship->created_at}}</td>
-
-                <td>Phone:</td>
-                <td>{{$ship->sender->sender_mobile}} @if($ship->sender->sender_tel != NULL) | {{$ship->sender->sender_tel}} @endif</td>
-
-                <td>Phone:</td>
-                <td>{{$ship->recipient->recipient_mobile}} @if($ship->recipient->recipient_tel != NULL) | {{$ship->recipient->recipient_tel}} @endif</td>
-            </tr>
-            <tr>
-                <td>Payment Mode:</td>
-
-                <td>Address:</td>
-                <td>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}}</td>
-
-                <td>Address:</td>
-                <td>{{$ship->recipient->recipient_address}} , {{$ship->recipient->recipient_city}}</td>
-            </tr>
-            <tr>
-                <td>Order Status: {{$ship->status}}</td>
-
-
-                <td>Postal code:</td>
-                <td>{{$ship->sender->sender_zip}} , {{$ship->sender->sender_state}}</td>
-
-                <td>Postal code:</td>
-                <td>{{$ship->recipient->recipient_zip}} , {{$ship->recipient->recipient_state}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead>
-            <tr>
-                <th class="no-border text-start heading" colspan="5">
-                    Order Items
-                </th>
-            </tr>
-            <tr class="bg-blue">
-                <th>Product</th>
-                <th>Details</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{$ship->item}}</td>
-                <td width="15%">{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}} Kg</td>
-                <td width="10%">${{$ship->total_price}}</td>
-                <td width="10%">{{$ship->quantity}}</td>
-                <td width="15%" class="fw-bold">${{$ship->total_price}}</td>
-            </tr>
-            <tr>
-                <td colspan="3" class="total-heading">Total Amount - <small>Inc. all vat/tax</small> :</td>
-                <td colspan="1" class="total-heading">${{$ship->total_price}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <br>
-    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE',10, 10) }}" alt="QR Code">
-    <p class="text-center">
-        <img src="/img/icargo-logo-1.jpg" style="max-height:150px;">
-    </p>
+    <main class="container border bg-white w-100 p-3">
+        <div>
+            <button class="print-button" onclick="window.print()">Print</button>
+        </div>
+        <header class="row">
+            <div class="col-2">
+                <img src="/img/icargo-logo-1.jpg" style="max-height:60px;">
+            </div>
+            <div class="col-4">
+                <h3 class="mb-0 fw-bold" style="color: #214D94;">iCARGO</h3>
+                <h3 class="mb-0 fw-bold" style="color: #F9CD1A;">PACIFIC</h3>
+            </div>
+            <div class="col-4 text-end">
+                <h1 class="mb-0 fw-bold" style="color: #214D94; letter-spacing: 3px;">INVOICE</h1>
+                <h5 class="mb-0">NO: {{$ship->id}}</h5>
+            </div>
+            <div class="col-1 text-end">
+               <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE',10, 10) }}" alt="QR Code" style="max-height:70px;">
+            </div>
+        </header>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <p class="fw-bold">SENDER:</p>
+                <p>{{$ship->sender->sender_name}}</p>
+                <p>{{$ship->sender->sender_mobile}}
+                    @if($ship->sender->sender_tel != NULL)
+                     | {{$ship->sender->sender_tel}} @endif
+                </p>
+                <p>{{$ship->sender->sender_address}}
+                    , {{$ship->sender->sender_city}},
+                </p>
+                <p>
+                    {{$ship->sender->sender_state}}
+                    , {{$ship->sender->sender_zip}}
+                </p>
+            </div>
+            <div class="col-6 text-end m-0">
+                <p class="fw-bold m-0">RECEIVER:</p>
+                <p>{{$ship->recipient->recipient_name}}</p>
+                <p>{{$ship->recipient->recipient_mobile}}
+                     @if($ship->recipient->recipient_tel != NULL)
+                     | {{$ship->recipient->recipient_tel}} @endif
+                </p>
+                <p>{{$ship->recipient->recipient_address}}
+                     , {{$ship->recipient->recipient_city}},
+                </p>
+                <p>{{$ship->recipient->recipient_state}}
+                    , {{$ship->recipient->recipient_zip}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-8">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">ORDER DETAILS:</th>
+                        </tr>
+                        <tr>
+                            <td>Order ID:</td>
+                            <td>{{$ship->id}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tracking No.:</td>
+                            <td>{{$ship->tracking_number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Order Date:</td>
+                            <td>{{$ship->created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Mode:</td>
+                            <td>{{$ship->mop}}</td>
+                        </tr>
+                        <tr>
+                            <td>Order Status:</td>
+                            <td>{{$ship->status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 d-flex flex-column align-items-end justify-content-end">
+                <p class="fw-bold">Date Issued:</p>
+                <p>{{date(' d / m / Y')}}</p>
+            </div>
+        </div>
+        <section class="mb-5 my-3 overflow-auto">
+            <table class="table table-striped table-hover">
+                <thead class="text-white" style="background-color: #214D94;">
+                    <tr>
+                        <td>Product</td>
+                        <td>Details</td>
+                        <td>Price</td>
+                        <td>Qty</td>
+                        <td>Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{$ship->item}}</td>
+                        <td width="25%">{{intval($ship->length)}}
+                            x{{intval($ship->width)}}
+                            x{{intval($ship->height)}}
+                             | {{intval($ship->weight)}}Kg
+                        </td>
+                        <td width="15%">Php {{$ship->total_price}}</td>
+                        <td width="7%">{{$ship->quantity}}</td>
+                        <td width="15%">Php {{$ship->total_price}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Total
+                            <small class="fw-normal"> - (Include all VAT/TAX):</small>
+                        </th>
+                        <td colspan="3"></td>
+                        <td class="fw-bold">Php {{$ship->total_price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <footer class="justify-content-end">
+            <hr class="opacity-75">
+                <div class="text-center">
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',2,50) }}" alt="barcode" style="height:60px;">
+                </div>
+            <hr class="opacity-75">
+        </footer>
+    </main>
 </body>
 </html>

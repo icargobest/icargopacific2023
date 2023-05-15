@@ -1,29 +1,21 @@
 <head>
-<title>Company | Adv. Freight</title>
-<style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-  }
-  th{
-    color: white !important;
-  }
-  td, th {
-    text-align: center !important;
-    padding: 10px;
-    border: 1px solid black;
-    
-  }
-</style>
+<title>Company | Advance Freight</title>
+
 
 </head>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 
 
 <div class="mx-2">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
-
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        {{session()->get('message')}}
+    </div>  
+    @endif
         <div class="employee-header-container">
             <h3 class="">ADVANCE FREIGHT LIST</h3>
         </div>
@@ -42,7 +34,7 @@
 
         </section>
 
-        <section class="mb-5 px-4 h-90" style="overflow-x:auto">            
+        <section class="mb-5 px-2 h-90" style="overflow-x:auto">            
                 <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <col>
@@ -50,13 +42,16 @@
                     <colgroup span="3"></colgroup>
                     <colgroup span="3"></colgroup>
                     <tr>
-                        
+                    <thead>
                         <th colspan="3" scope="colgroup">SENDER</th>
                         <th colspan="3" scope="colgroup">RECEIVER</th>
                         <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
                         <th colspan="1" scope="colgroup"></th>
+                    </thead>
+
                     </tr>
                     <tr>
+                    <thead>
                         <th scope="col">NAME</th>
                         <th scope="col">ADDRESS</th>
                         <th scope="col">NUMBER</th>
@@ -68,12 +63,14 @@
                         <th scope="col">CATEGORY</th>
                         <th scope="col">MODE of PAYMENT</th>
                         <th scope="col">ACTION</th>
+                    </thead> 
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->id == $ship->user_id || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Processing' || (Auth::user()->type == 'company' && $ship->company_bid == Auth::user()->name && $ship->status == 'Transferred')))
+                    @if(Auth::user()->type == 'company')
+                    @if($company->id == $ship->company_id)
          
                     <tr>
                         
@@ -99,23 +96,46 @@
                         <td>{{$ship->category}}</td>
                         {{-- Mode of Pament --}}
                         <td>COD</td>
-
-                        <td class="tdbutton" style="max-width:120px"><button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Tracking</button>
-                        <a href="{{ url('/company/freight/transfers') }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <td class="tdbutton" style="max-width:120px">
+                        <a href="{{ route('trackOrder_Company', $ship->id) }}"><button class="btn created-button mx-auto">Tracking</button></a>
+                        @if($ship->advTransferredStatus == NULL)
+                        <a href="{{ route('adv_Freight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        @elseif($ship->advTransferredStatus == 'Accepted')
+                        Transfer Accepted
+                        @else
+                        Pending for transfer
+                        @endif
+                        
                         <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                     </tr>
+                    @endif
                     @endif
                     @endforeach
                 </tbody>
                 </table>
-
+                
 
         </section>
 
 
-
+        
         
     </div>
+    @include('company.advance_freight.requests') 
 </div>
 
-<script></script>
+<style>
+    table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+
+}
+</style>
