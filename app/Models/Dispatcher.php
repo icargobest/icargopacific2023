@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dispatcher extends Model
 {
     use HasFactory;
-
+    protected $table = 'dispatchers';
     protected $fillable = ['user_id', 'company_id', 'contact_no', 'archived'];
 
     public function user()

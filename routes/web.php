@@ -22,6 +22,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\CompaniesController;
 
 
@@ -334,8 +335,8 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
-        ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
+    ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){
