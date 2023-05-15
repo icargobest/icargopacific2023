@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('dispatcher_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

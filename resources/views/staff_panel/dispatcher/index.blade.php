@@ -61,23 +61,7 @@
                             @include('staff_panel/dispatcher.show')
                             @include('staff_panel/dispatcher.edit')
                             @include('staff_panel/dispatcher.archive')
-                            @if($user->user->status == 1)
-                            <a
-                                href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 0]) }}"
-                                class="btn btn-danger btn-sm"
-                                style="width: 80px !important"
-                            >
-                                Lock
-                            </a>
-                            @else
-                            <a
-                                href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 1]) }}"
-                                class="btn btn-success btn-sm"
-                                style="width: 85px !important"
-                            >
-                                unlock
-                            </a>
-                            @endif
+
                         </td>
                     </tr>
                     @endif @endforeach

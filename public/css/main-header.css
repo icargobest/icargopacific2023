@@ -148,6 +148,10 @@ border-top-left-radius: 0;
 border-bottom-left-radius: 0;
 }
 
+.search-bar-container .search-input-wrapper {
+    display: flex;
+}
+
 .search-bar-container input:focus
 {
 outline: none;

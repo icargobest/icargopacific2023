@@ -4,6 +4,12 @@
 @include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
+@if($errors->any())
+    @foreach($errors->all() as $err)
+        <strong>{{$err}}</strong>
+    @endforeach
+@endif
+
 <div class="mx-4">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
 
@@ -25,43 +31,38 @@
               <i class="fa fa-calendar"></i>
             </span>
           </div>
+          @if(Auth::user()->type == 'company')
+          
+         
+          <form action="{{route('advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <input type="hidden" name="id" value="{{$ship->id}}">
 
           <div class="div mb-4">
-            <label class="form-label" for="transfer_station_number"></label>
-            <select type="text" name="select_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <label class="form-label" for="transfer_to_company"></label>
+            <select type="text" id="transfer_to_company" name="transfer_to_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
               <option value="" hidden>SELECT COMPANY</option>
               <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
+                 foreach ($companies as $company) {
+                    echo "<option value='{$company['user_id']}'>{$company['user_id']}</option>";
+                 }
                 ?>
             </select>
           </div>
 
           <div class="div mb-4">
-            <select type="text" name="select_transport" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
-              <option value="" hidden>SELECT TRANSPORT</option>
-              <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
-                ?>
-            </select>
-          </div>
-
-          <div class="div mb-4">
-            <select type="text" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <select type="text" id="select_method" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
               <option value="" hidden>SELECT METHOD</option>
               <?php
-                // foreach ($stations as $station) {
-                //     echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
-                // }
+                    echo "<option value='COD'>Cash On Delivery</option>";
+                    echo "<option value='Card'>Card Payment</option>";
                 ?>
             </select>
           </div>
 
           <div class="div mb-4">
-            <input type="search" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
+            <input type="search" id="freight_charges" name="freight_charges" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
           </div>
 
           <div class="div mb-4">
@@ -74,19 +75,24 @@
           <div class="second-div ">
               <div class="receiverInfo border pt-4">
                 <ul>
-                    <li class="mb-3">ID : <span><strong>#28</strong></span></li>
-                    <li class="mb-3">PICKUP : <span><strong>Sample Pick-up</strong></li>
-                    <li class="mb-3">DROP-OFF : <span><strong>Sample Drop-off</strong></li>
-                    <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>29X88 | 6KG</strong></span></li>
-                    <li class="mb-3">PARCEL ITEM : <span><strong>Computer & Tablets</strong></span></li>
+                    <li class="mb-3">ID : <span><strong>{{$ship['id']}}</strong></span></li>
+                    <li class="mb-3">PICKUP : <span><strong>{{$ship->sender['sender_address']}}</strong></li>
+                    <li class="mb-3">DROP-OFF : <span><strong>{{$ship->recipient['recipient_address']}}</strong></li>
+                    <li class="mb-3">PARCEL SIZE & WEIGHT : <span><strong>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</strong></span></li>
+                    <li class="mb-3">PARCEL ITEM : <span><strong>{{$ship['order_type']}}</strong></span></li>
                 </ul>
               </div>
 
               <div class="mt-4 text-center">
                 <button class="btn btn-primary w-100">SUBMIT</button>
               </div>
+              
           </div>
         </div>
+      </form>
+        
+        
+        @endif
       </div>
 </div>
 
