@@ -11,6 +11,13 @@
        </div>
        <div class="modal-body">
           <fieldset disabled>
+            <div class="row">
+              <div class="col">
+                <div class="mb-4">
+                  <img src="{{ url('uploads/drivers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
+                </div>
+              </div>
+            </div>
            {{--  Driver ID --}}
              <div class="row">
                <div class="col"> 
@@ -45,7 +52,32 @@
              <div class="form-outline mb-4">
               <input type="text" id="contact_no" name="contact_no" value="{{$user->contact_no}}" class="form-control" />
               <label class="form-label" for="contact_no">Contact No.</label>
-             </div>             
+             </div>
+             
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="tel" value="{{$user->tel}}" class="form-control" />
+              <label class="form-label" for="contact_no">Tel No.</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="street" value="{{$user->street}}" class="form-control" />
+              <label class="form-label" for="contact_no">Street</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="city" value="{{$user->city}}" class="form-control" />
+              <label class="form-label" for="contact_no">City</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="postal_code" value="{{$user->postal_code}}" class="form-control" />
+              <label class="form-label" for="contact_no">Postal Code</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->state}}" class="form-control" />
+              <label class="form-label" for="contact_no">State</label>
+             </div>
 
              <!-- License No.  -->
 
@@ -63,12 +95,12 @@
              <!-- Created At. -->
 
              <div class="form-outline mb-4">
-               <input type="text" id="created_at" name="created_at" value="{{$user->created_at}}" class="form-control" />
+               <input type="text" id="created_at" name="created_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}" class="form-control" />
                <label class="form-label" for="created_at">Created At</label>
              </div>
              <!-- Updated At. -->
              <div class="form-outline mb-4">
-               <input type="text" id="updated_at" name="updated_at" value="{{$user->updated_at}}" class="form-control" />
+               <input type="text" id="updated_at" name="updated_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->updated_at))}}" class="form-control" />
                <label class="form-label" for="updated_at">Updated At</label>
               </div>
 

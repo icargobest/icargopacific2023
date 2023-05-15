@@ -1,8 +1,9 @@
 <head>
     <title>Company | Transfer Forwarding</title>
 </head>
-@extends('layouts.app') @include('partials.navigationCompany',['advance' =>
-"nav-selected"])
+@extends('layouts.app')
+@include('partials.navigationCompany', ['advance' => 'nav-selected'])
+
 
 <div class="content-containe mx-4 pt-4">
     <div class="main-wrapper border border-2" style="max-width: 100%">

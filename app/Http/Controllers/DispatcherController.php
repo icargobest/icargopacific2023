@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class DispatcherController extends Controller
 {
@@ -99,10 +100,22 @@ class DispatcherController extends Controller
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
+            if($request->hasfile('profile_image')){
+                $file = $request->file('profile_image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('uploads/dispatchers/',$filename);
+            }
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
                 'company_id' => $user_id,
                 'contact_no' =>  $otherValidation['contact_no'],
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'profile_image' =>  $filename,
             ]);
           
             DB::commit();
@@ -127,15 +140,33 @@ class DispatcherController extends Controller
 
     public function update($id, Request $request)
     {
+        $dispatcher = Dispatcher::find($id);
+        if($request->hasfile('profile_image')){
+            $destination = 'uploads/dispatchers/'.$dispatcher->profile_image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('profile_image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('uploads/dispatchers/',$filename);
+        }else{
+            $filename = $dispatcher->profile_image;
+        }
         $dispatcherData = [
             'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'profile_image' =>  $filename,
         ];
 
         $userData = [
             'name' => $request->input('name'),
         ];
         
-        $dispatcher = Dispatcher::find($id);
         $dispatcher->update($dispatcherData);
 
         $user = $dispatcher->user;
@@ -191,6 +222,66 @@ class DispatcherController extends Controller
 
         return back()->with('success', 'Driver was successfully assigned!');
         
+    }
+
+    public function dispatcherProfile()
+    {
+        $user_id = Auth::id();
+        $dispatchers = $this->dispatcher->with('user')->where('user_id', $user_id)->get();
+        return view('dispatcher_panel/profile.user', compact('dispatchers'));
+    }
+
+    public function updateProfile($id, Request $request)
+    {
+        $dispatcherData = [
+            'vehicle_type' => $request->vehicle_type,
+            'plate_no' => $request->plate_no,
+            'license_number' => $request->license_number,
+            'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'fb_account' => $request->fb_account,
+            'in_account' => $request->in_account,
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+        
+        $dispatcher = Dispatcher::find($id);
+        $dispatcher->update($dispatcherData);
+
+        $user = $dispatcher->user;
+        $user->update($userData);
+
+        return back()->with('success', 'Updated successfully!');
+        
+    }
+
+    public function updateImage($id, Request $request)
+    {
+        $dispatcher = Dispatcher::find($id);
+        if($request->hasfile('profile_image')){
+            $destination = 'uploads/dispatchers/'.$dispatcher->profile_image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('profile_image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('uploads/dispatchers/',$filename);
+        }
+        $dispatcherData = [
+            'profile_image' =>  $filename,
+        ];
+        
+        $dispatcher->update($dispatcherData);
+
+        return back()->with('success', 'Profile picture updated successfully!');
     }
 
 }

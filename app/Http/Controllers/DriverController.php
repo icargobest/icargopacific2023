@@ -10,6 +10,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 use App\Drivers;
 use Exception;
@@ -110,13 +111,25 @@ class DriverController extends Controller
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
+            if($request->hasfile('profile_image')){
+                $file = $request->file('profile_image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('uploads/drivers/',$filename);
+            }
             $drivers = Driver::create([
                 'user_id' => $user->id,
                 'vehicle_type' => $otherValidation['vehicle_type'],
                 'plate_no' => $otherValidation['plate_no'],
                 'license_number' => $otherValidation['license_number'],
                 'contact_no' =>  $otherValidation['contact_no'],
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
                 'company_id' => $user_id,
+                'profile_image' =>  $filename,
             ]);
           
             DB::commit();
@@ -141,18 +154,37 @@ class DriverController extends Controller
 
     public function update($id, Request $request)
     {
+        $driver = Driver::find($id);
+        if($request->hasfile('profile_image')){
+            $destination = 'uploads/drivers/'.$driver->profile_image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('profile_image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('uploads/drivers/',$filename);
+        }else{
+            $filename = $driver->profile_image;
+        }
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
             'license_number' => $request->license_number,
             'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'profile_image' =>  $filename,
         ];
 
         $userData = [
             'name' => $request->input('name'),
         ];
         
-        $driver = Driver::find($id);
+
         $driver->update($driverData);
 
         $user = $driver->user;
@@ -190,6 +222,66 @@ class DriverController extends Controller
             ]);
             $user_id = User::findOrFail($user_id);
             return back()->with('success', 'Driver status updated successfully!');
+    }
+
+    public function driverProfile()
+    {
+        $user_id = Auth::id();
+        $drivers = $this->driver->with('user')->where('user_id', $user_id)->get();
+        return view('driver_panel/profile.user', compact('drivers'));
+    }
+
+    public function updateProfile($id, Request $request)
+    {
+        $driverData = [
+            'vehicle_type' => $request->vehicle_type,
+            'plate_no' => $request->plate_no,
+            'license_number' => $request->license_number,
+            'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'fb_account' => $request->fb_account,
+            'in_account' => $request->in_account,
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+        
+        $driver = Driver::find($id);
+        $driver->update($driverData);
+
+        $user = $driver->user;
+        $user->update($userData);
+
+        return back()->with('success', 'Updated successfully!');
+        
+    }
+
+    public function updateImage($id, Request $request)
+    {
+        $driver = Driver::find($id);
+        if($request->hasfile('profile_image')){
+            $destination = 'uploads/drivers/'.$driver->profile_image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('profile_image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('uploads/drivers/',$filename);
+        }
+        $driverData = [
+            'profile_image' =>  $filename,
+        ];
+        
+        $driver->update($driverData);
+
+        return back()->with('success', 'Profile picture updated successfully!');
     }
 
 }

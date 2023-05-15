@@ -60,15 +60,18 @@
                <input type="text" id="plate_no" name="plate_no" value="{{$user->plate_no}}" class="form-control" />
                <label class="form-label" for="plate_no">Plate No.</label>
               </div>
+              
              <!-- Created At. -->
 
-             <div class="form-outline mb-4">
-               <input type="text" id="created_at" name="created_at" value="{{$user->created_at}}" class="form-control" />
-               <label class="form-label" for="created_at">Created At</label>
-             </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="created_at" name="created_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}" class="form-control" />
+                <label class="form-label" for="created_at">Created At</label>
+              </div>
+
              <!-- Updated At. -->
-             <div class="form-outline mb-4">
-               <input type="text" id="updated_at" name="updated_at" value="{{$user->updated_at}}" class="form-control" />
+
+              <div class="form-outline mb-4">
+               <input type="text" id="updated_at" name="updated_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->updated_at))}}" class="form-control" />
                <label class="form-label" for="updated_at">Updated At</label>
               </div>
 
