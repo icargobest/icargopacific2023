@@ -65,6 +65,7 @@ class StaffController extends Controller
             'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
             'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
+        $user->sendEmailVerificationNotification();
         
             $id = Auth::id();
             $company = Company::where('user_id', $id)->first();

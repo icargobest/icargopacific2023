@@ -196,7 +196,6 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
 
-
     ],
 
     /*

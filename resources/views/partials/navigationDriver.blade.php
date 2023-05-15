@@ -19,6 +19,16 @@
                                 </div>
                             </a>
                         </div>
+
+                        <div class="links">
+                            <a class="nav-link" href="{{ route('driver.order') }}">
+                            <div class="link @if(isset($order)){{$order}}@endif">
+                                <i class="fa fa-list link-i-1"></i>
+                                <span>Order</span>
+                            </div>
+                            </a>
+                        </div>
+                        
                         <div class="links">
                             <a class="nav-link" href="{{ url('/driver/qr') }}">
                                 <div class="link @if(isset($qr)){{$qr}}@endif">

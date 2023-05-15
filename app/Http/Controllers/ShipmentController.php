@@ -15,6 +15,7 @@ use App\Models\Recipient;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\Dispatcher;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -116,6 +117,18 @@ class ShipmentController extends Controller
         return view('company.freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function advfreight($id){
+        $currentUser = Auth::user()->id;
+
+        $ship = Shipment::findOrFail($id);
+        $company = Company::all()->whereNotIn('user_id',[$currentUser]);
+        $bid = Bid::all();
+        
+        $this->TrackOrderLog();
+
+        return view('company.advance_freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
+    }
+
     public function company_advFreightPanel()
     {
         $shipment = Shipment::all();
@@ -124,7 +137,7 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('company.freight.advance_freight', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.advance_freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function staff_advFreightPanel()
@@ -554,10 +567,48 @@ class ShipmentController extends Controller
         return redirect()->back()->with('success', 'Transfer Success');
     }
 
+    public function advTransfer(Request $request)
+    {
+        $data = Shipment::findOrFail($request->id);
+        $data->advTransferredto = $request->transfer_to_company;
+        $data->advTransferredStatus = 'Pending';
+        $data->save();
+
+        return redirect()->back()->with('success', 'Transfer Pending');
+
+    }
+
+    public function accept_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+        $currentCompany = Company::where('user_id', Auth::user()->id)->first();
+
+        $shipment->company_name = Auth::user()->name;
+        $shipment->company_id = $currentCompany->id;
+        $shipment->advTransferredStatus = 'Accepted';
+        $shipment->status = 'Transferred';
+        $shipment->save();
+        $this->TrackOrderLog();
+        return redirect()->back()->with('message', 'Transfer Accepted');
+    }
+
+    public function decline_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->advTransferredto = NULL;
+        $shipment->advTransferredStatus = NULL;
+        $shipment->save();
+
+        return redirect()->back()->with('message', 'Transfer Declined');
+
+    }
+
     public function toPickUp_view()
     {
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $driver = Driver::all();
 
         $user_id = Auth::id();
         $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
@@ -565,8 +616,9 @@ class ShipmentController extends Controller
             $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
             $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
             if ($company) {
-                $company_id_dispatcher =  $company->user_id;
-                $user = User::where('id', $company_id_dispatcher)->first(); // Retrieve the first matching user record
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
                 if ($user) {
                     $company_name = $user->name;
                 }
@@ -575,13 +627,14 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('dispatcher_panel.order.pickup', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient',]);
+        return view('dispatcher_panel.order.pickup', compact('company_id_dispatcher', 'company_name'), ['shipments' => $shipment, 'drivers' => $driver, 'bids' => $bid, 'sender', 'recipient',]);
     }
 
     public function toDispatch_view()
     {
         $shipment = Shipment::all();
         $bid = Bid::all();
+        $driver = Driver::all();
 
         $user_id = Auth::id();
         $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
@@ -589,8 +642,9 @@ class ShipmentController extends Controller
             $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
             $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
             if ($company) {
-                $company_id_dispatcher =  $company->user_id;
-                $user = User::where('id', $company_id_dispatcher)->first(); // Retrieve the first matching user record
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
                 if ($user) {
                     $company_name = $user->name;
                 }
@@ -599,7 +653,87 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('dispatcher_panel.order.dispatch', compact('company_id_dispatcher'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('dispatcher_panel.order.dispatch', compact('company_id_dispatcher'), ['shipments' => $shipment, 'drivers' => $driver, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function driverHistory_view(){
+        $shipment = Shipment::all();
+
+        $user_id = Auth::id();
+        $driver = Driver::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($driver) {
+            $driverID = $driver->id; // Get the driver_id from the driver record
+            $company_id = $driver->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            } 
+        }
+
+        $this->TrackOrderLog();
+
+        return view('driver_panel.deliverHistory', compact('driverID', 'company_name'), ['shipments' => $shipment]);
+    }
+
+    public function driverOrder_view(){
+        $shipment = Shipment::all();
+
+        $user_id = Auth::id();
+        $driver = Driver::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($driver) {
+            $driverID = $driver->id; // Get the driver_id from the driver record
+            $company_id = $driver->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                }
+            } 
+        }
+
+        $this->TrackOrderLog();
+
+        return view('driver_panel.orderList', compact('driverID', 'company_name'), ['shipments' => $shipment]);
+    }
+
+    public function dispatcherHistory_view(){
+        $shipment = Shipment::all();
+        $bid = Bid::all();
+        $driver = Driver::all();
+
+        $user_id = Auth::id();
+        $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
+        if ($dispatcher) {
+            $dispatch_id = $dispatcher->user_id;
+            $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
+            $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
+            if($company){
+                $company_id_dispatcher =  $company->id;
+                $company_ID =  $company->user_id;
+                $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
+                if($user){
+                    $company_name = $user->name;
+                    $driver_id = Driver::where('dispatcher_id', $user_id)->first();
+                    if($driver_id){
+                        $driverID = $driver_id->id;
+                    }else{
+                        $driverID = null;
+                    }
+                }
+            }
+        }
+
+        $this->TrackOrderLog();
+
+        return view('dispatcher_panel.dispatchHistory', compact('company_id_dispatcher', 'company_name', 'driverID'), ['shipments' => $shipment, 'drivers' => $driver, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function edit_order($id)
