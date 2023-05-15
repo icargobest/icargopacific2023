@@ -22,6 +22,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\CompaniesController;
 
 
 
