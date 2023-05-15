@@ -9,7 +9,7 @@ class Dispatcher extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'company_id', 'contact_no', 'archived'];
+    protected $fillable = ['user_id', 'company_id', 'contact_no', 'archived' , 'tel', 'street', 'city', 'postal_code', 'state', 'profile_image', 'fb_account', 'in_account'];
 
     public function user()
     {

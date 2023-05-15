@@ -121,6 +121,11 @@ class DriverController extends Controller
                 'plate_no' => $otherValidation['plate_no'],
                 'license_number' => $otherValidation['license_number'],
                 'contact_no' =>  $otherValidation['contact_no'],
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
                 'company_id' => $user_id,
                 'profile_image' =>  $filename,
             ]);
@@ -157,12 +162,19 @@ class DriverController extends Controller
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
             $file->move('uploads/drivers/',$filename);
+        }else{
+            $filename = $driver->profile_image;
         }
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
             'license_number' => $request->license_number,
             'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
             'profile_image' =>  $filename,
         ];
 
@@ -224,10 +236,13 @@ class DriverController extends Controller
             'plate_no' => $request->plate_no,
             'license_number' => $request->license_number,
             'contact_no' => $request->contact_no,
-            'addr_street' => $request->addr_street,
-            'addr_city' => $request->addr_city,
-            'addr_zipcode' => $request->addr_zipcode,
-            'addr_country' => $request->addr_country,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'fb_account' => $request->fb_account,
+            'in_account' => $request->in_account,
         ];
 
         $userData = [
@@ -264,7 +279,7 @@ class DriverController extends Controller
         
         $driver->update($driverData);
 
-        return back()->with('success', 'Updated successfully!');
+        return back()->with('success', 'Profile picture updated successfully!');
     }
 
 }

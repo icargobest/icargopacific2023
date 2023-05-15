@@ -50,6 +50,8 @@
                     <span class="data-content">{{ $driver->user->name }}</span>
                     <span class="data-title">Mobile No.</span>
                     <span class="data-content">(+63){{ $driver->contact_no }}</span>
+                    <span class="data-title">Tel No.</span>
+                    <span class="data-content">{{ $driver->tel }}</span>
                     <span class="data-title">Email Address</span>
                     <span class="data-content">{{ $driver->user->email }}</span>
                     <span class="data-title">License Number</span>
@@ -68,14 +70,27 @@
                   <div class="profileDivider2 "></div>
                     <div class="profileInfoData">
                       <span class="data-title">Bldg. No / Street Name</span>
-                      <span class="data-content">{{ $driver->addr_street }}</span>
+                      <span class="data-content">{{ $driver->street }}</span>
                       <span class="data-title">Province/City</span>
-                      <span class="data-content">{{ $driver->addr_city }}</span>
-                      <span class="data-title">Zip Code</span>
-                      <span class="data-content">{{ $driver->addr_zipcode }}</span>
+                      <span class="data-content">{{ $driver->city }}</span>
+                      <span class="data-title">Postal Code</span>
+                      <span class="data-content">{{ $driver->postal_code }}</span>
                       <span class="data-title">State/Country</span>
-                      <span class="data-content">{{ $driver->addr_country }}</span>
+                      <span class="data-content">{{ $driver->state }}</span>
                     </div>
+              </div>
+
+              <div class="profileContent">
+                <div class="titleButton">
+                  <h5 style="font-weight: bolder">Social</h5>
+                </div>
+                <div class="profileDivider2 "></div>
+                  <div class="profileInfoData">
+                    <i class="fa fa-facebook" aria-hidden="true">
+                    <span class="data-content">{{ $driver->fb_account }}</span></i>
+                    <i class="fa fa-linkedin" aria-hidden="true">
+                    <span class="data-content">{{ $driver->in_account }}</span></i>
+                  </div>
               </div>
 
 

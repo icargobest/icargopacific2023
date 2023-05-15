@@ -23,10 +23,13 @@ return new class extends Migration
             $table->string('vehicle_type');
             $table->string('license_number');
             $table->string('plate_no');
-            $table->string('addr_street')->nullable()->default(null);
-            $table->string('addr_city')->nullable()->default(null);
-            $table->string('addr_zipcode')->nullable()->default(null);
-            $table->string('addr_country')->nullable()->default(null);
+            $table->string('tel')->nullable()->default(null);
+            $table->string('street')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
+            $table->string('postal_code')->nullable()->default(null);
+            $table->string('state')->nullable()->default(null);
+            $table->string('fb_account')->nullable()->default(null);
+            $table->string('in_account')->nullable()->default(null);
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

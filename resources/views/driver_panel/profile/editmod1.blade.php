@@ -36,6 +36,17 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->tel }}" name="tel" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="7" 
+                  maxlength="9" required autocomplete="">
+                  <label class="form-label" for="mobile">Mobile number</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
                   <input id="password" type="email" class="form-control" value="{{ $driver->user->email }}" name="email" required autocomplete="">
                   <label class="form-label" for="Tel">Email address</label>
                 </div>
@@ -44,7 +55,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{ $driver->addr_street }}" name="addr_street" required autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->street }}" name="street" required autocomplete="">
                   <label class="form-label" for="Tel">Bldg. No / Street Name</label>
                 </div>
               </div>
@@ -52,7 +63,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{  $driver->addr_city }}" name="addr_city" required autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{  $driver->city }}" name="city" required autocomplete="">
                   <label class="form-label" for="Tel">Province/City</label>
                 </div>
               </div>
@@ -60,7 +71,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{  $driver->addr_zipcode }}" name="addr_zipcode" required autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{  $driver->postal_code }}" name="postal_code" required autocomplete="">
                   <label class="form-label" for="Tel">Zip Code</label>
                 </div>
               </div>
@@ -68,8 +79,24 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{  $driver->addr_country }}" name="addr_country" required autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{  $driver->state }}" name="state" required autocomplete="">
                   <label class="form-label" for="Tel">State/Country</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->fb_account }}" name="fb_account" required autocomplete="">
+                  <label class="form-label" for="email">Facebook Account</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->in_account }}" name="in_account" autocomplete="">
+                  <label class="form-label" for="email">Linkedin Account</label>
                 </div>
               </div>
             </div>
