@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        return redirect('login')->with('success','Registered successfully');
+        return redirect('login')->with('success', 'Registered successfully');
     }
 
     /**
@@ -76,10 +77,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // create a related customer record with the user_id of the created user
+        $user->customer()->create([
+            'user_id' => $user->id,
+            // add any other customer fields as needed
+        ]);
+
+        return $user;
     }
 }

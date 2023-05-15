@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\DailyIncome;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Shipment;
+use App\Models\Company;
+use App\Models\Staff;
 
 class StaffDashboardController extends Controller
 {
@@ -30,9 +32,26 @@ class StaffDashboardController extends Controller
 
         $totalYearly = $totalMonthly;
 
-        $user_id = Auth::id();
-        $dashboard = DB::table('dashboard')->where('user_id', $user_id)->first();
-
+        $statuses = ['Pending', 'Processing', 'PickedUp', 'Assort', 'Transferred', 'Arrived', 'Dispatched', 'Delivered'];
+        $counts = [];
+        
+        foreach ($statuses as $status) {
+            if ($status === 'Pending') {
+                $counts[$status] = Shipment::where('status', $status)
+                                          ->count();
+            } else {
+                if (Auth::check()) {
+                    $user_id = Auth::user()->id;
+                    $staff = Staff::where('user_id', $user_id)->first();
+                    $counts[$status] = Shipment::where('company_id', $staff->company_id)
+                                              ->where('status', $status)
+                                              ->count();
+                } else {
+                    $counts[$status] = 0;
+                }
+            }
+        }
+        
         // Prepare the data for use in the line chart
         $chartData = [
             ['Year', 'Income'],
@@ -49,6 +68,6 @@ class StaffDashboardController extends Controller
         $dailyData = DailyIncome::select('day', 'income')->orderBy('day')->get();
         
 
-        return view('company\staff\dashboard', compact('incomes', 'totalMonthly', 'totalYearly', 'dashboard', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
+        return view('staff_panel.dashboard', compact('incomes','counts', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 }

@@ -1,8 +1,14 @@
-<title>Company | Dashboard</title>
+<title>Super Admin | Dashboard</title>
 
 
 @extends('layouts.app')
-@include('partials.navigationSuperAdmin')
+@extends('layouts.chart')
+@include('partials.navigationCompany',['dashboard' => "nav-selected"])
+
+{{-- @extends('layouts.chart') --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@section('title', 'Monthly Income')
 
 @section('content')
 <nav class="navbar navbar-light bg-light">
@@ -17,8 +23,8 @@
             </div>
         </div>
     </div>
-
-    {{-- <body>
+  
+    <body>
         <h1>Registered Companies: {{ $companycount }}</h1>
         <h1>Registered Users: {{ $usercount }}</h1>
     </body>
@@ -44,12 +50,7 @@
 
         chart.draw(data, options);
     }
-</script> --}}
+</script>
 
 
 
-
-
-
-
-@endsection

@@ -4,8 +4,12 @@
         <div class="sidebar">
             <div class="wrapper">
                 <div class="search-bar-container">
-                    <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input class="input"id="search-input" placeholder="Tracking ID">
+                    <form action="{{ url('/staff/track_parcel') }}" method="GET">
+                        <div class="search-input-wrapper">
+                            <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="input" name="tracking_number" placeholder="Tracking ID">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="divider">

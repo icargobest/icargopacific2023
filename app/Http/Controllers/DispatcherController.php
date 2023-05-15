@@ -87,7 +87,7 @@ class DispatcherController extends Controller
                 'contact_no.required' => 'Contact field is required.',
                 'contact_no.max' => 'Contact number must be a min and max of 11 numbers'
             ]);
-            
+            $user->sendEmailVerificationNotification();
             if(Auth::user()->type == 'staff'){
                 $id = Auth::id();
                 $staff = Staff::where('user_id', $id)->first();

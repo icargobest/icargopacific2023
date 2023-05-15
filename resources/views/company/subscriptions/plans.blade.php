@@ -1,6 +1,7 @@
 @extends('layouts.app')
    
 @section('content')
+
 <div class="container">
 <section>
   <div class="row">
@@ -8,12 +9,12 @@
   <header class="text-center mb-5 text-black">
       <div class="container py-5">
         <div class="col-lg-12 mx-auto">
-          <h1>Laravel 9 Cashier Stripe Subscription</h1>
+        <a href="/company/dashboard"><- back to dashboard</a>
+          <h1>Monthly Subscription</h1>
           <h3>PRICING</h3>
         </div>
       </div>
     </header>
- 
         @foreach($plans as $plan)
         <div class="col-4">
             <div class="bg-white p-5 rounded-lg shadow">
@@ -44,9 +45,11 @@
             </div>
         </div>
         @endforeach
+
+        <center><a href="/subscribe">Click here for a 30-day free trial of our Standard Subscription</a></center>
     </div>
   </div>
-</section>
+</section>  
  
 </div>
 @endsection

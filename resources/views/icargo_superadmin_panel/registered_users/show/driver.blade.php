@@ -155,7 +155,7 @@
                             class="form-control"
                         />
                         <label class="form-label" for="license_number"
-                            >Contact No.</label
+                            >License No.</label
                         >
                     </div>
 
@@ -180,7 +180,7 @@
                             type="text"
                             id="created_at"
                             name="created_at"
-                            value="{{$driver->created_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($driver->user->created_at))}}"
                             class="form-control"
                         />
                         <label class="form-label" for="created_at"
@@ -193,7 +193,7 @@
                             type="text"
                             id="updated_at"
                             name="updated_at"
-                            value="{{$driver->updated_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($driver->user->updated_at))}}"
                             class="form-control"
                         />
                         <label class="form-label" for="updated_at"

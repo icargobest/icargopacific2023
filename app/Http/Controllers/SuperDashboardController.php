@@ -22,6 +22,6 @@ class SuperDashboardController extends Controller
        
         
 
-        return view('dashboard', compact('incomes', 'companycount', 'usercount'));
+        return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount'));
     }
 }
