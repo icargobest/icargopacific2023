@@ -38,6 +38,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">#</th>
+                        <th scope="col" style="text-align: center">Profile</th>
                         <th scope="col" style="text-align: center">
                             Dispatcher Name
                         </th>
@@ -53,6 +54,9 @@
                     @foreach ($dispatchers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
+                        <td>
+                            <img src="{{ url('uploads/dispatchers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
+                        </td>
                         <td class="capitalized">{{ $user->user->name }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"

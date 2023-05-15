@@ -28,7 +28,7 @@
                     <div class="form-outline mb-4">
                         <input type="text" name="name" value="{{ $user->user->name }}" class="form-control"
                             placeholder="Dispatcher name" required>
-                           <label class="form-label" for="name">Staff Name</label>
+                           <label class="form-label" for="name">Dispatcher Name</label>
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -43,7 +43,7 @@
                           minlength="11" 
                           maxlength="11"
                           placeholder="Contact Number:" required>
-                          <label class="form-label" for="name">Staff Name</label>
+                          <label class="form-label" for="name">Contact No.</label>
 
                       @error('name')
                       <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

@@ -45,13 +45,38 @@
              <div class="form-outline mb-4">
               <input type="text" id="contact_no" name="contact_no" value="{{$user->contact_no}}" class="form-control" />
               <label class="form-label" for="contact_no">Contact No.</label>
-             </div>             
+             </div>
+             
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="tel" value="{{$user->tel}}" class="form-control" />
+              <label class="form-label" for="contact_no">Tel No.</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="street" value="{{$user->street}}" class="form-control" />
+              <label class="form-label" for="contact_no">Street</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="city" value="{{$user->city}}" class="form-control" />
+              <label class="form-label" for="contact_no">City</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="postal_code" value="{{$user->postal_code}}" class="form-control" />
+              <label class="form-label" for="contact_no">Postal Code</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->state}}" class="form-control" />
+              <label class="form-label" for="contact_no">State</label>
+             </div>
 
              <!-- License No.  -->
 
              <div class="form-outline mb-4">
               <input type="text" id="license_number" name="license_number" value="{{$user->license_number}}" class="form-control" />
-              <label class="form-label" for="license_number">Contact No.</label>
+              <label class="form-label" for="license_number">License No.</label>
              </div>             
 
              <!-- Plate No. -->
