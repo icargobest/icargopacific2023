@@ -32,7 +32,6 @@ class PlanSeeder extends Seeder
                 'description' => 'Premium'
             ]
         ];
-   
         foreach ($plans as $plan) {
             Plan::create($plan);
         }

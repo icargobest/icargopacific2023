@@ -14,8 +14,7 @@
       
         <div class="profileTab">
           <div class="profileBackground">
-            {{-- @include('profile.photoform'); --}}
-            <i class="fa fa-pencil profileIcon"></i>
+            <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal" data-bs-target="#editimage"><i class="fa fa-pencil "></i></button>
             <div class="profilePicture">
               <img src="https://cdn.donmai.us/original/a7/d9/__nakiri_ayame_and_nakiri_ayame_hololive_drawn_by_kakinotane_e__a7d97d0312f20a4f5a65126d16c87caf.jpg" alt="HTML tutorial">
             </div>
@@ -45,8 +44,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Personal Information</h5>
-                  @include('profile.userInfoform')
-                  {{-- <button class="profileButton">EDIT</button> --}}
+                  <button type="button" class="profileButton" style="" data-bs-toggle="modal" data-bs-target="#personalinfo">EDIT</button>
                 </div>
                 <div class="profileDivider2 "></div>
                   <div class="profileInfoData">
@@ -63,9 +61,8 @@
               
               <div class="profileContent">
                   <div class="titleButton">
-                    <h5 style="font-weight: bolder">Adress</h5>
-                    @include('profile.addressform')
-                    {{-- <button class="profileButton">EDIT</button> --}}
+                    <h5 style="font-weight: bolder">Address</h5>
+                    <button type="button" class="profileButton" style="" data-bs-toggle="modal" data-bs-target="#address">EDIT</button>
                   </div>
                   <div class="profileDivider2 "></div>
                     <div class="profileInfoData">
@@ -83,8 +80,7 @@
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Social</h5>
-                  @include('profile.socialform')
-                  {{-- <button class="profileButton">EDIT</button> --}}
+                  <button type="button" class="profileButton" style="" data-bs-toggle="modal" data-bs-target="#social">EDIT</button>
                 </div>
                 <div class="profileDivider2 "></div>
                   <div class="profileInfoData">
@@ -102,7 +98,11 @@
     </div>
 </main>
 
-
+@include('profile.editmod1')
+@include('profile.editmod2')
+@include('profile.editmod3')
+@include('profile.imagemodal')
+@include('profile.companymodal')
 @include('partials.footer')	
 
 <style>

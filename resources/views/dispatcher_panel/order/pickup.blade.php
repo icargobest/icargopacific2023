@@ -2,9 +2,7 @@
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Dispatcher | Pick Up Orders</title>
 </head>
-
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDispatcher')
 
@@ -28,6 +26,9 @@
         <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
             <h3 class="text-white mb-0">ORDER LIST | TO PICK UP</h3>
         </div>
+        <div class="mt-2">
+            @include('flash-message')
+        </div>
         {{-- TABLE START--}}
         <section class="mb-5 px-5 my-3 overflow-auto">
             <table class="table table-striped table-hover">
@@ -41,13 +42,13 @@
                     <th>SIZE & WIDTH</th>
                     <th>MAXIMUM BID</th>
                     <th>STATUS</th>
-                    <th>ACTION</th>
+                    <th>DRIVER NAME</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->type == 'dispatcher')
-                        @if($ship->company_id == $company_id_dispatcher && $ship->status == 'Processing')
+                        @if($ship->company_id == $company_id_dispatcher && $ship->status == 'Processing' && $ship->driver_id == null)
                         <tr>
                             <td>{{$ship->id}}</td>
                             <!-- Photo not showing -->
@@ -61,12 +62,15 @@
                             <td>{{$ship->min_bid_amount}}</td>
                             <td>{{$ship->status}}</td>
                             <td>
-                                {{-- <span class="d-flex align-items-start"> --}}
-                                <a class="cardItem" href=" ">
-                                    <button type="button" class="btn text-white mb-1" style="background-color:#214D94;">
-                                    ASSIGN DRIVER
-                                    </button>
-                                </a>
+                                @if($ship->driver_id == null)
+                                    @include('dispatcher_panel/order.assignDriver')
+                                @else
+                                    @foreach ($drivers as $driver)
+                                        @if($driver->id == $ship->driver_id)
+                                            {{$driver->user->name}}
+                                        @endif
+                                    @endforeach
+                                @endif
                             </td>
                         </tr>
                         @endif

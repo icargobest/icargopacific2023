@@ -12,19 +12,19 @@ class PlanController extends Controller
     public function index(){
         $plans=Plan::get();
 
-        return view("/subscriptions/plans", compact("plans"));
+        return view("/company/subscriptions/plans", compact("plans"));
     }
     public function show(Plan $plan, Request $request)
     {
         $intent = auth()->user()->createSetupIntent();
-        return view("/subscriptions/subscription", compact("plan", "intent"));
+        return view('/company/subscriptions/subscription', compact("plan", "intent"));
     }
     public function subscription(Request $request)
     {
         $plan = Plan::find($request->plan);
    
         $subscription = $request->user()->newSubscription($request->plan, $plan->stripe_plan)->create($request->token);
-        return view("subscription_success");
+        return view("/company/subscriptions/subscription_success");
     } 
     
 }

@@ -1,19 +1,19 @@
 <title>Driver | Dashboard</title>
-
+@include('partials.header')
 @include('partials.navigationDriver', ['dashboard' =>"nav-selected"])
 @extends('layouts.app')
 {{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="{{ asset('css/driverdashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/companydashboard.css') }}">
 
 @section('title', 'Driver Dashboard')
 @section('content')
 
-<div class="content-container" style="margin-top:-14px !important;">
+
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
-                Dispatcher Dashboard  
+                Driver Dashboard  
             </div>
 
             <div class="shippingStatus">
@@ -102,7 +102,6 @@
     </div>         
 </div>
 
-</div>
 
 {{-- <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">Driver Dashboard</a>

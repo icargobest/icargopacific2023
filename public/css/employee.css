@@ -181,9 +181,9 @@ text-align: center;
 }
 
 
-th
+thead th
 {
-background-color: #214D94 !important;
+background-color:   #214D94 !important;
 border: none;
 color: #FFF;
 text-align: center;

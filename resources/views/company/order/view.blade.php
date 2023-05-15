@@ -1,28 +1,13 @@
 <head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Customer | Order Details #{{ $ship->id }}</title>
 </head>
-
-{{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationCompany', ['order' => 'nav-selected'])
 
 <!-- MDB -->
 <link rel="stylesheet" href="/css/mdb.min.css" />
-
-<style>
-    th {
-        background-color: transparent !important;
-        color: black;
-        font-weight: normal;
-    }
-
-    td {
-        text-align: left;
-        font-weight: bold;
-    }
-</style>
-
 {{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
 <!-- Exp start -->
 <!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $ship->id }}">
@@ -269,3 +254,16 @@ VIEW
         }
     });
 </script>
+
+<style>
+th {
+background-color: transparent !important;
+color: black;
+font-weight: normal;
+}
+
+td {
+text-align: left;
+font-weight: bold;
+}
+</style>

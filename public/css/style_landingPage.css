@@ -4,7 +4,9 @@
 html{
     scroll-behavior: smooth;
 }
-
+body{
+    background-color:#fff;
+}
 .user-container{
     display: flex;
     gap: 90px;
@@ -62,6 +64,9 @@ html{
     color: #214D94;
 }
 /* HEROSECTION */
+.heroCarousel .imgControls{
+    font-size: 35px;
+}
 .hero-container{
     width: 100%;
     padding: 20px;
@@ -144,21 +149,33 @@ html{
 
 .cardPlan{
     background-color: #fff;
-    min-width: 235px;
-    min-height: 330px;
+    max-width: 280px;
+    min-width: 280px;
+    /* max-height: 600px; */
     padding: 0 10px;
+
+    justify-content: space-between;
 
     border: 1px solid #dcdde5;
     border-radius: 8px;
 }
-.cardPlan:hover{
+
+.cardPlanBest{
     transform: scale(1.1);
+    color: #fff;
+    background-color: rgba(33, 77, 148, 0.896);
 }
+/* .cardPlan:hover{
+    transform: scale(1.1);
+} */
 .cardPlan h5{
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1px;
     color: #214D94;
+}
+.cardPlanBest h5{
+    color: #fff;
 }
 .duration{
     border-bottom: 1px solid rgba(126, 126, 126, 0.5);
@@ -184,13 +201,27 @@ html{
     color: #214D94;
     letter-spacing: 1px;
 }
+.price{
+    justify-content: space-between;
+}
+.price ul li{
+    list-style-type:disc;
+    color: #214D94;
+}
+.cardPlanBest .price ul li{
+    color: #fff;
+}
 .price h3{
     color: #214D94;
+}
+.cardPlanBest .price h3{
+    color: #ffff;
 }
 .price h3 span{
     color: #F9CD1A;
 }
 /* SERVICES */
+
 .ourService{
     align-items: start;
 }
@@ -199,6 +230,7 @@ html{
     color: #fff;
 }
 .serviceDesc{
+    padding: 200px 30px;
     background-color: #214D94;
 }
 .serviceDesc h1{
@@ -222,6 +254,24 @@ html{
 }
 .iconTitle h5{
     border-bottom: 5px solid #F9CD1A;
+}
+/* FOOTER */
+.footerLandingPage{
+    background-color: #e4eaf4;
+}
+.footerLandingPage .footerNav img{
+    width: 300px;
+}
+.socialIcons i{
+    font-size: 30px;
+    color: #214D94;
+}
+.foot{
+    background-color: #e4eaf4;
+}
+.foot h6{
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {
@@ -315,10 +365,10 @@ html{
         overflow-x: scroll;
         justify-content: start;
     }
-
-    .cardPlan:hover{
+    .cardPlanBest{
         transform: scale(1.0);
     }
+
     /* SERVICES */
 
     .ourService{
@@ -327,9 +377,15 @@ html{
     .ourService p{
         display: none;
     }
+    .ourService h5{
+        font-size: 2.2vh;
+    }
     .iconTitle{
         padding: 25px;
+        width: 100%;
         border: 3px solid #214D94;
         border-radius: 8px;
+
+        gap: 40px;
     }
 }

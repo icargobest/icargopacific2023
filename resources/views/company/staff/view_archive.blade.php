@@ -1,4 +1,5 @@
 <title>Company | Staffs Archived</title>
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany')
 <style>

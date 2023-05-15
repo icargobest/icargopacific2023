@@ -100,6 +100,7 @@
                                     >
                                 </div>
                             </div>
+
                             <div class="links">
                                 <div class="link">
                                     <i class="fa fa-table"></i>
@@ -117,7 +118,21 @@
                                     >
                                 </div>
                             </div>
+                            <div class="links">
+                                <div class="link">
+                                    <i class="fa fa-plus"></i>
+                                    <a
+                                        class="nav-link"
+                                        href="{{route('show.queries')}}"
+                                        ><span>Queries</span></a
+                                    >
+                                </div>
+                         </div>
+
                         </div>
+
+
+
 
                         <div class="links bottom-nav">
                             <div class="link">
