@@ -147,7 +147,7 @@
                         <input
                             type="text"
                             name="created_at"
-                            value="{{$company->created_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}"
                             class="form-control"
                         />
                     </div>
@@ -157,7 +157,7 @@
                         <input
                             type="text"
                             name="updated_at"
-                            value="{{$company->updated_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($company->user->updated_at))}}"
                             class="form-control"
                         />
                     </div>
