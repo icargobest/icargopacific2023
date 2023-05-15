@@ -68,6 +68,6 @@ class StaffDashboardController extends Controller
         $dailyData = DailyIncome::select('day', 'income')->orderBy('day')->get();
         
 
-        return view('income', compact('incomes','counts', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
+        return view('staff_panel.dashboard', compact('incomes','counts', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 }
