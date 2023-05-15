@@ -1,8 +1,8 @@
 <head>
 <title>Company | Transfer Forwarding</title>
 </head>
-@include('partials.header')
-@extends('layouts.app')
+{{-- @include('partials.header')
+@extends('layouts.app') --}}
 @include('partials.navigationCompany',['advance' => "nav-selected"])
 @if($errors->any())
     @foreach($errors->all() as $err)

@@ -126,7 +126,7 @@
         text-align: center !important;
         padding: 10px;
         border: 1px solid black;
-        
+        vertical-align: middle;
     }
     </style>
 

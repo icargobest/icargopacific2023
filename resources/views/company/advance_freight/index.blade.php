@@ -34,7 +34,7 @@
 
         </section>
 
-        <section class="mb-5 px-2 h-90" style="overflow-x:auto">            
+        <section class="mb-5 px-2 h-90 d-flex align-items-center justify-content-center" style="overflow-x:auto;">            
                 <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <col>
@@ -75,7 +75,7 @@
                     <tr>
                         
                         {{-- sender namae --}}
-                        <td>{{$ship->sender->sender_name}}</td>
+                        <td class="text-center">{{$ship->sender->sender_name}}</td>
                         {{-- sender address --}}
                         <td>{{$ship->sender->sender_address}} , {{$ship->sender->sender_city}} , {{$ship->sender->sender_state}} , {{$ship->sender->sender_zip}}</td>
                         {{-- sender number --}}
@@ -129,6 +129,7 @@
 border-collapse: collapse;
 border-color: transparent !important;
 }
+
 th{
 color: white !important;
 }
@@ -136,6 +137,7 @@ td, th {
 text-align: center !important;
 padding: 10px;
 border: 1px solid black;
-
+vertical-align: middle;
 }
+
 </style>
