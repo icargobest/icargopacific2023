@@ -117,6 +117,18 @@ class ShipmentController extends Controller
         return view('company.freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function advfreight($id){
+        $currentUser = Auth::user()->id;
+
+        $ship = Shipment::findOrFail($id);
+        $company = Company::all()->whereNotIn('user_id',[$currentUser]);
+        $bid = Bid::all();
+        
+        $this->TrackOrderLog();
+
+        return view('company.advance_freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
+    }
+
     public function company_advFreightPanel()
     {
         $shipment = Shipment::all();
@@ -125,7 +137,7 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('company.freight.advance_freight', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.advance_freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function staff_advFreightPanel()
@@ -553,6 +565,43 @@ class ShipmentController extends Controller
         $data->save();
         $this->TrackOrderLog();
         return redirect()->back()->with('success', 'Transfer Success');
+    }
+
+    public function advTransfer(Request $request)
+    {
+        $data = Shipment::findOrFail($request->id);
+        $data->advTransferredto = $request->transfer_to_company;
+        $data->advTransferredStatus = 'Pending';
+        $data->save();
+
+        return redirect()->back()->with('success', 'Transfer Pending');
+
+    }
+
+    public function accept_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+        $currentCompany = Company::where('user_id', Auth::user()->id)->first();
+
+        $shipment->company_name = Auth::user()->name;
+        $shipment->company_id = $currentCompany->id;
+        $shipment->advTransferredStatus = 'Accepted';
+        $shipment->status = 'Transferred';
+        $shipment->save();
+        $this->TrackOrderLog();
+        return redirect()->back()->with('message', 'Transfer Accepted');
+    }
+
+    public function decline_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->advTransferredto = NULL;
+        $shipment->advTransferredStatus = NULL;
+        $shipment->save();
+
+        return redirect()->back()->with('message', 'Transfer Declined');
+
     }
 
     public function toPickUp_view()
