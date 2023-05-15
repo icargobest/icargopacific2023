@@ -23,19 +23,17 @@
         <div class="profileTab">
             <div class="profileBackground">
                 <button
-                    type="button"
-                    class="profileIcon"
-                    style="border: 0px !important"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editimage"
+                type="button"
+                class="profileIcon"
+                style="border: 0px !important"
+                data-bs-toggle="modal"
+                data-bs-target="#editimageCompany"
                 >
-                    <i class="fa fa-pencil"></i>
+                <i class="fa fa-pencil"></i>
                 </button>
                 <div class="profilePicture">
-                    <img
-                        src="https://cdn.donmai.us/original/a7/d9/__nakiri_ayame_and_nakiri_ayame_hololive_drawn_by_kakinotane_e__a7d97d0312f20a4f5a65126d16c87caf.jpg"
-                        alt="HTML tutorial"
-                    />
+                    <img src="{{ asset('images/company/' . $company->user->name . '/' . $company->image) }}" 
+                    alt="Profile Image">
                 </div>
             </div>
             <div class="profileData">
@@ -138,7 +136,7 @@
     </div>
 </main>
 
-@include('company.profile.edit') @include('profile.imagemodal')
+@include('company.profile.edit') @include('company.profile.image')
 @include('partials.footer')
 
 <style>

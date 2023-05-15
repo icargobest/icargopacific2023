@@ -74,7 +74,6 @@ class CompaniesController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
-        DB::enableQueryLog();
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
     
@@ -91,7 +90,7 @@ class CompaniesController extends Controller
         ]);
     
         $company->update([
-            'contact_no' =>  $request->contact_no,
+            'contact_no' => $request->contact_no,
             'contact_name' => $request->contact_name,
             'tel' => $request->tel,
             'street' => $request->street,
@@ -104,8 +103,25 @@ class CompaniesController extends Controller
         ]);
     
         return back()->with('success', 'Company account has been updated successfully.');
-        DB::enableQueryLog();
     }
+    
+    public function updateImage(Request $request, $id)
+    {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+
+        if ($image = $request->file('image')) {
+            $folderName = $user->name; // Get the company's name
+            $destinationPath = "images/company/$folderName"; // Set the destination path
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $company->update(['image' => $profileImage]);
+        }
+    
+    return back()->with('success', 'Profile image has been updated successfully.');
+    }
+
+    
 
     public function update(Request $request, $id)
     {

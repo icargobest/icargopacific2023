@@ -19,6 +19,7 @@ class Company extends Model
         'city',
         'state',
         'postal_code',
+        'image',
         'website',
         'facebook',
         'linkedin',

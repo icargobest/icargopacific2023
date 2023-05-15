@@ -24,7 +24,6 @@ use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffDashboardController;
-use App\Http\Controllers\CompaniesController;
 
 
 
@@ -173,6 +172,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     // profile page
     Route::get('/company/profile', [CompaniesController::class, 'profile'])->name('company.profile');
     Route::put('/company/profile/{id}/submit', [CompaniesController::class, 'updateProfile'])->name('company.updateProfile');
+    Route::put('/company/profile+image/{id}/submit', [CompaniesController::class, 'updateImage'])->name('company.updateImage');
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
