@@ -112,9 +112,10 @@ class ShipmentController extends Controller
         $shipment = Shipment::all();
         $company = Company::where('user_id', Auth::user()->id)->first();
         $bid = Bid::all();
+        $logs = OrderHistory::all();
         $this->TrackOrderLog();
 
-        return view('company.freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.freight.index', compact('company', 'logs'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function advfreight($id){
@@ -123,7 +124,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $company = Company::all()->whereNotIn('user_id',[$currentUser]);
         $bid = Bid::all();
-        
+
         $this->TrackOrderLog();
 
         return view('company.advance_freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
@@ -672,7 +673,7 @@ class ShipmentController extends Controller
                 if($user){
                     $company_name = $user->name;
                 }
-            } 
+            }
         }
 
         $this->TrackOrderLog();
@@ -696,7 +697,7 @@ class ShipmentController extends Controller
                 if($user){
                     $company_name = $user->name;
                 }
-            } 
+            }
         }
 
         $this->TrackOrderLog();
