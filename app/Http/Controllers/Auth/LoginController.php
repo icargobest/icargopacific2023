@@ -10,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -33,7 +34,7 @@ class LoginController extends Controller
 
             if (!$order_history_item) {
                 $order_history_item = new OrderHistory;
-                $order_history_item->order_id = $ship->id;
+                $order_history_item->shipment_id = $ship->id;
             }
 
             if ($ship->status === 'Pending') {

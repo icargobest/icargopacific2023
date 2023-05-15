@@ -37,7 +37,7 @@ class CompanyController extends Controller
             'password' => Hash::make($request->password),
             'type' => '2',
         ]);
-    
+        $user->sendEmailVerificationNotification();
         $company = Company::create([
             'user_id' => $user->id,
             'contact_no' =>  $request->contact_no,

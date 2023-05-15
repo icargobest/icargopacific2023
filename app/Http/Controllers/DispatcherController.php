@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Models\User;
 use App\Models\Dispatcher;
+use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Company;
+use Exception;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class DispatcherController extends Controller
 {
-    private $type;
-    private $validate;
-    private $update_user;
+    private $dispatcher;
 
     function __construct()
     {
@@ -86,7 +86,7 @@ class DispatcherController extends Controller
                 'contact_no.required' => 'Contact field is required.',
                 'contact_no.max' => 'Contact number must be a min and max of 11 numbers'
             ]);
-            
+            $user->sendEmailVerificationNotification();
             if(Auth::user()->type == 'staff'){
                 $id = Auth::id();
                 $staff = Staff::where('user_id', $id)->first();
@@ -171,6 +171,26 @@ class DispatcherController extends Controller
             ]);
             $user_id = User::findOrFail($user_id);
             return back()->with('success', 'Dispatcher status updated successfully!');
+    }
+
+    public function assignDriver($shipment_id, $driver_id)
+    {
+        $shipmentData = [
+            'driver_id' => $driver_id,
+        ];
+
+        $driverData = [
+            'dispatcher_id' => Auth::id()
+        ];
+
+        $shipment = Shipment::find($shipment_id);
+        $shipment->update($shipmentData);
+
+        $dispatch = Driver::where('id', $driver_id)->first();
+        $dispatch->update($driverData);
+
+        return back()->with('success', 'Driver was successfully assigned!');
+        
     }
 
 }

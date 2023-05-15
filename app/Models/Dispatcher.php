@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dispatcher extends Model
 {
     use HasFactory;
-
+    protected $table = 'dispatchers';
     protected $fillable = ['user_id', 'company_id', 'contact_no', 'archived'];
 
     public function user()
@@ -16,4 +16,8 @@ class Dispatcher extends Model
         return $this->belongsTo(User::class)->withDefault();
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
