@@ -20,7 +20,7 @@ class DispatcherDashboardController extends Controller
         $dispatcher = Dispatcher::where('user_id', $user_id)->first();
 
         foreach ($statuses as $status) {
-            $counts[$status] = Shipment::where('company_id', $dispatcher->id)
+            $counts[$status] = Shipment::where('company_id', $dispatcher->company_id)
                                       ->where('status', $status)
                                       ->count();
         }

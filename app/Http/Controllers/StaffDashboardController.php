@@ -43,7 +43,7 @@ class StaffDashboardController extends Controller
                 if (Auth::check()) {
                     $user_id = Auth::user()->id;
                     $staff = Staff::where('user_id', $user_id)->first();
-                    $counts[$status] = Shipment::where('company_id', $staff->id)
+                    $counts[$status] = Shipment::where('company_id', $staff->company_id)
                                               ->where('status', $status)
                                               ->count();
                 } else {

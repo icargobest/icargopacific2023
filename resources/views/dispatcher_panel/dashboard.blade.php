@@ -24,11 +24,11 @@
                     <div class="cardAlign">
                         <div style="background-color: #4966AB;" class="cards ">
                             <span class="cardTitle">
-                                ACCEPTED
+                                PROCESSING
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-handshake-o"></i></span>
-                                {{ $dashboard->accepted }}
+                                {{ $counts['Processing'] }}
                             </div>
                         </div>
                         <div style="background-color: #284C8E;" class="cardsM">
@@ -37,16 +37,16 @@
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-cubes"></i></span>
-                                {{ $dashboard->pickedup }}
+                                {{ $counts['PickedUp'] }}
                             </div>
                         </div>
                         <div style="background-color: #006979;" class="cards">
                             <span class="cardTitle">
-                                RECEIVED
+                                ASSORT
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-check-square"></i></span>
-                                {{ $dashboard->received }}
+                                {{ $counts['Assort'] }}
                             </div>
                         </div>
                     </div>   
@@ -54,29 +54,29 @@
                     <div class="cardAlign">
                         <div style="background-color: #2F4858;" class="cards">
                             <span class="cardTitle">
-                                DISPATCHED
+                                TRANSFERRED
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-truck"></i></span>
-                                {{ $dashboard->dispatched }}
+                                {{ $counts['Transferred'] }}
                             </div>
                         </div>
                         <div style="background-color: #7089D2;" class="cardsM">
                             <span class="cardTitle">
-                                FORWARDED
+                                ARRIVED
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-cube"></i></span>
-                                {{ $dashboard->forwarded }}
+                                {{ $counts['Arrived']  }}
                             </div>
                         </div>
                         <div style="background-color: #97AEFA;" class="cards">
                             <span class="cardTitle">
-                                DELIVERED
+                                DISPATCHED
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-thumbs-up"></i> </i></span>
-                                {{ $dashboard->delivered }}
+                                {{ $counts['Dispatched']  }}
                             </div>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
                     <div class="cardAlign">
                         <div style="background-color: #0083BB;" class="cards">
                             <span class="cardTitle">
-                                CONFIRMED
+                                DELIVERED
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
-                                {{ $dashboard->confirmed }}
+                                {{ $counts['Delivered']  }}
                             </div>
                         </div>
                     </div>
