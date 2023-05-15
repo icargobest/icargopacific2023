@@ -19,6 +19,11 @@
            <form action="{{ route('drivers.update',$user->id) }}" method="POST" enctype="multipart/form-data">
              @csrf
              @method('PUT')
+
+            <div class="form-outline mb-4">
+              <img src="{{ url('uploads/drivers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
+              <input class="form-control" type="file" id="formFile" name="profile_image" required>
+            </div>
              {{-- Name Input --}}
              <div class="row mb-2">
                <div class="col">
@@ -47,7 +52,6 @@
              <!-- License Number input -->
              <div class="form-outline mb-3">
               <input type="text" name="license_number" value="{{ $user->license_number }}" class="form-control" placeholder="License No" 
-              oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
               minlength="11" 
               maxlength="11" required>
                   @error('license_number')

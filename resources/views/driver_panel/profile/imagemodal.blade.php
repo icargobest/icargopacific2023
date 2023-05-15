@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
 
-<div class="modal top fade" id="editimage" tabindex="-1" aria-labelledby="editimage" aria-hidden="true">
+<div class="modal top fade" id="editimage{{$driver->id}}" tabindex="-1" aria-labelledby="editimage" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,15 +10,18 @@
 
           
           <div class="modal-body">
+          <form action="{{ route('driver.profile.update',$driver->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
             <div class="mb-3">
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="formFile" name="profile_image">
             </div>
             <div class="buttonContainer">
               <button type="submit" class="modalbutton">
                 UPLOAD
               </button>
             </div>
-
+          </form>
           </div>
       </div>
     </div>

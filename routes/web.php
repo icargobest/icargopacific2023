@@ -287,6 +287,14 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
         Route::get('/driver/order', 'driverOrder_view')->name('driver.order');
     });
+
+    //Profile Page
+    Route::controller(DriverController::class)->group(function () {
+        Route::get('/driver/profile',  'driverProfile')->name('driver.profile');
+        Route::put('/driver/update-info/{id}',  'updateProfile')->name('driver.personinfo.update');
+        Route::put('/driver/update-image/{id}',  'updateImage')->name('driver.profile.update');
+    });
+    
 });
 
 // Dispatcher Panel
@@ -308,6 +316,13 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     //DISPATCHER
     Route::controller(DispatcherController::class)->group(function(){
         Route::get('/dispatcher/order_list/dispatch/{shipment_id}/{driver_id}', 'assignDriver')->name('dispatcher.assign');
+    });
+
+    //Profile Page
+    Route::controller(DispatcherController::class)->group(function () {
+        Route::get('/dispatcher/profile',  'dispatcherProfile')->name('dispatcher.profile');
+        Route::put('/dispatcher/update-info/{id}',  'updateProfile')->name('dispatcher.personinfo.update');
+        Route::put('/dispatcher/update-image/{id}',  'updateImage')->name('dispatcher.profile.update');
     });
 
 });

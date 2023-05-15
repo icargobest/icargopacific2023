@@ -131,6 +131,10 @@
                   @enderror
               </div>
             </div>
+
+            <div class="form-outline mb-4">
+              <input class="form-control" type="file" id="formFile" name="profile_image" required>
+            </div>
                   
             <div class="button-modal-container">
 

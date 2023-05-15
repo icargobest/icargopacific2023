@@ -95,8 +95,13 @@ li
                         </a>
                     </li>
                     <li><div class="dividerBlack1"></div></li>
-                    
-                    <li><a class="dropdown-item navFont" href="#"><i class="fa fa-user"></i>Profile</a></li>
+
+                    @if(Auth::user()->type == 'driver')
+                    <li><a class="dropdown-item navFont" href="{{ route('driver.profile') }}"><i class="fa fa-user"></i>Profile</a></li>
+                    @endif
+                    @if(Auth::user()->type == 'dispatcher')
+                    <li><a class="dropdown-item navFont" href="{{ route('dispatcher.profile') }}"><i class="fa fa-user"></i>Profile</a></li>
+                    @endif
       {{--          <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>

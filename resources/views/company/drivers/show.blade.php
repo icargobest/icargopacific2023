@@ -11,6 +11,13 @@
        </div>
        <div class="modal-body">
           <fieldset disabled>
+            <div class="row">
+              <div class="col">
+                <div class="mb-4">
+                  <img src="{{ url('uploads/drivers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
+                </div>
+              </div>
+            </div>
            {{--  Driver ID --}}
              <div class="row">
                <div class="col"> 
