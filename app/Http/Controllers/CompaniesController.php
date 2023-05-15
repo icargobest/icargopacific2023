@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class CompaniesController extends Controller
 {
+    public $timestamps = true;
+    
     public function index()
     {
         $companies = Company::with('user')
@@ -69,6 +71,42 @@ class CompaniesController extends Controller
         return view('icargo_superadmin_panel.companies.edit', compact('company'));
     }
 
+
+    public function updateProfile(Request $request, $id)
+    {
+        DB::enableQueryLog();
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+    
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+    
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email ?? $user->email,
+        ]);
+    
+        $company->update([
+            'contact_no' =>  $request->contact_no,
+            'contact_name' => $request->contact_name,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'website' => $request->website,
+            'linkedin' => $request->linkedin,
+        ]);
+    
+        return back()->with('success', 'Company account has been updated successfully.');
+        DB::enableQueryLog();
+    }
+
     public function update(Request $request, $id)
     {
         $company = Company::with('user')->findOrFail($id);
@@ -76,10 +114,8 @@ class CompaniesController extends Controller
     
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'facebook' => ['required', 'string', 'min:255'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
-            'facebook.required' => 'Facebook Link is required'
         ]);
     
         $user->update([
@@ -191,9 +227,7 @@ class CompaniesController extends Controller
     // PROFILE
     public function profile()
     {
-        $company = Company::with('user')
-            ->where('archived', 0)
-            ->first();
+        $company = Company::with('user')->first();
     
         $userID = Auth::id();
     

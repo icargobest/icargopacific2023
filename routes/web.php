@@ -158,8 +158,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
     // profile page
     Route::get('/company/profile', [CompaniesController::class, 'profile'])->name('company.profile');
-    Route::get('/company/profile/edit', [CompaniesController::class, 'edit']);
-    Route::put('/company/profile/{id}/submit', [CompaniesController::class, 'update'])->name('company.updateProfile');
+    Route::put('/company/profile/{id}/submit', [CompaniesController::class, 'updateProfile'])->name('company.updateProfile');
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){

@@ -59,9 +59,9 @@ class CreateCompanyRequest extends FormRequest
             'facebook.max' => 'Facebook link field must be a max of 255 characters',
             'linkedin.max' => 'Linkedin link field must be a max of 255 characters',
             'facebook.required' => 'Facebook link field is required.',
-            'website.url' => 'Website link must be a url',
-            'facebook.url' => 'Facebook link must be a url',
-            'linkedin.url' => 'Linkedin link must be a url',
+            'website.url' => 'The website must be a valid url.',
+            'facebook.url' => 'The facebook must be a valid url.',
+            'linkedin.url' => 'The linkedin must be a valid url.',
         ];
     } 
 }

@@ -189,13 +189,19 @@
                     <div class="col">
                         <div class="form-outline">
                             <input
-                                id="website"
+                                id=""
                                 type="text"
-                                class="form-control"
+                                class="form-control @error('website') is-invalid @enderror" 
                                 name="website"
                                 autocomplete="website"
                                 value="{{$company->website}}"
                             />
+
+                            @error('website')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                             <label class="form-label" for="postal"
                                 >Website Link</label
                             >
@@ -205,15 +211,21 @@
                 <div class="row mb-4">
                     <div class="col">
                         <div class="form-outline">
-                            <input
-                                id="facebook"
-                                type="text"
-                                class="form-control"
-                                name="facebook"
-                                required
+                            <input 
+                                id="facebook" 
+                                type="text" 
+                                class="form-control @error('facebook') is-invalid @enderror" name="facebook" 
+                                value="{{$company->facebook}}" 
+                                required 
                                 autocomplete="facebook"
-                                value="{{$company->facebook}}"
-                            />
+                                autofocus
+                                placeholder="Facebook Link">
+
+                                @error('facebook')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             <label class="form-label" for="postal"
                                 >Facebook Link</label
                             >
@@ -226,11 +238,16 @@
                             <input
                                 id="linkedin"
                                 type="text"
-                                class="form-control"
+                                class="form-control @error('linkedin') is-invalid @enderror" 
                                 name="linkedin"
                                 autocomplete="linkedin"
                                 value="{{$company->linkedin}}"
                             />
+                            @error('linkedin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             <label class="form-label" for="postal"
                                 >Linkedin Link</label
                             >

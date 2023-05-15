@@ -18,6 +18,7 @@
             MY PROFILE
         </h2>
     </div>
+    <div class="mt-2">@include('flash-message')</div>
     <div class="profile-wrapper" style="">
         <div class="profileTab">
             <div class="profileBackground">
@@ -74,6 +75,8 @@
                     <span class="data-content">{{$company->user->name}}</span>
                     <span class="data-title">Mobile No.</span>
                     <span class="data-content">{{$company->contact_no}}</span>
+                    <span class="data-title">Contact Name</span>
+                    <span class="data-content">{{$company->contact_name}}</span>
                     <span class="data-title">Telephone</span>
                     <span class="data-content">{{$company->tel}}</span>
                     <span class="data-title">Email Address</span>
