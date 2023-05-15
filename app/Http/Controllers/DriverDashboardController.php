@@ -21,7 +21,7 @@ class DriverDashboardController extends Controller
         $driver = Driver::where('user_id', $user_id)->first();
 
         foreach ($statuses as $status) {
-            $counts[$status] = Shipment::where('company_id', $driver->id)
+            $counts[$status] = Shipment::where('company_id', $driver->company_id)
                                       ->where('status', $status)
                                       ->count();
         }
