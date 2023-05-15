@@ -414,22 +414,6 @@ Route::middleware("auth")->group(function () {
         Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
     });
 });
-
-Route::middleware('auth')->group(function(){
-Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
-Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
-Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
-Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
-});
-
-Route::get('pay',[SubscriptionController::class, 'pay']);
-Route::get('success',[SubscriptionController::class, 'success']);
-
-Route::get('/paymongo', function () {
-    return view('pay');
-});
-
-Route::get('/pay/callback', [SubscriptionController::class, 'handlePaymentCallback']);
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes
