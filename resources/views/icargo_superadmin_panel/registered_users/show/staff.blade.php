@@ -120,7 +120,7 @@
                             type="text"
                             id="updateStaff"
                             name="updateStaff"
-                            value="{{$staff->created_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($staff->user->created_at))}}"
                             class="form-control"
                         />
                     </div>
@@ -132,7 +132,7 @@
                             type="text"
                             id="updateStaffAt"
                             name="updateStaffAt"
-                            value="{{$staff->updated_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($staff->user->updated_at))}}"
                             class="form-control"
                         />
                     </div>
