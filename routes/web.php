@@ -22,6 +22,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -58,6 +59,9 @@ Route::get('/', function () {
    return view('staff_panel.profile.user');
 });   */
 
+Route::get('/profile', function(){
+    return view('profile.user');
+});
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
@@ -132,6 +136,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
         ->name('dashboard')->middleware("verified");
+
+    //Edit Profile
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/user/edit_profile/{id}', 'index')->name('edit_profile');
+        Route::post('/user/edit_profile/{id}', 'edit')->name('edit');
+        Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
+        Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
+        Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');
+    });
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function () {
