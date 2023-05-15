@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,36 +26,8 @@ class CompaniesController extends Controller
     {
         return view('icargo_superadmin_panel.companies.create');
     }
-
-    // company registration
-    public function companyRegistrationOutsidePanel(CreateCompanyRequest $request)
-    {  
-       DB::beginTransaction();
-       try {
-       $user = User::create([
-           'name' => $request->name,
-           'email' => $request->email,
-           'password' => Hash::make($request->password),
-           'type' => '2',
-       ]);
-   
-       $company = Company::create([
-           'user_id' => $user->id,
-           'contact_no' =>  $request->contact_no,
-           'contact_name' => $request->contact_name,
-           'company_address' => $request->company_address,
-       ]);
-           DB::commit();
-           auth()->login($user); // log in the user programmatically
-       } catch (Exception $ex) {
-           DB::rollBack();
-           throw $ex;
-       }
-
-        return redirect()->route('company.dashboard') // redirect to the company dashboard page
-                        ->with('success', 'Registered successfully. You are now logged in.');
-    }
     
+    // SUPER ADMIN : Managing the Companies
     public function store(CreateCompanyRequest $request)
     {
         DB::beginTransaction();
@@ -100,27 +73,37 @@ class CompaniesController extends Controller
     {
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
-
+    
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'facebook' => ['required', 'string', 'min:255'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
+            'facebook.required' => 'Facebook Link is required'
         ]);
-
+    
         $user->update([
             'name' => $request->name,
             'email' => $request->email ?? $user->email,
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
-
+    
         $company->update([
             'contact_no' =>  $request->contact_no,
             'contact_name' => $request->contact_name,
-            'company_address' => $request->company_address,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'website' => $request->filled('website') ? $request->website : $company->website,
+            'linkedin' => $request->filled('linkedin') ? $request->linkedin : $company->linkedin,
         ]);
-
+    
         return back()->with('success', 'Company account has been updated successfully.');
     }
+    
 
     public function archive(Request $request, $id)
     {
@@ -158,4 +141,67 @@ class CompaniesController extends Controller
         Company::destroy($id);
         return back()->with('success', 'Staff member has been deleted successfully.');
     }
+
+
+    // Company registration in the website
+    public function addCompany(CreateCompanyRequest $request)
+    {  
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'type' => '2',
+            ]);
+    
+            $companyData = [
+                'user_id' => $user->id,
+                'contact_no' =>  $request->contact_no,
+                'contact_name' => $request->contact_name,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'facebook' => $request->facebook ?? '',
+            ];
+    
+            if ($request->has('website')) {
+                $companyData['website'] = $request->website;
+            }
+            if ($request->has('linkedin')) {
+                $companyData['linkedin'] = $request->linkedin;
+            }
+            
+            $company = Company::create($companyData);
+            
+            DB::commit();
+            auth()->login($user); // log in the user programmatically
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    
+        return redirect()->route('company.dashboard') // redirect to the company dashboard page
+            ->with('success', 'Registered successfully. You are now logged in.');
+    }
+    
+
+    // PROFILE
+    public function profile()
+    {
+        $company = Company::with('user')
+            ->where('archived', 0)
+            ->first();
+    
+        $userID = Auth::id();
+    
+        if ($company && $company->user_id == $userID) {
+            return view('company.profile.myprofile', compact('company'));
+        }
+    
+        return back()->with('error', 'You are not authorized to view this profile.');
+    }
+    
 }

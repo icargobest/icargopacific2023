@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
@@ -108,8 +109,8 @@ Route::get('company_registration', function () {
     return view('registerCompany');
 });
 Route::post(
-    'company_registration/store',
-    [CompaniesController::class, 'companyRegistrationOutsidePanel']
+    'company_registration/addCompany',
+    [CompaniesController::class, 'addCompany']
 )->name('add.company');
 
 
@@ -153,6 +154,12 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [IncomeController::class, 'index'])
         ->name('company.dashboard')->middleware('verified');
+
+
+    // profile page
+    Route::get('/company/profile', [CompaniesController::class, 'profile'])->name('company.profile');
+    Route::get('/company/profile/edit', [CompaniesController::class, 'edit']);
+    Route::put('/company/profile/{id}/submit', [CompaniesController::class, 'update'])->name('company.updateProfile');
 
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
@@ -209,6 +216,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
         Route::put('/dispatcher/unarchive/{id}', 'unarchive')->name('dispatcher.unarchive');
     });
+
 });
 
 // Super Admin Panel
@@ -230,7 +238,6 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::put('icargo/registered_users/update+dispatcher/{id}', [DispatcherController::class, 'update'])->name('update.dispatcher');
         Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'update'])->name('update.staff');
         Route::put('icargo/registered_users/update+customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
-
 
         //  archive registered user
         Route::put('icargo/registered_users/archive+company/{id}', [CompaniesController::class, 'archive'])->name('archive.company');
