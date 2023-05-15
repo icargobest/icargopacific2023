@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-@extends('layouts.app')
-@include('partials.navigationCompany', ['history' => 'nav-selected'])
-    <link rel="stylesheet" href="{{ asset('css/driver&dispatcher.css') }}">
-=======
 @extends('layouts.app') @include('partials.navigationCompany', ['history' => 'nav-selected'])
->>>>>>> develop
 
 <title>Company | Order History</title>
 <main class="container py-5" style="margin-top: -49px !important">
