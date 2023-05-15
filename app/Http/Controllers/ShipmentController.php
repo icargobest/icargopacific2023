@@ -118,6 +118,18 @@ class ShipmentController extends Controller
         return view('company.freight.index', compact('company', 'logs'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
+    public function freight_transfer($id)
+    {
+        $shipments = Shipment::where('id', $id)->first();
+        $company = Company::where('user_id', Auth::user()->id)->first();
+        $bids = Bid::all();
+        $logs = OrderHistory::all();
+        $stations = Station::all();
+        $this->TrackOrderLog();
+
+        return view('company.freight.freight_transfer', compact('company', 'logs', 'stations','shipments', 'bids'),['sender', 'recipient']);
+    }
+
     public function advfreight($id){
         $currentUser = Auth::user()->id;
 

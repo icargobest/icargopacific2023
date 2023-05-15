@@ -50,7 +50,7 @@ use App\Http\Controllers\QueryController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});
 
 
 /* Profile Tab */
@@ -170,7 +170,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
-        
+        Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
+
     });
 
     // stations
