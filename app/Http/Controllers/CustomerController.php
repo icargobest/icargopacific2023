@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPSTORM_META\type;
 
@@ -17,8 +18,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::with('user')
-        ->where('archived', 0)
-        ->get();
+            ->where('archived', 0)
+            ->get();
 
         return view('icargo_superadmin_panel.registered_customers.index', compact('customers'));
     }
@@ -47,7 +48,6 @@ class CustomerController extends Controller
             ]);
 
             DB::commit();
-
         } catch (Exception $ex) {
             DB::rollBack();
             throw $ex;
@@ -143,54 +143,53 @@ class CustomerController extends Controller
         $user = User::where('id', $id)->first();
         $customer = Customer::where('user_id', $id)->first();
 
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable', 'url', 'max:255'],
+            'linkedin' => ['nullable', 'url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
 
         $customer->mobile = $request->input('mobile');
         $customer->tel = $request->input('tel');
-        $customer->save();
-
-        return back();
-    }
-
-    public function edit_address(Request $request, $id)
-    {
-        $customer = Customer::where('user_id', $id)->first();
-
         $customer->street = $request->input('street');
         $customer->city = $request->input('city');
         $customer->state = $request->input('state');
         $customer->postal_code = $request->input('postal_code');
+        $customer->facebook = $request->input('facebook');
+        $customer->website = $request->input('website');
+        $customer->linkedin = $request->input('linkedin');
         $customer->save();
 
-        return back();
+        return back()->with('success', 'Profile account has been updated successfully.');
     }
 
     public function upload_photo(Request $request, $id)
     {
         $customer = Customer::where('user_id', $id)->first();
+
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/photos', $filename);
-            $customer->photo = $filename;
+            $path = 'public/photos/' . $id;
+
+            // Create the folder if it doesn't exist
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path);
+            }
+
+            // Store the photo in the user's folder
+            $file->storeAs($path, $filename);
+
+            // Save the photo path in the customer record
+            $customer->photo = 'photos/' . $id . '/' . $filename;
             $customer->save();
         }
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Profile image has been updated successfully.');
     }
-
-    public function edit_social(Request $request, $id)
-    {
-        $customer = Customer::where('user_id', $id)->first();
-
-        $customer->facebook = $request->input('facebook');
-        $customer->twitter = $request->input('twitter');
-        $customer->instagram = $request->input('instagram');
-        $customer->linkedin = $request->input('linkedin');
-        $customer->save();
-
-        return back();
-    }
-
 }

@@ -23,10 +23,9 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->integer('postal_code')->nullable();
             $table->string('photo', 300)->nullable();
+            $table->string('website')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
-            $table->string('twitter')->nullable();
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

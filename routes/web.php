@@ -140,9 +140,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::controller(CustomerController::class)->group(function () {
         Route::get('/user/edit_profile/{id}', 'index_edit')->name('edit_profile');
         Route::post('/user/edit_profile/{id}', 'edit_profile')->name('edit');
-        Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
         Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
-        Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');
     });
 
     //Order Routes
