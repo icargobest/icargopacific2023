@@ -22,7 +22,7 @@ class CustomerController extends Controller
 
         return view('icargo_superadmin_panel.registered_customers.index', compact('customers'));
     }
-    
+
 
     public function create()
     {
@@ -30,7 +30,7 @@ class CustomerController extends Controller
     }
 
     public function store(CreateCustomerRequest $request)
-    { 
+    {
         DB::beginTransaction();
         try {
             $user = User::create([
@@ -130,5 +130,67 @@ class CustomerController extends Controller
         Customer::destroy($id);
         return back()->with('success', 'Customer account has been deleted successfully.');
     }
-  
+
+    public function index_edit($id)
+    {
+        $user = User::where('id', $id)->first();
+        $customer = Customer::where('user_id', $user->id)->first();
+        return view('profile.user', compact('user', 'customer'));
+    }
+
+    public function edit_profile(Request $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        $customer = Customer::where('user_id', $id)->first();
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        $customer->mobile = $request->input('mobile');
+        $customer->tel = $request->input('tel');
+        $customer->save();
+
+        return back();
+    }
+
+    public function edit_address(Request $request, $id)
+    {
+        $customer = Customer::where('user_id', $id)->first();
+
+        $customer->street = $request->input('street');
+        $customer->city = $request->input('city');
+        $customer->state = $request->input('state');
+        $customer->postal_code = $request->input('postal_code');
+        $customer->save();
+
+        return back();
+    }
+
+    public function upload_photo(Request $request, $id)
+    {
+        $customer = Customer::where('user_id', $id)->first();
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/photos', $filename);
+            $customer->photo = $filename;
+            $customer->save();
+        }
+        return redirect()->back();
+    }
+
+    public function edit_social(Request $request, $id)
+    {
+        $customer = Customer::where('user_id', $id)->first();
+
+        $customer->facebook = $request->input('facebook');
+        $customer->twitter = $request->input('twitter');
+        $customer->instagram = $request->input('instagram');
+        $customer->linkedin = $request->input('linkedin');
+        $customer->save();
+
+        return back();
+    }
+
 }

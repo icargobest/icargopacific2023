@@ -23,6 +23,7 @@ use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -138,9 +139,9 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         ->name('dashboard')->middleware("verified");
 
     //Edit Profile
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/user/edit_profile/{id}', 'index')->name('edit_profile');
-        Route::post('/user/edit_profile/{id}', 'edit')->name('edit');
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/user/edit_profile/{id}', 'index_edit')->name('edit_profile');
+        Route::post('/user/edit_profile/{id}', 'edit_profile')->name('edit');
         Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
         Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
         Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');

@@ -32,7 +32,7 @@
                     <div class="item-card container px-4">
                     <div class="card-body">
                         <div class="row mb-3 titleID">
-                            <div class="col d-flex gap-4 align-items-center"><span class="fw-bold">ORDER #{{$ship->id}}</span> <span class="orderStatus fw-bold"> {{$ship->status}}</span></div>
+                            <div class="col d-flex gap-4 align-items-center"><span class="fw-bold">ORDER #{{$ship->id}}</span> <span class="orderStatus fw-bold">{{$ship->status}}</span></div>
                         </div>
                         <div class="row">
 
