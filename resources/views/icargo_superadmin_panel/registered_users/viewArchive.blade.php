@@ -1,6 +1,8 @@
-<title>iCargo | Companies Archived</title>
+<title>SuperAdmin | Registered Archived</title>
+@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationSuperAdmin', ['register' =>"nav-selected"])
+
 <style>
     svg{
         width:  1.5rem;
@@ -42,12 +44,12 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align:center;">ID</th>
-                        <th scope="col" style="text-align:center;">Name</th>
-                        <th scope="col" style="text-align:center;">Email</th>
-                        <th scope="col" style="text-align:center;">Type</th>
-                        <th scope="col" style="text-align:center;">Company ID</th>
-                        <th scope="col" style="text-align:center; width:300px">Action</th>
+                        <th scope="col" >ID</th>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Type</th>
+                        <th scope="col" >Company ID</th>
+                        <th scope="col" style="text-align:center !important; width:300px">Action</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,6 +1,9 @@
-<title>iCargo | Registered Users</title>
+<title>SuperAdmin | Registered Users</title>
+@include('partials.header')
+@extends('layouts.app')
+@include('partials.navigationSuperAdmin', ['register' =>"nav-selected"])
 
-@extends('layouts.app') @include('partials.navigationSuperAdmin')
+
 
 <main class="container py-5" style="margin-top: -49px !important">
     <div class="main-wrapper border border-2" style="max-width: 100%">
@@ -8,16 +11,19 @@
             <h3 class="">Registered User Accounts</h3>
         </div>
 
-        <a href="{{ route('registered_users.viewArchive') }}">
-            <button
-                type="button"
-                class="btn btn-success btn-sm m-button2"
-                style="height: 32.8px"
-            >
-                Archived
-            </button>
-        </a>
+        <div class="addemployee" style="">
 
+            <a href="{{ route('registered_users.viewArchive') }}">
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm m-button2"
+                    style="height: 32.8px"
+                >   
+                    Archived
+                </button>
+            </a>
+            
+        </div>
         <div class="mt-2">@include('flash-message')</div>
 
         <div class="table-container">
@@ -33,7 +39,7 @@
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 300px"
                         >
                             Action
                         </th>
@@ -45,7 +51,7 @@
                         <td class="capitalized">{{ $company->user->name }}</td>
                         <td>{{ $company->user->email }}</td>
                         <td>{{ $company->contact_no}}</td>
-                        <td>{{ $company->user->type }}</td>
+                        <td style="text-transform: capitalize">{{ $company->user->type }}</td>
                         <td>{{ $company->user->name }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"
@@ -67,7 +73,7 @@
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
                         <td>{{ $dispatcher->contact_no}}</td>
-                        <td>{{ $dispatcher->user->type }}</td>
+                        <td class="capitalized">{{ $dispatcher->user->type }}</td>
                         <td>
                             @if ($dispatcher->company && $dispatcher->company->user)
                                 {{ $dispatcher->company->user->name }}
@@ -91,7 +97,7 @@
                         <td class="capitalized">{{ $driver->user->name }}</td>
                         <td>{{ $driver->user->email }}</td>
                         <td>{{ $driver->contact_no }}</td>
-                        <td>{{ $driver->user->type }}</td>
+                        <td class="capitalized">{{ $driver->user->type }}</td>
                         <td>
                             @if ($driver->company && $driver->company->user)
                                 {{ $driver->company->user->name }}
@@ -116,7 +122,7 @@
                         <td class="capitalized">{{ $staff->user->name }}</td>
                         <td>{{ $staff->user->email }}</td>
                         <td>{{ $staff->contact_no }}</td>
-                        <td>{{ $staff->user->type }}</td>
+                        <td class="capitalized">{{ $staff->user->type }}</td>
                         <td>
                             @if ($staff->company && $staff->company->user)
                                 {{ $staff->company->user->name }}

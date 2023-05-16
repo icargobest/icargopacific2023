@@ -135,7 +135,7 @@
                             </span>
                             <input id="contactnum" type="text"
                             class="form-control @error('company_address')
-                            is-invalid" @enderror" name="company_address"
+                            is-invalid" @enderror name="company_address"
                             value="{{$company->company_address }}"
                             autocomplete="company_address" autofocus
                             placeholder="Company Address">
@@ -143,6 +143,7 @@
                     </div>
 
                     {{-- Created at --}}
+                    
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -150,6 +151,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Created At</label>
                     </div>
 
                     {{-- Updated at --}}
@@ -160,6 +163,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($company->user->updated_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Updated At</label>
                     </div>
                 </fieldset>
                 <div class="modal-footer">
