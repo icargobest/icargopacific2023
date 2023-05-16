@@ -1,12 +1,10 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-        @extends('layouts.app')
-        @extends('layouts.status')
         <link rel="stylesheet" href="./line-awesome.min.css">
         <title>Customer | Order Tracking #{{ $ship->id }}</title>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    @extends('partials.header')
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationUser', ['order' => 'nav-selected'])
 
@@ -17,18 +15,20 @@
         }
 
         td {
-            text-align: left;
+            text-align: left !important;
             padding: 5px;
             color: #214D94;
         }
     </style>
 
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-    <main class="container py-5" style="margin-top:-49px !important">
-        <div class="order-container container">
-            <h4 class="text-dark">ORDER TRACKING #{{ $ship->id }}</h4>
+    <main class="container mw-100 py-5" style="margin-top:-49px !important">
+        <div class="order-container container mw-100 px-0">
+            <div class="mt-3">
+                <h2 class="text-dark" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">ORDER TRACKING #{{ $ship->id }}</h2>
+            </div>
             <div class="cards-holder">
-                <card class="item-card bg-white btn-wrapper p-4">
+                <card class="item-card bg-white btn-wrapper p-4 mw-100">
                     {{-- START OF ORDER DETAILS --}}
                     <!-- Mobile Sender and Receiver -->
                     <div class="row overflow-hidden">
@@ -39,31 +39,31 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th>
                                             <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
-                                            <th width="40%">Name:</th>
-                                            <td width="60%">{{ $ship->sender->sender_name }}</td>
+                                            <th width="40%" class="fw-normal">Name:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->sender->sender_name }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Address:</th>
-                                            <td>{{ $ship->sender->sender_address }} ,
+                                            <th class="fw-normal">Address:</th>
+                                            <td class="fw-bold">{{ $ship->sender->sender_address }} ,
                                                 {{ $ship->sender->sender_city }} ,
                                                 {{ $ship->sender->sender_state }} ,
                                                 {{ $ship->sender->sender_zip }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Contact Number:</th>
-                                            <td>{{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
+                                            <th class="fw-normal">Contact Number:</th>
+                                            <td class="fw-bold">{{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
                                                     | {{ $ship->sender->sender_tel }}
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Email:</th>
-                                            <td>{{ $ship->sender->sender_email }}</td>
+                                            <th class="fw-normal">Email:</th>
+                                            <td class="fw-bold">{{ $ship->sender->sender_email }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -72,31 +72,31 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th>
                                             <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
-                                            <th width="40%">Name:</th>
-                                            <td width="60%">{{ $ship->recipient->recipient_name }}</td>
+                                            <th width="40%" class="fw-normal">Name:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->recipient->recipient_name }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Address:</th>
-                                            <td>{{ $ship->recipient->recipient_address }} ,
+                                            <th class="fw-normal">Address:</th>
+                                            <td class="fw-bold">{{ $ship->recipient->recipient_address }} ,
                                                 {{ $ship->recipient->recipient_city }} ,
                                                 {{ $ship->recipient->recipient_state }} ,
                                                 {{ $ship->recipient->recipient_zip }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Contact Number:</th>
-                                            <td>{{ $ship->recipient->recipient_mobile }} @if ($ship->recipient->recipient_tel != null)
+                                            <th class="fw-normal">Contact Number:</th>
+                                            <td class="fw-bold">{{ $ship->recipient->recipient_mobile }} @if ($ship->recipient->recipient_tel != null)
                                                     | {{ $ship->recipient->recipient_tel }}
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Email:</th>
-                                            <td>{{ $ship->recipient->recipient_email }}</td>
+                                            <th class="fw-normal">Email:</th>
+                                            <td class="fw-bold">{{ $ship->recipient->recipient_email }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -107,22 +107,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
-                                            <th width="40%">ID:</th>
-                                            <td width="60%">{{ $ship->id }}</td>
+                                            <th width="40%" class="fw-normal">ID:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->id }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Size & Weight:</th>
-                                            <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
+                                            <th class="fw-normal">Size & Weight:</th>
+                                            <td class="fw-bold">{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                                 | {{ intval($ship->weight) }}Kg</td>
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
-                                                <th>Company:</th>
-                                                <td>{{ $company_name }}</td>
+                                                <th class="fw-normal">Company:</th>
+                                                <td class="fw-bold">{{ $company_name }}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -130,17 +130,17 @@
                                 <div class="col-lg-6">
                                     <table style="width:100%">
                                         <tr>
-                                            <th width="40%">Category:</th>
-                                            <td width="60%">{{ $ship->category }}</td>
+                                            <th width="40%" class="fw-normal">Category:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->category }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Mode of Payment:</th>
-                                            <td>{{$ship->mop}}</td>
+                                            <th class="fw-normal">Mode of Payment:</th>
+                                            <td class="fw-bold">{{$ship->mop}}</td>
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
-                                                <th>Bid Amount:</th>
-                                                <td>{{ $ship->bid_amount }}</td>
+                                                <th class="fw-normal">Bid Amount:</th>
+                                                <td class="fw-bold">{{ $ship->bid_amount }}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -162,20 +162,20 @@
                                 style="object-fit:cover; min-width:140px; max-width:509px; height:250px; margin-left: auto; margin-right: auto;">
                             </a>
                             <a href="{{ route('generate', $ship->id) }}" target="_blank">
-                                <button type="button" class="btn btn-primary primary btn-block shadow-0 my-1"
-                                    style="min-width:140px; max-width:509px; background-color:#214D94;">
+                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1"
+                                    style="background-color:#214D94; min-width:140px; max-width:509px;">
                                     Invoice
                                 </button>
                             </a>
                             <a href="{{ route('user.generateWaybill', $ship->id) }}" target="_blank">
-                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1"
+                                <button type="button" class="btn btn-warning btn-block shadow-0 my-1"
                                     style="min-width:140px; max-width:509px;">
                                     Waybill
                                 </button>
                             </a>
                             <a href="{{route('viewOrder', $ship->id)}}">
                                 <div class="my-1">
-                                    <button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;">
+                                    <button type="button" class="btn btn-block btn-light shadow-0 mb-1 border" style="min-width:140px; max-width:509px;">
                                     Back
                                     </button>
                                 </div>
