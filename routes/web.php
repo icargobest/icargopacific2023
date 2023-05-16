@@ -22,7 +22,9 @@ use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\CompaniesController;
+
 
 
 /*
@@ -50,7 +52,7 @@ use App\Http\Controllers\CompaniesController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});
 
 
 /* Profile Tab */
@@ -58,6 +60,9 @@ Route::get('/', function () {
    return view('staff_panel.profile.user');
 });   */
 
+Route::get('/profile', function(){
+    return view('profile.user');
+});
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
@@ -133,6 +138,15 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])
         ->name('dashboard')->middleware("verified");
 
+    //Edit Profile
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/user/edit_profile/{id}', 'index')->name('edit_profile');
+        Route::post('/user/edit_profile/{id}', 'edit')->name('edit');
+        Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
+        Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
+        Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');
+    });
+
     //Order Routes
     Route::controller(ShipmentController::class)->group(function () {
         Route::get('/user/order', 'userIndex')->name('userOrderPanel');
@@ -170,7 +184,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
-        
+        Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
+
     });
 
     // stations
@@ -320,8 +335,8 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
-        ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
+    ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){
