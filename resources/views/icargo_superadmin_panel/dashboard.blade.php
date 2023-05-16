@@ -1,10 +1,10 @@
 <title>Super Admin | Dashboard</title>
 
-
 @include('partials.header')
+
 @extends('layouts.app')
 @extends('layouts.chart')
-@include('partials.navigationSuperAdmin', ['dashboard' =>"nav-selected"])
+@include('partials.navigationSuperAdmin',['dashboard' => "nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -52,6 +52,3 @@
         chart.draw(data, options);
     }
 </script>
-
-
-
