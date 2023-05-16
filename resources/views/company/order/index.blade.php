@@ -1,5 +1,5 @@
-@include('partials.header')
 <title>Company | Orders</title>
+@include('partials.header')
 @extends('layouts.app') 
 @include('partials.navigationCompany', ['order' => 'nav-selected'])
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
@@ -9,7 +9,7 @@
             <h3 class="text-white mb-0">Order List</h3>
         </div>
         {{-- TABLE START --}}
-        <section class="mb-5 px-5 my-3 overflow-auto">
+        <section class="mb-5 px-2 my-3 overflow-auto">
             <table class="table table-striped table-hover table-borderless hover" id="companyorder">
                 <thead class="text-white" style="background-color: #214d94">
                     <tr>

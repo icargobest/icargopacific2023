@@ -2,11 +2,28 @@
 
 <button type="button" class="btn created-button mx-auto"
     style="background-color: white; border-color:#214D94; color:black !important;" data-mdb-toggle="modal"
-    data-mdb-target="#trackModal{{ $ship->id }}">
+    data-mdb-target="#trackModal {{-- {{$ship->id}} --}}">
     Tracking
 </button>
+<style>
+    .child2 td {
+        text-align: left !important;
+    }
 
-<div class="modal fade" id="trackModal{{ $ship->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    .child2 th {
+        text-align: left !important;
+    }
+
+    td.contact,
+    th.contact {
+        border-bottom: 1px solid black !important;
+    }
+
+    #tracking-status {
+        text-align: left !important;
+    }
+</style>
+<div class="modal fade" id="trackModal{{-- {{$ship->id}} --}}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">

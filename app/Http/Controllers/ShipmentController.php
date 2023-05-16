@@ -114,8 +114,14 @@ class ShipmentController extends Controller
         $bid = Bid::all();
         $logs = OrderHistory::all();
         $this->TrackOrderLog();
+        $stations = Station::all();
+        $statuses = Shipment::pluck('status')->unique();
 
-        return view('company.freight.index', compact('company', 'logs'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        // $company = Company::where('id', $shipment->company_id)->first();
+        // $user = User::where('id', $company->user_id)->first();
+        // $company_name = $user->name;
+
+        return view('company.freight.index', compact('company', 'logs', 'stations'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function freight_transfer($id)
@@ -180,13 +186,13 @@ class ShipmentController extends Controller
     public function freightStaff()
     {
         $staff = Staff::where('user_id', Auth::user()->id)->first();
-
-
-        $this->TrackOrderLog();
-
+        $logs = OrderHistory::all();
+        $stations = Station::all();
         $bids = Bid::all();
         $shipments = Shipment::all();
-        return view('staff_panel.freight.index', compact('staff'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
+        $this->TrackOrderLog();
+
+        return view('staff_panel.freight.index', compact('staff','logs','stations'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
     }
 
     function postOrder()

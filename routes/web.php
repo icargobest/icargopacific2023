@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +23,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
-use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\ProfileController;
-
-
+use App\Http\Controllers\StaffDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -335,8 +333,8 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
-        ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
+    ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){

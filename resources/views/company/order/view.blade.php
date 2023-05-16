@@ -1,13 +1,25 @@
 <head>
-<link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Customer | Order Details #{{ $ship->id }}</title>
+    <style>
+        th {
+            background-color: transparent !important;
+            color: black;
+            font-weight: normal;
+        }
+        td {
+            text-align: left;
+            font-weight: bold;
+            color:#214D94;
+        }
+    </style>
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
 </head>
 @include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany', ['order' => 'nav-selected'])
 
-<!-- MDB -->
-<link rel="stylesheet" href="/css/mdb.min.css" />
 {{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
 <!-- Exp start -->
 <!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $ship->id }}">
@@ -58,14 +70,15 @@ VIEW
                                         $ship->status != 'Delivered')
                                     <div class="col-md-12 d-flex justify-content-center">
                                         <a href="{{ route('trackOrder_Company', $ship->id) }}"
-                                            class="btn btn-primary btn-block " style="background-color:#214D94;">
+                                            class="btn btn-primary btn-block shadow-0" style="background-color:#214D94;">
                                             Track Order
                                         </a>
                                     </div>
                                     <a class="cardItem my-1" href="{{ route('freightPanel') }}">
                                         <div class="d-flex justify-content-center">
                                             <button type="button"
-                                                class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                                class="btn btn-block btn-light shadow-0 mb-1"
+                                                style="border-color:#214D94;">
                                                 BACK
                                             </button>
                                         </div>
@@ -93,7 +106,8 @@ VIEW
                                 </div>
                                 <a class="cardItem my-2" href="{{ route('company.order') }}">
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                        <button type="button" class="btn btn-block btn-light shadow-0 mb-1"
+                                            style="border-color:#214D94;">
                                             BACK
                                         </button>
                                         </form>
@@ -111,7 +125,7 @@ VIEW
                                 <table class="m-2" style="width:100%">
                                     <tr>
                                         <th colspan="2">
-                                            <h5 class="fw-bold opacity-75">SENDER</h5>
+                                            <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                         </th>
                                     </tr>
                                     <tr>
@@ -137,7 +151,7 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th colspan="2">
-                                            <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                            <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                         </th>
                                     </tr>
                                     <tr>
@@ -165,7 +179,7 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th colspan="2">
-                                            <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                            <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                         </th>
                                     </tr>
                                     <tr>
@@ -197,7 +211,7 @@ VIEW
                     </div>
 
                     <!-- START ACCEPT BID TABLE -->
-                    <hr class="px-3" class="opacity-75">
+                    <hr class="px-3 opacity-75" style="border-color:#214D94;">
                     <section class="overflow-auto">
                         <table class="table table-striped table-hover">
                             <thead>
@@ -215,9 +229,9 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td>{{ $bid->company_name }} </td>
-                                                <td>{{ $bid->bid_amount }}</td>
-                                                <td>{{ $bid->status }}</td>
+                                                <td class="text-center">{{ $bid->company_name }} </td>
+                                                <td class="text-center">{{ $bid->bid_amount }}</td>
+                                                <td class="text-center">{{ $bid->status }}</td>
                                             </tr>
                                         </tbody>
                                     </form>

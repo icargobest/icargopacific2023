@@ -6,8 +6,8 @@
     @endif
 </head>
 
-<button type="button" class="btn btn-block btn-dark shadow-0 mb-1" style="min-width:140px; max-width:509px;"
-    data-bs-toggle="modal" data-bs-target="#transferModal">Transfer</button>
+<button type="button" class="btn created-button mx-auto my-2" data-bs-toggle="modal"
+    data-bs-target="#transferModal">Transfer</button>
 
 {{-- TRANSFER MODAL --}}
 <div class="modal top fade" id="transferModal" tabindex="-1" aria-labelledby="transferModal" aria-hidden="true"
@@ -65,4 +65,3 @@
         </div>
     </div>
 </div>
-

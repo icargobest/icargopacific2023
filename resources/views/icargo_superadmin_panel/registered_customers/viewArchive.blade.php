@@ -1,5 +1,7 @@
-<title>iCargo | Customer Archived</title>
-@extends('layouts.app') @include('partials.navigationCompany')
+<title>SuperAdmin | Customer Archived</title>
+@include('partials.header')
+@extends('layouts.app')
+@include('partials.navigationSuperAdmin', ['customers' =>"nav-selected"])
 <style>
     svg {
         width: 1.5rem;
@@ -50,14 +52,14 @@
                         <th scope="col" style="text-align: center">
                             Customer ID
                         </th>
-                        <th scope="col" style="text-align: center">Name</th>
-                        <th scope="col" style="text-align: center">Email</th>
-                        <th scope="col" style="text-align: center">
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">
                             Contact No
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 300px;"
                         >
                             Action
                         </th>

@@ -45,15 +45,15 @@
             >
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center">#</th>
-                        <th scope="col" style="text-align: center">Name</th>
-                        <th scope="col" style="text-align: center">Email</th>
-                        <th scope="col" style="text-align: center">
+                        <th scope="col" >#</th>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >
                             Contact No
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 300px"
                         >
                             Action
                         </th>
