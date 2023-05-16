@@ -147,9 +147,11 @@
                         <input
                             type="text"
                             name="created_at"
-                            value="{{$company->created_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Created At</label>
                     </div>
 
                     {{-- Updated at --}}
@@ -157,9 +159,11 @@
                         <input
                             type="text"
                             name="updated_at"
-                            value="{{$company->updated_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($company->user->updated_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Updated At"
+                        >Updated At</label>
                     </div>
                 </fieldset>
                 <div class="modal-footer">

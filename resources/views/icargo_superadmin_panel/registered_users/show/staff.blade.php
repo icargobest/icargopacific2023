@@ -51,88 +51,98 @@
                         >
                     </div>
 
-                    <div class="form-outline mb-4">
-                        @if ($staff->company && $staff->company->user)
-                        <input
-                            type="text"
-                            value="{{ $staff->company->user->name }}"
-                            class="form-control"
-                        />
-                        @else
-                        <input
-                            type="text"
-                            value="Company not found"
-                            class="form-control"
-                        />
-                        @endif
-                        <label class="form-label" for="updateEmail"
-                            >Company Name</label
-                        >
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="updateFullName"
-                                    name="updateFullName"
-                                    value="{{$staff->user->name}}"
-                                    class="form-control"
-                                />
-                                <label class="form-label" for="id"
-                                    >Staff ID</label
-                                >
-                            </div>
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                            @if ($staff->company && $staff->company->user)
+                            <input
+                                type="text"
+                                value="{{ $staff->company->user->name }}"
+                                class="form-control"
+                            />
+                            @else
+                            <input
+                                type="text"
+                                value="Company not found"
+                                class="form-control"
+                            />
+                            @endif
                         </div>
                     </div>
 
+                    <hr />
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="updateFullName"
+                                name="updateFullName"
+                                value="{{$staff->user->name}}"
+                                class="form-control"
+                            />
+                        </div>
+                    </div>
+
+
                     <!-- Email input -->
 
-                    <div class="form-outline mb-4">
-                        <input
-                            type="email"
-                            id="updateEmail"
-                            name="updateEmail"
-                            value="{{$staff->user->email}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="id">Staff Email</label>
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="email"
+                                id="updateEmail"
+                                name="updateEmail"
+                                value="{{$staff->user->email}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
 
                     <!-- Contact No input -->
 
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="updateContactNo"
-                            name="updateContactNo"
-                            value="{{$staff->contact_no}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="id">Password</label>
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="updateContactNo"
+                                name="updateContactNo"
+                                value="{{$staff->contact_no}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
 
-                    <!-- Contact No input -->
+                    <!-- created_at -->
 
                     <div class="form-outline mb-4">
                         <input
                             type="text"
                             id="updateStaff"
                             name="updateStaff"
-                            value="{{$staff->created_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($staff->user->created_at))}}"
                             class="form-control"
                         />
                     </div>
 
-                    <!-- Contact No input -->
+                    <!-- updated_at -->
 
                     <div class="form-outline mb-4">
                         <input
                             type="text"
                             id="updateStaffAt"
                             name="updateStaffAt"
-                            value="{{$staff->updated_at}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($staff->user->updated_at))}}"
                             class="form-control"
                         />
                     </div>
