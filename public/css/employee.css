@@ -120,6 +120,8 @@ flex-direction: column;
 margin-top: 10px; 
 gap: 10px;
 padding-right: 10px;
+margin-bottom: 40px;
+overflow: auto;
 }
 
 .m-button1
@@ -174,11 +176,6 @@ min-width: 80px !important;
 border: none;
 }
 
-td,th
-{
-text-align: center;
-
-}
 
 
 thead th
@@ -188,9 +185,16 @@ border: none;
 color: #FFF;
 text-align: center;
 }
+tbody td
+{
+text-align: center;
+}
 
 
-
+.modal-body h4
+{
+text-align: center;
+}
 
 /* Table Container Button */
 
@@ -389,6 +393,9 @@ justify-content: flex-start;
 margin:0px 5px !important;
 }
 
+
+
+
 .col-yellow
 {
 color: #ffc107 !important;
@@ -409,6 +416,24 @@ color: #14a44d !important;
 color:#dc3545 !important;
 }
 
+
+.dataTables_empty
+{
+text-align: center !important;
+}
+.dataTables_paginate .paginate_button.previous a,
+.dataTables_paginate .paginate_button.next a {
+min-width: 85px !important;
+text-align: center;
+margin: auto 2px;
+border: 1px solid #d6d6d6;
+}
+
+#truckIcon
+{
+font-weight: bolder !important;
+}
+
 @media screen and (min-width: 668px) 
 {
 
@@ -425,14 +450,10 @@ margin-left: 1rem;
 }
 
 
-
-/* Modal */
-
 .button-modal-container
 {
 display: flex;
 }
-
 
 .leftmodal-button-container button, .rightmodal-button-container button
 {
@@ -455,18 +476,17 @@ justify-content: flex-end;
 margin: 0px 5px;
 }
 
+/* table */
+thead th
+{
+text-align: start !important;
+}
+tbody td
+{
+text-align: start;   
 }
 
-
-
-
-
-
-
-
-
-
-
+}
 @media screen and (min-width: 1020px) 
 {
 
@@ -549,6 +569,5 @@ max-width: 150px;
 justify-content:center;
 align-items: center;
 }
-
 
 }

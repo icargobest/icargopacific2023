@@ -1,5 +1,5 @@
 <title>Driver | Profile</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDriver')
 
@@ -80,6 +80,7 @@
                     </div>
               </div>
 
+              {{-- Extra-Data FEEL FREE TO REMOVE--}}
               <div class="profileContent">
                 <div class="titleButton">
                   <h5 style="font-weight: bolder">Social</h5>

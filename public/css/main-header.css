@@ -84,8 +84,8 @@ text-transform: capitalize !important;
 
 .userButton
 {
-    max-width: 100px !important;
-    width: 100px;
+    max-width: 120px !important;
+    width: 120px;
     max-height: 23.04px !important;
     border-radius:20px !important;
     background: #F9CD1A;
@@ -157,17 +157,32 @@ border-bottom-left-radius: 0;
 outline: none;
 }
 
+
+.search-bar-container
+{
+}
 .search-bar-button
 {
 max-height: 38PX;
 background-color: transparent;
 height: 42px;   
-width: 48px;
-background-color:yellow;
+padding: 0px 14px;
 border: none;
-border-radius: 0.25rem;
-border-top-right-radius: 0;
-border-bottom-right-radius: 0;
+color: black;
+background-color:yellow; 
+ border-radius: 0.15rem; 
+margin: 0px 4px;
+} 
+
+
+.sidebar:hover .search-bar-button
+{
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0px;
+    margin-left: 5px;
 }
 
 .sidebar:hover
@@ -196,7 +211,7 @@ display: block
 .search-bar-container
 {
 display: flex;
-margin: 0px 5px;
+/* margin: 0px 5px; */
 }
 
 
@@ -215,7 +230,7 @@ height: 20px;
 color: #fff;;
 display: flex;
 align-items: center;
-padding: 12px 12px;
+padding: 18px 12px;
 transition:  all 300ms ease-in-out;
 }
 
@@ -457,7 +472,15 @@ width: 250px;
 {
 visibility:visible;
 }
-
+.search-bar-button
+{
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0px;
+    margin-left: 5px;
+}
 .sidebar .divider2
 {
     border-bottom: 1px solid #d6d6d6;
