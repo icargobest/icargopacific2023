@@ -1,17 +1,7 @@
-<head>
+    <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Staff | Order Details #{{ $ship->id }}</title>
-    </head>
-
-    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    @include('partials.header')
-    @extends('layouts.app')
-    @include('partials.navigationStaff', ['order' => 'nav-selected'])
-
-    <!-- MDB -->
-    <link rel="stylesheet" href="/css/mdb.min.css" />
-
-    <style>
+        <style>
         th {
             background-color: transparent !important;
             color: black;
@@ -19,16 +9,24 @@
         }
 
         td {
-            text-align: left;
+            text-align: left !important;
             font-weight: bold;
+            color:#214D94;
         }
-    </style>
+        </style>
+        <!-- MDB -->
+        <link rel="stylesheet" href="/css/mdb.min.css" />
+    </head>
+    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('partials.header')
+    @extends('layouts.app')
+    @include('partials.navigationStaff', ['order' => 'nav-selected'])
 
     {{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
     <!-- Exp start -->
     <!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $ship->id }}">
-VIEW
-</button> -->
+    VIEW
+    </button> -->
 
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <!-- tracking modal -->
@@ -81,7 +79,7 @@ VIEW
                                         </div>
                                         <a class="cardItem my-1" href="{{ route('freightStaff') }}">
                                             <div class="d-flex justify-content-center">
-                                                <button type="button" class="btn btn-block btn-dark text-white mb-1">
+                                                <button type="button" class="btn btn-block btn-light mb-1" style="border-color:#214D94;">
                                                     BACK
                                                 </button>
                                             </div>
@@ -109,7 +107,7 @@ VIEW
                                     <a class="cardItem mt-2" href="{{ route('staff.order') }}">
                                         <div class="d-flex justify-content-center">
                                             <button type="button"
-                                                class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                                class="btn btn-block btn-light shadow-0 mb-1" style="border-color:#214D94;">
                                                 BACK
                                             </button>
                                             </form>
@@ -127,7 +125,7 @@ VIEW
                                     <table class="m-2" style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -156,7 +154,7 @@ VIEW
                                         </tr>
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -185,7 +183,7 @@ VIEW
                                         </tr>
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -218,7 +216,7 @@ VIEW
                         </div>
 
                         <!-- START ACCEPT BID TABLE -->
-                        <hr class="px-3" class="opacity-75">
+                        <hr class="px-3 opacity-75" style="border-color:#214D94;">
                         <section class="overflow-auto">
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -236,9 +234,9 @@ VIEW
                                             <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                             <tbody class="table table-striped">
                                                 <tr>
-                                                    <td>{{ $bid->company_name }}</td>
-                                                    <td>{{ $bid->bid_amount }}</td>
-                                                    <td>{{ $bid->status }}</td>
+                                                    <td class="text-center">{{ $bid->company_name }}</td>
+                                                    <td class="text-center">{{ $bid->bid_amount }}</td>
+                                                    <td class="text-center">{{ $bid->status }}</td>
                                                 </tr>
                                             </tbody>
                                         </form>

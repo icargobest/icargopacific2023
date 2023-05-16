@@ -28,7 +28,7 @@
             <h3 class="text-white mb-0">Order List</h3>
         </div>
         {{-- TABLE START--}}
-        <section class="mb-5 px-5 my-3 overflow-auto">
+        <section class="mb-5 px-2 my-3 overflow-auto">
             <table
                 class="table table-striped table-hover table-borderless hover"
                 id="staffordertable"
