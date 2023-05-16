@@ -1,6 +1,6 @@
 <title>Company |  Dispatcher Archived</title>
 @extends('layouts.app')
-@include('partials.navigationStaff')
+@include('partials.navigationStaff',['drivers' => "nav-selected"])
 
 <main class="container py-5" style="margin-top:-49px !important">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
