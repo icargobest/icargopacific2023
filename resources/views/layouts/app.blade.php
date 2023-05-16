@@ -112,7 +112,7 @@ li
                     <li><div class="dividerBlack"></div></li> --}}
 
                     <li><a class="dropdown-item navFont" href="{{ route('change-password') }}"><i class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
-                    @if(Auth::user()->type != 'user')
+                    @if(Auth::user()->type != ('user' || 'super-admin'))
                     <li><a class="dropdown-item navFont" href="#" data-mdb-toggle="modal" data-mdb-target="#lockModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
                     @endif
                     <li><a class="dropdown-item navFont" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>

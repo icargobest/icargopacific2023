@@ -127,6 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
     Route::get('/dispatcher/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
     Route::get('/staff/status/{user_id}/{status_code}', [StaffController::class, 'updateStatus'])->name('staff.status.update');
+    Route::get('/icargo/companies/status/{user_id}/{status_code}', [CompaniesController::class, 'updateStatus'])->name('company.status.update');
 
     // Change Password
     Route::get('settings/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
