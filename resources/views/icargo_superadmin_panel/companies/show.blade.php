@@ -150,6 +150,8 @@
                             value="{{$company->created_at}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Created At</label>
                     </div>
 
                     {{-- Updated at --}}
@@ -160,6 +162,8 @@
                             value="{{$company->updated_at}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Updated At"
+                        >Updated At</label>
                     </div>
                 </fieldset>
                 <div class="modal-footer">

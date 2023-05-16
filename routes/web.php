@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BidController;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;

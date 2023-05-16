@@ -51,32 +51,34 @@
                         >
                     </div>
 
-                    <div class="form-outline mb-4">
-                        @if ($driver->company && $driver->company->user)
-                        <input
-                            type="text"
-                            value="{{ $driver->company->user->name }}"
-                            class="form-control"
-                        />
-                        @else
-                        <input
-                            type="text"
-                            value="Company not found"
-                            class="form-control"
-                        />
-                        @endif
-                        <label class="form-label" for="updateEmail"
-                            >Company Name</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                                @if ($driver->company && $driver->company->user)
+                                <input
+                                    type="text"
+                                    value="{{ $driver->company->user->name }}"
+                                    class="form-control"
+                                />
+                                @else
+                                <input
+                                    type="text"
+                                    value="Company not found"
+                                    class="form-control"
+                                />
+                                @endif
+                        </div>
                     </div>
-
+                    <hr />
                     {{-- Driver ID --}}
                     <div class="row">
                         <div class="col">
                             <div class="form-outline mb-4">
                                 <input
                                     type="text"
-                                    id="id"
+                                    id="id" 
                                     name="id"
                                     value="{{$driver->user->id}}"
                                     class="form-control"
@@ -89,89 +91,101 @@
                     </div>
 
                     <!-- Name  -->
-                    <div class="form-outline mb-4">
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{$driver->user->name}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="email"
-                            >Driver Name</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value="{{$driver->user->name}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
 
                     <!-- Email  -->
-                    <div class="form-outline mb-4">
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{$driver->user->email}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="email"
-                            >Driver Email</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{$driver->user->email}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
-
-                    <!-- Vehicle  -->
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="vehicle_type"
-                            name="vehicle_type"
-                            value="{{$driver->vehicle_type}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="vehicle_type"
-                            >Vehicle Type</label
-                        >
-                    </div>
-
                     <!-- Contact No.  -->
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="contact_no"
-                            name="contact_no"
-                            value="{{$driver->contact_no}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="contact_no"
-                            >Contact No.</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill text-secondary"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="contact_no"
+                                name="contact_no"
+                                value="{{$driver->contact_no}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
 
+                    <hr />
+                    
+                    <!-- Vehicle  -->
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-truck"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="vehicle_type"
+                                name="vehicle_type"
+                                value="{{$driver->vehicle_type}}"
+                                class="form-control"
+                            />
+                        </div>
+                    </div>
                     <!-- License No.  -->
 
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="license_number"
-                            name="license_number"
-                            value="{{$driver->license_number}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="license_number"
-                            >Contact No.</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-truck"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="license_number"
+                                name="license_number"
+                                value="{{$driver->license_number}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
 
                     <!-- Plate No. -->
 
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="plate_no"
-                            name="plate_no"
-                            value="{{$driver->plate_no}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="plate_no"
-                            >Plate No.</label
-                        >
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-truck"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="plate_no"
+                                name="plate_no"
+                                value="{{$driver->plate_no}}"
+                                class="form-control"
+                            />
+                        </div>
                     </div>
                     <!-- Created At. -->
 

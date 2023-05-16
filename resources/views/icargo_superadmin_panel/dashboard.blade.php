@@ -1,8 +1,9 @@
-<title>Company | Dashboard</title>
+<title>SuperAdmin | Dashboard</title>
 
-
+@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationSuperAdmin')
+@include('partials.navigationSuperAdmin', ['dashboard' =>"nav-selected"])
+
 
 @section('content')
 <nav class="navbar navbar-light bg-light">
