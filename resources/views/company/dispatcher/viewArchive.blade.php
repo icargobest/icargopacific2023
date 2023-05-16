@@ -1,6 +1,7 @@
 <title>Company | Dispatcher Archived</title>
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.header')
+@include('partials.navigationCompany', ['dispatcher' =>"nav-selected"])
 <style>
     svg{
         width:  1.5rem;
