@@ -43,11 +43,11 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col" style="text-align:center;">#</th>
-                    <th scope="col" style="text-align:center;">Staff Name</th>
-                    <th scope="col" style="text-align:center;">Email</th>
-                    <th scope="col" style="text-align:center;">Contact No.</th>
-                    <th scope="col" style="text-align:center; width:300px">Action</th>
+                    <th scope="col" >#</th>
+                    <th scope="col" >Staff Name</th>
+                    <th scope="col" >Email</th>
+                    <th scope="col" >Contact No.</th>
+                    <th scope="col" style="text-align:center !important; width:300px">Action</th>
                 </tr>
                 </thead>
                 <tbody>

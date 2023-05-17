@@ -67,7 +67,7 @@
                     @foreach ($drivers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->user->name }}</td>
+                        <td><img src="{{ url('images/company/drivers/'.$user->image) }}" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
                         <td>{{ $user->vehicle_type }}</td>
                         <td>{{ $user->plate_no }}</td>
                         <td

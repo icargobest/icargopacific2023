@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,7 @@ use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffDashboardController;
-use App\Http\Controllers\CompaniesController;
+
 
 
 
@@ -124,6 +125,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/drivers/status/{user_id}/{status_code}', [DriverController::class, 'updateStatus'])->name('driver.status.update');
     Route::get('/dispatcher/status/{user_id}/{status_code}', [DispatcherController::class, 'updateStatus'])->name('dispatcher.status.update');
     Route::get('/staff/status/{user_id}/{status_code}', [StaffController::class, 'updateStatus'])->name('staff.status.update');
+    Route::get('/icargo/companies/status/{user_id}/{status_code}', [CompaniesController::class, 'updateStatus'])->name('company.status.update');
 
     // Change Password
     Route::get('settings/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
@@ -294,6 +296,14 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
         Route::get('/driver/order', 'driverOrder_view')->name('driver.order');
     });
+
+    //Profile Page
+    Route::controller(DriverController::class)->group(function () {
+        Route::get('/driver/profile',  'driverProfile')->name('driver.profile');
+        Route::put('/driver/update-info/{id}',  'updateProfile')->name('driver.personinfo.update');
+        Route::put('/driver/update-image/{id}',  'updateImage')->name('driver.profile.update');
+    });
+    
 });
 
 // Dispatcher Panel
@@ -317,6 +327,13 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
     //DISPATCHER
     Route::controller(DispatcherController::class)->group(function(){
         Route::get('/dispatcher/order_list/dispatch/{shipment_id}/{driver_id}', 'assignDriver')->name('dispatcher.assign');
+    });
+
+    //Profile Page
+    Route::controller(DispatcherController::class)->group(function () {
+        Route::get('/dispatcher/profile',  'dispatcherProfile')->name('dispatcher.profile');
+        Route::put('/dispatcher/update-info/{id}',  'updateProfile')->name('dispatcher.personinfo.update');
+        Route::put('/dispatcher/update-image/{id}',  'updateImage')->name('dispatcher.profile.update');
     });
 
 });
@@ -344,7 +361,13 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');
         Route::get('/staff/track_parcel', ['uses' => 'App\Http\Controllers\StaffQrScannerController@index']);
         Route::post('/staff/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\StaffQrScannerController@checkUser']);
+        Route::get('/staff/order_list/station', 'assignStation_view')->name('assignStation_view');
      });
+
+     //Assign Station
+     Route::controller(StaffController::class)->group(function(){
+        Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+    });
 
     //DRIVER
     Route::resource('staff/driver', DriverController::class);

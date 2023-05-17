@@ -1,10 +1,10 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
-    <title>Dispatcher | Pick Up Orders</title>
+    <title>Staff | Order Station</title>
 </head>
 @include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationDispatcher')
+@include('partials.navigationStaff')
 
 <!-- MBD -->
 <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -25,7 +25,7 @@
 <div class="container mw-100">
     <div class="bg-white shadow" style="max-width: 100%;">
         <div class="py-3 ps-3" style="background-color: #214D94;">
-            <h3 class="text-white text-center text-sm-start mb-0 fw-bold">ORDER LIST | TO PICK UP</h3>
+            <h3 class="text-white text-center text-sm-start mb-0 fw-bold">ORDER LIST | ASSIGN STATION</h3>
         </div>
         <div class="mt-2">
             @include('flash-message')
@@ -42,14 +42,13 @@
                     <th>ITEM</th>
                     <th>SIZE & WIDTH</th>
                     <th>MAXIMUM BID</th>
-                    <th>STATUS</th>
-                    <th>DRIVER NAME</th>
+                    <th>STATION</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($shipments as $ship)
-                    @if(Auth::user()->type == 'dispatcher')
-                        @if($ship->company_id == $company_id_dispatcher && $ship->station_id == $dispatcher_station_id && $ship->status == 'Processing')
+                    @if(Auth::user()->type == 'staff')
+                        @if($ship->company_id == $company_id_staff && $ship->status == 'Processing' )
                         <tr>
                             <td>{{$ship->id}}</td>
                             <!-- Photo not showing -->
@@ -61,14 +60,13 @@
                             <td>{{$ship->category}}</td>
                             <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                             <td>{{$ship->min_bid_amount}}</td>
-                            <td><span class="badge badge-primary" style="background-color: #F9CD1A;">{{$ship->status}}</span></td>
                             <td>
-                                @if($ship->driver_id == null)
-                                    @include('dispatcher_panel/order.assignDriver')
+                                @if($ship->station_id == null)
+                                    @include('staff_panel/order.assignStation')
                                 @else
-                                    @foreach ($drivers as $driver)
-                                        @if($driver->id == $ship->driver_id)
-                                            {{$driver->user->name}}
+                                    @foreach ($stations as $station)
+                                        @if($station->id == $ship->station_id)
+                                            {{$station->station_name}}
                                         @endif
                                     @endforeach
                                 @endif
