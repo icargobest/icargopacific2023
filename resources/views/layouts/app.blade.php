@@ -96,14 +96,23 @@ li
                     </li>
                     <li><div class="dividerBlack1"></div></li>
 
-                    <li><a class="dropdown-item navFont" @if(Auth::user()->type == 'user')href="{{route('edit_profile', Auth::id())}}"@endif><i class="fa fa-user"></i>Profile</a></li>
+                    @if(Auth::user()->type == 'driver')
+                    <li><a class="dropdown-item navFont" href="{{ route('driver.profile') }}"><i class="fa fa-user"></i>Profile</a></li>
+                    @endif
+                    @if(Auth::user()->type == 'dispatcher')
+                    <li><a class="dropdown-item navFont" href="{{ route('dispatcher.profile') }}"><i class="fa fa-user"></i>Profile</a></li>
+                    @endif
+                    @if(Auth::user()->type == 'user')
+                    <li><a class="dropdown-item navFont" href="{{ route('edit_profile', Auth::id()) }}"><i class="fa fa-user"></i>Profile</a></li>
+                    @endif
+                    
       {{--          <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-folder-open"></i>Projects</a></li>
                     <li><div class="dividerBlack"></div></li> --}}
 
                     <li><a class="dropdown-item navFont" href="{{ route('change-password') }}"><i class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
-                    @if(Auth::user()->type != 'user')
+                    @if(Auth::user()->type != ('user' || 'super-admin'))
                     <li><a class="dropdown-item navFont" href="#" data-mdb-toggle="modal" data-mdb-target="#lockModal{{ Auth::user()->id }}" ><i class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
                     @endif
                     <li><a class="dropdown-item navFont" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>Logout</a></li>
@@ -163,5 +172,4 @@ li
                 @endif
                 <main class="">
                     @yield('content')
-               </main>
 @include('partials.footer')
