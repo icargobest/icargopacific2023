@@ -133,6 +133,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Created At</label>
                     </div>
 
                     {{-- Updated at --}}
@@ -143,6 +145,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($user->user->updated_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Updated At</label>
                     </div>
                 </fieldset>
                 <div class="modal-footer">

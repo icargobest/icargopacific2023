@@ -3,7 +3,7 @@
 
 <title>Company | Order History</title>
 <main class="container py-5" style="margin-top: -49px !important">
-    <div class="mt-4">
+    <div class="mt-4 mb-5">
         <h2 class=""
             style="
                 border-bottom: 2px solid black;
@@ -14,7 +14,7 @@
         </h2>
     </div>
     <div class="main-wrapper">
-        <section class="search-filter-container mb-4">
+        {{-- <section class="search-filter-container mb-4">
             <div class="top-container1" style="max-width: 800px; margin-top: 15px">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
                 <div class="input-group rounded">
@@ -25,7 +25,7 @@
                     </span>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <div class="mt-2">@include('flash-message')</div>
 
