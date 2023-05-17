@@ -39,15 +39,24 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0 justify-content-center mt-5">
+                        <div class="row mb-0 justify-content-center">
                             <div class="col-lg-12">
-                                <button type="submit" class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94; margin-top:200px;">
+                                <button type="submit" class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94;">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                
+                    <div class="text-center" style="margin-top: 300px;">
+                        <p>Already have an account?
+                            <span> 
+                                <a href="{{ route('login') }}">Login Here</a> 
+                            </span>
+                        </p>
+                    </div>
+                    <div class="text-center mt-1">
+                        <small class="">Don't have an Account? <span class="blue"><a href="/register">Sign up</a></span></small>
+                    </div>
             
         </div>
     </div>

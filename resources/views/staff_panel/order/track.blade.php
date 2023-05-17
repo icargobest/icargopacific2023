@@ -1,27 +1,30 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Staff | Order Tracking #{{ $ship->id }}</title>
-    </head>
-    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
-    @extends('layouts.app')
-    @include('partials.navigationStaff')
-
-    <style>
+        <style>
         th {
             background-color: transparent !important;
             color: black;
+            font-weight: normal;
         }
-
         td {
-            text-align: left;
+            text-align: left !important;
             padding: 5px;
             color: #214D94;
+            font-weight: bold;
+        }
+        hr {
+            border-color: #214D94;
         }
 
         .status-green {
             color: #00bf9a;
         }
-    </style>
+        </style>
+    </head>
+    {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @extends('layouts.app')
+    @include('partials.navigationStaff')
 
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <main class="container py-5" style="margin-top:-49px !important">
@@ -29,7 +32,7 @@
             <h3 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">Order
                 Tracking #{{ $ship->id }}</h3>
         </div>
-        <div class="order-container container">
+        <div class="order-container container px-0">
             <div class="cards-holder">
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{-- START OF ORDER DETAILS --}}
@@ -42,7 +45,7 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
@@ -70,12 +73,12 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <hr class="opacity-75 d-block d-lg-none">
+                                <hr class="opacity-75 d-block d-lg-none" style="border-color:#214D94;">
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung receiver -->
                                         </tr>
                                         <tr>
@@ -106,11 +109,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                             <div class="row">
-                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
@@ -152,7 +155,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-xl-none">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                         </div>
@@ -170,7 +173,7 @@
                                 </button>
                             </a>
                             <a href="{{ route('staff.generateWaybill', $ship->id) }}" target="_blank">
-                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1"
+                                <button type="button" class="btn btn-warning btn-block shadow-0 my-1"
                                     style="min-width:140px; max-width:509px;">
                                     Waybill
                                 </button>
@@ -180,15 +183,15 @@
                             @endif
                             <a href="{{ route('viewOrder_Staff', $ship->id) }}">
                                 <div class="my-1">
-                                    <button type="button" class="btn btn-block shadow-0 btn-dark mb-1"
-                                        style="min-width:140px; max-width:509px;">
+                                    <button type="button" class="btn btn-block shadow-0 btn-light mb-1"
+                                        style="min-width:140px; max-width:509px; border-color:#214D94;">
                                         BACK
                                     </button>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <hr class="opacity-75">
+                    <hr class="opacity-75" style="border-color:#214D94;">
                     {{-- END OF ORDER DETAILS --}}
 
                     {{-- TRACKING ORDER START --}}
