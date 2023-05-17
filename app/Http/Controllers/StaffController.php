@@ -6,6 +6,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Shipment;
+use App\Models\Station;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -154,6 +156,18 @@ class StaffController extends Controller
             ]);
             $user_id = User::findOrFail($user_id);
             return back()->with('success', 'Staff  status updated successfully!');
+    }
+
+    public function assignStation($shipment_id, $station_id)
+    {
+        $shipmentData = [
+            'station_id' => $station_id,
+        ];
+
+        $shipment = Shipment::find($shipment_id);
+        $shipment->update($shipmentData);
+
+        return back()->with('success', 'Driver was successfully assigned!');
     }
 
 }
