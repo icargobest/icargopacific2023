@@ -89,7 +89,7 @@
     
                             <td class="tdbutton" style="max-width:120px">
                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
-                            @include('staff_panel/advance_freight.advance.tracking')
+                            @include('staff_panel/advance_freight/advance.tracking')
                             <a href="{{ url('/staff_panel/advance_freight/advance.transfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
                             <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                         </tr>

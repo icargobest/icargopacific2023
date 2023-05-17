@@ -336,12 +336,7 @@
                                                 </div>
                                             </div>
                                         @endif
-<<<<<<< HEAD
-                                        @endif
-                                        @if($log->isAssort == true)
-=======
                                         @if ($log->isAssort == true)
->>>>>>> develop
                                             <h4 class="fw-bold border-0">ARRIVED AT (current_station)</h4>
                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                 <div class="card-body">
@@ -400,6 +395,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endif
                                         @endif
                                         @if ($log->isProcessed == true)
                                             <h4 class="fw-bold border-0">PROCESSING</h4>
