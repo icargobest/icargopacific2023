@@ -2,7 +2,7 @@
 
 
 @extends('layouts.app')
-@include('partials.navigationCompany',['dashboard' => "nav-selected"])
+@include('partials.navigationStaff',['dashboard' => "nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

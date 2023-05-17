@@ -52,4 +52,7 @@
         chart.draw(data, options);
     }
 </script>
+<<<<<<< HEAD
  --}}
+=======
+>>>>>>> develop
