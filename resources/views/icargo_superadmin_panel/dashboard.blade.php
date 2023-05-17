@@ -1,12 +1,13 @@
 <title>Super Admin | Dashboard</title>
 
+@include('partials.header')
 
 @extends('layouts.app')
 @extends('layouts.chart')
-@include('partials.navigationCompany',['dashboard' => "nav-selected"])
+@include('partials.navigationSuperAdmin',['dashboard' => "nav-selected"])
 
-{{-- @extends('layouts.chart') --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- @extends('layouts.chart') --}}{{-- 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E</script>
 
 @section('title', 'Monthly Income')
 
@@ -23,7 +24,7 @@
             </div>
         </div>
     </div>
-  
+
     <body>
         <h1>Registered Companies: {{ $companycount }}</h1>
         <h1>Registered Users: {{ $usercount }}</h1>
@@ -51,6 +52,4 @@
         chart.draw(data, options);
     }
 </script>
-
-
-
+ --}}

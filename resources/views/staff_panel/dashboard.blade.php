@@ -97,7 +97,7 @@
                                 {{ $counts['Dispatched'] }}
                             </div>
                         </div>
-                        <div style="background-color: #0083BB;" class="cards">
+                        <div style="background-color: #01b3ff;" class="cardsM">
                             <span class="cardTitle">
                                 DELIVERED
                             </span>
@@ -169,7 +169,7 @@
             @endforeach
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Monthly Income',
             curveType: 'function',
@@ -195,7 +195,7 @@
         ]);
     
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
             // title: 'Weekly Income Chart',
             curveType: 'function',
@@ -224,7 +224,7 @@
             ['2030', {{ $chartData[8][1] }}]
         ]);
         var options = {
-            width: 1500,
+            width: 1100,
             height: 500,
             // title: 'Yearly Income',
             curveType: 'function',
@@ -249,7 +249,7 @@
             @endforeach
         ]);
         var options = {
-            width: 1200,
+            width: 1100,
             height: 500,
             // height: 200,
             // title: 'Daily Income',

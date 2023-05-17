@@ -10,8 +10,8 @@
 }
 .DashboardContainer{
     border-radius: 5px;
-    box-shadow: 2px 2px 5px #838383;
-    border: 1px #d6d6d6 solid;
+    /* box-shadow: 2px 2px 5px #838383; */
+    /* border: 1px #d6d6d6 solid; */
     background-color: #ffffff;
     width: 100%;
     padding: 10px 5px;
@@ -21,13 +21,19 @@
 {
 margin-bottom: 20px;
 letter-spacing: 3px;
-color: #214D94;
 font-size: 15px;
 font-weight: bolder;
 }
+
+.dashboardTitle{
+    border-bottom: 3px #214D94 solid;
+    color: #214D94;
+}
+
 .shippingStatus
 {
- border: 1px #d6d6d6 solid;
+ /* border: 1px #d6d6d6 solid; */
+ box-shadow: 2px 2px 5px #838383;
 border-radius: 5px;
 padding: 10px 5px;
 display: flex;
@@ -38,6 +44,7 @@ margin-bottom: 10px;
 .title{
 font-style:14px !important;
 margin-bottom: 0px !important;
+color: #214D94;
 }
 
 .cardContainer{
@@ -82,7 +89,8 @@ color: #ffffff;
 
 .graphContainer
 {
-    border: 1px #d6d6d6 solid;
+    box-shadow: 2px 2px 5px #838383;
+    /* border: 1px #d6d6d6 solid; */
     background-color: #ffffff;
     border-radius: 5px;
     padding: 10px 5px;

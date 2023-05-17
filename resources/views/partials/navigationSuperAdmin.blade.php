@@ -1,148 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
-
-        <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="/css/bootstrap.css" />
-        <!-- Font Awesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        />
-        <!-- MDB -->
-        <link rel="stylesheet" href="/css/mdb.min.css" />
-        <script
-            src="https://kit.fontawesome.com/efac33293c.js"
-            crossorigin="anonymous"
-        ></script>
-        <link rel="stylesheet" href="{{ asset('css/main-header.css') }}" />
-
-        {{-- Data Table --}}
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
-        />
-
-        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}" />
-
-        <script
-            src="https://kit.fontawesome.com/efac33293c.js"
-            crossorigin="anonymous"
-        ></script>
-
-        <link rel="stylesheet" href="{{ asset('css/main-header.css') }}" />
-
-        <title>Document</title>
-    </head>
-
-    <body>
-        <div class="main-container">
-            <div class="sidebar">
-                <div class="wrapper">
-                    <div class="search-bar-container">
-                        <button class="search-bar-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <input
-                            class="input"
-                            id="search-input"
-                            placeholder="Tracking ID"
-                        />
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <div class="links-wrapper">
-                        <div class="link1">
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-gauge"></i>
-                                    <a class="nav-link" href="/dashboard"
-                                        ><span>Dashboard</span></a
-                                    >
-                                </div>
-                            </div>
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-plus"></i>
-                                    <a
-                                        class="nav-link"
-                                        href="{{route('registered_users.view')}}"
-                                        ><span>Registered Users</span></a
-                                    >
-                                </div>
-                            </div>
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-plus"></i>
-                                    <a
-                                        class="nav-link"
-                                        href="{{route('companies.index')}}"
-                                        ><span>Companies</span></a
-                                    >
-                                </div>
-                            </div>
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-plus"></i>
-                                    <a
-                                        class="nav-link"
-                                        href="{{route('customers.index')}}"
-                                        ><span>Customers</span></a
-                                    >
-                                </div>
-                            </div>
-
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-table"></i>
-                                    <a class="nav-link" href=""
-                                        ><span>Commission</span></a
-                                    >
-                                </div>
-                            </div>
-
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-user"></i>
-                                    <a class="nav-link" href="/dashboard"
-                                        ><span>Subscription</span></a
-                                    >
-                                </div>
-                            </div>
-                            <div class="links">
-                                <div class="link">
-                                    <i class="fa fa-plus"></i>
-                                    <a
-                                        class="nav-link"
-                                        href="{{route('show.queries')}}"
-                                        ><span>Queries</span></a
-                                    >
-                                </div>
-                         </div>
-
+<header>
+    
+    <style>
+       svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    </style>
+    </header>
+    <div class="main-container">
+                <div class="sidebar">
+                    <div class="wrapper">
+                        <div class="search-bar-container">
+                            <button class="search-bar-button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input
+                                class="input"
+                                id="search-input"
+                                placeholder="Tracking ID"
+                            />
                         </div>
-
-
-
-
-                        <div class="links bottom-nav">
-                            <div class="link">
-                                <i class="fa fa-sign-out"></i>
-                                <span>Logout</span>
+    
+                        <div class="divider"></div>
+    
+                        <div class="links-wrapper">
+                            <div class="link1">
+                                <div class="links">
+                                    <a class="nav-link" href="/icargo/dashboard">
+                                        <div class="link @if (isset($dashboard)) {{ $dashboard }} @endif" >
+                                            <i class="fa fa-tachometer link-i-1"></i>
+                                            <span>Dashboard</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <div class="links">
+                                    <a class="nav-link" href="{{route('registered_users.view')}}">
+                                        <div class="link @if (isset($register)) {{ $register }} @endif">
+                                            <i class="fa fa-user-plus link-i-1"></i>
+                                            <span>Registered Users</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <div class="links">
+                                    <a class="nav-link" href="{{route('companies.index')}}">
+                                        <div class="link @if (isset($companies)) {{ $companies }} @endif">
+                                            <i class="fa fa-building-o link-i-1"></i>
+                                            <span>Companies</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <div class="links">
+                                    <a class="nav-link" href="{{route('customers.index')}}">
+                                        <div class="link @if (isset($customers)) {{ $customers }} @endif">
+                                            <i class="fa fa-address-card-o link-i-1"></i>
+                                            <span>Customers</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <div class="links">
+                                    <a class="nav-link" href="">
+                                        <div class="link @if (isset($Commisions)) {{ $Commisions }} @endif">
+                                            <i class="fa fa-table link-i-1"></i>
+                                            <span>Commisions</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                
+                                <div class="links">
+                                    <a class="nav-link" href="">
+                                        <div class="link @if (isset($Subscription)) {{ $Subscription }} @endif">
+                                            <i class="fa fa-credit-card link-i-1"></i>
+                                            <span>Subscription</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <div class="links">
+                                    <a class="nav-link" href="{{route('show.queries')}}">
+                                        <div class="link @if (isset($queries)) {{ $queries}} @endif">
+                                            <i class="fa fa-question-circle-o link-i-1"></i>
+                                            <span>Queries</span>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                            </div>
+    
+    
+    
+    
+                            <div class="links bottom-nav">
+                                <div class="link">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>Logout</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="content-container">
+    
+            <div class="content-container">
+    
