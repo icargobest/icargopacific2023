@@ -496,43 +496,49 @@ class ShipmentController extends Controller
     public function viewInvoice($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('order.generate-invoice', compact('ship'));
+        return view('order.generate-invoice', compact('ship','log'));
     }
 
     public function viewWaybill($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('order.generate-waybill', compact('ship'));
+        return view('order.generate-waybill', compact('ship','log'));
     }
 
     public function viewWaybillCompany($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('company.order.generate-waybill', compact('ship'));
+        return view('company.order.generate-waybill', compact('ship','log'));
     }
 
     public function viewInvoiceCompany($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('company.order.generate-invoice', compact('ship'));
+        return view('company.order.generate-invoice', compact('ship','log'));
     }
 
     public function viewWaybillStaff($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('staff_panel.order.generate-waybill', compact('ship'));
+        return view('staff_panel.order.generate-waybill', compact('ship','log'));
     }
 
     public function viewInvoiceStaff($id)
     {
         $ship = Shipment::findOrFail($id);
+        $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('staff_panel.order.generate-invoice', compact('ship'));
+        return view('staff_panel.order.generate-invoice', compact('ship','log'));
     }
 
     function orderHistory_user()

@@ -93,8 +93,10 @@
                                     <td class="tdbutton" style="max-width:120px">
                                         {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                         @include('staff_panel.freight.freight_tracking')
-                                        @if ($ship->status != 'Transferred')
-                                            @include('staff_panel.freight.transfer')
+                                        @if ($ship->status == 'Assort')
+                                            @if ($ship->status != 'Transferred')
+                                                @include('staff_panel.freight.transfer')
+                                            @endif
                                         @endif
                                         @include('staff_panel.freight.print-modal')
                                     </td>

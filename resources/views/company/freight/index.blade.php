@@ -87,13 +87,15 @@
                                         {{-- Category --}}
                                         <td>{{ $ship->total_price }}</td>
                                         {{-- Mode of Pament --}}
-                                        <td>{{ $ship->mop}}</td>
+                                        <td>{{ $ship->mop }}</td>
 
                                         <td class="tdbutton" style="max-width:120px">
                                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                             @include('company/freight.freight_tracking')
-                                            @if($ship->status != 'Transferred')
-                                                @include('company.freight.transfer')
+                                            @if ($ship->status == 'Assort')
+                                                @if ($ship->status != 'Transferred')
+                                                    @include('company.freight.transfer')
+                                                @endif
                                             @endif
                                             @include('company.freight.print-modal')
                                         </td>

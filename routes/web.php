@@ -156,7 +156,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/user/track_order/{id}', 'trackOrder')->name('trackOrder');
         Route::put('/user/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/user/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/user/invoice/{id}', 'viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}', 'viewInvoice')->name('user.generate');
         Route::get('/user/waybill/{id}', 'viewWaybill')->name('user.generateWaybill');
     });
 });
