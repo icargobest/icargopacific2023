@@ -1,5 +1,5 @@
 <head>
-<title>Company | Transfer Forwarding</title>
+<title>Staff | Transfer Forwarding</title>
 </head>
 @include('partials.header')
 @extends('layouts.app')
@@ -36,10 +36,10 @@
               <i class="fa fa-calendar"></i>
             </span>
           </div>
-          @if(Auth::user()->type == 'company')
+          @if(Auth::user()->type == 'staff')
           
          
-          <form action="{{route('advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
+          <form action="{{route('staff_advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <input type="hidden" name="id" value="{{$ship->id}}">

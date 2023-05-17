@@ -2,12 +2,7 @@
 
 <section style="padding:100px 0px; background-color:white;" id="contactUS">
     <div class="container" >
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-        {{session()->get('message')}}
-    </div>  
-    @endif
+    <div class="mt-2">@include('flash-message')</div>
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="background-color: white; ">
                 <div>

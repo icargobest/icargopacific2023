@@ -1,6 +1,6 @@
 <title>iCargo | Companies Archived</title>
 @extends('layouts.app')
-@include('partials.navigationCompany')
+@include('partials.navigationSuperAdmin')
 <style>
     svg{
         width:  1.5rem;

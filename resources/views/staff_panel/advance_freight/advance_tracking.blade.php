@@ -1,11 +1,8 @@
-<head>
-<title>Company | Advance Freight</title>
 
+<title>Staff | Advanced Freight</title>
 
-</head>
-@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationCompany',['advance' => "nav-selected"])
+@include('partials.navigationStaff')
 
 
 <div class="mx-2">
@@ -17,7 +14,7 @@
     </div>  
     @endif
         <div class="employee-header-container">
-            <h3 class="">ADVANCE FREIGHT LIST</h3>
+            <h3 class="">ADVANCED FREIGHT LIST</h3>
         </div>
 
         <section class="search-filter-container mb-4">
@@ -69,11 +66,11 @@
 
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->type == 'company')
-                    @if($company->id == $ship->company_id)
-         
+                    @if(Auth::user()->type == 'staff')
+                    @if($staff->company_id == $ship->company_id)
+                
                     <tr>
-                        
+                    
                         {{-- sender namae --}}
                         <td>{{$ship->sender->sender_name}}</td>
                         {{-- sender address --}}
@@ -99,7 +96,7 @@
                         <td class="tdbutton" style="max-width:120px">
                         <a href="{{ route('trackOrder_Company', $ship->id) }}"><button class="btn created-button mx-auto">Tracking</button></a>
                         @if($ship->advTransferredStatus == NULL)
-                        <a href="{{ route('adv_Freight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        <a href="{{ route('staff_advFreight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
                         @elseif($ship->advTransferredStatus == 'Accepted')
                         Transfer Accepted
                         @else
@@ -113,6 +110,7 @@
                     @endforeach
                 </tbody>
                 </table>
+                
 
                 <div class="employee-header-container">
                     <h3 class="">REQUESTS</h3>
@@ -127,7 +125,7 @@
                   <th>Bid Amount</th>
                 </thead>
                 @foreach ($shipments as $ship)
-                @if(Auth::user()->type == 'company' && $ship->advTransferredto == Auth::user()->id && $ship->advTransferredStatus == "Pending")
+                @if(Auth::user()->type == 'staff' && $ship->advTransferredto == $company_id_staff && $ship->advTransferredStatus == "Pending")
                 <tr>
 
                   <td>{{$ship->tracking_number}}</td>
@@ -137,11 +135,11 @@
                   <td>{{$ship->bid_amount}}</td>
 
                   <td>
-                    <a href="{{url('/company/advFreight/accept', $ship->id)}}" class="btn btn-success">Accept</a>
+                    <a href="{{url('/staff/advfreight/accept', $ship->id)}}" class="btn btn-success">Accept</a>
                   </td>
 
                   <td>
-                    <a href="{{url('/company/advFreight/decline', $ship->id)}}" class="btn btn-danger">Decline</a>
+                    <a href="{{url('/staff/advfreight/decline', $ship->id)}}" class="btn btn-danger">Decline</a>
                   </td>
 
                 </tr>
@@ -174,3 +172,4 @@ border: 1px solid black;
 
 }
 </style>
+@include('partials.footer')

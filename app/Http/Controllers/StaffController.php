@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,6 +123,39 @@ class StaffController extends Controller
                 ->with('success','Staff #'.$id.' has been updated successfully.');
     }
 
+    public function superAdmin_update(Request $request, $id)
+    {
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
+        $staffData = [
+            'contact_no' => $request->contactno,
+        ];
+        
+        $staff = Staff::find($id);
+        $staff->update($staffData);
+
+        $user = $staff->user;
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
+
+        return back()->with('success','Staff #'.$id.' has been updated successfully.');
+    }
 
     public function destroy($id)
     {

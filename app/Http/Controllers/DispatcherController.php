@@ -7,6 +7,7 @@ use App\Models\Dispatcher;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\VerifyToken;
 use Exception;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
@@ -127,19 +128,33 @@ class DispatcherController extends Controller
 
     public function update($id, Request $request)
     {
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
         $dispatcherData = [
             'contact_no' => $request->contact_no,
-        ];
-
-        $userData = [
-            'name' => $request->input('name'),
         ];
         
         $dispatcher = Dispatcher::find($id);
         $dispatcher->update($dispatcherData);
 
         $user = $dispatcher->user;
-        $user->update($userData);
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
         return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
     }
 

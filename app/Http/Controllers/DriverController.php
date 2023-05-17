@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\VerifyToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -141,6 +142,19 @@ class DriverController extends Controller
 
     public function update($id, Request $request)
     {
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
@@ -148,16 +162,17 @@ class DriverController extends Controller
             'contact_no' => $request->contact_no,
         ];
 
-        $userData = [
-            'name' => $request->input('name'),
-        ];
-        
         $driver = Driver::find($id);
         $driver->update($driverData);
 
         $user = $driver->user;
-        $user->update($userData);
-
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
         return back()->with('success', 'Driver #'.$id.' data updated successfully!');
         
     }

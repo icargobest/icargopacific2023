@@ -174,7 +174,57 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('staff_panel.freight.advance_freight', compact('company_name', 'company_id_staff'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('staff_panel.advance_freight.advance_tracking', compact('staff', 'company_name', 'company_id_staff'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+    }
+
+    public function staff_advfreight($id){
+        $user_id = Auth::user()->id;
+        $staff = Staff::where('user_id', $user_id)->first();
+        $company_id = $staff->company_id;
+        $company_user = Company::where('id', $company_id)->first();
+        $company = Company::all()->whereNotIn('user_id', [$company_user->user_id]);
+
+        $ship = Shipment::findOrFail($id);
+        $bid = Bid::all();
+
+        $this->TrackOrderLog();
+
+        return view('staff_panel.advance_freight.transfers', compact('ship'), ['bids' => $bid, 'companies' => $company, 'sender', 'recipient']);
+    }
+
+    public function staff_advTransfer(Request $request)
+    {
+        $data = Shipment::findOrFail($request->id);
+        $data->advTransferredto = $request->transfer_to_company;
+        $data->advTransferredStatus = 'Pending';
+        $data->save();
+
+        return redirect()->back()->with('message', 'Transfer Pending');
+    }
+
+    public function staff_accept_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+        $currentStaff = Staff::where('user_id', Auth::user()->id)->first();
+
+        $shipment->company_name = $company_name;
+        $shipment->company_id = $currentStaff->company_id;
+        $shipment->advTransferredStatus = 'Accepted';
+        $shipment->status = 'Transferred';
+        $shipment->save();
+        $this->TrackOrderLog();
+        return redirect()->back()->with('message', 'Transfer Accepted');
+    }
+
+    public function staff_decline_transfer($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->advTransferredto = NULL;
+        $shipment->advTransferredStatus = NULL;
+        $shipment->save();
+
+        return redirect()->back()->with('message', 'Transfer Declined');
     }
 
     public function freightStaff()
@@ -186,7 +236,7 @@ class ShipmentController extends Controller
 
         $bids = Bid::all();
         $shipments = Shipment::all();
-        return view('staff_panel.freight.index', compact('staff'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
+        return view('staff_panel.freight.freight_tracking', compact('staff'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
     }
 
     function postOrder()
@@ -588,7 +638,7 @@ class ShipmentController extends Controller
         $data->advTransferredStatus = 'Pending';
         $data->save();
 
-        return redirect()->back()->with('success', 'Transfer Pending');
+        return redirect()->back()->with('message', 'Transfer Pending');
     }
 
     public function accept_transfer($id)
