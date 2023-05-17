@@ -18,7 +18,7 @@
           <div class="profileBackground1">
             <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal" data-bs-target="#editimage{{$driver->id}}"><i class="fa fa-pencil "></i></button>
             <div class="profilePicture">
-              <img src="{{ url('uploads/drivers/'.$driver->profile_image) }}" height="100" width="100" alt="">
+              <img src="{{ url('images/company/drivers/'.$driver->image) }}" height="100" width="100" alt="">
             </div>
           </div>
           <div class="profileData">
@@ -87,12 +87,26 @@
                 <div class="profileDivider2 "></div>
                   <div class="profileInfoData">
                     <i class="fa fa-facebook" aria-hidden="true">
-                    <span class="data-content">{{ $driver->fb_account }}</span></i>
+                    <span class="data-content"><a href="{{ $driver->facebook }}" target="_blank">{{ $driver->facebook }}</a></span></i>
                     <i class="fa fa-linkedin" aria-hidden="true">
-                    <span class="data-content">{{ $driver->in_account }}</span></i>
+                    <span class="data-content"><a href="{{ $driver->linkedin }}" target="_blank">{{ $driver->linkedin ?? '-'}}</a></span></i>
                   </div>
               </div>
 
+              <div class="profileContent">
+                <div class="titleButton">
+                    <h5 style="font-weight: bolder">Joined At</h5>
+                </div>
+                <div class="profileDivider2"></div>
+                <div class="profileInfoData">
+                    <span class="data-title">Joined At</span>
+                    <span class="data-content"
+                        >{{$driver->user->created_at}}</span
+                    >
+                    <span class="data-title">Updated At</span>
+                    <span class="data-content">{{$driver->updated_at}}</span>
+                </div>
+            </div>
 
         </div>
     </div>

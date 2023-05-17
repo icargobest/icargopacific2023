@@ -13,7 +13,7 @@
             @csrf
 
             <div class="form-outline mb-4">
-              <input class="form-control" type="file" id="formFile" name="profile_image" required>
+              <input class="form-control" type="file" id="formFile" name="image" required>
             </div>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <!-- Driver Name -->

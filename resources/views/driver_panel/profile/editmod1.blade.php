@@ -72,7 +72,7 @@
               <div class="col">
                 <div class="form-outline">
                   <input id="password" type="text" class="form-control" value="{{  $driver->postal_code }}" name="postal_code" required autocomplete="">
-                  <label class="form-label" for="Tel">Zip Code</label>
+                  <label class="form-label" for="Tel">Postal Code</label>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{ $driver->fb_account }}" name="fb_account" required autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->facebook }}" name="facebook" required autocomplete="">
                   <label class="form-label" for="email">Facebook Account</label>
                 </div>
               </div>
@@ -95,7 +95,7 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" value="{{ $driver->in_account }}" name="in_account" autocomplete="">
+                  <input id="password" type="text" class="form-control" value="{{ $driver->linkedin }}" name="linkedin" autocomplete="">
                   <label class="form-label" for="email">Linkedin Account</label>
                 </div>
               </div>

@@ -48,9 +48,6 @@
                     <tr>
                         <th scope="col" style="text-align: center">#</th>
                         <th scope="col" style="text-align: center">
-                            Profile
-                        </th>
-                        <th scope="col" style="text-align: center">
                             Dispatcher Name
                         </th>
                         <th scope="col" style="text-align: center">
@@ -71,10 +68,7 @@
                     @foreach ($dispatchers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>
-                            <img src="{{ url('uploads/dispatchers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
-                        </td>
-                        <td class="capitalized">{{ $user->user->name }}</td>
+                        <td class="capitalized"><img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
                         <td>{{ $user->user->email }}</td>
                         <td class="capitalized">{{ $user->contact_no }}</td>
                         <td

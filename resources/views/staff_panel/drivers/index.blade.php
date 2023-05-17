@@ -27,7 +27,6 @@
                 <thead>
                 <tr>
                     <th scope="col"style="text-align:center;">#</th>
-                    <th scope="col"style="text-align:center;">Profile</th>
                     <th scope="col"style="text-align:center;">Driver Name</th>
                     <th scope="col"style="text-align:center;">Vehicle Type</th>
                     <th scope="col"style="text-align:center;">Plate Number</th>
@@ -39,10 +38,7 @@
                         @if ($user->archived == 0)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>
-                                    <img src="{{ url('uploads/drivers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
-                                </td>
-                                <td>{{ $user->user->name }}</td>
+                                <td><img src="{{ url('images/company/drivers/'.$user->image) }}" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
                                 <td>{{ $user->vehicle_type }}</td>
                                 <td>{{ $user->plate_no }}</td>
                                 <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">

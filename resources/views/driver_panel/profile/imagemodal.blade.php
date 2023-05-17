@@ -14,7 +14,7 @@
             @csrf
             @method('PUT')
             <div class="mb-3">
-                <input class="form-control" type="file" id="formFile" name="profile_image">
+                <input class="form-control" type="file" id="formFile" name="image" required>
             </div>
             <div class="buttonContainer">
               <button type="submit" class="modalbutton">

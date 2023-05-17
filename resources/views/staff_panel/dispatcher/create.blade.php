@@ -12,7 +12,7 @@
             @csrf
 
             <div class="form-outline mb-4">
-              <input class="form-control" type="file" id="formFile" name="profile_image" required>
+              <input class="form-control" type="file" id="formFile" name="image" required>
             </div>
             <div class="form-outline mb-4">
                 <div class="form-outline">

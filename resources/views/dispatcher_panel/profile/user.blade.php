@@ -18,7 +18,7 @@
           <div class="profileBackground1">
             <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal" data-bs-target="#editimage{{$dispatcher->id}}"><i class="fa fa-pencil "></i></button>
             <div class="profilePicture">
-              <img src="{{ url('uploads/dispatchers/'.$dispatcher->profile_image) }}" height="100" width="100" alt="">
+              <img src="{{ url('images/company/dispatchers/'.$dispatcher->image) }}" height="100" width="100" alt="">
             </div>
           </div>
           <div class="profileData">
@@ -81,11 +81,26 @@
                 <div class="profileDivider2 "></div>
                   <div class="profileInfoData">
                     <i class="fa fa-facebook" aria-hidden="true">
-                    <span class="data-content">{{ $dispatcher->fb_account }}</span></i>
+                    <span class="data-content"><a href="{{ $dispatcher->facebook }}" target="_blank">{{ $dispatcher->facebook }}</a></span></i>
                     <i class="fa fa-linkedin" aria-hidden="true">
-                    <span class="data-content">{{ $dispatcher->in_account }}</span></i>
+                    <span class="data-content"><a href="{{ $dispatcher->linkedin }}" target="_blank">{{ $dispatcher->linkedin ?? '-'}}</a></span></i>
                   </div>
               </div>
+
+              <div class="profileContent">
+                <div class="titleButton">
+                    <h5 style="font-weight: bolder">Joined At</h5>
+                </div>
+                <div class="profileDivider2"></div>
+                <div class="profileInfoData">
+                    <span class="data-title">Joined At</span>
+                    <span class="data-content"
+                        >{{$dispatcher->user->created_at}}</span
+                    >
+                    <span class="data-title">Updated At</span>
+                    <span class="data-content">{{$dispatcher->updated_at}}</span>
+                </div>
+            </div>
 
 
         </div>

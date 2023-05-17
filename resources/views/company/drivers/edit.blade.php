@@ -21,8 +21,8 @@
              @method('PUT')
 
             <div class="form-outline mb-4">
-              <img src="{{ url('uploads/drivers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
-              <input class="form-control" type="file" id="formFile" name="profile_image">
+              <img src="{{ url('images/company/drivers/'.$user->image) }}" height="100" width="100" alt="profile image">
+              <input class="form-control" type="file" id="formFile" name="image">
             </div>
              {{-- Name Input --}}
              <div class="row mb-2">
