@@ -7,10 +7,10 @@
 </head>
 
 <button type="button" class="btn created-button mx-auto my-2" data-bs-toggle="modal"
-    data-bs-target="#transferModal">Transfer</button>
+    data-bs-target="#transferModal{{$ship->id}}">Transfer</button>
 
 {{-- TRANSFER MODAL --}}
-<div class="modal top fade" id="transferModal" tabindex="-1" aria-labelledby="transferModal" aria-hidden="true"
+<div class="modal top fade" id="transferModal{{$ship->id}}" tabindex="-1" aria-labelledby="transferModal" aria-hidden="true"
     data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -41,7 +41,7 @@
                             <option value="" hidden>Transfer To</option>
                             <?php
                             foreach ($stations as $station) {
-                                echo "<option value='{$station['station_number']}'>{$station['station_number']}</option>";
+                                echo "<option value='{$station['id']}'>{$station['station_number']}</option>";
                             }
                             ?>
                         </select>
@@ -52,7 +52,7 @@
                         <div class="rightmodal-button-container">
 
                             <button type="submit" class="btn btn-primary" data-mdb-dismiss="modal">
-                                Continue
+                                Transfer
                             </button>
 
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">

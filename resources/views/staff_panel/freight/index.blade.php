@@ -93,9 +93,10 @@
                                     <td class="tdbutton" style="max-width:120px">
                                         {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                         @include('staff_panel.freight.freight_tracking')
-                                        @include('staff_panel.order.transfer')
-                                        <a href="{{ route('generateInvoice', $ship->id) }}" target="_blank"><button class="btn created-button mx-auto"
-                                                >Waybill</button></a>
+                                        @if ($ship->status != 'Transferred')
+                                            @include('staff_panel.freight.transfer')
+                                        @endif
+                                        @include('staff_panel.freight.print-modal')
                                     </td>
                                 </tr>
                             @endif

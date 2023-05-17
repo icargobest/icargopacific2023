@@ -177,8 +177,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::get('/company/advFreight/decline/{id}', 'decline_transfer');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
-        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
+        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('company.generateInvoice');
+        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('company.generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
@@ -359,7 +359,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/order_history', 'orderHistory_staff')->name('orderHistory_Staff');
         Route::get('/staff/view_shipment/{id}', 'viewOrder_Staff')->name('viewOrder_Staff');
         Route::get('/staff/track_order/{id}', 'trackOrder_Staff')->name('trackOrder_Staff');
-        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('viewInvoiceStaff');
+        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('staff.generateInvoice');
         Route::post('/staff/add_bid', 'staff_addBid')->name('staff_addBid');
         Route::put('/staff/transfer/{id}', 'transfer')->name('transfer.staff');
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');

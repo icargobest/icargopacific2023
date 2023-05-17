@@ -167,7 +167,7 @@
                                     Invoice
                                 </button>
                             </a>
-                            <a href="{{ route('user.generateWaybill', $ship->id) }}" target="_blank">
+                            <a href="{{ route('staff.generateWaybill', $ship->id) }}" target="_blank">
                                 <button type="button" class="btn btn-warning btn-block shadow-0 my-1"
                                     style="min-width:140px; max-width:509px;">
                                     Waybill
