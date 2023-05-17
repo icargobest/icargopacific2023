@@ -1,5 +1,5 @@
 <title>Driver | Profile</title>
-@include('partials.header')
+
 @extends('layouts.app')
 @include('partials.navigationDriver')
 
@@ -87,10 +87,10 @@
                 </div>
                 <div class="profileDivider2 "></div>
                   <div class="profileInfoData">
-                    <i class="fa fa-facebook" aria-hidden="true">
-                    <span class="data-content"><a href="{{ $driver->facebook }}" target="_blank">{{ $driver->facebook }}</a></span></i>
-                    <i class="fa fa-linkedin" aria-hidden="true">
-                    <span class="data-content"><a href="{{ $driver->linkedin }}" target="_blank">{{ $driver->linkedin ?? '-'}}</a></span></i>
+                    <span class="data-title">Facebook</span>
+                    <span class="data-content"><a href="{{ $driver->facebook }}" target="_blank">{{ $driver->facebook }}</a></span>
+                    <span class="data-title">LinkedIn</span>
+                    <span class="data-content"><a href="{{ $driver->linkedin }}" target="_blank">{{ $driver->linkedin ?? '-'}}</a></span>
                   </div>
               </div>
 
