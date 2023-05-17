@@ -1,15 +1,14 @@
-<title>
-    User | Profile</title>
+<title>Staff | Profile</title>
 
 @extends('layouts.app')
-@include('partials.navigationUser', ['staff' => 'nav-selected'])
+@include('partials.navigationStaff', ['staff' => 'nav-selected'])
 
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
 <main class="container" style="">
     <div class="mt-4">
         <h2 class="" style="border-bottom: 1px solid #adaeaf; padding-bottom: 5px; letter-spacing:1px;">MY PROFILE
-        </h2>
+            </h3>
     </div>
     <div class="mt-2">@include('flash-message')</div>
     <div class="profile-wrapper" style="">
@@ -18,21 +17,20 @@
                 <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal"
                     data-bs-target="#editimage"><i class="fa fa-pencil "></i></button>
                 <div class="profilePicture">
-                    <img src="@if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} @else /img/default_dp.png @endif"
+                    <img src="@if ($staff->photo != null) {{ asset('storage/' . $staff->photo) }} @else /img/default_dp.png @endif"
                         alt="Profile Image">
                 </div>
-
             </div>
             <div class="profileData">
                 <span class="profileName">{{ $user->name }}</span>
                 <div class="profileDivider"></div>
-                <span class="profilePosition">Customer</span>
+                <span class="profilePosition">Staff</span>
 
                 <div class="profileContact">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <span>
-                        @if ($customer->mobile != null)
-                            {{ $customer->mobile }}@else---
+                        @if ($staff->contact_no != null)
+                            {{ $staff->contact_no }}@else---
                         @endif
                     </span>
                 </div>
@@ -43,7 +41,7 @@
                 <div class="profileContact">
                     <i class="fa fa-facebook" aria-hidden="true"></i>
                     <?php
-                    $facebookUrl = $customer->facebook;
+                    $facebookUrl = $staff->facebook;
                     $facebookName = '';
                     if (!empty($facebookUrl)) {
                         $parsedUrl = parse_url($facebookUrl);
@@ -54,7 +52,6 @@
                     ?>
                     <span>{{ $facebookName }}</span>
                 </div>
-
             </div>
         </div>
 
@@ -72,14 +69,14 @@
                     <span class="data-content">{{ $user->name }}</span>
                     <span class="data-title">Mobile No.</span>
                     <span class="data-content">
-                        @if ($customer->mobile != null)
-                            (+63) {{ $customer->mobile }}@else---
+                        @if ($staff->contact_no != null)
+                            (+63) {{ $staff->contact_no }}@else---
                         @endif
                     </span>
                     <span class="data-title">Telephone</span>
                     <span class="data-content">
-                        @if ($customer->tel != null)
-                            {{ $customer->tel }}@else---
+                        @if ($staff->tel != null)
+                            {{ $staff->tel }}@else---
                         @endif
                     </span>
                     <span class="data-title">Email Address</span>
@@ -95,26 +92,26 @@
                 <div class="profileInfoData">
                     <span class="data-title">Street Name</span>
                     <span class="data-content">
-                        @if ($customer->street != null)
-                            {{ $customer->street }}@else---
+                        @if ($staff->street != null)
+                            {{ $staff->street }}@else---
                         @endif
                     </span>
                     <span class="data-title">City</span>
                     <span class="data-content">
-                        @if ($customer->city != null)
-                            {{ $customer->city }}@else---
+                        @if ($staff->city != null)
+                            {{ $staff->city }}@else---
                         @endif
                     </span>
                     <span class="data-title">State/Country</span>
                     <span class="data-content">
-                        @if ($customer->state != null)
-                            {{ $customer->state }}@else---
+                        @if ($staff->state != null)
+                            {{ $staff->state }}@else---
                         @endif
                     </span>
                     <span class="data-title">Postal Code</span>
                     <span class="data-content">
-                        @if ($customer->postal_code != null)
-                            {{ $customer->postal_code }}@else---
+                        @if ($staff->postal_code != null)
+                            {{ $staff->postal_code }}@else---
                         @endif
                     </span>
                 </div>
@@ -127,39 +124,39 @@
                 <div class="profileDivider2 "></div>
                 <div class="profileInfoData">
                     <span class="data-title"><i class="fa fa-globe"></i> Website</span>
-                    @if ($customer->website != null)
-                        <a href="{{ $customer->website }}" target="_blank">
+                    @if ($staff->website != null)
+                        <a href="{{ $staff->website }}" target="_blank">
                     @endif
                     <span class="data-content">
-                        @if ($customer->website != null)
-                            {{ $customer->website }}@else---
+                        @if ($staff->website != null)
+                            {{ $staff->website }}@else---
                         @endif
                     </span>
-                    @if ($customer->website != null)
+                    @if ($staff->website != null)
                         </a>
                     @endif
                     <span class="data-title"><i class="fa fa-facebook"></i> Facebook</span>
-                    @if ($customer->facebook != null)
-                        <a href="{{ $customer->facebook }}" target="_blank">
+                    @if ($staff->facebook != null)
+                        <a href="{{ $staff->facebook }}" target="_blank">
                     @endif
                     <span class="data-content">
-                        @if ($customer->facebook != null)
-                            {{ $customer->facebook }}@else---
+                        @if ($staff->facebook != null)
+                            {{ $staff->facebook }}@else---
                         @endif
                     </span>
-                    @if ($customer->facebook != null)
+                    @if ($staff->facebook != null)
                         </a>
                     @endif
                     <span class="data-title"><i class="fa fa-linkedin"></i> LinkedIn</span>
-                    @if ($customer->linkedin != null)
-                        <a href="{{ $customer->linkedin }}" target="_blank">
+                    @if ($staff->linkedin != null)
+                        <a href="{{ $staff->linkedin }}" target="_blank">
                     @endif
                     <span class="data-content">
-                        @if ($customer->linkedin != null)
-                            {{ $customer->linkedin }}@else---
+                        @if ($staff->linkedin != null)
+                            {{ $staff->linkedin }}@else---
                         @endif
                     </span>
-                    @if ($customer->linkedin != null)
+                    @if ($staff->linkedin != null)
                         </a>
                     @endif
                 </div>
@@ -171,17 +168,17 @@
                 <div class="profileDivider2"></div>
                 <div class="profileInfoData">
                     <span class="data-title">Joined At</span>
-                    <span class="data-content">{{ date('Y-m-d h:i:s A', strtotime($customer->created_at)) }}</span>
+                    <span class="data-content">{{ date('Y-m-d h:i:s A', strtotime($staff->created_at)) }}</span>
                     <span class="data-title">Updated At</span>
-                    <span class="data-content">{{ date('Y-m-d h:i:s A', strtotime($customer->updated_at)) }}</span>
+                    <span class="data-content">{{ date('Y-m-d h:i:s A', strtotime($staff->updated_at)) }}</span>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-@include('profile.editmod1')
-@include('profile.imagemodal')
+@include('staff_panel.profile.edit-modal')
+@include('staff_panel.profile.imagemodal')
 @include('profile.companymodal')
 @include('partials.footer')
 

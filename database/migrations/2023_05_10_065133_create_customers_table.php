@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->string('mobile')->nullable();
+            $table->string('contact_no')->nullable();
             $table->string('tel')->nullable();
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->integer('postal_code')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('photo', 300)->nullable();
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();

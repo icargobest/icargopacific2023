@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCustomerRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use App\Models\User;
 use Exception;
@@ -135,7 +136,7 @@ class CustomerController extends Controller
     {
         $user = User::where('id', $id)->first();
         $customer = Customer::where('user_id', $user->id)->first();
-        return view('profile.user', compact('user', 'customer'));
+        return view('profile.myProfile', compact('user', 'customer'));
     }
 
     public function edit_profile(Request $request, $id)
@@ -154,7 +155,7 @@ class CustomerController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        $customer->mobile = $request->input('mobile');
+        $customer->contact_no = $request->input('mobile');
         $customer->tel = $request->input('tel');
         $customer->street = $request->input('street');
         $customer->city = $request->input('city');
@@ -175,7 +176,7 @@ class CustomerController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = 'public/photos/' . $id;
+            $path = 'public/photos/' . Auth::user()->name;
 
             // Create the folder if it doesn't exist
             if (!Storage::exists($path)) {
@@ -186,10 +187,29 @@ class CustomerController extends Controller
             $file->storeAs($path, $filename);
 
             // Save the photo path in the customer record
-            $customer->photo = 'photos/' . $id . '/' . $filename;
+            $customer->photo = 'photos/' . Auth::user()->name . '/' . $filename;
             $customer->save();
         }
 
         return redirect()->back()->with('success', 'Profile image has been updated successfully.');
+    }
+
+    public function getCustomerInfo()
+    {
+        // Retrieve the customer information from the database
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+
+        if ($customer) {
+            return response()->json([
+                'street' => $customer->street,
+                'contact_no' => $customer->contact_no,
+                'tel' => $customer->tel,
+                'city' => $customer->city,
+                'postal_code' => $customer->postal_code,
+                'state' => $customer->state
+            ]);
+        }
+
+        return response()->json([]);
     }
 }
