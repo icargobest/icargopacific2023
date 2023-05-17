@@ -1,35 +1,35 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Company | Order Tracking #{{ $ship->id }}</title>
+        <style>
+            th {
+                background-color: transparent !important;
+                color: black;
+                font-weight: normal;
+            }
+            td {
+                text-align: left !important;
+                padding: 5px;
+                color: #214D94;
+                font-weight: bold;
+            }
+            .status-green {
+                color: #00bf9a;
+            }
+        </style>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationCompany')
 
-    <style>
-        th {
-            background-color: transparent !important;
-            color: black;
-        }
-
-        td {
-            text-align: left;
-            padding: 5px;
-            color: #214D94;
-        }
-
-        .status-green {
-            color: #00bf9a;
-        }
-    </style>
-
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-    <main class="container py-5" style="margin-top:-49px !important">
+    <main class="container py-5 mw-100" style="margin-top:-49px !important">
         <div class="mt-4">
             <h3 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">Order
                 Tracking #{{ $ship->id }}</h3>
         </div>
-        <div class="order-container container">
+        <div class="order-container container mw-100 px-0">
             <div class="cards-holder">
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{-- START OF ORDER DETAILS --}}
@@ -42,7 +42,7 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
@@ -72,7 +72,7 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
@@ -102,11 +102,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                             <div class="row">
-                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-xl-none">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                         </div>
@@ -165,15 +165,15 @@
                                 </button>
                             </a>
                             <a href="{{ route('generateWaybill', $ship->id) }}" target="_blank">
-                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1"
+                                <button type="button" class="btn btn-warning btn-block shadow-0 my-1"
                                     style="min-width:140px; max-width:509px;">
                                     Waybill
                                 </button>
                             </a>
                             <a href="{{ route('viewOrder_Company', $ship->id) }}">
                                 <div class="my-1">
-                                    <button type="button" class="btn btn-block btn-dark shadow-0 mb-1"
-                                        style="min-width:140px; max-width:509px;">
+                                    <button type="button" class="btn btn-block btn-light shadow-0 mb-1"
+                                        style="min-width:140px; max-width:509px; border-color:#214D94;">
                                         BACK
                                     </button>
                                 </div>
@@ -183,7 +183,7 @@
                             @endif
                         </div>
                     </div>
-                    <hr class="opacity-75">
+                    <hr class="opacity-75" style="border-color:#214D94;">
                     {{-- END OF ORDER DETAILS --}}
 
                     {{-- TRACKING ORDER START --}}
@@ -335,6 +335,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endif
                                         @endif
                                         @if ($log->isAssort == true)
                                             <h4 class="fw-bold border-0">ARRIVED AT (current_station)</h4>

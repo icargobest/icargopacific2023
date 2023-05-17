@@ -15,7 +15,7 @@
             {{ session('status') }}
         </div>
         @endif
-        <form action="{{ route('dispatcher.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('dispatchers.update',$user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row ">

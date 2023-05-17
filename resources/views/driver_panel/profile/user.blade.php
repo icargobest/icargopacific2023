@@ -1,5 +1,5 @@
 <title>Driver | Profile</title>
-
+@include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationDriver',['staff' => "nav-selected"])
 
@@ -77,9 +77,10 @@
                     </div>
               </div>
 
+              {{-- Extra-Data FEEL FREE TO REMOVE--}}
               <div class="profileContent">
                 <div class="titleButton">
-                  <h5 style="font-weight: bolder">Social</h5>
+                  <h5 style="font-weight: bolder">Socials</h5>
                   <button type="button" class="profileButton" style="" data-bs-toggle="modal" data-bs-target="#social">EDIT</button>
                 </div>
                 <div class="profileDivider2 "></div>
@@ -94,6 +95,10 @@
                     <span class="data-content">juandelacruz@gmail.com</span>
                   </div>
               </div>
+
+
+
+
         </div>
     </div>
 </main>
@@ -102,7 +107,6 @@
 @include('profile.editmod2')
 @include('profile.editmod3')
 @include('profile.imagemodal')
-@include('profile.companymodal')
 @include('partials.footer')	
 
 <style>
