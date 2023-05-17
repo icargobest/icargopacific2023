@@ -11,6 +11,16 @@
             <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             
+            <div class="row mb-4">
+                <label class="form-label" for="vehicle_type"></label>
+                <select type="text" id="form6Example5" name="station_id" 
+                style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+                    <option value="" hidden>STATION</option>
+                  @foreach ($stations as $station)
+                    <option value="{{ $station->id }}" >{{ $station->station_name }}</option>
+                  @endforeach
+                </select>
+              </div>
             <div class="form-outline mb-4">
               <input class="form-control" type="file" id="formFile" name="image" required>
             </div>

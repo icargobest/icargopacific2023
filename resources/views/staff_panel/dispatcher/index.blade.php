@@ -41,6 +41,12 @@
                         <th scope="col" style="text-align: center">
                             Dispatcher Name
                         </th>
+                        <th scope="col" style="text-align: center">
+                            Station No
+                        </th>
+                        <th scope="col" style="text-align: center">
+                            Contact No
+                        </th>
                         <th
                             scope="col"
                             style="text-align: center; width: 350px"
@@ -54,6 +60,15 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td class="capitalized"><img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
+                        <td>
+                            @foreach( $stations as $station)
+                                @if($user->station_id == $station->id)
+                                    {{ $station->station_number }}
+                                @endif
+                            @endforeach
+
+                        </td>
+                        <td>{{ $user->contact_no }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"

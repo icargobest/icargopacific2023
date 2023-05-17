@@ -369,7 +369,13 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');
         Route::get('/staff/track_parcel', ['uses' => 'App\Http\Controllers\StaffQrScannerController@index']);
         Route::post('/staff/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\StaffQrScannerController@checkUser']);
+        Route::get('/staff/order_list/station', 'assignStation_view')->name('assignStation_view');
      });
+
+     //Assign Station
+     Route::controller(StaffController::class)->group(function(){
+        Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+    });
 
     //DRIVER
     Route::resource('staff/driver', DriverController::class);

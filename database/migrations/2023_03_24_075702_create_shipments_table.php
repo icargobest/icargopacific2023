@@ -43,7 +43,6 @@ return new class extends Migration
         });
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('station_id')->nullable()->default;
             $table->string('company_name')->nullable()->default;
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');

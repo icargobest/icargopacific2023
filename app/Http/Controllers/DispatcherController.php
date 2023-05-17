@@ -7,6 +7,7 @@ use App\Models\Dispatcher;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\Station;
 use Exception;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
@@ -26,22 +27,26 @@ class DispatcherController extends Controller
 
     public function index()
     {
+        $station = Station::all();
+
         $id = Auth::id();
         $company = Company::where('user_id', $id)->first();
         $user_id = $company->id;
         $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
-        return view('company/dispatcher.index', compact('dispatchers'));
+        return view('company/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
     }
 
     public function staffIndex()
     {
+        $station = Station::all();
+        
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first();
         if ($staff) {
             $company_id = $staff->company_id;
             $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
         }
-        return view('staff_panel/dispatcher.index', compact('dispatchers'));
+        return view('staff_panel/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
     }
 
     function viewArchive(){
@@ -109,6 +114,7 @@ class DispatcherController extends Controller
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
                 'company_id' => $user_id,
+                'station_id' => $request->station_id,
                 'contact_no' =>  $otherValidation['contact_no'],
                 'tel' => $request->tel,
                 'street' => $request->street,
