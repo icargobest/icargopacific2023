@@ -51,7 +51,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="/staff/advance_freight/index">
+                            <a class="nav-link" href="{{ route('staff.advFreightPanel') }}">
                                 <div class="link @if(isset($advance)){{$advance}}@endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>
@@ -91,7 +91,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="/staff/track_parcel">
                                 <div class="link">
                                     <i class="fa fa-qrcode link-i-1"></i>
                                     <span>Track Parcel</span>

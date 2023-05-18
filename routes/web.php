@@ -16,7 +16,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeStaffController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\SubscriptionController;
@@ -24,9 +24,6 @@ use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffDashboardController;
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +50,7 @@ use App\Http\Controllers\StaffDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
 
 
 /* Profile Tab */
@@ -61,9 +58,6 @@ Route::get('/', function () {
    return view('staff_panel.profile.user');
 });   */
 
-Route::get('/profile', function(){
-    return view('profile.user');
-});
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
@@ -141,12 +135,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         ->name('dashboard')->middleware("verified");
 
     //Edit Profile
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/user/edit_profile/{id}', 'index')->name('edit_profile');
-        Route::post('/user/edit_profile/{id}', 'edit')->name('edit');
-        Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/user/edit_profile/{id}', 'index_edit')->name('edit_profile');
+        Route::post('/user/edit_profile/{id}', 'edit_profile')->name('edit');
         Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
-        Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');
+        Route::get('/customer-info', 'getCustomerInfo');
     });
 
     //Order Routes
@@ -160,7 +153,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/user/track_order/{id}', 'trackOrder')->name('trackOrder');
         Route::put('/user/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/user/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/user/invoice/{id}', 'viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}', 'viewInvoice')->name('user.generate');
         Route::get('/user/waybill/{id}', 'viewWaybill')->name('user.generateWaybill');
     });
 });
@@ -181,12 +174,14 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::get('/company/advFreight/decline/{id}', 'decline_transfer');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
-        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
+        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('company.generateInvoice');
+        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('company.generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
         Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
+        Route::get('/company/track_parcel', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@index']);
+        Route::post('/company/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@checkUser']);
 
     });
 
@@ -245,7 +240,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         ->name('super.admin.dashboard')->middleware("verified");
 
     Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
-
+    Route::get('/customer-queries/{id}', [QueryController::class, 'show_Query'])->name('showQuery');
     //Registered User Accounts
     Route::resource('icargo/registered_users', UsersController::class);
     Route::controller(UsersController::class)->group(function () {
@@ -258,7 +253,8 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::put('icargo/registered_users/update+dispatcher/{id}', [DispatcherController::class, 'update'])->name('update.dispatcher');
         Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'update'])->name('update.staff');
         Route::put('icargo/registered_users/update+customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
-
+        Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'superAdmin_update'])->name('super-admin.update');
+        Route::get('icargo/registered_users/send_otp/{id}', [SuperDashboardController::class, 'sendOTP']);
 
         //  archive registered user
         Route::put('icargo/registered_users/archive+company/{id}', [CompaniesController::class, 'archive'])->name('archive.company');
@@ -273,6 +269,11 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::put('icargo/registered_users/unarchive+dispatcher/{id}', [DispatcherController::class, 'unarchive'])->name('unarchive.dispatcher');
         Route::put('icargo/registered_users/unarchive+staff/{id}', [StaffController::class, 'unarchive'])->name('unarchive.staff');
         Route::put('icargo/registered_users/unarchive+customer/{id}', [CustomerController::class, 'unarchive'])->name('unarchive.customer');
+        
+        // track parcel
+        Route::get('/icargo/track_parcel', ['uses' => 'App\Http\Controllers\SuperQrScannerController@index']);
+        Route::post('/icargo/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\SuperQrScannerController@checkUser']);
+        
     });
 
     //Companies
@@ -298,11 +299,11 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     ->name('driver.dashboard')->middleware('verified');
 
     //DRIVER PAGE
-    Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
-    Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
-    Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
-    Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
-    Route::post('driver/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
+    Route::get('/driver/track_parcel', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+    Route::post('/driver/track_parcel/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+    Route::post('/driver/track_parcel/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+    Route::post('/driver/track_parcel/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
+    Route::post('/driver/track_parcel/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
 
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
@@ -315,7 +316,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
         Route::put('/driver/update-info/{id}',  'updateProfile')->name('driver.personinfo.update');
         Route::put('/driver/update-image/{id}',  'updateImage')->name('driver.profile.update');
     });
-    
+
 });
 
 // Dispatcher Panel
@@ -324,12 +325,12 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
         ->name('dispatcher.dashboard')->middleware('verified');
 
     //DISPATCHER PAGE
-    Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
-    Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
-    Route::post('dispatchers/update-received', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
-    Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-    Route::post('dispatchers/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
-    Route::post('dispatchers/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
+    Route::get('/dispatcher/track_parcel', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+    Route::post('/dispatcher/track_parcel/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+    Route::post('/dispatcher/track_parcel/update-received', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+    Route::post('/dispatcher/track_parcel/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
+    Route::post('/dispatcher/track_parcel/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
+    Route::post('/dispatcher/track_parcel/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
 
     Route::controller(ShipmentController::class)->group(function () {
         Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
@@ -352,18 +353,22 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
-    ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
+        ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){
         Route::get('/staff/order', 'staffIndex')->name('staff.order');
         Route::get('/staff/freight', 'freightStaff')->name('freightStaff');
         Route::get('/staff/advfreight', 'staff_advFreightPanel')->name('staff.advFreightPanel');
+        Route::get('/staff/advfreight/transfers/{id}','staff_advfreight')->name('staff_advFreight');
+        Route::put('staff/advfreight/transfers/{id}', 'staff_advTransfer')->name('staff_advFreight.transfer');
+        Route::get('/staff/advfreight/accept/{id}', 'staff_accept_transfer');
+        Route::get('/staff/advfreight/decline/{id}', 'staff_decline_transfer');
         Route::get('/staff/order_history', 'orderHistory_staff')->name('orderHistory_Staff');
         Route::get('/staff/view_shipment/{id}', 'viewOrder_Staff')->name('viewOrder_Staff');
         Route::get('/staff/track_order/{id}', 'trackOrder_Staff')->name('trackOrder_Staff');
-        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('viewInvoiceStaff');
+        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('staff.generateInvoice');
         Route::post('/staff/add_bid', 'staff_addBid')->name('staff_addBid');
         Route::put('/staff/transfer/{id}', 'transfer')->name('transfer.staff');
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');
@@ -375,6 +380,9 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
      //Assign Station
      Route::controller(StaffController::class)->group(function(){
         Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+        Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
+        Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
+        Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
     });
 
     //DRIVER
@@ -411,7 +419,15 @@ Route::get('/find', function () {
 
 Route::post('/checkTnumber', [StaffQrScannerController::class, 'checkTnumber'])->name('checkTnumber');
 
-Route::post('/search', [UserController::class, 'search']);
+Route::post('/search', [SearchController::class, 'search']);
+
+Route::post('/searchStaff', [SearchController::class, 'searchStaff']);
+
+Route::post('/searchCompany', [SearchController::class, 'searchCompany']);
+
+Route::post('/searchDriver', [SearchController::class, 'searchDriver']);
+
+Route::post('/searchDispatcher', [SearchController::class, 'searchDispatcher']);
 
 Route::get('/income', [IncomeController::class, 'index']);
 
@@ -444,30 +460,7 @@ Route::get('/waybillForm', function () {
     Route::get('company/order/waybill-form')->name('waybillForm');
 });
 
-// Plan Controller / Monthly Subscription Routes
-Route::middleware("auth")->group(function () {
-    Route::group(['prefix' => 'subscriptions'], function () {
-        Route::get('/plans', [PlanController::class, 'index']);
-        Route::get('/plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-        Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
-    });
-});
 
-Route::middleware('auth')->group(function(){
-Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
-Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
-Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
-Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
-});
-
-Route::get('pay',[SubscriptionController::class, 'pay']);
-Route::get('success',[SubscriptionController::class, 'success']);
-
-Route::get('/paymongo', function () {
-    return view('pay');
-});
-
-Route::get('/pay/callback', [SubscriptionController::class, 'handlePaymentCallback']);
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes
