@@ -10,7 +10,7 @@ class DispatcherQrScannerController extends Controller
 {
     public function index(Request $request)
     {
-        return view('dispatcher_panel.dispatcher');
+        return view('dispatcher_panel.dispatcherParcelTracking');
     }
 
     // Function to show the page we want to log in by scanner of QR code

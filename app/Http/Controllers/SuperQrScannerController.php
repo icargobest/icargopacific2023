@@ -10,7 +10,7 @@ class SuperQrScannerController extends Controller
     // Function to show the page we want to log in by scanner of QR code
     public function index(Request $request)
     {
-        return view('icargo_superadmin_panel.adminQR');
+        return view('icargo_superadmin_panel.adminParcelTracking');
     }
 
     // Function to allow the user to log in or not log in that is done by scanner of QR code
