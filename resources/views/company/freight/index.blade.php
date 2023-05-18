@@ -105,13 +105,7 @@
                         @endforeach
                     </tbody>
                 </table>
-
-
             </section>
-
-
-
-
         </div>
     </div>
 
