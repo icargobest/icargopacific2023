@@ -815,6 +815,7 @@ class ShipmentController extends Controller
             $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
             if ($company) {
                 $company_id_staff =  $company->id;
+                $company_user_id =  $company->user_id;
                 $company_ID =  $company->user_id;
                 $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
                 if ($user) {
@@ -825,6 +826,6 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('staff_panel.order.station', compact('company_id_staff', 'company_name'), ['shipments' => $shipment, 'stations' => $station, 'bids' => $bid, 'sender', 'recipient',]);
+        return view('staff_panel.order.station', compact('company_id_staff', 'company_user_id'), ['shipments' => $shipment, 'stations' => $station, 'bids' => $bid, 'sender', 'recipient',]);
     }
 }
