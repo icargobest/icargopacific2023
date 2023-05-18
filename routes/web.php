@@ -232,7 +232,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         ->name('super.admin.dashboard')->middleware("verified");
 
     Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
-
+    Route::get('/customer-queries/{id}', [QueryController::class, 'show_Query'])->name('showQuery');
     //Registered User Accounts
     Route::resource('icargo/registered_users', UsersController::class);
     Route::controller(UsersController::class)->group(function () {
@@ -436,14 +436,7 @@ Route::get('/waybillForm', function () {
     Route::get('company/order/waybill-form')->name('waybillForm');
 });
 
-// Plan Controller / Monthly Subscription Routes
-Route::middleware("auth")->group(function () {
-    Route::group(['prefix' => 'subscriptions'], function () {
-        Route::get('/plans', [PlanController::class, 'index']);
-        Route::get('/plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-        Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
-    });
-});
+
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes

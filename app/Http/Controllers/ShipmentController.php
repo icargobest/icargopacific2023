@@ -16,6 +16,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\Dispatcher;
 use App\Models\Driver;
+use App\Models\advTransferLog;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -148,10 +149,11 @@ class ShipmentController extends Controller
         $shipment = Shipment::all();
         $company = Company::where('user_id', Auth::user()->id)->first();
         $bid = Bid::all();
+        $company_log = advTransferLog::all();
 
         $this->TrackOrderLog();
 
-        return view('company.advance_freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
+        return view('company.advance_freight.index', compact('company'), ['shipments' => $shipment, 'bids' => $bid, 'company_logs' => $company_log, 'sender', 'recipient']);
     }
 
     public function staff_advFreightPanel()
@@ -194,8 +196,20 @@ class ShipmentController extends Controller
 
     public function staff_advTransfer(Request $request)
     {
+        $validation = $request->validate([
+            'shipping_date' => 'required',
+            'transfer_to_company' => 'required',
+            'freight_charges' => 'required'
+        ], [
+            'shipping_date.required' => 'Shipping date field is required.',
+            'transfer_to_company.required' => 'Transfer to company field is required.',
+            'freight_charges.required' => 'Freight charges field is required.'
+        ]);
+
         $data = Shipment::findOrFail($request->id);
         $data->advTransferredto = $request->transfer_to_company;
+        $data->advFreight_total_amount = $request->total_amount;
+        $data->shipping_date = $request->shipping_date;
         $data->advTransferredStatus = 'Pending';
         $data->save();
 
@@ -328,6 +342,12 @@ class ShipmentController extends Controller
         $order_history->save();
 
         $this->TrackOrderLog();
+
+        $company_log = new advTransferLog;
+        $company_log->shipment_id = $shipment->id;
+        $company_log->status = 'Created';
+        $company_log->save();
+        $this->advTransfer_Log($shipment->id);
 
         return redirect()->route('userOrderPanel')->with('success', 'Order added successfully.');
     }
@@ -633,11 +653,24 @@ class ShipmentController extends Controller
 
     public function advTransfer(Request $request)
     {
+        $validation = $request->validate([
+            'shipping_date' => 'required',
+            'transfer_to_company' => 'required',
+            'freight_charges' => 'required'
+        ], [
+            'shipping_date.required' => 'Shipping date field is required.',
+            'transfer_to_company.required' => 'Transfer to company field is required.',
+            'freight_charges.required' => 'Freight charges field is required.'
+        ]);
+
         $data = Shipment::findOrFail($request->id);
+        $data->advTransferredfrom = $request->transfer_from_company;
         $data->advTransferredto = $request->transfer_to_company;
+        $data->advFreight_total_amount = $request->total_amount;
+        $data->shipping_date = $request->shipping_date;
         $data->advTransferredStatus = 'Pending';
         $data->save();
-
+        $this->advTransfer_Log($request->id);
         return redirect()->back()->with('message', 'Transfer Pending');
     }
 
@@ -652,19 +685,106 @@ class ShipmentController extends Controller
         $shipment->status = 'Transferred';
         $shipment->save();
         $this->TrackOrderLog();
+        $this->advTransfer_Log($id);
         return redirect()->back()->with('message', 'Transfer Accepted');
     }
 
     public function decline_transfer($id)
     {
         $shipment = Shipment::findOrFail($id);
-
+        $shipment->advTransferredStatus = 'Rejected';
+        $shipment->save();
+        $this->advTransfer_Log($id);
+        $shipment->advTransferredfrom = NULL;
         $shipment->advTransferredto = NULL;
-        $shipment->advTransferredStatus = NULL;
+        $shipment->advFreight_total_amount = NULL;
+        $shipment->shipping_date = NULL;
         $shipment->save();
 
         return redirect()->back()->with('message', 'Transfer Declined');
     }
+
+    public function advTransfer_Log($id){
+        $CompanyLog = advTransferLog::all();
+        $shipment = Shipment::findOrFail($id);
+        $currentStaff = Staff::where('user_id', Auth::user()->id)->first();
+
+        $company_log = $CompanyLog->where('shipment_id', $shipment->id)->first();
+        
+        
+            if(Auth::user()->type == 'company'){
+            if ($shipment->advTransferredStatus === 'Pending') {
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->company_from = $shipment->advTransferredfrom;;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Pending'; 
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Accepted'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->company_from = $shipment->advTransferredfrom;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Accepted';
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Rejected'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->company_from = $shipment->advTransferredto;;
+                $company_log->company_to = $shipment->advTransferredfrom;
+                $company_log->status = 'Rejected';
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Transferred'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->company_from = $shipment->advTransferredfrom;;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Transferred';
+                $company_log->save();
+            }
+        }
+        else{
+            if ($shipment->advTransferredStatus === 'Pending') {
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->staff_from = $shipment->advTransferredfrom;;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Pending';
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Accepted'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->staff_from = $currentStaff->user_id;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Accepted';
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Rejected'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->staff_from = $currentStaff->user_id;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Rejected';
+                $company_log->save();
+            }
+            else if($shipment->advTransferredStatus == 'Transferred'){
+                $company_log = new advTransferLog;
+                $company_log->shipment_id = $shipment->id;
+                $company_log->staff_from = $currentStaff->user_id;
+                $company_log->company_to = $shipment->advTransferredto;
+                $company_log->status = 'Transferred';
+                $company_log->save();
+            }
+        
+
+
+    }
+
+}
 
     public function toPickUp_view()
     {

@@ -2,7 +2,6 @@
 
 <section style="padding:100px 0px; background-color:white;" id="contactUS">
     <div class="container" >
-    <div class="mt-2">@include('flash-message')</div>
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 border shadow text-center p-5 fw-bolder" style="background-color: white; ">
                 <div>
@@ -12,6 +11,7 @@
                         @csrf
                         <div class="row d-flex justify-content-center mb-4">
                             <div class="col-12 ps-lg-5 pe-lg-5 text-start">
+                            <div class="mt-2">@include('flash-message')</div>
                                 <label for="email" class="text-md-start fw-bold mb-2">Email address:</label>
                                 <div class="input-group">
                                     <span class="input-group-text">

@@ -102,9 +102,7 @@ li
                     @if(Auth::user()->type == 'dispatcher')
                     <li><a class="dropdown-item navFont" href="{{ route('dispatcher.profile') }}"><i class="fa fa-user"></i>Profile</a></li>
                     @endif
-                    @if(Auth::user()->type == 'user')
-                    <li><a class="dropdown-item navFont" href="{{ route('edit_profile', Auth::id()) }}"><i class="fa fa-user"></i>Profile</a></li>
-                    @endif
+
                     
       {{--          <li><a class="dropdown-item navFont" href="#"><i class="fa fa-gear"></i>Settings</a></li>
                     <li><a class="dropdown-item navFont" href="#"><i class="fa fa-credit-card"></i>Payments</a></li>
