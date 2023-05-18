@@ -111,11 +111,11 @@ class DriverController extends Controller
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
-            if($request->hasfile('profile_image')){
-                $file = $request->file('profile_image');
+            if($request->hasfile('image')){
+                $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extention;
-                $file->move('uploads/drivers/',$filename);
+                $file->move('images/company/drivers/',$filename);
             }
             $drivers = Driver::create([
                 'user_id' => $user->id,
@@ -129,7 +129,7 @@ class DriverController extends Controller
                 'state' => $request->state,
                 'postal_code' => $request->postal_code,
                 'company_id' => $user_id,
-                'profile_image' =>  $filename,
+                'image' => $filename,
             ]);
           
             DB::commit();
@@ -155,17 +155,17 @@ class DriverController extends Controller
     public function update($id, Request $request)
     {
         $driver = Driver::find($id);
-        if($request->hasfile('profile_image')){
-            $destination = 'uploads/drivers/'.$driver->profile_image;
+        if($request->hasfile('image')){
+            $destination = 'images/company/drivers/'.$driver->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
-            $file = $request->file('profile_image');
+            $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('uploads/drivers/',$filename);
+            $file->move('images/company/drivers/',$filename);
         }else{
-            $filename = $driver->profile_image;
+            $filename = $driver->image;
         }
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
@@ -177,7 +177,7 @@ class DriverController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'postal_code' => $request->postal_code,
-            'profile_image' =>  $filename,
+            'image' => $filename,
         ];
 
         $userData = [
@@ -233,6 +233,11 @@ class DriverController extends Controller
 
     public function updateProfile($id, Request $request)
     {
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
@@ -243,8 +248,8 @@ class DriverController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'postal_code' => $request->postal_code,
-            'fb_account' => $request->fb_account,
-            'in_account' => $request->in_account,
+            'facebook' => $validated['facebook'],
+            'linkedin' => $request->linkedin,
         ];
 
         $userData = [
@@ -265,18 +270,18 @@ class DriverController extends Controller
     public function updateImage($id, Request $request)
     {
         $driver = Driver::find($id);
-        if($request->hasfile('profile_image')){
-            $destination = 'uploads/drivers/'.$driver->profile_image;
+        if($request->hasfile('image')){
+            $destination = 'images/company/drivers/'.$driver->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
-            $file = $request->file('profile_image');
+            $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('uploads/drivers/',$filename);
+            $file->move('images/company/drivers/',$filename);
         }
         $driverData = [
-            'profile_image' =>  $filename,
+            'image' =>  $filename,
         ];
         
         $driver->update($driverData);

@@ -254,4 +254,12 @@ class CompaniesController extends Controller
         return back()->with('error', 'You are not authorized to view this profile.');
     }
     
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Company status updated successfully!');
+    }
 }

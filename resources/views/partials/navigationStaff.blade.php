@@ -98,6 +98,14 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="links">
+                            <a class="nav-link" href="{{ route('assignStation_view') }}">
+                                <div class="link">
+                                    <i class="fas fa-location-dot link-i-1"></i>
+                                    <span>Assign Station</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
 
                     <!--             <div class="divider2">

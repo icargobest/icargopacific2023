@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col">
                 <div class="mb-4">
-                  <img src="{{ url('uploads/dispatchers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
+                  <img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">
                 </div>
               </div>
             </div>

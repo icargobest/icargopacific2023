@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\Driver;
 use App\Models\Dispatcher;
@@ -93,6 +94,12 @@ class CreateUsersSeeder extends Seeder
                         'company_id' => $company->id,
                         'contact_no' => '1234567890',
                         'archived' => false,
+                ]);
+            }
+            if ($user->type == 'user') {
+                Customer::create([
+                    'user_id' => $user->id,
+                    'contact_no' => '1234567890',
                 ]);
             }
         }

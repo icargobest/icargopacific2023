@@ -18,6 +18,15 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('company_id')->nullable()->default(null);
             $table->string('contact_no');
+            $table->string('tel')->nullable();
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('photo', 300)->nullable();
+            $table->string('website')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

@@ -20,15 +20,15 @@
             @method('PUT')
 
             <div class="form-outline mb-4">
-              <img src="{{ url('uploads/dispatchers/'.$user->profile_image) }}" height="100" width="100" alt="profile image">
-              <input class="form-control" type="file" id="formFile" name="profile_image">
+              <img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">
+              <input class="form-control" type="file" id="formFile" name="image">
             </div>
             <div class="row ">
                 <div class="col">
                     <div class="form-outline mb-4">
                         <input type="text" name="name" value="{{ $user->user->name }}" class="form-control"
                             placeholder="Dispatcher name" required>
-                           <label class="form-label" for="name">Staff Name</label>
+                           <label class="form-label" for="name">Dispatcher Name</label>
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -43,7 +43,7 @@
                           minlength="11" 
                           maxlength="11"
                           placeholder="Contact Number:" required>
-                          <label class="form-label" for="name">Staff Name</label>
+                          <label class="form-label" for="name">Contact No.</label>
 
                       @error('name')
                       <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
