@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,7 @@ class CompaniesController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => '2',
             ]);
-
+            $user->sendEmailVerificationNotification();
             $company = Company::create([
                 'user_id' => $user->id,
                 'contact_no' =>  $request->contact_no,
@@ -109,6 +110,8 @@ class CompaniesController extends Controller
     {
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
 
         if ($image = $request->file('image')) {
             $folderName = $user->name; // Get the company's name
@@ -133,7 +136,10 @@ class CompaniesController extends Controller
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
-    
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
         $user->update([
             'name' => $request->name,
             'email' => $request->email ?? $user->email,
@@ -152,7 +158,10 @@ class CompaniesController extends Controller
             'website' => $request->filled('website') ? $request->website : $company->website,
             'linkedin' => $request->filled('linkedin') ? $request->linkedin : $company->linkedin,
         ]);
-    
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+        }
+
         return back()->with('success', 'Company account has been updated successfully.');
     }
     

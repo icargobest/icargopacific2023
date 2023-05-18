@@ -1,11 +1,8 @@
-<head>
-<title>Company | Advance Freight</title>
 
+<title>Staff | Advanced Freight</title>
 
-</head>
-@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationCompany',['advance' => "nav-selected"])
+@include('partials.navigationStaff')
 
 
 <div class="mx-2">
@@ -17,7 +14,7 @@
     </div>  
     @endif
         <div class="employee-header-container">
-            <h3 class="">ADVANCE FREIGHT LIST</h3>
+            <h3 class="">ADVANCED FREIGHT LIST</h3>
         </div>
 
         <section class="search-filter-container mb-4">
@@ -69,11 +66,11 @@
 
                 <tbody>
                     @foreach ($shipments as $ship)
-                    @if(Auth::user()->type == 'company')
-                    @if($company->id == $ship->company_id)
-         
+                    @if(Auth::user()->type == 'staff')
+                    @if($staff->company_id == $ship->company_id)
+                
                     <tr>
-                        
+                    
                         {{-- sender namae --}}
                         <td>{{$ship->sender->sender_name}}</td>
                         {{-- sender address --}}
@@ -98,8 +95,8 @@
                         <td>COD</td>
                         <td class="tdbutton" style="max-width:120px">
                         <a href="{{ route('trackOrder_Company', $ship->id) }}"><button class="btn created-button mx-auto">Tracking</button></a>
-                        @if($ship->advTransferredStatus == NULL || $ship->advTransferredStatus == 'Rejected')
-                        <a href="{{ route('adv_Freight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
+                        @if($ship->advTransferredStatus == NULL)
+                        <a href="{{ route('staff_advFreight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
                         @elseif($ship->advTransferredStatus == 'Accepted')
                         Transfer Accepted
                         @else
@@ -113,6 +110,7 @@
                     @endforeach
                 </tbody>
                 </table>
+                
 
                 <div class="employee-header-container">
                     <h3 class="">REQUESTS</h3>
@@ -120,33 +118,34 @@
                 <br>
                 <table class="table table-bordered table-striped">
                 <thead>
-                  <th>Tracking Number</th>
-                  <th>Shipping Date</th>
-                  <th>Order Type</th>
-                  <th>Sender Name</th>
-                  <th>Recipient Name</th>
-                  <th>Bid Amount</th>
-                  <th>Freight Charges</th>
+                    
+                    <th>Tracking Number</th>
+                    <th>Shipping Date</th>
+                    <th>Order Type</th>
+                    <th>Sender Name</th>
+                    <th>Recipient Name</th>
+                    <th>Bid Amount</th>
+                    <th>Freight Charges</th>
                 
                 </thead>
                 @foreach ($shipments as $ship)
-                @if(Auth::user()->type == 'company' && $ship->advTransferredto == Auth::user()->id && $ship->advTransferredStatus == "Pending")
+                @if(Auth::user()->type == 'staff' && $ship->advTransferredto == $company_id_staff && $ship->advTransferredStatus == "Pending")
                 <tr>
 
-                  <td>{{$ship->tracking_number}}</td>
-                  <td>{{$ship->shipping_date}}</td>
-                  <td>{{$ship->order_type}}</td>
-                  <td>{{$ship->sender->sender_name}}</td>
-                  <td>{{$ship->recipient->recipient_name}}</td>
-                  <td>{{$ship->bid_amount}}</td>
-                  <td>{{$ship->advFreight_total_amount}}</td>
+                    <td>{{$ship->tracking_number}}</td>
+                    <td>{{$ship->shipping_date}}</td>
+                    <td>{{$ship->order_type}}</td>
+                    <td>{{$ship->sender->sender_name}}</td>
+                    <td>{{$ship->recipient->recipient_name}}</td>
+                    <td>{{$ship->bid_amount}}</td>
+                    <td>{{$ship->advFreight_total_amount}}</td>
 
                   <td>
-                    <a href="{{url('/company/advFreight/accept', $ship->id)}}" class="btn btn-success">Accept</a>
+                    <a href="{{url('/staff/advfreight/accept', $ship->id)}}" class="btn btn-success">Accept</a>
                   </td>
 
                   <td>
-                    <a href="{{url('/company/advFreight/decline', $ship->id)}}" class="btn btn-danger">Decline</a>
+                    <a href="{{url('/staff/advfreight/decline', $ship->id)}}" class="btn btn-danger">Decline</a>
                   </td>
 
                 </tr>
@@ -155,58 +154,6 @@
             @endif
             @endforeach
             </table>
-
-            <div class="employee-header-container">
-                    <h3 class="">ADVANCED FREIGHT LOGS</h3>
-            </div>
-            <br>
-
-            @foreach($shipments as $ship)
-            @foreach($company_logs as $company_log)
-            @if(Auth::user()->type == 'company' && $company_log->shipment_id == $ship->id && $ship->company_id == $company->id)
-            @if($company_log->status == 'Created')
-                
-            @endif
-            @if($company_log->status == 'Pending')
-                    <div class="card mb-3" style="background-color: #D9D9D9;">
-                        <div class="card-body">
-                            <div class="row">
-                                <h3 class="fw-bold border-0">TRANSFER PENDING</h3>
-                                    <h5 class="card-title border-0 fw-bold">AWAITING FOR COMPANY #: {{$company_log->company_to}} 
-                                        TO ACCEPT TRANSFER</h5>
-                            </div>
-                        </div>
-                    </div>
-            @elseif($company_log->status == 'Accepted')
-                    <div class="card mb-3" style="background-color: #D9D9D9;">
-                        <div class="card-body">
-                            <div class="row">
-                                <h3 class="fw-bold border-0">TRANSFER HAS BEEN ACCEPTED</h3>
-                                    <h5 class="card-title border-0 fw-bold">COMPANY #: {{$company_log->company_to}} 
-                                        HAS ACCEPTED THE TRANSFER.</h5>
-                            </div>
-                        </div>
-                    </div>
-            @elseif($company_log->status == 'Rejected')
-
-                    <div class="card mb-3" style="background-color: #D9D9D9;">
-                        <div class="card-body">
-                            <div class="row">
-                                <h3 class="fw-bold border-0">TRANSFER HAS BEEN REJECTED</h3>
-                                    <h5 class="card-title border-0 fw-bold">COMPANY #: {{$company_log->company_from}}
-                                        HAS REJECTED THE TRANSFER.
-                                    </h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-            @endif
-            @endif
-            @endforeach
-            @endforeach
-            </table>
-
-            
 
         </section>
 
@@ -231,3 +178,4 @@ border: 1px solid black;
 
 }
 </style>
+@include('partials.footer')
