@@ -11,7 +11,7 @@ class Company extends Model
 
 
     protected $table = 'companies';
-    protected $fillable = ['user_id', 'contact_no', 'contact_name', 'company_address', 'archived', 'comapny_id'];
+    protected $fillable = ['user_id', 'contact_no', 'contact_name', 'company_address', 'archived', 'company_id'];
 
     public function user()
     {

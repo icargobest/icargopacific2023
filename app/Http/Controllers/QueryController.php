@@ -23,4 +23,10 @@ class QueryController extends Controller
 
         return view('icargo_superadmin_panel.list_queries', compact('cust_queries'));
     }
+
+    public function show_Query($id){
+        $cust_queries = CustomerQueries::findOrFail($id);
+
+        return view('icargo_superadmin_panel.messages', compact('cust_queries'));
+    }
 }

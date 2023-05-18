@@ -8,8 +8,7 @@
 </head>
 @include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationCompany',['advance' => "nav-selected"])
-
+@include('partials.navigationStaff')
 
 <body>
 
@@ -32,24 +31,21 @@
       <div class="parent-div">
 
         <div class="first-child col-sm-6 col-md-6 ">
-
-
-          @if(Auth::user()->type == 'company')
-         
-          <form action="{{route('advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
+          @if(Auth::user()->type == 'staff')
+          <form action="{{route('staff_advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
+
           <div class="div input-group rounded mb-4" style="width: 98% !important;">
           <div class="mt-2">@include('flash-message')</div>
-            <input type="date" id="shipping_date" name="shipping_date" class="form-control @error('shipping_date')is-invalid @enderror" placeholder="SHIPPING DATE" aria-label="Search" aria-describedby="search-addon" style="margin-left: 15px;" />
+          <input type="date" id="shipping_date" name="shipping_date" class="form-control @error('shipping_date')is-invalid @enderror" placeholder="SHIPPING DATE" aria-label="Search" aria-describedby="search-addon" style="margin-left: 15px;" />
             <span class="input-group-text border-0" id="search-addon">
               <i class="fa fa-calendar"></i>
             </span>
           </div>
 
-
           <input type="hidden" name="id" value="{{$ship->id}}">
-          <input type="hidden" name="transfer_from_company" value="{{Auth::user()->id}}">
+
           <div class="div mb-4">
             <label class="form-label" for="transfer_to_company"></label>
             <select type="text" id="transfer_to_company" name="transfer_to_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;" class="form-control @error('transfer_to_company')is-invalid @enderror">
@@ -67,7 +63,7 @@
           </div>
 
           <div class="div mb-4">
-            <input type="text" name="freight_charges" class="form-control @error('freight_charges')is-invalid @enderror input-sm text-right amount" placeholder="FREIGHT CHARGES"/>
+          <input type="text" name="freight_charges" class="form-control @error('freight_charges')is-invalid @enderror input-sm text-right amount" placeholder="FREIGHT CHARGES"/>
           </div>
 
           <div class="div mb-4">
@@ -104,7 +100,7 @@
 
 <script type="text/javascript">
   $(function() {
-    
+    //mask 
     var total_amount = function(){
       var total = 0;
       $('.amount').each(function(){
@@ -125,9 +121,9 @@
 
   });
 </script>
-
-
 </html>
+
+
 
 <style>
   table {

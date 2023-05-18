@@ -50,7 +50,7 @@ use App\Http\Controllers\StaffDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
 
 
 /* Profile Tab */
@@ -58,9 +58,6 @@ Route::get('/', function () {
    return view('staff_panel.profile.user');
 });   */
 
-Route::get('/profile', function(){
-    return view('profile.user');
-});
 
 /* Users Tab */
 Route::get('/userpanel/orderHistory', function () {
@@ -182,8 +179,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
-        Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
-
+        
     });
 
     // stations
@@ -241,7 +237,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         ->name('super.admin.dashboard')->middleware("verified");
 
     Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
-
+    Route::get('/customer-queries/{id}', [QueryController::class, 'show_Query'])->name('showQuery');
     //Registered User Accounts
     Route::resource('icargo/registered_users', UsersController::class);
     Route::controller(UsersController::class)->group(function () {
@@ -254,7 +250,8 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::put('icargo/registered_users/update+dispatcher/{id}', [DispatcherController::class, 'update'])->name('update.dispatcher');
         Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'update'])->name('update.staff');
         Route::put('icargo/registered_users/update+customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
-
+        Route::put('icargo/registered_users/update+staff/{id}', [StaffController::class, 'superAdmin_update'])->name('super-admin.update');
+        Route::get('icargo/registered_users/send_otp/{id}', [SuperDashboardController::class, 'sendOTP']);
 
         //  archive registered user
         Route::put('icargo/registered_users/archive+company/{id}', [CompaniesController::class, 'archive'])->name('archive.company');
@@ -348,14 +345,18 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
-    ->name('staff.dashboard')->middleware('verified');
+    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
+        ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
        Route::controller(ShipmentController::class)->group(function(){
         Route::get('/staff/order', 'staffIndex')->name('staff.order');
         Route::get('/staff/freight', 'freightStaff')->name('freightStaff');
         Route::get('/staff/advfreight', 'staff_advFreightPanel')->name('staff.advFreightPanel');
+        Route::get('/staff/advfreight/transfers/{id}','staff_advfreight')->name('staff_advFreight');
+        Route::put('staff/advfreight/transfers/{id}', 'staff_advTransfer')->name('staff_advFreight.transfer');
+        Route::get('/staff/advfreight/accept/{id}', 'staff_accept_transfer');
+        Route::get('/staff/advfreight/decline/{id}', 'staff_decline_transfer');
         Route::get('/staff/order_history', 'orderHistory_staff')->name('orderHistory_Staff');
         Route::get('/staff/view_shipment/{id}', 'viewOrder_Staff')->name('viewOrder_Staff');
         Route::get('/staff/track_order/{id}', 'trackOrder_Staff')->name('trackOrder_Staff');
@@ -443,30 +444,7 @@ Route::get('/waybillForm', function () {
     Route::get('company/order/waybill-form')->name('waybillForm');
 });
 
-// Plan Controller / Monthly Subscription Routes
-Route::middleware("auth")->group(function () {
-    Route::group(['prefix' => 'subscriptions'], function () {
-        Route::get('/plans', [PlanController::class, 'index']);
-        Route::get('/plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-        Route::post('/subscription', [PlanController::class, 'subscription'])->name("subscription.create");
-    });
-});
 
-Route::middleware('auth')->group(function(){
-Route::get('/company-home', [SubscriptionController::class, 'index'])->name('company.home');
-Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('subscribe');
-Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
-Route::post('/cancel-subscription', [SubscriptionController::class, 'cancelSubscription'])->name('cancel-subscription');
-});
-
-Route::get('pay',[SubscriptionController::class, 'pay']);
-Route::get('success',[SubscriptionController::class, 'success']);
-
-Route::get('/paymongo', function () {
-    return view('pay');
-});
-
-Route::get('/pay/callback', [SubscriptionController::class, 'handlePaymentCallback']);
 /*Route::group(['middleware' => ['auth']], function() {
         /**
          * Logout Routes

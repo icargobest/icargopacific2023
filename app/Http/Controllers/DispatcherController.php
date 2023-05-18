@@ -7,6 +7,7 @@ use App\Models\Dispatcher;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\VerifyToken;
 use App\Models\Station;
 use Exception;
 use App\Models\Shipment;
@@ -147,6 +148,28 @@ class DispatcherController extends Controller
     public function update($id, Request $request)
     {
         $dispatcher = Dispatcher::find($id);
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
+        $user = $dispatcher->user;
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
+
+
         if($request->hasfile('image')){
             $destination = 'images/company/dispatchers/'.$dispatcher->image;
             if(File::exists($destination)){
@@ -168,15 +191,9 @@ class DispatcherController extends Controller
             'postal_code' => $request->postal_code,
             'image' =>  $filename,
         ];
-
-        $userData = [
-            'name' => $request->input('name'),
-        ];
         
         $dispatcher->update($dispatcherData);
 
-        $user = $dispatcher->user;
-        $user->update($userData);
         return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
     }
 
