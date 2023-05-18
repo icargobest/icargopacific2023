@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shipment;
 use App\Models\OrderHistory;
-use App\Models\Dispatcher;
 use Illuminate\Support\Facades\Auth;
-class DispatcherQrScannerController extends Controller
+class SuperQrScannerController extends Controller
 {
+    // Function to show the page we want to log in by scanner of QR code
     public function index(Request $request)
     {
-        return view('dispatcher_panel.dispatcherParcelTracking');
+        return view('icargo_superadmin_panel.adminParcelTracking');
     }
 
-    // Function to show the page we want to log in by scanner of QR code
+    // Function to allow the user to log in or not log in that is done by scanner of QR code
     public function checkUser(Request $request)
     {
         $result = 0;
@@ -49,19 +49,11 @@ class DispatcherQrScannerController extends Controller
                 $tracking_number = trim($data[1]);
                 $id = trim($data[2]);
             }
-            $user = Auth::user()->id;
             $shipment = Shipment::where('user_id', $user_id)->where('id', $id)->first();
-            $dispatcher = Dispatcher::where('user_id', $user)->first();
             if ($shipment) {
                 if ($tracking_number && $shipment->tracking_number != $tracking_number) {
                     $result = 0;
                 } else {
-                    if ($shipment->company_id != $dispatcher->company_id) {
-                        $result = 1;
-                        $status = 'driver';
-                        $tracking_number = 'Invalid';
-                        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number]);
-                    }
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;
@@ -93,73 +85,5 @@ class DispatcherQrScannerController extends Controller
                                 'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp,
                                 'isTransferred' => $isTransferred, 'isArrived' => $isArrived, 'isDispatched' => $isDispatched, 'isDelivered' => $isDelivered,
                                 'result' => $result, 'status' => $status, 'tracking_number' => $tracking_number, 'id' => $id]);
-    }
-
-	public function updateReceived(Request $request)
-    {
-        $id = $request->id;
-        $shipment = Shipment::find($id);
-        $time = OrderHistory::find($id);
-        if ($shipment) {
-            $shipment->status = 'Assort';
-            $shipment->save();
-        }
-        if ($time) {
-            $time->isAssort = true;
-            $time->isAssortTime = now();
-            $time->save();
-        }
-        return response()->json(['success' => true]);
-    }
-
-    public function updateOutfordelivery(Request $request)
-    {
-        $id = $request->id;
-        $shipment = Shipment::find($id);
-        $time = OrderHistory::find($id);
-        if ($shipment) {
-            $shipment->status = 'Dispatched';
-            $shipment->save();
-        }
-        if ($time) {
-            $time->isDispatched = true;
-            $time->isDispatchedTime = now();
-            $time->save();
-        }
-        return response()->json(['success' => true]);
-    }
-
-    public function updateTransfer(Request $request)
-    {
-        $id = $request->id;
-        $shipment = Shipment::find($id);
-        $time = OrderHistory::find($id);
-        if ($shipment) {
-            $shipment->status = 'Transferred';
-            $shipment->save();
-        }
-        if ($time) {
-            $time->isTransferred= true;
-            $time->isTransferredTime = now();
-            $time->save();
-        }
-        return response()->json(['success' => true]);
-    }
-
-    public function updateArrived(Request $request)
-    {
-        $id = $request->id;
-        $shipment = Shipment::find($id);
-        $time = OrderHistory::find($id);
-        if ($shipment) {
-            $shipment->status = 'Arrived';
-            $shipment->save();
-        }
-        if ($time) {
-            $time->isArrived = true;
-            $time->isArrivedTime = now();
-            $time->save();
-        }
-        return response()->json(['success' => true]);
     }
 }

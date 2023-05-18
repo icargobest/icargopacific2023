@@ -3,8 +3,12 @@
         <div class="sidebar">
             <div class="wrapper">
                 <div class="search-bar-container">
-                    <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input class="input"id="search-input" placeholder="Tracking ID">
+                    <form action="{{ url('/dispatcher/track_parcel') }}" method="GET">
+                        <div class="search-input-wrapper">
+                            <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="input" name="tracking_number" placeholder="Tracking ID">
+                        </div>
+                    </form>
                 </div>
                 <div class="divider">
                 </div>
@@ -20,7 +24,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="{{ url('/dispatcher/qr') }}">
+                            <a class="nav-link" href="{{ url('/dispatcher/track_parcel') }}">
                                 <div class="link @if (isset($qr)) {{ $qr }} @endif">
                                     <i class="fa fa-qrcode link-i-1"></i>
                                     <span>Qr Scanner</span>

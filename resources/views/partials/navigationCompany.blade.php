@@ -3,8 +3,12 @@
         <div class="sidebar">
             <div class="wrapper">
                 <div class="search-bar-container">
-                    <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input class="input"id="search-input" placeholder="Tracking ID">
+                    <form action="{{ url('/company/track_parcel') }}" method="GET">
+                        <div class="search-input-wrapper">
+                            <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="input" name="tracking_number" placeholder="Tracking ID">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="divider">
@@ -111,6 +115,16 @@
                                 </div>
                             </a>
                         </div>
+
+                        <div class="links">
+                            <a class="nav-link" href="/company/track_parcel">
+                                <div class="link">
+                                    <i class="fa fa-qrcode link-i-1"></i>
+                                    <span>Track Parcel</span>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
 
                     <div class="links bottom-nav">
