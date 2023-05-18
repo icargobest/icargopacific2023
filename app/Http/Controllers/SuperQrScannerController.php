@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shipment;
 use App\Models\OrderHistory;
-use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
-class StaffQrScannerController extends Controller
+class SuperQrScannerController extends Controller
 {
     // Function to show the page we want to log in by scanner of QR code
     public function index(Request $request)
     {
-        return view('staff_panel.staffQR');
+        return view('icargo_superadmin_panel.adminQR');
     }
 
     // Function to allow the user to log in or not log in that is done by scanner of QR code
@@ -50,19 +49,11 @@ class StaffQrScannerController extends Controller
                 $tracking_number = trim($data[1]);
                 $id = trim($data[2]);
             }
-            $user = Auth::user()->id;
             $shipment = Shipment::where('user_id', $user_id)->where('id', $id)->first();
-            $staff = Staff::where('user_id', $user)->first();
             if ($shipment) {
                 if ($tracking_number && $shipment->tracking_number != $tracking_number) {
                     $result = 0;
                 } else {
-                    if ($shipment->company_id != $staff->company_id) {
-                        $result = 1;
-                        $status = 'driver';
-                        $tracking_number = 'Invalid';
-                        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number]);
-                    }
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;

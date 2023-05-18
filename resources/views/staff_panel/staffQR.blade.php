@@ -28,11 +28,11 @@
                     <button type="button" class="btn btn-primary">Search</button>
 
                   </div> --}}
-                  <form action="/search" method="POST">
+                  <form action="/searchStaff" method="POST">
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
                     <div class="row d-flex justify-content-center">
-                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
+                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3" value= "{{ $request->tracking_number }}">
                     </div>
                     <div class="row d-flex justify-content-center">
                       <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
@@ -107,6 +107,39 @@
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
+                  <div class="modal fade" id="noShipmentModal" tabindex="-1" aria-labelledby="noShipmentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="noShipmentModalLabel">Shipment Alert</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>The shipment does not exist.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+
+                  <div class="modal fade" id="notDispatcherModal" tabindex="-1" aria-labelledby="notDispatcherModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="notDispatcherModalLabel">Shipment Alert</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>The shipment is not assigned to this company.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
                 </section>
               </main>
             </div>
@@ -148,6 +181,10 @@
                 // after success to get Data from controller if Shipment is available in the database
                 // iframe for waybill info
                 if (data.result == 1) {
+                  if (data.status === 'driver') {
+                      var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
+                      notDispatcherModal.show();
+                  }
                   var iframeContainer = document.getElementById('my-iframe-container');
                   // check if there is already an iframe in the container
                   if (iframeContainer.childElementCount > 0) {
@@ -340,6 +377,10 @@
         data: formData,
         success: function(response) {
             $('#message').text(response.message);
+            if (response.status === 'driver') {
+                var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
+                notDispatcherModal.show();
+            }
             if (response.shipment) {
                 // after success to get Data from controller if Shipment is available in the database
                 var iframeContainer = document.getElementById('my-iframe-container');
@@ -506,7 +547,8 @@
                     }
             };
             } else {
-            return confirm('There is no shipment with this qr code');
+                var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
+                modal.show();
             }
         }
         });
@@ -514,11 +556,11 @@
   </script>
 
   <script type="text/javascript">
-        // Add event listener to Reset button
-        document.getElementById("resetButton").addEventListener("click", function() {
-            // Reload the current page
-            location.reload();
-        });
+      document.getElementById("resetButton").addEventListener("click", function() {
+          history.replaceState({}, document.title, location.pathname);
+          document.querySelector("form").submit();
+          document.getElementById("id").value = "";
+      });
   </script>
 
 

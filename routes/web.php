@@ -16,7 +16,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeStaffController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DispatcherDashboardController;
 use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\SubscriptionController;
@@ -179,7 +179,10 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
-        
+        Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
+        Route::get('/company/track_parcel', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@index']);
+        Route::post('/company/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@checkUser']);
+
     });
 
     // stations
@@ -266,6 +269,11 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::put('icargo/registered_users/unarchive+dispatcher/{id}', [DispatcherController::class, 'unarchive'])->name('unarchive.dispatcher');
         Route::put('icargo/registered_users/unarchive+staff/{id}', [StaffController::class, 'unarchive'])->name('unarchive.staff');
         Route::put('icargo/registered_users/unarchive+customer/{id}', [CustomerController::class, 'unarchive'])->name('unarchive.customer');
+        
+        // track parcel
+        Route::get('/icargo/track_parcel', ['uses' => 'App\Http\Controllers\SuperQrScannerController@index']);
+        Route::post('/icargo/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\SuperQrScannerController@checkUser']);
+        
     });
 
     //Companies
@@ -411,7 +419,15 @@ Route::get('/find', function () {
 
 Route::post('/checkTnumber', [StaffQrScannerController::class, 'checkTnumber'])->name('checkTnumber');
 
-Route::post('/search', [UserController::class, 'search']);
+Route::post('/search', [SearchController::class, 'search']);
+
+Route::post('/searchStaff', [SearchController::class, 'searchStaff']);
+
+Route::post('/searchCompany', [SearchController::class, 'searchCompany']);
+
+Route::post('/searchDriver', [SearchController::class, 'searchDriver']);
+
+Route::post('/searchDispatcher', [SearchController::class, 'searchDispatcher']);
 
 Route::get('/income', [IncomeController::class, 'index']);
 

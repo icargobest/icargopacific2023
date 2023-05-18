@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-primary">Search</button>
 
                       </div> --}}
-                      <form action="/search" method="POST">
+                      <form action="/searchDispatcher" method="POST">
                         @csrf
                         <label for="id">Enter Tracking ID:</label>
                         <div class="row d-flex justify-content-center">
@@ -246,6 +246,23 @@
                       </div>
                     </div>
                   </div> 
+
+                  <div class="modal fade" id="notDispatcherModal" tabindex="-1" aria-labelledby="notDispatcherModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="notDispatcherModalLabel">Shipment Alert</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>The shipment is not assigned to this dispatcher.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
                 </section>
                 <form method="POST" action="{{ url('/generate-code') }}">
                   @csrf
@@ -306,6 +323,10 @@
                 // after success to get Data from controller if Shipment is available in the database
                 // iframe for waybill info
                 if (data.result == 1) {
+                  if (data.status === 'driver') {
+                      var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
+                      notDispatcherModal.show();
+                  }
                   var iframeContainer = document.getElementById('my-iframe-container');
                   // check if there is already an iframe in the container
                   if (iframeContainer.childElementCount > 0) {
@@ -579,6 +600,10 @@
         data: formData,
         success: function(response) {
             $('#message').text(response.message);
+            if (response.status === 'driver') {
+                var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
+                notDispatcherModal.show();
+            }
             if (response.shipment) {
                 // after success to get Data from controller if Shipment is available in the database
                 var iframeContainer = document.getElementById('my-iframe-container');

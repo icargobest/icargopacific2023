@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shipment;
 use App\Models\OrderHistory;
+use App\Models\Driver;
 use Illuminate\Support\Facades\Auth;
 class DriverQrScannerController extends Controller
 {
@@ -49,11 +50,19 @@ class DriverQrScannerController extends Controller
                 $tracking_number = trim($data[1]);
                 $id = trim($data[2]);
             }
+            $user = Auth::user()->id;
             $shipment = Shipment::where('user_id', $user_id)->where('id', $id)->first();
+            $driver = Driver::where('user_id', $user)->first();
             if ($shipment) {
                 if ($tracking_number && $shipment->tracking_number != $tracking_number) {
                     $result = 0;
                 } else {
+                    if ($shipment->driver_id != $driver->id) {
+                        $result = 1;
+                        $status = 'driver';
+                        $tracking_number = 'Invalid';
+                        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number]);
+                    }
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;

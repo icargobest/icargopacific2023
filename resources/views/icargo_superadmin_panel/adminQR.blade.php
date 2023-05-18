@@ -1,7 +1,7 @@
 <title>Track Parcel</title>
 
 @extends('layouts.app')
-@extends('partials.navigationCompany')
+@extends('partials.navigationSuperAdmin')
 @extends('layouts.status')
 @include('partials.navigationStaff',['qr' => "nav-selected"])
 
@@ -29,7 +29,7 @@
                     <button type="button" class="btn btn-primary">Search</button>
 
                   </div> --}}
-                  <form action="/searchCompany" method="POST">
+                  <form action="/search" method="POST">
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
                     <div class="row d-flex justify-content-center">
@@ -108,7 +108,6 @@
                     <div id="my-iframe-container"></div>
                     <span id="result"></span>
                   </div>
-
                   <div class="modal fade" id="noShipmentModal" tabindex="-1" aria-labelledby="noShipmentModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -118,23 +117,6 @@
                         </div>
                         <div class="modal-body modal-info">
                           <p>The shipment does not exist.</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> 
-
-                  <div class="modal fade" id="notDispatcherModal" tabindex="-1" aria-labelledby="notDispatcherModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="notDispatcherModalLabel">Shipment Alert</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-info">
-                          <p>The shipment is not assigned to this company.</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
@@ -177,16 +159,12 @@
         $j.ajax({
             type: "POST",
             cache: false,
-            url: "{{action('App\Http\Controllers\CompanyQrScannerController@checkUser')}}",
+            url: "{{action('App\Http\Controllers\SuperQrScannerController@checkUser')}}",
             data: {"_token": "{{ csrf_token() }}", data: data},
             success: function (data) {
                 // after success to get Data from controller if Shipment is available in the database
                 // iframe for waybill info
                 if (data.result == 1) {
-                  if (data.status === 'driver') {
-                      var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
-                      notDispatcherModal.show();
-                  }
                   var iframeContainer = document.getElementById('my-iframe-container');
                   // check if there is already an iframe in the container
                   if (iframeContainer.childElementCount > 0) {
@@ -379,10 +357,6 @@
         data: formData,
         success: function(response) {
             $('#message').text(response.message);
-            if (response.status === 'driver') {
-                var notDispatcherModal = new bootstrap.Modal(document.getElementById('notDispatcherModal'), {});
-                notDispatcherModal.show();
-            }
             if (response.shipment) {
                 // after success to get Data from controller if Shipment is available in the database
                 var iframeContainer = document.getElementById('my-iframe-container');
@@ -549,8 +523,7 @@
                     }
             };
             } else {
-                var modal = new bootstrap.Modal(document.getElementById('noShipmentModal'), {});
-                modal.show();
+            return confirm('There is no shipment with this qr code');
             }
         }
         });
