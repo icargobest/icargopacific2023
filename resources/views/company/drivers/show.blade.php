@@ -79,6 +79,16 @@
               <label class="form-label" for="contact_no">State</label>
              </div>
 
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->facebook ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Facebook</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->linkedin ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Linkedin</label>
+             </div>
+
              <!-- License No.  -->
 
              <div class="form-outline mb-4">

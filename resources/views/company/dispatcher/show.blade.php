@@ -63,7 +63,16 @@
               <label class="form-label" for="contact_no">State</label>
              </div>
 
-             
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->facebook ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Facebook</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->linkedin ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Linkedin</label>
+             </div>
+
              <div class="form-outline mb-4">
               <input type="text" id="created_at" name="created_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}" class="form-control" style="text-transform:capitalize;"/>
               <label class="form-label" for="contact_no">Created At</label>

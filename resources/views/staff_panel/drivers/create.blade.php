@@ -97,7 +97,6 @@
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                   minlength="7" 
                   maxlength="9" 
-                  required 
                   placeholder="">
                   <label class="form-label" for="form6Example5">TELEPHONE</label>
                   @error('tel')

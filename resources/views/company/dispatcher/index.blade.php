@@ -82,9 +82,9 @@
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
                         >
-                            @include('staff_panel/dispatcher.show')
-                            @include('staff_panel/dispatcher.edit')
-                            @include('staff_panel/dispatcher.archive')
+                            @include('company/dispatcher.show')
+                            @include('company/dispatcher.edit')
+                            @include('company/dispatcher.archive')
 
                         </td>
                     </tr>

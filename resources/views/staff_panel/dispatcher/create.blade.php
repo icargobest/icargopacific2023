@@ -88,8 +88,7 @@
                   <input id="telephone" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" autocomplete="tel" 
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                   minlength="7" 
-                  maxlength="9" 
-                  required 
+                  maxlength="9"  
                   placeholder="">
                   <label class="form-label" for="form6Example5">TELEPHONE</label>
                   @error('tel')
