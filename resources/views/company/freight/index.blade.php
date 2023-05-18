@@ -108,24 +108,6 @@
             </section>
         </div>
 
-        <section class="search-filter-container mb-4">
-            <div class="top-container1" style="max-width: 800px">
-                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
-                <div class="input-group rounded">
-                    <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Search"
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                    />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
-            </div>
-        </section>
-
         <section class="mb-5 px-2 h-90" style="overflow-x: auto">
             <table
                 class="table table-striped table-bordered table-hover table-borderless hover"

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
 {
@@ -72,98 +73,64 @@ class CompaniesController extends Controller
         return view('icargo_superadmin_panel.companies.edit', compact('company'));
     }
 
-
-    public function updateProfile(Request $request, $id)
-    {
-        $company = Company::with('user')->findOrFail($id);
-        $user = $company->user;
-    
-        $validated = $this->validate($request, [
-            'facebook' => ['required', 'url', 'max:255'],
-            'website' => ['nullable','url', 'max:255'],
-            'linkedin' => ['nullable','url', 'max:255'],
-            'facebook.required' => 'Facebook Link is required',
-        ]);
-    
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email ?? $user->email,
-        ]);
-    
-        $company->update([
-            'contact_no' => $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'tel' => $request->tel,
-            'street' => $request->street,
-            'city' => $request->city,
-            'state' => $request->state,
-            'postal_code' => $request->postal_code,
-            'facebook' => $validated['facebook'],
-            'website' => $request->website,
-            'linkedin' => $request->linkedin,
-        ]);
-    
-        return back()->with('success', 'Company account has been updated successfully.');
-    }
-    
-    public function updateImage(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
         $get_token = $request->otp;
         $get_token = VerifyToken::where('token', $get_token)->first();
-
-        if ($image = $request->file('image')) {
-            $folderName = $user->name; // Get the company's name
-            $destinationPath = "images/company/$folderName"; // Set the destination path
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $company->update(['image' => $profileImage]);
-        }
-    
-    return back()->with('success', 'Profile image has been updated successfully.');
-    }
-
-    
-
-    public function update(Request $request, $id)
-    {
-        $company = Company::with('user')->findOrFail($id);
-        $user = $company->user;
     
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
         ]);
 
         if($get_token){
-        $get_token->is_activated = 1;
-        $get_token->save();
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email ?? $user->email,
-            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
-        ]);
-    
-        $company->update([
-            'contact_no' =>  $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'tel' => $request->tel,
-            'street' => $request->street,
-            'city' => $request->city,
-            'state' => $request->state,
-            'postal_code' => $request->postal_code,
-            'facebook' => $validated['facebook'],
-            'website' => $request->filled('website') ? $request->website : $company->website,
-            'linkedin' => $request->filled('linkedin') ? $request->linkedin : $company->linkedin,
-        ]);
-        $delete_token = VerifyToken::where('token', $get_token->token)->first();
-        $delete_token->delete();
+            $get_token->is_activated = 1;
+            $get_token->save();
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email ?? $user->email,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if ($image = $request->file('image')) {
+                $folderName = Auth::id(); // Get the user id
+                $destinationPath = "images/company/$folderName"; // Set the destination path
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->storeAs($destinationPath, $profileImage, 'public'); // Use the 'public' disk
+                $company->update(['image' => $profileImage]);
+        
+                return back()->with('success', 'Profile image has been updated successfully.');
+            }
+            
+            $company->update([
+                'contact_no' =>  $request->contact_no,
+                'contact_name' => $request->contact_name,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'facebook' => $request->facebook,
+                'website' => $request->website,
+                'linkedin' => $request->linkedin,
+            ]);
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+            return back()->with('success','Staff #'.$id.' has been updated successfully.');
         }
 
-        return back()->with('success', 'Company account has been updated successfully.');
+        return back()->with('warning','Please verify the account with OTP before modifying data.');
     }
+
     
 
     public function archive(Request $request, $id)
@@ -252,23 +219,73 @@ class CompaniesController extends Controller
     // PROFILE
     public function profile()
     {
-        $company = Company::with('user')->first();
-    
         $userID = Auth::id();
-    
-        if ($company && $company->user_id == $userID) {
+        $company = Company::where('user_id', $userID)->first();
+        
+        if ($company) {
             return view('company.profile.myprofile', compact('company'));
         }
-    
+        
         return back()->with('error', 'You are not authorized to view this profile.');
     }
+
     
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Company status updated successfully!');
+        $update_user = User::whereId($user_id)->update([
+            'status' => $status_code
+        ]);
+        $user_id = User::findOrFail($user_id);
+        return back()->with('success', 'Company status updated successfully!');
+
     }
+    public function updateProfile(Request $request, $id)
+    {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+    
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+    
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email ?? $user->email,
+        ]);
+    
+        $company->update([
+            'contact_no' => $request->contact_no,
+            'contact_name' => $request->contact_name,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'website' => $request->website,
+            'linkedin' => $request->linkedin,
+        ]);
+    
+        return back()->with('success', 'Company account has been updated successfully.');
+    }
+    
+    public function updateImage(Request $request, $id)
+    {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+    
+        if ($image = $request->file('image')) {
+            $folderName = Auth::id(); // Get the user id
+            $destinationPath = "images/company/$folderName"; // Set the destination path
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->storeAs($destinationPath, $profileImage, 'public'); // Use the 'public' disk
+            $company->update(['image' => $profileImage]);
+        } 
+    
+        return back()->with('success', 'Profile image has been updated successfully.');
+    }
+    
 }

@@ -3,7 +3,6 @@
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -232,7 +231,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
 // Super Admin Panel
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
-    Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
+    Route::get('/icargo/dashboard', [SuperDashboardController::class, 'index'])
         ->name('super.admin.dashboard')->middleware("verified");
 
     Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
@@ -383,6 +382,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
        Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
        Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
        Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
+    });
 
     //DRIVER
     Route::resource('staff/driver', DriverController::class);

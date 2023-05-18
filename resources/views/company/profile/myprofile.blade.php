@@ -32,7 +32,9 @@
                 <i class="fa fa-pencil"></i>
                 </button>
                 <div class="profilePicture">
-                    <img src="{{ asset('images/company/' . $company->user->name . '/' . $company->image) }}" 
+                    <img src="{{ asset($company->image 
+                                ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
+                                : 'img/default_dp.png') }}"
                     alt="Profile Image">
                 </div>
             </div>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('postal_code');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('website')->nullable()->default;
             $table->string('facebook');
             $table->string('linkedin')->nullable()->default;

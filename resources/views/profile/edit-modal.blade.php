@@ -24,7 +24,7 @@
                         <div class="col">
                             <div class="form-outline">
                                 <input type="number" class="form-control" value="{{ $customer->contact_no }}" autocomplete="mobile"
-                                    name="mobile" required>
+                                    name="contact_no" required>
                                 <label class="form-label" for="mobile">Mobile number</label>
                             </div>
                         </div>

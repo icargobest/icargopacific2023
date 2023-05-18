@@ -37,141 +37,118 @@
                 <form
                     method="POST"
                     action="{{route('update.customer', $customer->id)}}"
+                    enctype="multipart/form-data"
                 >
                     @csrf @method('PUT')
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="file"
+                            name="photo"
+                            id="photo"
+                        />
+                        <label class="form-label" for="name"
+                            >Upload new profile image</label
+                        >
+                    </div>
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="name"
-                                type="text"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                value="{{ $customer->user->name }}"
-                                required
-                                autocomplete="name"
-                                autofocus
-                                placeholder="Name"
-                            />
-
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" name="name" autocomplete="name" value="{{ $customer->user->name }}"
+                                    required>
+                                <label class="form-label" for="fname">Full Name</label>
+                            </div>
                         </div>
                     </div>
-
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password"
-                                type="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                placeholder="Password"
-                            />
-
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="number" class="form-control" value="{{ $customer->contact_no }}" autocomplete="mobile"
+                                    name="contact_no">
+                                <label class="form-label" for="mobile">Mobile number</label>
+                            </div>
                         </div>
                     </div>
-
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password-confirm"
-                                type="password"
-                                class="form-control"
-                                name="password_confirmation"
-                                placeholder="Re-Type Password"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="number" class="form-control" value="{{ $customer->tel }}" autocomplete="tel" name="tel">
+                                <label class="form-label" for="Tel">Telephone</label>
+                            </div>
                         </div>
                     </div>
-
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $customer->user->email}}"
-                                required
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" value="{{ $customer->user->email }}" autocomplete="email" name="email">
+                                <label class="form-label" for="email">Email address</label>
+                            </div>
                         </div>
                     </div>
-
-                    <hr />
-
-                    {{-- contact number --}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="contact"
-                                type="text"
-                                class="form-control @error('contact_no') is-invalid @enderror"
-                                name="contact_no"
-                                value="{{ $customer->contact_no }}"
-                                autocomplete="contact_no"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                                minlength="11"
-                                maxlength="11"
-                                @required(true)
-                                placeholder="Contact No"
-                            />
-
-                            @error('contact_no')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" name="street" autocomplete="street">
+                                <label class="form-label" for="sname">Street name</label>
+                            </div>
                         </div>
                     </div>
-
-                    {{-- address--}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('address') is-invalid"
-                            @enderror" name="address"
-                            value="{{$customer->address }}" required
-                            autocomplete="address" autofocus
-                            placeholder="Address"> @error('address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" name="city" autocomplete="city">
+                                <label class="form-label" for="city">City</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" name="state" autocomplete="state">
+                                <label class="form-label" for="state">State/Country</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control" name="postal_code" autocomplete="postal_code">
+                                <label class="form-label" for="postal">Postal Code</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('website') is-invalid @enderror" name="website" id="twit">
+                                @error('website')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="twit">Website</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb">
+                                @error('facebook')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="faceb">Facebook</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" id="linkin">
+                                <label class="form-label" for="linkin">LinkedIn</label>
+                            </div>
                         </div>
                     </div>
 

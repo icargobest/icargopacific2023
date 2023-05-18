@@ -39,6 +39,17 @@
                     action="{{route('companies.update', $company->id)}}"
                 >
                     @csrf @method('PUT')
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="file"
+                            name="photo"
+                            id="photo"
+                        />
+                        <label class="form-label" for="name"
+                            >Upload new profile image</label
+                        >
+                    </div>
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -63,7 +74,6 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -89,7 +99,6 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -111,7 +120,6 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -130,81 +138,233 @@
 
                     <hr />
 
-                    {{-- contact number --}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="contact"
-                                type="text"
-                                class="form-control @error('contact_no') is-invalid @enderror"
-                                name="contact_no"
-                                value="{{ $company->contact_no }}"
-                                autocomplete="contact_no"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                                minlength="11"
-                                maxlength="11"
-                                @required(true)
-                                placeholder="Contact No"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="contact_no"
+                                    required
+                                    autocomplete="contact_no"
+                                    value="{{$company->contact_no}}"
+                                />
+                                <label class="form-label" for="mobile"
+                                    >Contact number</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="contact_name"
+                                    required
+                                    autocomplete="contact_name"
+                                    value="{{$company->contact_name}}"
+                                />
+                                <label class="form-label" for="mobile"
+                                    >Contact Name</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="tel"
+                                    required
+                                    autocomplete="tel"
+                                    value="{{$company->tel}}"
+                                />
+                                <label class="form-label" for="Tel"
+                                    >Telephone</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="street"
+                                    required
+                                    autocomplete="street"
+                                    value="{{$company->street}}"
+                                />
+                                <label class="form-label" for="sname"
+                                    >Street name</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="city"
+                                    required
+                                    autocomplete="city"
+                                    value="{{$company->city}}"
+                                />
+                                <label class="form-label" for="city"
+                                    >City</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="state"
+                                    required
+                                    autocomplete="state"
+                                    value="{{$company->state}}"
+                                />
+                                <label class="form-label" for="state"
+                                    >State/Country</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="postal_code"
+                                    required
+                                    autocomplete="postal_code"
+                                    value="{{$company->postal_code}}"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Postal Code</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control @error('website') is-invalid @enderror"
+                                    name="website"
+                                    autocomplete="website"
+                                    value="{{$company->website}}"
+                                />
 
-                            @error('contact_no')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('website')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="postal"
+                                    >Website Link</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="facebook"
+                                    type="text"
+                                    class="form-control @error('facebook') is-invalid @enderror"
+                                    name="facebook"
+                                    value="{{$company->facebook}}"
+                                    required
+                                    autocomplete="facebook"
+                                    autofocus
+                                    placeholder="Facebook Link"
+                                />
+
+                                @error('facebook')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="postal"
+                                    >Facebook Link</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="linkedin"
+                                    type="text"
+                                    class="form-control @error('linkedin') is-invalid @enderror"
+                                    name="linkedin"
+                                    autocomplete="linkedin"
+                                    value="{{$company->linkedin}}"
+                                />
+                                @error('linkedin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="postal"
+                                    >Linkedin Link</label
+                                >
+                            </div>
                         </div>
                     </div>
 
-                    {{-- contact name --}}
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('contact_name')
-                            is-invalid" @enderror" name="contact_name" value="{{
-                            $company->contact_name }}" required
-                            autocomplete="contact_name" autofocus
-                            placeholder="Contact Name"> @error('contact_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- contact address--}}
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('company_address')
-                            is-invalid" @enderror" name="company_address"
-                            value="{{$company->company_address }}" required
-                            autocomplete="company_address" autofocus
-                            placeholder="Company Address">
-                            @error('company_address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <button
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            {{session()->get('message')}}
+                        </div>  
+                    @endif             
+                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send password reset link
-                    </button>
+                    </a>
+                    
+                    <br><br>
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
 
-                    <hr />
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button
                             type="submit"
