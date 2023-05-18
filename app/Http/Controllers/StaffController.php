@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class StaffController extends Controller
@@ -33,7 +34,7 @@ class StaffController extends Controller
         $staff = $this->staff->with('user')->where('company_id', $user_id)->get();
         return view('company.staff.index', compact('staff'));
     }
-    
+
 
     public function viewArchive()
     {
@@ -43,7 +44,7 @@ class StaffController extends Controller
         $staff = $this->staff->with('user')->where('company_id', $user_id)->get();
         return view('company.staff.view_archive', compact('staff'));
     }
-    
+
 
     public function create()
     {
@@ -69,7 +70,7 @@ class StaffController extends Controller
             'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
         $user->sendEmailVerificationNotification();
-        
+
             $id = Auth::id();
             $company = Company::where('user_id', $id)->first();
             $user_id = $company->id;
@@ -87,7 +88,7 @@ class StaffController extends Controller
         return redirect()->route('staff.index')
                 ->with('success','Staff has been created successfully.');
     }
-    
+
     public function show($id)
     {
         $staff = $this->staff->getStaff($id);
@@ -114,7 +115,7 @@ class StaffController extends Controller
             'email' => $request->input('updateEmail'),
             'password' => Hash::make($request->input('updatePassword')),
         ];
-        
+
         $staff = Staff::find($id);
         $staff->update($staffData);
 
@@ -204,4 +205,65 @@ class StaffController extends Controller
         return back()->with('success', 'Driver was successfully assigned!');
     }
 
+    public function index_edit($id)
+    {
+        $user = User::where('id', $id)->first();
+        $staff = Staff::where('user_id', $user->id)->first();
+        return view('staff_panel.profile.myProfile', compact('user', 'staff'));
+    }
+
+    public function edit_profile(Request $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        $staff = Staff::where('user_id', $id)->first();
+
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable', 'url', 'max:255'],
+            'linkedin' => ['nullable', 'url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        $staff->contact_no = $request->input('mobile');
+        $staff->tel = $request->input('tel');
+        $staff->street = $request->input('street');
+        $staff->city = $request->input('city');
+        $staff->state = $request->input('state');
+        $staff->postal_code = $request->input('postal_code');
+        $staff->facebook = $request->input('facebook');
+        $staff->website = $request->input('website');
+        $staff->linkedin = $request->input('linkedin');
+        $staff->save();
+
+        return back()->with('success', 'Profile account has been updated successfully.');
+    }
+
+    public function upload_photo(Request $request, $id)
+    {
+        $staff = Staff::where('user_id', $id)->first();
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = 'public/photos/' . Auth::user()->name;
+
+            // Create the folder if it doesn't exist
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path);
+            }
+
+            // Store the photo in the user's folder
+            $file->storeAs($path, $filename);
+
+            // Save the photo path in the customer record
+            $staff->photo = 'photos/' . Auth::user()->name . '/' . $filename;
+            $staff->save();
+        }
+
+        return redirect()->back()->with('success', 'Profile image has been updated successfully.');
+    }
 }

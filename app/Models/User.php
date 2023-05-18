@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasOne(Company::class);
     }
 
     public function dispatcher()
@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasOne(Customer::class);
     }
 
     public function subscribed()
