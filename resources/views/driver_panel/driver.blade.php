@@ -3,6 +3,12 @@
 @extends('layouts.app')
 @extends('layouts.status')
 @include('partials.navigationDriver',['qr' => "nav-selected"])
+
+@php
+    use Illuminate\Http\Request;
+    $request = Request::capture();
+@endphp
+
 <link rel="stylesheet" href="./line-awesome.min.css">
   <div class="container center p-3">
       <div class="row">
@@ -26,7 +32,7 @@
                     @csrf
                     <label for="id">Enter Tracking ID:</label>
                     <div class="row d-flex justify-content-center">
-                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3">
+                      <input type="text" id="id" name="tracking_number" class="col-md-7 col-lg-3" value= "{{ $request->tracking_number }}">
                     </div>
                     <div class="row d-flex justify-content-center">
                       <button type="submit" class="btn btn-primary mt-3 col-md-7 col-lg-3" style="background-color:#1D4586; letter-spacing:1px; padding:5px;">SEARCH</button>
@@ -793,11 +799,11 @@
   </script>
 
   <script type="text/javascript">
-        // Add event listener to Reset button
-        document.getElementById("resetButton").addEventListener("click", function() {
-            // Reload the current page
-            location.reload();
-        });
+      document.getElementById("resetButton").addEventListener("click", function() {
+          var url = new URL(location.href);
+          url.searchParams.delete('tracking_number');
+          window.location.href = url.toString();
+      });
   </script>
 
 

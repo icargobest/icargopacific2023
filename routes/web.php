@@ -299,11 +299,11 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     ->name('driver.dashboard')->middleware('verified');
 
     //DRIVER PAGE
-    Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
-    Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
-    Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
-    Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
-    Route::post('driver/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
+    Route::get('/driver/track_parcel', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
+    Route::post('/driver/track_parcel/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
+    Route::post('/driver/track_parcel/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
+    Route::post('/driver/track_parcel/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
+    Route::post('/driver/track_parcel/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
 
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
@@ -325,12 +325,12 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
         ->name('dispatcher.dashboard')->middleware('verified');
 
     //DISPATCHER PAGE
-    Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
-    Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
-    Route::post('dispatchers/update-received', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
-    Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-    Route::post('dispatchers/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
-    Route::post('dispatchers/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
+    Route::get('/dispatcher/track_parcel', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
+    Route::post('/dispatcher/track_parcel/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
+    Route::post('/dispatcher/track_parcel/update-received', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
+    Route::post('/dispatcher/track_parcel/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
+    Route::post('/dispatcher/track_parcel/update-transfer', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateTransfer']);
+    Route::post('/dispatcher/track_parcel/update-arrived', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateArrived']);
 
     Route::controller(ShipmentController::class)->group(function () {
         Route::get('/dispatcher/order_list/pickup', 'toPickUp_view')->name('toPickUp_view');
