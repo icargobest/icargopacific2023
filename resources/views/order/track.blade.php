@@ -161,7 +161,7 @@
                                 alt=""
                                 style="object-fit:cover; min-width:140px; max-width:509px; height:250px; margin-left: auto; margin-right: auto;">
                             </a>
-                            <a href="{{ route('generate', $ship->id) }}" target="_blank">
+                            <a href="{{ route('user.generate', $ship->id) }}" target="_blank">
                                 <button type="button" class="btn btn-primary btn-block shadow-0 my-1"
                                     style="background-color:#214D94; min-width:140px; max-width:509px;">
                                     Invoice

@@ -25,9 +25,6 @@ use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffDashboardController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,12 +138,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         ->name('dashboard')->middleware("verified");
 
     //Edit Profile
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/user/edit_profile/{id}', 'index')->name('edit_profile');
-        Route::post('/user/edit_profile/{id}', 'edit')->name('edit');
-        Route::post('/user/edit_address/{id}', 'edit_address')->name('edit_address');
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/user/edit_profile/{id}', 'index_edit')->name('edit_profile');
+        Route::post('/user/edit_profile/{id}', 'edit_profile')->name('edit');
         Route::post('/user/upload_photo/{id}', 'upload_photo')->name('upload_photo');
-        Route::post('/user/edit_social/{id}', 'edit_social')->name('edit_social');
+        Route::get('/customer-info', 'getCustomerInfo');
     });
 
     //Order Routes
@@ -160,7 +156,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/user/track_order/{id}', 'trackOrder')->name('trackOrder');
         Route::put('/user/accept_bid/{id}', 'acceptBid')->name('acceptBid');
         Route::put('/user/cancel_order/{id}', 'cancelOrder')->name('cancelOrder');
-        Route::get('/user/invoice/{id}', 'viewInvoice')->name('generate');
+        Route::get('/user/invoice/{id}', 'viewInvoice')->name('user.generate');
         Route::get('/user/waybill/{id}', 'viewWaybill')->name('user.generateWaybill');
     });
 });
@@ -181,8 +177,8 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::get('/company/advFreight/decline/{id}', 'decline_transfer');
         Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
         Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('generateInvoice');
-        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('generateWaybill');
+        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('company.generateInvoice');
+        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('company.generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
         Route::put('/transfer/{id}','transfer')->name('transfer.company');
@@ -315,7 +311,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
         Route::put('/driver/update-info/{id}',  'updateProfile')->name('driver.personinfo.update');
         Route::put('/driver/update-image/{id}',  'updateImage')->name('driver.profile.update');
     });
-    
+
 });
 
 // Dispatcher Panel
@@ -363,7 +359,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/order_history', 'orderHistory_staff')->name('orderHistory_Staff');
         Route::get('/staff/view_shipment/{id}', 'viewOrder_Staff')->name('viewOrder_Staff');
         Route::get('/staff/track_order/{id}', 'trackOrder_Staff')->name('trackOrder_Staff');
-        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('viewInvoiceStaff');
+        Route::get('/staff/invoice/{id}', 'viewInvoiceStaff')->name('staff.generateInvoice');
         Route::post('/staff/add_bid', 'staff_addBid')->name('staff_addBid');
         Route::put('/staff/transfer/{id}', 'transfer')->name('transfer.staff');
         Route::get('/staff/waybill/{id}', 'viewWaybillStaff')->name('staff.generateWaybill');
@@ -375,6 +371,9 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
      //Assign Station
      Route::controller(StaffController::class)->group(function(){
         Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+        Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
+        Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
+        Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
     });
 
     //DRIVER
