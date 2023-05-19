@@ -10,7 +10,20 @@
         <div class="modal-body">
             <form action="{{ route('dispatcher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            
+            <div class="row mb-4">
+                <label class="form-label" for="vehicle_type"></label>
+                <select type="text" id="form6Example5" name="station_id" 
+                style="width:95% !important; margin:auto;border:1px solid #ced4da; height:33.26px; border-radius:0.375rem;padding: 5.12px 12px; color:#828282;"required>
+                    <option value="" hidden>STATION</option>
+                  @foreach ($stations as $station)
+                    <option value="{{ $station->id }}" >{{ $station->station_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            <div class="form-outline mb-4">
+              <input class="form-control" type="file" id="formFile" name="image" required>
+            </div>
             <div class="form-outline mb-4">
                 <div class="form-outline">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -62,6 +75,86 @@
                   maxlength="11"  required placeholder="">
                   <label class="form-label" for="form6Example5">Contact</label>
                   @error('contact_no')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="telephone" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" autocomplete="tel" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="7" 
+                  maxlength="9" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">TELEPHONE</label>
+                  @error('tel')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" autocomplete="street" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">STREET</label>
+                  @error('street')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">CITY</label>
+                  @error('city')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" autocomplete="state" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">STATE</label>
+                  @error('state')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="postal_code" type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}" autocomplete="postal_code" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="4" 
+                  maxlength="4" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">POSTAL CODE</label>
+                  @error('postal_code')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>

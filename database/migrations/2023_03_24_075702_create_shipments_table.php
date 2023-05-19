@@ -43,7 +43,6 @@ return new class extends Migration
         });
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('station_id')->nullable()->default;
             $table->string('company_name')->nullable()->default;
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
@@ -70,7 +69,10 @@ return new class extends Migration
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
+            $table->decimal('advFreight_total_amount')->nullable()->default;
+            $table->timestamp('shipping_date')->nullable()->default;
             $table->string('order_status')->nullable()->default;
+            $table->string('advTransferredfrom')->nullable()->default;
             $table->string('advTransferredto')->nullable()->default;
             $table->string('advTransferredStatus')->nullable()->default;
             $table->string('status');

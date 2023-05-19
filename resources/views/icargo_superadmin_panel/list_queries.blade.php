@@ -27,7 +27,7 @@
                           <tr>
                             <td>{{$cust_query->email}}</td>
                             <td>{{$cust_query->name}}</td>
-                            <td>{{$cust_query->cust_query}}</td>
+                            <td><a href="{{ route('showQuery', $cust_query->id) }}"><button class="btn created-button mx-auto">Show</button></a></td>
                           </tr>
                           
                       

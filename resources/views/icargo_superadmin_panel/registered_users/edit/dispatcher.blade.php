@@ -39,8 +39,9 @@
                     enctype="multipart/form-data"
                 >
                     @csrf @method('PUT')
+                    <input type="hidden" id="email" name="email" value="{{$dispatcher->user->email}}" />
                     <div class="row">
-                        <div class="col">
+                        <div class="col">   
                             <div class="form-outline mb-4">
                                 <input
                                     type="text"
@@ -61,6 +62,33 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password" >
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Re-Type Password">
+                        </div>
+                    </div>
+
+
                     <div class="form-outline mb-4">
                         <div class="col">
                             <div class="form-outline mb-4">
@@ -88,12 +116,35 @@
                         </div>
                     </div>
 
-                    <button
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            {{session()->get('message')}}
+                        </div>  
+                    @endif             
+                    <a href="{{ url('icargo/registered_users/send_otp', $dispatcher->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send password reset link
-                    </button>
+                    </a>
+                    
+                    <br><br>
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
+
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <hr />
 

@@ -185,12 +185,35 @@
                         </div>
                     </div>
 
-                    <button
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            {{session()->get('message')}}
+                        </div>  
+                    @endif             
+                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send password reset link
-                    </button>
+                    </a>
+                    
+                    <br><br>
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
+
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <hr />
                     <div class="modal-footer">
