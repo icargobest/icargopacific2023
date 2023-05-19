@@ -109,24 +109,9 @@
 <body>
 
             <div class="sticker">
-                <button class="print-button" onclick="window.print()">Print</button>
                 <div class="image-row">
                     <img src="/img/icargo-logo-1.jpg" style="max-height:50px;">
-                    <img src="https://via.placeholder.com/150x150.png?text=Barcode" alt="Barcode">
-                    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE',5, 5) }}" alt="QR Code">
-                </div><br>
-                <table>
-                    <tr>
-                        <th>Sender</th>
-                        <th>Recipient</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><strong>Name:</strong> {{$ship->sender->sender_name}}<br><br>
-                            <strong>Address:</strong> {{$ship->sender->sender_address}}<br>
-                            {{$ship->sender->sender_city}}, {{$ship->sender->sender_zip}}<br>
-                            {{$ship->sender->sender_state}}</p>
-                        </td>
+
                         <td>
                             <p><strong>Name:</strong> {{$ship->recipient->recipient_name}}<br><br>
                             <strong>Address:</strong> {{$ship->recipient->recipient_address}}<br>
@@ -147,11 +132,14 @@
                             <p><strong>Total Price:</strong> </p>
                         </td>
                     </tr>
+					<button class="print-button" onclick="window.print()">Print</button>
                 </table>
                 <th width="25%" colspan="1">
                     <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128',2,50) }}" alt="barcode">
                 </th>
+				
             </div>
+			
 
 
 

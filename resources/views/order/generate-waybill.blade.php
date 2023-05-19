@@ -87,32 +87,34 @@
 		}
 
         .print-button {
-            background-color: #333;
+			background-color:  #214D94;
             color: #fff;
             font-size: 12px;
             padding: 5px 10px;
             border-radius: 3px;
             cursor: pointer;
+			position: fixed;
+  			bottom: 0px;
+  			right: 0px; 
+			padding: 10px;
+			font-size: 20px;
         }
 
-		.textalignright
-		{
-			text-align:right;
-		}
-
 		.rotate-90{ 
-			transform: rotate(-90deg);
+			transform: rotate(-90deg) translate(5px, 8px);
 			color: #214D94;
 			letter-spacing: 3px;
-			font-size: 25px;
-			margin:-30px;
+			font-size: 23px;
+			margin:-45px;
+			padding: 40px 20px;
 		}
 		.rotate90{ 
-			transform: rotate(90deg);
+			transform: rotate(90deg) translate(0px, 9px);
 			color:  #214D94;
 			letter-spacing: 3px;
-			font-size: 25px;
-			margin:-30px;
+			font-size: 23px;
+			margin:-58px;
+			padding: 40px 22px;
 		}
 		.rotatecolor{
 			background-color: #F9CD1A;
@@ -146,9 +148,6 @@
 <body>
 	<div class="body">
 	<div class="sticker">
-		<button class="print-button" onclick="window.print()">
-			Print
-		</button>
 		<h1 class="m-0">WAYBILL SUMMARY</h1>
 		<div class="image-row p-0 m-0">
 			<p class="element h4 p-4 m-0" style="color: #214D94">[{{$ship->tracking_number}}]</p>
@@ -253,7 +252,8 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
-</div>
+			<div>
+				<button class="print-button btn btn-secondary" onclick="window.print()">Print</button>
+			</div>
 </body>
 </html>
