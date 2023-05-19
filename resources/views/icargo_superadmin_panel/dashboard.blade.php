@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-
+  
     <body>
         <h1>Registered Companies: {{ $companycount }}</h1>
         <h1>Registered Users: {{ $usercount }}</h1>
@@ -52,7 +52,3 @@
         chart.draw(data, options);
     }
 </script>
-<<<<<<< HEAD
- --}}
-=======
->>>>>>> develop

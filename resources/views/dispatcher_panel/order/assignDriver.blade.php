@@ -22,7 +22,7 @@
                 <span class="d-none d-sm-block">
                   <img class="rounded-circle p-2"
                   style="max-width:60px;"
-                  src="https://locator.apa.org/resource/1668705141000/PsycLocator/img/profile-default.png"/>
+                  src="{{ url('images/company/drivers/'.$driver->image) }}"/>
                   <span class="text-warning" style="font-size:25px;">●</span>
                 </span>
                 <div class="card-body text-sm-start text-middle">
