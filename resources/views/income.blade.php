@@ -108,7 +108,7 @@
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
-                                {{ $counts['Delivered'] }}
+                                empty
                             </div>
                         </div>
                     </div>
