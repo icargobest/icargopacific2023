@@ -90,6 +90,14 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="links">
+                            <a class="nav-link" href="">
+                                <div class="link">
+                                    <i class="fa fa-qrcode link-i-1"></i>
+                                    <span>Track Parcel</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
 
                     <!--             <div class="divider2">
