@@ -18,7 +18,7 @@
           <div class="profileBackground1">
             <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal" data-bs-target="#editimage{{$dispatcher->id}}"><i class="fa fa-pencil "></i></button>
             <div class="profilePicture">
-              <img src="{{ url('images/company/dispatchers/'.$dispatcher->image) }}" height="100" width="100" alt="">
+              <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="">
             </div>
           </div>
           <div class="profileData">

@@ -18,7 +18,7 @@
           <div class="profileBackground1">
             <button type="button" class="profileIcon" style="border: 0px !important;" data-bs-toggle="modal" data-bs-target="#editimage{{$driver->id}}"><i class="fa fa-pencil "></i></button>
             <div class="profilePicture">
-              <img src="{{ url('images/company/drivers/'.$driver->image) }}" height="100" width="100" alt="">
+              <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="">
             </div>
           </div>
           <div class="profileData">
