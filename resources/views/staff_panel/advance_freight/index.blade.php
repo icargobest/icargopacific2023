@@ -125,19 +125,5 @@
         </div>
     </div>
 
-    <style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-    }
-    th{
-        color: white !important;
-    }
-    td, th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black;
-        vertical-align: middle;
-    }
-    </style>
+    
     @include('partials.footer')
