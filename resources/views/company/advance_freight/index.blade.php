@@ -99,7 +99,7 @@
                         <td class="tdbutton" style="max-width:120px">
                         <a href="{{ route('trackOrder_Company', $ship->id) }}"><button class="btn created-button mx-auto">Tracking</button></a>
                         @if($ship->advTransferredStatus == NULL)
-                        <a {{-- href="{{ route('adv_Freight', $ship->id) }}" --}}><button class="btn created-button mx-auto">Forward</button></a>
+                        <a href="{{ route('adv_Freight', $ship->id) }}"><button class="btn created-button mx-auto">Forward</button></a>
                         @elseif($ship->advTransferredStatus == 'Accepted')
                         Transfer Accepted
                         @else
