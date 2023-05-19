@@ -11,7 +11,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <input class="form-control" type="file" name="photo" id="photo">
+                        <input class="form-control" type="file" name="photo" id="photo" required>
                     </div>
                     <div class="buttonContainer">
                         <button type="submit" class="modalbutton">

@@ -28,7 +28,7 @@
                         <th scope="col" style="text-align:center;">Company Name</th>
                         <th scope="col" style="text-align:center;">Email</th>
                         <th scope="col" style="text-align:center;">Contact No</th>
-                        <th scope="col" style="text-align:center;">Address</th>
+                        <th scope="col" style="text-align:center;">Contact Name</th>
                         <th scope="col" style="text-align:center !important; width:300px">Action</th>
                     </tr>
                 </thead>
@@ -36,10 +36,17 @@
                     @foreach ($companies as $company)
                         <tr>
                             <td>{{ $company->id }}</td>
-                            <td class="capitalized">{{ $company->user->name }}</td>
+                            <td class="capitalized">
+                                <img src="{{ asset($company->image 
+                                    ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
+                                    : 'img/default_dp.png') }}"
+                                    style="width:50px"
+                        alt="Profile Image">
+                                {{ $company->user->name }}
+                            </td>
                             <td>{{ $company->user->email }}</td>
                             <td>{{ $company->contact_no }}</td>
-                            <td>{{ $company->company_address }}</td>
+                            <td>{{ $company->contact_name }}</td>
                             <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">
                                 @include('icargo_superadmin_panel.companies.show')
                                 @include('icargo_superadmin_panel.companies.edit')

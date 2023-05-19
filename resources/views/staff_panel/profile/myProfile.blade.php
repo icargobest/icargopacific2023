@@ -123,15 +123,6 @@
                 </div>
                 <div class="profileDivider2 "></div>
                 <div class="profileInfoData">
-                    <span class="data-title"><i class="fa fa-globe"></i> Website</span>
-                    @if ($staff->website != null)
-                        <a href="{{ $staff->website }}" target="_blank">
-                    @endif
-                    <span class="data-content">
-                        @if ($staff->website != null)
-                            {{ $staff->website }}@else---
-                        @endif
-                    </span>
                     @if ($staff->website != null)
                         </a>
                     @endif

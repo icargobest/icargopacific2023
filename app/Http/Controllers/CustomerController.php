@@ -86,11 +86,33 @@ class CustomerController extends Controller
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
 
-        $customer->update([
-            'contact_no' =>  $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'address' => $request->address,
-        ]);
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = 'public/photos/customer/' . Auth::id();
+
+            // Create the folder if it doesn't exist
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path);
+            }
+
+            // Store the photo in the user's folder
+            $file->storeAs($path, $filename);
+
+            // Save the photo path in the customer record
+            $customer->photo = 'photos/customer/' . Auth::id() . '/' . $filename;
+            $customer->save();
+        }
+
+        $customer->contact_no = $request->input('contact_no');
+        $customer->tel = $request->input('tel');
+        $customer->street = $request->input('street');
+        $customer->city = $request->input('city');
+        $customer->state = $request->input('state');
+        $customer->postal_code = $request->input('postal_code');
+        $customer->facebook = $request->input('facebook');
+        $customer->linkedin = $request->input('linkedin');
+        $customer->save();
 
         return back()->with('success', 'Customer account has been updated successfully.');
     }
@@ -155,7 +177,7 @@ class CustomerController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        $customer->contact_no = $request->input('mobile');
+        $customer->contact_no = $request->input('contact_no');
         $customer->tel = $request->input('tel');
         $customer->street = $request->input('street');
         $customer->city = $request->input('city');
@@ -176,7 +198,7 @@ class CustomerController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = 'public/photos/' . Auth::user()->name;
+            $path = 'public/photos/' . Auth::id();
 
             // Create the folder if it doesn't exist
             if (!Storage::exists($path)) {
@@ -187,7 +209,7 @@ class CustomerController extends Controller
             $file->storeAs($path, $filename);
 
             // Save the photo path in the customer record
-            $customer->photo = 'photos/' . Auth::user()->name . '/' . $filename;
+            $customer->photo = 'photos/' . Auth::id() . '/' . $filename;
             $customer->save();
         }
 
