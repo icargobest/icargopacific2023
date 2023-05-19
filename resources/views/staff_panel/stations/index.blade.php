@@ -1,7 +1,7 @@
 <title>Company | Station</title>
 
 @include('partials.header') @extends('layouts.app')
-@include('partials.navigationCompany',['station' =>"nav-selected"])
+@include('partials.navigationStaff',['station' =>"nav-selected"])
 <style>
     svg {
         width: 1.5rem;

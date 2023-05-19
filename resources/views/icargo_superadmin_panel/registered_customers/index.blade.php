@@ -46,7 +46,16 @@
                     @foreach ($customers as $customer)
                     <tr>
                         <td>{{ $customer->id }}</td>
-                        <td class="capitalized">{{ $customer->user->name }}</td>
+                        <td class="capitalized">
+                            <img
+                            src="
+                            @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
+                            @else /img/default_dp.png 
+                            @endif"
+                            alt="Profile Image" style="width:50px"
+                    />
+                            {{ $customer->user->name }}
+                        </td>
                         <td>{{ $customer->user->email }}</td>
                         <td>{{ $customer->contact_no }}</td>
                         <td

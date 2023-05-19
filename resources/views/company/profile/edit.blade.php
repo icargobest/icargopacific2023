@@ -1,143 +1,51 @@
-<button
-    type="button"
-    class="btn btn-success btn-sm"
-    data-mdb-toggle="modal"
-    data-mdb-target="#editModal{{$company->id}}"
->
-    EDIT
-</button>
+<link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
 
 <div
     class="modal top fade"
-    id="editModal{{$company->id}}"
+    id="editCompanyProfile"
     tabindex="-1"
-    aria-labelledby="editModal"
+    aria-labelledby="editCompanyProfile"
     aria-hidden="true"
-    data-mdb-backdrop="static"
-    data-mdb-keyboard="true"
 >
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header mbc2">
-                <h5 class="modal-title">EDIT COMPANY</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCompanyProfile">
+                    EDIT INFORMATION
+                </h5>
                 <button
                     type="button"
                     class="btn-close"
-                    data-mdb-dismiss="modal"
+                    data-bs-dismiss="modal"
                     aria-label="Close"
                 ></button>
             </div>
+
             <div class="modal-body">
-                <p class="small text-muted">
-                    <span class="fw-bold">Caution:</span> Changing company
-                    passwords without consent may violate privacy and compliance
-                    regulations. Consider sending a password reset email link
-                    instead.
-                </p>
                 <form
+                    action="{{ route('company.updateProfile', $company->id) }}"
                     method="POST"
-                    action="{{route('companies.update', $company->id)}}"
+                    enctype="multipart/form-data"
                 >
                     @csrf @method('PUT')
-                    <div class="mb-3">
-                        <input
-                            class="form-control"
-                            type="file"
-                            name="photo"
-                            id="photo"
-                        />
-                        <label class="form-label" for="name"
-                            >Upload new profile image</label
-                        >
-                    </div>
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="name"
-                                type="text"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                value="{{ $company->user->name }}"
-                                required
-                                autocomplete="name"
-                                autofocus
-                                placeholder="Name"
-                            />
-
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="name"
+                                    type="text"
+                                    class="form-control"
+                                    name="name"
+                                    required
+                                    autocomplete="name"
+                                    value="{{$company->user->name}}"
+                                />
+                                <label class="form-label" for="cname"
+                                    >Company Name</label
+                                >
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $company->user->email}}"
-                                required
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password"
-                                type="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                autocomplete="new-password"
-                                placeholder="Password"
-                            />
-
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="password-confirm"
-                                type="password"
-                                class="form-control"
-                                name="password_confirmation"
-                                autocomplete="new-password"
-                                placeholder="Re-Type Password"
-                            />
-                        </div>
-                    </div>
-
-                    <hr />
-
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
@@ -151,7 +59,7 @@
                                     value="{{$company->contact_no}}"
                                 />
                                 <label class="form-label" for="mobile"
-                                    >Contact number</label
+                                    >Mobile number</label
                                 >
                             </div>
                         </div>
@@ -188,6 +96,24 @@
                                 />
                                 <label class="form-label" for="Tel"
                                     >Telephone</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="email"
+                                    required
+                                    autocomplete="email"
+                                    value="{{$company->user->email}}"
+                                />
+                                <label class="form-label" for="email"
+                                    >Email address</label
                                 >
                             </div>
                         </div>
@@ -336,50 +262,14 @@
                         </div>
                     </div>
 
-                    @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                            {{session()->get('message')}}
-                        </div>  
-                    @endif             
-                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
-                        type="button"
-                        class="btn btn-outline-primary btn-block"
-                    >
-                        Send password reset link
-                    </a>
-                    
-                    <br><br>
-                    <div class="row mb-4">
-                        
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock-fill text-secondary"></i>
-                            </span>
-                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
-
-                            @error('otp')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="submit"
-                            class="btn btn-success btn-block"
-                            id="addModal2"
-                            data-mdb-dismiss="modal"
-                        >
-                            Save changes
-                        </button>
+                    <div class="buttonContainer">
+                        <button type="submit" class="modalbutton">SAVE</button>
                         <a
-                            href="{{route('companies.index')}}"
+                            href="{{route('company.profile')}}"
                             class="btn btn-secondary btn-block"
                             data-mdb-dismiss="modal"
                         >
-                            Cancel
+                            CANCEL
                         </a>
                     </div>
                 </form>
