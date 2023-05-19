@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     {{-- POPPINS FONT --}}
     <link href="https://fonts.googleapis.com">
-    <title>Invoice #{{ $ship->id }}</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
         body {
