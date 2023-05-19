@@ -28,12 +28,31 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <p class="small text-muted">
+                    <span class="fw-bold">Caution:</span> Changing company
+                    passwords without consent may violate privacy and compliance
+                    regulations. Consider sending a password reset email link
+                    instead.
+                </p>
                 <form
                     method="POST"
                     action="{{route('super-admin.update', $staff->id)}}"
+                    enctype="multipart/form-data"
                 >
                     @csrf @method('PUT')
-                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="file"
+                            name="photo"
+                            id="photo"
+                        />
+                        <label class="form-label" for="name"
+                            >Upload new profile image</label
+                        >
+                    </div>
+
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
@@ -60,7 +79,7 @@
                         @error('email') is-invalid @enderror
                         value="{{$staff->user->email}}" class="form-control"
                         @required(true)/>
-                        <label class="form-label" for="email">Email</label>
+                        <label class="form-label" for="email">Email Address</label>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -93,19 +112,141 @@
                         </div>
                     </div>
 
-                    <!-- Contact input -->
-                    <div class="form-outline mb-4">
-                        <input type="text" id="contactno"
-                        name="contactno" @error('contactno')
-                        is-invalid @enderror value="{{$staff->contact_no}}"
-                        class="form-control" @required(true)/>
-                        <label class="form-label" for="contact">Contact</label>
-                        @error('contactno')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                   <!-- Contact input -->
+                   <div class="form-outline mb-4">
+                    <input type="text" id="contact_no" name="contact_no"
+                    @error('contact_no') is-invalid @enderror
+                    value="{{$staff->contact_no}}" class="form-control"
+                    @required(true)/>
+                    <label class="form-label" for="contact">Contact Number</label>
+                    @error('contact_no')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ $staff->tel }}"
+                                autocomplete="tel"
+                                name="tel"
+                            />
+                            <label class="form-label" for="Tel"
+                                >Telephone</label
+                            >
+                        </div>
                     </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ $staff->street }}"
+                                name="street"
+                                autocomplete="street"
+                            />
+                            <label class="form-label" for="sname"
+                                >Street name</label
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ $staff->city }}"
+                                name="city"
+                                autocomplete="city"
+                            />
+                            <label class="form-label" for="city"
+                                >City</label
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ $staff->state }}"
+                                name="state"
+                                autocomplete="state"
+                            />
+                            <label class="form-label" for="state"
+                                >State/Country</label
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="postal_code"
+                                value="{{ $staff->postal_code }}"
+                                autocomplete="postal_code"
+                            />
+                            <label class="form-label" for="postal"
+                                >Postal Code</label
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="url"
+                                class="form-control @error('facebook') is-invalid @enderror"
+                                name="facebook"
+                                value="{{ $staff->facebook }}"
+                                id="faceb"
+                                required
+                            />
+                            @error('facebook')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <label class="form-label" for="faceb"
+                                >Facebook</label
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                class="form-control @error('linkedin') is-invalid @enderror"
+                                name="linkedin"
+                                value="{{ $staff->linkedin }}"
+                                id="linkin"
+                            />
+                            @error('linkedin')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <label class="form-label" for="linkin"
+                                >LinkedIn</label
+                            >
+                        </div>
+                    </div>
+                </div>
 
                     @if(session()->has('message'))
                         <div class="alert alert-success">
@@ -117,7 +258,7 @@
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
-                        Send password OTP
+                        Send One-Time Password (OTP)
                     </a>
                     
                     <br><br>

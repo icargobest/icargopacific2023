@@ -40,8 +40,27 @@
                     method="POST"
                     enctype="multipart/form-data"
                 >
-                    @csrf @method('PUT') {{-- Name Input --}}
-                    <input type="hidden" id="email" name="email" value="{{$driver->user->email}}" />
+                    @csrf @method('PUT')
+
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="file"
+                            name="image"
+                            id="photo"
+                        />
+                        <label class="form-label" for="name"
+                            >Upload new profile image</label
+                        >
+                    </div>
+
+                    {{-- Name Input --}}
+                    <input
+                        type="hidden"
+                        id="email"
+                        name="email"
+                        value="{{$driver->user->email}}"
+                    />
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-3">
@@ -66,17 +85,23 @@
                     </div>
 
                     <div class="row mb-4">
-                        
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-lock-fill text-secondary"></i>
                             </span>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password" >
+                            <input
+                                id="password"
+                                type="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                name="password"
+                                autocomplete="new-password"
+                                placeholder="Password"
+                            />
 
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>
@@ -86,10 +111,16 @@
                             <span class="input-group-text">
                                 <i class="bi bi-lock-fill text-secondary"></i>
                             </span>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Re-Type Password">
+                            <input
+                                id="password-confirm"
+                                type="password"
+                                class="form-control"
+                                name="password_confirmation"
+                                autocomplete="new-password"
+                                placeholder="Re-Type Password"
+                            />
                         </div>
                     </div>
-
 
                     <!-- Contact Number input -->
                     <div class="form-outline mb-4">
@@ -196,33 +227,89 @@
                             >Plate No.</label
                         >
                     </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control @error('facebook') is-invalid @enderror"
+                                    name="facebook"
+                                    value="{{ $driver->facebook }}"
+                                    id="faceb"
+                                    required
+                                />
+                                @error('facebook')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="faceb"
+                                    >Facebook</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    class="form-control @error('linkedin') is-invalid @enderror"
+                                    name="linkedin"
+                                    value="{{ $driver->linkedin }}"
+                                    id="linkin"
+                                />
+                                @error('linkedin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="linkin"
+                                    >LinkedIn</label
+                                >
+                            </div>
+                        </div>
+                    </div>
 
                     @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                            {{session()->get('message')}}
-                        </div>  
-                    @endif             
-                    <a href="{{ url('icargo/registered_users/send_otp', $driver->user->id)}}"
+                    <div class="alert alert-success">
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-hidden="true"
+                        >
+                            x
+                        </button>
+                        {{session()->get('message')}}
+                    </div>
+                    @endif
+                    <a
+                        href="{{ url('icargo/registered_users/send_otp', $driver->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send password reset link
                     </a>
-                    
-                    <br><br>
+
+                    <br /><br />
                     <div class="row mb-4">
-                        
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-lock-fill text-secondary"></i>
                             </span>
-                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
+                            <input
+                                id="otp"
+                                type="number"
+                                class="form-control @error('otp') is-invalid @enderror"
+                                name="otp"
+                                autocomplete="new-otp"
+                                placeholder="Enter OTP"
+                            />
 
                             @error('otp')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>

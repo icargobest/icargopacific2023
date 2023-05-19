@@ -70,8 +70,8 @@
                     <span class="data-content">{{ $user->name }}</span>
                     <span class="data-title">Mobile No.</span>
                     <span class="data-content">
-                        @if ($customer->mobile != null)
-                            (+63) {{ $customer->mobile }}@else---
+                        @if ($customer->contact_no != null)
+                            (+63) {{ $customer->contact_no }}@else---
                         @endif
                     </span>
                     <span class="data-title">Telephone</span>
