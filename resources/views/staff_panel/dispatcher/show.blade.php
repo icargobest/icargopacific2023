@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col">
                 <div class="mb-4">
-                  <img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">
+                  <img src="@if ($user->image != null) {{ url('images/company/dispatchers/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
                 </div>
               </div>
             </div>
