@@ -5,6 +5,21 @@
     @extends('layouts.app')
     @include('partials.navigationCompany', ['freight' => 'nav-selected'])
 
+    <style>
+        table {
+        border-collapse: collapse;
+        border-color: transparent !important;
+        }
+        th{
+        color: white !important;
+        }
+        td, th {
+        text-align: center !important;
+        padding: 10px;
+        border: 1px solid black; 
+        vertical-align: middle;
+        }
+        </style>
 
     <div class="mx-2">
         <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -110,18 +125,4 @@
     </div>
 
 
-<style>
-table {
-border-collapse: collapse;
-border-color: transparent !important;
-}
-th{
-color: white !important;
-}
-td, th {
-text-align: center !important;
-padding: 10px;
-border: 1px solid black; 
-vertical-align: middle;
-}
-</style>
+

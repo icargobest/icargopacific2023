@@ -1,6 +1,23 @@
 <head>
 <title>Company | Advance Freight</title>
 
+<style>
+    table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+vertical-align: middle;
+}
+
+</style>
 
 </head>
 @include('partials.header')
@@ -216,20 +233,3 @@
     </div>
 </div>
 
-<style>
-    table {
-border-collapse: collapse;
-border-color: transparent !important;
-}
-
-th{
-color: white !important;
-}
-td, th {
-text-align: center !important;
-padding: 10px;
-border: 1px solid black;
-vertical-align: middle;
-}
-
-</style>

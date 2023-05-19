@@ -6,6 +6,25 @@
     Tracking
 </button>
 
+<style>
+    .child2 td {
+        text-align: left !important;
+    }
+
+    .child2 th {
+        text-align: left !important;
+    }
+
+    td.contact,
+    th.contact {
+        border-bottom: 1px solid black !important;
+    }
+
+    #tracking-status {
+        text-align: left !important;
+    }
+</style>
+
 <div class="modal fade" id="trackModal{{ $ship->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -306,21 +325,4 @@
 </div>
 </div>
 
-<style>
-    .child2 td {
-        text-align: left !important;
-    }
 
-    .child2 th {
-        text-align: left !important;
-    }
-
-    td.contact,
-    th.contact {
-        border-bottom: 1px solid black !important;
-    }
-
-    #tracking-status {
-        text-align: left !important;
-    }
-</style>

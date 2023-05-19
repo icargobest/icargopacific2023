@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('adv_transfer_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipment_id')-nullable();
+            $table->unsignedBigInteger('shipment_id')->nullable();
             $table->string('company_from')->nullable();
             $table->string('staff_from')->nullable();
             $table->string('company_to')->nullable();
