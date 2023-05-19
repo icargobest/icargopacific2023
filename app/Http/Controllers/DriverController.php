@@ -7,9 +7,11 @@ use App\Models\Driver;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\VerifyToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 use App\Drivers;
 use Exception;
@@ -110,13 +112,25 @@ class DriverController extends Controller
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
+            if($request->hasfile('image')){
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('images/company/drivers/',$filename);
+            }
             $drivers = Driver::create([
                 'user_id' => $user->id,
                 'vehicle_type' => $otherValidation['vehicle_type'],
                 'plate_no' => $otherValidation['plate_no'],
                 'license_number' => $otherValidation['license_number'],
                 'contact_no' =>  $otherValidation['contact_no'],
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
                 'company_id' => $user_id,
+                'image' => $filename,
             ]);
           
             DB::commit();
@@ -141,22 +155,57 @@ class DriverController extends Controller
 
     public function update($id, Request $request)
     {
+        $driver = Driver::find($id);
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
+
+        $user = $driver->user;
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
+
+
+        
+        if($request->hasfile('image')){
+            $destination = 'images/company/drivers/'.$driver->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('images/company/drivers/',$filename);
+        }else{
+            $filename = $driver->image;
+        }
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
             'license_number' => $request->license_number,
             'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'image' => $filename,
         ];
-
-        $userData = [
-            'name' => $request->input('name'),
-        ];
-        
-        $driver = Driver::find($id);
         $driver->update($driverData);
-
-        $user = $driver->user;
-        $user->update($userData);
 
         return back()->with('success', 'Driver #'.$id.' data updated successfully!');
         
@@ -190,6 +239,71 @@ class DriverController extends Controller
             ]);
             $user_id = User::findOrFail($user_id);
             return back()->with('success', 'Driver status updated successfully!');
+    }
+
+    public function driverProfile()
+    {
+        $user_id = Auth::id();
+        $drivers = $this->driver->with('user')->where('user_id', $user_id)->get();
+        return view('driver_panel/profile.user', compact('drivers'));
+    }
+
+    public function updateProfile($id, Request $request)
+    {
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+
+        $driverData = [
+            'vehicle_type' => $request->vehicle_type,
+            'plate_no' => $request->plate_no,
+            'license_number' => $request->license_number,
+            'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'linkedin' => $request->linkedin,
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+        
+        $driver = Driver::find($id);
+        $driver->update($driverData);
+
+        $user = $driver->user;
+        $user->update($userData);
+
+        return back()->with('success', 'Updated successfully!');
+        
+    }
+
+    public function updateImage($id, Request $request)
+    {
+        $driver = Driver::find($id);
+        if($request->hasfile('image')){
+            $destination = 'images/company/drivers/'.$driver->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('images/company/drivers/',$filename);
+        }
+        $driverData = [
+            'image' =>  $filename,
+        ];
+        
+        $driver->update($driverData);
+
+        return back()->with('success', 'Profile picture updated successfully!');
     }
 
 }

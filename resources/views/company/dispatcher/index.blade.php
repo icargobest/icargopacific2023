@@ -51,7 +51,7 @@
                             Dispatcher Name
                         </th>
                         <th scope="col" style="text-align: center">
-                            Email
+                            Station No
                         </th>
                         <th scope="col" style="text-align: center">
                             Contact No
@@ -68,33 +68,24 @@
                     @foreach ($dispatchers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td class="capitalized">{{ $user->user->name }}</td>
-                        <td>{{ $user->user->email }}</td>
-                        <td class="capitalized">{{ $user->contact_no }}</td>
+                        <td class="capitalized"><img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
+                        <td>
+                            @foreach( $stations as $station)
+                                @if($user->station_id == $station->id)
+                                    {{ $station->station_number }}
+                                @endif
+                            @endforeach
+
+                        </td>
+                        <td>{{ $user->contact_no }}</td>
                         <td
                             class="td-buttons d-flex justify-content-center"
                             style="overflow: auto"
                         >
-                            @include('company/dispatcher.show')
-                            @include('company/dispatcher.edit')
-                            @include('company/dispatcher.archive')
-                            @if($user->user->status == 1)
-                            <a
-                                href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 0]) }}"
-                                class="btn btn-danger btn-sm"
-                                style="width: 80px !important"
-                            >
-                                Lock
-                            </a>
-                            @else
-                            <a
-                                href="{{ route('dispatcher.status.update', ['user_id' => $user->user->id, 'status_code' => 1]) }}"
-                                class="btn btn-success btn-sm"
-                                style="width: 85px !important"
-                            >
-                                unlock
-                            </a>
-                            @endif
+                            @include('staff_panel/dispatcher.show')
+                            @include('staff_panel/dispatcher.edit')
+                            @include('staff_panel/dispatcher.archive')
+
                         </td>
                     </tr>
                     @endif @endforeach

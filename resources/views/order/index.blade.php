@@ -32,7 +32,16 @@
                     <div class="item-card container px-4">
                     <div class="card-body">
                         <div class="row mb-3 titleID">
-                            <div class="col d-flex gap-4 align-items-center"><span class="fw-bold">ORDER #{{$ship->id}}</span> <span class="orderStatus fw-bold"> {{$ship->status}}</span></div>
+                            <div class="col d-flex gap-4 align-items-center"><span class="fw-bold">ORDER #{{$ship->id}}</span> <span class="orderStatus fw-bold">
+                                @if($ship->status == 'Pending')<i class="fa fa-clock"></i>
+                                @elseif($ship->status == 'Processing')<i class="fa fa-gears"></i>
+                                @elseif($ship->status == 'PickedUp')<i class="fa fa-truck-ramp-box"></i>
+                                @elseif($ship->status == 'Assort')<i class="fa fa-arrows-spin"></i>
+                                @elseif($ship->status == 'Transferred')<i class="fa fa-right-left"></i>
+                                @elseif($ship->status == 'Arrived')<i class="fa fa-boxes-stacked"></i>
+                                @elseif($ship->status == 'Dispatched')<i class="fa fa-truck-fast"></i>
+                                @elseif($ship->status == 'Delivered')<i class="fa fa-circle-check"></i>
+                                @endif {{$ship->status}}</span></div>
                         </div>
                         <div class="row">
 

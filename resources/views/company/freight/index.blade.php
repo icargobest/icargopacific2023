@@ -37,27 +37,24 @@
                         <colgroup span="3"></colgroup>
                         <tr>
                             <thead>
-
-                                <th colspan="3" scope="colgroup">SENDER</th>
-                                <th colspan="3" scope="colgroup">RECEIVER</th>
-                                <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
-                                <th colspan="1" scope="colgroup"></th>
+                                <th class="text-center" colspan="2" scope="colgroup">SENDER</th>
+                                <th class="text-center" colspan="2" scope="colgroup">RECEIVER</th>
+                                <th class="text-center" colspan="4" scope="colgroup">ITEM INFORMATION</th>
+                                <th class="text-center" colspan="1" scope="colgroup"></th>
                             </thead>
 
                         </tr>
                         <thead>
                             <tr>
-                                <th scope="col">NAME</th>
-                                <th scope="col">ADDRESS</th>
-                                <th scope="col">NUMBER</th>
-                                <th scope="col">NAME</th>
-                                <th scope="col">ADDRESS</th>
-                                <th scope="col">NUMBER</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">SIZE & WEIGHT</th>
-                                <th scope="col">CATEGORY</th>
-                                <th scope="col">MODE of PAYMENT</th>
-                                <th scope="col">ACTION</th>
+                                <th class="text-center" scope="col">NAME</th>
+                                <th class="text-center" scope="col">ADDRESS</th>
+                                <th class="text-center" scope="col">NAME</th>
+                                <th class="text-center" scope="col">ADDRESS</th>
+                                <th class="text-center" scope="col">TRACKING NUMBER</th>
+                                <th class="text-center" scope="col">SIZE & WEIGHT</th>
+                                <th class="text-center" scope="col">TOTAL PRICE</th>
+                                <th class="text-center" scope="col">MODE of PAYMENT</th>
+                                <th class="text-center" scope="col">ACTION</th>
                             </tr>
                         </thead>
 
@@ -74,11 +71,6 @@
                                         {{-- sender address --}}
                                         <td>{{ $ship->sender->sender_address }} , {{ $ship->sender->sender_city }} ,
                                             {{ $ship->sender->sender_state }} , {{ $ship->sender->sender_zip }}</td>
-                                        {{-- sender number --}}
-                                        <td>{{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
-                                                | {{ $ship->sender->sender_tel }}
-                                            @endif
-                                        </td>
                                         {{-- receiver name --}}
                                         <td>{{ $ship->recipient->recipient_name }}</td>
                                         {{-- receiver address --}}
@@ -86,29 +78,26 @@
                                             {{ $ship->recipient->recipient_city }} ,
                                             {{ $ship->recipient->recipient_state }} ,
                                             {{ $ship->recipient->recipient_zip }}</td>
-                                        {{-- receiver number --}}
-                                        <td>{{ $ship->recipient->recipient_mobile }} @if ($ship->recipient->recipient_tel != null)
-                                                | {{ $ship->recipient->recipient_tel }}
-                                            @endif
-                                        </td>
 
                                         {{-- item id --}}
-                                        <td>{{ $ship->id }}</td>
+                                        <td><strong>{{ $ship->tracking_number }}</strong></td>
                                         {{-- Size & Weight --}}
                                         <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                             | {{ intval($ship->weight) }}Kg</td>
                                         {{-- Category --}}
-                                        <td>{{ $ship->category }}</td>
+                                        <td>{{ $ship->total_price }}</td>
                                         {{-- Mode of Pament --}}
-                                        <td>COD</td>
+                                        <td>{{ $ship->mop }}</td>
 
                                         <td class="tdbutton" style="max-width:120px">
                                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                             @include('company/freight.freight_tracking')
-                                            <a href="{{ route('freight_transfer', $ship->id) }}"><button
-                                                    class="btn created-button mx-auto my-2">Forward</button></a>
-                                            <button class="btn created-button mx-auto" data-bs-toggle="modal"
-                                                data-bs-target="#editModal">Print</button>
+                                            @if ($ship->status == 'Assort')
+                                                @if ($ship->status != 'Transferred')
+                                                    @include('company.freight.transfer')
+                                                @endif
+                                            @endif
+                                            @include('company.freight.print-modal')
                                         </td>
                                     </tr>
                                 @endif
@@ -116,13 +105,7 @@
                         @endforeach
                     </tbody>
                 </table>
-
-
             </section>
-
-
-
-
         </div>
     </div>
 
