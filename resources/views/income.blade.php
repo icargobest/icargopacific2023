@@ -93,13 +93,22 @@
                                 {{ $counts['Dispatched'] }}
                             </div>
                         </div>
-                        <div style="background-color: #0083BB;" class="cards">
+                        <div style="background-color: #01b3ff;" class="cardsM">
                             <span class="cardTitle">
                                 DELIVERED
                             </span>
                             <div class="cardIconCount">
                                 <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
                                 {{ $counts['Delivered'] }}
+                            </div>
+                        </div>
+                        <div style="background-color: #ffffff;" class="cards">
+                            <span class="cardTitle">
+                                empty card
+                            </span>
+                            <div class="cardIconCount">
+                                <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
+                                empty
                             </div>
                         </div>
                     </div>

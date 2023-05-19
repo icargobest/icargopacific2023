@@ -91,6 +91,10 @@
                             <td>Delivered</td>
                             <td>{{ $counts['Delivered'] }}</td>
                         </tr>
+                        <tr>
+                            <td>Delivered</td>
+                            <td>{{ $counts['Delivered'] }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
