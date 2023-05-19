@@ -122,7 +122,151 @@
                 </table>
             </section>
         </div>
+
+        <section class="mb-5 px-2 h-90" style="overflow-x: auto">
+            <table
+                class="table table-striped table-bordered table-hover table-borderless hover"
+                id="companyfreightlist"
+            >
+                <thead class="table-dark">
+                    <col />
+                    <colgroup span="3"></colgroup>
+                    <colgroup span="3"></colgroup>
+                    <colgroup span="3"></colgroup>
+                    <tr>
+                        <thead>
+                            <th colspan="3" scope="colgroup">SENDER</th>
+                            <th colspan="3" scope="colgroup">RECEIVER</th>
+                            <th colspan="4" scope="colgroup">
+                                ITEM INFORMATION
+                            </th>
+                            <th colspan="1" scope="colgroup"></th>
+                        </thead>
+                    </tr>
+                    <thead>
+                        <tr>
+                            <th scope="col">NAME</th>
+                            <th scope="col">ADDRESS</th>
+                            <th scope="col">NUMBER</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">ADDRESS</th>
+                            <th scope="col">NUMBER</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">SIZE & WEIGHT</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">MODE of PAYMENT</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                </thead>
+
+                <tbody>
+                    @foreach ($shipments as $ship) @if(Auth::user()->id ==
+                    $ship->user_id || (Auth::user()->type == 'company' &&
+                    $ship->company_bid == Auth::user()->name && $ship->status ==
+                    'Processing' || (Auth::user()->type == 'company' &&
+                    $ship->company_bid == Auth::user()->name && $ship->status ==
+                    'Transferred')))
+
+                    <tr>
+                        {{-- sender namae --}}
+                        <td>{{$ship->sender->sender_name}}</td>
+                        {{-- sender address --}}
+                        <td>
+                            {{$ship->sender->sender_address}} ,
+                            {{$ship->sender->sender_city}} ,
+                            {{$ship->sender->sender_state}} ,
+                            {{$ship->sender->sender_zip}}
+                        </td>
+                        {{-- sender number --}}
+                        <td>
+                            {{$ship->sender->sender_mobile}}
+                            @if($ship->sender->sender_tel != NULL) |
+                            {{$ship->sender->sender_tel}} @endif
+                        </td>
+
+                        {{-- receiver name --}}
+                        <td>{{$ship->recipient->recipient_name}}</td>
+                        {{-- receiver address --}}
+                        <td>
+                            {{$ship->recipient->recipient_address}} ,
+                            {{$ship->recipient->recipient_city}} ,
+                            {{$ship->recipient->recipient_state}} ,
+                            {{$ship->recipient->recipient_zip}}
+                        </td>
+                        {{-- receiver number --}}
+                        <td>
+                            {{$ship->recipient->recipient_mobile}}
+                            @if($ship->recipient->recipient_tel != NULL) |
+                            {{$ship->recipient->recipient_tel}} @endif
+                        </td>
+
+                        {{-- item id --}}
+                        <td>1{{$ship->id}}</td>
+                        {{-- Size & Weight --}}
+                        <td>
+                            {{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}}
+                            | {{intval($ship->weight)}}Kg
+                        </td>
+                        {{-- Category --}}
+                        <td>{{$ship->category}}</td>
+                        {{-- Mode of Pament --}}
+                        <td>COD</td>
+
+                        <td class="tdbutton" style="max-width: 120px">
+                            {{--
+                            <button
+                                class="btn created-button mx-auto"
+                                data-bs-toggle="modal"
+                                data-bs-target="#trackModal"
+                            >
+                                Tracking
+                            </button>
+                            --}} @include('company/freight.freight_tracking')
+                            <a
+                                href="{{ url('/company/freight/freight_transfer') }}"
+                                ><button
+                                    class="btn created-button mx-auto my-2"
+                                >
+                                    Forward
+                                </button></a
+                            >
+                            <button
+                                class="btn created-button mx-auto"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal"
+                            >
+                                Print
+                            </button>
+                        </td>
+                    </tr>
+                    @endif @endforeach
+                </tbody>
+            </table>
+        </section>
     </div>
+</div>
 
+<style>
+    table {
+        border-collapse: collapse;
+        border-color: transparent !important;
+    }
+    th {
+        color: white !important;
+    }
+    td,
+    th {
+        text-align: center !important;
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
+<script type="text/javascript">
+    let companyfreightlist = new DataTable("#companyfreightlist");
+</script>

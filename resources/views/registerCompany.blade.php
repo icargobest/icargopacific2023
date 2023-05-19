@@ -115,15 +115,15 @@
                             </div>
                         </div>
 
-                        {{-- contact address--}}
+                        {{-- tel--}}
                         <div class="row mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="contactnum" type="text" class="form-control @error('company_address') is-invalid" @enderror" name="company_address" value="{{ old('company_address') }}" required autocomplete="company_address" autofocus placeholder="Company Address">
+                                <input id="telephone" type="text" class="form-control @error('tel') is-invalid" @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus placeholder="Telephone">
 
-                                @error('company_address')
+                                @error('tel')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -131,6 +131,117 @@
                             </div>
                         </div>
 
+                        {{-- street--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="street" type="text" class="form-control @error('street') is-invalid" @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus placeholder="Street">
+
+                                @error('street')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- city--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="city" type="text" class="form-control @error('city') is-invalid" @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus placeholder="City">
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- state--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="state" type="text" class="form-control @error('state') is-invalid" @enderror" name="state" value="{{ old('state') }}" required autocomplete="state" autofocus placeholder="State">
+
+                                @error('state')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- postal_code--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="postalcode" type="text" class="form-control @error('postal_code') is-invalid" @enderror" name="postal_code" value="{{ old('city') }}" required autocomplete="postal_code" autofocus placeholder="Postal Code">
+
+                                @error('postal_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- website--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="website" type="text" class="form-control @error('website') is-invalid" @enderror" name="website" value="{{ old('website') }}" autocomplete="website" autofocus placeholder="Website Link">
+
+                                @error('website')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- facebook--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" required autocomplete="facebook" autofocus placeholder="Facebook Link">
+
+                                @error('facebook')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- Linkedin--}}
+                        <div class="row mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill text-secondary"></i>
+                                </span>
+                                <input id="linkedin" type="text" class="form-control @error('linkedin') is-invalid" @enderror" name="linkedin" value="{{ old('linkedin') }}" autocomplete="linkedin" autofocus placeholder="Linkedin Link">
+
+                                @error('linkedin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-0">
                             <div class="col-12">

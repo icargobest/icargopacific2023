@@ -12,9 +12,7 @@
       <div class="addemployee" style=""></div>
 
       <div class="table-container">
-          <table class="table table-striped table-borderless hover">
-            @section('content')
-
+          <table class="table table-striped table-borderless hover" id="listOfQueries">
                           <thead>
                             <th>Email</th>
                             <th>Name</th>
@@ -35,7 +33,14 @@
                       </tbody>
                       </table>
 
-            @endsection
       </div>
 </div>
 </main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    let listOfQueries = new DataTable('#listOfQueries');
+</script>

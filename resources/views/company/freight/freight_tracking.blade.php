@@ -7,14 +7,13 @@
 </button>
 
 <style>
-    .child2 td {
-        text-align: left !important;
-    }
-
     .child2 th {
         text-align: left !important;
     }
 
+    .child2 td {
+        text-align: left !important;
+    }
     td.contact,
     th.contact {
         border-bottom: 1px solid black !important;
@@ -23,6 +22,8 @@
     #tracking-status {
         text-align: left !important;
     }
+
+
 </style>
 
 <div class="modal fade" id="trackModal{{ $ship->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -118,7 +119,6 @@
                                             <th>PARCEL CHARGES:</th>
                                             <td class="fw-bold">Php 68</td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -314,7 +314,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -326,3 +325,11 @@
 </div>
 
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    let trackingTable = new DataTable("#tracking-table");
+</script>
