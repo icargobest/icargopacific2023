@@ -11,9 +11,10 @@
 
 <style>
     th {
-        background-color: white !important;
+        background-color: transparent !important;
         color: black;
         font-weight: normal;
+        text-align: left;
     }
     td {
         text-align: left;
@@ -21,16 +22,16 @@
     }
 </style>
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-<div class="container mw-100 px-lg-5">
+<div class="container mw-100">
     <div class="bg-white shadow" style="max-width: 100%;">
-        <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
-            <h3 class="text-white mb-0">ORDER LIST | TO PICK UP</h3>
+        <div class="py-3 ps-3" style="background-color: #214D94;">
+            <h3 class="text-white text-center text-sm-start mb-0 fw-bold">ORDER LIST | TO PICK UP</h3>
         </div>
         <div class="mt-2">
             @include('flash-message')
         </div>
         {{-- TABLE START--}}
-        <section class="mb-5 px-5 my-3 overflow-auto">
+        <section class="mb-5 px-2 my-2 overflow-auto">
             <table class="table table-striped table-hover">
             <thead class="text-white" style="background-color: #214D94;">
                 <tr>
@@ -48,7 +49,7 @@
             <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->type == 'dispatcher')
-                        @if($ship->company_id == $company_id_dispatcher && $ship->status == 'Processing' && $ship->driver_id == null)
+                        @if($ship->company_id == $company_id_dispatcher && $ship->station_id == $dispatcher_station_id && $ship->status == 'Processing')
                         <tr>
                             <td>{{$ship->id}}</td>
                             <!-- Photo not showing -->
@@ -60,7 +61,7 @@
                             <td>{{$ship->category}}</td>
                             <td>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                             <td>{{$ship->min_bid_amount}}</td>
-                            <td>{{$ship->status}}</td>
+                            <td><span class="badge badge-primary" style="background-color: #F9CD1A;">{{$ship->status}}</span></td>
                             <td>
                                 @if($ship->driver_id == null)
                                     @include('dispatcher_panel/order.assignDriver')

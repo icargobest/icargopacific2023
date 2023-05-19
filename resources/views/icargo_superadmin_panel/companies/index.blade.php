@@ -44,6 +44,23 @@
                                 @include('icargo_superadmin_panel.companies.show')
                                 @include('icargo_superadmin_panel.companies.edit')
                                 @include('icargo_superadmin_panel.companies.archive')
+                                @if($company->user->status == 1)
+                                    <a
+                                        href="{{ route('company.status.update', ['user_id' => $company->user->id, 'status_code' => 0]) }}"
+                                        class="btn btn-danger btn-sm"
+                                        style="width: 80px !important"
+                                    >
+                                        Lock
+                                    </a>
+                                    @else
+                                    <a
+                                        href="{{ route('company.status.update', ['user_id' => $company->user->id, 'status_code' => 1]) }}"
+                                        class="btn btn-success btn-sm"
+                                        style="width: 80px !important"
+                                    >
+                                        unlock
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

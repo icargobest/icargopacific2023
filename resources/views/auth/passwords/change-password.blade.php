@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+<style>
+    svg{
+        width:  1.5rem;
+        height: 1.5rem;
+    }
+</style>
 @section('content')
 <div class="py-4 vertical-center">
     <div class="container center p-5">
@@ -38,7 +43,7 @@
                                 <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput"
                                     placeholder="New Password">
                                 @error('new_password')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger col-12">{{ $message }}</span>
                                 @enderror
                                 </div>
                             </div>
@@ -57,10 +62,29 @@
                         
                            <div class="row mb-0 mt-5">
                                 <div class="col-lg-12">
-                                    <button class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94;">Submit</button>
+                                    <button class="mb-1 resetpass-button letter-spacing" style="background-color:#F7CF0F; color: #214D94;">SUBMIT</button>
                                 </div>
                            </div>
                     </form>
+                            <div class="row mb-0 mt-3">
+                                <div class="col-lg-12">
+                                    @if (Auth::user()->type == 'company')
+                                        <a href="/company/dashboard"><button class="mb-1 register-ascompany-button letter-spacing">BACK</button></a>
+                                    @endif
+                                    @if (Auth::user()->type == 'user')
+                                        <a href="/user/order"><button class="mb-1 register-ascompany-button letter-spacing">BACK</button></a>
+                                    @endif
+                                    @if (Auth::user()->type == 'driver')
+                                        <a href="/driver/dashboard"><button class="mb-1 register-ascompany-button letter-spacing">BACK</button></a>
+                                    @endif
+                                    @if (Auth::user()->type == 'dispatcher')
+                                        <a href="/dispatcher/dashboard"><button class="mb-1 register-ascompany-button letter-spacing">BACK</button></a>
+                                    @endif
+                                    @if (Auth::user()->type == 'staff')
+                                        <a href="/staff/dashboard"><button class="mb-1 register-ascompany-button letter-spacing">BACK</button></a>
+                                    @endif
+                                </div>
+                            </div>
             </div>
         </div>
     </div>
