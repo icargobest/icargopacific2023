@@ -186,7 +186,6 @@ svg{
     }
     .cardAlign
     {
-      
     display: flex;
     flex-direction: row;
     margin-bottom: 15px;
@@ -195,10 +194,11 @@ svg{
     .cards, .cardsM
     {
     height: 140px;
-    margin-right: 0px;
+
     margin-bottom: 0px;
-    width: 31%;
+    width: 33%;
     min-width: 250px;
+    max-width: 700px;
     display: flex;
     padding: 15px;
     }
@@ -206,7 +206,6 @@ svg{
     margin-right: 30px;
     margin-left: 30px;
     }
-    
     .cardTitle
     {
         margin-bottom: 15px;
