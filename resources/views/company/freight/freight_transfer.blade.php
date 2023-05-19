@@ -4,6 +4,15 @@
 @extends('layouts.app')
 @include('partials.navigationCompany', ['advance' => 'nav-selected'])
 
+<style>
+    #table-div th,
+    #table-div td {
+        background-color: transparent !important;
+        color: black !important;
+        text-align: left !important;
+
+    }
+</style>
 
 <div class="content-containe mx-4 pt-4">
     <div class="main-wrapper border border-2" style="max-width: 100%">

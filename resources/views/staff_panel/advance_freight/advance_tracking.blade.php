@@ -4,6 +4,21 @@
 @extends('layouts.app')
 @include('partials.navigationStaff')
 
+<style>
+    table {
+border-collapse: collapse;
+border-color: transparent !important;
+}
+th{
+color: white !important;
+}
+td, th {
+text-align: center !important;
+padding: 10px;
+border: 1px solid black;
+
+}
+</style>
 
 <div class="mx-2">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -163,19 +178,5 @@
     </div>
 </div>
 
-<style>
-    table {
-border-collapse: collapse;
-border-color: transparent !important;
-}
-th{
-color: white !important;
-}
-td, th {
-text-align: center !important;
-padding: 10px;
-border: 1px solid black;
 
-}
-</style>
 @include('partials.footer')

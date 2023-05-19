@@ -2,7 +2,14 @@
     
     <title>Company | Transfer Forwarding</title>
 
-    
+    <style>
+        #table-div th, #table-div td{
+          background-color: transparent !important;
+          color:black !important;
+          text-align: left !important;
+          
+        }
+      </style> 
 
 </head>
 
@@ -135,11 +142,3 @@
     </div>
 </div>
 
-<style>
-    #table-div th, #table-div td{
-      background-color: transparent !important;
-      color:black !important;
-      text-align: left !important;
-      
-    }
-  </style>

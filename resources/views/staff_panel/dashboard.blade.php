@@ -65,8 +65,6 @@
                 </div>
             </div>
 
-            {{-- <marquee behavior="" direction="down"> --}}
-            {{-- </marquee> --}}
         </div>  
     </div>         
 </div>
