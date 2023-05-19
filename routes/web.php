@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\BidController;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +24,8 @@ use App\Models\OrderTrackingLog;
 use App\Http\Controllers\SuperDashboardController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffDashboardController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -108,8 +110,8 @@ Route::get('company_registration', function () {
     return view('registerCompany');
 });
 Route::post(
-    'company_registration/store',
-    [CompaniesController::class, 'companyRegistrationOutsidePanel']
+    'company_registration/addCompany',
+    [CompaniesController::class, 'addCompany']
 )->name('add.company');
 
 
@@ -163,6 +165,12 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::get('/company/dashboard', [IncomeController::class, 'index'])
         ->name('company.dashboard')->middleware('verified');
 
+
+    // profile page
+    Route::get('/company/profile', [CompaniesController::class, 'profile'])->name('company.profile');
+    Route::put('/company/profile/{id}/submit', [CompaniesController::class, 'updateProfile'])->name('company.updateProfile');
+    Route::put('/company/profile+image/{id}/submit', [CompaniesController::class, 'updateImage'])->name('company.updateImage');
+
     //Order Routes
     Route::controller(ShipmentController::class)->group(function(){
         Route::get('/company/order','index')->name('company.order');
@@ -185,24 +193,13 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
 
     });
 
-    // stations
-    Route::group(['prefix' => 'company/stations'], function () {
-        Route::get('/', [StationController::class, 'index'])
-            ->name('stations.view');
-        Route::post('/add-station', [StationController::class, 'store'])
-            ->name('add.station');
-        Route::get('/view_station/{id}', [StationController::class, 'show'])
-            ->name('show.station');
-        Route::get('/stations_archive', [StationController::class, 'viewArchive'])
-            ->name('view.stations.archived');
-        Route::get('/edit/{id}', [StationController::class, 'edit'])
-            ->name('edit.station');
-        Route::put('/update/{id}', [StationController::class, 'update'])
-            ->name('update.station');
-        Route::put('/archive/{id}', [StationController::class, 'archive'])
-            ->name('archive.station');
-        Route::put('/unarchive/{id}', [StationController::class, 'unarchive'])
-            ->name('unarchive.station');
+    //stations
+    Route::resource('company/stations', StationController::class);
+    Route::controller(StationController::class)->group(function () {
+        Route::get('company/stations', 'index')->name('stations.view');
+        Route::get('company/archived_stations', 'viewArchive')->name('view.stations.archived');
+        Route::put('company/stations/archive/{id}', 'archive')->name('archive.station');
+        Route::put('company/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
     });
 
     //Staff
@@ -232,11 +229,12 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
         Route::put('/dispatcher/unarchive/{id}', 'unarchive')->name('dispatcher.unarchive');
     });
+
 });
 
 // Super Admin Panel
 Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
-    Route::get('/icargo/dashboard', [HomeController::class, 'superAdminDashboard'])
+    Route::get('/icargo/dashboard', [SuperDashboardController::class, 'index'])
         ->name('super.admin.dashboard')->middleware("verified");
 
     Route::get('/customer-queries', [QueryController::class, 'show'])->name('show.queries');
@@ -377,12 +375,21 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/order_list/station', 'assignStation_view')->name('assignStation_view');
      });
 
-     //Assign Station
-     Route::controller(StaffController::class)->group(function(){
-        Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
-        Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
-        Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
-        Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
+    //Stations
+    Route::resource('staff/stations', StationController::class);
+    Route::controller(StationController::class)->group(function () {
+        Route::get('staff/stations', 'index')->name('stations.view');
+        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archived');
+        Route::put('staff/stations/archive/{id}', 'archive')->name('archive.station');
+        Route::put('staff/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
+    });
+
+    //Assign Station
+    Route::controller(StaffController::class)->group(function(){
+       Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+       Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
+       Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
+       Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
     });
 
     //DRIVER
