@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Driver;
+use App\Models\Dispatcher;
 use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
@@ -170,10 +173,42 @@ class CompaniesController extends Controller
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Company status updated successfully!');
+        $update_user = User::whereId($user_id);
+
+        $companies = Company::with('user')->where('user_id', $user_id)->first(); // Retrieve the first matching company record
+        if($companies){
+            $company_id = $companies->id;
+            $drivers = Driver::where('company_id', $company_id)->get();
+            if($drivers){
+                foreach($drivers as $driver){
+                    $driverUpdate = User::whereId($driver->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+            $dispatchers = Dispatcher::where('company_id', $company_id)->get();
+            if($dispatchers){
+                foreach($dispatchers as $dispatcher){
+                    $dispatcherUpdate = User::whereId($dispatcher->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+            $staffs = Staff::where('company_id', $company_id)->get();
+            if($staffs){
+                foreach($staffs as $staff){
+                    $staffUpdate = User::whereId($staff->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+        }
+        $update_user->update([
+            'status' => $status_code
+        ]);
+        return back()->with('success', 'Company status updated successfully!');
     }
 }
