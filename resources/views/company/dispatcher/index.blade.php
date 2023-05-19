@@ -68,7 +68,7 @@
                     @foreach ($dispatchers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td class="capitalized"><img src="@if ($user->image != null) {{ url('images/company/dispatchers/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
+                        <td class="capitalized"><img src="@if ($user->image != null) {{ asset('storage/images/dispatcher/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
                         <td>
                             @foreach( $stations as $station)
                                 @if($user->station_id == $station->id)

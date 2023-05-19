@@ -116,7 +116,7 @@ class DriverController extends Controller
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extention;
-                $file->move('images/company/drivers/',$filename);
+                $file->move('storage/images/driver/'.$user->id ,$filename);
             }
             $drivers = Driver::create([
                 'user_id' => $user->id,
@@ -182,14 +182,14 @@ class DriverController extends Controller
 
         
         if($request->hasfile('image')){
-            $destination = 'images/company/drivers/'.$driver->image;
+            $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('images/company/drivers/',$filename);
+            $file->move('storage/images/driver/'.$driver->user_id ,$filename);
         }else{
             $filename = $driver->image;
         }
@@ -288,14 +288,14 @@ class DriverController extends Controller
     {
         $driver = Driver::find($id);
         if($request->hasfile('image')){
-            $destination = 'images/company/drivers/'.$driver->image;
+            $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('images/company/drivers/',$filename);
+            $file->move('storage/images/driver/'.$driver->user_id ,$filename);
         }
         $driverData = [
             'image' =>  $filename,

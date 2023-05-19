@@ -21,7 +21,7 @@
             @method('PUT')
 
             <div class="form-outline mb-4">
-              <img src="@if ($user->image != null) {{ url('images/company/dispatchers/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
+              <img src="@if ($user->image != null) {{ asset('storage/images/dispatcher/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
               <input class="form-control" type="file" id="formFile" name="image">
             </div>
             <div class="row ">

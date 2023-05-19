@@ -38,7 +38,7 @@
                         @if ($user->archived == 0)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td><img src="@if ($user->image != null) {{ url('images/company/drivers/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
+                                <td><img src="@if ($user->image != null) {{ asset('storage/images/driver/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">{{ $user->user->name }}</td>
                                 <td>{{ $user->vehicle_type }}</td>
                                 <td>{{ $user->plate_no }}</td>
                                 <td class="td-buttons d-flex justify-content-center" style="overflow:auto;">

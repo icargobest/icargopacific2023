@@ -110,7 +110,7 @@ class DispatcherController extends Controller
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extention;
-                $file->move('images/company/dispatchers/',$filename);
+                $file->move('storage/images/dispatcher/'.$user->id ,$filename);
             }
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
@@ -171,14 +171,14 @@ class DispatcherController extends Controller
 
 
         if($request->hasfile('image')){
-            $destination = 'images/company/dispatchers/'.$dispatcher->image;
+            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('images/company/dispatchers/',$filename);
+            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
         }else{
             $filename = $dispatcher->image;
         }
@@ -294,14 +294,14 @@ class DispatcherController extends Controller
     {
         $dispatcher = Dispatcher::find($id);
         if($request->hasfile('image')){
-            $destination = 'images/company/dispatchers/'.$dispatcher->image;
+            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
             if(File::exists($destination)){
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
-            $file->move('images/company/dispatchers/',$filename);
+            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
         }
         $dispatcherData = [
             'image' =>  $filename,
