@@ -88,4 +88,13 @@ class UsersController extends Controller
         User::destroy($id);
         return redirect()->route('companies.index')->with('success', 'Staff member has been deleted successfully.');
     }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back();
+    }
 }

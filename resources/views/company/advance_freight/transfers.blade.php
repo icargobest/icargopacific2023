@@ -1,18 +1,26 @@
+<html>
 <head>
 <title>Company | Transfer Forwarding</title>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js" ></script>
+
+
 </head>
 @include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationCompany',['advance' => "nav-selected"])
-@if($errors->any())
-    @foreach($errors->all() as $err)
-        <strong>{{$err}}</strong>
-    @endforeach
-@endif
+
+
+<body>
 
 <div class="mx-4">
     <div class="main-wrapper border border-2" style=" max-width: 100%;">
-
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        {{session()->get('message')}}
+    </div>  
+    @endif
         <div class="employee-header-container">
             <h3 class="">TRANSFER TO FORWARDING</h3>
         </div>
@@ -25,23 +33,26 @@
 
         <div class="first-child col-sm-6 col-md-6 ">
 
-          <div class="div input-group rounded mb-4" style="width: 98% !important;">
-            <input type="search" class="form-control rounded" placeholder="SHIPPING DATE" aria-label="Search" aria-describedby="search-addon" style="margin-left: 15px;" />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fa fa-calendar"></i>
-            </span>
-          </div>
+
           @if(Auth::user()->type == 'company')
-          
          
           <form action="{{route('advFreight.transfer', $ship->id)}}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
-          <input type="hidden" name="id" value="{{$ship->id}}">
+          <div class="div input-group rounded mb-4" style="width: 98% !important;">
+          <div class="mt-2">@include('flash-message')</div>
+            <input type="date" id="shipping_date" name="shipping_date" class="form-control @error('shipping_date')is-invalid @enderror" placeholder="SHIPPING DATE" aria-label="Search" aria-describedby="search-addon" style="margin-left: 15px;" />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+          </div>
 
+
+          <input type="hidden" name="id" value="{{$ship->id}}">
+          <input type="hidden" name="transfer_from_company" value="{{Auth::user()->id}}">
           <div class="div mb-4">
             <label class="form-label" for="transfer_to_company"></label>
-            <select type="text" id="transfer_to_company" name="transfer_to_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;"required>
+            <select type="text" id="transfer_to_company" name="transfer_to_company" style="width:95% !important; height:33.26px; border-radius:0.375rem;" class="form-control @error('transfer_to_company')is-invalid @enderror">
               <option value="" hidden>SELECT COMPANY</option>
               <?php
                  foreach ($companies as $company) {
@@ -52,21 +63,15 @@
           </div>
 
           <div class="div mb-4">
-            <select type="text" id="select_method" name="select_method" style="width:95% !important; height:33.26px; border-radius:0.375rem;">
-              <option value="" hidden>SELECT METHOD</option>
-              <?php
-                    echo "<option value='COD'>Cash On Delivery</option>";
-                    echo "<option value='Card'>Card Payment</option>";
-                ?>
-            </select>
+            <input type="text" name="payment_method" value="{{$ship->mop}}" placeholder="{{$ship->mop}}"/>
           </div>
 
           <div class="div mb-4">
-            <input type="search" id="freight_charges" name="freight_charges" class="form-control rounded" placeholder="FREIGHT CHARGES"/>
+            <input type="text" name="freight_charges" class="form-control @error('freight_charges')is-invalid @enderror input-sm text-right amount" placeholder="FREIGHT CHARGES"/>
           </div>
 
           <div class="div mb-4">
-            <input type="search" class="form-control rounded" placeholder="TOTAL AMOUNT"/>
+            <input type="text" name="total_amount" readonly id="total_amount" class="form-control rounded" placeholder="TOTAL AMOUNT"/>
           </div>
         
         </div>
@@ -95,9 +100,34 @@
         @endif
       </div>
 </div>
+</body>
+
+<script type="text/javascript">
+  $(function() {
+    
+    var total_amount = function(){
+      var total = 0;
+      $('.amount').each(function(){
+        var num = $(this).val().replace(',','');
+
+        if(num != 0){
+          temp = parseFloat(num * 0.1);
+          total = parseFloat(num) + parseFloat(temp);
+        }
+      });
+
+      $('#total_amount').val(total);
+    }
+
+    $('.amount').keyup(function(){
+      total_amount();
+    });
+
+  });
+</script>
 
 
-
+</html>
 
 <style>
   table {

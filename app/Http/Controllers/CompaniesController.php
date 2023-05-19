@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,7 @@ class CompaniesController extends Controller
            'password' => Hash::make($request->password),
            'type' => '2',
        ]);
-   
+       $user->sendEmailVerificationNotification();
        $company = Company::create([
            'user_id' => $user->id,
            'contact_no' =>  $request->contact_no,
@@ -65,7 +66,7 @@ class CompaniesController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => '2',
             ]);
-
+            $user->sendEmailVerificationNotification();
             $company = Company::create([
                 'user_id' => $user->id,
                 'contact_no' =>  $request->contact_no,
@@ -100,6 +101,8 @@ class CompaniesController extends Controller
     {
         $company = Company::with('user')->findOrFail($id);
         $user = $company->user;
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -107,6 +110,9 @@ class CompaniesController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
+        if($get_token){
+        $get_token->is_activated = 1;
+        $get_token->save();
         $user->update([
             'name' => $request->name,
             'email' => $request->email ?? $user->email,
@@ -118,6 +124,9 @@ class CompaniesController extends Controller
             'contact_name' => $request->contact_name,
             'company_address' => $request->company_address,
         ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+        }
 
         return back()->with('success', 'Company account has been updated successfully.');
     }
@@ -157,5 +166,14 @@ class CompaniesController extends Controller
     {
         Company::destroy($id);
         return back()->with('success', 'Staff member has been deleted successfully.');
+    }
+
+    public function updateStatus($user_id, $status_code)
+    {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+            $user_id = User::findOrFail($user_id);
+            return back()->with('success', 'Company status updated successfully!');
     }
 }
