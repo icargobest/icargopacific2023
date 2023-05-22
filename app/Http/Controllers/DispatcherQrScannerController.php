@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shipment;
+use App\Models\Driver;
 use App\Models\OrderHistory;
 use App\Models\Dispatcher;
 use Illuminate\Support\Facades\Auth;
@@ -102,7 +103,6 @@ class DispatcherQrScannerController extends Controller
         $time = OrderHistory::find($id);
         if ($shipment) {
             $shipment->status = 'Assort';
-            $shipment->driver_id = null;
             $shipment->save();
         }
         if ($time) {
@@ -154,7 +154,16 @@ class DispatcherQrScannerController extends Controller
         $time = OrderHistory::find($id);
         if ($shipment) {
             $shipment->status = 'Arrived';
+            $shipment->driver_id = null;
             $shipment->save();
+        }
+        if ($shipment) {
+            $driver_id = $shipment->driver_id;
+            $driver = Driver::find($driver_id);
+            if ($driver) {
+                $driver->dispatcher_id = null;
+                $driver->save();
+            }
         }
         if ($time) {
             $time->isArrived = true;
