@@ -229,19 +229,17 @@ class DispatcherController extends Controller
 
     public function assignDriver($shipment_id, $driver_id)
     {
-        $shipmentData = [
-            'driver_id' => $driver_id,
-        ];
-
-        $driverData = [
-            'dispatcher_id' => Auth::id()
-        ];
+        $driver = Driver::find($driver_id);
+        if($driver){
+            $driver->dispatcher_id = Auth::id();
+            $driver->save();
+        }
 
         $shipment = Shipment::find($shipment_id);
-        $shipment->update($shipmentData);
-
-        $dispatch = Driver::where('id', $driver_id)->first();
-        $dispatch->update($driverData);
+        if($shipment){
+            $shipment->driver_id = $driver_id;
+            $shipment->save();
+        }
 
         return back()->with('success', 'Driver was successfully assigned!');
         
