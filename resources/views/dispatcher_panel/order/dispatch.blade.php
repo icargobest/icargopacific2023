@@ -48,7 +48,7 @@
                 <tbody>
                     @foreach ($shipments as $ship) @if(Auth::user()->type ==
                     'dispatcher') @if($ship->company_id ==
-                    $company_id_dispatcher && $ship->status == 'Arrived' &&
+                    $company_id_dispatcher && $ship->status == ('Arrived' || 'Dispatched') &&
                     $ship->driver_id == null)
                     <tr>
                         <td>{{$ship->id}}</td>

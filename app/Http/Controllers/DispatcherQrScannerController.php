@@ -154,15 +154,14 @@ class DispatcherQrScannerController extends Controller
         $time = OrderHistory::find($id);
         if ($shipment) {
             $shipment->status = 'Arrived';
-            $shipment->driver_id = null;
             $shipment->save();
-        }
-        if ($shipment) {
             $driver_id = $shipment->driver_id;
-            $driver = Driver::find($driver_id);
+            $driver = Driver::find($driver_id)->first();
             if ($driver) {
                 $driver->dispatcher_id = null;
                 $driver->save();
+                $shipment->driver_id = null;
+                $shipment->save();
             }
         }
         if ($time) {
