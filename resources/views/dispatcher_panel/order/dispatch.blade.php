@@ -48,8 +48,8 @@
                 <tbody>
                     @foreach ($shipments as $ship) @if(Auth::user()->type ==
                     'dispatcher') @if($ship->company_id ==
-                    $company_id_dispatcher && $ship->status == ('Arrived' || 'Dispatched') &&
-                    $ship->driver_id == null)
+                    $company_id_dispatcher && ($ship->status == 'Arrived' || $ship->status == 'Dispatched') &&
+                    $ship->driver_id == null  && $ship->station_id == $dispatcher_station_id)
                     <tr>
                         <td>{{$ship->id}}</td>
                         <!-- Photo not showing -->
@@ -79,7 +79,7 @@
                             | {{intval($ship->weight)}}Kg
                         </td>
                         <td>{{$ship->min_bid_amount}}</td>
-                        <td>{{$ship->status}}</td>
+                        <td><span class="badge badge-primary" style="background-color: #F9CD1A;">{{$ship->status}}</span></td>
                         <td>
                             @if($ship->driver_id == null)
                             @include('dispatcher_panel/order.assignDriver')
