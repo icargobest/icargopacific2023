@@ -89,32 +89,42 @@
         }
 
         .print-button {
-            background-color: #333;
+			background-color:  #214D94;
             color: #fff;
             font-size: 12px;
             padding: 5px 10px;
             border-radius: 3px;
             cursor: pointer;
+			position: fixed;
+  			bottom: 0px;
+  			right: 0px; 
+			padding: 10px;
+			font-size: 20px;
         }
 
-        .textalignright {
-            text-align: right;
-        }
-
-        .rotate-90 {
-            transform: rotate(-90deg);
-            color: #214D94;
-            letter-spacing: 3px;
-            font-size: 25px;
-            margin: -30px;
-        }
-
-        .rotate90 {
-            transform: rotate(90deg);
-            color: #214D94;
-            letter-spacing: 3px;
-            font-size: 25px;
-            margin: -30px;
+		.rotate-90{ 
+			transform: rotate(-90deg) translate(5px, 8px);
+			color: #214D94;
+			letter-spacing: 3px;
+			font-size: 23px;
+			margin:-45px;
+			padding: 40px 20px;
+		}
+		.rotate90{ 
+			transform: rotate(90deg) translate(0px, 9px);
+			color:  #214D94;
+			letter-spacing: 3px;
+			font-size: 23px;
+			margin:-58px;
+			padding: 40px 22px;
+		}
+		.rotatecolor{
+			background-color: #F9CD1A;
+		}
+		.verticaltext{
+           width:1px;
+           word-wrap: break-word;
+           white-space:pre-wrap; 
         }
 
         .rotatecolor {
@@ -149,134 +159,123 @@
 </head>
 
 <body>
-    <div class="body">
-        <div class="sticker">
-            <button class="print-button" onclick="window.print()">
-                Print
-            </button>
-            <h1 class="m-0">WAYBILL SUMMARY</h1>
-            <div class="image-row p-0 m-0">
-                <p class="element h4 p-4 m-0" style="color: #214D94">[{{ $ship->tracking_number }}]</p>
-                <table class="p-0 m-0">
-                    <thead>
-                        <tr>
-                            <td class="p-1 border-0 my-0 mx-auto" colspan="2">
-                                <img class="mx-auto my-0" src="/img/icargo-logo-1.jpg" style="max-height:60px;">
-                            </td>
-                            <td class="p-1 border-0 my-0 mx-auto" colspan="2" rowspan="2">
-                                <img class="mx-auto my-0" src="/img/jst-express-logo.png" style="max-height:80px;">
-                            </td>
-                        </tr>
-                    </thead>
-                    </tr>
-                    <tr>
-                        <td class="m-0 p-0 border-0 text-end" style="color: #214D94">
-                            <p class="smalltext m-0 fw-bold">iCARGO</p>
-                        </td>
-                        <td class="m-0 p-0 border-0" style="color: #F9CD1A">
-                            <p class="smalltext m-0 fw-bold">PACIFIC</p>
-                    </tr>
-                </table>
-            </div>
-            <table class="p-0 m-0">
-                <thead>
-                    <tr>
-                        <th width="30%" height="75px" colspan="4" class="p-1 m-0">
-                            <p class="m-0">ORDER DATE:</p> <!-- margin-0 -->
-                            <p class="fw-normal m-0">{{ date('d/m/Y', strtotime($log->isPendingTime)) }}
-                            </p> <!-- font-normal, margin-0 -->
-                        </th>
-                        <th rowspan="2" width="70%" colspan="6" class="m-0 p-1 text-center">
+	<div class="body">
+	<div class="sticker">
+		<h1 class="m-0">WAYBILL SUMMARY</h1>
+		<div class="image-row p-0 m-0">
+			<p class="element h4 p-4 m-0" style="color: #214D94">[{{ $ship->tracking_number }}]</p>
+			<table class="p-0 m-0">
+				<thead>
+					<tr>
+						<td class="p-1 border-0 my-0 mx-auto" colspan="2">
+							<img class="mx-auto my-0" src="/img/icargo-logo-1.jpg" style="max-height:60px;">
+						</td>
+						<td class="p-1 border-0 my-0 mx-auto" colspan="2" rowspan="2">
+							<img class="mx-auto my-0" src="/img/jst-express-logo.png" style="max-height:80px;">
+						</td>
+					</tr>
+				</thead>			
+					</tr>
+					<tr>
+						<td class="m-0 p-0 border-0 text-end" style="color: #214D94"><p class="smalltext m-0 fw-bold">iCARGO</p></td>
+						<td class="m-0 p-0 border-0" style="color: #F9CD1A"><p class="smalltext m-0 fw-bold">PACIFIC</p>
+					</tr>
+			</table>			
+		</div>
+		<table class="p-0 m-0">
+			<thead>
+					<tr>
+						<th width="30%" height="75px" colspan="4" class="p-1 m-0">
+							<p class="m-0">ORDER DATE:</p> <!-- margin-0 -->
+							<p class="fw-normal m-0">{{ date('d/m/Y', strtotime($log->isPendingTime)) }}</p> <!-- font-normal, margin-0 -->
+						</th>
+						<th rowspan="2" width="70%" colspan="6" class="m-0 p-1 text-center">
                             <img class="m-0 p-1 mx-auto my-0 p-1"
                                 src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128', 2, 50) }}"
                                 alt="barcode" style="height:70px;">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="4" height="75px" class="p-1 m-0">
-                            <p class="m-0">ORDER NO:</p>
-                            <p class="fw-normal m-0">{{ $ship->id }}</p>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-            <table class="m-0 p-0">
-                <tbody>
-                    <tr>
-                        <th class="m-0 p-0" height="150px" width="2%" colspan="1"
-                            style="background-color:#F9CD1A;">
-                            <div class="d-flex justify-content-center rotate-90">
-                                <p>SENDER</p>
-                            </div>
-                        </th>
-                        <th class="p-0" height="150px" width="1%" colspan="1"
-                            style="background-color:#214D94;"></th>
-                        <th class="m-0 p-1" height="150px" width="97%" colspan="8">
-                            <div>SENDER'S NAME</div>
-                            <p height="150px" class="fw-normal">
-                                {{ $ship->sender->sender_name }}<br>
-                                {{ $ship->sender->sender_address }}, {{ $ship->sender->sender_city }},
-                                {{ $ship->sender->sender_state }}, {{ $ship->sender->sender_zip }}<br>
-                                {{ $ship->sender->sender_mobile }}
-                                @if ($ship->sender->sender_tel != null)
-                                    | {{ $ship->sender->sender_tel }}
-                                @endif
-
-                            </p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="m-0 p-1" height="150px" colspan="8" width="97%">
-                            <div>RECEIVER'S NAME</div>
-                            <p class="fw-normal">
-                                {{ $ship->recipient->recipient_name }}<br>
+						</th>	
+					</tr>
+					<tr>
+						<th colspan="4" height="75px" class="p-1 m-0">
+							<p class="m-0">ORDER NO:</p>
+							<p class="fw-normal m-0">{{ $ship->id }}</p>
+						</th>
+					</tr>
+			</thead>
+		</table>
+		<table class="m-0 p-0" >
+			<tbody>
+				<tr>
+					<th class="m-0 p-0" height="150px" width="2%" colspan="1" style="background-color:#F9CD1A;">					
+						<div class="d-flex justify-content-center rotate-90">
+							<p>SENDER</p>	
+						</div>
+					</th> 
+					<th class="p-0" height="150px" width="1%" colspan="1" style="background-color:#214D94;"></th>
+					<th class="m-0 p-1" height="150px" width="97%"  colspan="8">
+						<div>SENDER'S NAME</div>
+						<p height="150px" class="fw-normal">
+							{{ $ship->sender->sender_name }}<br>
+							{{ $ship->sender->sender_address }}, {{ $ship->sender->sender_city }},
+							{{ $ship->sender->sender_state }}, {{ $ship->sender->sender_zip }}<br>
+							{{ $ship->sender->sender_mobile }}
+							@if ($ship->sender->sender_tel != null)
+								| {{ $ship->sender->sender_tel }}
+							@endif
+						</p>
+					</th>
+				</tr>
+				<tr>
+					<th class="m-0 p-1" height="150px" colspan="8" width="97%">
+						<div>RECEIVER'S NAME</div>
+						<p class="fw-normal">
+							{{ $ship->recipient->recipient_name }}<br>
                                 {{ $ship->recipient->recipient_address }},{{ $ship->recipient->recipient_city }},
                                 {{ $ship->recipient->recipient_state }},{{ $ship->recipient->recipient_zip }}<br>
                                 {{ $ship->recipient->recipient_mobile }}
                                 @if ($ship->recipient->recipient_tel != null)
                                     | {{ $ship->recipient->recipient_tel }}
-                                @endif
-                            </p>
-                        <th class="p-0" height="150px" width="1%" colspan="1"
-                            style="background-color:#214D94;"></th>
-                        </th>
-                        <th class="m-0 p-0" colspan="1" height="150px" width="2%"
-                            style="background-color:#F9CD1A;">
-                            <div class="d-flex justify-content-center rotate90">
-                                <p>RECEIVER</p>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="m-0 p-1" height="150px" colspan="10" width="100%">
-                            <div>ITEM INFORMATION</div>
-                            <p class="fw-normal">
-                                {{ $ship->tracking_number }}<br>
-                                {{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }} |
-                                {{ intval($ship->weight) }} Kg
+                                @endif						</p>
+						<th class="p-0" height="150px" width="1%" colspan="1" style="background-color:#214D94;"></th>
+					</th>
+					<th class="m-0 p-0" colspan="1" height="150px" width="2%" style="background-color:#F9CD1A;">
+						<div class="d-flex justify-content-center rotate90">
+							<p>RECEIVER</p>	
+						</div>
+					</th>
+				</tr>
+				<tr>
+					<th class="m-0 p-1" height="150px" colspan="10" width="100%"><div>ITEM INFORMATION</div>
+						<p class="fw-normal">
+							{{ $ship->tracking_number }}<br>
+							{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }} |
+							{{ intval($ship->weight) }} Kg
                             <p>Total Price:</p>
-                                {{$ship->total_price}}
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="m-0 p-0">
-                <tbody>
-                    <tr>
-                        <th class="m-0 p-0" colspan="3" width="20%">
-                            <img class="mx-auto my-0 p-1"
+							{{$ship->total_price}}
+					</th>
+				</tr>
+			</tbody>
+			</table>
+			<table class="m-0 p-0">
+			<tbody>
+				<tr>
+					<th class="m-0 p-0" colspan="3" width="20%">                
+						<img class="mx-auto my-0 p-1"
                                 src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE', 5, 5) }}"
                                 alt="QR Code">
-                        </th>
-                        <th class="mx-auto my-0" height="150px" c="7" width="80%">
-                            <p>MODE OF PAYMENT</p>
-                            <p class="fw-normal">{{ $ship->mop }}</p>
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+					</th>
+					<th class="mx-auto my-0" height="150px" c="7" width="80%">
+						<p>MODE OF PAYMENT</p>
+						<p class="fw-normal">{{ $ship->mop }}</p>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+			<div>
+				<button class="print-button" onclick="window.print()">
+					Print
+				</button>
+			</div>
 </body>
 
 </html>

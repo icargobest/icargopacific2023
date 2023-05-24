@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     {{-- POPPINS FONT --}}
     <link href="https://fonts.googleapis.com">
-    <title>Invoice #{{ $ship->id }}</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
         body {
@@ -25,21 +24,23 @@
         }
 
         .print-button {
-            background-color: #333;
+            background-color:  #214D94;
             color: #fff;
             font-size: 12px;
             padding: 5px 10px;
             border-radius: 3px;
             cursor: pointer;
+            position: fixed;
+  			bottom: 0px;
+  			right: 0px; 
+			padding: 10px;
+			font-size: 20px;
         }
     </style>
 </head>
 
 <body>
     <main class="container border bg-white w-100 p-3">
-        <div>
-            <button class="print-button" onclick="window.print()">Print</button>
-        </div>
         <header class="row">
             <div class="col-2">
                 <img src="/img/icargo-logo-1.jpg" style="max-height:60px;">
@@ -170,6 +171,9 @@
             <hr class="opacity-75">
         </footer>
     </main>
+    <div>
+        <button class="print-button btn btn-secondary" onclick="window.print()">Print</button>
+    </div>
 </body>
 
 </html>

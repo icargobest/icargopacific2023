@@ -15,7 +15,7 @@
         </div>
         <div class="modal-body pb-0 overflow-hidden">
           @foreach ($stations as $station)
-
+            @if ($station->user_id == $company_user_id)
             <a href="{{ route('station.assign',['shipment_id' => $ship->id, 'station_id' => $station->id]) }}">
               <button class="btn btn-block p-0 mx-0 mb-2 card flex-row" style="min-width: 385px;">
                 <div class="card-body text-sm-start text-middle">
@@ -25,6 +25,7 @@
                 </div>
               </button>
             </a>
+            @endif
           @endforeach
           <hr class="opacity-50 mb-0">
         </div>

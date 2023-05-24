@@ -2,6 +2,7 @@
 <button type="button" class="btn btn-success btn-sm" data-mdb-toggle="modal" data-mdb-target="#editModal{{ $user->id }}">
     Edit
  </button>
+ 
 <div class="modal top fade" id="editModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog ">
       <div class="modal-content">
@@ -20,7 +21,7 @@
             @method('PUT')
 
             <div class="form-outline mb-4">
-              <img src="{{ url('images/company/dispatchers/'.$user->image) }}" height="100" width="100" alt="profile image">
+              <img src="@if ($user->image != null) {{ asset('storage/images/dispatcher/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
               <input class="form-control" type="file" id="formFile" name="image">
             </div>
             <div class="row ">
@@ -55,7 +56,7 @@
               <input type="tel" name="tel" value="{{ $user->tel }}" class="form-control" placeholder="Tel No" 
               oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
               minlength="7" 
-              maxlength="9" required>
+              maxlength="9">
                   @error('contact_no')
                       <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                   @enderror

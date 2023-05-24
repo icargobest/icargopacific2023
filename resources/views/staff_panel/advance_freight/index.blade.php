@@ -1,6 +1,21 @@
 <head>
     <title>Staff | Advance Freight</title>
     
+    <style>
+        table {
+    border-collapse: collapse;
+    border-color: transparent !important;
+    }
+    th{
+        color: white !important;
+    }
+    td, th {
+        text-align: center !important;
+        padding: 10px;
+        border: 1px solid black;
+        vertical-align: middle;
+    }
+    </style>
     
     </head>
     @include('partials.header')
@@ -89,7 +104,7 @@
     
                             <td class="tdbutton" style="max-width:120px">
                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
-                            @include('staff_panel/advance_freight.advance.tracking')
+                            @include('staff_panel/advance_freight/advance.tracking')
                             <a href="{{ url('/staff_panel/advance_freight/advance.transfer') }}"><button class="btn created-button mx-auto my-2">Forward</button></a>
                             <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#editModal">Print</button></td>
                         </tr>
@@ -110,19 +125,5 @@
         </div>
     </div>
 
-    <style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-    }
-    th{
-        color: white !important;
-    }
-    td, th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black;
-        
-    }
-    </style>
+    
     @include('partials.footer')
