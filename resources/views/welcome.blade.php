@@ -222,14 +222,28 @@
                     <div class="col-lg-6 col-sm-12 d-flex flex-column pb-3 align-items-center gap-3">
                         <span class="fw-bold">Follow us in:</span>
                         <div class="socialIcons d-flex gap-5">
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-instagram"></i></a>
-                            <a href="#"><i class="bi bi-tiktok"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://www.facebook.com/icargotech?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                            <a href="https://www.tiktok.com/@icargopacific" target="_blank"><i class="bi bi-tiktok" target="_blank"></i></a>
+                            <a href="https://www.linkedin.com/company/icargopacific/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                        <div class="contactD d-flex flex-column gap-3 mt-4">
+                            <h6 class="d-flex gap-3 align-items-center"><i class="bi bi-envelope-fill"></i><span class="fw-bold">techicargo@gmail.com</span></h6>
+                            <h6 class="d-flex gap-3 align-items-center"><i class="bi bi-telephone-fill"></i><span class="fw-bold">+63 917 692 4203</span></h6>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 d-flex flex-column pb-3 align-items-center gap-3"">
                         <span class="fw-bold">In Partnership with:</span>
+                        <div class="partnersIcons d-flex justify-content-center gap-5">
+                            <img src="/img/lbc.png" alt="Logo">
+                            <img src="/img/fedex.png" alt="Logo">
+                            <img src="/img/jrslogo.png" alt="Logo">
+                            <img src="/img/transportify.png" alt="Logo">
+                            <img src="/img/apcargologo.png" alt="Logo">
+                            <img src="/img/capex.png" alt="Logo">
+                            
+
+                        </div>
                     </div>
                 </div>
             </div>
