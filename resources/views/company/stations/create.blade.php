@@ -10,7 +10,7 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
                  @endif
-            <form method="POST" action="{{route('add.station')}}">
+            <form method="POST" action="{{route('stations.store')}}">
             @csrf
             
                 <!-- Station ID Input -->

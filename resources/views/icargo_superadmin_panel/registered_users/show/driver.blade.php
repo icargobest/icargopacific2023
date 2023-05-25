@@ -28,13 +28,7 @@
             </div>
             <div class="modal-body">
                 <div class="image-class">
-                    <img
-                    src="
-                    @if ($driver->image != null) {{ asset('storage/' . $driver->image) }} 
-                    @else /img/default_dp.png 
-                    @endif"
-                    alt="Profile Image" 
-                />
+                    <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" alt="profile image"/>
                 </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
@@ -226,8 +220,40 @@
                             >Plate No.</label
                         >
                     </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{ $driver->facebook ?? '-' }}"
+                                    id="faceb"
+                                    required
+                                />
+                                <label class="form-label" for="faceb"
+                                    >Facebook</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="linkedin"
+                                    value="{{ $driver->linkedin ?? '-' }}"
+                                    id="linkin"
+                                />
+                                <label class="form-label" for="linkin"
+                                    >LinkedIn</label
+                                >
+                            </div>
+                        </div>
+                    </div>
                     <!-- Created At. -->
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"

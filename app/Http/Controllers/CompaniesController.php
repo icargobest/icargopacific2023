@@ -107,32 +107,56 @@ class CompaniesController extends Controller
         $user = $company->user;
         $get_token = $request->otp;
         $get_token = VerifyToken::where('token', $get_token)->first();
-
+    
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
         ]);
 
         if($get_token){
-        $get_token->is_activated = 1;
-        $get_token->save();
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email ?? $user->email,
-            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
-        ]);
+            $get_token->is_activated = 1;
+            $get_token->save();
 
-        $company->update([
-            'contact_no' =>  $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'company_address' => $request->company_address,
-        ]);
-        $delete_token = VerifyToken::where('token', $get_token->token)->first();
-        $delete_token->delete();
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email ?? $user->email,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if ($image = $request->file('image')) {
+                $folderName = Auth::id(); // Get the user id
+                $destinationPath = "images/company/$folderName"; // Set the destination path
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->storeAs($destinationPath, $profileImage, 'public'); // Use the 'public' disk
+                $company->update(['image' => $profileImage]);
+        
+                return back()->with('success', 'Profile image has been updated successfully.');
+            }
+            
+            $company->update([
+                'contact_no' =>  $request->contact_no,
+                'contact_name' => $request->contact_name,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'facebook' => $request->facebook,
+                'website' => $request->website,
+                'linkedin' => $request->linkedin,
+            ]);
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+            return back()->with('success','Staff #'.$id.' has been updated successfully.');
         }
 
-        return back()->with('success', 'Company account has been updated successfully.');
+        return back()->with('warning','Please verify the account with OTP before modifying data.');
     }
 
     public function archive(Request $request, $id)

@@ -22,7 +22,7 @@ class SuperDashboardController extends Controller
         $totalMonthly = 0;
 
         $companycount = Companies::where('type', 2)->count();
-        $usercount = Users::where('type', 0)->count();
+        $usercount = User::where('type', 0)->count();
        
         
 

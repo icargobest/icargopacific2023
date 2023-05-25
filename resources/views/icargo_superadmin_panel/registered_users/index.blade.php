@@ -37,7 +37,7 @@
                         <th scope="col" style="text-align: center">Company</th>
                         <th
                             scope="col"
-                            style="text-align: center !important; width: 300px"
+                            style="text-align: center !important; width: 100px"
                         >
                             Action
                         </th>
@@ -46,7 +46,10 @@
                 <tbody>
                     @if ($superadmin)
                     <tr>
-                        <td class="capitalized">{{ $superadmin->name }}</td>
+                        <td class="capitalized">
+                            <img src="/img/default_dp.png" style="width: 30px" alt="profile image">
+                            {{ $superadmin->name }}
+                        </td>
                         <td>{{ $superadmin->email }}</td>
                         <td>-</td>
                         <td style="text-transform: capitalize">
@@ -58,29 +61,17 @@
                             style="overflow: auto"
                         >
                             @include('icargo_superadmin_panel.registered_users.show.superadmin')
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm"
-                                disabled
-                            >
-                                EDIT
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-danger btn-sm"
-                                disabled
-                            >
-                                Archive
-                            </button>
                         </td>
                     </tr>
-                    @endif @foreach ($companies as $company)
+                    @endif 
+                    
+                    @foreach ($companies as $company)
                     <tr>
                         <td class="capitalized">
                             <img src="{{ asset($company->image 
                                 ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
                                 : 'img/default_dp.png') }}"
-                                style="width:50px"
+                                style="width:30px"
                     alt="Profile Image">
                             {{ $company->user->name }}
                         </td>
@@ -96,14 +87,15 @@
                         >
                             @if ($company->user->type == "company")
                             @include('icargo_superadmin_panel.registered_users.show.company')
-                            @include('icargo_superadmin_panel.registered_users.edit.company')
-                            @include('icargo_superadmin_panel.registered_users.archive.company')
                             @endif
                         </td>
                     </tr>
-                    @endforeach @foreach ($dispatchers as $dispatcher)
+                    @endforeach 
+                    
+                    @foreach ($dispatchers as $dispatcher)
                     <tr>
                         <td class="capitalized">
+                            <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $dispatcher->user->name }}
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
@@ -122,14 +114,17 @@
                         >
                             @if ($dispatcher->user->type == "dispatcher")
                             @include('icargo_superadmin_panel.registered_users.show.dispatcher')
-                            @include('icargo_superadmin_panel.registered_users.edit.dispatcher')
-                            @include('icargo_superadmin_panel.registered_users.archive.dispatcher')
                             @endif
                         </td>
                     </tr>
-                    @endforeach @foreach ($drivers as $driver)
+                    @endforeach 
+                    
+                    @foreach ($drivers as $driver)
                     <tr>
-                        <td class="capitalized">{{ $driver->user->name }}</td>
+                        <td class="capitalized">
+                            <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
+                            {{ $driver->user->name }}
+                        </td>
                         <td>{{ $driver->user->email }}</td>
                         <td>{{ $driver->contact_no }}</td>
                         <td class="capitalized">{{ $driver->user->type }}</td>
@@ -143,13 +138,13 @@
                         >
                             @if ($driver->user->type == "driver")
                             @include('icargo_superadmin_panel.registered_users.show.driver')
-                            @include('icargo_superadmin_panel.registered_users.edit.driver')
-                            @include('icargo_superadmin_panel.registered_users.archive.driver')
                             @endif
                         </td>
                     </tr>
 
-                    @endforeach @foreach ($staffs as $staff)
+                    @endforeach 
+                    
+                    @foreach ($staffs as $staff)
                     <tr>
                         <td class="capitalized">
                             <img
@@ -172,12 +167,12 @@
                         >
                             @if ($staff->user->type == "staff")
                             @include('icargo_superadmin_panel.registered_users.show.staff')
-                            @include('icargo_superadmin_panel.registered_users.edit.staff')
-                            @include('icargo_superadmin_panel.registered_users.archive.staff')
                             @endif
                         </td>
                     </tr>
-                    @endforeach @foreach ($customers as $customer)
+                    @endforeach 
+                    
+                    @foreach ($customers as $customer)
                     <tr>
                         <td class="capitalized">
                             <img
@@ -185,7 +180,7 @@
                                 @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
                                 @else /img/default_dp.png 
                                 @endif"
-                                alt="Profile Image" style="width:50px"
+                                alt="Profile Image" style="width:30px"
                             />
                             {{ $customer->user->name }}
                         </td>
@@ -199,8 +194,6 @@
                         >
                             @if ($customer->user->type == "user")
                             @include('icargo_superadmin_panel.registered_users.show.customer')
-                            @include('icargo_superadmin_panel.registered_users.edit.customer')
-                            @include('icargo_superadmin_panel.registered_users.archive.customer')
                             @endif
                         </td>
                     </tr>
