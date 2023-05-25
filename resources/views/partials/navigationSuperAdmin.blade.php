@@ -60,6 +60,33 @@
                             </div>
 
                             <div class="links">
+                                <a class="nav-link" >
+                                    <div class="link">
+                                        <i class="fa fa-id-card-o link-i-1"></i>
+                                        <span>Driver</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                             <div class="links">
+                                <a class="nav-link">
+                                    <div class="link">
+                                        <i class="fa fa-id-card link-i-1"></i>
+                                        <span>Dispatcher</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="links">
+                                <a class="nav-link">
+                                    <div class="link">
+                                        <i class="fa fa-user link-i-1"></i>
+                                        <span>Staff</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                           <div class="links">
                                 <a class="nav-link" href="">
                                     <div class="link @if (isset($Commisions)) {{ $Commisions }} @endif">
                                         <i class="fa fa-table link-i-1"></i>

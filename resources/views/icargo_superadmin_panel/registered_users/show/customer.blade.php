@@ -27,13 +27,15 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <div class="image-class">
                  <img
                         src="
                         @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
                         @else /img/default_dp.png 
                         @endif"
-                        alt="Profile Image" style="width:250px"
+                        alt="Profile Image"
                 />
+                </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
                         <input
