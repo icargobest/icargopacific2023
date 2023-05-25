@@ -26,6 +26,12 @@ class ShipmentController extends Controller
     private $shipment;
     private $bid;
 
+    function __construct()
+    {
+        $this->shipment = new Shipment;
+        $this->bid = new Bid;
+    }
+
     public function TrackOrderLog()
     {
         $order_history = OrderHistory::all();
@@ -185,7 +191,8 @@ class ShipmentController extends Controller
         return view('staff_panel.advance_freight.advance_tracking', compact('staff', 'company_name', 'company_id_staff'), ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient']);
     }
 
-    public function staff_advfreight($id){
+    public function staff_advfreight($id)
+    {
         $user_id = Auth::user()->id;
         $staff = Staff::where('user_id', $user_id)->first();
         $company_id = $staff->company_id;
@@ -256,19 +263,13 @@ class ShipmentController extends Controller
         $shipments = Shipment::all();
         $this->TrackOrderLog();
 
-        return view('staff_panel.freight.index', compact('staff','logs','stations'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
+        return view('staff_panel.freight.index', compact('staff', 'logs', 'stations'), ['shipments' => $shipments, 'bids' => $bids, 'sender', 'recipient']);
     }
 
     function postOrder()
     {
         $this->TrackOrderLog();
         return view('order.waybill-form');
-    }
-
-    function __construct()
-    {
-        $this->shipment = new Shipment;
-        $this->bid = new Bid;
     }
 
     function addOrder(Request $request)
@@ -323,7 +324,6 @@ class ShipmentController extends Controller
             'height' => $request->input('height'),
             'service_type' => $request->input('service_type'),
             'order_type' => $request->input('order_type'),
-            'category' => $request->input('category'),
             'min_bid_amount' => $request->input('amount'),
             'mop' => $request->input('mop'),
             'photo' => '/storage/' . $path,
@@ -568,7 +568,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('order.generate-invoice', compact('ship','log'));
+        return view('order.generate-invoice', compact('ship', 'log'));
     }
 
     public function viewWaybill($id)
@@ -576,7 +576,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('order.generate-waybill', compact('ship','log'));
+        return view('order.generate-waybill', compact('ship', 'log'));
     }
 
     public function viewWaybillCompany($id)
@@ -584,7 +584,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('company.order.generate-waybill', compact('ship','log'));
+        return view('company.order.generate-waybill', compact('ship', 'log'));
     }
 
     public function viewInvoiceCompany($id)
@@ -592,7 +592,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('company.order.generate-invoice', compact('ship','log'));
+        return view('company.order.generate-invoice', compact('ship', 'log'));
     }
 
     public function viewWaybillStaff($id)
@@ -600,7 +600,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('staff_panel.order.generate-waybill', compact('ship','log'));
+        return view('staff_panel.order.generate-waybill', compact('ship', 'log'));
     }
 
     public function viewInvoiceStaff($id)
@@ -608,7 +608,7 @@ class ShipmentController extends Controller
         $ship = Shipment::findOrFail($id);
         $log = OrderHistory::where('shipment_id', $ship->id)->first();
         $this->TrackOrderLog();
-        return view('staff_panel.order.generate-invoice', compact('ship','log'));
+        return view('staff_panel.order.generate-invoice', compact('ship', 'log'));
     }
 
     function orderHistory_user()
@@ -716,40 +716,38 @@ class ShipmentController extends Controller
         return redirect()->back()->with('message', 'Transfer Declined');
     }
 
-    public function advTransfer_Log($id){
+    public function advTransfer_Log($id)
+    {
         $CompanyLog = advTransferLog::all();
         $shipment = Shipment::findOrFail($id);
         $currentStaff = Staff::where('user_id', Auth::user()->id)->first();
 
         $company_log = $CompanyLog->where('shipment_id', $shipment->id)->first();
-        
-        
-            if(Auth::user()->type == 'company'){
+
+
+        if (Auth::user()->type == 'company') {
             if ($shipment->advTransferredStatus === 'Pending') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->company_from = $shipment->advTransferredfrom;;
                 $company_log->company_to = $shipment->advTransferredto;
-                $company_log->status = 'Pending'; 
+                $company_log->status = 'Pending';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Accepted'){
+            } else if ($shipment->advTransferredStatus == 'Accepted') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->company_from = $shipment->advTransferredfrom;
                 $company_log->company_to = $shipment->advTransferredto;
                 $company_log->status = 'Accepted';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Rejected'){
+            } else if ($shipment->advTransferredStatus == 'Rejected') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->company_from = $shipment->advTransferredto;;
                 $company_log->company_to = $shipment->advTransferredfrom;
                 $company_log->status = 'Rejected';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Transferred'){
+            } else if ($shipment->advTransferredStatus == 'Transferred') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->company_from = $shipment->advTransferredfrom;;
@@ -757,8 +755,7 @@ class ShipmentController extends Controller
                 $company_log->status = 'Transferred';
                 $company_log->save();
             }
-        }
-        else{
+        } else {
             if ($shipment->advTransferredStatus === 'Pending') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
@@ -766,24 +763,21 @@ class ShipmentController extends Controller
                 $company_log->company_to = $shipment->advTransferredto;
                 $company_log->status = 'Pending';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Accepted'){
+            } else if ($shipment->advTransferredStatus == 'Accepted') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->staff_from = $currentStaff->user_id;
                 $company_log->company_to = $shipment->advTransferredto;
                 $company_log->status = 'Accepted';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Rejected'){
+            } else if ($shipment->advTransferredStatus == 'Rejected') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->staff_from = $currentStaff->user_id;
                 $company_log->company_to = $shipment->advTransferredto;
                 $company_log->status = 'Rejected';
                 $company_log->save();
-            }
-            else if($shipment->advTransferredStatus == 'Transferred'){
+            } else if ($shipment->advTransferredStatus == 'Transferred') {
                 $company_log = new advTransferLog;
                 $company_log->shipment_id = $shipment->id;
                 $company_log->staff_from = $currentStaff->user_id;
@@ -791,12 +785,8 @@ class ShipmentController extends Controller
                 $company_log->status = 'Transferred';
                 $company_log->save();
             }
-        
-
-
+        }
     }
-
-}
 
     public function toPickUp_view()
     {
@@ -975,7 +965,6 @@ class ShipmentController extends Controller
         $shipment->height = $request->input('height');
         $shipment->service_type = $request->input('service_type');
         $shipment->order_type = $request->input('order_type');
-        $shipment->category = $request->input('category');
         $shipment->mop = $request->input('mop');
         $shipment->min_bid_amount = $request->input('amount');
 

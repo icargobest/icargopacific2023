@@ -104,13 +104,8 @@
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
-                                                <th class="fw-normal">Company:</th>
-                                                <td class="fw-bold">{{ $company_name }}</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <th class="fw-normal">Minimum Bid:</th>
-                                                <td class="fw-bold">{{ $ship->min_bid_amount }}</td>
+                                                <th class="fw-normal">Bid Amount:</th>
+                                                <td class="fw-bold">{{ $ship->bid_amount }}</td>
                                             </tr>
                                         @endif
                                     </table>
@@ -118,19 +113,21 @@
                                 <div class="col-lg-6">
                                     <table style="width:100%">
                                         <tr>
-                                            <th width="40%" class="fw-normal">Category:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->category }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="fw-normal">Mode of Payment:</th>
-                                            <td class="fw-bold">{{ $ship->mop }}</td>
+                                            <th width="40%" class="fw-normal">Mode of Payment:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->mop }}</td>
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
-                                                <th class="fw-normal">Bid Amount:</th>
-                                                <td class="fw-bold">{{ $ship->bid_amount }}</td>
+                                                <th class="fw-normal">Company:</th>
+                                                <td class="fw-bold">{{ $company_name }}</td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <th class="fw-normal">Maximum Bid:</th>
+                                                <td class="fw-bold">{{ $ship->min_bid_amount }}</td>
                                             </tr>
                                         @endif
+
                                     </table>
                                 </div>
                             </div>

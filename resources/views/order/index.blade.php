@@ -80,7 +80,6 @@
                                     <ul>
                                         {{-- <li>ID | <span>{{$ship->id}}</span></li> --}}
                                         <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
-                                        <li>Category | <span>{{$ship->category}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="listLayout col-lg-6 col-sm-12">
