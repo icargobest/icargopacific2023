@@ -5,7 +5,7 @@
 @extends('layouts.chart')
 @include('partials.navigationSuperAdmin',['dashboard' => "nav-selected"])
 
-@extends('layouts.chart') 
+{{-- @extends('layouts.chart')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E</script>
 
 @section('title', 'Monthly Income')
@@ -71,4 +71,4 @@
 
         chart.draw(data, options);
     }
-</script>
+</script> --}}
