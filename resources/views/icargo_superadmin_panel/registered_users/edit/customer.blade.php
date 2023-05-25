@@ -64,7 +64,7 @@
                         <div class="col">
                             <div class="form-outline">
                                 <input type="number" class="form-control" value="{{ $customer->contact_no }}" autocomplete="mobile"
-                                    name="contact_no">
+                                    name="contact_no" required>
                                 <label class="form-label" for="mobile">Mobile number</label>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" value="{{ $customer->user->email }}" autocomplete="email" name="email">
+                                <input type="text" class="form-control" value="{{ $customer->user->email }}" autocomplete="email" name="email" required>
                                 <label class="form-label" for="email">Email address</label>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="street" autocomplete="street">
+                                <input type="text" class="form-control" name="street" autocomplete="street" required>
                                 <label class="form-label" for="sname">Street name</label>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="city" autocomplete="city">
+                                <input type="text" class="form-control" name="city" autocomplete="city" required>
                                 <label class="form-label" for="city">City</label>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="state" autocomplete="state">
+                                <input type="text" class="form-control" name="state" autocomplete="state" required>
                                 <label class="form-label" for="state">State/Country</label>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="postal_code" autocomplete="postal_code">
+                                <input type="text" class="form-control" name="postal_code" autocomplete="postal_code" required>
                                 <label class="form-label" for="postal">Postal Code</label>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <label class="form-label" for="twit">Website</label>
+                                <label class="form-label" for="twit">Website Link</label>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <label class="form-label" for="faceb">Facebook</label>
+                                <label class="form-label" for="faceb">Facebook Link</label>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                         <div class="col">
                             <div class="form-outline">
                                 <input type="url" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" id="linkin">
-                                <label class="form-label" for="linkin">LinkedIn</label>
+                                <label class="form-label" for="linkin">LinkedIn Link</label>
                             </div>
                         </div>
                     </div>
@@ -165,7 +165,6 @@
                             type="submit"
                             class="btn btn-success btn-block"
                             id="addModal2"
-                            data-mdb-dismiss="modal"
                         >
                             Save changes
                         </button>

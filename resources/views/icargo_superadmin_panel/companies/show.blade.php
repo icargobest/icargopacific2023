@@ -27,11 +27,15 @@
                 ></button>
             </div>
             <div class="modal-body">
+
+                <div class="image-class">
                 <img src="{{ asset($company->image 
                     ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
                     : 'img/default_dp.png') }}"
-                    style="width:250px"
-        alt="Profile Image">
+                   {{--  style="width:250px" --}}
+                    alt="Profile Image">
+                </div>
+        
                 <fieldset disabled>
                     <div class="form-outline mb-4">
                         <input

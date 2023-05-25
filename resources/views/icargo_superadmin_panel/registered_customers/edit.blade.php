@@ -188,7 +188,6 @@
                             type="submit"
                             class="btn btn-success btn-block"
                             id="addModal2"
-                            data-mdb-dismiss="modal"
                         >
                             Save changes
                         </button>

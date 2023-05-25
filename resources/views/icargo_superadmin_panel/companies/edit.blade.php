@@ -65,6 +65,7 @@
                                 autocomplete="name"
                                 autofocus
                                 placeholder="Name"
+                                required
                             />
 
                             @error('name')
@@ -90,6 +91,7 @@
                                 required
                                 autocomplete="email"
                                 placeholder="E-mail Address"
+                                required
                             />
 
                             @error('email')
@@ -111,6 +113,7 @@
                                 name="password"
                                 autocomplete="new-password"
                                 placeholder="Password"
+                                
                             />
 
                             @error('password')
@@ -149,6 +152,8 @@
                                     required
                                     autocomplete="contact_no"
                                     value="{{$company->contact_no}}"
+                                    required
+
                                 />
                                 <label class="form-label" for="mobile"
                                     >Contact number</label
@@ -167,6 +172,8 @@
                                     required
                                     autocomplete="contact_name"
                                     value="{{$company->contact_name}}"
+                                    required
+
                                 />
                                 <label class="form-label" for="mobile"
                                     >Contact Name</label
@@ -203,6 +210,7 @@
                                     required
                                     autocomplete="street"
                                     value="{{$company->street}}"
+                                    required
                                 />
                                 <label class="form-label" for="sname"
                                     >Street name</label
@@ -221,6 +229,7 @@
                                     required
                                     autocomplete="city"
                                     value="{{$company->city}}"
+                                    required
                                 />
                                 <label class="form-label" for="city"
                                     >City</label
@@ -239,6 +248,7 @@
                                     required
                                     autocomplete="state"
                                     value="{{$company->state}}"
+                                    required
                                 />
                                 <label class="form-label" for="state"
                                     >State/Country</label
@@ -257,6 +267,7 @@
                                     required
                                     autocomplete="postal_code"
                                     value="{{$company->postal_code}}"
+                                    required
                                 />
                                 <label class="form-label" for="postal"
                                     >Postal Code</label
@@ -296,7 +307,6 @@
                                     class="form-control @error('facebook') is-invalid @enderror"
                                     name="facebook"
                                     value="{{$company->facebook}}"
-                                    required
                                     autocomplete="facebook"
                                     autofocus
                                     placeholder="Facebook Link"
@@ -370,7 +380,7 @@
                             type="submit"
                             class="btn btn-success btn-block"
                             id="addModal2"
-                            data-mdb-dismiss="modal"
+                            {{-- data-mdb-dismiss="modal" --}}
                         >
                             Save changes
                         </button>
