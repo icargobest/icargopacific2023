@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shipment;
 use App\Models\OrderHistory;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 class CompanyQrScannerController extends Controller
 {
     // Function to show the page we want to log in by scanner of QR code
     public function index(Request $request)
     {
-        return view('company.companyQR');
+        return view('company.companyParcelTracking');
     }
 
     // Function to allow the user to log in or not log in that is done by scanner of QR code
@@ -49,16 +50,24 @@ class CompanyQrScannerController extends Controller
                 $tracking_number = trim($data[1]);
                 $id = trim($data[2]);
             }
+            $user = Auth::user()->id;
             $shipment = Shipment::where('user_id', $user_id)->where('id', $id)->first();
+            $company = Company::where('user_id', $user)->first();
             if ($shipment) {
                 if ($tracking_number && $shipment->tracking_number != $tracking_number) {
                     $result = 0;
                 } else {
+                    if ($shipment->company_id != $company->id) {
+                        $result = 1;
+                        $status = 'driver';
+                        $tracking_number = 'Invalid';
+                        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number]);
+                    }
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;
                     $order_id = $shipment->id;
-                    $time = OrderHistory::where('order_id', $order_id)->first();
+                    $time = OrderHistory::where('shipment_id', $order_id)->first();
                     if ($time) {
                         $isPending = $time->isPending;
                         $isPendingTime = $time->isPendingTime;
@@ -80,9 +89,9 @@ class CompanyQrScannerController extends Controller
                 }
             }
         }
-        return response()->json(['isPendingTime' => $isPendingTime, 'isProcessedTime' => $isProcessedTime, 'isAssortTime' => $isAssortTime, 'isPickUpTime' => $isPickUpTime, 
+        return response()->json(['isPendingTime' => $isPendingTime, 'isProcessedTime' => $isProcessedTime, 'isAssortTime' => $isAssortTime, 'isPickUpTime' => $isPickUpTime,
                                 'isTransferredTime' => $isTransferredTime, 'isArrivedTime' => $isArrivedTime, 'isDispatchedTime' => $isDispatchedTime, 'isDeliveredTime' => $isDeliveredTime,
-                                'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp, 
+                                'isPending' => $isPending, 'isProcessed' => $isProcessed, 'isAssort' => $isAssort, 'isPickUp' => $isPickUp,
                                 'isTransferred' => $isTransferred, 'isArrived' => $isArrived, 'isDispatched' => $isDispatched, 'isDelivered' => $isDelivered,
                                 'result' => $result, 'status' => $status, 'tracking_number' => $tracking_number, 'id' => $id]);
     }

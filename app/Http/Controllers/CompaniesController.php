@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Driver;
+use App\Models\Dispatcher;
 use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -170,10 +174,92 @@ class CompaniesController extends Controller
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Company status updated successfully!');
+        $update_user = User::whereId($user_id);
+
+        $companies = Company::with('user')->where('user_id', $user_id)->first(); // Retrieve the first matching company record
+        if($companies){
+            $company_id = $companies->id;
+            $drivers = Driver::where('company_id', $company_id)->get();
+            if($drivers){
+                foreach($drivers as $driver){
+                    $driverUpdate = User::whereId($driver->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+            $dispatchers = Dispatcher::where('company_id', $company_id)->get();
+            if($dispatchers){
+                foreach($dispatchers as $dispatcher){
+                    $dispatcherUpdate = User::whereId($dispatcher->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+            $staffs = Staff::where('company_id', $company_id)->get();
+            if($staffs){
+                foreach($staffs as $staff){
+                    $staffUpdate = User::whereId($staff->user_id)->update([
+                        'status' => $status_code
+                    ]);
+                    
+                }
+            }
+        }
+        $update_user->update([
+            'status' => $status_code
+        ]);
+        return back()->with('success', 'Company status updated successfully!');
     }
+    
+    public function updateProfile(Request $request, $id)
+    {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+    
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+    
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email ?? $user->email,
+        ]);
+    
+        $company->update([
+            'contact_no' => $request->contact_no,
+            'contact_name' => $request->contact_name,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'website' => $request->website,
+            'linkedin' => $request->linkedin,
+        ]);
+    
+        return back()->with('success', 'Company account has been updated successfully.');
+    }
+    
+    public function updateImage(Request $request, $id)
+    {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
+    
+        if ($image = $request->file('image')) {
+            $folderName = Auth::id(); // Get the user id
+            $destinationPath = "images/company/$folderName"; // Set the destination path
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->storeAs($destinationPath, $profileImage, 'public'); // Use the 'public' disk
+            $company->update(['image' => $profileImage]);
+        } 
+    
+        return back()->with('success', 'Profile image has been updated successfully.');
+    }
+    
 }

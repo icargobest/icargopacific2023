@@ -397,6 +397,7 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        @endif
                                         @if ($log->isProcessed == true)
                                             <h4 class="fw-bold border-0">PROCESSING</h4>
                                             <div class="card mb-3" style="background-color: #D9D9D9;">
@@ -457,7 +458,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                    @endif
+                                    
                                 @endforeach
                             </div>
                         </div>

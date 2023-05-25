@@ -11,14 +11,12 @@
             <div class="sidebar">
                 <div class="wrapper">
                     <div class="search-bar-container">
-                        <button class="search-bar-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <input
-                            class="input"
-                            id="search-input"
-                            placeholder="Tracking ID"
-                        />
+                        <form action="{{ url('/icargo/track_parcel') }}" method="GET">
+                            <div class="search-input-wrapper">
+                                <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <input class="input" name="tracking_number" placeholder="Tracking ID">
+                            </div>
+                        </form>
                     </div>
 
                     <div class="divider"></div>
@@ -62,6 +60,33 @@
                             </div>
 
                             <div class="links">
+                                <a class="nav-link" >
+                                    <div class="link">
+                                        <i class="fa fa-id-card-o link-i-1"></i>
+                                        <span>Driver</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                             <div class="links">
+                                <a class="nav-link">
+                                    <div class="link">
+                                        <i class="fa fa-id-card link-i-1"></i>
+                                        <span>Dispatcher</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="links">
+                                <a class="nav-link">
+                                    <div class="link">
+                                        <i class="fa fa-user link-i-1"></i>
+                                        <span>Staff</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                           <div class="links">
                                 <a class="nav-link" href="">
                                     <div class="link @if (isset($Commisions)) {{ $Commisions }} @endif">
                                         <i class="fa fa-table link-i-1"></i>
@@ -88,6 +113,15 @@
                                 </a>
                             </div>
 
+                            <div class="links">
+                                <a class="nav-link" href="/icargo/track_parcel">
+                                    <div class="link">
+                                        <i class="fa fa-qrcode link-i-1"></i>
+                                        <span>Track Parcel</span>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
 
 
@@ -102,6 +136,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="content-container">
+    
+            <div class="content-container">
+    

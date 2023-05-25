@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col">
                 <div class="mb-4">
-                  <img src="{{ url('images/company/drivers/'.$user->image) }}" height="100" width="100" alt="profile image">
+                  <img src="@if ($user->image != null) {{ asset('storage/images/driver/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
                 </div>
               </div>
             </div>
@@ -77,6 +77,16 @@
              <div class="form-outline mb-4">
               <input type="text" id="contact_no" name="state" value="{{$user->state}}" class="form-control" />
               <label class="form-label" for="contact_no">State</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->facebook ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Facebook</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->linkedin ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Linkedin</label>
              </div>
 
              <!-- License No.  -->

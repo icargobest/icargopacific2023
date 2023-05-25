@@ -91,7 +91,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="/staff/track_parcel">
                                 <div class="link">
                                     <i class="fa fa-qrcode link-i-1"></i>
                                     <span>Track Parcel</span>
