@@ -240,8 +240,7 @@
                             <img src="/img/jrslogo.png" alt="Logo">
                             <img src="/img/transportify.png" alt="Logo">
                             <img src="/img/apcargologo.png" alt="Logo">
-                            <img src="/img/capex.png" alt="Logo">
-                            
+                            <img src="/img/capex.png" alt="Logo">    
 
                         </div>
                     </div>

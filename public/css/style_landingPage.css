@@ -282,10 +282,6 @@ body{
     font-size: 13px;
     letter-spacing: 1px;
 }
-.contactD span{
-    font-size: 13px;
-    color: #214D94;
-}
 
 @media (max-width: 768px) {
     .navBar-menu{

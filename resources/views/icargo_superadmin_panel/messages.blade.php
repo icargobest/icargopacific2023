@@ -3,8 +3,8 @@
 @extends('layouts.app')
 @include('partials.navigationSuperAdmin', ['queries' =>"nav-selected"])
 
-{{-- <main class="container py-5" style="margin-top: -49px !important">
-    <div class="main-wrapper border border-2" style="max-width: 100%">
+  {{-- <main class="container py-5" style="margin-top: -49px !important">
+  <div class="main-wrapper border border-2" style="max-width: 100%">
       <div class="employee-header-container">
           <h3 class="">Show Message #{{$cust_queries->id}}</h3>
       </div>
@@ -24,8 +24,9 @@
 
             @endsection
       </div>
-    </div>
+</div>
 </main> --}}
+
 
 <div class="container p-5" style="background-color: #f8fafc">
 
@@ -48,6 +49,7 @@
     </div>
 
 </div>
+
 
 @include('partials.footer')	
 
