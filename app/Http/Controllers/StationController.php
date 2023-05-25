@@ -42,7 +42,7 @@ class StationController extends Controller
 
     public function show($id){
         $station=$this->station->getStation($id);
-        return view('company.stations.show',compact('station'));
+        return view('company.stations.view',compact('station'));
     }
 
     public function edit($id){
@@ -60,7 +60,7 @@ class StationController extends Controller
         ];
        
         $this->station->updateStation($data, $id);
-        return back()->with('success', 'Station #'.$id.' data updated successfully!');
+        return back()->with('success', 'Station #'.$request->id.' data updated successfully!');
     }
 
     public function viewArchive(){

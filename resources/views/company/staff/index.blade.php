@@ -63,10 +63,7 @@
                     @foreach ($staff as $staff) @if ($staff->archived == 0)
                     <tr>
                         <td>{{$staff->id}}</td>
-                        <td class="capitalized">
-                            <img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" alt="Profile Image" style="width:30px">
-                            {{$staff->user->name}}
-                        </td>
+                        <td class="capitalized">{{$staff->user->name}}</td>
                         <td>{{$staff->user->email}}</td>
                         <td>{{$staff->contact_no}}</td>
                         <td

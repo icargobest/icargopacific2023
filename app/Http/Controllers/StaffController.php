@@ -62,13 +62,13 @@ class StaffController extends Controller
             'type' => '5',
         ]);
 
-        $validated = $this->validate($request, [
+        $otherValidation = $request->validate([
             'contact_no' => ['required', 'min:11', 'max:11'],
+        ], [
             'contact_no.required' => 'Contact field is required.',
             'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
+            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
         ]);
-
         $user->sendEmailVerificationNotification();
 
             $id = Auth::id();
@@ -76,11 +76,10 @@ class StaffController extends Controller
             $user_id = $company->id;
 
         $staff = Staff::create([
+            'contact_no' =>  $otherValidation['contact_no'],
             'user_id' => $user->id,
             'company_id' => $user_id,
-            'contact_no' =>  $validated['contact_no'],
         ]);
-
             DB::commit();
         } catch (Exception $ex) {
             DB::rollBack();
@@ -107,51 +106,26 @@ class StaffController extends Controller
 
     public function update(Request $request, $id)
     {
-        $staff = Staff::find($id);
-    
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = 'public/images/staff/' . Auth::id();
+        $staffData = [
+            'contact_no' => $request->input('updateContactNo')
+        ];
 
-            // Create the folder if it doesn't exist
-            if (!Storage::exists($path)) {
-                Storage::makeDirectory($path);
-            }
-
-            // Store the photo in the user's folder
-            $file->storeAs($path, $filename);
-
-            // Save the photo path in the customer record
-            $staff->photo = 'images/staff/' . Auth::id() . '/' . $filename;
-            $staff->save();
-        }
-
-        $staff->contact_no = $request->input('contact_no');
-        $staff->tel = $request->input('tel');
-        $staff->street = $request->input('street');
-        $staff->city = $request->input('city');
-        $staff->state = $request->input('state');
-        $staff->postal_code = $request->input('postal_code');
-        $staff->facebook = $request->input('facebook');
-        $staff->linkedin = $request->input('linkedin');
-        $staff->save();
-    
         $userData = [
             'name' => $request->input('updateFullName'),
             'email' => $request->input('updateEmail'),
             'password' => Hash::make($request->input('updatePassword')),
         ];
-    
-        // Update the user data
+
+        $staff = Staff::find($id);
+        $staff->update($staffData);
+
         $user = $staff->user;
         $user->update($userData);
-    
+
         return redirect()->route('staff.index')
-            ->with('success', 'Staff #' . $id . ' has been updated successfully.');
+                ->with('success','Staff #'.$id.' has been updated successfully.');
     }
-    
-    
+
     public function superAdmin_update(Request $request, $id)
     {
         $get_token = $request->otp;
@@ -163,52 +137,27 @@ class StaffController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
+
         if($get_token){
-            $get_token->is_activated = 1;
-            $get_token->save();
-            
-            $staff = Staff::find($id);
+        $get_token->is_activated = 1;
+        $get_token->save();
+        $staffData = [
+            'contact_no' => $request->contactno,
+        ];
+        
+        $staff = Staff::find($id);
+        $staff->update($staffData);
 
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $path = 'public/images/staff/' . Auth::id();
-    
-                // Create the folder if it doesn't exist
-                if (!Storage::exists($path)) {
-                    Storage::makeDirectory($path);
-                }
-    
-                // Store the photo in the user's folder
-                $file->storeAs($path, $filename);
-    
-                // Save the photo path in the customer record
-                $staff->photo = 'images/staff/' . Auth::id() . '/' . $filename;
-                $staff->save();
-            }
-            
-            $staff->contact_no = $request->input('contact_no');
-            $staff->tel = $request->input('tel');
-            $staff->street = $request->input('street');
-            $staff->city = $request->input('city');
-            $staff->state = $request->input('state');
-            $staff->postal_code = $request->input('postal_code');
-            $staff->facebook = $request->input('facebook');
-            $staff->linkedin = $request->input('linkedin');
-            $staff->save();
+        $user = $staff->user;
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+        $delete_token = VerifyToken::where('token', $get_token->token)->first();
+        $delete_token->delete();
+    }
 
-            $user = $staff->user;
-            $user->update( [
-                'name' => $request->name,
-                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
-            ]);
-            $delete_token = VerifyToken::where('token', $get_token->token)->first();
-            $delete_token->delete();
-
-            return back()->with('success','Staff #'.$id.' has been updated successfully.');
-        }
-
-        return back()->with('warning','Please verify the account with OTP before modifying data.');
+        return back()->with('success','Staff #'.$id.' has been updated successfully.');
     }
 
     public function destroy($id)
@@ -270,6 +219,7 @@ class StaffController extends Controller
 
         $validated = $this->validate($request, [
             'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable', 'url', 'max:255'],
             'linkedin' => ['nullable', 'url', 'max:255'],
             'facebook.required' => 'Facebook Link is required',
         ]);
@@ -285,6 +235,7 @@ class StaffController extends Controller
         $staff->state = $request->input('state');
         $staff->postal_code = $request->input('postal_code');
         $staff->facebook = $request->input('facebook');
+        $staff->website = $request->input('website');
         $staff->linkedin = $request->input('linkedin');
         $staff->save();
 
@@ -298,7 +249,7 @@ class StaffController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = 'public/images/' . Auth::id();
+            $path = 'public/photos/' . Auth::user()->name;
 
             // Create the folder if it doesn't exist
             if (!Storage::exists($path)) {
@@ -309,7 +260,7 @@ class StaffController extends Controller
             $file->storeAs($path, $filename);
 
             // Save the photo path in the customer record
-            $staff->photo = 'images/' . Auth::id() . '/' . $filename;
+            $staff->photo = 'photos/' . Auth::user()->name . '/' . $filename;
             $staff->save();
         }
 
