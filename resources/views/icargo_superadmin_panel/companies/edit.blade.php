@@ -29,10 +29,9 @@
             </div>
             <div class="modal-body">
                 <p class="small text-muted">
-                    <span class="fw-bold">Caution:</span> Changing company
-                    passwords without consent may violate privacy and compliance
-                    regulations. Consider sending a password reset email link
-                    instead.
+                    <span class="fw-bold">Caution:</span> Changing company's
+                    information without consent may violate privacy and compliance
+                    regulations. Consider sending an OTP instead to modify their data.
                 </p>
                 <form
                     method="POST"
@@ -65,6 +64,7 @@
                                 autocomplete="name"
                                 autofocus
                                 placeholder="Name"
+                                required
                             />
 
                             @error('name')
@@ -90,6 +90,7 @@
                                 required
                                 autocomplete="email"
                                 placeholder="E-mail Address"
+                                required
                             />
 
                             @error('email')
@@ -111,6 +112,7 @@
                                 name="password"
                                 autocomplete="new-password"
                                 placeholder="Password"
+                                
                             />
 
                             @error('password')
@@ -149,6 +151,8 @@
                                     required
                                     autocomplete="contact_no"
                                     value="{{$company->contact_no}}"
+                                    required
+
                                 />
                                 <label class="form-label" for="mobile"
                                     >Contact number</label
@@ -167,6 +171,8 @@
                                     required
                                     autocomplete="contact_name"
                                     value="{{$company->contact_name}}"
+                                    required
+
                                 />
                                 <label class="form-label" for="mobile"
                                     >Contact Name</label
@@ -203,6 +209,7 @@
                                     required
                                     autocomplete="street"
                                     value="{{$company->street}}"
+                                    required
                                 />
                                 <label class="form-label" for="sname"
                                     >Street name</label
@@ -221,6 +228,7 @@
                                     required
                                     autocomplete="city"
                                     value="{{$company->city}}"
+                                    required
                                 />
                                 <label class="form-label" for="city"
                                     >City</label
@@ -239,6 +247,7 @@
                                     required
                                     autocomplete="state"
                                     value="{{$company->state}}"
+                                    required
                                 />
                                 <label class="form-label" for="state"
                                     >State/Country</label
@@ -257,6 +266,7 @@
                                     required
                                     autocomplete="postal_code"
                                     value="{{$company->postal_code}}"
+                                    required
                                 />
                                 <label class="form-label" for="postal"
                                     >Postal Code</label
@@ -296,7 +306,6 @@
                                     class="form-control @error('facebook') is-invalid @enderror"
                                     name="facebook"
                                     value="{{$company->facebook}}"
-                                    required
                                     autocomplete="facebook"
                                     autofocus
                                     placeholder="Facebook Link"
@@ -346,7 +355,7 @@
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
-                        Send password reset link
+                        Send One-Time-Password (OTP)
                     </a>
                     
                     <br><br>
@@ -370,14 +379,12 @@
                             type="submit"
                             class="btn btn-success btn-block"
                             id="addModal2"
-                            data-mdb-dismiss="modal"
                         >
                             Save changes
                         </button>
                         <a
-                            href="{{route('companies.index')}}"
+                            href="{{route('registered_companies.index')}}"
                             class="btn btn-secondary btn-block"
-                            data-mdb-dismiss="modal"
                         >
                             Cancel
                         </a>

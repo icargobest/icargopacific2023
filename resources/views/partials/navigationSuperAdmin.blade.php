@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="links">
-                                <a class="nav-link" href="{{route('companies.index')}}">
+                                <a class="nav-link" href="{{route('registered_companies.index')}}">
                                     <div class="link @if (isset($companies)) {{ $companies }} @endif">
                                         <i class="fa fa-building-o link-i-1"></i>
                                         <span>Companies</span>
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="links">
-                                <a class="nav-link" href="{{route('customers.index')}}">
+                                <a class="nav-link" href="{{route('registered_customers.index')}}">
                                     <div class="link @if (isset($customers)) {{ $customers }} @endif">
                                         <i class="fa fa-address-card-o link-i-1"></i>
                                         <span>Customers</span>
@@ -60,6 +60,33 @@
                             </div>
 
                             <div class="links">
+                                <a class="nav-link" href="{{route('registered_drivers.index')}}">
+                                    <div class="link @if (isset($drivers)) {{ $drivers }} @endif">
+                                        <i class="fa fa-id-card-o link-i-1"></i>
+                                        <span>Driver</span>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                             <div class="links">
+                                <a class="nav-link" href="{{route('registered_dispatchers.index')}}">
+                                    <div class="link @if (isset($dispatchers)) {{ $dispatchers }} @endif">
+                                        <i class="fa fa-id-card link-i-1"></i>
+                                        <span>Dispatcher</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="links">
+                                <a class="nav-link" href="{{route('registered_staff.index')}}">
+                                    <div class="link @if (isset($staff)) {{ $staff }} @endif">
+                                        <i class="fa fa-user link-i-1"></i>
+                                        <span>Staff</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                           <div class="links">
                                 <a class="nav-link" href="">
                                     <div class="link @if (isset($Commisions)) {{ $Commisions }} @endif">
                                         <i class="fa fa-table link-i-1"></i>

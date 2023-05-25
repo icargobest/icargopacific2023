@@ -35,6 +35,11 @@
                     {{ session('status') }}
                 </div>
                 @endif
+                <p class="small text-muted">
+                    <span class="fw-bold">Caution:</span> Changing company's
+                    employee information without consent may violate privacy and compliance
+                    regulations. Consider sending an OTP instead to modify their data.
+                </p>
                 <form
                     action="{{ route('update.driver',$driver->id) }}"
                     method="POST"
@@ -42,49 +47,63 @@
                 >
                     @csrf @method('PUT')
 
-                    <div class="mb-3">
+                    <div class="form-outline mb-4">
+                        <img
+                            src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif"
+                            style="width: 30px"
+                            alt="profile image"
+                        />
                         <input
                             class="form-control"
                             type="file"
+                            id="formFile"
                             name="image"
-                            id="photo"
                         />
-                        <label class="form-label" for="name"
-                            >Upload new profile image</label
-                        >
                     </div>
-
-                    {{-- Name Input --}}
-                    <input
-                        type="hidden"
-                        id="email"
-                        name="email"
-                        value="{{$driver->user->email}}"
-                    />
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col">
-                            <div class="form-outline mb-3">
+                            <div class="form-outline mb-4">
                                 <input
                                     type="text"
-                                    id="name"
                                     name="name"
                                     value="{{ $driver->user->name }}"
-                                    class="form-control"
-                                    placeholder="Driver name"
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    placeholder="Dispatcher name"
+                                    required
                                 />
+                                <label class="form-label" for="name"
+                                    >Driver Name</label
+                                >
                                 @error('name')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                 </div>
                                 @enderror
-                                <label class="form-label" for="name"
-                                    >Driver Name</label
-                                >
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mb-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value="{{ $driver->user->email }}"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Dispatcher email"
+                                    required
+                                />
+                                <label class="form-label" for="email"
+                                    >Driver Email</label
+                                >
+                                @error('email')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>   <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-lock-fill text-secondary"></i>
@@ -96,6 +115,7 @@
                                 name="password"
                                 autocomplete="new-password"
                                 placeholder="Password"
+                                
                             />
 
                             @error('password')
@@ -105,7 +125,6 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -122,41 +141,131 @@
                         </div>
                     </div>
 
-                    <!-- Contact Number input -->
+                    <hr />
+                    <div class="form-outline mb-4">
+                        <div class="col">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="contact_no"
+                                    value="{{ $driver->contact_no }}"
+                                    class="form-control @error('contact_no') is-invalid @enderror"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                                    minlength="11"
+                                    maxlength="11"
+                                    placeholder="Contact Number:"
+                                    required
+                                />
+                                <label class="form-label" for="name"
+                                    >Contact No.</label
+                                >
+
+                                @error('contact_no')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input
+                            type="tel"
+                            name="tel"
+                            value="{{ $driver->tel }}"
+                            class="form-control @error('tel') is-invalid @enderror"
+                            placeholder="Tel No"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                            minlength="7"
+                            maxlength="9"
+                        />
+                        @error('tel')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="plate_no">Tel No.</label>
+                    </div>
+
                     <div class="form-outline mb-4">
                         <input
                             type="text"
-                            name="contact_no"
-                            value="{{ $driver->contact_no }}"
-                            class="form-control"
-                            placeholder="Contact No"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                            minlength="11"
-                            maxlength="11"
-                            required
+                            name="street"
+                            value="{{ $driver->street }}"
+                            class="form-control @error('street') is-invalid @enderror"
+                            placeholder="Street"
                         />
-                        @error('contact_no')
+                        @error('street')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="street">Street</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            name="city"
+                            value="{{ $driver->city }}"
+                            class="form-control @error('city') is-invalid @enderror"
+                            placeholder="City"
+                        />
+                        @error('city')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="plate_no">City</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            name="state"
+                            value="{{ $driver->state }}"
+                            class="form-control @error('state') is-invalid @enderror"
+                            placeholder="State"
+                        />
+                        @error('state')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="plate_no">State</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            name="postal_code"
+                            value="{{ $driver->postal_code }}"
+                            class="form-control @error('postal_code') is-invalid @enderror"
+                            placeholder="Postal No"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                            minlength="4"
+                            maxlength="4"
+                        />
+                        @error('postal_code')
                         <div class="alert alert-danger mt-1 mb-1">
                             {{ $message }}
                         </div>
                         @enderror
                         <label class="form-label" for="plate_no"
-                            >Contact No.</label
+                            >Postal Code</label
                         >
                     </div>
 
-                    <!-- License Number input -->
                     <div class="form-outline mb-3">
                         <input
                             type="text"
                             name="license_number"
                             value="{{ $driver->license_number }}"
-                            class="form-control"
+                            class="form-control @error('license_number') is-invalid @enderror"
                             placeholder="License No"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                             minlength="11"
                             maxlength="11"
-                            required
                         />
                         @error('license_number')
                         <div class="alert alert-danger mt-1 mb-1">
@@ -172,7 +281,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <label
-                                class="form-label"
+                                class="form-label @error('vehicle_type') is-invalid @enderror"
                                 for="vehicle_type"
                             ></label>
                             <select
@@ -188,7 +297,6 @@
                                     padding: 5.12px 12px;
                                     color: #828282;
                                 "
-                                required
                             >
                                 <option
                                     value="{{ $driver->vehicle_type }}"
@@ -215,7 +323,7 @@
                             type="text"
                             name="plate_no"
                             value="{{ $driver->plate_no }}"
-                            class="form-control"
+                            class="form-control @error('plate_no') is-invalid @enderror"
                             placeholder="Plate No"
                         />
                         @error('plate_no')
@@ -226,48 +334,6 @@
                         <label class="form-label" for="plate_no"
                             >Plate No.</label
                         >
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-outline">
-                                <input
-                                    type="url"
-                                    class="form-control @error('facebook') is-invalid @enderror"
-                                    name="facebook"
-                                    value="{{ $driver->facebook }}"
-                                    id="faceb"
-                                    required
-                                />
-                                @error('facebook')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <label class="form-label" for="faceb"
-                                    >Facebook</label
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-outline">
-                                <input
-                                    class="form-control @error('linkedin') is-invalid @enderror"
-                                    name="linkedin"
-                                    value="{{ $driver->linkedin }}"
-                                    id="linkin"
-                                />
-                                @error('linkedin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <label class="form-label" for="linkin"
-                                    >LinkedIn</label
-                                >
-                            </div>
-                        </div>
                     </div>
 
                     @if(session()->has('message'))
@@ -321,14 +387,12 @@
                             type="submit"
                             class="btn btn-primary btn-block"
                             id="addModal2"
-                            data-mdb-dismiss="modal"
                         >
                             Save changes
                         </button>
                         <a
-                            href="{{ route ('registered_users.view')}}"
+                            href="{{ route ('registered_drivers.index')}}"
                             class="btn btn-secondary btn-block"
-                            data-mdb-dismiss="modal"
                         >
                             Cancel
                         </a>

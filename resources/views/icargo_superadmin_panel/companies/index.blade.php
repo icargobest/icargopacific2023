@@ -40,7 +40,7 @@
                                 <img src="{{ asset($company->image 
                                     ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
                                     : 'img/default_dp.png') }}"
-                                    style="width:50px"
+                                    style="width:40px"
                         alt="Profile Image">
                                 {{ $company->user->name }}
                             </td>

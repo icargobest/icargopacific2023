@@ -21,7 +21,7 @@ class SuperDashboardController extends Controller
         $incomes = Income::all();
         $totalMonthly = 0;
 
-        $companycount = User::where('type', 2)->count();
+        $companycount = Companies::where('type', 2)->count();
         $usercount = User::where('type', 0)->count();
        
         

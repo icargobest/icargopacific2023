@@ -27,13 +27,9 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <img
-                    src="
-                    @if ($dispatcher->image != null) {{ asset('storage/' . $dispatcher->image) }} 
-                    @else /img/default_dp.png 
-                    @endif"
-                    alt="Profile Image" style="width:250px"
-                />
+                <div class="image-class">
+                    <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
+                </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
                         <input

@@ -1,8 +1,9 @@
 <head>
-    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
     <title>Dispatcher | Dispatch Orders</title>
 </head>
-@include('partials.header') @extends('layouts.app')
+@include('partials.header')
+@extends('layouts.app')
 @include('partials.navigationDispatcher')
 
 <!-- MBD -->
@@ -21,11 +22,13 @@
 </style>
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="container mw-100 px-lg-5">
-    <div class="bg-white shadow" style="max-width: 100%">
-        <div class="waybill-head py-3 ps-5" style="background-color: #214d94">
+    <div class="bg-white shadow" style="max-width: 100%;">
+        <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
             <h3 class="text-white mb-0">ORDER LIST | TO DISPATCH</h3>
         </div>
-        <div class="mt-2">@include('flash-message')</div>
+        <div class="mt-2">
+            @include('flash-message')
+        </div>
         {{-- TABLE START--}}
         <section class="mb-5 px-5 my-3 overflow-auto">
             <table
@@ -96,13 +99,4 @@
     </div>
 </div>
 {{-- END OF ORDER CONTAINER --}}
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-
-<script type="text/javascript">
-    let dispatcherToDispatchTable = new DataTable("#dispatcherToDispatchTable");
-</script>
-
 @include('partials.footer')

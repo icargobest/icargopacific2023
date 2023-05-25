@@ -40,6 +40,15 @@ class DriverController extends Controller
         }
         return view('staff_panel/drivers.index', compact('drivers'));
     }
+    
+    public function superadminIndex()
+    {
+        $drivers = Driver::with('company.user')
+            ->where('archived', 0)
+            ->get();
+
+        return view('icargo_superadmin_panel.driver.index', compact('drivers'));
+    }
 
     function viewArchive(){
 
@@ -59,6 +68,15 @@ class DriverController extends Controller
             $drivers = $this->driver->with('user')->where('company_id', $company_id)->get();
         }
         return view('staff_panel/drivers.viewArchive', compact('drivers'));
+    }
+
+    public function superadminviewArchive(){
+
+        $drivers = Driver::with('company.user')
+            ->where('archived', 1)
+            ->get();
+
+        return view('icargo_superadmin_panel.driver.viewArchive', compact('drivers'));
     }
 
 
@@ -156,8 +174,6 @@ class DriverController extends Controller
     public function update($id, Request $request)
     {
         $driver = Driver::find($id);
-        $get_token = $request->otp;
-        $get_token = VerifyToken::where('token', $get_token)->first();
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -165,22 +181,13 @@ class DriverController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-
-        if($get_token){
-        $get_token->is_activated = 1;
-        $get_token->save();
-
         $user = $driver->user;
         $user->update( [
             'name' => $request->name,
+            'email' => $request->email,
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
-        $delete_token = VerifyToken::where('token', $get_token->token)->first();
-        $delete_token->delete();
-    }
 
-
-        
         if($request->hasfile('image')){
             $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
             if(File::exists($destination)){
@@ -193,6 +200,7 @@ class DriverController extends Controller
         }else{
             $filename = $driver->image;
         }
+        
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
@@ -207,8 +215,66 @@ class DriverController extends Controller
         ];
         $driver->update($driverData);
 
-        return back()->with('success', 'Driver #'.$id.' data updated successfully!');
-        
+        return back()->with('success','Staff #'.$id.' has been updated successfully.');
+    }
+
+    public function superadminUpdate($id, Request $request)
+    {
+        $driver = Driver::find($id);
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+        if($get_token){
+            $get_token->is_activated = 1;
+            $get_token->save();
+
+            $user = $driver->user;
+            $user->update( [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if($request->hasfile('image')){
+                $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
+                if(File::exists($destination)){
+                    File::delete($destination);
+                }
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('storage/images/driver/'.$driver->user_id ,$filename);
+            }else{
+                $filename = $driver->image;
+            }
+            
+            $driverData = [
+                'vehicle_type' => $request->vehicle_type,
+                'plate_no' => $request->plate_no,
+                'license_number' => $request->license_number,
+                'contact_no' => $request->contact_no,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'image' => $filename,
+            ];
+            $driver->update($driverData);
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+            return back()->with('success','Staff #'.$id.' has been updated successfully.');
+        }
+        else{
+            return back()->with('warning','Please verify the account with OTP before modifying data.');
+        };
     }
 
     public function destroy($id){

@@ -2,14 +2,14 @@
     type="button"
     class="btn btn-warning btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#showModal{{$customer->id}}"
+    data-mdb-target="#showModalCustomer{{$customer->id}}"
 >
     SHOW
 </button>
 
 <div
     class="modal top fade"
-    id="showModal{{$customer->id}}"
+    id="showModalCustomer{{$customer->id}}"
     tabindex="-1"
     aria-hidden="true"
     data-mdb-backdrop="static"
@@ -27,6 +27,15 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <div class="image-class">
+                 <img
+                        src="
+                        @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
+                        @else /img/default_dp.png 
+                        @endif"
+                        alt="Profile Image"
+                />
+                </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
                         <input
@@ -50,41 +59,26 @@
                         >
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="name"
-                                type="text"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                value="{{ $customer->user->name }}"
-                                autocomplete="name"
-                                autofocus
-                                placeholder="Name"
-                            />
-                        </div>
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $customer->user->name ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >Name</label
+                        >
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $customer->user->email}}"
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
-                        </div>
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $customer->user->email ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >Email</label
+                        >
                     </div>
 
                     <hr />
@@ -96,7 +90,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    value="{{$customer->contact_no}}"
+                                    value="{{$customer->contact_no ?? '-'}}"
                                     name="contact_no"
                                     required
                                 />
@@ -112,7 +106,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    value="{{$customer->tel}}"
+                                    value="{{$customer->tel ?? '-'}}"
                                     name="tel"
                                     required
                                 />
@@ -129,7 +123,7 @@
                                     type="text"
                                     class="form-control"
                                     name="street"
-                                    value="{{$customer->street}}"
+                                    value="{{$customer->street ?? '-'}}"
                                 />
                                 <label class="form-label" for="sname"
                                     >Street name</label
@@ -144,7 +138,7 @@
                                     type="text"
                                     class="form-control"
                                     name="city"
-                                    value="{{$customer->city}}"
+                                    value="{{$customer->city ?? '-'}}"
                                 />
                                 <label class="form-label" for="city"
                                     >City</label
@@ -159,7 +153,7 @@
                                     type="text"
                                     class="form-control"
                                     name="state"
-                                    value="{{$customer->state}}"
+                                    value="{{$customer->state ?? '-'}}"
                                 />
                                 <label class="form-label" for="state"
                                     >State/Country</label
@@ -174,7 +168,7 @@
                                     type="text"
                                     class="form-control"
                                     name="postal_code"
-                                    value="{{$customer->postal_code}}"
+                                    value="{{$customer->postal_code ?? '-'}}"
                                 />
                                 <label class="form-label" for="postal"
                                     >Postal Code</label
@@ -189,7 +183,7 @@
                                     type="url"
                                     class="form-control"
                                     name="facebook"
-                                    value="{{$customer->facebook}}"
+                                    value="{{$customer->facebook ?? '-'}}"
                                 />
                                 <label class="form-label" for="faceb"
                                     >Facebook</label
@@ -204,7 +198,7 @@
                                     type="url"
                                     class="form-control"
                                     name="facebook"
-                                    value="{{$customer->linkedin}}"
+                                    value="{{$customer->linkedin ?? '-'}}"
                                 />
                                 <label class="form-label" for="linkin"
                                     >LinkedIn</label
