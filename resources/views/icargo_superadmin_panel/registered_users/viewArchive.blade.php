@@ -66,7 +66,6 @@
                         >
                             @if ($company->user->type == "company")
                                 @include('icargo_superadmin_panel.registered_users.show.company')
-                                @include('icargo_superadmin_panel.registered_users.restore.company')
                             @endif
                         </td>
                     </tr>
@@ -87,7 +86,6 @@
                         >
                             @if ($dispatcher->user->type == "dispatcher")
                                 @include('icargo_superadmin_panel.registered_users.show.dispatcher')
-                                @include('icargo_superadmin_panel.registered_users.restore.dispatcher')
                             @endif 
                         </td>
                     </tr>
@@ -106,7 +104,6 @@
                         >
                             @if ($driver->user->type == "driver")
                                 @include('icargo_superadmin_panel.registered_users.show.driver')
-                                @include('icargo_superadmin_panel.registered_users.restore.driver')
                             @endif 
                         </td>
                     </tr>
@@ -126,7 +123,6 @@
                         >
                             @if ($staff->user->type == "staff")
                                 @include('icargo_superadmin_panel.registered_users.show.staff')
-                                @include('icargo_superadmin_panel.registered_users.restore.staff')
                             @endif
                         </td>
                     </tr>
@@ -145,7 +141,6 @@
                         >
                             @if ($customer->user->type == "user")
                                 @include('icargo_superadmin_panel.registered_users.show.customer')
-                                @include('icargo_superadmin_panel.registered_users.restore.customer')
                             @endif
                         </td>
                     </tr>
