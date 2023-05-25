@@ -65,7 +65,7 @@ class ShipmentSeeder extends Seeder
             'height' => $faker->randomFloat(2, 1, 100),
             'service_type' => $faker->randomElement(['Standard', 'Express']),
             'order_type' => $faker->randomElement(['Document', 'Parcel']),
-            'category' => $faker->randomElement(['Domestic', 'International']),
+            'mop' => $faker->randomElement(['COD', 'Gcash Payment', 'Credit/Debit Card']),
             'min_bid_amount' => $faker->randomFloat(2, 10, 1000),
             'photo' => $faker->imageUrl(),
             'status' => 'Pending',

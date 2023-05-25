@@ -1,16 +1,16 @@
 <head>
     <title>Staff | Freight</title>
-    
+
     <style>
         table {
             border-collapse: collapse;
             border-color: transparent !important;
         }
-    
+
         th {
             color: white !important;
         }
-    
+
         td,
         th {
             text-align: center !important;
@@ -82,7 +82,7 @@
                 <tbody>
                     @foreach ($shipments as $ship)
                         @if (Auth::user()->type == 'staff')
-                            @if ($ship->company_id == $staff->company_id)
+                            @if ($ship->company_id == $staff->company_id && $ship->status != 'Delivered')
                                 <tr>
 
                                     {{-- sender namae --}}

@@ -52,7 +52,7 @@ use App\Http\Controllers\StaffDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});
 
 
 /* Profile Tab */
@@ -243,7 +243,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::controller(UsersController::class)->group(function () {
         Route::get('icargo/registered_users', 'index')->name('registered_users.view');
         Route::get('registered_users/archived', 'viewArchive')->name('registered_users.viewArchive');
-        
+
         // track parcel
         Route::get('/icargo/track_parcel', ['uses' => 'App\Http\Controllers\SuperQrScannerController@index']);
         Route::post('/icargo/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\SuperQrScannerController@checkUser']);

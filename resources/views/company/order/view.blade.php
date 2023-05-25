@@ -229,9 +229,9 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td class="text-center">{{ $bid->company_name }} </td>
-                                                <td class="text-center">{{ $bid->bid_amount }}</td>
-                                                <td class="text-center">{{ $bid->status }}</td>
+                                                <td>{{ $bid->company_name }} </td>
+                                                <td>{{ $bid->bid_amount }}</td>
+                                                <td>{{ $bid->status }}</td>
                                             </tr>
                                         </tbody>
                                     </form>

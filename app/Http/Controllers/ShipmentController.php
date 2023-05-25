@@ -448,6 +448,8 @@ class ShipmentController extends Controller
             ->select('bids.*', 'users.name as company_name')
             ->get();
 
+        $bid = Bid::where('shipment_id', $id)->exists();
+
         if ($ship->company_id != null && $ship->bid_amount != null) {
             $company = Company::where('id', $ship->company_id)->first();
             $user = User::where('id', $company->user_id)->first();
@@ -458,7 +460,7 @@ class ShipmentController extends Controller
         } else {
 
             $this->TrackOrderLog();
-            return view('order.view', compact('ship', 'bids'));
+            return view('order.view', compact('ship', 'bids', 'bid'));
         }
     }
 
@@ -935,7 +937,6 @@ class ShipmentController extends Controller
     public function update_order(Request $request, $id)
     {
         $shipment = Shipment::find($id);
-        $bids = Bid::where('shipment_id', $shipment->id)->exist();
 
         $shipment->sender->sender_name = $request->input('senderName');
         $shipment->sender->sender_address = $request->input('senderAddress');
@@ -970,7 +971,7 @@ class ShipmentController extends Controller
 
         $shipment->save();
 
-        return redirect()->route('viewOrder', $id, compact('bids'))->with('success', 'Order information has been updated!');
+        return redirect()->route('viewOrder', $id)->with('success', 'Order information has been updated!');
     }
 
     public function assignStation_view()
