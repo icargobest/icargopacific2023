@@ -29,16 +29,26 @@
             </div>
             <div class="modal-body">
                 <p class="small text-muted">
-                    <span class="fw-bold">Caution:</span> Changing someone's
-                    password without consent may violate privacy and compliance
-                    regulations. Consider sending a password reset email link
-                    instead.
+                    <span class="fw-bold">Caution:</span> Changing customer's
+                    information without consent may violate privacy and compliance
+                    regulations. Consider sending an OTP instead to modify their data.
                 </p>
                 <form
                     method="POST"
                     action="{{route('customers.update', $customer->id)}}"
                 >
                     @csrf @method('PUT')
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="file"
+                            name="photo"
+                            id="photo"
+                        />
+                        <label class="form-label" for="name"
+                            >Upload new profile image</label
+                        >
+                    </div>
                     <div class="row mb-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -55,7 +65,6 @@
                                 autofocus
                                 placeholder="Name"
                             />
-
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -130,10 +139,8 @@
 
                     {{-- contact number --}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
+                        <div class="col">
+                            <div class="form-outline">
                             <input
                                 id="contact"
                                 type="text"
@@ -147,6 +154,8 @@
                                 @required(true)
                                 placeholder="Contact No"
                             />
+                            <label class="form-label" for="Tel">Contact Number</label>
+                            </div>
 
                             @error('contact_no')
                             <span class="invalid-feedback" role="alert">
@@ -156,22 +165,95 @@
                         </div>
                     </div>
 
-                    {{-- address--}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('address') is-invalid"
-                            @enderror" name="address"
-                            value="{{$customer->address }}" required
-                            autocomplete="address" autofocus
-                            placeholder="Address"> @error('address')
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control @error('tel') is-invalid @enderror" value="{{ $customer->tel }}" autocomplete="tel" name="tel">
+                                <label class="form-label" for="Tel">Telephone</label>
+                            </div>
+                            @error('tel')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" autocomplete="street" required>
+                                <label class="form-label" for="sname">Street name</label>
+                            </div>
+                            @error('street')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" autocomplete="city" required>
+                                <label class="form-label" for="city">City</label>
+                            </div>
+                            @error('city')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control @error('state') is-invalid @enderror" name="state" autocomplete="state" required>
+                                <label class="form-label" for="state">State/Country</label>
+                            </div>
+                        </div>
+                        @error('state')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" autocomplete="postal_code" required>
+                                <label class="form-label" for="postal">Postal Code</label>
+                            </div>
+                            @error('postal_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('website') is-invalid @enderror" name="website" id="twit">
+                                @error('website')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="twit">Website Link</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb">
+                                @error('facebook')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="faceb">Facebook Link</label>
+                            </div>
                         </div>
                     </div>
 
@@ -179,7 +261,7 @@
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
-                        Send password reset link
+                        Send One-Time-Password (OTP)
                     </button>
 
                     <hr />
@@ -192,9 +274,8 @@
                             Save changes
                         </button>
                         <a
-                            href="{{ route ('registered_users.view')}}"
+                            href="{{ route ('registered_customers.index')}}"
                             class="btn btn-secondary btn-block"
-                            data-mdb-dismiss="modal"
                         >
                             Cancel
                         </a>

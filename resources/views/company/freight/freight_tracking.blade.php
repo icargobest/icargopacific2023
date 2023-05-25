@@ -119,6 +119,7 @@
                                             <th>PARCEL CHARGES:</th>
                                             <td class="fw-bold">Php 68</td>
                                         </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -314,6 +315,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

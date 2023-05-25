@@ -45,7 +45,7 @@
             >
                 <thead>
                     <tr>
-                        <th scope="col" >#</th>
+                        <th scope="col" >Staff #</th>
                         <th scope="col" >Name</th>
                         <th scope="col" >Email</th>
                         <th scope="col" >
@@ -64,7 +64,7 @@
                     <tr>
                         <td>{{$staff->id}}</td>
                         <td class="capitalized">
-                            <img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" alt="Profile Image" style="width:30px">
+                            <img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" style="width:30px" alt="Profile Image">
                             {{$staff->user->name}}
                         </td>
                         <td>{{$staff->user->email}}</td>

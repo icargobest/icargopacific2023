@@ -50,6 +50,15 @@ class DispatcherController extends Controller
         return view('staff_panel/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
     }
 
+    public function superadminIndex()
+    {
+        $dispatchers = Dispatcher::with('company.user')
+            ->where('archived', 0)
+            ->get();
+
+        return view('icargo_superadmin_panel.dispatcher.index', compact('dispatchers'));
+    }
+
     function viewArchive(){
 
         $id = Auth::id();
@@ -68,6 +77,15 @@ class DispatcherController extends Controller
             $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
         }
         return view('staff_panel/dispatcher.viewArchive', compact('dispatchers'));
+    }
+
+    public function superadminviewArchive(){
+
+        $dispatchers = Dispatcher::with('company.user')
+            ->where('archived', 1)
+            ->get();
+
+        return view('icargo_superadmin_panel.dispatcher.viewArchive', compact('dispatchers'));
     }
 
 
@@ -148,8 +166,6 @@ class DispatcherController extends Controller
     public function update($id, Request $request)
     {
         $dispatcher = Dispatcher::find($id);
-        $get_token = $request->otp;
-        $get_token = VerifyToken::where('token', $get_token)->first();
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -157,18 +173,11 @@ class DispatcherController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-        if($get_token){
-        $get_token->is_activated = 1;
-        $get_token->save();
         $user = $dispatcher->user;
         $user->update( [
             'name' => $request->name,
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
-        $delete_token = VerifyToken::where('token', $get_token->token)->first();
-        $delete_token->delete();
-    }
-
 
         if($request->hasfile('image')){
             $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
@@ -193,8 +202,63 @@ class DispatcherController extends Controller
         ];
         
         $dispatcher->update($dispatcherData);
-
+        
         return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
+    }
+
+    public function superadminUpdate($id, Request $request)
+    {
+        $dispatcher = Dispatcher::find($id);
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+        if($get_token){
+            $get_token->is_activated = 1;
+            $get_token->save();
+            $user = $dispatcher->user;
+            $user->update( [
+                'name' => $request->name,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if($request->hasfile('image')){
+                $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
+                if(File::exists($destination)){
+                    File::delete($destination);
+                }
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
+            }else{
+                $filename = $dispatcher->image;
+            }
+            $dispatcherData = [
+                'contact_no' => $request->contact_no,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'image' =>  $filename,
+            ];
+            
+            $dispatcher->update($dispatcherData);
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+
+            return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
+        }
+        else{
+            return back()->with('warning','Please verify the account with OTP before modifying data.');
+        };
     }
 
     public function destroy($id){

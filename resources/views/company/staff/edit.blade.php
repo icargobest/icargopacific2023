@@ -198,7 +198,6 @@
                                     name="facebook"
                                     value="{{ $staff->facebook }}"
                                     id="faceb"
-                                    required
                                 />
                                 @error('facebook')
                                 <span class="invalid-feedback" role="alert">

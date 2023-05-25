@@ -14,12 +14,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
 {
-    public $timestamps = true;
-    
     public function index()
     {
         $companies = Company::with('user')
@@ -33,8 +30,36 @@ class CompaniesController extends Controller
     {
         return view('icargo_superadmin_panel.companies.create');
     }
+
+    // company registration
+    public function companyRegistrationOutsidePanel(CreateCompanyRequest $request)
+    {  
+       DB::beginTransaction();
+       try {
+       $user = User::create([
+           'name' => $request->name,
+           'email' => $request->email,
+           'password' => Hash::make($request->password),
+           'type' => '2',
+       ]);
+       $user->sendEmailVerificationNotification();
+       $company = Company::create([
+           'user_id' => $user->id,
+           'contact_no' =>  $request->contact_no,
+           'contact_name' => $request->contact_name,
+           'company_address' => $request->company_address,
+       ]);
+           DB::commit();
+           auth()->login($user); // log in the user programmatically
+       } catch (Exception $ex) {
+           DB::rollBack();
+           throw $ex;
+       }
+
+        return redirect()->route('company.dashboard') // redirect to the company dashboard page
+                        ->with('success', 'Registered successfully. You are now logged in.');
+    }
     
-    // SUPER ADMIN : Managing the Companies
     public function store(CreateCompanyRequest $request)
     {
         DB::beginTransaction();
@@ -134,8 +159,6 @@ class CompaniesController extends Controller
         return back()->with('warning','Please verify the account with OTP before modifying data.');
     }
 
-    
-
     public function archive(Request $request, $id)
     {
         $company = Company::findOrFail($id);
@@ -173,66 +196,6 @@ class CompaniesController extends Controller
         return back()->with('success', 'Staff member has been deleted successfully.');
     }
 
-
-    // Company registration in the website
-    public function addCompany(CreateCompanyRequest $request)
-    {  
-        DB::beginTransaction();
-        try {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'type' => '2',
-            ]);
-    
-            $companyData = [
-                'user_id' => $user->id,
-                'contact_no' =>  $request->contact_no,
-                'contact_name' => $request->contact_name,
-                'tel' => $request->tel,
-                'street' => $request->street,
-                'city' => $request->city,
-                'state' => $request->state,
-                'postal_code' => $request->postal_code,
-                'facebook' => $request->facebook ?? '',
-            ];
-    
-            if ($request->has('website')) {
-                $companyData['website'] = $request->website;
-            }
-            if ($request->has('linkedin')) {
-                $companyData['linkedin'] = $request->linkedin;
-            }
-            
-            $company = Company::create($companyData);
-            
-            DB::commit();
-            auth()->login($user); // log in the user programmatically
-        } catch (Exception $ex) {
-            DB::rollBack();
-            throw $ex;
-        }
-    
-        return redirect()->route('company.dashboard') // redirect to the company dashboard page
-            ->with('success', 'Registered successfully. You are now logged in.');
-    }
-    
-
-    // PROFILE
-    public function profile()
-    {
-        $userID = Auth::id();
-        $company = Company::where('user_id', $userID)->first();
-        
-        if ($company) {
-            return view('company.profile.myprofile', compact('company'));
-        }
-        
-        return back()->with('error', 'You are not authorized to view this profile.');
-    }
-
-    
     public function updateStatus($user_id, $status_code)
     {
         $update_user = User::whereId($user_id);

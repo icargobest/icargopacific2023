@@ -1,4 +1,4 @@
-<title>SuperAdmin | Customer</title>
+<title>SuperAdmin | Customers</title>
 @include('partials.header')
 @extends('layouts.app')
 @include('partials.navigationSuperAdmin', ['customers' =>"nav-selected"])
@@ -52,7 +52,7 @@
                             @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
                             @else /img/default_dp.png 
                             @endif"
-                            alt="Profile Image" style="width:50px"
+                            alt="Profile Image" style="width:30px"
                     />
                             {{ $customer->user->name }}
                         </td>
