@@ -29,10 +29,9 @@
             </div>
             <div class="modal-body">
                 <p class="small text-muted">
-                    <span class="fw-bold">Caution:</span> Changing company
-                    passwords without consent may violate privacy and compliance
-                    regulations. Consider sending a password reset email link
-                    instead.
+                    <span class="fw-bold">Caution:</span> Changing company's
+                    information without consent may violate privacy and compliance
+                    regulations. Consider sending an OTP instead to modify their data.
                 </p>
                 <form
                     method="POST"
@@ -352,11 +351,11 @@
                             {{session()->get('message')}}
                         </div>  
                     @endif             
-                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
+                    <a href="{{ url('icargo/companies/send_otp', $company->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
-                        Send password reset link
+                        Send One-Time-Password (OTP)
                     </a>
                     
                     <br><br>
@@ -380,14 +379,12 @@
                             type="submit"
                             class="btn btn-success btn-block"
                             id="addModal2"
-                            {{-- data-mdb-dismiss="modal" --}}
                         >
                             Save changes
                         </button>
                         <a
-                            href="{{route('companies.index')}}"
+                            href="{{route('registered_companies.index')}}"
                             class="btn btn-secondary btn-block"
-                            data-mdb-dismiss="modal"
                         >
                             Cancel
                         </a>

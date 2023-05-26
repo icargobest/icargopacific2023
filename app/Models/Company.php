@@ -9,23 +9,9 @@ class Company extends Model
 {
     use HasFactory;
 
+
     protected $table = 'companies';
-    protected $fillable =
-    [
-        'user_id',
-        'contact_no',
-        'contact_name',
-        'tel',
-        'street',
-        'city',
-        'state',
-        'postal_code',
-        'image',
-        'website',
-        'facebook',
-        'linkedin',
-        'archived'
-    ];
+    protected $fillable = ['user_id', 'contact_no', 'contact_name', 'company_address', 'archived', 'company_id'];
 
     public function user()
     {

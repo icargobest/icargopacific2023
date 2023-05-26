@@ -28,13 +28,7 @@
             </div>
             <div class="modal-body">
                 <div class="image-class">
-                    <img
-                    src="
-                    @if ($driver->image != null) {{ asset('storage/' . $driver->image) }} 
-                    @else /img/default_dp.png 
-                    @endif"
-                    alt="Profile Image" 
-                />
+                    <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" alt="profile image"/>
                 </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
@@ -80,6 +74,19 @@
                         </div>
                     </div>
                     <hr />
+                    <!-- Driver ID  -->
+                    <div class="form-outline mb-4">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{$driver->id}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="email"
+                            >Driver ID</label
+                        >
+                    </div>
                     <!-- Name  -->
                     <div class="form-outline mb-4">
                         <input

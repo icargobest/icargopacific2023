@@ -57,7 +57,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $dispatcher->user->name }}"
-                                    class="form-control"
+                                    class="form-control @error('name') is-invalid @enderror"
                                     placeholder="Dispatcher name"
                                     required
                                 />
@@ -72,6 +72,66 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    name="email"
+                                    value="{{ $dispatcher->user->email }}"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Dispatcher email"
+                                    required
+                                />
+                                <label class="form-label" for="email"
+                                    >Dispatcher Email</label
+                                >
+                                @error('email')
+                                <div class="alert alert-danger mt-1 mb-1">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>   <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input
+                                id="password"
+                                type="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                name="password"
+                                autocomplete="new-password"
+                                placeholder="Password"
+                                
+                            />
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input
+                                id="password-confirm"
+                                type="password"
+                                class="form-control"
+                                name="password_confirmation"
+                                autocomplete="new-password"
+                                placeholder="Re-Type Password"
+                            />
+                        </div>
+                    </div>
+
+                    <hr />
                     <div class="form-outline mb-4">
                         <div class="col">
                             <div class="form-outline mb-4">
@@ -79,7 +139,7 @@
                                     type="text"
                                     name="contact_no"
                                     value="{{ $dispatcher->contact_no }}"
-                                    class="form-control"
+                                    class="form-control @error('contact_no') is-invalid @enderror"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                     minlength="11"
                                     maxlength="11"
@@ -90,7 +150,7 @@
                                     >Contact No.</label
                                 >
 
-                                @error('name')
+                                @error('contact_no')
                                 <div class="alert alert-danger mt-1 mb-1">
                                     {{ $message }}
                                 </div>
@@ -103,14 +163,13 @@
                             type="tel"
                             name="tel"
                             value="{{ $dispatcher->tel }}"
-                            class="form-control"
+                            class="form-control @error('tel') is-invalid @enderror"
                             placeholder="Tel No"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                             minlength="7"
                             maxlength="9"
-                            required
                         />
-                        @error('contact_no')
+                        @error('tel')
                         <div class="alert alert-danger mt-1 mb-1">
                             {{ $message }}
                         </div>
@@ -123,9 +182,8 @@
                             type="text"
                             name="street"
                             value="{{ $dispatcher->street }}"
-                            class="form-control"
+                            class="form-control @error('street') is-invalid @enderror"
                             placeholder="Street"
-                            required
                         />
                         @error('street')
                         <div class="alert alert-danger mt-1 mb-1">
@@ -140,9 +198,8 @@
                             type="text"
                             name="city"
                             value="{{ $dispatcher->city }}"
-                            class="form-control"
+                            class="form-control @error('city') is-invalid @enderror"
                             placeholder="City"
-                            required
                         />
                         @error('city')
                         <div class="alert alert-danger mt-1 mb-1">
@@ -157,9 +214,8 @@
                             type="text"
                             name="state"
                             value="{{ $dispatcher->state }}"
-                            class="form-control"
+                            class="form-control @error('state') is-invalid @enderror"
                             placeholder="State"
-                            required
                         />
                         @error('state')
                         <div class="alert alert-danger mt-1 mb-1">
@@ -174,12 +230,11 @@
                             type="text"
                             name="postal_code"
                             value="{{ $dispatcher->postal_code }}"
-                            class="form-control"
-                            placeholder="Contact No"
+                            class="form-control @error('postal_code') is-invalid @enderror"
+                            placeholder="Postal No"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                             minlength="4"
                             maxlength="4"
-                            required
                         />
                         @error('postal_code')
                         <div class="alert alert-danger mt-1 mb-1">
@@ -199,7 +254,6 @@
                                     name="facebook"
                                     value="{{ $dispatcher->facebook }}"
                                     id="faceb"
-                                    required
                                 />
                                 @error('facebook')
                                 <span class="invalid-feedback" role="alert">
@@ -247,7 +301,7 @@
                     </div>
                     @endif
                     <a
-                        href="{{ url('icargo/registered_users/send_otp', $dispatcher->user->id)}}"
+                        href="{{ url('icargo/dispatchers/send_otp', $dispatcher->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >

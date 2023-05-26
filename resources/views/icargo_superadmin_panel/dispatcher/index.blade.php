@@ -1,15 +1,15 @@
-<title>SuperAdmin | Registered Users</title>
+<title>SuperAdmin | Dispatchers</title>
 @include('partials.header') @extends('layouts.app')
-@include('partials.navigationSuperAdmin', ['register' =>"nav-selected"])
+@include('partials.navigationSuperAdmin', ['dispatchers' =>"nav-selected"])
 
 <main class="container py-5" style="margin-top: -49px !important">
     <div class="main-wrapper border border-2" style="max-width: 100%">
         <div class="employee-header-container">
-            <h3 class="">Registered User Accounts</h3>
+            <h3 class="">Registered Dispatchers</h3>
         </div>
 
         <div class="addemployee" style="">
-            <a href="{{ route('registered_users.viewArchive') }}">
+            <a href="{{ route('viewArchive.dispatchers') }}">
                 <button
                     type="button"
                     class="btn btn-success btn-sm m-button2"
@@ -28,89 +28,31 @@
             >
                 <thead>
                     <tr>
+                        <th scope="col" style="text-align: center">Dispatcher ID</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
                         <th scope="col" style="text-align: center">
                             Contact No
                         </th>
-                        <th scope="col" style="text-align: center">Type</th>
                         <th scope="col" style="text-align: center">Company</th>
                         <th
                             scope="col"
-                            style="text-align: center !important; width: 300px"
+                            style="text-align: center !important; width: 250px"
                         >
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($superadmin)
+                    @foreach ($dispatchers as $dispatcher)
                     <tr>
-                        <td class="capitalized">{{ $superadmin->name }}</td>
-                        <td>{{ $superadmin->email }}</td>
-                        <td>-</td>
-                        <td style="text-transform: capitalize">
-                            {{ $superadmin->type }}
-                        </td>
-                        <td>iCargo Pacific</td>
-                        <td
-                            class="td-buttons d-flex justify-content-center"
-                            style="overflow: auto"
-                        >
-                            @include('icargo_superadmin_panel.registered_users.show.superadmin')
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm"
-                                disabled
-                            >
-                                EDIT
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-danger btn-sm"
-                                disabled
-                            >
-                                Archive
-                            </button>
-                        </td>
-                    </tr>
-                    @endif @foreach ($companies as $company)
-                    <tr>
+                        <td>{{ $dispatcher->id}}</td>
                         <td class="capitalized">
-                            <img src="{{ asset($company->image 
-                                ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
-                                : 'img/default_dp.png') }}"
-                                style="width:50px"
-                    alt="Profile Image">
-                            {{ $company->user->name }}
-                        </td>
-                        <td>{{ $company->user->email }}</td>
-                        <td>{{ $company->contact_no}}</td>
-                        <td style="text-transform: capitalize">
-                            {{ $company->user->type }}
-                        </td>
-                        <td>{{ $company->user->name }}</td>
-                        <td
-                            class="td-buttons d-flex justify-content-center"
-                            style="overflow: auto"
-                        >
-                            @if ($company->user->type == "company")
-                            @include('icargo_superadmin_panel.registered_users.show.company')
-                            @include('icargo_superadmin_panel.registered_users.edit.company')
-                            @include('icargo_superadmin_panel.registered_users.archive.company')
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach @foreach ($dispatchers as $dispatcher)
-                    <tr>
-                        <td class="capitalized">
+                            <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $dispatcher->user->name }}
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
                         <td>{{ $dispatcher->contact_no}}</td>
-                        <td class="capitalized">
-                            {{ $dispatcher->user->type }}
-                        </td>
                         <td>
                             @if ($dispatcher->company &&
                             $dispatcher->company->user) {{
@@ -121,86 +63,9 @@
                             style="overflow: auto"
                         >
                             @if ($dispatcher->user->type == "dispatcher")
-                            @include('icargo_superadmin_panel.registered_users.show.dispatcher')
-                            @include('icargo_superadmin_panel.registered_users.edit.dispatcher')
-                            @include('icargo_superadmin_panel.registered_users.archive.dispatcher')
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach @foreach ($drivers as $driver)
-                    <tr>
-                        <td class="capitalized">{{ $driver->user->name }}</td>
-                        <td>{{ $driver->user->email }}</td>
-                        <td>{{ $driver->contact_no }}</td>
-                        <td class="capitalized">{{ $driver->user->type }}</td>
-                        <td>
-                            @if ($driver->company && $driver->company->user) {{
-                            $driver->company->user->name }} @endif
-                        </td>
-                        <td
-                            class="td-buttons d-flex justify-content-center"
-                            style="overflow: auto"
-                        >
-                            @if ($driver->user->type == "driver")
-                            @include('icargo_superadmin_panel.registered_users.show.driver')
-                            @include('icargo_superadmin_panel.registered_users.edit.driver')
-                            @include('icargo_superadmin_panel.registered_users.archive.driver')
-                            @endif
-                        </td>
-                    </tr>
-
-                    @endforeach @foreach ($staffs as $staff)
-                    <tr>
-                        <td class="capitalized">
-                            <img
-                                src="@if ($staff->photo != null) {{ asset('storage/' . $staff->photo) }} @else /img/default_dp.png @endif"
-                                alt="Profile Image"
-                                style="width: 30px"
-                            />
-                            {{ $staff->user->name }}
-                        </td>
-                        <td>{{ $staff->user->email }}</td>
-                        <td>{{ $staff->contact_no }}</td>
-                        <td class="capitalized">{{ $staff->user->type }}</td>
-                        <td>
-                            @if ($staff->company && $staff->company->user) {{
-                            $staff->company->user->name }} @endif
-                        </td>
-                        <td
-                            class="td-buttons d-flex justify-content-center"
-                            style="overflow: auto"
-                        >
-                            @if ($staff->user->type == "staff")
-                            @include('icargo_superadmin_panel.registered_users.show.staff')
-                            @include('icargo_superadmin_panel.registered_users.edit.staff')
-                            @include('icargo_superadmin_panel.registered_users.archive.staff')
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach @foreach ($customers as $customer)
-                    <tr>
-                        <td class="capitalized">
-                            <img
-                                src="
-                                @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
-                                @else /img/default_dp.png 
-                                @endif"
-                                alt="Profile Image" style="width:50px"
-                            />
-                            {{ $customer->user->name }}
-                        </td>
-                        <td>{{ $customer->user->email }}</td>
-                        <td>{{ $customer->contact_no }}</td>
-                        <td>customer</td>
-                        <td>-</td>
-                        <td
-                            class="td-buttons d-flex justify-content-center"
-                            style="overflow: auto"
-                        >
-                            @if ($customer->user->type == "user")
-                            @include('icargo_superadmin_panel.registered_users.show.customer')
-                            @include('icargo_superadmin_panel.registered_users.edit.customer')
-                            @include('icargo_superadmin_panel.registered_users.archive.customer')
+                            @include('icargo_superadmin_panel.dispatcher.show')
+                            @include('icargo_superadmin_panel.dispatcher.edit')
+                            @include('icargo_superadmin_panel.dispatcher.archive')
                             @endif
                         </td>
                     </tr>

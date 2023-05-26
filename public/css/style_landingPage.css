@@ -266,6 +266,15 @@ body{
     font-size: 30px;
     color: #214D94;
 }
+.partnersIcons{
+    width: 60%;
+    flex-wrap: wrap;
+}
+.partnersIcons img{
+    width: 85px !important;
+    aspect-ratio: auto;
+    object-fit: contain;
+}
 .foot{
     background-color: #e4eaf4;
 }
