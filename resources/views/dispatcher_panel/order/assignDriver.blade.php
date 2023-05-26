@@ -29,13 +29,13 @@
       <div class="modal-body pb-0 overflow-scroll">
         <h5 class="h4-sm text-center text-sm-start" style="color:#F9CD1A;">AVAILABLE DRIVER</h5>
           @foreach ($drivers as $driver)
-            @if ($driver->archived == 0 && $driver->company_id == $company_id_dispatcher && $driver->dispatcher_id == null)
+            @if ($driver->archived == 0 && $driver->company_id == $company_id_dispatcher)
             <a href="{{ route('dispatcher.assign',['shipment_id' => $ship->id, 'driver_id' => $driver->id]) }}">
               <button class="btn btn-block p-0 mx-0 mb-2 card flex-row" style="min-width: 385px;">
                 <span class="d-none d-sm-block">
                   <img class="rounded-circle p-2"
                   style="max-width:60px;"
-                  src="{{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }}"/>
+                  src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif"/>
                   <span class="text-warning" style="font-size:25px;">●</span>
                 </span>
                 <div class="card-body text-sm-start text-middle">
