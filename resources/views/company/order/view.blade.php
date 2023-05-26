@@ -216,9 +216,9 @@ VIEW
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Company</th>
-                                    <th>Bid Amount</th>
-                                    <th>Status</th>
+                                    <th class="text-center">Company</th>
+                                    <th class="text-center">Bid Amount</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             @foreach ($bids as $bid)
