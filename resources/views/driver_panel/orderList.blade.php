@@ -34,7 +34,7 @@
             <table class="table table-striped history-table border border-2 shadow">
                 <thead>
                 <tr>
-                    <th>ID{{$driverID}}</th>
+                    <th>ID</th>
                     <th>PHOTO</th>
                     <th>PICKUP</th>
                     <th>DROPOFF</th>
