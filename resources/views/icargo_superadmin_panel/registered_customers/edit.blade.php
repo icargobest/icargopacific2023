@@ -257,12 +257,28 @@
                         </div>
                     </div>
 
-                    <button
+                    <a href="{{ url('icargo/customers/send_otp', $customer->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send One-Time-Password (OTP)
-                    </button>
+                    </a>
+                    <br><br>
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
+
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <hr />
                     <div class="modal-footer">
