@@ -54,14 +54,23 @@
                                     <td>{{ date('Y-m-d h:i:s A', strtotime($ship->updated_at)) }}</td>
                                     @switch($ship->status)
                                         @case('Assort')
-                                        <td>Delivered</td>
+                                            <td class="" style="overflow: auto">
+                                                <label class="status-deliveredv2">
+                                                    Delivered
+                                                </label>
+                                            </td>
                                             @break
                                         @case('Delivered')
-                                            <td>Delivered</td>
+                                            <td class="" style="overflow: auto">
+                                                <label class="status-deliveredv2">
+                                                    Delivered
+                                                </label>
+                                            </td>
                                             @break
                                         @default
                                             <td></td>
                                     @endswitch
+                                    
                                 </tr>
                             @endif
                         @endif
