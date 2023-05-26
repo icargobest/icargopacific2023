@@ -108,6 +108,10 @@
                             <li><a class="dropdown-item navFont" href="{{ route('driver.profile') }}"><i
                                         class="fa fa-user"></i>Profile</a></li>
                         @endif
+                        @if (Auth::user()->type == 'company')
+                            <li><a class="dropdown-item navFont" href="{{ route('company.profile') }}"><i
+                                        class="fa fa-user"></i>Profile</a></li>
+                        @endif
                         @if (Auth::user()->type == 'dispatcher')
                             <li><a class="dropdown-item navFont" href="{{ route('dispatcher.profile') }}"><i
                                         class="fa fa-user"></i>Profile</a></li>
