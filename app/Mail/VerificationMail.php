@@ -49,7 +49,7 @@ class VerificationMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'icargo_superadmin_panel.registered_users.edit.mail',
+            view: 'icargo_superadmin_panel.mail.email',
         );
     }
 

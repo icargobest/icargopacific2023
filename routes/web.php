@@ -256,6 +256,8 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/companies+archived', 'viewArchive')->name('companies.viewArchive');
         Route::put('icargo/companies/archive/{id}', 'archive')->name('companies.archive');
         Route::put('icargo/companies/unarchive/{id}', 'unarchive')->name('companies.unarchive');
+        Route::put('icargo/companies/edit/{id}', 'update')->name('companies.update');
+        Route::get('icargo/companies/send_otp/{id}', 'sendOTP');
     });
 
     //Customers
@@ -265,6 +267,8 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/customers+archived', 'viewArchive')->name('registered_customers.viewArchive');
         Route::put('icargo/customers/archive/{id}', 'archive')->name('registered_customers.archive');
         Route::put('icargo/customers/unarchive/{id}', 'unarchive')->name('registered_customers.unarchive');
+        Route::put('icargo/customers/edit/{id}', 'update')->name('customers.update');
+        Route::get('icargo/customers/send_otp/{id}', 'sendOTP');
     });
 
     //Drivers
@@ -275,6 +279,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/drivers+archived', 'superadminviewArchive')->name('viewArchive.drivers');
         Route::put('icargo/registered_users/archive+dispatcher/{id}', 'archive')->name('archive.driver');
         Route::put('icargo/registered_users/unarchive+dispatcher/{id}','unarchive')->name('unarchive.driver');
+        Route::get('icargo/registered_users/send_otp/{id}', 'sendOTP');
     });
 
     //Dispatchers
