@@ -77,7 +77,7 @@
                             <div class="form-outline mb-4">
                                 <input
                                     type="text"
-                                    name="name"
+                                    name="email"
                                     value="{{ $dispatcher->user->email }}"
                                     class="form-control @error('email') is-invalid @enderror"
                                     placeholder="Dispatcher email"
@@ -301,7 +301,7 @@
                     </div>
                     @endif
                     <a
-                        href="{{ url('icargo/registered_users/send_otp', $dispatcher->user->id)}}"
+                        href="{{ url('icargo/dispatchers/send_otp', $dispatcher->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >

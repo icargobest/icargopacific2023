@@ -114,6 +114,10 @@ class CompaniesController extends Controller
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
+            'facebook' => ['required', 'url', 'max:255'],
+            'website' => ['nullable','url', 'max:255'],
+            'linkedin' => ['nullable','url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
         ]);
 
         if($get_token){
