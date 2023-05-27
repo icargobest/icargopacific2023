@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use App\Mail\VerificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class DispatcherController extends Controller
 {
@@ -261,6 +263,22 @@ class DispatcherController extends Controller
         };
     }
 
+    public function sendOTP($id){
+
+        $data = User::findOrFail($id);
+
+        $validToken = rand(10,100..'2022');
+        $get_token = new VerifyToken();
+        $get_token->token = $validToken;
+        $get_token->email = $data['email'];
+        $get_token->save();
+        $get_user_email = $data['email'];
+        $get_user_name = $data['name'];
+        Mail::to($data['email'])->send(new VerificationMail($get_user_email, $validToken, $get_user_name));
+
+        return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
+    }
+
     public function destroy($id){
         Dispatcher::destroy($id);
         return redirect()->route('dispatcher.index')->with('success','Dispatcher has been deleted successfully');
@@ -293,20 +311,24 @@ class DispatcherController extends Controller
 
     public function assignDriver($shipment_id, $driver_id)
     {
-        $shipmentData = [
-            'driver_id' => $driver_id,
-        ];
+        $driver = Driver::find($driver_id);
+        if($driver){
+            $driver->dispatcher_id = Auth::id();
+            $driver->save();
+        }
 
-        $driverData = [
-            'dispatcher_id' => Auth::id()
-        ];
+        $userID = Auth::id();
+        $dispatcherID = Dispatcher::where('user_id', $userID)->first();
+        if ($dispatcherID) {
+            $shipment = Shipment::find($shipment_id);
+            if($shipment){
+                $shipment->driver_id = $driver_id;
+                $shipment->dispatcher_id = $dispatcherID->id;
+                $shipment->save();
+            }
 
-        $shipment = Shipment::find($shipment_id);
-        $shipment->update($shipmentData);
-
-        $dispatch = Driver::where('id', $driver_id)->first();
-        $dispatch->update($driverData);
-
+        }
+        
         return back()->with('success', 'Driver was successfully assigned!');
         
     }

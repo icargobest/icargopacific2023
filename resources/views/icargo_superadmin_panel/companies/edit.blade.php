@@ -351,7 +351,7 @@
                             {{session()->get('message')}}
                         </div>  
                     @endif             
-                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
+                    <a href="{{ url('icargo/companies/send_otp', $company->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >

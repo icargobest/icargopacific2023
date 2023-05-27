@@ -39,8 +39,8 @@
                   <input id="password" type="text" class="form-control" value="{{ $driver->tel }}" name="tel" 
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                   minlength="7" 
-                  maxlength="9" required autocomplete="">
-                  <label class="form-label" for="mobile">Mobile number</label>
+                  maxlength="9" autocomplete="">
+                  <label class="form-label" for="mobile">Telephone number</label>
                 </div>
               </div>
             </div>

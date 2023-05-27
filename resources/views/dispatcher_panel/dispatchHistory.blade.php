@@ -42,10 +42,8 @@
                 </tr>
                 </thead>
                 <tbody class="history-tbody">
-                    @foreach ($drivers as $user)
-                        @if($user->dispatcher_id == Auth::id())
                             @foreach ($shipments as $ship)
-                                    @if($ship->company_id == $company_id_dispatcher && $ship->driver_id == $user->id && $ship->driver_id != null)
+                                    @if($ship->company_id == $company_id_dispatcher && $ship->dispatcher_id == $dispatcher_id && $ship->status == 'Delivered')
                                         <tr>
                                             <!-- Photo not showing -->
                                             <td style="width: 70px;">
@@ -61,10 +59,10 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-                                            <td>{{$ship->status}}</td>
+                                            <td>
+                                                <label class="status-deliveredv2">{{$ship->status}}</label>
+                                            </td>
                                         </tr>
-                                    @endif
-                            @endforeach
                         @endif
                     @endforeach
                 </tbody>

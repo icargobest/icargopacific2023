@@ -122,6 +122,12 @@ class DriverQrScannerController extends Controller
         if ($shipment) {
             $shipment->status = 'Delivered';
             $shipment->save();
+            $driver_id = $shipment->driver_id;
+            $driver = Driver::find($driver_id)->first();
+            if ($driver) {
+                $driver->dispatcher_id = null;
+                $driver->save();
+            }
         }
         if ($time) {
             $time->isDelivered= true;

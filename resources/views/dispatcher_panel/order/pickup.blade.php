@@ -49,7 +49,8 @@
             <tbody>
                 @foreach ($shipments as $ship)
                     @if(Auth::user()->type == 'dispatcher')
-                        @if($ship->company_id == $company_id_dispatcher && $ship->station_id == $dispatcher_station_id && $ship->status == 'Processing')
+                        @if($ship->company_id == $company_id_dispatcher && $ship->station_id == $dispatcher_station_id && $ship->status == 'Processing' &&
+                        $ship->driver_id == null)
                         <tr>
                             <td>{{$ship->id}}</td>
                             <!-- Photo not showing -->

@@ -202,10 +202,10 @@
                         <table class="table table-striped table-hover">
                             <thead class="text-white" style="background-color: #214D94;">
                                 <tr class="text-warning">
-                                    <th>COMPANY</th>
-                                    <th>BID</th>
-                                    <th>DATE</th>
-                                    <th>ACTION</th>
+                                    <th class="text-center">COMPANY</th>
+                                    <th class="text-center">BID</th>
+                                    <th class="text-center">DATE</th>
+                                    <th class="text-center">ACTION</th>
                                 </tr>
                             </thead>
                             @foreach ($bids as $bid)
