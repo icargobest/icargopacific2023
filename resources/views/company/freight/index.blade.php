@@ -1,25 +1,28 @@
     <head>
         <title>Company | Freight</title>
+
+        <style>
+            table {
+            border-collapse: collapse;
+            border-color: transparent !important;
+            }
+            th{
+            color: white !important;
+            }
+            td, th {
+            text-align: center !important;
+            padding: 10px;
+            border: 1px solid black; 
+            vertical-align: middle;
+            }
+            </style>
+
     </head>
     @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationCompany', ['freight' => 'nav-selected'])
 
-    <style>
-        table {
-        border-collapse: collapse;
-        border-color: transparent !important;
-        }
-        th{
-        color: white !important;
-        }
-        td, th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black; 
-        vertical-align: middle;
-        }
-        </style>
+    
 
     <div class="mx-2">
         <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -111,23 +114,6 @@
     </div>
 
 
-    <style>
-        table {
-            border-collapse: collapse;
-            border-color: transparent !important;
-        }
-
-        th {
-            color: white !important;
-        }
-
-        td,
-        th {
-            text-align: center !important;
-            padding: 10px;
-            border: 1px solid black;
-        }
-    </style>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
