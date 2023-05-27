@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 shadow px-0">
-                            <div class="child2 h-100 border">
+                            <div class="child2 h-100 ">
                                 <div class="d-block border-bottom bg-primary"
                                     style="background-color: #0C2F68 !important;">
                                     <h6 class="ms-3 pt-2 text-left" id="tracking-status">STATUS</h6>
@@ -164,7 +164,7 @@
                                         @endif
                                     @endforeach
                                     <div id="order-status-container">
-                                        <div class="row justify-content-center overflow-hidden">
+                                        <div class="row justify-content-center overflow-hidden mx-2">
                                             <!-- <h3>Order Summary</h3> -->
                                             @foreach ($logs as $log)
                                                 @if ($ship->id == $log->shipment_id)
@@ -296,7 +296,7 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isPending == true)
-                                                        <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                        <div class="card mb-3 px-5" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">

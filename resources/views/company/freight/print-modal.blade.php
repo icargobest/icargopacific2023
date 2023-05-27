@@ -19,19 +19,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="button-modal-container">
-                    <div class="rightmodal-button-container">
+                <div class="button-modal-container" style="justify-content:center !important;">
+                    
                         <a href="{{ route('company.generateInvoice', $ship->id) }}" target="_blank">
-                            <button type="button" class="btn created-button mx-auto">
+                            <button type="button" class="btn created-button mx-2">
                                 Invoice
                             </button>
                         </a>
                         <a href="{{ route('company.generateWaybill', $ship->id) }}" target="_blank">
-                            <button type="button" class="btn created-button mx-auto">
+                            <button type="button" class="btn created-button mx-2">
                                 Waybill
                             </button>
                         </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
