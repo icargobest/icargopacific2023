@@ -58,7 +58,7 @@
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 350px"
+                            style="text-align: center !important; width: 350px"
                         >
                             Action
                         </th>

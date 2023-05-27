@@ -388,9 +388,14 @@ display: flex;
 justify-content: flex-start;
 
 }
+.td-buttons
+{
+align-items: center;
+}
 .td-buttons button
 {
 margin:0px 5px !important;
+max-height: 30.36 !important;
 }
 
 
@@ -455,6 +460,11 @@ font-weight: bolder !important;
 }
 
 
+tbody td
+{
+min-height: 85px !important;
+vertical-align:middle;
+}
 
 
 @media screen and (min-width: 668px) 
