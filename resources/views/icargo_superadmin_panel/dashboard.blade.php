@@ -1,8 +1,6 @@
 <title>Super Admin | Dashboard</title>
-
-
+@include('partials.header')
 @extends('layouts.app')
-@extends('layouts.chart')
 @include('partials.navigationSuperAdmin',['dashboard' => "nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
@@ -12,11 +10,11 @@
 @section('title', 'Monthly Income')
 @section('content')
 
-<div class="content-container" style="margin-top:-14px !important;">
+<div class="" style="margin-top:-14px !important;">
     <div class="mainContainer">
         <div class="DashboardContainer">
             <div class = "dashboardTitle">
-                SuperAdmin Dashboard  
+                SuperAdmin Dashboard
             </div>
             <div class="shippingStatus">
                 <span class = "title">
