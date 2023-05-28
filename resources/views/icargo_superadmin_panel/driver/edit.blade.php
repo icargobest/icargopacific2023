@@ -87,7 +87,7 @@
                             <div class="form-outline mb-4">
                                 <input
                                     type="text"
-                                    name="name"
+                                    name="email"
                                     value="{{ $driver->user->email }}"
                                     class="form-control @error('email') is-invalid @enderror"
                                     placeholder="Dispatcher email"

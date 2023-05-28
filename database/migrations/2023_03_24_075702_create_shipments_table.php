@@ -64,6 +64,8 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedBigInteger('driver_id')->nullable()->default;
             $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade');
+            $table->unsignedBigInteger('dispatcher_id')->nullable()->default;
+            $table->foreign('dispatcher_id')->references('id')->on('dispatchers')->onDelete('cascade');
             // $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
             //$table->string('vehicle_type');
             //$table->string('cargo_type');

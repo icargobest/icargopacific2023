@@ -206,7 +206,6 @@
                                     <th class="text-center">COMPANY</th>
                                     <th class="text-center">BID</th>
                                     <th class="text-center">DATE</th>
-                                    <th class="text-center">STATUS</th>
                                     <th class="text-center">ACTION</th>
                                 </tr>
                             </thead>

@@ -903,7 +903,7 @@ class ShipmentController extends Controller
         $user_id = Auth::id();
         $dispatcher = Dispatcher::where('user_id', $user_id)->first(); // Retrieve the first matching dispatcher record
         if ($dispatcher) {
-            $dispatch_id = $dispatcher->user_id;
+            $dispatcher_id = $dispatcher->id;
             $company_id = $dispatcher->company_id; // Get the company_id from the dispatcher record
             $company = Company::where('id', $company_id)->first(); // Retrieve the first matching company record
             if ($company) {
@@ -912,19 +912,13 @@ class ShipmentController extends Controller
                 $user = User::where('id', $company_ID)->first(); // Retrieve the first matching user record
                 if ($user) {
                     $company_name = $user->name;
-                    $driver_id = Driver::where('dispatcher_id', $user_id)->first();
-                    if ($driver_id) {
-                        $driverID = $driver_id->id;
-                    } else {
-                        $driverID = null;
-                    }
                 }
             }
         }
 
         $this->TrackOrderLog();
 
-        return view('dispatcher_panel.dispatchHistory', compact('company_id_dispatcher', 'company_name', 'driverID'), ['shipments' => $shipment, 'drivers' => $driver, 'bids' => $bid, 'sender', 'recipient']);
+        return view('dispatcher_panel.dispatchHistory', compact('company_id_dispatcher', 'company_name', 'dispatcher_id'), ['shipments' => $shipment, 'drivers' => $driver, 'bids' => $bid, 'sender', 'recipient']);
     }
 
     public function edit_order($id)
