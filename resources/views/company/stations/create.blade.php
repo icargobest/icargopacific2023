@@ -20,7 +20,7 @@
                 @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                <form method="POST" action="{{route('stations.store')}}">
+                <form method="POST" action="{{route('stations.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Station ID Input -->
@@ -32,6 +32,7 @@
                                     id="stationID"
                                     name="station_number"
                                     class="form-control"
+                                    autocomplete="station_number"
                                     required
                                 />
                                 <label class="form-label" for="stationID"
@@ -48,6 +49,7 @@
                             id="stationName"
                             name="station_name"
                             class="form-control"
+                            autocomplete="station_name"
                             required
                         />
                         <label class="form-label" for="stationName"
@@ -62,6 +64,7 @@
                             id="stationAddress"
                             name="station_address"
                             class="form-control"
+                            autocomplete="station_address"
                             required
                         />
                         <label class="form-label" for="stationAddress"
@@ -70,16 +73,15 @@
                     </div>
 
                     <!-- Station Contact No. -->
-                    <!-- Contact input -->
                     <div class="form-outline mb-4">
                         <div class="form-outline">
                             <input
                                 id="contact"
                                 type="text"
-                                class="form-control @error('contact_no') is-invalid @enderror"
+                                class="form-control @error('station_contact_no') is-invalid @enderror"
                                 name="station_contact_no"
-                                value="{{ old('contact_no') }}"
-                                autocomplete="contact_no"
+                                value="{{ old('station_contact_no') }}"
+                                autocomplete="station_contact_no"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                 minlength="11"
                                 maxlength="11"
@@ -89,7 +91,7 @@
                             <label class="form-label" for="form6Example5"
                                 >Contact</label
                             >
-                            @error('contact_no')
+                            @error('station_contact_no')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -98,7 +100,6 @@
                     </div>
 
                     <!-- Station Email. -->
-                   <!-- Email input -->
                    <div class="form-outline mb-4">
                         <input
                             id="email"

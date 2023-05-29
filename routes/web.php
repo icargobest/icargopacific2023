@@ -50,7 +50,7 @@ use App\Http\Controllers\StaffDashboardController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->name('welcome');
 }); 
 
 
@@ -388,10 +388,8 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     //Stations
     Route::resource('staff/stations', StationController::class);
     Route::controller(StationController::class)->group(function () {
-        Route::get('staff/stations', 'index')->name('stations.view');
-        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archived');
-        Route::put('staff/stations/archive/{id}', 'archive')->name('archive.station');
-        Route::put('staff/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
+        Route::get('staff/stations', 'index')->name('stations.viewStaff');
+        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archivedStaff');
     });
 
     //Assign Station
