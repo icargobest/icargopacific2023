@@ -37,5 +37,18 @@ class Company extends Model
     {
         return $this->belongsTo(Station::class);
     }
+
+    public function dispatcher()
+    {
+        return $this->hasMany(Dispatcher::class);
+    }
+    public function driver()
+    {
+        return $this->hasMany(Driver::class);
+    }
+    public function staff()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }
 

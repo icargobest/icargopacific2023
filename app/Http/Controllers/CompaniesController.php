@@ -152,22 +152,34 @@ class CompaniesController extends Controller
     public function archive(Request $request, $id)
     {
         $company = Company::findOrFail($id);
+    
+        if ($company) {
+            $company->archived = true;
+            $company->save();
+    
+            // Archive employees (dispatcher, driver, staff) with matching company_id
+            $archivedDispatchers = $company->dispatcher()->where('company_id', $id)->update(['archived' => true]);
+            $archivedDrivers = $company->driver()->where('company_id', $id)->update(['archived' => true]);
+            $archivedStaff = $company->staff()->where('company_id', $id)->update(['archived' => true]);
 
-        $company->update([
-            'archived' => 1,
-        ]);
-
+        }
         return back()->with('success', 'Company account has been archived successfully.');
     }
-
+    
     public function unarchive(Request $request, $id)
     {
         $company = Company::findOrFail($id);
+    
+        if ($company) {
+            $company->archived = false;
+            $company->save();
+    
+            // Archive employees (dispatcher, driver, staff) with matching company_id
+            $archivedDispatchers = $company->dispatcher()->where('company_id', $id)->update(['archived' => false]);
+            $archivedDrivers = $company->driver()->where('company_id', $id)->update(['archived' => false]);
+            $archivedStaff = $company->staff()->where('company_id', $id)->update(['archived' => false]);
 
-        $company->update([
-            'archived' => 0,
-        ]);
-
+        }
         return back()->with('success', 'Company account has been restored successfully.');
     }
 
