@@ -174,7 +174,7 @@
                                                                         ORDER HAS BEEN
                                                                         DELIVERED</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isDeliveredTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -189,7 +189,7 @@
                                                                         YOUR ORDER IS OUT
                                                                         FOR DELIVERY</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isDispatchedTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isDispatchedTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -205,7 +205,7 @@
                                                                         YOUR ORDER HAS
                                                                         ARRIVED AT SORTING FACILITY</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isArrivedTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isArrivedTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -222,7 +222,7 @@
                                                                             YOUR ORDER HAS ALREADY BEEN
                                                                             TRANSFERRED TO ANOTHER COMPANY</h5>
                                                                         <p class="card-text mb-0">
-                                                                            {{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}
+                                                                            {{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -238,7 +238,7 @@
                                                                             ALREADY BEEN TRANSFERRED TO ANOTHER
                                                                             STATION</h5>
                                                                         <p class="card-text mb-0">
-                                                                            {{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}
+                                                                            {{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -256,7 +256,7 @@
                                                                         ALREADY BEEN PICKED UP BY LOGISTIC
                                                                         COMPANY</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isAssortTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isAssortTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -272,7 +272,7 @@
                                                                         ALREADY BEEN PICKED UP BY LOGISTIC
                                                                         COMPANY</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isPickUpTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isPickUpTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -286,7 +286,7 @@
                                                                         YOUR ORDER IS
                                                                         CURRENTLY BEING PROCESSED</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isProcessedTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isProcessedTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -300,7 +300,7 @@
                                                                         YOUR ORDER IS
                                                                         CURRENTLY PENDING</h5>
                                                                     <p class="card-text mb-0">
-                                                                        {{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}
                                                                     </p>
                                                                 </div>
                                                             </div>

@@ -57,7 +57,6 @@ return new class extends Migration
             $table->decimal('height', 8, 2);
             $table->string('service_type');
             $table->string('order_type');
-            $table->string('category');
             $table->unsignedBigInteger('min_bid_amount');
             $table->string('mop')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
@@ -118,8 +117,8 @@ return new class extends Migration
 
             // Define foreign key constraint for the order_id column
             $table->foreign('shipment_id')
-                  ->references('id')->on('shipments')
-                  ->onDelete('cascade');
+                ->references('id')->on('shipments')
+                ->onDelete('cascade');
         });
     }
 
@@ -133,12 +132,22 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
 
+        // Truncate tables
+        DB::table('senders')->truncate();
+        DB::table('recipients')->truncate();
+        DB::table('order_histories')->truncate();
+        DB::table('bids')->truncate();
+        DB::table('shipments')->truncate();
+
+        // Drop tables
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
-
         Schema::dropIfExists('order_histories');
         Schema::dropIfExists('bids');
         Schema::dropIfExists('shipments');
+
+        Schema::enableForeignKeyConstraints();
     }
 };
