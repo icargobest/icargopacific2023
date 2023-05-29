@@ -35,7 +35,8 @@
                                         </tr>
                                         <tr>
                                             <th class="fw-normal">Address:</th>
-                                            <td class="fw-bold">{{ $ship->sender->sender_address }} , {{ $ship->sender->sender_city }} ,
+                                            <td class="fw-bold">{{ $ship->sender->sender_address }} ,
+                                                {{ $ship->sender->sender_city }} ,
                                                 {{ $ship->sender->sender_state }} , {{ $ship->sender->sender_zip }}</td>
                                         </tr>
                                         <tr>
@@ -61,7 +62,8 @@
                                         </tr>
                                         <tr>
                                             <th width="40%" class="fw-normal">Name:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->recipient->recipient_name }}</td>
+                                            <td width="60%" class="fw-bold">{{ $ship->recipient->recipient_name }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th class="fw-normal">Address:</th>
@@ -99,8 +101,23 @@
                                         </tr>
                                         <tr>
                                             <th class="fw-normal">Size & Weight:</th>
-                                            <td class="fw-bold">{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
+                                            <td class="fw-bold">
+                                                {{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                                 | {{ intval($ship->weight) }}Kg</td>
+                                        </tr>
+                                        @if ($ship->bid_amount != null && $ship->company_id != null)
+                                            <tr>
+                                                <th class="fw-normal">Bid Amount:</th>
+                                                <td class="fw-bold">{{ $ship->bid_amount }}</td>
+                                            </tr>
+                                        @endif
+                                    </table>
+                                </div>
+                                <div class="col-lg-6">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <th width="40%" class="fw-normal">Mode of Payment:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->mop }}</td>
                                         </tr>
                                         @if ($ship->bid_amount != null && $ship->company_id != null)
                                             <tr>
@@ -109,28 +126,11 @@
                                             </tr>
                                         @else
                                             <tr>
-                                                <th class="fw-normal">Minimum Bid:</th>
+                                                <th class="fw-normal">Maximum Bid:</th>
                                                 <td class="fw-bold">{{ $ship->min_bid_amount }}</td>
                                             </tr>
                                         @endif
-                                    </table>
-                                </div>
-                                <div class="col-lg-6">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th width="40%" class="fw-normal">Category:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->category }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="fw-normal">Mode of Payment:</th>
-                                            <td class="fw-bold">{{ $ship->mop }}</td>
-                                        </tr>
-                                        @if ($ship->bid_amount != null && $ship->company_id != null)
-                                            <tr>
-                                                <th class="fw-normal">Bid Amount:</th>
-                                                <td class="fw-bold">{{ $ship->bid_amount }}</td>
-                                            </tr>
-                                        @endif
+
                                     </table>
                                 </div>
                             </div>
@@ -149,13 +149,6 @@
                                 </a>
                                 @if ($ship->company_bid == null && $ship->bid_amount == null)
                                     @if ($ship->status != 'Cancelled')
-                                        <a href="{{ route('edit_order', $ship->id) }}">
-                                            <button type="button"
-                                                class="btn btn-primary btn-block shadow-0 my-1"
-                                                style="background-color:#214D94; min-width:140px; max-width:509px;">
-                                                Edit
-                                            </button>
-                                        </a>
                                         <a href="{{ route('userOrderPanel') }}">
                                             <div class="my-1">
                                                 <button type="button" class="btn btn-block btn-light"
@@ -164,6 +157,14 @@
                                                 </button>
                                             </div>
                                         </a>
+                                        @if (!$bid)
+                                            <a href="{{ route('edit_order', $ship->id) }}">
+                                                <button type="button" class="btn btn-primary btn-block shadow-0 my-1"
+                                                    style="background-color:#214D94; min-width:140px; max-width:509px;">
+                                                    Edit
+                                                </button>
+                                            </a>
+                                        @endif
                                         <form method="POST" action="{{ route('cancelOrder', $ship->id) }}">
                                             @csrf
                                             @method('PUT')
@@ -218,10 +219,12 @@
                                             <tr>
                                                 <td class="text-center"><strong>{{ $bid->company_name }}</strong></td>
                                                 <td class="text-center">{{ $bid->bid_amount }}</td>
+                                                <td class="text-center">{{ date('Y-m-d h:i A', strtotime($bid->created_at)) }}</td>
                                                 <td class="text-center">{{ $bid->status }}</td>
                                                 @if ($bids->where('shipment_id', $bid->shipment_id)->contains('status', 'Accepted') || $ship->status == 'Cancelled')
-                                                    <td class="text-center"><button tpye="submit" class="btn btn-success btn-sm"
-                                                            disabled>Accept</button></td>
+                                                    <td class="text-center"><button tpye="submit"
+                                                            class="btn btn-success btn-sm" disabled>Accept</button>
+                                                    </td>
                                                 @else
                                                     <td class="text-center"><button tpye="submit"
                                                             class="btn btn-success btn-sm">Accept</button></td>

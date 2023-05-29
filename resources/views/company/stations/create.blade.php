@@ -12,7 +12,7 @@
                  @endif
             <form method="POST" action="{{route('stations.store')}}">
             @csrf
-            
+
                 <!-- Station ID Input -->
             <div class="row mb-4">
                 <div class="col">
@@ -22,33 +22,33 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- Station Name input -->
               <div class="form-outline mb-4">
                 <input type="text" id="stationName" name="station_name" class="form-control" />
                 <label class="form-label" for="stationName">Station Name</label>
               </div>
-  
+
               <!-- Sttation Address input -->
               <div class="form-outline mb-4">
                 <input type="text" id="stationAddress" name="station_address" class="form-control" />
                 <label class="form-label" for="stationAddress">Address</label>
               </div>
-  
+
               <!-- Station Contact No. -->
                <div class="form-outline mb-4">
                 <input type="text" id="stationContactNo" name="station_contact_no" class="form-control" />
                 <label class="form-label" for="stationContactNo">Contact No.</label>
               </div>
-  
+
               <!-- Station Email. -->
                <div class="form-outline mb-4">
                 <input type="text" id="stationEmail" name="station_email" class="form-control" />
                 <label class="form-label" for="stationEmail">Email</label>
               </div>
-            
 
-                  
+
+
             <div class="button-modal-container">
 
                 <div class="leftmodal-button-container">
@@ -56,9 +56,9 @@
                         Reset
                     </button>
                 </div>
-    
+
                 <div class="rightmodal-button-container">
-    
+
                     <button type="submit" class="btn btn-primary" id="addModal2"data-mdb-dismiss="modal">
                         Save
                     </button>

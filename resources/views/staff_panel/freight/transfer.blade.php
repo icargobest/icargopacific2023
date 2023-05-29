@@ -20,7 +20,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('transfer.company', $ship->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('transfer.staff', $ship->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $ship->id }}">
