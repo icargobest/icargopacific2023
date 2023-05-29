@@ -3,16 +3,16 @@
     type="button"
     class="btn btn-danger btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#archiveModal{{$company->id}}"
+    data-mdb-target="#archiveModal{{$station->id}}"
 >
     Archive
 </button>
 
 <div
     class="modal top fade"
-    id="archiveModal{{$company->id}}"
+    id="archiveModal{{$station->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModal{{$company->id}}"
+    aria-labelledby="archiveModal"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
@@ -20,7 +20,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header mbc3">
-                <h5 class="modal-title">ARCHIVE COMPANY</h5>
+                <h5 class="modal-title">Archive Data</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -31,19 +31,14 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('companies.archive', $company->id)}}"
+                    action="{{route('archive.stationStaff', $station->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>
                         Are you sure you want to
                         <span class="span-red">archived</span>
-                        {{$company->user->name}}?
+                        {{$station->station_number}}?
                     </h4>
-                    <p>
-                        <span class="fw-bold">Caution: </span>Archiving
-                        company's account will also archived its employee
-                        accounts.
-                    </p>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger btn-block">
                             Archive

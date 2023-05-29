@@ -21,11 +21,9 @@ class SuperDashboardController extends Controller
         $incomes = Income::all();
         $totalMonthly = 0;
 
-        $companycount = Companies::where('type', 2)->count();
+        $companycount = User::where('type', 2)->count();
         $usercount = User::where('type', 0)->count();
        
-        
-
         return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount'));
     }
 

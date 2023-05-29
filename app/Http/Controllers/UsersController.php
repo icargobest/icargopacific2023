@@ -38,6 +38,7 @@ class UsersController extends Controller
 
     public function show($id)
     {
+        $superadmin = User::findOrFail($id);
         $company = Company::findOrFail($id);
         $driver = Driver::findOrFail($id);
         $dispatcher = Dispatcher::findOrFail($id);
@@ -45,7 +46,7 @@ class UsersController extends Controller
         $customer = Customer::findOrFail($id);
 
         return view('icargo_superadmin_panel.registered_users.show', 
-            compact('companies' , 'drivers' , 'dispatchers',  'staffs', 'customer'));
+            compact('superadmin', 'companies' , 'drivers' , 'dispatchers',  'staffs', 'customer'));
     }
 
     public function viewArchive()

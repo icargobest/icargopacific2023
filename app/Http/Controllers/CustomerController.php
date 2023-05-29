@@ -90,20 +90,42 @@ class CustomerController extends Controller
             $get_token->is_activated = 1;
             $get_token->save();
 
-        $user->update([
-            'name' => $request->name ?? $user->name,
-            'email' => $request->email ?? $user->email,
-            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
-        ]);
+            $user->update([
+                'name' => $request->name ?? $user->name,
+                'email' => $request->email ?? $user->email,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
 
-        $customer->update([
-            'contact_no' =>  $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'address' => $request->address,
-        ]);
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = 'public/photos/customer/' . Auth::id();
 
-        $delete_token = VerifyToken::where('token', $get_token->token)->first();
-        $delete_token->delete();
+                // Create the folder if it doesn't exist
+                if (!Storage::exists($path)) {
+                    Storage::makeDirectory($path);
+                }
+
+                // Store the photo in the user's folder
+                $file->storeAs($path, $filename);
+
+                // Save the photo path in the customer record
+                $customer->photo = 'photos/customer/' . Auth::id() . '/' . $filename;
+                $customer->save();
+            }
+
+            $customer->contact_no = $request->input('contact_no');
+            $customer->tel = $request->input('tel');
+            $customer->street = $request->input('street');
+            $customer->city = $request->input('city');
+            $customer->state = $request->input('state');
+            $customer->postal_code = $request->input('postal_code');
+            $customer->facebook = $request->input('facebook');
+            $customer->linkedin = $request->input('linkedin');
+            $customer->save();
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
         }
 
         return back()->with('success', 'Customer account has been updated successfully.');
