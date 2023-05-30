@@ -170,7 +170,6 @@
 
 @include('staff_panel.profile.edit-modal')
 @include('staff_panel.profile.imagemodal')
-@include('profile.companymodal')
 @include('partials.footer')
 
 <style>

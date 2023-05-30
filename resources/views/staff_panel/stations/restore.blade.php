@@ -1,26 +1,26 @@
 <!-- Archive Modal -->
 <button
     type="button"
-    class="btn btn-danger btn-sm"
+    class="btn btn-success btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#archiveModal{{$company->id}}"
+    data-mdb-target="#restoreModal{{$station->id}}"
 >
-    Archive
+    Restore
 </button>
 
 <div
     class="modal top fade"
-    id="archiveModal{{$company->id}}"
+    id="restoreModal{{$station->id}}"
     tabindex="-1"
-    aria-labelledby="archiveModal{{$company->id}}"
+    aria-labelledby="exampleModalLabel"
     aria-hidden="true"
     data-mdb-backdrop="static"
     data-mdb-keyboard="true"
 >
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header mbc3">
-                <h5 class="modal-title">ARCHIVE COMPANY</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Restore Data</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -31,22 +31,16 @@
             <div class="modal-body">
                 <form
                     method="POST"
-                    action="{{route('companies.archive', $company->id)}}"
+                    action="{{route('unarchive.stationStaff', $station->id)}}"
                 >
                     @csrf @method ('PUT')
                     <h4>
-                        Are you sure you want to
-                        <span class="span-red">archived</span>
-                        {{$company->user->name}}?
+                        Are you sure you want to restore
+                        <strong>{{$station->station_number}}</strong>?
                     </h4>
-                    <p>
-                        <span class="fw-bold">Caution: </span>Archiving
-                        company's account will also archived its employee
-                        accounts.
-                    </p>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-block">
-                            Archive
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Restore
                         </button>
                         <a
                             class="btn btn-secondary btn-block"

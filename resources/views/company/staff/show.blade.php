@@ -85,10 +85,10 @@
                                 <input
                                     class="form-control"
                                     value="{{$staff->contact_no}}"
-                                    autocomplete="mobile"
-                                    name="mobile"
+                                    autocomplete="contact_no"
+                                    name="contact_no"
                                 />
-                                <label class="form-label" for="mobile"
+                                <label class="form-label" for="contact_no"
                                     >Contact Number</label
                                 >
                             </div>

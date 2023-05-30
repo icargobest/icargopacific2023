@@ -9,7 +9,7 @@
 @include('partials.navigationUser', ['order' => 'nav-selected'])
 
 
-<div class="waybillForm-container container">
+<div class="waybillForm-container container p-3">
 
     <div class="reminder-wrapper row px-3">
         <div class="card col p-4 shadow-sm">
@@ -30,7 +30,7 @@
         @csrf
         <div class="senderForm-wrapper row p-0 shadow-sm">
             <header class="mb-3"><span>SENDER INFORMATION</span><i class="bi bi-1-circle-fill"></i></header>
-            <div class="button-holder d-flex justify-content-end">
+            <div class="button-holder sameInfo d-flex justify-content-end">
                 <button type="button" id="sameInfoBtn" class="btn btn-primary">
                     Same as my info
                 </button>
@@ -399,22 +399,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--Dropdown category menu-->
-                    <div class="col">
-                        <div class="categoryInput">
-                            <span>
-                                <label for="categoryParcel">Category</label><span class="required">*</span>
-                            </span>
-                            <div class="form-outline">
-                                <select class="form-control" id="categoryParcel" name="category">
-                                    <option value="Domestic">Domestic</option>
-                                    <option value="International">International</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!--Bid input-->

@@ -266,6 +266,9 @@ body{
     font-size: 30px;
     color: #214D94;
 }
+.contactD h6 span{
+    color: #214D94;
+}
 .partnersIcons{
     width: 60%;
     flex-wrap: wrap;

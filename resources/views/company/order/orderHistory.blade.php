@@ -2,18 +2,18 @@
 @extends('layouts.app') @include('partials.navigationCompany', ['history' => 'nav-selected'])
 
 <title>Company | Order History</title>
-<main class="container py-5" style="margin-top: -49px !important">
-    <div class="mt-4 mb-5">
-        <h2 class=""
+<main class="container py-5" style="margin-top: -49px !important;">
+    <div class="shadow"></div>
+    <div class="mt-4 driver-order-header py-2 px-4">
+        <h3 class=""
             style="
-                border-bottom: 2px solid black;
-                padding-bottom: 5px;
                 letter-spacing: 1px;
+                margin-bottom: 0px !important;
             ">
-            ORDER HISTORY
-        </h2>
+            Order History
+        </h3>
     </div>
-    <div class="main-wrapper">
+    <div class="main-wrapper shadow" style="background-color:white;">
         {{-- <section class="search-filter-container mb-4">
             <div class="top-container1" style="max-width: 800px; margin-top: 15px">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
