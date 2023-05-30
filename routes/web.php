@@ -432,8 +432,6 @@ Route::get('/find', function () {
     return view('search');
 });
 
-Route::post('/checkTnumber', [StaffQrScannerController::class, 'checkTnumber'])->name('checkTnumber');
-
 Route::post('/search', [SearchController::class, 'search']);
 
 Route::post('/searchStaff', [SearchController::class, 'searchStaff']);
