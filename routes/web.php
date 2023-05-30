@@ -361,7 +361,7 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
 
 // Staff Panel
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/dashboard', [HomeController::class, 'staffDashboard'])
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
         ->name('staff.dashboard')->middleware('verified');
 
       //Order Routes
@@ -431,8 +431,6 @@ Route::get('/forgot-password', function () {
 Route::get('/find', function () {
     return view('search');
 });
-
-Route::post('/checkTnumber', [StaffQrScannerController::class, 'checkTnumber'])->name('checkTnumber');
 
 Route::post('/search', [SearchController::class, 'search']);
 
