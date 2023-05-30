@@ -22,15 +22,7 @@
                 <div class="cardContainer">
 
                     <div class="cardAlign">
-                        <div style="background-color: #4966AB;" class="cards ">
-                            <span class="cardTitle">
-                                PROCESSING
-                            </span>
-                            <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-handshake-o"></i></span>
-                                {{ $counts['Processing'] }}
-                            </div>
-                        </div>
+                       
                         <div style="background-color: #284C8E;" class="cardsM">
                             <span class="cardTitle">
                                 PICKED UP
