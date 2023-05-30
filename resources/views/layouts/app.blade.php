@@ -174,5 +174,5 @@
         </div>
     @endif
     <main class="">
-        {{-- @yield('content') --}}
+        @yield('content')
         @include('partials.footer')
