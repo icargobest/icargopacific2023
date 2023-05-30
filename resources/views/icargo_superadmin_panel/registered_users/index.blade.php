@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">Acount ID</th>
+                        <th scope="col" style="text-align: center !Important">Icon</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
                         <th scope="col" style="text-align: center">
@@ -48,8 +49,8 @@
                     @if ($superadmin)
                     <tr>
                         <td>{{ $superadmin->id }}</td>
+                        <td><img src="/img/default_dp.png" style="width: 30px" alt="profile image"></td>
                         <td class="capitalized">
-                            <img src="/img/default_dp.png" style="width: 30px" alt="profile image">
                             {{ $superadmin->name }}
                         </td>
                         <td>{{ $superadmin->email }}</td>
@@ -70,12 +71,12 @@
                     @foreach ($companies as $company)
                     <tr>
                         <td>{{ $company->user->id }}</td>
+                        <td><img src="{{ asset($company->image 
+                            ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
+                            : 'img/default_dp.png') }}"
+                            style="width:30px"
+                alt="Profile Image"></td>
                         <td class="capitalized">
-                            <img src="{{ asset($company->image 
-                                ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
-                                : 'img/default_dp.png') }}"
-                                style="width:30px"
-                    alt="Profile Image">
                             {{ $company->user->name }}
                         </td>
                         <td>{{ $company->user->email }}</td>
@@ -98,8 +99,8 @@
                     @foreach ($dispatchers as $dispatcher)
                     <tr>
                         <td>{{ $dispatcher->user->id }}</td>
+                        <td> <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image"></td>
                         <td class="capitalized">
-                            <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $dispatcher->user->name }}
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
@@ -126,8 +127,8 @@
                     @foreach ($drivers as $driver)
                     <tr>
                         <td>{{ $driver->user->id }}</td>
+                        <td><img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image"></td>
                         <td class="capitalized">
-                            <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $driver->user->name }}
                         </td>
                         <td>{{ $driver->user->email }}</td>
@@ -152,12 +153,12 @@
                     @foreach ($staffs as $staff)
                     <tr>
                         <td>{{ $staff->user->id }}</td>
+                        <td><img
+                            src="@if ($staff->photo != null) {{ asset('storage/' . $staff->photo) }} @else /img/default_dp.png @endif"
+                            alt="Profile Image"
+                            style="width: 30px"
+                        /></td>
                         <td class="capitalized">
-                            <img
-                                src="@if ($staff->photo != null) {{ asset('storage/' . $staff->photo) }} @else /img/default_dp.png @endif"
-                                alt="Profile Image"
-                                style="width: 30px"
-                            />
                             {{ $staff->user->name }}
                         </td>
                         <td>{{ $staff->user->email }}</td>
@@ -181,14 +182,14 @@
                     @foreach ($customers as $customer)
                     <tr>
                         <td>{{ $customer->user->id }}</td>
+                        <td><img
+                            src="
+                            @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
+                            @else /img/default_dp.png 
+                            @endif"
+                            alt="Profile Image" style="width:30px"
+                        /></td>
                         <td class="capitalized">
-                            <img
-                                src="
-                                @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
-                                @else /img/default_dp.png 
-                                @endif"
-                                alt="Profile Image" style="width:30px"
-                            />
                             {{ $customer->user->name }}
                         </td>
                         <td>{{ $customer->user->email }}</td>

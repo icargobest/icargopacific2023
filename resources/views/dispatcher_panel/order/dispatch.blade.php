@@ -4,38 +4,34 @@
 </head>
 @include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationDispatcher')
-
-<!-- MBD -->
-<link rel="stylesheet" href="/css/mdb.min.css" />
+@include('partials.navigationDispatcher', ['toDispatch_view' =>"nav-selected"])
 
 <style>
-    th {
-        background-color: white !important;
-        color: black;
-        font-weight: normal;
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
-    td {
-        text-align: left;
-        font-weight: bold;
+    table {
+    border-color: transparent !important;
     }
 </style>
-{{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-<div class="container mw-100 px-lg-5">
-    <div class="bg-white shadow" style="max-width: 100%;">
-        <div class="waybill-head py-3 ps-5" style="background-color: #214D94;">
-            <h3 class="text-white mb-0">ORDER LIST | TO DISPATCH</h3>
+
+<main class="container py-5" style="margin-top: -49px !important">
+    <div class="main-wrapper border border-2" style="max-width: 100%">
+        <div class="employee-header-container">
+            <h3 class="">ORDER LIST | TO DISPATCH</h3>
         </div>
+
         <div class="mt-2">
             @include('flash-message')
         </div>
-        {{-- TABLE START--}}
-        <section class="mb-5 px-5 my-3 overflow-auto">
+
+        <div class="table-container">
             <table
-                class="table table-striped table-hover table-borderless hover"
+                class="table table-striped table-bordered table-hover table-borderless hover"
                 id="dispatcherToDispatchTable"
             >
-                <thead class="text-white" style="background-color: #214d94">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>PHOTO</th>
@@ -94,9 +90,16 @@
                     @endif @endif @endforeach
                 </tbody>
             </table>
-        </section>
-        {{-- END OF TABLE --}}
+        </div>
     </div>
-</div>
-{{-- END OF ORDER CONTAINER --}}
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript">
+    let stafftable = new DataTable("#dispatcherToDispatchTable");
+</script>
+
 @include('partials.footer')

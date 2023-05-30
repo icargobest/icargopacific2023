@@ -39,7 +39,7 @@
                         </div>
                         <div id="toggle-div1" class="links none">
                             <a class="nav-link" href="{{route('toPickUp_view')}}">
-                                <div class="link ">
+                                <div class="link @if (isset($toPickUp_view)) {{ $toPickUp_view }} @endif">
                                     <i class="fa fa-truck-ramp-box link-i-1 ml-30px"></i>
                                     <span>To Pick-Up </span>
                                 </div>
@@ -48,7 +48,7 @@
 
                         <div id="toggle-div2" class="links none">
                             <a class="nav-link" href="{{route('toDispatch_view')}}">
-                                <div class="link">
+                                <div class="link @if (isset($toDispatch_view)) {{ $toDispatch_view }} @endif">
                                     <i class="fa fa-truck-arrow-right link-i-1 ml-30px"></i>
                                     <span>To Dispatch</span>
                                 </div>
