@@ -436,7 +436,7 @@
                 modal.show();
 
                 // Update the database with the new pickup value
-                j({
+                j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
                     data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
@@ -444,7 +444,7 @@
                       console.log(response);
                     }
                 });
-                j({
+                j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                     data: {
