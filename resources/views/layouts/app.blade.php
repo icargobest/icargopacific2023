@@ -132,7 +132,7 @@
 
                         <li><a class="dropdown-item navFont" href="{{ route('change-password') }}"><i
                                     class="fa fa-lock"></i>{{ __('Change Password') }}</a></li>
-                        @if (Auth::user()->type != ('user' || 'super-admin'))
+                        @if (Auth::user()->type !== 'user' && Auth::user()->type !== 'super-admin')
                             <li><a class="dropdown-item navFont" href="#" data-mdb-toggle="modal"
                                     data-mdb-target="#lockModal{{ Auth::user()->id }}"><i
                                         class="fa fa-lock"></i>{{ __('Lock Account') }}</a></li>
