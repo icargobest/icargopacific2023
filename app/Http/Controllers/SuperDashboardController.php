@@ -7,6 +7,10 @@ use App\Models\Companies;
 use App\Http\Controllers\Controller;
 use App\Models\Income;
 use App\Models\User;
+use App\Models\Driver;
+use App\Models\Dispatcher;
+use App\Models\Customer;
+use App\Models\Staff;
 use App\Models\VerifyToken;
 use App\Mail\VerificationMail;
 use Illuminate\Http\Request;
@@ -29,8 +33,12 @@ class SuperDashboardController extends Controller
 
         $companycount = User::where('type', 2)->count();
         $usercount = User::where('type', 0)->count();
+        $drivercount = Driver::count();
+        $staffcount = Staff::count();
+        $dispatchercount = Dispatcher::count();
+        $customercount = Customer::count();
        
-        return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount'));
+        return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount', 'drivercount', 'staffcount', 'dispatchercount', 'customercount'));
     }
 
     public function sendOTP($id){

@@ -25,8 +25,13 @@
     </div>
   
     <body>
-        <h1>Registered Companies: {{ $companycount }}</h1>
-        <h1>Registered Users: {{ $usercount }}</h1>
+        <h2>Registered Companies: {{ $companycount }}</h2>
+        <h2>Registered Users: {{ $usercount }}</h2>
+        <h2>Registered Drivers: {{ $drivercount }}</h2>
+        <h2>Registered Staff: {{ $staffcount }}</h2>
+        <h2>Registered Dispatcher: {{ $dispatchercount }}</h2>
+        <h2>Registered Customers: {{ $customercount }}</h2>
+
     </body>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
