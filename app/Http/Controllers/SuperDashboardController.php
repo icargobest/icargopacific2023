@@ -18,14 +18,18 @@ class SuperDashboardController extends Controller
 {
     public function index()
     {
+        
         $incomes = Income::all();
         $totalMonthly = 0;
+        foreach ($incomes as $income) {
+            $totalMonthly += $income->amount;
+        }
 
-        $companycount = Companies::where('type', 2)->count();
+        $totalYearly = $totalMonthly;
+
+        $companycount = User::where('type', 2)->count();
         $usercount = User::where('type', 0)->count();
        
-        
-
         return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount'));
     }
 

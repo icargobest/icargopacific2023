@@ -216,9 +216,9 @@ VIEW
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Company</th>
-                                    <th>Bid Amount</th>
-                                    <th>Status</th>
+                                    <th class="text-center">Company</th>
+                                    <th class="text-center">Bid Amount</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             @foreach ($bids as $bid)
@@ -229,9 +229,9 @@ VIEW
                                         <input type="hidden" name="shipment_id" value="{{ $ship->id }}">
                                         <tbody class="table table-striped">
                                             <tr>
-                                                <td class="text-center">{{ $bid->company_name }} </td>
-                                                <td class="text-center">{{ $bid->bid_amount }}</td>
-                                                <td class="text-center">{{ $bid->status }}</td>
+                                                <td>{{ $bid->company_name }} </td>
+                                                <td>{{ $bid->bid_amount }}</td>
+                                                <td>{{ $bid->status }}</td>
                                             </tr>
                                         </tbody>
                                     </form>

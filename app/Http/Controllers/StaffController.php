@@ -80,13 +80,13 @@ class StaffController extends Controller
             'type' => '5',
         ]);
 
-        $otherValidation = $request->validate([
+        $validated = $this->validate($request, [
             'contact_no' => ['required', 'min:11', 'max:11'],
-        ], [
             'contact_no.required' => 'Contact field is required.',
             'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers'
+            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
         ]);
+
         $user->sendEmailVerificationNotification();
 
             $id = Auth::id();
@@ -94,10 +94,11 @@ class StaffController extends Controller
             $user_id = $company->id;
 
         $staff = Staff::create([
-            'contact_no' =>  $otherValidation['contact_no'],
             'user_id' => $user->id,
             'company_id' => $user_id,
+            'contact_no' =>  $validated['contact_no'],
         ]);
+
             DB::commit();
         } catch (Exception $ex) {
             DB::rollBack();
@@ -124,7 +125,7 @@ class StaffController extends Controller
 
     public function updateStaff(Request $request, $id)
     {
-        $staff = Staff::find($id);
+         $staff = Staff::find($id);
     
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');

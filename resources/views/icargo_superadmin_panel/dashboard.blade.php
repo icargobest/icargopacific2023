@@ -1,4 +1,4 @@
-<title>Super Admin | Dashboard</title>
+<title>SuperAdmin | Dashboard</title>
 
 
 @extends('layouts.app')
@@ -52,3 +52,10 @@
     }
 </script>
 
+
+
+
+
+
+
+@endsection

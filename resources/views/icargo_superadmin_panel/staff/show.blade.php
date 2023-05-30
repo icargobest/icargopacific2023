@@ -31,6 +31,46 @@
                 <div class="image-class">
                     <img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" alt="Profile Image">
                 </div>
+                <div class="form-outline mb-4">
+                    <input
+                        type="text"
+                        value=" {{ $staff->user->id }}"
+                        class="form-control"
+                    />
+                    <label class="form-label" for="updateEmail"
+                        >User Account ID</label
+                    >
+                </div>
+                {{-- Company ID --}}
+                <div class="form-outline mb-4">
+                    <input
+                        type="text"
+                        value=" {{ $staff->company_id }}"
+                        class="form-control"
+                    />
+                    <label class="form-label" for="updateEmail"
+                        >Company ID</label
+                    >
+                </div>
+                {{-- Company Name --}}
+                <div class="form-outline mb-4">
+                    @if ($staff->company && $staff->company->user)
+                    <input
+                        type="text"
+                        value="{{ $staff->company->user->name }}"
+                        class="form-control"
+                    />
+                    @else
+                    <input
+                        type="text"
+                        value="Company not found"
+                        class="form-control"
+                    />  
+                    @endif
+                    <label class="form-label" for="updateEmail"
+                        >Company Name</label
+                    >
+                </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-outline mb-4">

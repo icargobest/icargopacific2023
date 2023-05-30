@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\Dispatcher;
+use App\Models\Driver;
 use App\Models\User;
 use App\Models\Shipment;
 use App\Models\OrderHistory;
+use App\Models\Staff;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -75,38 +79,64 @@ class LoginController extends Controller
 
         $user = User::where('email', $input['email'])->first();
 
-        if($user && auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-
+        if ($user && auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
             if ($user->type == 'super-admin') {
                 return redirect()->route('super.admin.dashboard');
-            }
-
-            else if ($user->type == 'company') {
+            } 
+            elseif ($user->type == 'company') {
+                $company = $user->company;
+                if ($company && $company->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'User account is archived.');
+                }
                 return redirect()->route('company.dashboard');
-            }
-
-            else if ($user->type == 'driver') {
+            } 
+            elseif ($user->type == 'driver') {
+                $driver = $user->driver;
+                $company = $driver->company;
+                if ($driver && $driver->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'User account is archived.');
+                } elseif ($company && $company->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Company account is archived.');
+                }
                 return redirect()->route('driver.dashboard');
-            }
-            else if ($user->type == 'dispatcher') {
+            } 
+            elseif ($user->type == 'dispatcher') {
+                $dispatcher = $user->dispatcher;
+                $company = $dispatcher->company;
+                if ($dispatcher && $dispatcher->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'User account is archived.');
+                } elseif ($company && $company->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Company account is archived.');
+                }
                 return redirect()->route('dispatcher.dashboard');
-            }
-            else if ($user->type == 'staff') {
+            } 
+            elseif ($user->type == 'staff') {
+                $staff = $user->staff;
+                $company = $staff->company;
+                if ($staff && $staff->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'User account is archived.');
+                } elseif ($company && $company->archived) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Company account is archived.');
+                }
                 return redirect()->route('staff.dashboard');
-            }
-            else{
+            } 
+            else {
                 return redirect()->route('dashboard');
             }
-        }
-        else if ($user) {
-            return redirect()->route('login')->with('error','Incorrect password');
-        }
-        else{
-            return redirect()->route('login')->with('error','User does not exist');
-        }
-    }
-
+        } elseif ($user) {
+            return redirect()->route('login')->with('error', 'Incorrect password');
+        } else {
+            return redirect()->route('login')->with('error', 'User does not exist');
+        }        
+    }            
+        
 
     /**
      * Log the user out of the application.

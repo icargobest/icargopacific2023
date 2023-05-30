@@ -1,16 +1,16 @@
 <head>
     <title>Staff | Freight</title>
-    
+
     <style>
         table {
             border-collapse: collapse;
             border-color: transparent !important;
         }
-    
+
         th {
             color: white !important;
         }
-    
+
         td,
         th {
             text-align: center !important;
@@ -82,7 +82,7 @@
                 <tbody>
                     @foreach ($shipments as $ship)
                         @if (Auth::user()->type == 'staff')
-                            @if ($ship->company_id == $staff->company_id)
+                            @if ($ship->company_id == $staff->company_id && $ship->status != 'Delivered')
                                 <tr>
 
                                     {{-- sender namae --}}
@@ -111,11 +111,11 @@
                                     <td class="tdbutton" style="max-width:120px">
                                         {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                         @include('staff_panel.freight.freight_tracking')
-                                        @if ($ship->status == 'Assort')
+                                        {{-- @if ($ship->status == 'Assort')
                                             @if ($ship->status != 'Transferred')
                                                 @include('staff_panel.freight.transfer')
                                             @endif
-                                        @endif
+                                        @endif --}}
                                         @include('staff_panel.freight.print-modal')
                                     </td>
                                 </tr>

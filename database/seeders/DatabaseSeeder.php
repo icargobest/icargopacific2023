@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user->id,
                 'contact_no' => '123456789',
                 'contact_name' => 'Contact Name ' . $i,
-                'company_address' => 'Company Address ' . $i,
+                // 'company_address' => 'Company Address ' . $i,
             ]);
         }
 

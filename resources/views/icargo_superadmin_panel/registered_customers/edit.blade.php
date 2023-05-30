@@ -233,21 +233,21 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="url" class="form-control @error('website') is-invalid @enderror" name="website" id="twit">
-                                @error('website')
+                                <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb">
+                                @error('facebook')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <label class="form-label" for="twit">Website Link</label>
+                                <label class="form-label" for="faceb">Facebook Link</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb">
-                                @error('facebook')
+                                <input type="url" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" id="linkedin">
+                                @error('linkedin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
