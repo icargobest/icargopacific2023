@@ -76,7 +76,15 @@ class CreateUsersSeeder extends Seeder
                     'user_id' => $user->id,
                     'contact_no' => '1234567890',
                     'contact_name' => 'John Doe',
-                    'company_address' => '123 Main St',
+                    'tel'=> 'John Doe',
+                    'street'=> 'street',
+                    'city'=> 'city',
+                    'state'=> 'philippines',
+                    'postal_code'=> '5436',
+                    'image'=> ' ',
+                    'website'=> '',
+                    'facebook'=> 'https://www.facebook.com/icargotech',
+                    'linkedin'=> '',
                     'archived' => false,
                 ]);
             }

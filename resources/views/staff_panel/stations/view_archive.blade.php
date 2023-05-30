@@ -14,7 +14,7 @@
             <h3 class="">Station Archived</h3>
         </div>
         <div class="addemployee" style="height: 75.6px">
-            <a href="{{route('stations.view')}}">
+            <a href="{{route('stations.viewStaff')}}">
                 <button
                     type="button"
                     class="btn btn-primary m-button1"
@@ -24,15 +24,18 @@
                 </button>
             </a>
         </div>
+        <p class="text-muted fst-italic px-2">
+            <span class="fw-bold">Please note: </span>Only the company can restore the station data.
+         </p>
 
         <div class="mt-2">@include('flash-message')</div>
 
         <div class="table-container">
             <table class="table table-striped table-borderless hover"
-                    id="stationsTableCompany">
+                    id="stationsTableStaff">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center">#</th>
+                        <th scope="col" style="text-align: center">ID</th>
                         <th scope="col" style="text-align: center">
                             Station Number
                         </th>
@@ -83,7 +86,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        let stationsTableCompany = new DataTable("#stationsTableCompany");
+        let stationsTableStaff = new DataTable("#stationsTableStaff");
     });
 </script>
 

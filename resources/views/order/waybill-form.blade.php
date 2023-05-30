@@ -399,22 +399,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--Dropdown category menu-->
-                    <div class="col">
-                        <div class="categoryInput">
-                            <span>
-                                <label for="categoryParcel">Category</label><span class="required">*</span>
-                            </span>
-                            <div class="form-outline">
-                                <select class="form-control" id="categoryParcel" name="category">
-                                    <option value="Domestic">Domestic</option>
-                                    <option value="International">International</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!--Bid input-->

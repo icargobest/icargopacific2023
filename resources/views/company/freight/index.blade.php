@@ -16,7 +16,6 @@
             vertical-align: middle;
             }
             </style>
-
     </head>
     @include('partials.header')
     @extends('layouts.app')
@@ -96,11 +95,11 @@
                                         <td class="tdbutton" style="max-width:120px">
                                             {{-- <button class="btn created-button mx-auto" data-bs-toggle="modal" data-bs-target="#trackModal">Tracking</button> --}}
                                             @include('company/freight.freight_tracking')
-                                            @if ($ship->status == 'Assort')
+                                            {{-- @if ($ship->status == 'Assort')
                                                 @if ($ship->status != 'Transferred')
                                                     @include('company.freight.transfer')
                                                 @endif
-                                            @endif
+                                            @endif --}}
                                             @include('company.freight.print-modal')
                                         </td>
                                     </tr>
