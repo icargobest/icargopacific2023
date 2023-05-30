@@ -1,62 +1,33 @@
-<button
-    type="button"
-    class="btn btn-warning btn-sm"
-    data-mdb-toggle="modal"
-    data-mdb-target="#showModal{{$company->id}}"
->
-    SHOW
-</button>
+<link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
 
 <div
     class="modal top fade"
-    id="showModal{{$company->id}}"
+    id="editCompanyProfile"
     tabindex="-1"
+    aria-labelledby="editCompanyProfile"
     aria-hidden="true"
-    data-mdb-backdrop="static"
-    data-mdb-keyboard="true"
 >
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header mbc1">
-                <h5 class="modal-title">VIEW Company</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCompanyProfile">
+                    EDIT INFORMATION
+                </h5>
                 <button
                     type="button"
                     class="btn-close"
-                    data-mdb-dismiss="modal"
+                    data-bs-dismiss="modal"
                     aria-label="Close"
                 ></button>
             </div>
-            <div class="modal-body">
 
-                <div class="image-class">
-                <img src="{{ asset($company->image 
-                    ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
-                    : 'img/default_dp.png') }}"
-                    style="width:250px"
-                    alt="Profile Image">
-                </div>
-        
-                <fieldset disabled>
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            value=" {{ $company->user->id }}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="updateEmail"
-                            >User Account ID</label
-                        >
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            value=" {{ $company->id }}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="updateEmail"
-                            >Company ID</label
-                        >
-                    </div>
+            <div class="modal-body">
+                <form
+                    action="{{ route('company.updateProfile', $company->id) }}"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+                    @csrf @method('PUT')
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
@@ -88,7 +59,7 @@
                                     value="{{$company->contact_no}}"
                                 />
                                 <label class="form-label" for="mobile"
-                                    >Contact Number</label
+                                    >Mobile number</label
                                 >
                             </div>
                         </div>
@@ -225,13 +196,19 @@
                                 <input
                                     id=""
                                     type="text"
-                                    class="form-control"
+                                    class="form-control @error('website') is-invalid @enderror"
                                     name="website"
                                     autocomplete="website"
-                                    value="{{$company->website ?? '-'}}"
+                                    value="{{$company->website}}"
                                 />
+
+                                @error('website')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <label class="form-label" for="postal"
-                                    >Websit Link</label
+                                    >Website Link</label
                                 >
                             </div>
                         </div>
@@ -242,7 +219,7 @@
                                 <input
                                     id="facebook"
                                     type="text"
-                                    class="form-control"
+                                    class="form-control @error('facebook') is-invalid @enderror"
                                     name="facebook"
                                     value="{{$company->facebook}}"
                                     required
@@ -250,6 +227,12 @@
                                     autofocus
                                     placeholder="Facebook Link"
                                 />
+
+                                @error('facebook')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <label class="form-label" for="postal"
                                     >Facebook Link</label
                                 >
@@ -262,11 +245,16 @@
                                 <input
                                     id="linkedin"
                                     type="text"
-                                    class="form-control"
+                                    class="form-control @error('linkedin') is-invalid @enderror"
                                     name="linkedin"
                                     autocomplete="linkedin"
-                                    value="{{$company->linkedin ?? '-'}}"
+                                    value="{{$company->linkedin}}"
                                 />
+                                @error('linkedin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <label class="form-label" for="postal"
                                     >Linkedin Link</label
                                 >
@@ -274,38 +262,16 @@
                         </div>
                     </div>
 
-                    {{-- Created at --}}
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            name="created_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="Created At"
-                        >Created At</label>
+                    <div class="buttonContainer">
+                        <button type="submit" class="modalbutton">SAVE</button>
+                        <a
+                            href="{{route('company.profile')}}"
+                            class="btn btn-secondary btn-block"
+                        >
+                            CANCEL
+                        </a>
                     </div>
-
-                    {{-- Updated at --}}
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            name="updated_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($company->user->updated_at))}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="Updated At"
-                        >Updated At</label>
-                    </div>
-                </fieldset>
-                <div class="modal-footer">
-                    <a
-                        class="btn btn-secondary btn-block"
-                        data-mdb-dismiss="modal"
-                    >
-                        Back
-                    </a>
-                </div>
+                </form>
             </div>
         </div>
     </div>

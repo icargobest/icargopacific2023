@@ -270,6 +270,7 @@
                         <div class="col">
                             <div class="form-outline">
                                 <input
+                                    type="url"
                                     class="form-control @error('linkedin') is-invalid @enderror"
                                     name="linkedin"
                                     value="{{ $dispatcher->linkedin }}"

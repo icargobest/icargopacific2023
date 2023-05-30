@@ -22,6 +22,11 @@ class Staff extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function station()
+    {
+        return $this->belongsTo(Station::class);
+    }
+
     public function getStaff($id)
     {
         return $this->select('staff.*', 'users.email', 'users.password')

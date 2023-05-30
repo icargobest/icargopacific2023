@@ -9,28 +9,13 @@
     </div>
     <div class="main-wrapper shadow" style="background-color:white;">
 
-        <section class="search-filter-container">
-
-            <div class="top-container1" style="max-width: 800px; margin-top: 15px">
-                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="background-color: white">
-                    <span class="input-group-text border-0" id="search-addon">
-                      <i class="fas fa-search"></i>
-                    </span>
-                </div>
-            </div>
-
-
-        </section>
-
         <div class="mt-2">
             @include('flash-message')
         </div>
 
 
         <div class="table-container">
-            <table class="table table-striped history-table border border-2 shadow">
+            <table class="table table-striped history-table border border-2 shadow table-borderless hover" id="dispatcherOrderHistoryTable">
                 <thead>
                 <tr>
                     <th scope="col"></th>
@@ -72,5 +57,12 @@
     </div>
 </main>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    let dispatcherOrderHistoryTable = new DataTable('#dispatcherOrderHistoryTable');
+</script>
 
 @include('partials.footer')	
