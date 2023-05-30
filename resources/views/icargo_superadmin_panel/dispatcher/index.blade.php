@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">Dispatcher ID</th>
+                        <th scope="col" style="text-align: center !Important">Icon</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
                         <th scope="col" style="text-align: center">
@@ -47,8 +48,8 @@
                     @foreach ($dispatchers as $dispatcher)
                     <tr>
                         <td>{{ $dispatcher->id}}</td>
+                        <td><img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image"></td>
                         <td class="capitalized">
-                            <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $dispatcher->user->name }}
                         </td>
                         <td>{{ $dispatcher->user->email }}</td>
