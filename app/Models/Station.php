@@ -11,6 +11,7 @@ class Station extends Model
 
     protected $fillable = [
         'user_id', 
+        'company_id', 
         'station_number',
         'station_name',
         'station_address',
@@ -30,6 +31,16 @@ class Station extends Model
     public function updateStation($data, $id){
         $station = $this->find($id);
         $station->update($data);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
     }
 
 }

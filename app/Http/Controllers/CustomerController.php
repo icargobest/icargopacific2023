@@ -6,11 +6,14 @@ use App\Http\Requests\CreateCustomerRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\VerifyToken;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\VerificationMail;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
@@ -73,6 +76,9 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('user')->findOrFail($id);
         $user = $customer->user;
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+    
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -80,20 +86,69 @@ class CustomerController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-        $user->update([
-            'name' => $request->name ?? $user->name,
-            'email' => $request->email ?? $user->email,
-            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
-        ]);
+        if($get_token){
+            $get_token->is_activated = 1;
+            $get_token->save();
 
-        $customer->update([
-            'contact_no' =>  $request->contact_no,
-            'contact_name' => $request->contact_name,
-            'address' => $request->address,
-        ]);
+            $user->update([
+                'name' => $request->name ?? $user->name,
+                'email' => $request->email ?? $user->email,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = 'public/photos/customer/' . Auth::id();
+
+                // Create the folder if it doesn't exist
+                if (!Storage::exists($path)) {
+                    Storage::makeDirectory($path);
+                }
+
+                // Store the photo in the user's folder
+                $file->storeAs($path, $filename);
+
+                // Save the photo path in the customer record
+                $customer->photo = 'photos/customer/' . Auth::id() . '/' . $filename;
+                $customer->save();
+            }
+
+            $customer->contact_no = $request->input('contact_no');
+            $customer->tel = $request->input('tel');
+            $customer->street = $request->input('street');
+            $customer->city = $request->input('city');
+            $customer->state = $request->input('state');
+            $customer->postal_code = $request->input('postal_code');
+            $customer->facebook = $request->input('facebook');
+            $customer->linkedin = $request->input('linkedin');
+            $customer->save();
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+        }
 
         return back()->with('success', 'Customer account has been updated successfully.');
     }
+
+    public function sendOTP($id){
+
+        $data = Customer::findOrFail($id);
+        $customerID = $data->user_id;
+        $get_userId = User::where('id', $customerID)->first();
+
+        $validToken = rand(10,100..'2022');
+        $get_token = new VerifyToken();
+        $get_token->token = $validToken;
+        $get_token->email = $get_userId['email'];
+        $get_token->save();
+        $get_user_email = $get_userId['email'];
+        $get_user_name = $get_userId['name'];
+        Mail::to($get_userId['email'])->send(new VerificationMail($get_user_email, $validToken, $get_user_name));
+
+        return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
+    }
+
 
     public function archive(Request $request, $id)
     {

@@ -28,6 +28,7 @@
             >
                 <thead>
                     <tr>
+                        <th scope="col" style="text-align: center">Acount ID</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
                         <th scope="col" style="text-align: center">
@@ -46,6 +47,7 @@
                 <tbody>
                     @if ($superadmin)
                     <tr>
+                        <td>{{ $superadmin->id }}</td>
                         <td class="capitalized">
                             <img src="/img/default_dp.png" style="width: 30px" alt="profile image">
                             {{ $superadmin->name }}
@@ -67,6 +69,7 @@
                     
                     @foreach ($companies as $company)
                     <tr>
+                        <td>{{ $company->user->id }}</td>
                         <td class="capitalized">
                             <img src="{{ asset($company->image 
                                 ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
@@ -94,6 +97,7 @@
                     
                     @foreach ($dispatchers as $dispatcher)
                     <tr>
+                        <td>{{ $dispatcher->user->id }}</td>
                         <td class="capitalized">
                             <img src="@if ($dispatcher->image != null) {{ asset('storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $dispatcher->user->name }}
@@ -121,6 +125,7 @@
                     
                     @foreach ($drivers as $driver)
                     <tr>
+                        <td>{{ $driver->user->id }}</td>
                         <td class="capitalized">
                             <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 30px" alt="profile image">
                             {{ $driver->user->name }}
@@ -146,6 +151,7 @@
                     
                     @foreach ($staffs as $staff)
                     <tr>
+                        <td>{{ $staff->user->id }}</td>
                         <td class="capitalized">
                             <img
                                 src="@if ($staff->photo != null) {{ asset('storage/' . $staff->photo) }} @else /img/default_dp.png @endif"
@@ -174,6 +180,7 @@
                     
                     @foreach ($customers as $customer)
                     <tr>
+                        <td>{{ $customer->user->id }}</td>
                         <td class="capitalized">
                             <img
                                 src="
@@ -211,7 +218,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         let table = new DataTable("#registeredUsers", {
-            order: [[0, "desc"]], // Sort by the first column in ascending order
+            lengthMenu: [ [25, 50, 100, -1], [25, 50, 100, "All"] ]
         });
     });
 </script>

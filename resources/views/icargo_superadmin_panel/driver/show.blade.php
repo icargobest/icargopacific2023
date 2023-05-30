@@ -233,6 +233,35 @@
                             >Plate No.</label
                         >
                     </div>
+
+                    <!-- Facebook input -->
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            name="facebook"
+                            value="{{ $driver->facebook ?? '-'}}"
+                            class="form-control"
+                            placeholder="Plate No"
+                        />
+                        <label class="form-label" for="facebook"
+                            >Facebook Link</label
+                        >
+                    </div>
+
+                    <!-- Linkedin input -->
+                    <div class="form-outline mb-4">
+                        <input
+                            type="url"
+                            name="linkedin"
+                            value="{{ $driver->linkedin ?? '-'}}"
+                            class="form-control"
+                            placeholder="Plate No"
+                        />
+                        <label class="form-label" for="linkedin"
+                            >Linkedin Link</label
+                        >
+                    </div>
+                    
                     <!-- Created At. -->
 
                     <div class="form-outline mb-4">

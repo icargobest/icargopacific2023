@@ -279,7 +279,7 @@
                             <div class="form-outline">
                                 <input
                                     id=""
-                                    type="text"
+                                    type="url"
                                     class="form-control @error('website') is-invalid @enderror"
                                     name="website"
                                     autocomplete="website"
@@ -302,7 +302,7 @@
                             <div class="form-outline">
                                 <input
                                     id="facebook"
-                                    type="text"
+                                    type="url"
                                     class="form-control @error('facebook') is-invalid @enderror"
                                     name="facebook"
                                     value="{{$company->facebook}}"
@@ -327,7 +327,7 @@
                             <div class="form-outline">
                                 <input
                                     id="linkedin"
-                                    type="text"
+                                    type="url"
                                     class="form-control @error('linkedin') is-invalid @enderror"
                                     name="linkedin"
                                     autocomplete="linkedin"
@@ -351,7 +351,7 @@
                             {{session()->get('message')}}
                         </div>  
                     @endif             
-                    <a href="{{ url('icargo/registered_users/send_otp', $company->user->id)}}"
+                    <a href="{{ url('icargo/companies/send_otp', $company->user->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >

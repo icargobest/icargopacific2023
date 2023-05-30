@@ -108,6 +108,10 @@
                             <li><a class="dropdown-item navFont" href="{{ route('driver.profile') }}"><i
                                         class="fa fa-user"></i>Profile</a></li>
                         @endif
+                        @if (Auth::user()->type == 'company')
+                            <li><a class="dropdown-item navFont" href="{{ route('company.profile') }}"><i
+                                        class="fa fa-user"></i>Profile</a></li>
+                        @endif
                         @if (Auth::user()->type == 'dispatcher')
                             <li><a class="dropdown-item navFont" href="{{ route('dispatcher.profile') }}"><i
                                         class="fa fa-user"></i>Profile</a></li>
@@ -135,7 +139,7 @@
                         @endif
                         <li><a class="dropdown-item navFont" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                    class="fa fa-lock"></i>Logout</a></li>
+                                    class="fa fa-sign-out"></i>Logout</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>

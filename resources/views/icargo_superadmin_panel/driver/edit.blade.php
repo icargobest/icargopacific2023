@@ -87,7 +87,7 @@
                             <div class="form-outline mb-4">
                                 <input
                                     type="text"
-                                    name="name"
+                                    name="email"
                                     value="{{ $driver->user->email }}"
                                     class="form-control @error('email') is-invalid @enderror"
                                     placeholder="Dispatcher email"
@@ -333,6 +333,44 @@
                         @enderror
                         <label class="form-label" for="plate_no"
                             >Plate No.</label
+                        >
+                    </div>
+
+                    <!-- Facebook input -->
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            name="facebook"
+                            value="{{ $driver->facebook }}"
+                            class="form-control @error('facebook') is-invalid @enderror"
+                            placeholder="Plate No"
+                        />
+                        @error('facebook')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="facebook"
+                            >Facebook Link</label
+                        >
+                    </div>
+
+                    <!-- Linkedin input -->
+                    <div class="form-outline mb-4">
+                        <input
+                            type="url"
+                            name="linkedin"
+                            value="{{ $driver->linkedin }}"
+                            class="form-control @error('linkedin') is-invalid @enderror"
+                            placeholder="Plate No"
+                        />
+                        @error('linkedin')
+                        <div class="alert alert-danger mt-1 mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <label class="form-label" for="linkedin"
+                            >Linkedin Link</label
                         >
                     </div>
 

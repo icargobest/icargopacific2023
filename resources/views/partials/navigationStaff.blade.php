@@ -60,7 +60,7 @@
                         </div>
                         <div id="toggle-icon" class="links" >
                             <div class="link "style="display: flex;justify-content: space-between;">
-                                <i class="fa fa-history link-i-1"><span>Employees</span></i>
+                                <i class="fa fa-users link-i-1"><span>Employees</span></i>
                                 <i id="" class="bx bxs-chevron-down"></i>
                             </div>
                         </div>

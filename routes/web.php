@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShipmentController;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +51,7 @@ use App\Http\Controllers\StaffDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});
 
 
 /* Profile Tab */
@@ -243,7 +242,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::controller(UsersController::class)->group(function () {
         Route::get('icargo/registered_users', 'index')->name('registered_users.view');
         Route::get('registered_users/archived', 'viewArchive')->name('registered_users.viewArchive');
-        
+
         // track parcel
         Route::get('/icargo/track_parcel', ['uses' => 'App\Http\Controllers\SuperQrScannerController@index']);
         Route::post('/icargo/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\SuperQrScannerController@checkUser']);
@@ -256,6 +255,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/companies+archived', 'viewArchive')->name('companies.viewArchive');
         Route::put('icargo/companies/archive/{id}', 'archive')->name('companies.archive');
         Route::put('icargo/companies/unarchive/{id}', 'unarchive')->name('companies.unarchive');
+        Route::get('icargo/companies/send_otp/{id}', 'sendOTP');
     });
 
     //Customers
@@ -265,6 +265,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/customers+archived', 'viewArchive')->name('registered_customers.viewArchive');
         Route::put('icargo/customers/archive/{id}', 'archive')->name('registered_customers.archive');
         Route::put('icargo/customers/unarchive/{id}', 'unarchive')->name('registered_customers.unarchive');
+        Route::get('icargo/customers/send_otp/{id}', 'sendOTP');
     });
 
     //Drivers
@@ -275,6 +276,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/drivers+archived', 'superadminviewArchive')->name('viewArchive.drivers');
         Route::put('icargo/registered_users/archive+dispatcher/{id}', 'archive')->name('archive.driver');
         Route::put('icargo/registered_users/unarchive+dispatcher/{id}','unarchive')->name('unarchive.driver');
+        Route::get('icargo/registered_users/send_otp/{id}', 'sendOTP');
     });
 
     //Dispatchers
@@ -285,6 +287,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/dispatchers+archived', 'superadminviewArchive')->name('viewArchive.dispatchers');
         Route::put('icargo/dispatchers/archive+dispatcher/{id}', 'archive')->name('archive.dispatcher');
         Route::put('icargo/dispatchers/unarchive+dispatcher/{id}', 'unarchive')->name('unarchive.dispatcher');
+        Route::get('icargo/dispatchers/send_otp/{id}', 'sendOTP');
     });
 
     //Staff
@@ -294,6 +297,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
         Route::get('icargo/staff+archived', 'superadminviewArchive')->name('viewArchive.staff');
         Route::put('icargo/staff/archive+staff/{id}', 'archive')->name('archive.staff');
         Route::put('icargo/staff/unarchive+staff/{id}', 'unarchive')->name('unarchive.staff');
+        Route::get('icargo/staff/send_otp/{id}', 'sendOTP');
     });
 });
 
@@ -384,10 +388,8 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     //Stations
     Route::resource('staff/stations', StationController::class);
     Route::controller(StationController::class)->group(function () {
-        Route::get('staff/stations', 'index')->name('stations.view');
-        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archived');
-        Route::put('staff/stations/archive/{id}', 'archive')->name('archive.station');
-        Route::put('staff/stations/unarchive/{id}', 'unarchive')->name('unarchive.station');
+        Route::get('staff/stations', 'index')->name('stations.viewStaff');
+        Route::get('staff/archived_stations', 'viewArchive')->name('view.stations.archivedStaff');
     });
 
     //Assign Station

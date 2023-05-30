@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('photo', 300)->nullable();
-            $table->string('website')->nullable();
             $table->string('facebook')->nullable();
             $table->string('linkedin')->nullable();
             $table->boolean('archived')->default(false);

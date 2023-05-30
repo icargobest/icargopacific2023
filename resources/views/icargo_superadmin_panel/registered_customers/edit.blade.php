@@ -233,19 +233,6 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="url" class="form-control @error('website') is-invalid @enderror" name="website" id="twit">
-                                @error('website')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <label class="form-label" for="twit">Website Link</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-outline">
                                 <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb">
                                 @error('facebook')
                                 <span class="invalid-feedback" role="alert">
@@ -256,13 +243,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="url" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" id="linkedin">
+                                @error('linkedin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <label class="form-label" for="faceb">Facebook Link</label>
+                            </div>
+                        </div>
+                    </div>
 
-                    <button
+                    <a href="{{ url('icargo/customers/send_otp', $customer->id)}}"
                         type="button"
                         class="btn btn-outline-primary btn-block"
                     >
                         Send One-Time-Password (OTP)
-                    </button>
+                    </a>
+                    <br><br>
+                    <div class="row mb-4">
+                        
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill text-secondary"></i>
+                            </span>
+                            <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" autocomplete="new-otp" placeholder="Enter OTP" >
+
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <hr />
                     <div class="modal-footer">
