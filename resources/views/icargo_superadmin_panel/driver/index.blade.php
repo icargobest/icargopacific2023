@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">Driver ID</th>
+                        <th scope="col" style="text-align: center !Important">Icon</th>
                         <th scope="col" style="text-align: center">Name</th>
                         <th scope="col" style="text-align: center">Email</th>
                         <th scope="col" style="text-align: center">
@@ -47,8 +48,8 @@
                     @foreach ($drivers as $driver)
                     <tr>
                         <td>{{ $driver->id }}</td>
+                        <td><img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 40px" alt="profile image"></td>
                         <td class="capitalized">
-                            <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" style="width: 40px" alt="profile image">
                             {{ $driver->user->name }}
                         </td>
                         <td>{{ $driver->user->email }}</td>

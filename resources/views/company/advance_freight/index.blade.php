@@ -1,20 +1,20 @@
 <head>
     <title>Company | Advance Freight</title>
-
-
-</head>
-@include('partials.header')
-@extends('layouts.app')
-@include('partials.navigationCompany', ['advance' => 'nav-selected'])
-
-
-<div class="mx-2">
-    <div class="main-wrapper border border-2" style=" max-width: 100%;">
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                {{ session()->get('message') }}
-            </div>
+    
+    
+    </head>
+    @include('partials.header')
+    @extends('layouts.app')
+    @include('partials.navigationCompany',['advance' => "nav-selected"])
+    
+    
+    <div class="mx-2">
+        <div class="main-wrapper border border-2" style=" max-width: 100%;">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            {{session()->get('message')}}
+        </div>  
         @endif
         <div class="employee-header-container">
             <h3 class="">ADVANCE FREIGHT LIST</h3>
@@ -215,34 +215,31 @@
                         @endif
                     @endif
                 @endforeach
-            @endforeach
-            </table>
-
-
-
-        </section>
-
-
-
-
+                @endforeach
+                </table>
+    
+                
+    
+            </section>
+    
+    
+            
+            
+        </div>
     </div>
-</div>
-
-<style>
-    table {
-        border-collapse: collapse;
-        border-color: transparent !important;
+    
+    <style>
+        table {
+    border-collapse: collapse;
+    border-color: transparent !important;
     }
-
-    th {
-        color: white !important;
+    th{
+    color: white !important;
     }
-
-    td,
-    th {
-        text-align: center !important;
-        padding: 10px;
-        border: 1px solid black;
-
+    td, th {
+    text-align: center !important;
+    padding: 10px;
+    border: 1px solid black;
+    
     }
-</style>
+    </style>

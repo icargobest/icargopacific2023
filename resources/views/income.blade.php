@@ -59,7 +59,7 @@
                                 ASSORT
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-truck"></i></span>
+                                <span class="d-icon"><i class="fa fa-dropbox"></i></span>
                                 {{ $counts['Assort'] }}
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                 DISPATCHED
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-cart-arrow-down"></i></span>
+                                <span class="d-icon"><i class="fa fa-truck"></i></span>
                                 {{ $counts['Dispatched'] }}
                             </div>
                         </div>

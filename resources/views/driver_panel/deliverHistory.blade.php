@@ -3,11 +3,11 @@
 @include('partials.navigationDriver',['history' => "nav-selected"])
 <title>Driver | History</title>
 
-<main class="container py-5" style="margin-top:-49px !important">
-    <div class="mt-4">
-      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">DELIVER HISTORY</h3>
+<main class="container py-5" style="margin-top:-60px !important">
+    <div class="mt-4 driver-order-header py-2 px-4 shadow">
+      <h3 style="letter-spacing:1px; margin-bottom: 0px !important;">Deliver History</h3>
     </div>
-    <div class="main-wrapper" style=" max-width:">
+    <div class="main-wrapper shadow" style="background-color:white;">
 
         <section class="search-filter-container">
 
