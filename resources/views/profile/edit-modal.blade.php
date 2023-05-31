@@ -81,19 +81,6 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="url" class="form-control @error('website') is-invalid @enderror" name="website" id="twit">
-                                @error('website')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <label class="form-label" for="twit">Website</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-outline">
                                 <input type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" id="faceb" required>
                                 @error('facebook')
                                 <span class="invalid-feedback" role="alert">
