@@ -127,7 +127,7 @@ class CompaniesController extends Controller
 
             $delete_token = VerifyToken::where('token', $get_token->token)->first();
             $delete_token->delete();
-            return back()->with('success','Staff #'.$id.' has been updated successfully.');
+            return back()->with('success','Company #'.$id.' has been updated successfully.');
         }
 
         return back()->with('warning','Please verify the account with OTP before modifying data.');
