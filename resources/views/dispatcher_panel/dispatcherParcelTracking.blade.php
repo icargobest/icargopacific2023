@@ -269,6 +269,23 @@
                       </div>
                     </div>
                   </div> 
+
+                  <div class="modal fade" id="dispatchedModal" tabindex="-1" aria-labelledby="dispatchedDispatcherModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="dispatchedModalLabel">Shipment Update</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-info">
+                          <p>Shipment out for delivery.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
                 </section>
                 <form method="POST" action="{{ url('/generate-code') }}">
                   @csrf
@@ -566,6 +583,9 @@
                           console.log(response);
                         }
                       });
+                    } else if (data.status === 'Dispatched') {
+                      var dispatchedModal = new bootstrap.Modal(document.getElementById('dispatchedModal'), {});
+                      dispatchedModal.show();
                     } else if (data.status === 'Delivered') {
                       var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                       deliveredModal.show();
@@ -844,7 +864,10 @@
                       console.log(response);
                     }
                   });
-                } else if (data.status === 'Delivered') {
+                } else if (response.shipment.status === 'Dispatched') {
+                  var dispatchedModal = new bootstrap.Modal(document.getElementById('dispatchedModal'), {});
+                  dispatchedModal.show();
+                } else if (response.shipment.status === 'Delivered') {
                   var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                   deliveredModal.show();
                 } else {
