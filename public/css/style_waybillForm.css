@@ -73,6 +73,14 @@ ul .mandatory{
 .required{
     color: red;
 }
+
+.senderForm-wrapper .sameInfo button{
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    padding: 6px 13px;
+    width: auto;
+}
+
 .button-holder button{
     background-color: #214D94;
     width: 120px;
@@ -95,10 +103,15 @@ ul .mandatory{
 .receiverForm-wrapper{
     display: none !important;
 }
+.receiverEdit{
+    display: block !important;
+}
 .parcelForm-wrapper{
     display: none !important;
 }
-
+.parcelEdit{
+    display: block !important;
+}
 /* DISPLAY TRIGGER */
 
 .displayItem{

@@ -25,6 +25,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="text-align:center;">ID</th>
+                        <th scope="col" style="text-align:center !Important;">Icon</th>
                         <th scope="col" style="text-align:center;">Company Name</th>
                         <th scope="col" style="text-align:center;">Email</th>
                         <th scope="col" style="text-align:center;">Contact No</th>
@@ -36,12 +37,12 @@
                     @foreach ($companies as $company)
                         <tr>
                             <td>{{ $company->id }}</td>
+                            <td><img src="{{ asset($company->image 
+                                ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
+                                : 'img/default_dp.png') }}"
+                                style="width:40px"
+                    alt="Profile Image"></td>
                             <td class="capitalized">
-                                <img src="{{ asset($company->image 
-                                    ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
-                                    : 'img/default_dp.png') }}"
-                                    style="width:40px"
-                        alt="Profile Image">
                                 {{ $company->user->name }}
                             </td>
                             <td>{{ $company->user->email }}</td>

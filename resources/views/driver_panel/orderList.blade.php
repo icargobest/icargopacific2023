@@ -1,6 +1,6 @@
 @include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationDriver',['history' => "nav-selected"])
+@include('partials.navigationDriver',['order' => "nav-selected"])
 <title>Driver | Order List</title>
 
 <main class="container py-5" style="margin-top:-49px !important;">
