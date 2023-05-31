@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('photo', 300)->nullable();
             $table->string('facebook')->nullable();
             $table->string('linkedin')->nullable();
-            $table->string('website')->nullable();
             $table->boolean('archived')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
