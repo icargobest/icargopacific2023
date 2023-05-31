@@ -32,6 +32,7 @@
                     method="POST"
                     action="{{route('staff.update', $staff->id)}}"
                     enctype="multipart/form-data"
+                    autocomplete="off"
                 >
                     @csrf @method('PUT')
 
@@ -90,20 +91,6 @@
                         @required(true)/>
                         <label class="form-label" for="contact">Contact Number</label>
                         @error('contact_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="password" id="updatePassword"
-                        name="updatePassword" @error('updatePassword')
-                        is-invalid @enderror class="form-control"
-                        />
-                        <label class="form-label" for="password"
-                            >Password</label
-                        >
-                        @error('updatePassword')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

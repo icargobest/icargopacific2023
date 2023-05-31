@@ -102,10 +102,10 @@
                 <div class="profileInfoData">
                     <span class="data-title">Joined At</span>
                     <span class="data-content"
-                        >{{$driver->user->created_at}}</span
+                        >{{date('M d, Y h:i:s A', strtotime($driver->user->created_at))}}</span
                     >
                     <span class="data-title">Updated At</span>
-                    <span class="data-content">{{$driver->updated_at}}</span>
+                    <span class="data-content">{{date('M d, Y h:i:s A', strtotime($driver->updated_at))}}</span>
                 </div>
             </div>
 

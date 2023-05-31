@@ -201,7 +201,6 @@ class CustomerController extends Controller
 
         $validated = $this->validate($request, [
             'facebook' => ['required', 'url', 'max:255'],
-            'website' => ['nullable', 'url', 'max:255'],
             'linkedin' => ['nullable', 'url', 'max:255'],
             'facebook.required' => 'Facebook Link is required',
         ]);
@@ -217,7 +216,6 @@ class CustomerController extends Controller
         $customer->state = $request->input('state');
         $customer->postal_code = $request->input('postal_code');
         $customer->facebook = $request->input('facebook');
-        $customer->website = $request->input('website');
         $customer->linkedin = $request->input('linkedin');
         $customer->save();
 

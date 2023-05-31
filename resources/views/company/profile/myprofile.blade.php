@@ -128,10 +128,10 @@
                 <div class="profileInfoData">
                     <span class="data-title">Joined At</span>
                     <span class="data-content"
-                        >{{$company->user->created_at}}</span
+                        >{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}</span
                     >
                     <span class="data-title">Updated At</span>
-                    <span class="data-content">{{$company->updated_at}}</span>
+                    <span class="data-content">{{date('M d, Y h:i:s A', strtotime($company->updated_at))}}</span>
                 </div>
             </div>
         </div>
