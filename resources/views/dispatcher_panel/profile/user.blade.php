@@ -152,11 +152,11 @@
                 <div class="profileInfoData">
                     <span class="data-title">Joined At</span>
                     <span class="data-content"
-                        >{{$dispatcher->user->created_at}}</span
+                        >{{date('M d, Y h:i:s A', strtotime($dispatcher->user->created_at))}}</span
                     >
                     <span class="data-title">Updated At</span>
                     <span class="data-content"
-                        >{{$dispatcher->updated_at}}</span
+                        >{{date('M d, Y h:i:s A', strtotime($dispatcher->updated_at))}}</span
                     >
                 </div>
             </div>

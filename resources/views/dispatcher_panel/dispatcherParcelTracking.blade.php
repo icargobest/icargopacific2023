@@ -119,7 +119,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="receivedModalLabel">Shipment Received</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment has been received.</p>
@@ -137,7 +137,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="assortModalLabel">Assort Shipment</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <p>Please select the appropriate action:</p>
@@ -155,7 +155,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="transferModalLabel">Shipment Transferred</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment Transferred.</p>
@@ -173,7 +173,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="outfordeliveryModalLabel">Shipment Permission</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment Out for delivery.</p>
@@ -190,7 +190,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="arrivedModalLabel">Shipment Arrived</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment Arrived.</p>
@@ -207,7 +207,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="successModalLabel">Shipment Success</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment has been Delivered.</p>
@@ -224,7 +224,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="notpickupModalLabel">Shipment Status</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment has not been Picked Up yet.</p>
@@ -241,7 +241,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="noShipmentModalLabel">Shipment Alert</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>The shipment does not exist.</p>
@@ -258,7 +258,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="notDispatcherModalLabel">Shipment Alert</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>The shipment is not assigned to this dispatcher.</p>
@@ -275,7 +275,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="dispatchedModalLabel">Shipment Update</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
                           <p>Shipment out for delivery.</p>
