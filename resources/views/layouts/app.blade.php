@@ -54,9 +54,9 @@
 <body>
     <div class="header-container">
         <div class="logo">
-            <span>
-                <img src="/img/Frame 1.png" alt="">
-            </span>
+           
+                <a href="/"><img src="/img/Frame 1.png" alt=""></a>
+            
         </div>
 
 

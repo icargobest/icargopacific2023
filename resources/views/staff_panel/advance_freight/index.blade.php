@@ -62,7 +62,6 @@
                             <th colspan="3" scope="colgroup">SENDER</th>
                             <th colspan="3" scope="colgroup">RECEIVER</th>
                             <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
-                            <th colspan="1" scope="colgroup"></th>
                         </thead>
 
                     </tr>

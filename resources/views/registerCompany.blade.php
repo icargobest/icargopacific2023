@@ -20,7 +20,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name*">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-envelope-fill text-secondary"></i>
                                 </span>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail Address">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail Address*">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-lock-fill text-secondary"></i>
                                 </span>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password*">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +66,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-lock-fill text-secondary"></i>
                                 </span>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-Type Password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-Type Password*">
                             </div>
                         </div>
 
@@ -88,7 +88,7 @@
                                 minlength="11" 
                                 maxlength="11"
                                 @required(true)
-                                placeholder="Contact No">
+                                placeholder="Contact No*">
 
                                 @error('contact_no')
                                     <span class="invalid-feedback" role="alert">
@@ -105,7 +105,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="contactnum" type="text" class="form-control @error('contact_name') is-invalid" @enderror" name="contact_name" value="{{ old('contact_name') }}" required autocomplete="contact_name" autofocus placeholder="Contact Name">
+                                <input id="contactnum" type="text" class="form-control @error('contact_name') is-invalid" @enderror" name="contact_name" value="{{ old('contact_name') }}" required autocomplete="contact_name" autofocus placeholder="Contact Name*">
 
                                 @error('contact_name')
                                     <span class="invalid-feedback" role="alert">
@@ -121,7 +121,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="telephone" type="text" class="form-control @error('tel') is-invalid" @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus placeholder="Telephone">
+                                <input id="telephone" type="text" class="form-control @error('tel') is-invalid" @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus placeholder="Telephone*">
 
                                 @error('tel')
                                     <span class="invalid-feedback" role="alert">
@@ -137,7 +137,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="street" type="text" class="form-control @error('street') is-invalid" @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus placeholder="Street">
+                                <input id="street" type="text" class="form-control @error('street') is-invalid" @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus placeholder="Street*">
 
                                 @error('street')
                                     <span class="invalid-feedback" role="alert">
@@ -153,7 +153,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="city" type="text" class="form-control @error('city') is-invalid" @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus placeholder="City">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid" @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus placeholder="City*">
 
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -169,7 +169,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="state" type="text" class="form-control @error('state') is-invalid" @enderror" name="state" value="{{ old('state') }}" required autocomplete="state" autofocus placeholder="State">
+                                <input id="state" type="text" class="form-control @error('state') is-invalid" @enderror" name="state" value="{{ old('state') }}" required autocomplete="state" autofocus placeholder="State*">
 
                                 @error('state')
                                     <span class="invalid-feedback" role="alert">
@@ -185,7 +185,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="postalcode" type="text" class="form-control @error('postal_code') is-invalid" @enderror" name="postal_code" value="{{ old('city') }}" required autocomplete="postal_code" autofocus placeholder="Postal Code">
+                                <input id="postalcode" type="text" class="form-control @error('postal_code') is-invalid" @enderror" name="postal_code" value="{{ old('city') }}" required autocomplete="postal_code" autofocus placeholder="Postal Code*">
 
                                 @error('postal_code')
                                     <span class="invalid-feedback" role="alert">
@@ -217,7 +217,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" required autocomplete="facebook" autofocus placeholder="Facebook Link">
+                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" required autocomplete="facebook" autofocus placeholder="Facebook Link*">
 
                                 @error('facebook')
                                     <span class="invalid-feedback" role="alert">

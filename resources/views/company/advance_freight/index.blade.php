@@ -1,6 +1,22 @@
 <head>
     <title>Company | Advance Freight</title>
     
+    <style>
+        table {
+    border-collapse: collapse;
+    border-color: transparent !important;
+    
+    }
+    th{
+    color: white !important;
+    }
+    td, th {
+    text-align: center !important;
+    padding: 10px;
+    border: 1px solid black;
+    vertical-align: middle !important;
+    }
+    </style>
     
     </head>
     @include('partials.header')
@@ -22,7 +38,7 @@
 
         <section class="search-filter-container mb-4">
 
-            <div class="top-container1" style="max-width: 800px;">
+            {{-- <div class="top-container1" style="max-width: 800px;">
                 <h5 class="fw-normal mb-2 d-inline"> SEARCH:</h5>
                 <div class="input-group rounded">
                     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
@@ -31,7 +47,7 @@
                         <i class="fas fa-search"></i>
                     </span>
                 </div>
-            </div>
+            </div> --}}
 
         </section>
 
@@ -47,7 +63,7 @@
                             <th colspan="3" scope="colgroup">SENDER</th>
                             <th colspan="3" scope="colgroup">RECEIVER</th>
                             <th colspan="4" scope="colgroup">ITEM INFORMATION</th>
-                            <th colspan="1" scope="colgroup"></th>
+                            
                         </thead>
 
                     </tr>
@@ -228,18 +244,4 @@
         </div>
     </div>
     
-    <style>
-        table {
-    border-collapse: collapse;
-    border-color: transparent !important;
-    }
-    th{
-    color: white !important;
-    }
-    td, th {
-    text-align: center !important;
-    padding: 10px;
-    border: 1px solid black;
     
-    }
-    </style>
