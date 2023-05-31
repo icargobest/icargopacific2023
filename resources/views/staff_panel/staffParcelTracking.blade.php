@@ -557,9 +557,9 @@
 
   <script type="text/javascript">
       document.getElementById("resetButton").addEventListener("click", function() {
-          history.replaceState({}, document.title, location.pathname);
-          document.querySelector("form").submit();
-          document.getElementById("id").value = "";
+          var url = new URL(location.href);
+          url.searchParams.delete('tracking_number');
+          window.location.href = url.toString();
       });
   </script>
 
