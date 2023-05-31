@@ -158,7 +158,7 @@ class StaffController extends Controller
         $userData = [
             'name' => $request->input('updateFullName'),
             'email' => $request->input('updateEmail'),
-            'password' => Hash::make($request->input('updatePassword')),
+            
         ];
     
         // Update the user data
