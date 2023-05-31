@@ -4,7 +4,7 @@
 @include('partials.navigationSuperAdmin',['dashboard' => "nav-selected"])
 
 {{-- @extends('layouts.chart') --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" href="{{ asset('css/superaddashboard.css') }}">
 
 @section('title', 'Monthly Income')
@@ -133,7 +133,6 @@
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawMonthlyChart);
-
     function drawMonthlyChart() {
         var data = google.visualization.arrayToDataTable([
             ['Month', 'Income'],
@@ -141,15 +140,94 @@
             ['{{ date('M', strtotime($income->date)) }}', {{ $income->amount }}],
             @endforeach
         ]);
-
         var options = {
-            title: 'Monthly Income',
+            width: 1100,
+            height: 500,
+            // title: 'Monthly Income',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
-
         var chart = new google.visualization.LineChart(document.getElementById('monthly_chart_div'));
+        chart.draw(data, options);
+    }
+</script>
 
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawWeeklyChart);
+    
+    function drawWeeklyChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Week', 'Income'],
+            ['Week 1', {{ $week1 }}],
+            ['Week 2', {{ $week2 }}],
+            ['Week 3', {{ $week3 }}],
+            ['Week 4', {{ $week4 }}]
+        ]);
+    
+        var options = {
+            width: 1100,
+            height: 500,
+            // title: 'Weekly Income Chart',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+    
+        var chart = new google.visualization.LineChart(document.getElementById('weekly_chart_div'));
+    
+        chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Income'],
+            ['2023', {{ $chartData[1][1] }}],
+            ['2024', {{ $chartData[2][1] }}],
+            ['2025', {{ $chartData[3][1] }}],
+            ['2026', {{ $chartData[4][1] }}],
+            ['2027', {{ $chartData[5][1] }}],
+            ['2028', {{ $chartData[6][1] }}],
+            ['2029', {{ $chartData[7][1] }}],
+            ['2030', {{ $chartData[8][1] }}]
+        ]);
+        var options = {
+            width: 1100,
+            height: 500,
+            // title: 'Yearly Income',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('yearly_chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Day', 'Income'],
+            @foreach ($dailyData as $row)
+              
+                ['{{ date('D', strtotime($row->day)) }}', {{ $row->income }}],
+            @endforeach
+        ]);
+        var options = {
+            width: 1100,
+            height: 500,
+            // title: 'Daily Income',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('daily_chart_div'));
         chart.draw(data, options);
     }
 </script>
