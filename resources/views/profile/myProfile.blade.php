@@ -180,7 +180,6 @@
 
 @include('profile.edit-modal')
 @include('profile.imagemodal')
-@include('profile.companymodal')
 @include('partials.footer')
 
 <style>

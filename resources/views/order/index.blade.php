@@ -78,13 +78,12 @@
 
                                 <div class="listLayout col-lg-6 col-sm-12">
                                     <ul>
-                                        {{-- <li>ID | <span>{{$ship->id}}</span></li> --}}
-                                        <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
+                                        <li>Item | <span>{{$ship->item}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="listLayout col-lg-6 col-sm-12">
                                     <ul>
-                                        <li>Mode of Pament | <span>{{$ship->mop}}</span></li>
+                                        <li>Size & Weight | <span>{{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</span></li>
                                     </ul>
                                 </div>
 

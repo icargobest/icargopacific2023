@@ -10,7 +10,6 @@
 
 
 <div class="waybillForm-container container p-3">
-
     <div class="reminder-wrapper row px-3">
         <div class="card col p-4 shadow-sm">
             <span class="infoTitle"><i class="bi bi-info-circle-fill"></i><span>NOTICE!</span></span><br>
@@ -299,6 +298,15 @@
             <header class="mb-3"><span>PARCEL DETAILS</span> <i class="bi bi-3-circle-fill"></i></header>
 
             <div class="senderForm p-4">
+
+                <div class="itemInput mb-4">
+                    <span>
+                        <label class="form-label" for="itemName">Item</label><span class="required">*</span>
+                    </span>
+                    <div class="form-outline">
+                        <input type="text" id="itemName" name="item" class="form-control" required />
+                    </div>
+                </div>
 
                 <div class="row mb-5">
 

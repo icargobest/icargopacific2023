@@ -68,12 +68,6 @@ VIEW
                                         $ship->bid_amount != null &&
                                         $ship->status != 'Cancelled' &&
                                         $ship->status != 'Delivered')
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <a href="{{ route('trackOrder_Company', $ship->id) }}"
-                                            class="btn btn-primary btn-block shadow-0" style="background-color:#214D94;">
-                                            Track Order
-                                        </a>
-                                    </div>
                                     <a class="cardItem my-1" href="{{ route('freightPanel') }}">
                                         <div class="d-flex justify-content-center">
                                             <button type="button"
@@ -193,7 +187,7 @@ VIEW
                                     </tr>
                                     <tr>
                                         <th>Parcel Item:</th>
-                                        <td>{{ $ship->category }}</td>
+                                        <td>{{ $ship->item }}</td>
                                     </tr>
                                     <tr>
                                         <th>Mode of Payment:</th>

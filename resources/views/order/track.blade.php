@@ -111,10 +111,6 @@
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
-                                            <th width="40%" class="fw-normal">ID:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->id }}</td>
-                                        </tr>
-                                        <tr>
                                             <th class="fw-normal">Size & Weight:</th>
                                             <td class="fw-bold">{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                                 | {{ intval($ship->weight) }}Kg</td>
@@ -129,10 +125,6 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <table style="width:100%">
-                                        <tr>
-                                            <th width="40%" class="fw-normal">Category:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->category }}</td>
-                                        </tr>
                                         <tr>
                                             <th class="fw-normal">Mode of Payment:</th>
                                             <td class="fw-bold">{{$ship->mop}}</td>

@@ -104,7 +104,7 @@
                                     <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                         | {{ intval($ship->weight) }}Kg</td>
                                     {{-- Category --}}
-                                    <td>{{ $ship->total_price }}</td>
+                                    <td>{{ $ship->bid_amount }}</td>
                                     {{-- Mode of Pament --}}
                                     <td>{{ $ship->mop }}</td>
 

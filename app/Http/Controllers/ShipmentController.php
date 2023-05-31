@@ -190,7 +190,7 @@ class ShipmentController extends Controller
 
         $this->TrackOrderLog();
 
-        return view('staff_panel.advance_freight.index', compact('staff', 'company_name', 'company_id_staff', 'logs','shipments', 'bids', 'company_logs'));
+        return view('staff_panel.advance_freight.index', compact('staff', 'company_name', 'company_id_staff', 'logs', 'shipments', 'bids', 'company_logs'));
     }
 
     public function staff_advfreight($id)
@@ -321,6 +321,7 @@ class ShipmentController extends Controller
             'user_id' => $request->user_id,
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
+            'item' => $request->input('item'),
             'weight' => $request->input('weight'),
             'length' => $request->input('length'),
             'width' => $request->input('width'),
@@ -416,7 +417,9 @@ class ShipmentController extends Controller
         $shipment->bid_amount = $bid->bid_amount;
         $shipment->company_id = $bid->company_id;
         $shipment->status = 'Processing';
+        $shipment->total_price = $shipment->bid_amount + ($shipment->bid_amount * 0.02);
         $shipment->save();
+
 
         Bid::where('shipment_id', $shipment->id)
             ->where('id', '!=', $bid->id)
@@ -434,6 +437,12 @@ class ShipmentController extends Controller
 
         Bid::where('shipment_id', $shipment->id)
             ->update(['status' => 'Order Cancelled']);
+
+        $log = OrderHistory::where('shipment_id', $shipment->id)->first();
+
+        $log->isCancelled = true;
+        $log->isCancelledTime = now();
+        $log->save();
 
         $this->TrackOrderLog();
 
@@ -618,11 +627,11 @@ class ShipmentController extends Controller
 
     function orderHistory_user()
     {
-        $shipment = Shipment::all();
-        $bid = Bid::all();
+        $shipments = Shipment::all();
+        $bids = Bid::all();
         $orderLogs = OrderHistory::all();
         $this->TrackOrderLog();
-        return view('order.orderHistory', ['shipments' => $shipment, 'bids' => $bid, 'sender', 'recipient', 'orderLogs' => $orderLogs]);
+        return view('order.orderHistory', compact('shipments', 'bids', 'orderLogs'));
     }
 
     function orderHistory_company()
@@ -635,13 +644,7 @@ class ShipmentController extends Controller
         $bids = Bid::all();
         $orderLogs = OrderHistory::all();
         $this->TrackOrderLog();
-        return view('company.order.orderHistory', [
-            'shipments' => $shipments,
-            'bids' => $bids,
-            'sender',
-            'recipient',
-            'orderLogs' => $orderLogs
-        ]);
+        return view('company.order.orderHistory', compact('shipments', 'bids', 'orderLogs'));
     }
 
     function orderHistory_staff()
@@ -654,9 +657,6 @@ class ShipmentController extends Controller
         $this->TrackOrderLog();
         return view('staff_panel.order.orderHistory', compact('shipments', 'orderLogs'));
     }
-
-
-
 
     public function transfer(Request $request)
     {
@@ -957,6 +957,7 @@ class ShipmentController extends Controller
 
         $shipment->recipient->save();
 
+        $shipment->item = $request->input('item');
         $shipment->weight = $request->input('weight');
         $shipment->length = $request->input('length');
         $shipment->width = $request->input('width');
