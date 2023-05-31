@@ -1,4 +1,4 @@
-<title>Company | Dashboard</title>
+<title>SuperAdmin | Dashboard</title>
 
 
 @extends('layouts.app')

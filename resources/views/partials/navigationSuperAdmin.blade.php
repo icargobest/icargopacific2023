@@ -1,11 +1,6 @@
 <header>
     
-<style>
-   svg {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-</style>
+
 </header>
 <div class="main-container">
             <div class="sidebar">

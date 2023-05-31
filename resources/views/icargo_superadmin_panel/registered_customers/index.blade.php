@@ -31,6 +31,7 @@
                 <thead>
                     <tr>
                         <th scope="col" >Customer ID</th>
+                        <th scope="col" style="text-align: center !Important">Icon</th>
                         <th scope="col" >Name</th>
                         <th scope="col" >Email</th>
                         <th scope="col" >Contact No</th>
@@ -46,14 +47,14 @@
                     @foreach ($customers as $customer)
                     <tr>
                         <td>{{ $customer->id }}</td>
-                        <td class="capitalized">
-                            <img
+                        <td><img
                             src="
                             @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
                             @else /img/default_dp.png 
                             @endif"
                             alt="Profile Image" style="width:30px"
-                    />
+                    /></td>
+                        <td class="capitalized">
                             {{ $customer->user->name }}
                         </td>
                         <td>{{ $customer->user->email }}</td>

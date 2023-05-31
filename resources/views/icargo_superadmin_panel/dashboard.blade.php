@@ -29,7 +29,7 @@
                                 Registered Companies
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-handshake-o"></i></span>
+                                <span class="d-icon"><i class="fa fa-building"></i></span>
                                 {{ $companycount }}
                             </div>
                         </div>
@@ -38,17 +38,17 @@
                                 Registered Users
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-cubes"></i></span>
+                                <span class="d-icon"><i class="fa fa-user"></i></span>
                                 {{ $usercount }}
                             </div>
                         </div>
                         <div style="background-color: #006979;" class="cards">
                             <span class="cardTitle">
-                                Registered Staff 
+                                Registered Drivers 
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-check-square"></i></span>
-                                20
+                                <span class="d-icon"><i class="fa fa-id-card-o"></i></span>
+                                {{ $drivercount }}
                             </div>
                         </div>
                     </div>   
@@ -56,29 +56,29 @@
                     <div class="cardAlign">
                         <div style="background-color: #2F4858;" class="cards">
                             <span class="cardTitle">
-                                Registered Driver
+                                Registered Staff
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-truck"></i></span>
-                                20
+                                <span class="d-icon"><i class="	fas fa-user-friends"></i></span>
+                                {{ $staffcount }}
                             </div>
                         </div>
                         <div style="background-color: #7089D2;" class="cardsM">
                             <span class="cardTitle">
-                                Registered Customer
+                                Registered Dispatcher
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-cube"></i></span>
-                                20
+                                <span class="d-icon"><i class="fa fa-truck"></i></span>
+                                {{ $dispatchercount }}
                             </div>
                         </div>
                         <div style="background-color: #97AEFA;" class="cards">
                             <span class="cardTitle">
-                                Registered Dispatchers
+                                Customers
                             </span>
                             <div class="cardIconCount">
-                                <span class="d-icon"><i class="fa fa-thumbs-up"></i> </i></span>
-                                20
+                                <span class="d-icon"><i class="fas fa-users"></i> </i></span>
+                                {{ $customercount }}
                             </div>
                         </div>
                     </div>
@@ -233,22 +233,4 @@
     
 </script>
 
-{{-- <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">SuperAdmin Dashboard</a>
-  </nav>
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">Monthly Income</div>
-            <div class="card-body">
-                <div id="monthly_chart_div"></div>
-            </div>
-        </div>
-    </div>
-  
-    <body>
-        <h1>Registered Companies: {{ $companycount }}</h1>
-        <h1>Registered Users: {{ $usercount }}</h1>
-    </body>
- --}}
-
+@endsection

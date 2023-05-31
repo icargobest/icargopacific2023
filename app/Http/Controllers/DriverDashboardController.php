@@ -15,7 +15,7 @@ class DriverDashboardController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $statuses = [ 'Processing', 'PickedUp', 'Assort', 'Transferred', 'Arrived', 'Dispatched', 'Delivered'];
+        $statuses = [ 'PickedUp', 'Delivered'];
         $counts = [];
 
         $driver = Driver::where('user_id', $user_id)->first();
