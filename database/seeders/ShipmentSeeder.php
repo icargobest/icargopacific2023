@@ -59,6 +59,7 @@ class ShipmentSeeder extends Seeder
             'user_id' => 1,
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
+            'item' => $faker->randomElement(['Cabinet', 'Refrigerator', 'Computer']),
             'weight' => $faker->randomFloat(2, 1, 100),
             'length' => $faker->randomFloat(2, 1, 100),
             'width' => $faker->randomFloat(2, 1, 100),

@@ -14,6 +14,7 @@
     .child2 td {
         text-align: left !important;
     }
+
     td.contact,
     th.contact {
         border-bottom: 1px solid black !important;
@@ -22,8 +23,6 @@
     #tracking-status {
         text-align: left !important;
     }
-
-
 </style>
 
 <div class="modal fade" id="trackModal{{ $ship->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -44,9 +43,12 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="child1 col-md-3 col-sm-3 w-100">
                                 <div class="parcel-pic">
-                                    <img src="/img/box.jpg" alt="login form"
+                                    <img src="{{ asset($ship->photo) }}" alt="photo"
                                         class="img-fluid rounded mx-auto d-block mb-2"
                                         style="border-radius: 0 1rem 1rem 0; margin-left:50%;" />
+                                    {{-- <img src="/img/box.jpg" alt="login form"
+                                        class="img-fluid rounded mx-auto d-block mb-2"
+                                        style="border-radius: 0 1rem 1rem 0; margin-left:50%;" /> --}}
                                 </div>
                             </div>
                             <div class="child2 col-md-9 col-sm-9 me-0 w-100">
@@ -113,11 +115,11 @@
                                         </tr>
                                         <tr>
                                             <th>PARCEL ITEM:</th>
-                                            <td class="fw-bold">Tools</td>
+                                            <td class="fw-bold">{{$ship->item}}</td>
                                         </tr>
                                         <tr>
-                                            <th>PARCEL CHARGES:</th>
-                                            <td class="fw-bold">Php 68</td>
+                                            <th>PRICE:</th>
+                                            <td class="fw-bold">Php {{$ship->bid_amount}}</td>
                                         </tr>
 
                                     </tbody>
@@ -173,7 +175,7 @@
                                                         <div class="card mb-3" style="background-color: #66D066;">
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <h5 class="card-title border-0 fw-bold">YOUR
+                                                                    <h5 class="card-title border-0 fw-bold">
                                                                         ORDER HAS BEEN
                                                                         DELIVERED</h5>
                                                                     <p class="card-text mb-0">
@@ -184,12 +186,12 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isDispatched == true)
-                                                        <h4 class="fw-bold border-0">IN TRANSIT</h4>
-                                                        <div class="card mb-3" style="background-color: #D9D9D9;">
+                                                    @if ($log->isDelivered != true && $log->isCancelled != true && $log->isDelivered != true)<h4 class="fw-bold border-0">IN TRANSIT</h4>
+                                                        <div class="card mb-3" style="background-color: #D9D9D9;">@endif
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER IS OUT
+                                                                         ORDER IS OUT
                                                                         FOR DELIVERY</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isDispatchedTime)) }}
@@ -199,13 +201,15 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isArrived == true)
-                                                        <h4 class="fw-bold border-0">ARRIVED AT
-                                                            {{ $ship->station_id }}</h4>
+                                                        @if ($log->isDispatched != true && $log->isCancelled != true && $log->isDelivered != true)
+                                                            <h4 class="fw-bold border-0">ARRIVED AT
+                                                                {{ $ship->station_id }}</h4>
+                                                        @endif
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER HAS
+                                                                         ORDER HAS
                                                                         ARRIVED AT SORTING FACILITY</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isArrivedTime)) }}
@@ -216,13 +220,15 @@
                                                     @endif
                                                     @if ($log->isTransferred == true)
                                                         @if ($ship->company_name != null && $ship->station_id == null)
-                                                            <h4 class="fw-bold border-0">TRANSFERRED TO COMPANY:
-                                                                {{ $ship->company_name }}</h4>
+                                                            @if ($log->isArrived != true && $log->isCancelled != true && $log->isDelivered != true)
+                                                                <h4 class="fw-bold border-0">TRANSFERRED TO COMPANY:
+                                                                    {{ $ship->company_name }}</h4>
+                                                            @endif
                                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <h5 class="card-title border-0 fw-bold">
-                                                                            YOUR ORDER HAS ALREADY BEEN
+                                                                             ORDER HAS ALREADY BEEN
                                                                             TRANSFERRED TO ANOTHER COMPANY</h5>
                                                                         <p class="card-text mb-0">
                                                                             {{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}
@@ -231,13 +237,15 @@
                                                                 </div>
                                                             </div>
                                                         @elseif($ship->company_name == null && $ship->station_id != null)
-                                                            <h4 class="fw-bold border-0">TRANSFERRED TO STATION:
-                                                                {{ $ship->station_id }}</h4>
+                                                            @if ($log->isArrived != true && $log->isCancelled != true && $log->isDelivered != true)
+                                                                <h4 class="fw-bold border-0">TRANSFERRED TO STATION:
+                                                                    {{ $ship->station_id }}</h4>
+                                                            @endif
                                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <h5 class="card-title border-0 fw-bold">
-                                                                            YOUR ORDER HAS
+                                                                             ORDER HAS
                                                                             ALREADY BEEN TRANSFERRED TO ANOTHER
                                                                             STATION</h5>
                                                                         <p class="card-text mb-0">
@@ -249,15 +257,17 @@
                                                         @endif
                                                     @endif
                                                     @if ($log->isAssort == true)
-                                                        <h4 class="fw-bold border-0">ARRIVED AT (current_station)
+                                                        @if ($log->isTransferred != true && $log->isCancelled != true && $log->isDelivered != true)
+                                                            <h4 class="fw-bold border-0">ARRIVED AT (current_station)
+                                                        @endif
                                                         </h4>
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER IS
-                                                                        ALREADY BEEN PICKED UP BY LOGISTIC
-                                                                        COMPANY</h5>
+                                                                         ORDER IS
+                                                                        ALREADY BEEN ARRIVED TO THE SORTING FACILITY
+                                                                    </h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isAssortTime)) }}
                                                                     </p>
@@ -266,12 +276,14 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isPickUp == true)
-                                                        <h4 class="fw-bold border-0">PICKED UP</h4>
+                                                        @if ($log->isAssort == false && $log->isCancelled != true && $log->isDelivered != true)
+                                                            <h4 class="fw-bold border-0">PICKED UP</h4>
+                                                        @endif
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER IS
+                                                                         ORDER IS
                                                                         ALREADY BEEN PICKED UP BY LOGISTIC
                                                                         COMPANY</h5>
                                                                     <p class="card-text mb-0">
@@ -281,12 +293,12 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if ($log->isProcessed == true)
+                                                    @if ($log->isProcessed == true && $log->isCancelled != true && $log->isDelivered != true)
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER IS
+                                                                         ORDER IS
                                                                         CURRENTLY BEING PROCESSED</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isProcessedTime)) }}
@@ -295,12 +307,12 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if ($log->isPending == true)
-                                                        <div class="card mb-3 px-5" style="background-color: #D9D9D9;">
+                                                    @if ($log->isPending == true && $log->isCancelled != true && $log->isDelivered != true)
+                                                        <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                        YOUR ORDER IS
+                                                                         ORDER IS
                                                                         CURRENTLY PENDING</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}
@@ -315,7 +327,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

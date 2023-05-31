@@ -96,8 +96,8 @@
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
-                                            <th width="40%" class="fw-normal">ID:</th>
-                                            <td width="60%" class="fw-bold">{{ $ship->id }}</td>
+                                            <th width="40%" class="fw-normal">Item:</th>
+                                            <td width="60%" class="fw-bold">{{ $ship->item }}</td>
                                         </tr>
                                         <tr>
                                             <th class="fw-normal">Size & Weight:</th>
@@ -206,6 +206,7 @@
                                     <th class="text-center">COMPANY</th>
                                     <th class="text-center">BID</th>
                                     <th class="text-center">DATE</th>
+                                    <th class="text-center">STATUS</th>
                                     <th class="text-center">ACTION</th>
                                 </tr>
                             </thead>

@@ -12,7 +12,7 @@
             td, th {
             text-align: center !important;
             padding: 10px;
-            border: 1px solid black; 
+            border: 1px solid black;
             vertical-align: middle;
             }
             </style>
@@ -21,7 +21,7 @@
     @extends('layouts.app')
     @include('partials.navigationCompany', ['freight' => 'nav-selected'])
 
-    
+
 
     <div class="mx-2">
         <div class="main-wrapper border border-2" style=" max-width: 100%;">
@@ -88,7 +88,7 @@
                                         <td>{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
                                             | {{ intval($ship->weight) }}Kg</td>
                                         {{-- Category --}}
-                                        <td>{{ $ship->total_price }}</td>
+                                        <td>{{ $ship->bid_amount }}</td>
                                         {{-- Mode of Pament --}}
                                         <td>{{ $ship->mop }}</td>
 

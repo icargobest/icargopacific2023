@@ -2,17 +2,17 @@
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Staff | Order Details #{{ $ship->id }}</title>
         <style>
-        th {
-            background-color: transparent !important;
-            color: black;
-            font-weight: normal;
-        }
+            th {
+                background-color: transparent !important;
+                color: black;
+                font-weight: normal;
+            }
 
-        td {
-            text-align: left !important;
-            font-weight: bold;
-            color:#214D94;
-        }
+            td {
+                text-align: left !important;
+                font-weight: bold;
+                color: #214D94;
+            }
         </style>
         <!-- MDB -->
         <link rel="stylesheet" href="/css/mdb.min.css" />
@@ -71,15 +71,10 @@
                                             $ship->bid_amount != null &&
                                             $ship->status != 'Cancelled' &&
                                             $ship->status != 'Delivered')
-                                        <div class="col-md-12 d-flex justify-content-center">
-                                            <a href="{{ route('trackOrder_Staff', $ship->id) }}"
-                                                class="btn text-white btn-block " style="background-color:#214D94;">
-                                                Track Order
-                                            </a>
-                                        </div>
                                         <a class="cardItem my-1" href="{{ route('freightStaff') }}">
                                             <div class="d-flex justify-content-center">
-                                                <button type="button" class="btn btn-block btn-light mb-1" style="border-color:#214D94;">
+                                                <button type="button" class="btn btn-block btn-light mb-1"
+                                                    style="border-color:#214D94;">
                                                     BACK
                                                 </button>
                                             </div>
@@ -106,8 +101,8 @@
                                     </div>
                                     <a class="cardItem mt-2" href="{{ route('staff.order') }}">
                                         <div class="d-flex justify-content-center">
-                                            <button type="button"
-                                                class="btn btn-block btn-light shadow-0 mb-1" style="border-color:#214D94;">
+                                            <button type="button" class="btn btn-block btn-light shadow-0 mb-1"
+                                                style="border-color:#214D94;">
                                                 BACK
                                             </button>
                                             </form>
@@ -198,7 +193,7 @@
                                         </tr>
                                         <tr>
                                             <th>Parcel Item:</th>
-                                            <td>{{ $ship->category }}</td>
+                                            <td>{{ $ship->item }}</td>
                                         </tr>
                                         <tr>
                                             <th>Mode of Payment:</th>

@@ -97,12 +97,12 @@
             cursor: pointer;
 			position: fixed;
   			bottom: 0px;
-  			right: 0px; 
+  			right: 0px;
 			padding: 10px;
 			font-size: 20px;
         }
 
-		.rotate-90{ 
+		.rotate-90{
 			transform: rotate(-90deg) translate(5px, 8px);
 			color: #214D94;
 			letter-spacing: 3px;
@@ -110,7 +110,7 @@
 			margin:-45px;
 			padding: 40px 20px;
 		}
-		.rotate90{ 
+		.rotate90{
 			transform: rotate(90deg) translate(0px, 9px);
 			color:  #214D94;
 			letter-spacing: 3px;
@@ -124,7 +124,7 @@
 		.verticaltext{
            width:1px;
            word-wrap: break-word;
-           white-space:pre-wrap; 
+           white-space:pre-wrap;
         }
 
         .rotatecolor {
@@ -174,13 +174,13 @@
 							<img class="mx-auto my-0" src="/img/jst-express-logo.png" style="max-height:80px;">
 						</td>
 					</tr>
-				</thead>			
+				</thead>
 					</tr>
 					<tr>
 						<td class="m-0 p-0 border-0 text-end" style="color: #214D94"><p class="smalltext m-0 fw-bold">iCARGO</p></td>
 						<td class="m-0 p-0 border-0" style="color: #F9CD1A"><p class="smalltext m-0 fw-bold">PACIFIC</p>
 					</tr>
-			</table>			
+			</table>
 		</div>
 		<table class="p-0 m-0">
 			<thead>
@@ -193,7 +193,7 @@
                             <img class="m-0 p-1 mx-auto my-0 p-1"
                                 src="data:image/png;base64,{{ DNS1D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'C128', 2, 50) }}"
                                 alt="barcode" style="height:70px;">
-						</th>	
+						</th>
 					</tr>
 					<tr>
 						<th colspan="4" height="75px" class="p-1 m-0">
@@ -206,13 +206,13 @@
 		<table class="m-0 p-0" >
 			<tbody>
 				<tr>
-					<th class="m-0 p-0" height="150px" width="2%" colspan="1" style="background-color:#F9CD1A;">					
+					<th class="m-0 p-0" height="150px" width="2%" colspan="1" style="background-color:#F9CD1A;">
 						<div class="d-flex justify-content-center rotate-90">
-							<p>SENDER</p>	
+							<p>SENDER</p>
 						</div>
-					</th> 
-					<th class="p-0" height="150px" width="1%" colspan="1" style="background-color:#214D94;"></th>
-					<th class="m-0 p-1" height="150px" width="97%"  colspan="8">
+					</th>
+					<th class="p-0" height="100px" width="1%" colspan="1" style="background-color:#214D94;"></th>
+					<th class="m-0 p-1" height="100px" width="97%"  colspan="8">
 						<div>SENDER'S NAME</div>
 						<p height="150px" class="fw-normal">
 							{{ $ship->sender->sender_name }}<br>
@@ -226,7 +226,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="m-0 p-1" height="150px" colspan="8" width="97%">
+					<th class="m-0 p-1" height="100px" colspan="8" width="97%">
 						<div>RECEIVER'S NAME</div>
 						<p class="fw-normal">
 							{{ $ship->recipient->recipient_name }}<br>
@@ -236,22 +236,21 @@
                                 @if ($ship->recipient->recipient_tel != null)
                                     | {{ $ship->recipient->recipient_tel }}
                                 @endif						</p>
-						<th class="p-0" height="150px" width="1%" colspan="1" style="background-color:#214D94;"></th>
+						<th class="p-0" height="100px" width="1%" colspan="1" style="background-color:#214D94;"></th>
 					</th>
 					<th class="m-0 p-0" colspan="1" height="150px" width="2%" style="background-color:#F9CD1A;">
 						<div class="d-flex justify-content-center rotate90">
-							<p>RECEIVER</p>	
+							<p>RECEIVER</p>
 						</div>
 					</th>
 				</tr>
 				<tr>
-					<th class="m-0 p-1" height="150px" colspan="10" width="100%"><div>ITEM INFORMATION</div>
+					<th class="m-0 p-1" height="100px" colspan="10" width="100%"><div>ITEM INFORMATION</div>
 						<p class="fw-normal">
-							{{ $ship->tracking_number }}<br>
+							{{ $ship->item }} |
 							{{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }} |
 							{{ intval($ship->weight) }} Kg
-                            <p>Total Price:</p>
-							{{$ship->total_price}}
+                            <p>Total Price: {{$ship->bid_amount}}</p>
 					</th>
 				</tr>
 			</tbody>
@@ -259,14 +258,13 @@
 			<table class="m-0 p-0">
 			<tbody>
 				<tr>
-					<th class="m-0 p-0" colspan="3" width="20%">                
+					<th class="m-0 p-0" colspan="3" width="20%">
 						<img class="mx-auto my-0 p-1"
                                 src="data:image/png;base64,{{ DNS2D::getBarcodePNG("$ship->user_id - $ship->tracking_number - $ship->id", 'QRCODE', 5, 5) }}"
                                 alt="QR Code">
 					</th>
-					<th class="mx-auto my-0" height="150px" c="7" width="80%">
-						<p>MODE OF PAYMENT</p>
-						<p class="fw-normal">{{ $ship->mop }}</p>
+					<th class="mx-auto my-0" height="50px" c="7" width="80%">
+						<p>MODE OF PAYMENT: {{ $ship->mop }}</p>
 					</th>
 				</tr>
 			</tbody>

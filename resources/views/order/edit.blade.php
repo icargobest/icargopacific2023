@@ -310,6 +310,15 @@
 
             <div class="senderForm p-4">
 
+                <div class="itemInput mb-4">
+                    <span>
+                        <label class="form-label" for="itemName">Item</label><span class="required">*</span>
+                    </span>
+                    <div class="form-outline">
+                        <input type="text" id="itemName" value="{{$shipment->item}}" name="item" class="form-control" required />
+                    </div>
+                </div>
+
                 <div class="row mb-5">
 
                     <div class="form-group col-4">

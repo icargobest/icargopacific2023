@@ -124,18 +124,6 @@
                 </div>
                 <div class="profileDivider2 "></div>
                 <div class="profileInfoData">
-                    <span class="data-title"><i class="fa fa-globe"></i> Website</span>
-                    @if ($customer->website != null)
-                        <a href="{{ $customer->website }}" target="_blank">
-                    @endif
-                    <span class="data-content">
-                        @if ($customer->website != null)
-                            {{ $customer->website }}@else---
-                        @endif
-                    </span>
-                    @if ($customer->website != null)
-                        </a>
-                    @endif
                     <span class="data-title"><i class="fa fa-facebook"></i> Facebook</span>
                     @if ($customer->facebook != null)
                         <a href="{{ $customer->facebook }}" target="_blank">
@@ -180,7 +168,6 @@
 
 @include('profile.edit-modal')
 @include('profile.imagemodal')
-@include('profile.companymodal')
 @include('partials.footer')
 
 <style>

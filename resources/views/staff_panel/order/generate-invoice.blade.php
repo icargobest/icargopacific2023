@@ -32,7 +32,7 @@
             cursor: pointer;
             position: fixed;
   			bottom: 0px;
-  			right: 0px; 
+  			right: 0px;
 			padding: 10px;
 			font-size: 20px;
         }
@@ -134,30 +134,26 @@
                     <tr>
                         <td>Product</td>
                         <td>Details</td>
-                        <td>Price</td>
-                        <td>Qty</td>
                         <td>Total</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>{{ $ship->item }}</td>
-                        <td width="25%">{{ intval($ship->length) }}
+                        <td width="35%">{{ intval($ship->length) }}
                             x{{ intval($ship->width) }}
                             x{{ intval($ship->height) }}
                             | {{ intval($ship->weight) }}Kg
                         </td>
-                        <td width="15%">Php {{ $ship->total_price }}</td>
-                        <td width="7%">{{ $ship->quantity }}</td>
-                        <td width="15%">Php {{ $ship->total_price }}</td>
+                        <td width="25%">Php {{ $ship->bid_amount }}</td>
                     </tr>
                     <tr>
                         <th>
                             Total
                             <small class="fw-normal"> - (Include all VAT/TAX):</small>
                         </th>
-                        <td colspan="3"></td>
-                        <td class="fw-bold">Php {{ $ship->total_price }}</td>
+                        <td colspan="1"></td>
+                        <td class="fw-bold">Php {{ $ship->bid_amount }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -78,7 +78,7 @@ class CustomerController extends Controller
         $user = $customer->user;
         $get_token = $request->otp;
         $get_token = VerifyToken::where('token', $get_token)->first();
-    
+
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -201,7 +201,6 @@ class CustomerController extends Controller
 
         $validated = $this->validate($request, [
             'facebook' => ['required', 'url', 'max:255'],
-            'website' => ['nullable', 'url', 'max:255'],
             'linkedin' => ['nullable', 'url', 'max:255'],
             'facebook.required' => 'Facebook Link is required',
         ]);
@@ -210,14 +209,13 @@ class CustomerController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        $customer->contact_no = $request->input('mobile');
+        $customer->contact_no = $request->input('contact_no');
         $customer->tel = $request->input('tel');
         $customer->street = $request->input('street');
         $customer->city = $request->input('city');
         $customer->state = $request->input('state');
         $customer->postal_code = $request->input('postal_code');
         $customer->facebook = $request->input('facebook');
-        $customer->website = $request->input('website');
         $customer->linkedin = $request->input('linkedin');
         $customer->save();
 

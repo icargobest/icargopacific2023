@@ -40,6 +40,12 @@ class DatabaseSeeder extends Seeder
             $company = Company::create([
                 'user_id' => $user->id,
                 'contact_no' => '123456789',
+                'tel' => '123456789',
+                'street' => '123 Main Street',
+                'city' => 'M City',
+                'state' => 'PH',
+                'postal_code' => '02132',
+                'facebook' => 'https://www.facebook.com/123',
                 'contact_name' => 'Contact Name ' . $i,
                 // 'company_address' => 'Company Address ' . $i,
             ]);
