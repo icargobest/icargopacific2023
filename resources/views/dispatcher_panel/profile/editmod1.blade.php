@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
 
 
-<div class="modal top fade" id="personalinfo" tabindex="-1" aria-labelledby="personalinfo" aria-hidden="true">
+<div class="modal top fade" id="personalinfo{{$dispatcher->id}}" tabindex="-1" aria-labelledby="personalinfo" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -11,27 +11,24 @@
 
           
           <div class="modal-body">
-            
+          <form action="{{ route('dispatcher.personinfo.update',$dispatcher->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" name="password" required autocomplete="new-password">
-                  <label class="form-label" for="fname">First Name</label>
+                  <input id="name" type="text" class="form-control" value="{{ $dispatcher->user->name }}" name="name" required autocomplete="">
+                  <label class="form-label" for="name">Name</label>
                 </div>
               </div>
             </div>
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" name="password" required autocomplete="new-password">
-                  <label class="form-label" for="lname">Last Name</label>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input id="password" type="text" class="form-control" name="password" required autocomplete="new-password">
+                  <input id="password" type="text" class="form-control" value="{{ $dispatcher->contact_no }}" name="contact_no" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="11" 
+                  maxlength="11" required autocomplete="">
                   <label class="form-label" for="mobile">Mobile number</label>
                 </div>
               </div>
@@ -39,16 +36,67 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" name="password" required autocomplete="new-password">
-                  <label class="form-label" for="Tel">Telephone</label>
+                  <input id="password" type="text" class="form-control" value="{{ $dispatcher->tel }}" name="tel" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="7" 
+                  maxlength="9" autocomplete="">
+                  <label class="form-label" for="mobile">Telephone number</label>
                 </div>
               </div>
             </div>
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input id="password" type="text" class="form-control" name="password" required autocomplete="new-password">
-                  <label class="form-label" for="email">Email address</label>
+                  <input id="password" type="email" class="form-control" value="{{ $dispatcher->user->email }}" name="email" required autocomplete="">
+                  <label class="form-label" for="Tel">Email address</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $dispatcher->street }}" name="street" required autocomplete="">
+                  <label class="form-label" for="Tel">Bldg. No / Street Name</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{  $dispatcher->city }}" name="city" required autocomplete="">
+                  <label class="form-label" for="Tel">Province/City</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{  $dispatcher->postal_code }}" name="postal_code" required autocomplete="">
+                  <label class="form-label" for="Tel">Postal Code</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{  $dispatcher->state }}" name="state" required autocomplete="">
+                  <label class="form-label" for="Tel">State/Country</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $dispatcher->facebook }}" name="facebook" required autocomplete="">
+                  <label class="form-label" for="email">Facebook Account</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input id="password" type="text" class="form-control" value="{{ $dispatcher->linkedin }}" name="linkedin" autocomplete="">
+                  <label class="form-label" for="email">Linkedin Account</label>
                 </div>
               </div>
             </div>
@@ -57,6 +105,7 @@
                 SAVE
               </button>
             </div>
+          </form>
           </div>
       </div>
     </div>

@@ -120,6 +120,8 @@ flex-direction: column;
 margin-top: 10px; 
 gap: 10px;
 padding-right: 10px;
+margin-bottom: 40px;
+overflow: auto;
 }
 
 .m-button1
@@ -174,11 +176,6 @@ min-width: 80px !important;
 border: none;
 }
 
-td,th
-{
-text-align: center;
-
-}
 
 
 thead th
@@ -188,9 +185,16 @@ border: none;
 color: #FFF;
 text-align: center;
 }
+tbody td
+{
+text-align: center;
+}
 
 
-
+.modal-body h4
+{
+text-align: center;
+}
 
 /* Table Container Button */
 
@@ -384,10 +388,18 @@ display: flex;
 justify-content: flex-start;
 
 }
+.td-buttons
+{
+align-items: center;
+}
 .td-buttons button
 {
 margin:0px 5px !important;
+max-height: 50.36 !important;
 }
+
+
+
 
 .col-yellow
 {
@@ -409,6 +421,62 @@ color: #14a44d !important;
 color:#dc3545 !important;
 }
 
+
+.dataTables_empty
+{
+text-align: center !important;
+}
+.dataTables_paginate .paginate_button.previous a,
+.dataTables_paginate .paginate_button.next a {
+min-width: 85px !important;
+text-align: center;
+margin: auto 2px;
+border: 1px solid #d6d6d6;
+}
+
+#truckIcon
+{
+font-weight: bolder !important;
+}
+
+
+
+
+/* IMG */
+.image-class
+{
+    display: flex;
+    justify-content: center;
+    margin-bottom:20px
+}
+.image-class img
+{
+    object-fit: contain;
+    width: 150px;
+    height: 150px;
+    border:.5px solid black;
+    border-radius: 50%;
+
+}
+
+
+tbody td
+{
+min-height: 110px !important;
+vertical-align:middle;
+}
+
+
+tbody td img
+{
+display: block;
+margin-left: auto;
+margin-right: auto;
+height: 100px;
+width: 100px !important;
+border-radius: 50%;
+}
+
 @media screen and (min-width: 668px) 
 {
 
@@ -425,14 +493,10 @@ margin-left: 1rem;
 }
 
 
-
-/* Modal */
-
 .button-modal-container
 {
 display: flex;
 }
-
 
 .leftmodal-button-container button, .rightmodal-button-container button
 {
@@ -455,18 +519,17 @@ justify-content: flex-end;
 margin: 0px 5px;
 }
 
+/* table */
+thead th
+{
+text-align: start !important;
+}
+tbody td
+{
+text-align: start;   
 }
 
-
-
-
-
-
-
-
-
-
-
+}
 @media screen and (min-width: 1020px) 
 {
 
@@ -549,6 +612,5 @@ max-width: 150px;
 justify-content:center;
 align-items: center;
 }
-
 
 }

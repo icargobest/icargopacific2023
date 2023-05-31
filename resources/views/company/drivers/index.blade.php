@@ -40,12 +40,18 @@
 
         <div class="table-container">
             <table
-                class="table table-striped table-borderless hover"
-                id="companydrivers"
+            class="table table-striped table-bordered table-hover table-borderless hover"
+            id="companydrivers"
             >
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">#</th>
+                        <th 
+                        style="max-width:150px !important;text-align: center !important;"
+                        scope="col" 
+                        >
+                        Image
+                        </th>
                         <th scope="col" style="text-align: center">
                             Driver Name
                         </th>
@@ -57,7 +63,7 @@
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 350px"
+                            style="text-align: center !important; width: 250px"
                         >
                             Action
                         </th>
@@ -67,6 +73,7 @@
                     @foreach ($drivers as $user) @if ($user->archived == 0)
                     <tr>
                         <td>{{ $user->id }}</td>
+                        <td><img src="@if ($user->image != null) {{ asset('storage/images/driver/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image"></td>
                         <td>{{ $user->user->name }}</td>
                         <td>{{ $user->vehicle_type }}</td>
                         <td>{{ $user->plate_no }}</td>

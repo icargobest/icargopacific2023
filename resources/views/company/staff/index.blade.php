@@ -8,6 +8,9 @@
         width: 1.5rem;
         height: 1.5rem;
     }
+    table {
+    border-color: transparent !important;
+    }
 </style>
 <main class="container py-5" style="margin-top: -49px !important">
     <div class="main-wrapper border border-2" style="max-width: 100%">
@@ -40,20 +43,26 @@
 
         <div class="table-container">
             <table
-                class="table table-striped table-borderless hover"
+                class="table table-striped table-bordered table-hover table-borderless hover"
                 id="stafftable"
             >
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center">#</th>
-                        <th scope="col" style="text-align: center">Name</th>
-                        <th scope="col" style="text-align: center">Email</th>
-                        <th scope="col" style="text-align: center">
+                        <th scope="col" >Staff #</th>
+                        <th 
+                        style="max-width:150px !important;text-align: center !important;"
+                        scope="col" 
+                        >
+                        Image
+                        </th>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >
                             Contact No
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 250px"
                         >
                             Action
                         </th>
@@ -63,7 +72,10 @@
                     @foreach ($staff as $staff) @if ($staff->archived == 0)
                     <tr>
                         <td>{{$staff->id}}</td>
-                        <td class="capitalized">{{$staff->user->name}}</td>
+                        <td><img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" style="width:30px" alt="Profile Image"></td>
+                        <td class="capitalized">
+                            {{$staff->user->name}}
+                        </td>
                         <td>{{$staff->user->email}}</td>
                         <td>{{$staff->contact_no}}</td>
                         <td

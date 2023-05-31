@@ -1,35 +1,35 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Company | Order Tracking #{{ $ship->id }}</title>
+        <style>
+            th {
+                background-color: transparent !important;
+                color: black;
+                font-weight: normal;
+            }
+            td {
+                text-align: left !important;
+                padding: 5px;
+                color: #214D94;
+                font-weight: bold;
+            }
+            .status-green {
+                color: #00bf9a;
+            }
+        </style>
     </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
+    @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationCompany')
 
-    <style>
-        th {
-            background-color: transparent !important;
-            color: black;
-        }
-
-        td {
-            text-align: left;
-            padding: 5px;
-            color: #214D94;
-        }
-
-        .status-green {
-            color: #00bf9a;
-        }
-    </style>
-
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
-    <main class="container py-5" style="margin-top:-49px !important">
+    <main class="container py-5 mw-100" style="margin-top:-49px !important">
         <div class="mt-4">
             <h3 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">Order
                 Tracking #{{ $ship->id }}</h3>
         </div>
-        <div class="order-container container">
+        <div class="order-container container mw-100 px-0">
             <div class="cards-holder">
                 <card class="item-card bg-white btn-wrapper p-4">
                     {{-- START OF ORDER DETAILS --}}
@@ -42,7 +42,7 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
@@ -72,7 +72,7 @@
                                     <table style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th> <!-- This code is here because of nagiging vertical yung sender -->
                                         </tr>
                                         <tr>
@@ -102,11 +102,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                             <div class="row">
-                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                 <div class="col-lg-6 pt-2">
                                     <table style="width:100%">
                                         <tr>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-xl-none">
-                                    <hr class="opacity-75">
+                                    <hr class="opacity-75" style="border-color:#214D94;">
                                 </div>
                             </div>
                         </div>
@@ -158,22 +158,22 @@
                                 <img src="{{ asset($ship->photo) }}" class="card shadow-0 w-100" alt="television"
                                     style="object-fit:cover; min-width:140px; max-width:509px; max-height:250px; margin-left: auto; margin-right: auto;">
                             </a>
-                            <a href="{{ route('generateInvoice', $ship->id) }}" target="_blank">
+                            <a href="{{ route('company.generateInvoice', $ship->id) }}" target="_blank">
                                 <button type="button" class="btn btn-primary btn-block shadow-0 my-1"
                                     style="background-color: #214D94; min-width:140px; max-width:509px;">
                                     Invoice
                                 </button>
                             </a>
-                            <a href="{{ route('generateWaybill', $ship->id) }}" target="_blank">
-                                <button type="button" class="btn btn-dark btn-block shadow-0 my-1"
+                            <a href="{{ route('company.generateWaybill', $ship->id) }}" target="_blank">
+                                <button type="button" class="btn btn-warning btn-block shadow-0 my-1"
                                     style="min-width:140px; max-width:509px;">
                                     Waybill
                                 </button>
                             </a>
                             <a href="{{ route('viewOrder_Company', $ship->id) }}">
                                 <div class="my-1">
-                                    <button type="button" class="btn btn-block btn-dark shadow-0 mb-1"
-                                        style="min-width:140px; max-width:509px;">
+                                    <button type="button" class="btn btn-block btn-light shadow-0 mb-1"
+                                        style="min-width:140px; max-width:509px; border-color:#214D94;">
                                         BACK
                                     </button>
                                 </div>
@@ -183,7 +183,7 @@
                             @endif
                         </div>
                     </div>
-                    <hr class="opacity-75">
+                    <hr class="opacity-75" style="border-color:#214D94;">
                     {{-- END OF ORDER DETAILS --}}
 
                     {{-- TRACKING ORDER START --}}
@@ -210,7 +210,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS BEEN
                                                                 DELIVERED</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isDeliveredTime)) }}
                                                             </p>
 
                                                         </div>
@@ -240,7 +240,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS OUT
                                                                 FOR DELIVERY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDispatchedTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isDispatchedTime)) }}
                                                             </p>
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -269,7 +269,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS
                                                                 ARRIVED AT SORTING FACILITY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isArrivedTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isArrivedTime)) }}
                                                             </p>
 
                                                         </div>
@@ -296,7 +296,7 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS ALREADY BEEN TRANSFERRED TO ANOTHER COMPANY</h5>
-                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}</p>
+                                                            <p class="card-text mb-0">{{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}</p>
 
                                                         </div>
                                                         <div class="col-lg-5 mt-lg-5 text-sm-end">
@@ -323,7 +323,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER HAS
                                                                 ALREADY BEEN TRANSFERRED TO ANOTHER STATION</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isTransferredTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}
                                                             </p>
 
                                                         </div>
@@ -336,12 +336,8 @@
                                                 </div>
                                             </div>
                                         @endif
-<<<<<<< HEAD
                                         @endif
-                                        @if($log->isAssort == true)
-=======
                                         @if ($log->isAssort == true)
->>>>>>> develop
                                             <h4 class="fw-bold border-0">ARRIVED AT (current_station)</h4>
                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                 <div class="card-body">
@@ -358,7 +354,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
                                                                 ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isAssortTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isAssortTime)) }}
                                                             </p>
 
                                                         </div>
@@ -388,7 +384,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
                                                                 ALREADY BEEN PICKED UP BY LOGISTIC COMPANY</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPickUpTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isPickUpTime)) }}
                                                             </p>
 
                                                         </div>
@@ -400,6 +396,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endif
                                         @endif
                                         @if ($log->isProcessed == true)
                                             <h4 class="fw-bold border-0">PROCESSING</h4>
@@ -418,7 +415,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
                                                                 CURRENTLY BEING PROCESSED</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isProcessedTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isProcessedTime)) }}
                                                             </p>
 
                                                         </div>
@@ -448,7 +445,7 @@
                                                             <h5 class="card-title border-0 fw-bold">YOUR ORDER IS
                                                                 CURRENTLY PENDING</h5>
                                                             <p class="card-text mb-0">
-                                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}
+                                                                {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}
                                                             </p>
 
                                                         </div>
@@ -461,7 +458,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                    @endif
+
                                 @endforeach
                             </div>
                         </div>

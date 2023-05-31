@@ -11,6 +11,13 @@
        </div>
        <div class="modal-body">
           <fieldset disabled>
+            <div class="row">
+              <div class="col">
+                <div class="mb-4">
+                  <img src="@if ($user->image != null) {{ asset('storage/images/dispatcher/'.$user->user_id.'/'.$user->image) }} @else /img/default_dp.png @endif" height="100" width="100" alt="profile image">
+                </div>
+              </div>
+            </div>
              <div class="row mb-4">
                <div class="col"> 
                  <div class="form-outline">
@@ -31,7 +38,41 @@
                <label class="form-label" for="contact_no">Contact Number</label>
              </div>
 
-             
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="tel" value="{{$user->tel}}" class="form-control" />
+              <label class="form-label" for="contact_no">Tel No.</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="street" value="{{$user->street}}" class="form-control" />
+              <label class="form-label" for="contact_no">Street</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="city" value="{{$user->city}}" class="form-control" />
+              <label class="form-label" for="contact_no">City</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="postal_code" value="{{$user->postal_code}}" class="form-control" />
+              <label class="form-label" for="contact_no">Postal Code</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->state}}" class="form-control" />
+              <label class="form-label" for="contact_no">State</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->facebook ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Facebook</label>
+             </div>
+
+             <div class="form-outline mb-4">
+              <input type="text" id="contact_no" name="state" value="{{$user->linkedin ?? '-'}}" class="form-control" />
+              <label class="form-label" for="contact_no">Linkedin</label>
+             </div>
+
              <div class="form-outline mb-4">
               <input type="text" id="created_at" name="created_at" value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}" class="form-control" style="text-transform:capitalize;"/>
               <label class="form-label" for="contact_no">Created At</label>

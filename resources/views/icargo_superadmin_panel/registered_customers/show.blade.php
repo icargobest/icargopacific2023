@@ -2,14 +2,14 @@
     type="button"
     class="btn btn-warning btn-sm"
     data-mdb-toggle="modal"
-    data-mdb-target="#showModal{{$customer->id}}"
+    data-mdb-target="#showModalCustomer{{$customer->id}}"
 >
     SHOW
 </button>
 
 <div
     class="modal top fade"
-    id="showModal{{$customer->id}}"
+    id="showModalCustomer{{$customer->id}}"
     tabindex="-1"
     aria-hidden="true"
     data-mdb-backdrop="static"
@@ -27,6 +27,15 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <div class="image-class">
+                 <img
+                        src="
+                        @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
+                        @else /img/default_dp.png 
+                        @endif"
+                        alt="Profile Image"
+                />
+                </div>
                 <fieldset disabled>
                     <div class="form-outline mb-4">
                         <input
@@ -38,7 +47,7 @@
                             >User Account ID</label
                         >
                     </div>
-                    
+
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -50,87 +59,159 @@
                         >
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="name"
-                                type="text"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                value="{{ $customer->user->name }}"
-                                autocomplete="name"
-                                autofocus
-                                placeholder="Name"
-                            />
-                        </div>
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $customer->user->name ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >Name</label
+                        >
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $customer->user->email}}"
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
-                        </div>
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            value=" {{ $customer->user->email ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="updateEmail"
+                            >Email</label
+                        >
                     </div>
 
                     <hr />
 
                     {{-- contact number --}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="contact"
-                                type="text"
-                                class="form-control @error('contact_no') is-invalid @enderror"
-                                name="contact_no"
-                                value="{{ $customer->contact_no }}"
-                                autocomplete="contact_no"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                                minlength="11"
-                                maxlength="11"
-                                placeholder="Contact No"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{$customer->contact_no ?? '-'}}"
+                                    name="contact_no"
+                                    required
+                                />
+                                <label class="form-label" for="contact_no"
+                                    >Contact Number</label
+                                >
+                            </div>
                         </div>
                     </div>
-
-                    {{-- address--}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('address')
-                            is-invalid" @enderror" name="address"
-                            value="{{$customer->address }}"
-                            autocomplete="address" autofocus
-                            placeholder="Address">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{$customer->tel ?? '-'}}"
+                                    name="tel"
+                                    required
+                                />
+                                <label class="form-label" for="Tel"
+                                    >Telephone</label
+                                >
+                            </div>
                         </div>
                     </div>
-
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="street"
+                                    value="{{$customer->street ?? '-'}}"
+                                />
+                                <label class="form-label" for="sname"
+                                    >Street name</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="city"
+                                    value="{{$customer->city ?? '-'}}"
+                                />
+                                <label class="form-label" for="city"
+                                    >City</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="state"
+                                    value="{{$customer->state ?? '-'}}"
+                                />
+                                <label class="form-label" for="state"
+                                    >State/Country</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="postal_code"
+                                    value="{{$customer->postal_code ?? '-'}}"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Postal Code</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{$customer->facebook ?? '-'}}"
+                                />
+                                <label class="form-label" for="faceb"
+                                    >Facebook</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{$customer->linkedin ?? '-'}}"
+                                />
+                                <label class="form-label" for="linkin"
+                                    >LinkedIn</label
+                                >
+                            </div>
+                        </div>
+                    </div>
                     {{-- Created at --}}
                     <div class="form-outline mb-4">
                         <input
                             type="text"
                             name="created_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($user->user->created_at))}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($customer->user->created_at))}}"
                             class="form-control"
                         />
                     </div>
@@ -140,7 +221,7 @@
                         <input
                             type="text"
                             name="updated_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($user->user->updated_at))}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($customer->user->updated_at))}}"
                             class="form-control"
                         />
                     </div>

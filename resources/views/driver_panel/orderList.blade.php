@@ -1,12 +1,14 @@
+@include('partials.header')
 @extends('layouts.app')
-@include('partials.navigationDriver',['history' => "nav-selected"])
+@include('partials.navigationDriver',['order' => "nav-selected"])
 <title>Driver | Order List</title>
 
-<main class="container py-5" style="margin-top:-49px !important">
-    <div class="mt-4">
-      <h2 class="" style="border-bottom: 2px solid black; padding-bottom: 5px; letter-spacing:1px;">Order List</h3>
+<main class="container py-5" style="margin-top:-49px !important;">
+    <div class="driver-order-container mt-4 shadow">
+    <div class="p-3 driver-order-header">
+      <label class="h2" style="letter-spacing:1px;">Order List</label>
     </div>
-    <div class="main-wrapper" style=" max-width:">
+    <div class="main-wrapper">
 
         <section class="search-filter-container">
 
@@ -28,11 +30,11 @@
         </div>
 
 
-        <div class="table-container">
+        <div class="table-container px-3">
             <table class="table table-striped history-table border border-2 shadow">
                 <thead>
                 <tr>
-                    <th>ID{{$driverID}}</th>
+                    <th>ID</th>
                     <th>PHOTO</th>
                     <th>PICKUP</th>
                     <th>DROPOFF</th>
@@ -75,6 +77,7 @@
         </div>
         
     </div>
+</div>
 </main>
 
 

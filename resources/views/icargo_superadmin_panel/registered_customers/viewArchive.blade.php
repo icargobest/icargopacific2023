@@ -1,5 +1,7 @@
-<title>iCargo | Customer Archived</title>
-@extends('layouts.app') @include('partials.navigationCompany')
+<title>SuperAdmin | Customer Archived</title>
+@include('partials.header')
+@extends('layouts.app')
+@include('partials.navigationSuperAdmin', ['customers' =>"nav-selected"])
 <style>
     svg {
         width: 1.5rem;
@@ -12,7 +14,7 @@
             <h3 class="">Customer archived</h3>
         </div>
         <div class="addemployee" style="height: 75.6px">
-            <a href="{{route('customers.index')}}">
+            <a href="{{route('registered_customers.index')}}">
                 <button
                     type="button"
                     class="btn btn-primary m-button1"
@@ -23,41 +25,23 @@
             </a>
         </div>
 
-        <section class="search-filter-container">
-            <div class="top-container1" style="max-width: 800px">
-                <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
-                <div class="input-group rounded">
-                    <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Search Company"
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                    />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
-            </div>
-        </section>
-
         <div class="mt-2">@include('flash-message')</div>
 
         <div class="table-container">
-            <table class="table table-striped">
+            <table class="table table-striped table-borderless hover" id="registeredCustomersSuperadmin">
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center">
                             Customer ID
                         </th>
-                        <th scope="col" style="text-align: center">Name</th>
-                        <th scope="col" style="text-align: center">Email</th>
-                        <th scope="col" style="text-align: center">
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">
                             Contact No
                         </th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 300px;"
                         >
                             Action
                         </th>
@@ -84,5 +68,15 @@
         </div>
     </div>
 </main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        let table = new DataTable("#registeredCustomersSuperadmin");
+    });
+</script>
 
 @include('partials.footer')

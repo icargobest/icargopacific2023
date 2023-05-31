@@ -51,7 +51,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="/staff/advance_freight/index">
+                            <a class="nav-link" href="{{ route('staff.advFreightPanel') }}">
                                 <div class="link @if(isset($advance)){{$advance}}@endif">
                                     <i class="fa fa-forward link-i-1"></i>
                                     <span>Adv. Freight Forwarding</span>
@@ -60,7 +60,7 @@
                         </div>
                         <div id="toggle-icon" class="links" >
                             <div class="link "style="display: flex;justify-content: space-between;">
-                                <i class="fa fa-history link-i-1"><span>Employees</span></i>
+                                <i class="fa fa-users link-i-1"><span>Employees</span></i>
                                 <i id="" class="bx bxs-chevron-down"></i>
                             </div>
                         </div>
@@ -83,10 +83,26 @@
                         </div>
 
                         <div class="links">
-                            <a class="nav-link" href="/company/stations">
+                            <a class="nav-link" href="/staff/stations">
                                 <div class="link @if(isset($station)){{$station}}@endif">
                                     <i class="fa fa-charging-station link-i-1"></i>
                                     <span>Station</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="links">
+                            <a class="nav-link" href="/staff/track_parcel">
+                                <div class="link">
+                                    <i class="fa fa-qrcode link-i-1"></i>
+                                    <span>Track Parcel</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="links">
+                            <a class="nav-link" href="{{ route('assignStation_view') }}">
+                                <div class="link">
+                                    <i class="fas fa-location-dot link-i-1"></i>
+                                    <span>Assign Station</span>
                                 </div>
                             </a>
                         </div>

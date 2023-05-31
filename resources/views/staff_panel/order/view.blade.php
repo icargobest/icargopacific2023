@@ -1,34 +1,32 @@
-<head>
+    <head>
         <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
         <title>Staff | Order Details #{{ $ship->id }}</title>
-    </head>
+        <style>
+            th {
+                background-color: transparent !important;
+                color: black;
+                font-weight: normal;
+            }
 
+            td {
+                text-align: left !important;
+                font-weight: bold;
+                color: #214D94;
+            }
+        </style>
+        <!-- MDB -->
+        <link rel="stylesheet" href="/css/mdb.min.css" />
+    </head>
     {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
     @include('partials.header')
     @extends('layouts.app')
     @include('partials.navigationStaff', ['order' => 'nav-selected'])
 
-    <!-- MDB -->
-    <link rel="stylesheet" href="/css/mdb.min.css" />
-
-    <style>
-        th {
-            background-color: transparent !important;
-            color: black;
-            font-weight: normal;
-        }
-
-        td {
-            text-align: left;
-            font-weight: bold;
-        }
-    </style>
-
     {{-- ORDER BUTTON CONTAINER RECONCEPTUALIZE --}}
     <!-- Exp start -->
     <!-- <button type="button" class="btn text-white mb-1" style="background-color:#214D94;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $ship->id }}">
-VIEW
-</button> -->
+    VIEW
+    </button> -->
 
     {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
     <!-- tracking modal -->
@@ -73,15 +71,10 @@ VIEW
                                             $ship->bid_amount != null &&
                                             $ship->status != 'Cancelled' &&
                                             $ship->status != 'Delivered')
-                                        <div class="col-md-12 d-flex justify-content-center">
-                                            <a href="{{ route('trackOrder_Staff', $ship->id) }}"
-                                                class="btn text-white btn-block " style="background-color:#214D94;">
-                                                Track Order
-                                            </a>
-                                        </div>
                                         <a class="cardItem my-1" href="{{ route('freightStaff') }}">
                                             <div class="d-flex justify-content-center">
-                                                <button type="button" class="btn btn-block btn-dark text-white mb-1">
+                                                <button type="button" class="btn btn-block btn-light mb-1"
+                                                    style="border-color:#214D94;">
                                                     BACK
                                                 </button>
                                             </div>
@@ -108,8 +101,8 @@ VIEW
                                     </div>
                                     <a class="cardItem mt-2" href="{{ route('staff.order') }}">
                                         <div class="d-flex justify-content-center">
-                                            <button type="button"
-                                                class="btn btn-block btn-dark shadow-0 text-white mb-1">
+                                            <button type="button" class="btn btn-block btn-light shadow-0 mb-1"
+                                                style="border-color:#214D94;">
                                                 BACK
                                             </button>
                                             </form>
@@ -127,7 +120,7 @@ VIEW
                                     <table class="m-2" style="width:100%">
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">SENDER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">SENDER</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -156,7 +149,7 @@ VIEW
                                         </tr>
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">RECEIVER</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">RECEIVER</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -185,7 +178,7 @@ VIEW
                                         </tr>
                                         <tr>
                                             <th colspan="2">
-                                                <h5 class="fw-bold opacity-75">PARCEL INFORMATION</h5>
+                                                <h5 class="fw-bold opacity-75 text-warning">PARCEL INFORMATION</h5>
                                             </th>
                                         </tr>
                                         <tr>
@@ -200,7 +193,7 @@ VIEW
                                         </tr>
                                         <tr>
                                             <th>Parcel Item:</th>
-                                            <td>{{ $ship->category }}</td>
+                                            <td>{{ $ship->item }}</td>
                                         </tr>
                                         <tr>
                                             <th>Mode of Payment:</th>
@@ -218,7 +211,7 @@ VIEW
                         </div>
 
                         <!-- START ACCEPT BID TABLE -->
-                        <hr class="px-3" class="opacity-75">
+                        <hr class="px-3 opacity-75" style="border-color:#214D94;">
                         <section class="overflow-auto">
                             <table class="table table-striped table-hover">
                                 <thead>

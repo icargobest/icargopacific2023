@@ -9,7 +9,6 @@
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "^2.0",
-        "endroid/qr-code": "^4.8",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -22,7 +21,6 @@
         "laravel/ui": "^4.2",
         "livewire/livewire": "^2.12",
         "milon/barcode": "^10.0",
-        "picqer/php-barcode-generator": "^2.2",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "stripe/stripe-php": "^10.12"
     },

@@ -27,8 +27,13 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <div class="image-class">
+                    <img src="{{ asset($company->image 
+                        ? 'storage/images/company/' . $company->user->id . '/' . $company->image 
+                        : 'img/default_dp.png') }}"
+                    alt="Profile Image">
+                </div>
                 <fieldset disabled>
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -39,7 +44,6 @@
                             >User Account ID</label
                         >
                     </div>
-                    
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -50,95 +54,220 @@
                             >Company ID</label
                         >
                     </div>
-
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="name"
-                                type="text"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                value="{{ $company->user->name }}"
-                                autocomplete="name"
-                                autofocus
-                                placeholder="Name"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="name"
+                                    type="text"
+                                    class="form-control"
+                                    name="name"
+                                    required
+                                    autocomplete="name"
+                                    value="{{$company->user->name}}"
+                                />
+                                <label class="form-label" for="cname"
+                                    >Company Name</label
+                                >
+                            </div>
                         </div>
                     </div>
-
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i
-                                    class="bi bi-envelope-fill text-secondary"
-                                ></i>
-                            </span>
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                value="{{ $company->user->email}}"
-                                autocomplete="email"
-                                placeholder="E-mail Address"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="contact_no"
+                                    required
+                                    autocomplete="contact_no"
+                                    value="{{$company->contact_no}}"
+                                />
+                                <label class="form-label" for="mobile"
+                                    >Contact Number</label
+                                >
+                            </div>
                         </div>
                     </div>
-
-                    <hr />
-                    {{-- contact number --}}
-
-                    <!-- Contact input -->
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input
-                                id="contact"
-                                type="text"
-                                class="form-control @error('contact_no') is-invalid @enderror"
-                                name="contact_no"
-                                value="{{ $company->contact_no }}"
-                                autocomplete="contact_no"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                                minlength="11"
-                                maxlength="11"
-                                placeholder="Contact No"
-                            />
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="contact_name"
+                                    required
+                                    autocomplete="contact_name"
+                                    value="{{$company->contact_name}}"
+                                />
+                                <label class="form-label" for="mobile"
+                                    >Contact Name</label
+                                >
+                            </div>
                         </div>
                     </div>
-
-                    {{-- contact name --}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('contact_name')
-                            is-invalid" @enderror" name="contact_name" value="{{
-                            $company->contact_name }}" 
-                            autocomplete="contact_name" autofocus
-                            placeholder="Contact Name">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="tel"
+                                    required
+                                    autocomplete="tel"
+                                    value="{{$company->tel}}"
+                                />
+                                <label class="form-label" for="Tel"
+                                    >Telephone</label
+                                >
+                            </div>
                         </div>
                     </div>
-
-                    {{-- company address--}}
                     <div class="row mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-person-fill text-secondary"></i>
-                            </span>
-                            <input id="contactnum" type="text"
-                            class="form-control @error('company_address')
-                            is-invalid" @enderror" name="company_address"
-                            value="{{$company->company_address }}"
-                            autocomplete="company_address" autofocus
-                            placeholder="Company Address">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="email"
+                                    required
+                                    autocomplete="email"
+                                    value="{{$company->user->email}}"
+                                />
+                                <label class="form-label" for="email"
+                                    >Email address</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="street"
+                                    required
+                                    autocomplete="street"
+                                    value="{{$company->street}}"
+                                />
+                                <label class="form-label" for="sname"
+                                    >Street name</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="city"
+                                    required
+                                    autocomplete="city"
+                                    value="{{$company->city}}"
+                                />
+                                <label class="form-label" for="city"
+                                    >City</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="state"
+                                    required
+                                    autocomplete="state"
+                                    value="{{$company->state}}"
+                                />
+                                <label class="form-label" for="state"
+                                    >State/Country</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="postal_code"
+                                    required
+                                    autocomplete="postal_code"
+                                    value="{{$company->postal_code}}"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Postal Code</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id=""
+                                    type="text"
+                                    class="form-control"
+                                    name="website"
+                                    autocomplete="website"
+                                    value="{{$company->website ?? '-'}}"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Websit Link</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="facebook"
+                                    type="text"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{$company->facebook}}"
+                                    required
+                                    autocomplete="facebook"
+                                    autofocus
+                                    placeholder="Facebook Link"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Facebook Link</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    id="linkedin"
+                                    type="text"
+                                    class="form-control"
+                                    name="linkedin"
+                                    autocomplete="linkedin"
+                                    value="{{$company->linkedin ?? '-'}}"
+                                />
+                                <label class="form-label" for="postal"
+                                    >Linkedin Link</label
+                                >
+                            </div>
                         </div>
                     </div>
 
@@ -150,6 +279,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($company->user->created_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Created At"
+                        >Created At</label>
                     </div>
 
                     {{-- Updated at --}}
@@ -160,6 +291,8 @@
                             value="{{date('M d, Y h:i:s A', strtotime($company->user->updated_at))}}"
                             class="form-control"
                         />
+                        <label class="form-label" for="Updated At"
+                        >Updated At</label>
                     </div>
                 </fieldset>
                 <div class="modal-footer">

@@ -3,13 +3,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shipment;
+use App\Models\Driver;
 use App\Models\OrderHistory;
+use App\Models\Dispatcher;
 use Illuminate\Support\Facades\Auth;
 class DispatcherQrScannerController extends Controller
 {
     public function index(Request $request)
     {
-        return view('dispatcher_panel.dispatcher');
+        return view('dispatcher_panel.dispatcherParcelTracking');
     }
 
     // Function to show the page we want to log in by scanner of QR code
@@ -48,11 +50,19 @@ class DispatcherQrScannerController extends Controller
                 $tracking_number = trim($data[1]);
                 $id = trim($data[2]);
             }
+            $user = Auth::user()->id;
             $shipment = Shipment::where('user_id', $user_id)->where('id', $id)->first();
+            $dispatcher = Dispatcher::where('user_id', $user)->first();
             if ($shipment) {
                 if ($tracking_number && $shipment->tracking_number != $tracking_number) {
                     $result = 0;
                 } else {
+                    if ($shipment->company_id != $dispatcher->company_id) {
+                        $result = 1;
+                        $status = 'driver';
+                        $tracking_number = 'Invalid';
+                        return response()->json(['result' => $result, 'status' => $status, 'tracking_number' => $tracking_number]);
+                    }
                     $result = 1;
                     $tracking_number = $shipment->tracking_number;
                     $status = $shipment->status;
@@ -111,6 +121,14 @@ class DispatcherQrScannerController extends Controller
         if ($shipment) {
             $shipment->status = 'Dispatched';
             $shipment->save();
+            $driver_id = $shipment->driver_id;
+            $driver = Driver::find($driver_id)->first();
+            if ($driver) {
+                $driver->dispatcher_id = null;
+                $driver->save();
+                $shipment->driver_id = null;
+                $shipment->save();
+            }
         }
         if ($time) {
             $time->isDispatched = true;
@@ -145,6 +163,14 @@ class DispatcherQrScannerController extends Controller
         if ($shipment) {
             $shipment->status = 'Arrived';
             $shipment->save();
+            $driver_id = $shipment->driver_id;
+            $driver = Driver::find($driver_id)->first();
+            if ($driver) {
+                $driver->dispatcher_id = null;
+                $driver->save();
+                $shipment->driver_id = null;
+                $shipment->save();
+            }
         }
         if ($time) {
             $time->isArrived = true;

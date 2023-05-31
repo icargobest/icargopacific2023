@@ -27,8 +27,10 @@
                 ></button>
             </div>
             <div class="modal-body">
+                <div class="image-class">
+                    <img src="@if ($driver->image != null) {{ asset('storage/images/driver/'.$driver->user_id.'/'.$driver->image) }} @else /img/default_dp.png @endif" alt="profile image"/>
+                </div>
                 <fieldset disabled>
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"
@@ -52,42 +54,26 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        @if ($driver->company && $driver->company->user)
-                        <input
-                            type="text"
-                            value="{{ $driver->company->user->name }}"
-                            class="form-control"
-                        />
-                        @else
-                        <input
-                            type="text"
-                            value="Company not found"
-                            class="form-control"
-                        />
-                        @endif
-                        <label class="form-label" for="updateEmail"
-                            >Company Name</label
-                        >
-                    </div>
-
-                    {{-- Driver ID --}}
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="id"
-                                    name="id"
-                                    value="{{$driver->user->id}}"
-                                    class="form-control"
-                                />
-                                <label class="form-label" for="id"
-                                    >Driver ID</label
-                                >
-                            </div>
+                        <div class="form-outline mb-4">
+                            @if($driver->company && $driver->company->user)
+                            <input
+                                type="text"
+                                value="{{ $driver->company->user->name }}"
+                                class="form-control"
+                            />
+                            @else
+                            <input
+                                type="text"
+                                value="Company not found"
+                                class="form-control"
+                            />
+                            @endif
+                            <label class="form-label" for="email"
+                                >Company Name</label
+                            >
                         </div>
                     </div>
-
+                    <hr />
                     <!-- Name  -->
                     <div class="form-outline mb-4">
                         <input
@@ -108,7 +94,7 @@
                             type="email"
                             id="email"
                             name="email"
-                            value="{{$driver->user->email}}"
+                            value="{{$driver->user->email ?? '-'}}"
                             class="form-control"
                         />
                         <label class="form-label" for="email"
@@ -122,7 +108,7 @@
                             type="text"
                             id="vehicle_type"
                             name="vehicle_type"
-                            value="{{$driver->vehicle_type}}"
+                            value="{{$driver->vehicle_type ?? '-'}}"
                             class="form-control"
                         />
                         <label class="form-label" for="vehicle_type"
@@ -136,12 +122,73 @@
                             type="text"
                             id="contact_no"
                             name="contact_no"
-                            value="{{$driver->contact_no}}"
+                            value="{{$driver->contact_no ?? '-'}}"
                             class="form-control"
                         />
                         <label class="form-label" for="contact_no"
                             >Contact No.</label
                         >
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            id="contact_no"
+                            name="tel"
+                            value="{{$driver->tel ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="contact_no"
+                            >Tel No.</label
+                        >
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            id="contact_no"
+                            name="street"
+                            value="{{$driver->street ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="contact_no"
+                            >Street</label
+                        >
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            id="contact_no"
+                            name="city"
+                            value="{{$driver->city ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="contact_no">City</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            id="contact_no"
+                            name="postal_code"
+                            value="{{$driver->postal_code ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="contact_no"
+                            >Postal Code</label
+                        >
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input
+                            type="text"
+                            id="contact_no"
+                            name="state"
+                            value="{{$driver->state ?? '-'}}"
+                            class="form-control"
+                        />
+                        <label class="form-label" for="contact_no">State</label>
                     </div>
 
                     <!-- License No.  -->
@@ -151,11 +198,11 @@
                             type="text"
                             id="license_number"
                             name="license_number"
-                            value="{{$driver->license_number}}"
+                            value="{{$driver->license_number ?? '-'}}"
                             class="form-control"
                         />
                         <label class="form-label" for="license_number"
-                            >License No.</label
+                            >Contact No.</label
                         >
                     </div>
 
@@ -166,21 +213,53 @@
                             type="text"
                             id="plate_no"
                             name="plate_no"
-                            value="{{$driver->plate_no}}"
+                            value="{{$driver->plate_no ?? '-'}}"
                             class="form-control"
                         />
                         <label class="form-label" for="plate_no"
                             >Plate No.</label
                         >
                     </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{ $driver->facebook ?? '-' }}"
+                                    id="faceb"
+                                    required
+                                />
+                                <label class="form-label" for="faceb"
+                                    >Facebook</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="linkedin"
+                                    value="{{ $driver->linkedin ?? '-' }}"
+                                    id="linkin"
+                                />
+                                <label class="form-label" for="linkin"
+                                    >LinkedIn</label
+                                >
+                            </div>
+                        </div>
+                    </div>
                     <!-- Created At. -->
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"
                             id="created_at"
                             name="created_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($driver->user->created_at))}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($driver->created_at))}}"
                             class="form-control"
                         />
                         <label class="form-label" for="created_at"
@@ -193,7 +272,7 @@
                             type="text"
                             id="updated_at"
                             name="updated_at"
-                            value="{{date('M d, Y h:i:s A', strtotime($driver->user->updated_at))}}"
+                            value="{{date('M d, Y h:i:s A', strtotime($driver->updated_at))}}"
                             class="form-control"
                         />
                         <label class="form-label" for="updated_at"

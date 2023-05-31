@@ -1,6 +1,7 @@
-<title>iCargo | Customers</title>
-
-@extends('layouts.app') @include('partials.navigationSuperAdmin')
+<title>SuperAdmin | Customers</title>
+@include('partials.header')
+@extends('layouts.app')
+@include('partials.navigationSuperAdmin', ['customers' =>"nav-selected"])
 
 <main class="container py-5" style="margin-top: -49px !important">
     <div class="main-wrapper border border-2" style="max-width: 100%">
@@ -10,17 +11,18 @@
 
         <div class="addemployee" style="">
             @include('icargo_superadmin_panel.registered_customers.create')
+            <a href="{{ route('registered_customers.viewArchive') }}">
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm m-button2"
+                    style="height: 32.8px"
+                >
+                    Archived
+                </button>
+            </a>
         </div>
 
-        <a href="{{ route('registered_customers.viewArchive') }}">
-            <button
-                type="button"
-                class="btn btn-success btn-sm m-button2"
-                style="height: 32.8px"
-            >
-                Archived
-            </button>
-        </a>
+
 
         <div class="mt-2">@include('flash-message')</div>
 
@@ -28,15 +30,14 @@
             <table class="table table-striped table-borderless hover" id="registeredCustomers">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center">Customer ID</th>
-                        <th scope="col" style="text-align: center">Name</th>
-                        <th scope="col" style="text-align: center">Email</th>
-                        <th scope="col" style="text-align: center">
-                            Contact No
-                        </th>
+                        <th scope="col" >Customer ID</th>
+                        <th scope="col" style="text-align: center !Important">Icon</th>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Contact No</th>
                         <th
                             scope="col"
-                            style="text-align: center; width: 300px"
+                            style="text-align: center !important; width: 300px"
                         >
                             Action
                         </th>
@@ -46,7 +47,16 @@
                     @foreach ($customers as $customer)
                     <tr>
                         <td>{{ $customer->id }}</td>
-                        <td class="capitalized">{{ $customer->user->name }}</td>
+                        <td><img
+                            src="
+                            @if ($customer->photo != null) {{ asset('storage/' . $customer->photo) }} 
+                            @else /img/default_dp.png 
+                            @endif"
+                            alt="Profile Image" style="width:30px"
+                    /></td>
+                        <td class="capitalized">
+                            {{ $customer->user->name }}
+                        </td>
                         <td>{{ $customer->user->email }}</td>
                         <td>{{ $customer->contact_no }}</td>
                         <td

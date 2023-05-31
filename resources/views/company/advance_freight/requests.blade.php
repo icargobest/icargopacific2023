@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@include('partials.navigationCompany')
+{{-- @extends('layouts.app')
+@include('partials.navigationCompany') --}}
 
 <head>
     <link rel="stylesheet" href="{{ asset('css/style_order.css') }}">
@@ -67,6 +67,6 @@
     </div>
   </div>
 
-@include('partials.footer')	
+{{-- @include('partials.footer')	 --}}
 
 

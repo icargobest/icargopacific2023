@@ -2,13 +2,21 @@
     
     <title>Staff | Transfer Forwarding</title>
 
-    
+    <style>
+        #table-div th, #table-div td{
+          background-color: transparent !important;
+          color:black !important;
+          text-align: left !important;
+          
+        }
+      </style>
 
 </head>
 
   {{-- @include('partials.navigation', ['waybill' => 'fw-bold']) --}}
 @extends('layouts.app')
 @include('partials.navigationStaff')
+@include('partials.header')
 
 
 <div class="content-containe mx-4 pt-4">
@@ -135,13 +143,6 @@
     </div>
 </div>
 
-<style>
-    #table-div th, #table-div td{
-      background-color: transparent !important;
-      color:black !important;
-      text-align: left !important;
-      
-    }
-  </style>
+
 
 @include('partials.footer')

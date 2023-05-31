@@ -2,19 +2,19 @@
 @extends('layouts.app') @include('partials.navigationCompany', ['history' => 'nav-selected'])
 
 <title>Company | Order History</title>
-<main class="container py-5" style="margin-top: -49px !important">
-    <div class="mt-4">
-        <h2 class=""
+<main class="container py-5" style="margin-top: -49px !important;">
+    <div class="shadow"></div>
+    <div class="mt-4 driver-order-header py-2 px-4">
+        <h3 class=""
             style="
-                border-bottom: 2px solid black;
-                padding-bottom: 5px;
                 letter-spacing: 1px;
+                margin-bottom: 0px !important;
             ">
-            ORDER HISTORY
-        </h2>
+            Order History
+        </h3>
     </div>
-    <div class="main-wrapper">
-        <section class="search-filter-container mb-4">
+    <div class="main-wrapper shadow" style="background-color:white;">
+        {{-- <section class="search-filter-container mb-4">
             <div class="top-container1" style="max-width: 800px; margin-top: 15px">
                 <h5 class="fw-normal mb-2 d-inline">SEARCH:</h5>
                 <div class="input-group rounded">
@@ -25,7 +25,7 @@
                     </span>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <div class="mt-2">@include('flash-message')</div>
 
@@ -38,10 +38,10 @@
                         <th scope="col">Photo</th>
                         <th scope="col">Pickup</th>
                         <th scope="col">Dropoff</th>
-                        <th scope="col">Parcel Size&Width</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Delivered Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody class="history-tbody">
@@ -63,17 +63,13 @@
                                         {{ $shipment->recipient->recipient_state }},
                                         {{ $shipment->recipient->recipient_zip }}
                                     </td>
-                                    <td>
-                                        {{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
-                                        | {{ intval($shipment->weight) }}Kg
-                                    </td>
                                     @foreach ($orderLogs as $log)
                                         @if ($log->shipment_id == $shipment->id)
                                             <td>
-                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}
+                                                {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}
                                             </td>
                                             <td>
-                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
+                                                {{ date('Y-m-d h:i A', strtotime($log->isDeliveredTime)) }}
                                             </td>
                                             <td class="" style="overflow: auto">
                                                 <label class="status-deliveredv2">
@@ -82,6 +78,9 @@
                                             </td>
                                         @endif
                                     @endforeach
+                                    <td>
+                                        @include('order.show')
+                                    </td>
                                 </tr>
                             @endif
                         @endif

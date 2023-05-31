@@ -1,6 +1,3 @@
-<button type="button" class="btn btn-primary m-button1" style="" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Add Company</button>
-
-
 <!-- Modal -->
 <div class="modal top fade" id="addCompanyModal" aria-labelledby="addCompanyModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
@@ -12,7 +9,7 @@
         <div class="modal-body">
           <form method="POST" action="{{ route('companies.store') }}">
             @csrf
-            @include('flash-message')
+            {{-- @include('flash-message') --}}
             <div class="row mb-4">
                 <div class="input-group">
                     <span class="input-group-text">
@@ -148,7 +145,7 @@
                         Back
                     </button>
                 </div>
-
+            </div>
           </form>
         </div>
 

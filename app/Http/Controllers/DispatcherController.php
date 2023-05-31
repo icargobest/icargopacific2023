@@ -7,12 +7,17 @@ use App\Models\Dispatcher;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Company;
+use App\Models\VerifyToken;
+use App\Models\Station;
 use Exception;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use App\Mail\VerificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class DispatcherController extends Controller
 {
@@ -25,22 +30,35 @@ class DispatcherController extends Controller
 
     public function index()
     {
+        $station = Station::all();
+
         $id = Auth::id();
         $company = Company::where('user_id', $id)->first();
         $user_id = $company->id;
         $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
-        return view('company/dispatcher.index', compact('dispatchers'));
+        return view('company/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
     }
 
     public function staffIndex()
     {
+        $station = Station::all();
+        
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first();
         if ($staff) {
             $company_id = $staff->company_id;
             $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
         }
-        return view('staff_panel/dispatcher.index', compact('dispatchers'));
+        return view('staff_panel/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
+    }
+
+    public function superadminIndex()
+    {
+        $dispatchers = Dispatcher::with('company.user')
+            ->where('archived', 0)
+            ->get();
+
+        return view('icargo_superadmin_panel.dispatcher.index', compact('dispatchers'));
     }
 
     function viewArchive(){
@@ -61,6 +79,15 @@ class DispatcherController extends Controller
             $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
         }
         return view('staff_panel/dispatcher.viewArchive', compact('dispatchers'));
+    }
+
+    public function superadminviewArchive(){
+
+        $dispatchers = Dispatcher::with('company.user')
+            ->where('archived', 1)
+            ->get();
+
+        return view('icargo_superadmin_panel.dispatcher.viewArchive', compact('dispatchers'));
     }
 
 
@@ -99,10 +126,23 @@ class DispatcherController extends Controller
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
+            if($request->hasfile('image')){
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('storage/images/dispatcher/'.$user->id ,$filename);
+            }
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
                 'company_id' => $user_id,
+                'station_id' => $request->station_id,
                 'contact_no' =>  $otherValidation['contact_no'],
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'image' =>  $filename,
             ]);
           
             DB::commit();
@@ -127,20 +167,116 @@ class DispatcherController extends Controller
 
     public function update($id, Request $request)
     {
-        $dispatcherData = [
-            'contact_no' => $request->contact_no,
-        ];
-
-        $userData = [
-            'name' => $request->input('name'),
-        ];
-        
         $dispatcher = Dispatcher::find($id);
-        $dispatcher->update($dispatcherData);
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
 
         $user = $dispatcher->user;
-        $user->update($userData);
+        $user->update( [
+            'name' => $request->name,
+            'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+        ]);
+
+        if($request->hasfile('image')){
+            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
+        }else{
+            $filename = $dispatcher->image;
+        }
+        $dispatcherData = [
+            'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'image' =>  $filename,
+        ];
+        
+        $dispatcher->update($dispatcherData);
+        
         return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
+    }
+
+    public function superadminUpdate($id, Request $request)
+    {
+        $dispatcher = Dispatcher::find($id);
+        $get_token = $request->otp;
+        $get_token = VerifyToken::where('token', $get_token)->first();
+
+        $validated = $this->validate($request, [
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password.confirmed' => 'Password does not match.',
+            'password.min' => 'Password must be a minimum of 8 characters',
+        ]);
+
+        if($get_token){
+            $get_token->is_activated = 1;
+            $get_token->save();
+            $user = $dispatcher->user;
+            $user->update( [
+                'name' => $request->name,
+                'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
+            ]);
+
+            if($request->hasfile('image')){
+                $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
+                if(File::exists($destination)){
+                    File::delete($destination);
+                }
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
+            }else{
+                $filename = $dispatcher->image;
+            }
+            $dispatcherData = [
+                'contact_no' => $request->contact_no,
+                'tel' => $request->tel,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postal_code' => $request->postal_code,
+                'image' =>  $filename,
+            ];
+            
+            $dispatcher->update($dispatcherData);
+
+            $delete_token = VerifyToken::where('token', $get_token->token)->first();
+            $delete_token->delete();
+
+            return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
+        }
+        else{
+            return back()->with('warning','Please verify the account with OTP before modifying data.');
+        };
+    }
+
+    public function sendOTP($id){
+
+        $data = User::findOrFail($id);
+
+        $validToken = rand(10,100..'2022');
+        $get_token = new VerifyToken();
+        $get_token->token = $validToken;
+        $get_token->email = $data['email'];
+        $get_token->save();
+        $get_user_email = $data['email'];
+        $get_user_name = $data['name'];
+        Mail::to($data['email'])->send(new VerificationMail($get_user_email, $validToken, $get_user_name));
+
+        return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
     }
 
     public function destroy($id){
@@ -175,22 +311,91 @@ class DispatcherController extends Controller
 
     public function assignDriver($shipment_id, $driver_id)
     {
-        $shipmentData = [
-            'driver_id' => $driver_id,
-        ];
+        $driver = Driver::find($driver_id);
+        if($driver){
+            $driver->dispatcher_id = Auth::id();
+            $driver->save();
+        }
 
-        $driverData = [
-            'dispatcher_id' => Auth::id()
-        ];
+        $userID = Auth::id();
+        $dispatcherID = Dispatcher::where('user_id', $userID)->first();
+        if ($dispatcherID) {
+            $shipment = Shipment::find($shipment_id);
+            if($shipment){
+                $shipment->driver_id = $driver_id;
+                $shipment->dispatcher_id = $dispatcherID->id;
+                $shipment->save();
+            }
 
-        $shipment = Shipment::find($shipment_id);
-        $shipment->update($shipmentData);
-
-        $dispatch = Driver::where('id', $driver_id)->first();
-        $dispatch->update($driverData);
-
+        }
+        
         return back()->with('success', 'Driver was successfully assigned!');
         
+    }
+
+    public function dispatcherProfile()
+    {
+        $user_id = Auth::id();
+        $dispatchers = $this->dispatcher->with('user')->where('user_id', $user_id)->get();
+        return view('dispatcher_panel/profile.user', compact('dispatchers'));
+    }
+
+    public function updateProfile($id, Request $request)
+    {
+        $validated = $this->validate($request, [
+            'facebook' => ['required', 'url', 'max:255'],
+            'facebook.required' => 'Facebook Link is required',
+        ]);
+
+        $dispatcherData = [
+            'vehicle_type' => $request->vehicle_type,
+            'plate_no' => $request->plate_no,
+            'license_number' => $request->license_number,
+            'contact_no' => $request->contact_no,
+            'tel' => $request->tel,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'facebook' => $validated['facebook'],
+            'linkedin' => $request->linkedin,
+        ];
+
+        $userData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+        
+        $dispatcher = Dispatcher::find($id);
+        $dispatcher->update($dispatcherData);
+
+        $user = $dispatcher->user;
+        $user->update($userData);
+
+        return back()->with('success', 'Updated successfully!');
+        
+    }
+
+    public function updateImage($id, Request $request)
+    {
+        $dispatcher = Dispatcher::find($id);
+        if($request->hasfile('image')){
+            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
+        }
+        $dispatcherData = [
+            'image' =>  $filename,
+        ];
+        
+        $dispatcher->update($dispatcherData);
+
+        return back()->with('success', 'Profile picture updated successfully!');
     }
 
 }

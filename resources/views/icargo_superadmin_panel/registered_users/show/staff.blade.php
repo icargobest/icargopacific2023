@@ -28,46 +28,24 @@
             </div>
             <div class="modal-body">
                 <fieldset disabled>
-
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            value=" {{ $staff->user->id }}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="updateEmail"
-                            >User Account ID</label
-                        >
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            value=" {{ $staff->company_id }}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="updateEmail"
-                            >Company ID</label
-                        >
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        @if ($staff->company && $staff->company->user)
-                        <input
-                            type="text"
-                            value="{{ $staff->company->user->name }}"
-                            class="form-control"
-                        />
-                        @else
-                        <input
-                            type="text"
-                            value="Company not found"
-                            class="form-control"
-                        />
-                        @endif
-                        <label class="form-label" for="updateEmail"
-                            >Company Name</label
-                        >
+                <div class="image-class">
+                    <img src="{{ $staff->photo != null ? asset('storage/' . $staff->photo) : asset('img/default_dp.png') }}" alt="Profile Image">
+                </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="text"
+                                    id="updateFullName"
+                                    name="updateFullName"
+                                    value="{{$staff->id}}"
+                                    class="form-control"
+                                />
+                                <label class="form-label" for="id"
+                                    >Staff ID</label
+                                >
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -81,7 +59,7 @@
                                     class="form-control"
                                 />
                                 <label class="form-label" for="id"
-                                    >Staff ID</label
+                                    >Full Name</label
                                 >
                             </div>
                         </div>
@@ -97,25 +75,141 @@
                             value="{{$staff->user->email}}"
                             class="form-control"
                         />
-                        <label class="form-label" for="id">Staff Email</label>
+                        <label class="form-label" for="id">Email</label>
                     </div>
 
-                    <!-- Contact No input -->
-
-                    <div class="form-outline mb-4">
-                        <input
-                            type="text"
-                            id="updateContactNo"
-                            name="updateContactNo"
-                            value="{{$staff->contact_no}}"
-                            class="form-control"
-                        />
-                        <label class="form-label" for="id">Password</label>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    class="form-control"
+                                    value="{{$staff->contact_no}}"
+                                    autocomplete="mobile"
+                                    name="mobile"
+                                />
+                                <label class="form-label" for="mobile"
+                                    >Contact Number</label
+                                >
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Contact No input -->
-
-                    <div class="form-outline mb-4">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    class="form-control"
+                                    value="{{$staff->tel ?? '-'}}"
+                                    autocomplete="tel"
+                                    name="tel"
+                                />
+                                <label class="form-label" for="Tel"
+                                    >Telephone</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{ $staff->street ?? '-' }} "
+                                    name="street"
+                                    autocomplete="street"
+                                    required
+                                />
+                                <label class="form-label" for="sname"
+                                    >Street name</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{ $staff->city ?? '-' }}"
+                                    name="city"
+                                    autocomplete="city"
+                                    required
+                                />
+                                <label class="form-label" for="city"
+                                    >City</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{ $staff->state ?? '-' }}"
+                                    name="state"
+                                    autocomplete="state"
+                                    required
+                                />
+                                <label class="form-label" for="state"
+                                    >State/Country</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="postal_code"
+                                    value="{{ $staff->postal_code ?? '-' }}"
+                                    autocomplete="postal_code"
+                                    required
+                                />
+                                <label class="form-label" for="postal"
+                                    >Postal Code</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="facebook"
+                                    value="{{ $staff->facebook ?? '-' }}"
+                                    id="faceb"
+                                    required
+                                />
+                                <label class="form-label" for="faceb"
+                                    >Facebook</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    name="linkedin"
+                                    value="{{ $staff->linkedin ?? '-' }}"
+                                    id="linkin"
+                                />
+                                <label class="form-label" for="linkin"
+                                    >LinkedIn</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-outline mb-4">
                         <input
                             type="text"
                             id="updateStaff"
@@ -124,9 +218,6 @@
                             class="form-control"
                         />
                     </div>
-
-                    <!-- Contact No input -->
-
                     <div class="form-outline mb-4">
                         <input
                             type="text"

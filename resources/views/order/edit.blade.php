@@ -4,21 +4,24 @@
 
 </head>
 
+@include('partials.header')
 @include('layouts.app')
 @include('partials.navigationUser', ['order' => 'nav-selected'])
 
 
-<div class="waybillForm-container container">
+<div class="waybillForm-container container p-3">
+
+    {{-- <strong><span class="infoTitle px-3"><span>EDIT ORDER FORM</span></span></strong> --}}
 
     <div class="reminder-wrapper row px-3">
         <div class="card col p-4 shadow-sm">
-            <strong><span class="infoTitle"><span>EDIT ORDER FORM</span></span></strong><br>
+
             <span class="infoTitle"><i class="bi bi-info-circle-fill"></i><span>NOTICE!</span></span><br>
             <h6>Complete the following Information to Proceed</h6>
             <ul class="mt-3 ">
-                <li><i class="bi bi-1-circle-fill"></i><span>Sender Information</span></li>
-                <li><i class="bi bi-2-circle-fill"></i><span>Receiver Information</span></li>
-                <li><i class="bi bi-3-circle-fill"></i><span>Parcel Details</span></li>
+                <li><i class="bi bi-1-circle-fill"></i><span>Edit Sender Information</span></li>
+                <li><i class="bi bi-2-circle-fill"></i><span>Edit Receiver Information</span></li>
+                <li><i class="bi bi-3-circle-fill"></i><span>Edit Parcel Details</span></li>
                 <li class="mandatory"><span class="required">*</span> Fields are mandatory.</li>
             </ul>
         </div>
@@ -30,7 +33,7 @@
         @csrf
         @method('PUT')
         <div class="senderForm-wrapper row p-0 shadow-sm">
-            <header class="mb-3"><span>SENDER INFORMATION (Edit)</span><i class="bi bi-1-circle-fill"></i></header>
+            <header class="mb-3"><span>EDIT SENDER INFORMATION</span><i class="bi bi-1-circle-fill"></i></header>
 
             <div class="senderForm p-4">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" class="form-control" />
@@ -149,7 +152,7 @@
                     </div>
                 </div>
 
-                <div class="button-holder d-flex justify-content-end">
+                <div class="button-holder d-none justify-content-end">
                     <a href="#receiverForm">
                         <button type="button" class="rcvrNextBtn btn btn-primary">
                             NEXT
@@ -163,8 +166,8 @@
 
         {{-- RECEIVER FORM --}}
 
-        <div class="receiverForm-wrapper row p-0 shadow-sm" id="receiverForm">
-            <header class="mb-3"><span>RECEIVER INFORMATION (Edit)</span> <i class="bi bi-2-circle-fill"></i>
+        <div class="receiverForm-wrapper receiverEdit row p-0 shadow-sm" id="receiverForm">
+            <header class="mb-3"><span>EDIT RECEIVER INFORMATION</span> <i class="bi bi-2-circle-fill"></i>
             </header>
 
             <div class="senderForm p-4">
@@ -288,7 +291,7 @@
                     </div>
                 </div>
 
-                <div class="button-holder d-flex justify-content-end">
+                <div class="button-holder d-none justify-content-end">
                     <a href="#parcelForm">
                         <button type="button" class="prclNextBtn btn btn-primary">
                             NEXT
@@ -302,10 +305,19 @@
 
         {{-- PARCEL DETAILS FORM --}}
 
-        <div class="parcelForm-wrapper row p-0 shadow-sm mb-4" id="parcelForm">
-            <header class="mb-3"><span>PARCEL DETAILS (Edit)</span> <i class="bi bi-3-circle-fill"></i></header>
+        <div class="parcelForm-wrapper parcelEdit row p-0 shadow-sm mb-4" id="parcelForm">
+            <header class="mb-3"><span>EDIT PARCEL DETAILS</span> <i class="bi bi-3-circle-fill"></i></header>
 
             <div class="senderForm p-4">
+
+                <div class="itemInput mb-4">
+                    <span>
+                        <label class="form-label" for="itemName">Item</label><span class="required">*</span>
+                    </span>
+                    <div class="form-outline">
+                        <input type="text" id="itemName" value="{{$shipment->item}}" name="item" class="form-control" required />
+                    </div>
+                </div>
 
                 <div class="row mb-5">
 
@@ -412,25 +424,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--Dropdown category menu-->
-                    <div class="col">
-                        <div class="categoryInput">
-                            <span>
-                                <label for="categoryParcel">Category</label><span class="required">*</span>
-                            </span>
-                            <div class="form-outline">
-                                <select class="form-control" id="categoryParcel" name="category">
-                                    <option value="Domestic"
-                                        {{ $shipment->category == 'Domestic' ? 'selected' : '' }}>Domestic</option>
-                                    <option value="International"
-                                        {{ $shipment->category == 'International' ? 'selected' : '' }}>International
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!--Bid input-->
@@ -451,7 +444,7 @@
                 <!--Image input-->
                 <div class="imageInput w-50 mb-4">
                     <span>Image<span class="required">*</span></span>
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-4 d-flex flex-column gap-3">
                         <div>
                             <img src="{{ asset($shipment->photo) }}" alt="Image preview" width="200px">
                         </div>

@@ -14,7 +14,7 @@ class DispatcherDashboardController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $statuses = [ 'Processing', 'PickedUp', 'Assort', 'Transferred', 'Arrived', 'Dispatched', 'Delivered'];
+        $statuses = [ 'PickedUp', 'Assort', 'Transferred', 'Arrived', 'Dispatched', 'Delivered'];
         $counts = [];
 
         $dispatcher = Dispatcher::where('user_id', $user_id)->first();

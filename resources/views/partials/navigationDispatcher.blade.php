@@ -3,8 +3,12 @@
         <div class="sidebar">
             <div class="wrapper">
                 <div class="search-bar-container">
-                    <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input class="input"id="search-input" placeholder="Tracking ID">
+                    <form action="{{ url('/dispatcher/track_parcel') }}" method="GET">
+                        <div class="search-input-wrapper">
+                            <button class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="input" name="tracking_number" placeholder="Tracking ID">
+                        </div>
+                    </form>
                 </div>
                 <div class="divider">
                 </div>
@@ -20,7 +24,7 @@
                             </a>
                         </div>
                         <div class="links">
-                            <a class="nav-link" href="{{ url('/dispatcher/qr') }}">
+                            <a class="nav-link" href="{{ url('/dispatcher/track_parcel') }}">
                                 <div class="link @if (isset($qr)) {{ $qr }} @endif">
                                     <i class="fa fa-qrcode link-i-1"></i>
                                     <span>Qr Scanner</span>
@@ -29,13 +33,13 @@
                         </div>
                         <div id="toggle-icon" class="links">
                             <div class="link "style="display: flex;justify-content: space-between;">
-                                <i class="fa fa-history link-i-1"><span>Order</span></i>
+                                <i class="fa fa-list link-i-1"><span>Order</span></i>
                                 <i id="" class="bx bxs-chevron-down"></i>
                             </div>
                         </div>
                         <div id="toggle-div1" class="links none">
                             <a class="nav-link" href="{{route('toPickUp_view')}}">
-                                <div class="link ">
+                                <div class="link @if (isset($toPickUp_view)) {{ $toPickUp_view }} @endif">
                                     <i class="fa fa-truck-ramp-box link-i-1 ml-30px"></i>
                                     <span>To Pick-Up </span>
                                 </div>
@@ -44,7 +48,7 @@
 
                         <div id="toggle-div2" class="links none">
                             <a class="nav-link" href="{{route('toDispatch_view')}}">
-                                <div class="link">
+                                <div class="link @if (isset($toDispatch_view)) {{ $toDispatch_view }} @endif">
                                     <i class="fa fa-truck-arrow-right link-i-1 ml-30px"></i>
                                     <span>To Dispatch</span>
                                 </div>

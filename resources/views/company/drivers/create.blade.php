@@ -12,6 +12,9 @@
           <form action="{{ route('drivers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            <div class="form-outline mb-4">
+              <input class="form-control" type="file" id="formFile" name="image" required>
+            </div>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <!-- Driver Name -->
             <div class="row mb-4">
@@ -88,6 +91,85 @@
               </div>
             </div>
 
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="telephone" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" autocomplete="tel" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="7" 
+                  maxlength="9"  
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">TELEPHONE</label>
+                  @error('tel')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" autocomplete="street" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">STREET</label>
+                  @error('street')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">CITY</label>
+                  @error('city')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" autocomplete="state" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">STATE</label>
+                  @error('state')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <!-- Contact input -->
+            <div class="form-outline mb-4">
+              <div class="form-outline">
+                  <input id="postal_code" type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}" autocomplete="postal_code" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  minlength="4" 
+                  maxlength="4" 
+                  required 
+                  placeholder="">
+                  <label class="form-label" for="form6Example5">POSTAL CODE</label>
+                  @error('postal_code')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
             <!-- License input -->
             <div class="form-outline mb-4">
               <div class="form-outline">
@@ -131,6 +213,7 @@
                   @enderror
               </div>
             </div>
+
                   
             <div class="button-modal-container">
 

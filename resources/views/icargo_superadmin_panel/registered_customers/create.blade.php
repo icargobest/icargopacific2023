@@ -5,7 +5,7 @@
     data-bs-toggle="modal"
     data-bs-target="#addCustomerModal"
 >
-    Add New
+    Add Customer
 </button>
 
 <!-- Modal -->

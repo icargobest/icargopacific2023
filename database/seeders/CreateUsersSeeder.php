@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\Driver;
 use App\Models\Dispatcher;
@@ -75,7 +76,15 @@ class CreateUsersSeeder extends Seeder
                     'user_id' => $user->id,
                     'contact_no' => '1234567890',
                     'contact_name' => 'John Doe',
-                    'company_address' => '123 Main St',
+                    'tel'=> 'John Doe',
+                    'street'=> 'street',
+                    'city'=> 'city',
+                    'state'=> 'philippines',
+                    'postal_code'=> '5436',
+                    'image'=> ' ',
+                    'website'=> '',
+                    'facebook'=> 'https://www.facebook.com/icargotech',
+                    'linkedin'=> '',
                     'archived' => false,
                 ]);
             }
@@ -85,6 +94,12 @@ class CreateUsersSeeder extends Seeder
                         'company_id' => $company->id,
                         'contact_no' => '1234567890',
                         'archived' => false,
+                ]);
+            }
+            if ($user->type == 'user') {
+                Customer::create([
+                    'user_id' => $user->id,
+                    'contact_no' => '1234567890',
                 ]);
             }
         }

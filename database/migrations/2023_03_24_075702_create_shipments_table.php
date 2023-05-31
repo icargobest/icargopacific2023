@@ -43,7 +43,6 @@ return new class extends Migration
         });
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('station_id')->nullable()->default;
             $table->string('company_name')->nullable()->default;
             $table->string('tracking_number')->unique();
             $table->unsignedBigInteger('user_id');
@@ -52,13 +51,13 @@ return new class extends Migration
             $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
             $table->unsignedBigInteger('recipient_id');
             $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
+            $table->string('item');
             $table->decimal('weight', 8, 2);
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2);
             $table->decimal('height', 8, 2);
             $table->string('service_type');
             $table->string('order_type');
-            $table->string('category');
             $table->unsignedBigInteger('min_bid_amount');
             $table->string('mop')->nullable()->default;
             $table->unsignedBigInteger('bid_amount')->nullable()->default;
@@ -66,11 +65,16 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedBigInteger('driver_id')->nullable()->default;
             $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade');
+            $table->unsignedBigInteger('dispatcher_id')->nullable()->default;
+            $table->foreign('dispatcher_id')->references('id')->on('dispatchers')->onDelete('cascade');
             // $table->foreign('company_id')->references('user_id')->on('companies')->onDelete('cascade');
             //$table->string('vehicle_type');
             //$table->string('cargo_type');
             $table->decimal('total_price', 8, 2)->nullable()->default;
+            $table->decimal('advFreight_total_amount')->nullable()->default;
+            $table->timestamp('shipping_date')->nullable()->default;
             $table->string('order_status')->nullable()->default;
+            $table->string('advTransferredfrom')->nullable()->default;
             $table->string('advTransferredto')->nullable()->default;
             $table->string('advTransferredStatus')->nullable()->default;
             $table->string('status');
@@ -110,12 +114,14 @@ return new class extends Migration
             $table->dateTime('isDispatchedTime')->nullable();
             $table->boolean('isDelivered')->default(false);
             $table->dateTime('isDeliveredTime')->nullable();
+            $table->boolean('isCancelled')->default(false);
+            $table->dateTime('isCancelledTime')->nullable();
             $table->timestamps();
 
             // Define foreign key constraint for the order_id column
             $table->foreign('shipment_id')
-                  ->references('id')->on('shipments')
-                  ->onDelete('cascade');
+                ->references('id')->on('shipments')
+                ->onDelete('cascade');
         });
     }
 
@@ -129,12 +135,22 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
 
+        // Truncate tables
+        DB::table('senders')->truncate();
+        DB::table('recipients')->truncate();
+        DB::table('order_histories')->truncate();
+        DB::table('bids')->truncate();
+        DB::table('shipments')->truncate();
+
+        // Drop tables
         Schema::dropIfExists('senders');
         Schema::dropIfExists('recipients');
-
         Schema::dropIfExists('order_histories');
         Schema::dropIfExists('bids');
         Schema::dropIfExists('shipments');
+
+        Schema::enableForeignKeyConstraints();
     }
 };

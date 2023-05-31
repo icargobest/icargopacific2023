@@ -36,22 +36,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasOne(Company::class);
     }
 
     public function dispatcher()
     {
-        return $this->belongsTo(Dispatcher::class);
+        return $this->hasOne(Dispatcher::class);
     }
 
     public function driver()
     {
-        return $this->belongsTo(Driver::class);
+        return $this->hasOne(Driver::class);
     }
 
     public function staff()
     {
-        return $this->belongsTo(Staff::class);
+        return $this->hasOne(Staff::class);
     }
 
     protected function type(): Attribute
@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasOne(Customer::class);
     }
 
     public function subscribed()

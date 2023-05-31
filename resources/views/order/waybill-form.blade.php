@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <title>Customer | Order Form</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 @include('partials.header')
@@ -8,8 +9,7 @@
 @include('partials.navigationUser', ['order' => 'nav-selected'])
 
 
-<div class="waybillForm-container container">
-
+<div class="waybillForm-container container p-3">
     <div class="reminder-wrapper row px-3">
         <div class="card col p-4 shadow-sm">
             <span class="infoTitle"><i class="bi bi-info-circle-fill"></i><span>NOTICE!</span></span><br>
@@ -24,11 +24,16 @@
     </div>
 
     <form class="userInputs d-flex px-3" method="POST" action="{{ route('addOrder') }}" enctype="multipart/form-data">
+
         {{-- SENDER FORM --}}
         @csrf
         <div class="senderForm-wrapper row p-0 shadow-sm">
             <header class="mb-3"><span>SENDER INFORMATION</span><i class="bi bi-1-circle-fill"></i></header>
-
+            <div class="button-holder sameInfo d-flex justify-content-end">
+                <button type="button" id="sameInfoBtn" class="btn btn-primary">
+                    Same as my info
+                </button>
+            </div>
             <div class="senderForm p-4">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" class="form-control" />
                 <input type="hidden" name="station_id" value="0" class="form-control" />
@@ -294,6 +299,15 @@
 
             <div class="senderForm p-4">
 
+                <div class="itemInput mb-4">
+                    <span>
+                        <label class="form-label" for="itemName">Item</label><span class="required">*</span>
+                    </span>
+                    <div class="form-outline">
+                        <input type="text" id="itemName" name="item" class="form-control" required />
+                    </div>
+                </div>
+
                 <div class="row mb-5">
 
                     <div class="form-group col-4">
@@ -393,22 +407,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--Dropdown category menu-->
-                    <div class="col">
-                        <div class="categoryInput">
-                            <span>
-                                <label for="categoryParcel">Category</label><span class="required">*</span>
-                            </span>
-                            <div class="form-outline">
-                                <select class="form-control" id="categoryParcel" name="category">
-                                    <option value="Domestic">Domestic</option>
-                                    <option value="International">International</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!--Bid input-->
@@ -469,5 +467,38 @@
 
         prclForm.classList.add("displayItem")
 
+    });
+</script>
+
+<script>
+    document.getElementById('sameInfoBtn').addEventListener('click', function() {
+        // Get user information values from users table
+        var userName = "{{ Auth::user()->name }}";
+        var userEmail = "{{ Auth::user()->email }}";
+
+        // Retrieve additional information from customers table using AJAX or fetch API
+        fetch('/customer-info') // Replace with the appropriate route to retrieve customer information
+            .then(response => response.json())
+            .then(data => {
+                var userAddress = data.street;
+                var userMobile = data.contact_no;
+                var userTelephone = data.tel;
+                var userCity = data.city;
+                var userZip = data.postal_code;
+                var userState = data.state;
+
+                // Populate sender information fields with user and customer information
+                document.getElementById('nameSender').value = userName;
+                document.getElementById('addressSender').value = userAddress;
+                document.getElementById('mobileSender').value = userMobile;
+                document.getElementById('telephoneSender').value = userTelephone;
+                document.getElementById('emailSender').value = userEmail;
+                document.getElementById('municipalitySender').value = userCity;
+                document.getElementById('postalSender').value = userZip;
+                document.getElementById('stateSender').value = userState;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
 </script>
