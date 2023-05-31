@@ -78,7 +78,7 @@ class CustomerController extends Controller
         $user = $customer->user;
         $get_token = $request->otp;
         $get_token = VerifyToken::where('token', $get_token)->first();
-    
+
 
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -209,7 +209,7 @@ class CustomerController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        $customer->contact_no = $request->input('mobile');
+        $customer->contact_no = $request->input('contact_no');
         $customer->tel = $request->input('tel');
         $customer->street = $request->input('street');
         $customer->city = $request->input('city');

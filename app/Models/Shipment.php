@@ -12,7 +12,7 @@ class Shipment extends Model
     protected $guarded = [];
 
     protected $table = 'shipments';
-    protected $fillable = ['station_id', 'company_name', 'tracking_number', 'user_id', 'sender_id', 'recipient_id', 'weight', 'length', 'width', 'height', 'service_type', 'order_type', 'category', 'mop', 'min_bid_amount', 'total_price', 'advFreight_total_amount', 'shipping_date', 'status', 'advTransferredfrom', 'advTransferredto', 'advTransferredStatus', 'photo', 'driver_id'];
+    protected $fillable = ['station_id', 'company_name', 'tracking_number', 'user_id', 'sender_id', 'recipient_id', 'item', 'weight', 'length', 'width', 'height', 'service_type', 'order_type', 'category', 'mop', 'min_bid_amount', 'total_price', 'advFreight_total_amount', 'shipping_date', 'status', 'advTransferredfrom', 'advTransferredto', 'advTransferredStatus', 'photo', 'driver_id'];
 
     public function sender()
     {

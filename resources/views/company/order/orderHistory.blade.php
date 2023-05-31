@@ -38,10 +38,10 @@
                         <th scope="col">Photo</th>
                         <th scope="col">Pickup</th>
                         <th scope="col">Dropoff</th>
-                        <th scope="col">Parcel Size&Width</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Delivered Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody class="history-tbody">
@@ -63,17 +63,13 @@
                                         {{ $shipment->recipient->recipient_state }},
                                         {{ $shipment->recipient->recipient_zip }}
                                     </td>
-                                    <td>
-                                        {{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
-                                        | {{ intval($shipment->weight) }}Kg
-                                    </td>
                                     @foreach ($orderLogs as $log)
                                         @if ($log->shipment_id == $shipment->id)
                                             <td>
-                                                {{ date('Y-m-d h:i:s A', strtotime($log->isPendingTime)) }}
+                                                {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}
                                             </td>
                                             <td>
-                                                {{ date('Y-m-d h:i:s A', strtotime($log->isDeliveredTime)) }}
+                                                {{ date('Y-m-d h:i A', strtotime($log->isDeliveredTime)) }}
                                             </td>
                                             <td class="" style="overflow: auto">
                                                 <label class="status-deliveredv2">
@@ -82,6 +78,9 @@
                                             </td>
                                         @endif
                                     @endforeach
+                                    <td>
+                                        @include('order.show')
+                                    </td>
                                 </tr>
                             @endif
                         @endif

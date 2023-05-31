@@ -51,6 +51,7 @@ return new class extends Migration
             $table->foreign('sender_id')->references('id')->on('senders')->onDelete('cascade');
             $table->unsignedBigInteger('recipient_id');
             $table->foreign('recipient_id')->references('id')->on('recipients')->onDelete('cascade');
+            $table->string('item');
             $table->decimal('weight', 8, 2);
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2);
@@ -113,6 +114,8 @@ return new class extends Migration
             $table->dateTime('isDispatchedTime')->nullable();
             $table->boolean('isDelivered')->default(false);
             $table->dateTime('isDeliveredTime')->nullable();
+            $table->boolean('isCancelled')->default(false);
+            $table->dateTime('isCancelledTime')->nullable();
             $table->timestamps();
 
             // Define foreign key constraint for the order_id column

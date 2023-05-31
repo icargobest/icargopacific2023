@@ -124,9 +124,6 @@
                 </div>
                 <div class="profileDivider2 "></div>
                 <div class="profileInfoData">
-                    @if ($customer->website != null)
-                        </a>
-                    @endif
                     <span class="data-title"><i class="fa fa-facebook"></i> Facebook</span>
                     @if ($customer->facebook != null)
                         <a href="{{ $customer->facebook }}" target="_blank">

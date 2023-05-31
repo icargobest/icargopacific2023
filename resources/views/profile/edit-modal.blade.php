@@ -49,7 +49,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="street" autocomplete="street" required>
+                                <input type="text" class="form-control" value="{{ $customer->street }}"  name="street" autocomplete="street" required>
                                 <label class="form-label" for="sname">Street name</label>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="city" autocomplete="city" required>
+                                <input type="text" class="form-control" value="{{ $customer->city }}"  name="city" autocomplete="city" required>
                                 <label class="form-label" for="city">City</label>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="state" autocomplete="state" required>
+                                <input type="text" class="form-control" value="{{ $customer->state }}"  name="state" autocomplete="state" required>
                                 <label class="form-label" for="state">State/Country</label>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" class="form-control" name="postal_code" autocomplete="postal_code" required>
+                                <input type="text" class="form-control" value="{{ $customer->postal_code }}"  name="postal_code" autocomplete="postal_code" required>
                                 <label class="form-label" for="postal">Postal Code</label>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="url" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" id="linkin">
+                                <input type="url" class="form-control @error('linkedin') is-invalid @enderror" value="{{ $customer->linkedin }}"  name="linkedin" id="linkin">
                                 <label class="form-label" for="linkin">LinkedIn</label>
                             </div>
                         </div>

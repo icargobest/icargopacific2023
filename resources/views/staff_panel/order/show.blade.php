@@ -1,9 +1,9 @@
 {{-- naka comment po yung mga variable pero wala akong inalis --}}
 
 <button type="button" class="btn created-button mx-auto"
-    style="background-color: white; border-color:#214D94; color:black !important;" data-mdb-toggle="modal"
-    data-mdb-target="#trackModal{{ $ship->id }}">
-    Tracking
+    style="background-color: yellow; border-color:#214D94; color:black !important;" data-mdb-toggle="modal"
+    data-mdb-target="#showModal{{ $shipment->id }}">
+    Show
 </button>
 
 <style>
@@ -14,6 +14,7 @@
     .child2 td {
         text-align: left !important;
     }
+
     td.contact,
     th.contact {
         border-bottom: 1px solid black !important;
@@ -22,11 +23,9 @@
     #tracking-status {
         text-align: left !important;
     }
-
-
 </style>
 
-<div class="modal fade" id="trackModal{{ $ship->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="showModal{{ $shipment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -44,9 +43,9 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="child1 col-md-3 col-sm-3 w-100">
                                 <div class="parcel-pic">
-                                    <img src="{{ asset($ship->photo) }}" alt="photo"
-                                        class="img-fluid rounded mx-auto d-block mb-2"
-                                        style="border-radius: 0 1rem 1rem 0; margin-left:50%;" />
+                                    <img src="{{ asset($shipment->photo) }}" alt="photo"
+                                    class="img-fluid rounded mx-auto d-block mb-2"
+                                        style="border-radius: 0 1rem 1rem 0; margin-left:50%;"/>
                                     {{-- <img src="/img/box.jpg" alt="login form"
                                         class="img-fluid rounded mx-auto d-block mb-2"
                                         style="border-radius: 0 1rem 1rem 0; margin-left:50%;" /> --}}
@@ -61,19 +60,20 @@
                                         </tr>
                                         <tr>
                                             <th>NAME:</th>
-                                            <td class="fw-bold" value="">{{ $ship->sender->sender_name }}</td>
+                                            <td class="fw-bold" value="">{{ $shipment->sender->sender_name }}</td>
                                         </tr>
                                         <tr>
                                             <th>ADDRESS:</th>
-                                            <td class="fw-bold" value="">{{ $ship->sender->sender_address }} ,
-                                                {{ $ship->sender->sender_city }} ,
-                                                {{ $ship->sender->sender_state }} , {{ $ship->sender->sender_zip }}</td>
+                                            <td class="fw-bold" value="">{{ $shipment->sender->sender_address }} ,
+                                                {{ $shipment->sender->sender_city }} ,
+                                                {{ $shipment->sender->sender_state }} ,
+                                                {{ $shipment->sender->sender_zip }}</td>
                                         </tr>
                                         <tr>
                                             <th class="contact">CONTACT NUMBER:</th>
                                             <td class="contact fw-bold" value="">
-                                                {{ $ship->sender->sender_mobile }} @if ($ship->sender->sender_tel != null)
-                                                    | {{ $ship->sender->sender_tel }}
+                                                {{ $shipment->sender->sender_mobile }} @if ($shipment->sender->sender_tel != null)
+                                                    | {{ $shipment->sender->sender_tel }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -82,22 +82,23 @@
                                         </tr>
                                         <tr>
                                             <th>NAME:</th>
-                                            <td class="fw-bold" value="">{{ $ship->recipient->recipient_name }}
+                                            <td class="fw-bold" value="">
+                                                {{ $shipment->recipient->recipient_name }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>ADDRESS:</th>
                                             <td class="fw-bold" value="">
-                                                {{ $ship->recipient->recipient_address }} ,
-                                                {{ $ship->recipient->recipient_city }} ,
-                                                {{ $ship->recipient->recipient_state }} ,
-                                                {{ $ship->recipient->recipient_zip }}</td>
+                                                {{ $shipment->recipient->recipient_address }} ,
+                                                {{ $shipment->recipient->recipient_city }} ,
+                                                {{ $shipment->recipient->recipient_state }} ,
+                                                {{ $shipment->recipient->recipient_zip }}</td>
                                         </tr>
                                         <tr>
                                             <th class="contact">CONTACT NUMBER:</th>
-                                            <td class="contact fw-bold">{{ $ship->recipient->recipient_mobile }}
-                                                @if ($ship->recipient->recipient_tel != null)
-                                                    | {{ $ship->recipient->recipient_tel }}
+                                            <td class="contact fw-bold">{{ $shipment->recipient->recipient_mobile }}
+                                                @if ($shipment->recipient->recipient_tel != null)
+                                                    | {{ $shipment->recipient->recipient_tel }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -106,21 +107,21 @@
                                         </tr>
                                         <tr>
                                             <th>ID:</th>
-                                            <td class="fw-bold" value="">{{ $ship->id }}</td>
+                                            <td class="fw-bold" value="">{{ $shipment->id }}</td>
                                         </tr>
                                         <tr>
                                             <th>PARCEL SIZE & WEIGHT:</th>
                                             <td class="fw-bold" value="">
-                                                {{ intval($ship->length) }}x{{ intval($ship->width) }}x{{ intval($ship->height) }}
-                                                | {{ intval($ship->weight) }}Kg</td>
+                                                {{ intval($shipment->length) }}x{{ intval($shipment->width) }}x{{ intval($shipment->height) }}
+                                                | {{ intval($shipment->weight) }}Kg</td>
                                         </tr>
                                         <tr>
                                             <th>PARCEL ITEM:</th>
-                                            <td class="fw-bold">{{$ship->item}}</td>
+                                            <td class="fw-bold">Tools</td>
                                         </tr>
                                         <tr>
-                                            <th>PRICE:</th>
-                                            <td class="fw-bold">Php {{$ship->bid_amount}}</td>
+                                            <th>PARCEL CHARGES:</th>
+                                            <td class="fw-bold">Php 68</td>
                                         </tr>
 
                                     </tbody>
@@ -135,8 +136,8 @@
                                 </div>
                                 <div class="container mt-3">
                                     {{-- naghahanap pa ng tamang code para sa line --}}
-                                    @foreach ($logs as $log)
-                                        @if ($ship->id == $log->shipment_id)
+                                    @foreach ($orderLogs as $log)
+                                        @if ($shipment->id == $log->shipment_id)
                                             <div class="row text-center pb-5">
                                                 <!-- order confirm -->
                                                 <div class="col-md-3">
@@ -169,14 +170,29 @@
                                     <div id="order-status-container">
                                         <div class="row justify-content-center overflow-hidden">
                                             <!-- <h3>Order Summary</h3> -->
-                                            @foreach ($logs as $log)
-                                                @if ($ship->id == $log->shipment_id)
+                                            @foreach ($orderLogs as $log)
+                                                @if ($shipment->id == $log->shipment_id)
+                                                    @if ($log->isCancelled == true)
+                                                        <h4 class="fw-bold border-0">CANCELLED</h4>
+                                                        <div class="card mb-3" style="background-color: #66D066;">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <h5 class="card-title border-0 fw-bold">YOUR
+                                                                        ORDER HAS BEEN
+                                                                        CANCELLED</h5>
+                                                                    <p class="card-text mb-0">
+                                                                        {{ date('Y-m-d h:i A', strtotime($log->isCancelledTime)) }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     @if ($log->isDelivered == true)
                                                         <h4 class="fw-bold border-0">DELIVERED</h4>
                                                         <div class="card mb-3" style="background-color: #66D066;">
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <h5 class="card-title border-0 fw-bold">
+                                                                    <h5 class="card-title border-0 fw-bold">YOUR
                                                                         ORDER HAS BEEN
                                                                         DELIVERED</h5>
                                                                     <p class="card-text mb-0">
@@ -187,12 +203,12 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isDispatched == true)
-                                                    @if ($log->isDelivered != true && $log->isCancelled != true && $log->isDelivered != true)<h4 class="fw-bold border-0">IN TRANSIT</h4>
-                                                        <div class="card mb-3" style="background-color: #D9D9D9;">@endif
+                                                        <h4 class="fw-bold border-0">IN TRANSIT</h4>
+                                                        <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER IS OUT
+                                                                        YOUR ORDER IS OUT
                                                                         FOR DELIVERY</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isDispatchedTime)) }}
@@ -202,15 +218,13 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isArrived == true)
-                                                        @if ($log->isDispatched != true && $log->isCancelled != true && $log->isDelivered != true)
-                                                            <h4 class="fw-bold border-0">ARRIVED AT
-                                                                {{ $ship->station_id }}</h4>
-                                                        @endif
+                                                        <h4 class="fw-bold border-0">ARRIVED AT
+                                                            {{ $shipment->station_id }}</h4>
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER HAS
+                                                                        YOUR ORDER HAS
                                                                         ARRIVED AT SORTING FACILITY</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isArrivedTime)) }}
@@ -220,16 +234,14 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isTransferred == true)
-                                                        @if ($ship->company_name != null && $ship->station_id == null)
-                                                            @if ($log->isArrived != true && $log->isCancelled != true && $log->isDelivered != true)
-                                                                <h4 class="fw-bold border-0">TRANSFERRED TO COMPANY:
-                                                                    {{ $ship->company_name }}</h4>
-                                                            @endif
+                                                        @if ($shipment->company_name != null && $shipment->station_id == null)
+                                                            <h4 class="fw-bold border-0">TRANSFERRED TO COMPANY:
+                                                                {{ $shipment->company_name }}</h4>
                                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <h5 class="card-title border-0 fw-bold">
-                                                                             ORDER HAS ALREADY BEEN
+                                                                            YOUR ORDER HAS ALREADY BEEN
                                                                             TRANSFERRED TO ANOTHER COMPANY</h5>
                                                                         <p class="card-text mb-0">
                                                                             {{ date('Y-m-d h:i A', strtotime($log->isTransferredTime)) }}
@@ -237,16 +249,14 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @elseif($ship->company_name == null && $ship->station_id != null)
-                                                            @if ($log->isArrived != true && $log->isCancelled != true && $log->isDelivered != true)
-                                                                <h4 class="fw-bold border-0">TRANSFERRED TO STATION:
-                                                                    {{ $ship->station_id }}</h4>
-                                                            @endif
+                                                        @elseif($shipment->company_name == null && $shipment->station_id != null)
+                                                            <h4 class="fw-bold border-0">TRANSFERRED TO STATION:
+                                                                {{ $shipment->station_id }}</h4>
                                                             <div class="card mb-3" style="background-color: #D9D9D9;">
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <h5 class="card-title border-0 fw-bold">
-                                                                             ORDER HAS
+                                                                            YOUR ORDER HAS
                                                                             ALREADY BEEN TRANSFERRED TO ANOTHER
                                                                             STATION</h5>
                                                                         <p class="card-text mb-0">
@@ -258,17 +268,15 @@
                                                         @endif
                                                     @endif
                                                     @if ($log->isAssort == true)
-                                                        @if ($log->isTransferred != true && $log->isCancelled != true && $log->isDelivered != true)
-                                                            <h4 class="fw-bold border-0">ARRIVED AT (current_station)
-                                                        @endif
+                                                        <h4 class="fw-bold border-0">ARRIVED AT (current_station)
                                                         </h4>
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER IS
-                                                                        ALREADY BEEN ARRIVED TO THE SORTING FACILITY
-                                                                    </h5>
+                                                                        YOUR ORDER IS
+                                                                        ALREADY BEEN PICKED UP BY LOGISTIC
+                                                                        COMPANY</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isAssortTime)) }}
                                                                     </p>
@@ -277,14 +285,12 @@
                                                         </div>
                                                     @endif
                                                     @if ($log->isPickUp == true)
-                                                        @if ($log->isAssort == false && $log->isCancelled != true && $log->isDelivered != true)
-                                                            <h4 class="fw-bold border-0">PICKED UP</h4>
-                                                        @endif
+                                                        <h4 class="fw-bold border-0">PICKED UP</h4>
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER IS
+                                                                        YOUR ORDER IS
                                                                         ALREADY BEEN PICKED UP BY LOGISTIC
                                                                         COMPANY</h5>
                                                                     <p class="card-text mb-0">
@@ -294,12 +300,12 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if ($log->isProcessed == true && $log->isCancelled != true && $log->isDelivered != true)
+                                                    @if ($log->isProcessed == true)
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER IS
+                                                                        YOUR ORDER IS
                                                                         CURRENTLY BEING PROCESSED</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isProcessedTime)) }}
@@ -308,12 +314,12 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if ($log->isPending == true && $log->isCancelled != true && $log->isDelivered != true)
+                                                    @if ($log->isPending == true)
                                                         <div class="card mb-3" style="background-color: #D9D9D9;">
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <h5 class="card-title border-0 fw-bold">
-                                                                         ORDER IS
+                                                                        YOUR ORDER IS
                                                                         CURRENTLY PENDING</h5>
                                                                     <p class="card-text mb-0">
                                                                         {{ date('Y-m-d h:i A', strtotime($log->isPendingTime)) }}

@@ -1,6 +1,6 @@
 <title>Company | Orders</title>
 @include('partials.header')
-@extends('layouts.app') 
+@extends('layouts.app')
 @include('partials.navigationCompany', ['order' => 'nav-selected'])
 {{-- ORDER CONTAINER RECONCEPTUALIZE --}}
 <div class="container mw-100">
@@ -17,8 +17,8 @@
                         <th>PHOTO</th>
                         <th>PICKUP</th>
                         <th>DROPOFF</th>
+                        <th>ITEM DESCRIPTION</th>
                         <th>MAXIMUM BID</th>
-                        <th>TOTAL PRICE</th>
                         <th>STATUS</th>
                         <th>ACTION</th>
                     </tr>
@@ -46,8 +46,8 @@
                                         {{ $ship->recipient->recipient_state }},
                                         {{ $ship->recipient->recipient_zip }}
                                     </td>
+                                    <td>{{ $ship->item}} | {{intval($ship->length)}}x{{intval($ship->width)}}x{{intval($ship->height)}} | {{intval($ship->weight)}}Kg</td>
                                     <td>{{ $ship->min_bid_amount }}</td>
-                                    <td>{{ $ship->total_price }}</td>
                                     <td>{{ $ship->status }}</td>
                                     <td>
                                         <a class="cardItem" href="{{ route('viewOrder_Company', $ship->id) }}">
