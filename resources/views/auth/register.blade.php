@@ -23,7 +23,7 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-person-fill text-secondary"></i>
                                 </span>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
