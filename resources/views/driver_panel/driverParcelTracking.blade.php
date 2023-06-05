@@ -127,7 +127,7 @@
                           <p>Shipment has been picked up.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div>
@@ -145,7 +145,7 @@
                           <p>Waiting for dispatcher to dispatch the shipment.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -162,7 +162,7 @@
                           <p>Shipment Delivered Succesfully.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
                         </div>
                       </div>
                     </div>
@@ -179,7 +179,7 @@
                           <p>Shipment Delivered.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATIS</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div>
@@ -196,7 +196,7 @@
                           <p>The shipment does not exist.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -213,7 +213,7 @@
                           <p>The shipment is not assigned to this driver.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -427,7 +427,6 @@
 
 
             button.addEventListener("click", function() {
-              // Update the status and date/time
               if (data.status === "Processing") {
                 data.status = 'PickedUp';
                 data.isPickUp = true;
@@ -435,16 +434,15 @@
                 var modal = new bootstrap.Modal(document.getElementById('pickupModal'), {});
                 modal.show();
 
-                // Update the database with the new pickup value
-                j.ajax({
+                $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                    data: {"_token": "{{ csrf_token() }}", id: data.id, pickup: data.status},
+                    data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
                     success: function (response) {
                       console.log(response);
                     }
                 });
-                j.ajax({
+                $j.ajax({
                     type: "POST",
                     url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                     data: {
@@ -720,7 +718,7 @@
                   $j.ajax({
                       type: "POST",
                       url: "{{ action('App\Http\Controllers\DriverQrScannerController@updatePickup') }}",
-                      data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, pickup: response.shipment.status},
+                      data: {"_token": "{{ csrf_token() }}", id: response.shipment.id, status: response.shipment.status},
                       success: function (response) {
                         console.log(response);
                       }
@@ -770,7 +768,7 @@
                 } else if (response.shipment.status === 'Delivered') {
                     var deliveredModal = new bootstrap.Modal(document.getElementById('successModal'), {});
                     deliveredModal.show();
-                    j({
+                    $j.ajax({
                       type: "POST",
                       url: "{{ action('App\Http\Controllers\OrderTrackingLogController@store') }}",
                       data: {
