@@ -125,7 +125,7 @@
                           <p>Shipment has been received.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div>
@@ -161,7 +161,7 @@
                           <p>Shipment Transferred.</p>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                        <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div> 
@@ -179,7 +179,7 @@
                           <p>Shipment Out for delivery.</p>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                        <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div> 
@@ -196,7 +196,7 @@
                           <p>Shipment Arrived.</p>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
+                        <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">UPDATE STATUS</button>
                         </div>
                       </div>
                     </div> 
@@ -210,10 +210,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-info">
-                          <p>Shipment has been Delivered.</p>
+                          <p>Shipment has been Delivered by the Driver.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
                         </div>
                       </div>
                     </div>
@@ -230,7 +230,7 @@
                           <p>Shipment has not been Picked Up yet.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -247,7 +247,7 @@
                           <p>The shipment does not exist.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -264,7 +264,7 @@
                           <p>The shipment is not assigned to this dispatcher.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:gray; color:white;">CLOSE</button>
                         </div>
                       </div>
                     </div>
@@ -281,7 +281,7 @@
                           <p>Shipment out for delivery.</p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
+                          <button id="update_button" type="button" class="btn" data-bs-dismiss="modal" onclick="location.reload()" style="width:50%; background-color:#66D066; color:white;">OK</button>
                         </div>
                       </div>
                     </div>
@@ -534,38 +534,44 @@
                       var assortModal = new bootstrap.Modal(document.getElementById('assortModal'), {});
                       assortModal.show();
 
-                      // listen for user's selection
-                      $('#dispatch-btn').click(function() {
-                        var outfordeliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
-                        data.status = 'Dispatched';
-                        data.isDispatched = true;
-                        data.isDispatchedTime = new Date();
-                        outfordeliveryModal.show();
+                      $('#assortModal').on('shown.bs.modal', function () {
+                        // listen for user's selection
+                        $('#dispatch-btn').click(function() {
+                          var outfordeliveryModal = new bootstrap.Modal(document.getElementById('outfordeliveryModal'), {});
+                          data.status = 'Dispatched';
+                          data.isDispatched = true;
+                          data.isDispatchedTime = new Date();
+                          outfordeliveryModal.show();
 
-                        $j.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                          success: function (response) {
-                            console.log(response);
-                          }
+                          $j.ajax({
+                            type: "POST",
+                            url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery') }}",
+                            data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
+                            success: function (response) {
+                              console.log(response);
+                            }
+                          });
                         });
-                      });
 
-                      $('#transfer-btn').click(function() {
-                        var transferModal = new bootstrap.Modal(document.getElementById('transferModal'), {});
-                        data.status = 'Transferred';
-                        data.isTransferred = true;
-                        data.isTransferred = new Date();
-                        transferModal.show();
+                        $('#transfer-btn').click(function() {
+                          var transferModal = new bootstrap.Modal(document.getElementById('transferModal'), {});
+                          data.status = 'Transferred';
+                          data.isTransferred = true;
+                          data.isTransferred = new Date();
+                          transferModal.show();
 
-                        $j.ajax({
-                          type: "POST",
-                          url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
-                          data: {"_token": "{{ csrf_token() }}", id: data.id, status: data.status},
-                          success: function (response) {
-                            console.log(response);
-                          }
+                          $j.ajax({
+                            type: "POST",
+                            url: "{{ action('App\Http\Controllers\DispatcherQrScannerController@updateTransfer') }}",
+                            data: {
+                              "_token": "{{ csrf_token() }}",
+                              id: data.id,
+                              status: data.status
+                            },
+                            success: function(response) {
+                              console.log(response);
+                            }
+                          });
                         });
                       });
                     } else if (data.status === 'Transferred') {
