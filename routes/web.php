@@ -26,77 +26,10 @@ use App\Http\Controllers\StaffDashboardController;
 
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-// LOGIN PAGE
-// Route::get('/', function () {
-//     return view('login/index');
-// });
-
-// // REGISTER ACCOUNT PAGE
-// Route::get('/register', function () {
-//     return view('login/register');
-// });
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-
-/* Profile Tab */
-/*  Route::get('/', function () {
-   return view('staff_panel.profile.user');
-});   */
-
-
-/* Users Tab */
-Route::get('/userpanel/orderHistory', function () {
-   return view('userpanel.orderHistory');
-});
-
-/* Company Tab */
-
-Route::get('/company/history/orderHistory', function () {
-   return view('company.history.orderHistory');
-});
-
-
-/* Drivers Tab */
-Route::get('/driver/qr', function () {
-   return view('driver_panel.driver');
-});
-
-
-Route::get('/driver/history', function () {
-   return view('driver_panel.deliverHistory');
-});
-
-/* Dispatcher Tab */
-Route::get('/dispatcher/qr', function () {
-   return view('dispatcher_panel.dispatcher');
-});
-
-
-Route::get('/dispatcher/history', function () {
-   return view('dispatcher_panel.dispatchHistory');
-});
-
-/* Staff Tab */
-
-Route::get('/staff/advance_freight/index', function () {
-    return view('staff_panel.advance_freight.index');
- });
 
  /* Contact Us */
 Route::post('/contactUS', [QueryController::class, 'save'])->name('sendQuery');
