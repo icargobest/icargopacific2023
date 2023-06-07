@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>iCargo Pacific</title>
-        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
+        <link rel="shortcut icon" href="ICARGOicon.ico">
 
         <!-- Fonts -->
 
@@ -21,11 +21,9 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
-        
-        <link rel="shortcut icon" href="{{ asset('ICARGOicon.ico') }}">
 
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="{{ asset('assets\css\app.css') }}" type="text/css" rel="stylesheet">
+        <link href="\assets\css\app.css" type="text/css" rel="stylesheet">
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="/css/bootstrap.css">
         {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --}}
@@ -40,10 +38,10 @@
         <script src="https://kit.fontawesome.com/efac33293c.js" crossorigin="anonymous"></script>
         
         {{-- CSS --}}
-        <link rel="stylesheet" href="{{ asset('css/main-header.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/employee.css') }}">
+        <link rel="stylesheet" href="/css/main-header.css">
+        <link rel="stylesheet" href="/css/employee.css">
         <link rel="stylesheet" href="/css/waybill-list.css" />
-        <link rel="stylesheet" href="{{ asset('css/style_landingPage.css') }}">
+        <link rel="stylesheet" href="/css/style_landingPage.css">
 
 
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Josefin+Sans:wght@600&family=Poppins:wght@200;300;600&display=swap" rel="stylesheet">
