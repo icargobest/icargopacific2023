@@ -377,51 +377,12 @@ Route::post('/searchDispatcher', [SearchController::class, 'searchDispatcher']);
 
 Route::get('/income', [IncomeController::class, 'index']);
 
-
-//DRIVER PAGE
-//Route::get('driver', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
-//Route::post('driver/check-user', ['uses' => 'App\Http\Controllers\DriverQrScannerController@checkUser']);
-//Route::post('driver/update-pickup', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updatePickup']);
-//Route::post('driver/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
-//Route::post('driver/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
-
-//DISPATCHER PAGE
-//Route::get('dispatchers', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@index']);
-//Route::post('dispatchers/check-user', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@checkUser']);
-//Route::post('dispatchers/update-pickup', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateReceived']);
-//Route::post('dispatchers/update-delivery', ['uses' => 'App\Http\Controllers\DispatcherQrScannerController@updateOutfordelivery']);
-
-
-// Route::get('/company', [CompanyController::class, 'index']);
-
-
-
 Route::get('/order-form', function () {
     return view('order/waybill-form');
 });
-
-
 
 Route::get('/waybillForm', function () {
     Route::get('company/order/waybill-form')->name('waybillForm');
 });
 
 
-/*Route::group(['middleware' => ['auth']], function() {
-        /**
-         * Logout Routes
-         */
-        /*Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
-        /**
-         * User Routes
-         */
-        /*Route::group(['prefix' => 'users'], function() {
-            Route::get('/', 'UsersController@index')->name('users.index');
-            Route::get('/create', 'UsersController@create')->name('users.create');
-            Route::post('/create', 'UsersController@store')->name('users.store');
-            Route::get('/{user}/show', 'UsersController@show')->name('users.show');
-            Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
-            Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
-            Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
-        });
-    });*/
