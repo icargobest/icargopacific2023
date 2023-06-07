@@ -8,11 +8,11 @@ RUN mkdir -p /run/nginx
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir -p /app
-WORKDIR /app
-COPY . .
+COPY . /app
 
 RUN wget https://getcomposer.org/composer-stable.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
-RUN composer install --no-dev --ignore-platform-reqs
+RUN cd /app && \
+    /usr/local/bin/composer install --no-dev
 
 RUN chown -R www-data: /app
 
