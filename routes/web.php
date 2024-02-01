@@ -31,7 +31,7 @@ Route::get('/', function () {
 });
 
 
- /* Contact Us */
+/* Contact Us */
 Route::post('/contactUS', [QueryController::class, 'save'])->name('sendQuery');
 
 
@@ -103,25 +103,24 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
     Route::put('/company/profile+image/{id}/submit', [CompaniesController::class, 'updateImage'])->name('company.updateImage');
 
     //Order Routes
-    Route::controller(ShipmentController::class)->group(function(){
-        Route::get('/company/order','index')->name('company.order');
-        Route::get('/company/freight','freight')->name('freightPanel');
-        Route::get('/company/advFreight','company_advFreightPanel')->name('company.advFreightPanel');
-        Route::get('/company/freight/transfers/{id}','advfreight')->name('adv_Freight');
+    Route::controller(ShipmentController::class)->group(function () {
+        Route::get('/company/order', 'index')->name('company.order');
+        Route::get('/company/freight', 'freight')->name('freightPanel');
+        Route::get('/company/advFreight', 'company_advFreightPanel')->name('company.advFreightPanel');
+        Route::get('/company/freight/transfers/{id}', 'advfreight')->name('adv_Freight');
         Route::put('/company/freight/transfers/{id}', 'advTransfer')->name('advFreight.transfer');
         Route::get('/company/advFreight/accept/{id}', 'accept_transfer');
         Route::get('/company/advFreight/decline/{id}', 'decline_transfer');
-        Route::get('/company/view_shipment/{id}','viewOrder_Company')->name('viewOrder_Company');
-        Route::get('/company/track_order/{id}','trackOrder_Company')->name('trackOrder_Company');
-        Route::get('/company/invoice/{id}','viewInvoiceCompany')->name('company.generateInvoice');
-        Route::get('/company/waybill/{id}','viewWaybillCompany')->name('company.generateWaybill');
+        Route::get('/company/view_shipment/{id}', 'viewOrder_Company')->name('viewOrder_Company');
+        Route::get('/company/track_order/{id}', 'trackOrder_Company')->name('trackOrder_Company');
+        Route::get('/company/invoice/{id}', 'viewInvoiceCompany')->name('company.generateInvoice');
+        Route::get('/company/waybill/{id}', 'viewWaybillCompany')->name('company.generateWaybill');
         Route::post('/company/add_bid', 'addBid')->name('addBid.company');
         Route::get('/company/order_history', 'orderHistory_company')->name('orderHistory_Company');
-        Route::put('/transfer/{id}','transfer')->name('transfer.company');
+        Route::put('/transfer/{id}', 'transfer')->name('transfer.company');
         Route::get('/company/transfer/{id}', 'freight_transfer')->name('freight_transfer');
         Route::get('/company/track_parcel', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@index']);
         Route::post('/company/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@checkUser']);
-
     });
 
     //stations
@@ -160,7 +159,6 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::put('/dispatcher/archive/{id}', 'archive')->name('dispatcher.archive');
         Route::put('/dispatcher/unarchive/{id}', 'unarchive')->name('dispatcher.unarchive');
     });
-
 });
 
 // Super Admin Panel
@@ -205,10 +203,10 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
     Route::resource('icargo/drivers', DriverController::class);
     Route::controller(DriverController::class)->group(function () {
         Route::get('icargo/drivers', 'superadminIndex')->name('registered_drivers.index');
-        Route::put('icargo/registered_users/update+dispatcher/{id}','superadminUpdate')->name('update.driver');
+        Route::put('icargo/registered_users/update+dispatcher/{id}', 'superadminUpdate')->name('update.driver');
         Route::get('icargo/drivers+archived', 'superadminviewArchive')->name('viewArchive.drivers');
         Route::put('icargo/registered_users/archive+dispatcher/{id}', 'archive')->name('archive.driver');
-        Route::put('icargo/registered_users/unarchive+dispatcher/{id}','unarchive')->name('unarchive.driver');
+        Route::put('icargo/registered_users/unarchive+dispatcher/{id}', 'unarchive')->name('unarchive.driver');
         Route::get('icargo/registered_users/send_otp/{id}', 'sendOTP');
     });
 
@@ -237,7 +235,7 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
 // Driver Panel
 Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])
-    ->name('driver.dashboard')->middleware('verified');
+        ->name('driver.dashboard')->middleware('verified');
 
     //DRIVER PAGE
     Route::get('/driver/track_parcel', ['uses' => 'App\Http\Controllers\DriverQrScannerController@index']);
@@ -246,7 +244,7 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
     Route::post('/driver/track_parcel/update-delivered', ['uses' => 'App\Http\Controllers\DriverQrScannerController@updateDelivered']);
     Route::post('/driver/track_parcel/order-tracking-log', ['uses' => 'App\Http\Controllers\OrderTrackingLogController@store']);
 
-    Route::controller(ShipmentController::class)->group(function(){
+    Route::controller(ShipmentController::class)->group(function () {
         Route::get('/driver/history', 'driverHistory_view')->name('driver.history');
         Route::get('/driver/order', 'driverOrder_view')->name('driver.order');
     });
@@ -257,7 +255,6 @@ Route::middleware(['auth', 'user-access:driver'])->group(function () {
         Route::put('/driver/update-info/{id}',  'updateProfile')->name('driver.personinfo.update');
         Route::put('/driver/update-image/{id}',  'updateImage')->name('driver.profile.update');
     });
-
 });
 
 // Dispatcher Panel
@@ -279,7 +276,7 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
         Route::get('/dispatcher/history', 'dispatcherHistory_view')->name('driver.history');
     });
     //DISPATCHER
-    Route::controller(DispatcherController::class)->group(function(){
+    Route::controller(DispatcherController::class)->group(function () {
         Route::get('/dispatcher/order_list/dispatch/{shipment_id}/{driver_id}', 'assignDriver')->name('dispatcher.assign');
     });
 
@@ -289,7 +286,6 @@ Route::middleware(['auth', 'user-access:dispatcher'])->group(function () {
         Route::put('/dispatcher/update-info/{id}',  'updateProfile')->name('dispatcher.personinfo.update');
         Route::put('/dispatcher/update-image/{id}',  'updateImage')->name('dispatcher.profile.update');
     });
-
 });
 
 // Staff Panel
@@ -297,12 +293,12 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
         ->name('staff.dashboard')->middleware('verified');
 
-      //Order Routes
-       Route::controller(ShipmentController::class)->group(function(){
+    //Order Routes
+    Route::controller(ShipmentController::class)->group(function () {
         Route::get('/staff/order', 'staffIndex')->name('staff.order');
         Route::get('/staff/freight', 'freightStaff')->name('freightStaff');
         Route::get('/staff/advfreight', 'staff_advFreightPanel')->name('staff.advFreightPanel');
-        Route::get('/staff/advfreight/transfers/{id}','staff_advfreight')->name('staff_advFreight');
+        Route::get('/staff/advfreight/transfers/{id}', 'staff_advfreight')->name('staff_advFreight');
         Route::put('staff/advfreight/transfers/{id}', 'staff_advTransfer')->name('staff_advFreight.transfer');
         Route::get('/staff/advfreight/accept/{id}', 'staff_accept_transfer');
         Route::get('/staff/advfreight/decline/{id}', 'staff_decline_transfer');
@@ -316,7 +312,7 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
         Route::get('/staff/track_parcel', ['uses' => 'App\Http\Controllers\StaffQrScannerController@index']);
         Route::post('/staff/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\StaffQrScannerController@checkUser']);
         Route::get('/staff/order_list/station', 'assignStation_view')->name('assignStation_view');
-     });
+    });
 
     //Stations
     Route::resource('staff/stations', StationController::class);
@@ -326,11 +322,11 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     });
 
     //Assign Station
-    Route::controller(StaffController::class)->group(function(){
-       Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
-       Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
-       Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
-       Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
+    Route::controller(StaffController::class)->group(function () {
+        Route::get('/staff/order_list/station/{shipment_id}/{station_id}', 'assignStation')->name('station.assign');
+        Route::get('/staff/edit_profile/{id}', 'index_edit')->name('staff.edit_profile');
+        Route::post('/staff/edit_profile/{id}', 'edit_profile')->name('staff.edit');
+        Route::post('/staff/upload_photo/{id}', 'upload_photo')->name('staff.upload_photo');
     });
 
     //DRIVER
@@ -384,5 +380,3 @@ Route::get('/order-form', function () {
 Route::get('/waybillForm', function () {
     Route::get('company/order/waybill-form')->name('waybillForm');
 });
-
-

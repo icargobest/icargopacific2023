@@ -10,8 +10,8 @@ class Station extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
-        'company_id', 
+        'user_id',
+        'company_id',
         'station_number',
         'station_name',
         'station_address',
@@ -20,15 +20,18 @@ class Station extends Model
         'archived',
     ];
 
-    public function addStation($data){
+    public function addStation($data)
+    {
         return $this->create($data);
     }
 
-    public function getStation(){
+    public function getStation()
+    {
         return $this->all();
     }
 
-    public function updateStation($data, $id){
+    public function updateStation($data, $id)
+    {
         $station = $this->find($id);
         $station->update($data);
     }
@@ -42,5 +45,4 @@ class Station extends Model
     {
         return $this->belongsTo(Staff::class);
     }
-
 }
