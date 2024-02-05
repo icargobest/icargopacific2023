@@ -36,20 +36,20 @@ class DispatcherController extends Controller
         $company = Company::where('user_id', $id)->first();
         $user_id = $company->id;
         $dispatchers = $this->dispatcher->with('user')->where('company_id', $user_id)->get();
-        return view('company/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
+        return view('company/dispatcher.index', compact('dispatchers'), ['stations' => $station,]);
     }
 
     public function staffIndex()
     {
         $station = Station::all();
-        
+
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first();
         if ($staff) {
             $company_id = $staff->company_id;
             $dispatchers = $this->dispatcher->with('user')->where('company_id', $company_id)->get();
         }
-        return view('staff_panel/dispatcher.index', compact('dispatchers'), ['stations' => $station, ]);
+        return view('staff_panel/dispatcher.index', compact('dispatchers'), ['stations' => $station,]);
     }
 
     public function superadminIndex()
@@ -61,7 +61,8 @@ class DispatcherController extends Controller
         return view('icargo_superadmin_panel.dispatcher.index', compact('dispatchers'));
     }
 
-    function viewArchive(){
+    function viewArchive()
+    {
 
         $id = Auth::id();
         $company = Company::where('user_id', $id)->first();
@@ -70,7 +71,8 @@ class DispatcherController extends Controller
         return view('company/dispatcher.viewArchive', compact('dispatchers'));
     }
 
-    function staffviewArchive(){
+    function staffviewArchive()
+    {
 
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first();
@@ -81,7 +83,8 @@ class DispatcherController extends Controller
         return view('staff_panel/dispatcher.viewArchive', compact('dispatchers'));
     }
 
-    public function superadminviewArchive(){
+    public function superadminviewArchive()
+    {
 
         $dispatchers = Dispatcher::with('company.user')
             ->where('archived', 1)
@@ -106,7 +109,7 @@ class DispatcherController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => '4',
             ]);
-    
+
             $otherValidation = $request->validate([
                 'contact_no' => ['required', 'min:11', 'max:11'],
             ], [
@@ -114,23 +117,22 @@ class DispatcherController extends Controller
                 'contact_no.max' => 'Contact number must be a min and max of 11 numbers'
             ]);
             $user->sendEmailVerificationNotification();
-            if(Auth::user()->type == 'staff'){
+            if (Auth::user()->type == 'staff') {
                 $id = Auth::id();
                 $staff = Staff::where('user_id', $id)->first();
                 $company_id = $staff->company_id;
                 $company = Company::where('id', $company_id)->first();
                 $user_id = $company->id;
-
-            }else{
+            } else {
                 $id = Auth::id();
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
-            if($request->hasfile('image')){
+            if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extention;
-                $file->move('storage/images/dispatcher/'.$user->id ,$filename);
+                $filename = time() . '.' . $extention;
+                $file->move('storage/images/dispatcher/' . $user->id, $filename);
             }
             $drivers = Dispatcher::create([
                 'user_id' => $user->id,
@@ -144,15 +146,14 @@ class DispatcherController extends Controller
                 'postal_code' => $request->postal_code,
                 'image' =>  $filename,
             ]);
-          
-            DB::commit();
-          } catch (Exception $ex) {
-                DB::rollBack();
-                throw $ex;
-                
-          }
 
-        return back()->with('success','Dispatcher has been created successfully.');
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+
+        return back()->with('success', 'Dispatcher has been created successfully.');
     }
 
     public function show(User $users)
@@ -162,7 +163,7 @@ class DispatcherController extends Controller
 
     public function edit(User $users)
     {
-        return view('dispatcher.edit',compact('users'));
+        return view('dispatcher.edit', compact('users'));
     }
 
     public function update($id, Request $request)
@@ -176,21 +177,21 @@ class DispatcherController extends Controller
         ]);
 
         $user = $dispatcher->user;
-        $user->update( [
+        $user->update([
             'name' => $request->name,
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
 
-        if($request->hasfile('image')){
-            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
-            if(File::exists($destination)){
+        if ($request->hasfile('image')) {
+            $destination = 'storage/images/dispatcher/' . $dispatcher->user_id . '/' . $dispatcher->image;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
-        }else{
+            $filename = time() . '.' . $extention;
+            $file->move('storage/images/dispatcher/' . $dispatcher->user_id, $filename);
+        } else {
             $filename = $dispatcher->image;
         }
         $dispatcherData = [
@@ -202,10 +203,10 @@ class DispatcherController extends Controller
             'postal_code' => $request->postal_code,
             'image' =>  $filename,
         ];
-        
+
         $dispatcher->update($dispatcherData);
-        
-        return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
+
+        return back()->with('success', 'Dispatcher #' . $id . ' data updated successfully!');
     }
 
     public function superadminUpdate($id, Request $request)
@@ -220,25 +221,25 @@ class DispatcherController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-        if($get_token){
+        if ($get_token) {
             $get_token->is_activated = 1;
             $get_token->save();
             $user = $dispatcher->user;
-            $user->update( [
+            $user->update([
                 'name' => $request->name,
                 'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
             ]);
 
-            if($request->hasfile('image')){
-                $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
-                if(File::exists($destination)){
+            if ($request->hasfile('image')) {
+                $destination = 'storage/images/dispatcher/' . $dispatcher->user_id . '/' . $dispatcher->image;
+                if (File::exists($destination)) {
                     File::delete($destination);
                 }
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extention;
-                $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
-            }else{
+                $filename = time() . '.' . $extention;
+                $file->move('storage/images/dispatcher/' . $dispatcher->user_id, $filename);
+            } else {
                 $filename = $dispatcher->image;
             }
             $dispatcherData = [
@@ -250,24 +251,24 @@ class DispatcherController extends Controller
                 'postal_code' => $request->postal_code,
                 'image' =>  $filename,
             ];
-            
+
             $dispatcher->update($dispatcherData);
 
             $delete_token = VerifyToken::where('token', $get_token->token)->first();
             $delete_token->delete();
 
-            return back()->with('success', 'Dispatcher #'.$id.' data updated successfully!');
-        }
-        else{
-            return back()->with('warning','Please verify the account with OTP before modifying data.');
+            return back()->with('success', 'Dispatcher #' . $id . ' data updated successfully!');
+        } else {
+            return back()->with('warning', 'Please verify the account with OTP before modifying data.');
         };
     }
 
-    public function sendOTP($id){
+    public function sendOTP($id)
+    {
 
         $data = User::findOrFail($id);
 
-        $validToken = rand(10,100..'2022');
+        $validToken = rand(10, 100. . '2022');
         $get_token = new VerifyToken();
         $get_token->token = $validToken;
         $get_token->email = $data['email'];
@@ -279,9 +280,10 @@ class DispatcherController extends Controller
         return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         Dispatcher::destroy($id);
-        return redirect()->route('dispatcher.index')->with('success','Dispatcher has been deleted successfully');
+        return redirect()->route('dispatcher.index')->with('success', 'Dispatcher has been deleted successfully');
     }
 
     public function archive($id)
@@ -289,7 +291,7 @@ class DispatcherController extends Controller
         $id = Dispatcher::findOrFail($id);
         $id->archived = True;
         $id->save();
-        return back()->with('success', 'Dispatcher #'.$id->id.' Archived successfully!');
+        return back()->with('success', 'Dispatcher #' . $id->id . ' Archived successfully!');
     }
 
     public function unarchive($id)
@@ -297,22 +299,22 @@ class DispatcherController extends Controller
         $id = Dispatcher::findOrFail($id);
         $id->archived = False;
         $id->save();
-        return back()->with('success', 'Dispatcher #'.$id->id.' Restore successfully!');
+        return back()->with('success', 'Dispatcher #' . $id->id . ' Restore successfully!');
     }
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Dispatcher status updated successfully!');
+        $update_user = User::whereId($user_id)->update([
+            'status' => $status_code
+        ]);
+        $user_id = User::findOrFail($user_id);
+        return back()->with('success', 'Dispatcher status updated successfully!');
     }
 
     public function assignDriver($shipment_id, $driver_id)
     {
         $driver = Driver::find($driver_id);
-        if($driver){
+        if ($driver) {
             $driver->dispatcher_id = Auth::id();
             $driver->save();
         }
@@ -321,16 +323,14 @@ class DispatcherController extends Controller
         $dispatcherID = Dispatcher::where('user_id', $userID)->first();
         if ($dispatcherID) {
             $shipment = Shipment::find($shipment_id);
-            if($shipment){
+            if ($shipment) {
                 $shipment->driver_id = $driver_id;
                 $shipment->dispatcher_id = $dispatcherID->id;
                 $shipment->save();
             }
-
         }
-        
+
         return back()->with('success', 'Driver was successfully assigned!');
-        
     }
 
     public function dispatcherProfile()
@@ -365,7 +365,7 @@ class DispatcherController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ];
-        
+
         $dispatcher = Dispatcher::find($id);
         $dispatcher->update($dispatcherData);
 
@@ -373,29 +373,27 @@ class DispatcherController extends Controller
         $user->update($userData);
 
         return back()->with('success', 'Updated successfully!');
-        
     }
 
     public function updateImage($id, Request $request)
     {
         $dispatcher = Dispatcher::find($id);
-        if($request->hasfile('image')){
-            $destination = 'storage/images/dispatcher/'.$dispatcher->user_id.'/'.$dispatcher->image;
-            if(File::exists($destination)){
+        if ($request->hasfile('image')) {
+            $destination = 'storage/images/dispatcher/' . $dispatcher->user_id . '/' . $dispatcher->image;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('storage/images/dispatcher/'.$dispatcher->user_id ,$filename);
+            $filename = time() . '.' . $extention;
+            $file->move('storage/images/dispatcher/' . $dispatcher->user_id, $filename);
         }
         $dispatcherData = [
             'image' =>  $filename,
         ];
-        
+
         $dispatcher->update($dispatcherData);
 
         return back()->with('success', 'Profile picture updated successfully!');
     }
-
 }

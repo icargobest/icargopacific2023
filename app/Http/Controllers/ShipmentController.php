@@ -161,7 +161,7 @@ class ShipmentController extends Controller
         $company = Company::where('user_id', Auth::user()->id)->first();
         $bids = Bid::all();
         $logs = OrderHistory::all();
-        $company_logs = advTransferLog::orderBy('id' ,'desc')->get();
+        $company_logs = advTransferLog::orderBy('id', 'desc')->get();
 
 
         $this->TrackOrderLog();

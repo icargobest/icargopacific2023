@@ -11,16 +11,17 @@ use Illuminate\Support\Facades\Storage;
 class QrCodeController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         return view('qrcode');
     }
 
     public function generateQrCode($data)
     {
         $qr = QrCode::size(500)
-                ->backgroundColor(255,255,255)
-                ->color(0, 0, 0)
-                ->generate($data);
+            ->backgroundColor(255, 255, 255)
+            ->color(0, 0, 0)
+            ->generate($data);
 
         $output = base64_encode($qr);
         return view('qr-code', compact('output'));
@@ -49,4 +50,3 @@ class QrCodeController extends Controller
         return response()->download(storage_path('public/img/' . $filename), $filename, $headers);
     }
 }
-

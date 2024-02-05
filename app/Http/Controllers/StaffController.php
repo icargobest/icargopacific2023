@@ -55,7 +55,8 @@ class StaffController extends Controller
         return view('company.staff.view_archive', compact('staff'));
     }
 
-    public function superadminviewArchive(){
+    public function superadminviewArchive()
+    {
 
         $staffs = Staff::with('company.user')
             ->where('archived', 1)
@@ -73,31 +74,31 @@ class StaffController extends Controller
     {
         DB::beginTransaction();
         try {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'type' => '5',
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'type' => '5',
+            ]);
 
-        $validated = $this->validate($request, [
-            'contact_no' => ['required', 'min:11', 'max:11'],
-            'contact_no.required' => 'Contact field is required.',
-            'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
-            'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
-        ]);
+            $validated = $this->validate($request, [
+                'contact_no' => ['required', 'min:11', 'max:11'],
+                'contact_no.required' => 'Contact field is required.',
+                'contact_no.min' => 'Contact nuber must be a min and max of 11 numbers',
+                'contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
+            ]);
 
-        $user->sendEmailVerificationNotification();
+            $user->sendEmailVerificationNotification();
 
             $id = Auth::id();
             $company = Company::where('user_id', $id)->first();
             $user_id = $company->id;
 
-        $staff = Staff::create([
-            'user_id' => $user->id,
-            'company_id' => $user_id,
-            'contact_no' =>  $validated['contact_no'],
-        ]);
+            $staff = Staff::create([
+                'user_id' => $user->id,
+                'company_id' => $user_id,
+                'contact_no' =>  $validated['contact_no'],
+            ]);
 
             DB::commit();
         } catch (Exception $ex) {
@@ -105,7 +106,7 @@ class StaffController extends Controller
             throw $ex;
         }
         return redirect()->route('staff.index')
-                ->with('success','Staff has been created successfully.');
+            ->with('success', 'Staff has been created successfully.');
     }
 
     public function show($id)
@@ -125,8 +126,8 @@ class StaffController extends Controller
 
     public function updateStaff(Request $request, $id)
     {
-         $staff = Staff::find($id);
-    
+        $staff = Staff::find($id);
+
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -154,16 +155,16 @@ class StaffController extends Controller
         $staff->facebook = $request->input('facebook');
         $staff->linkedin = $request->input('linkedin');
         $staff->save();
-    
+
         $userData = [
             'name' => $request->input('updateFullName'),
             'email' => $request->input('updateEmail'),
         ];
-    
+
         // Update the user data
         $user = $staff->user;
         $user->update($userData);
-    
+
         return redirect()->route('staff.index')
             ->with('success', 'Staff #' . $id . ' has been updated successfully.');
     }
@@ -174,14 +175,14 @@ class StaffController extends Controller
         $user = $staff->user;
         $get_token = $request->otp;
         $get_token = VerifyToken::where('token', $get_token)->first();
-    
+
         $validated = $this->validate($request, [
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'password.confirmed' => 'Password does not match.',
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-        if($get_token){
+        if ($get_token) {
             $get_token->is_activated = 1;
             $get_token->save();
 
@@ -195,20 +196,20 @@ class StaffController extends Controller
                 $file = $request->file('photo');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $path = 'public/images/staff/' . Auth::id();
-    
+
                 // Create the folder if it doesn't exist
                 if (!Storage::exists($path)) {
                     Storage::makeDirectory($path);
                 }
-    
+
                 // Store the photo in the user's folder
                 $file->storeAs($path, $filename);
-    
+
                 // Save the photo path in the customer record
                 $staff->photo = 'images/staff/' . Auth::id() . '/' . $filename;
                 $staff->save();
             }
-            
+
             $staff->update([
                 'contact_no' =>  $request->contact_no,
                 'tel' => $request->tel,
@@ -223,17 +224,18 @@ class StaffController extends Controller
             $delete_token = VerifyToken::where('token', $get_token->token)->first();
             $delete_token->delete();
 
-            return back()->with('success','Staff #'.$id.' has been updated successfully.');
+            return back()->with('success', 'Staff #' . $id . ' has been updated successfully.');
         }
 
-        return back()->with('warning','Please verify the account with OTP before modifying data.');
+        return back()->with('warning', 'Please verify the account with OTP before modifying data.');
     }
 
-    public function sendOTP($id){
+    public function sendOTP($id)
+    {
 
         $data = User::findOrFail($id);
 
-        $validToken = rand(10,100..'2022');
+        $validToken = rand(10, 100. . '2022');
         $get_token = new VerifyToken();
         $get_token->token = $validToken;
         $get_token->email = $data['email'];
@@ -258,7 +260,7 @@ class StaffController extends Controller
         $staff->archived = True;
         $staff->save();
 
-        return redirect()->back()->with('success', 'Staff #'.$id.' data archived successfully.');
+        return redirect()->back()->with('success', 'Staff #' . $id . ' data archived successfully.');
     }
 
     public function unarchive($id)
@@ -267,16 +269,16 @@ class StaffController extends Controller
         $staff->archived = False;
         $staff->save();
 
-        return redirect()->back()->with('success', 'Staff #'.$id.' data restored successfully.');
+        return redirect()->back()->with('success', 'Staff #' . $id . ' data restored successfully.');
     }
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Staff  status updated successfully!');
+        $update_user = User::whereId($user_id)->update([
+            'status' => $status_code
+        ]);
+        $user_id = User::findOrFail($user_id);
+        return back()->with('success', 'Staff  status updated successfully!');
     }
 
     public function assignStation($shipment_id, $station_id)

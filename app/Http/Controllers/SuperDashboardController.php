@@ -19,13 +19,11 @@ use App\Models\DailyIncome;
 use Illuminate\Support\Facades\DB;
 
 
-
-
 class SuperDashboardController extends Controller
 {
     public function index()
     {
-        
+
         $incomes = Income::all();
         $totalMonthly = 0;
         foreach ($incomes as $income) {
@@ -70,15 +68,16 @@ class SuperDashboardController extends Controller
         }
 
         $totalYearly = $totalMonthly;
-       
+
         return view('icargo_superadmin_panel.dashboard', compact('incomes', 'companycount', 'usercount', 'drivercount', 'staffcount', 'dispatchercount', 'customercount', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 
-    public function sendOTP($id){
+    public function sendOTP($id)
+    {
 
         $data = User::findOrFail($id);
 
-        $validToken = rand(10,100..'2022');
+        $validToken = rand(10, 100. . '2022');
         $get_token = new VerifyToken();
         $get_token->token = $validToken;
         $get_token->email = $data['email'];
@@ -89,6 +88,4 @@ class SuperDashboardController extends Controller
 
         return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
     }
-
-    
 }

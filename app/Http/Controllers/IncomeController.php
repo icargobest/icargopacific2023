@@ -33,26 +33,26 @@ class IncomeController extends Controller
 
         $statuses = ['Pending', 'Processing', 'PickedUp', 'Assort', 'Transferred', 'Arrived', 'Dispatched', 'Delivered'];
         $counts = [];
-        
+
         foreach ($statuses as $status) {
             if ($status === 'Pending') {
                 $counts[$status] = Shipment::where('status', $status)
-                                          ->count();
+                    ->count();
             } else {
                 if (Auth::check()) {
                     $user_id = Auth::user()->id;
                     $company = Company::where('user_id', $user_id)->first();
                     $counts[$status] = Shipment::where('company_id', $company->id)
-                                              ->where('status', $status)
-                                              ->count();
+                        ->where('status', $status)
+                        ->count();
                 } else {
                     $counts[$status] = 0;
                 }
             }
         }
-        
-        
-        
+
+
+
         // Prepare the data for use in the line chart
         $chartData = [
             ['Year', 'Income'],
@@ -67,8 +67,8 @@ class IncomeController extends Controller
         ];
 
         $dailyData = DailyIncome::select('day', 'income')->orderBy('day')->get();
-        
 
-        return view('income', compact('incomes','counts', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
+
+        return view('income', compact('incomes', 'counts', 'totalMonthly', 'totalYearly', 'week1', 'week2', 'week3', 'week4', 'chartData', 'dailyData'));
     }
 }

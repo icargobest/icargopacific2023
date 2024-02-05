@@ -30,11 +30,13 @@ class UsersController extends Controller
         $customers = Customer::with('user')
             ->where('archived', 0)
             ->get();
-        
-        return view('icargo_superadmin_panel.registered_users.index', 
-            compact('superadmin' , 'companies' , 'drivers' , 'dispatchers',  'staffs' , 'customers'));
-    }    
-    
+
+        return view(
+            'icargo_superadmin_panel.registered_users.index',
+            compact('superadmin', 'companies', 'drivers', 'dispatchers',  'staffs', 'customers')
+        );
+    }
+
 
     public function show($id)
     {
@@ -45,8 +47,10 @@ class UsersController extends Controller
         $staff = Staff::findOrFail($id);
         $customer = Customer::findOrFail($id);
 
-        return view('icargo_superadmin_panel.registered_users.show', 
-            compact('superadmin', 'companies' , 'drivers' , 'dispatchers',  'staffs', 'customer'));
+        return view(
+            'icargo_superadmin_panel.registered_users.show',
+            compact('superadmin', 'companies', 'drivers', 'dispatchers',  'staffs', 'customer')
+        );
     }
 
     public function viewArchive()
@@ -66,17 +70,19 @@ class UsersController extends Controller
         $customers = Customer::with('user')
             ->where('archived', 1)
             ->get();
-        
-        return view('icargo_superadmin_panel.registered_users.viewArchive', 
-            compact('companies' , 'drivers' , 'dispatchers',  'staffs' , 'customers'));
-    }    
+
+        return view(
+            'icargo_superadmin_panel.registered_users.viewArchive',
+            compact('companies', 'drivers', 'dispatchers',  'staffs', 'customers')
+        );
+    }
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back();
+        $update_user = User::whereId($user_id)->update([
+            'status' => $status_code
+        ]);
+        $user_id = User::findOrFail($user_id);
+        return back();
     }
 }

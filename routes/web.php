@@ -123,7 +123,7 @@ Route::middleware(['auth', 'user-access:company'])->group(function () {
         Route::post('/company/track_parcel/checkUser', ['uses' => 'App\Http\Controllers\CompanyQrScannerController@checkUser']);
     });
 
-    //stations
+    //Stations
     Route::resource('company/stations', StationController::class);
     Route::controller(StationController::class)->group(function () {
         Route::get('company/stations', 'index')->name('stations.view');

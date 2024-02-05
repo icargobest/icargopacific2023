@@ -42,8 +42,6 @@ class StationController extends Controller
             'station_contact_no.max' => 'Contact nuber must be a min and max of 11 numbers',
         ]);
 
-        Auth::user()->type;
-                
         if(Auth::user()->type == 'staff'){
             $user = Auth::user();
             $company_id = $user->staff->company_id;    

@@ -15,15 +15,15 @@ class DriverDashboardController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $statuses = [ 'PickedUp', 'Delivered'];
+        $statuses = ['PickedUp', 'Delivered'];
         $counts = [];
 
         $driver = Driver::where('user_id', $user_id)->first();
 
         foreach ($statuses as $status) {
             $counts[$status] = Shipment::where('company_id', $driver->company_id)
-                                      ->where('status', $status)
-                                      ->count();
+                ->where('status', $status)
+                ->count();
         }
         return view('driver_panel.dashboard', compact('counts'));
     }
