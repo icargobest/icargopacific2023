@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 class DriverController extends Controller
 {
     private $driver;
-    
+
     public function index()
     {
         $id = Auth::id();
@@ -42,7 +42,7 @@ class DriverController extends Controller
         }
         return view('staff_panel/drivers.index', compact('drivers'));
     }
-    
+
     public function superadminIndex()
     {
         $drivers = Driver::with('company.user')
@@ -52,7 +52,8 @@ class DriverController extends Controller
         return view('icargo_superadmin_panel.driver.index', compact('drivers'));
     }
 
-    function viewArchive(){
+    function viewArchive()
+    {
 
         $id = Auth::id();
         $company = Company::where('user_id', $id)->first();
@@ -61,7 +62,8 @@ class DriverController extends Controller
         return view('company/drivers.viewArchive', compact('drivers'));
     }
 
-    function staffviewArchive(){
+    function staffviewArchive()
+    {
 
         $user_id = Auth::id();
         $staff = Staff::where('user_id', $user_id)->first();
@@ -72,7 +74,8 @@ class DriverController extends Controller
         return view('staff_panel/drivers.viewArchive', compact('drivers'));
     }
 
-    public function superadminviewArchive(){
+    public function superadminviewArchive()
+    {
 
         $drivers = Driver::with('company.user')
             ->where('archived', 1)
@@ -102,7 +105,7 @@ class DriverController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => '3',
             ]);
-    
+
             $otherValidation = $request->validate([
                 'contact_no' => ['required', 'min:11', 'max:11'],
                 'vehicle_type' => ['required'],
@@ -119,24 +122,23 @@ class DriverController extends Controller
             ]);
 
             $user->sendEmailVerificationNotification();
-            
-            if(Auth::user()->type == 'staff'){
+
+            if (Auth::user()->type == 'staff') {
                 $id = Auth::id();
                 $staff = Staff::where('user_id', $id)->first();
                 $company_id = $staff->company_id;
                 $company = Company::where('id', $company_id)->first();
                 $user_id = $company->id;
-
-            }else{
+            } else {
                 $id = Auth::id();
                 $company = Company::where('user_id', $id)->first();
                 $user_id = $company->id;
             }
-            if($request->hasfile('image')){
+            if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extention;
-                $file->move('storage/images/driver/'.$user->id ,$filename);
+                $filename = time() . '.' . $extention;
+                $file->move('storage/images/driver/' . $user->id, $filename);
             }
             $drivers = Driver::create([
                 'user_id' => $user->id,
@@ -152,15 +154,14 @@ class DriverController extends Controller
                 'company_id' => $user_id,
                 'image' => $filename,
             ]);
-          
+
             DB::commit();
-          } catch (Exception $ex) {
-                DB::rollBack();
-                throw $ex;
-                
-          }
-       
-        return back()->with('success','Driver has been created successfully.');
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+
+        return back()->with('success', 'Driver has been created successfully.');
     }
 
     public function show(User $users)
@@ -170,7 +171,7 @@ class DriverController extends Controller
 
     public function edit(User $users)
     {
-        return view('drivers.edit',compact('users'));
+        return view('drivers.edit', compact('users'));
     }
 
     public function update($id, Request $request)
@@ -184,25 +185,25 @@ class DriverController extends Controller
         ]);
 
         $user = $driver->user;
-        $user->update( [
+        $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
         ]);
 
-        if($request->hasfile('image')){
-            $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
-            if(File::exists($destination)){
+        if ($request->hasfile('image')) {
+            $destination = 'storage/images/driver/' . $driver->user_id . '/' . $driver->image;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('storage/images/driver/'.$driver->user_id ,$filename);
-        }else{
+            $filename = time() . '.' . $extention;
+            $file->move('storage/images/driver/' . $driver->user_id, $filename);
+        } else {
             $filename = $driver->image;
         }
-        
+
         $driverData = [
             'vehicle_type' => $request->vehicle_type,
             'plate_no' => $request->plate_no,
@@ -217,7 +218,7 @@ class DriverController extends Controller
         ];
         $driver->update($driverData);
 
-        return back()->with('success','Staff #'.$id.' has been updated successfully.');
+        return back()->with('success', 'Staff #' . $id . ' has been updated successfully.');
     }
 
     public function superadminUpdate($id, Request $request)
@@ -232,30 +233,30 @@ class DriverController extends Controller
             'password.min' => 'Password must be a minimum of 8 characters',
         ]);
 
-        if($get_token){
+        if ($get_token) {
             $get_token->is_activated = 1;
             $get_token->save();
 
             $user = $driver->user;
-            $user->update( [
+            $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => !empty($validated['password']) ? Hash::make($validated['password']) : $user->password,
             ]);
 
-            if($request->hasfile('image')){
-                $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
-                if(File::exists($destination)){
+            if ($request->hasfile('image')) {
+                $destination = 'storage/images/driver/' . $driver->user_id . '/' . $driver->image;
+                if (File::exists($destination)) {
                     File::delete($destination);
                 }
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extention;
-                $file->move('storage/images/driver/'.$driver->user_id ,$filename);
-            }else{
+                $filename = time() . '.' . $extention;
+                $file->move('storage/images/driver/' . $driver->user_id, $filename);
+            } else {
                 $filename = $driver->image;
             }
-            
+
             $driverData = [
                 'vehicle_type' => $request->vehicle_type,
                 'plate_no' => $request->plate_no,
@@ -272,18 +273,18 @@ class DriverController extends Controller
 
             $delete_token = VerifyToken::where('token', $get_token->token)->first();
             $delete_token->delete();
-            return back()->with('success','Staff #'.$id.' has been updated successfully.');
-        }
-        else{
-            return back()->with('warning','Please verify the account with OTP before modifying data.');
+            return back()->with('success', 'Staff #' . $id . ' has been updated successfully.');
+        } else {
+            return back()->with('warning', 'Please verify the account with OTP before modifying data.');
         };
     }
 
-    public function sendOTP($id){
+    public function sendOTP($id)
+    {
 
         $data = User::findOrFail($id);
 
-        $validToken = rand(10,100..'2022');
+        $validToken = rand(10, 100. . '2022');
         $get_token = new VerifyToken();
         $get_token->token = $validToken;
         $get_token->email = $data['email'];
@@ -295,9 +296,10 @@ class DriverController extends Controller
         return back()->with('message', 'OTP sent. Please ask the otp from the email owner.');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         Driver::destroy($id);
-        return redirect()->route('drivers.index')->with('success','Driver has been deleted successfully');
+        return redirect()->route('drivers.index')->with('success', 'Driver has been deleted successfully');
     }
 
     public function archive($id)
@@ -305,7 +307,7 @@ class DriverController extends Controller
         $id = Driver::findOrFail($id);
         $id->archived = True;
         $id->save();
-        return back()->with('success', 'Driver #'.$id->id.' Archived successfully!');
+        return back()->with('success', 'Driver #' . $id->id . ' Archived successfully!');
     }
 
     public function unarchive($id)
@@ -313,16 +315,16 @@ class DriverController extends Controller
         $id = Driver::findOrFail($id);
         $id->archived = False;
         $id->save();
-        return back()->with('success', 'Driver #'.$id->id.' Restore successfully!');
+        return back()->with('success', 'Driver #' . $id->id . ' Restore successfully!');
     }
 
     public function updateStatus($user_id, $status_code)
     {
-            $update_user = User::whereId($user_id)->update([
-                'status' => $status_code
-            ]);
-            $user_id = User::findOrFail($user_id);
-            return back()->with('success', 'Driver status updated successfully!');
+        $update_user = User::whereId($user_id)->update([
+            'status' => $status_code
+        ]);
+        $user_id = User::findOrFail($user_id);
+        return back()->with('success', 'Driver status updated successfully!');
     }
 
     public function driverProfile()
@@ -357,7 +359,7 @@ class DriverController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ];
-        
+
         $driver = Driver::find($id);
         $driver->update($driverData);
 
@@ -365,29 +367,27 @@ class DriverController extends Controller
         $user->update($userData);
 
         return back()->with('success', 'Updated successfully!');
-        
     }
 
     public function updateImage($id, Request $request)
     {
         $driver = Driver::find($id);
-        if($request->hasfile('image')){
-            $destination = 'storage/images/driver/'.$driver->user_id.'/'.$driver->image;
-            if(File::exists($destination)){
+        if ($request->hasfile('image')) {
+            $destination = 'storage/images/driver/' . $driver->user_id . '/' . $driver->image;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('image');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('storage/images/driver/'.$driver->user_id ,$filename);
+            $filename = time() . '.' . $extention;
+            $file->move('storage/images/driver/' . $driver->user_id, $filename);
         }
         $driverData = [
             'image' =>  $filename,
         ];
-        
+
         $driver->update($driverData);
 
         return back()->with('success', 'Profile picture updated successfully!');
     }
-
 }
